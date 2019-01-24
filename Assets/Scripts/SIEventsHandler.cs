@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class EventsHandler
+    public class SIEventsHandler
     {
         public static Action OnPlayerMove = delegate { };
     }

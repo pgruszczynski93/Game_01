@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Numerics;
+using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 
 namespace SpaceInvaders
 {
@@ -8,7 +10,6 @@ namespace SpaceInvaders
 
         private Transform _cachedTransform;
         private Vector2 _startPosition;
-        private Vector2 _currentPosition;
 
         protected override void SetInitialReferences()
         {
@@ -16,18 +17,17 @@ namespace SpaceInvaders
 
             _cachedTransform = transform;
             _startPosition = _cachedTransform.position;
-            _currentPosition = _startPosition;
             _currentMovementSpeed = BASIC_SPEED;
         }
 
         protected override void OnEnable()
         {
-            EventsHandler.OnPlayerMove += MoveObject;
+            SIEventsHandler.OnPlayerMove += MoveObject;
         }
 
         protected override void OnDisable()
         {
-            EventsHandler.OnPlayerMove -= MoveObject;
+            SIEventsHandler.OnPlayerMove -= MoveObject;
         }
 
         protected override void MoveObject()
@@ -37,9 +37,18 @@ namespace SpaceInvaders
             float dt = Time.deltaTime;
             float horizontalMoveDelta = Input.GetAxis("Horizontal") * _currentMovementSpeed * dt;
 
-            _currentPosition += new Vector2(horizontalMoveDelta, 0f);
+            Vector2 currentPosition = _cachedTransform.position;
+            Vector2 newPosition = new Vector2(_cachedTransform.position.x + horizontalMoveDelta, _startPosition.y);
+            Vector2 smoothedPosition = Vector2.Lerp(currentPosition, newPosition, _lerpStep);
 
-            _cachedTransform.position = Vector2.Lerp(_cachedTransform.position, _currentPosition , _lerpStep);
+            Vector2 objectInCameraBoundsPos = _mainCamera.WorldToViewportPoint(smoothedPosition);
+            objectInCameraBoundsPos.x = Mathf.Clamp(objectInCameraBoundsPos.x, CAMERA_MIN_PERCENT_OFFSET,
+                CAMERA_MAX_PERCENT_OFFSET);
+
+            objectInCameraBoundsPos = _mainCamera.ViewportToWorldPoint(objectInCameraBoundsPos);
+
+            _cachedTransform.position = objectInCameraBoundsPos;
+
         }
     }
 }

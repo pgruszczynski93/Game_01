@@ -5,12 +5,16 @@ namespace SpaceInvaders
 {
     public class SIMovement : MonoBehaviour
     {
-        protected const float SLOW_SPEED = 5f;
-        protected const float BASIC_SPEED = 10f;
-        protected const float FAST_SPEED = 15f;
+        protected const float SLOW_SPEED = 15f;
+        protected const float BASIC_SPEED = 30f;
+        protected const float FAST_SPEED = 45f;
+
+        protected const float CAMERA_MIN_PERCENT_OFFSET = 0.05f;
+        protected const float CAMERA_MAX_PERCENT_OFFSET = 0.95f;
 
         [SerializeField] protected MovementType _movementType;
         [SerializeField] protected float _currentMovementSpeed;
+        [SerializeField] protected Camera _mainCamera;
 
         protected Dictionary<MovementType, float> _movementSpeeds;
 
@@ -57,7 +61,7 @@ namespace SpaceInvaders
 
         protected virtual void Update()
         {
-            EventsHandler.OnPlayerMove?.Invoke();
+            SIEventsHandler.OnPlayerMove?.Invoke();
         }
 
     }
