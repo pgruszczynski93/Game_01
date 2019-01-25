@@ -4,23 +4,98 @@ namespace SpaceInvaders
 {
     public class SIProjectileBehaviour : MonoBehaviour, IMoveable
     {
+        [SerializeField] private bool _isMoving;
+        [Range(8f,20f)][SerializeField] private float _forceScaleFactor;
+        [SerializeField] private Rigidbody2D _rigidbody2D;
 
-        [SerializeField] public bool canMove;
+        [SerializeField] private Transform _cachedParentTransform;
+        [SerializeField] private Transform _cachedProjectileTransform;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private ParticleSystem _particles;
+
+        private Vector2 _moveForce;
+
+        private void Awake()
+        {
+            SetInitialReferences();
+        }
+
+        private void OnEnable()
+        {
+            ResetProjectile();
+        }
+
+        private void OnDisable()
+        {
+            ResetProjectile();
+        }
+
+        private void SetInitialReferences()
+        {
+            _moveForce = new Vector2(0,1f).normalized;
+            _spriteRenderer.enabled = false;
+        }
 
         public void MoveObj()
         {
-            Debug.Log("Xxxx");
-            transform.Translate(0,2*Time.deltaTime,0);
+            Move();
         }
 
-        private void Update()
+        private void OnTriggerEnter2D(Collider2D collider2D)
         {
-            if (canMove == false)
+            if (collider2D.tag == "Enemy")
+            {
+                ResetProjectile();
+            }
+        }
+
+        private void Move()
+        {
+            if (_rigidbody2D == null)
             {
                 return;
             }
 
-            MoveObj();;
+            if (_isMoving == false)
+            {
+                _isMoving = true;
+                _spriteRenderer.enabled = true;
+                _cachedProjectileTransform.parent = null;
+                _rigidbody2D.AddForce(_moveForce.normalized * _forceScaleFactor, ForceMode2D.Impulse);
+                EnableParticles(true);
+            }
+        }
+
+        private void ResetProjectile()
+        {
+            if(_cachedProjectileTransform == null || _cachedParentTransform == null)
+            {
+                return;
+            }
+
+            _isMoving = false;
+            _spriteRenderer.enabled = false;
+            _rigidbody2D.velocity = new Vector2(0,0);
+            _cachedProjectileTransform.parent = _cachedParentTransform;
+            _cachedProjectileTransform.localPosition = _cachedParentTransform.localPosition;
+            EnableParticles(false);
+        }
+
+        private void EnableParticles(bool canEnableParcles)
+        {
+            if (_particles == null)
+            {
+                return;
+            }
+
+            if (canEnableParcles)
+            {
+                _particles.Play();
+            }
+            else
+            {
+                _particles.Pause();
+            }
         }
     }
 
