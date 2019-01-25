@@ -21,7 +21,7 @@ namespace SpaceInvaders
                 return;
             }
 
-            _currentProjectile = _availableProjectiles[0];
+            _currentProjectile = _availableProjectiles[2];
         }
 
         public void Shoot()

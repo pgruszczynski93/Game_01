@@ -14,7 +14,8 @@ namespace SpaceInvaders
         [SerializeField] private ParticleSystem _particles;
 
         private Vector2 _moveForce;
-
+        private Vector2 _parentResetPosition;
+        
         private void Awake()
         {
             SetInitialReferences();
@@ -33,6 +34,7 @@ namespace SpaceInvaders
         private void SetInitialReferences()
         {
             _moveForce = new Vector2(0,1f).normalized;
+            _parentResetPosition = new Vector2(0,0);
             _spriteRenderer.enabled = false;
         }
 
@@ -77,7 +79,7 @@ namespace SpaceInvaders
             _spriteRenderer.enabled = false;
             _rigidbody2D.velocity = new Vector2(0,0);
             _cachedProjectileTransform.parent = _cachedParentTransform;
-            _cachedProjectileTransform.localPosition = _cachedParentTransform.localPosition;
+            _cachedProjectileTransform.localPosition = _parentResetPosition;
             EnableParticles(false);
         }
 

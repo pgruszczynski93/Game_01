@@ -5971,6 +5971,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1243456219927810678 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1243456219927810678, guid: e2855eae7d088094c84e15e88475139a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3677294488476665162}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3677294488476665162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6042,6 +6048,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 822644587, guid: e2855eae7d088094c84e15e88475139a, type: 3}
+      propertyPath: _availableProjectiles.Array.data[0].projectileParents.Array.data[0]
+      value: 
+      objectReference: {fileID: 1243456219927810678}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2855eae7d088094c84e15e88475139a, type: 3}
 --- !u!1001 &4849729526086637060
