@@ -33,5 +33,24 @@ namespace SpaceInvaders
                 currentProjectile.GetComponent<SIProjectileBehaviour>().MoveObj();
             }
         }
+
+        //DEBUG_
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                _currentProjectile = _availableProjectiles[0];
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                _currentProjectile = _availableProjectiles[1];
+            }
+
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                _currentProjectile = _availableProjectiles[2];
+            }
+        }
     }
 }
