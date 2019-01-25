@@ -33,7 +33,11 @@ namespace SpaceInvaders
 
         private void SetInitialReferences()
         {
-            _moveForce = new Vector2(0,1f).normalized;
+            if (_cachedParentTransform == null)
+            {
+                return;
+            }
+            _moveForce = _cachedParentTransform.up.normalized;
             _parentResetPosition = new Vector2(0,0);
             _spriteRenderer.enabled = false;
         }
