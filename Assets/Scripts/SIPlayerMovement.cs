@@ -1,15 +1,14 @@
-﻿using System.Numerics;
-using UnityEngine;
-using Vector2 = UnityEngine.Vector2;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
     public class SIPlayerMovement : SIMovement
     {
         [Range(0,1)] [SerializeField] private float _lerpStep;
-
         private Transform _cachedTransform;
         private Vector2 _startPosition;
+
+        public float InputMovementValue { get; set; }
 
         protected override void SetInitialReferences()
         {
@@ -35,10 +34,11 @@ namespace SpaceInvaders
             base.MoveObject();
 
             float dt = Time.deltaTime;
-            float horizontalMoveDelta = Input.GetAxis("Horizontal") * _currentMovementSpeed * dt;
+            InputMovementValue = Input.GetAxis("Horizontal") * dt;
+            float horizontalMoveSpeed = InputMovementValue * _currentMovementSpeed;
 
             Vector2 currentPosition = _cachedTransform.position;
-            Vector2 newPosition = new Vector2(_cachedTransform.position.x + horizontalMoveDelta, _startPosition.y);
+            Vector2 newPosition = new Vector2(_cachedTransform.position.x + horizontalMoveSpeed, _startPosition.y);
             Vector2 smoothedPosition = Vector2.Lerp(currentPosition, newPosition, _lerpStep);
 
             Vector2 objectInCameraBoundsPos = _mainCamera.WorldToViewportPoint(smoothedPosition);
