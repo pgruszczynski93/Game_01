@@ -63,6 +63,5 @@ namespace SpaceInvaders
         {
             SIEventsHandler.OnPlayerMove?.Invoke();
         }
-
     }
 }
