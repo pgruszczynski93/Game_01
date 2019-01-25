@@ -25,7 +25,8 @@
 
     public enum Events
     {
-        OnPlayerMove
+        OnPlayerMove, 
+        OnPlayerShoot
     }
 
 
