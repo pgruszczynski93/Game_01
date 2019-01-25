@@ -1,18 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SIProjectileBehaviour : MonoBehaviour
+namespace SpaceInvaders
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SIProjectileBehaviour : MonoBehaviour, IMoveable
     {
-        
+
+        [SerializeField] public bool canMove;
+
+        public void MoveObj()
+        {
+            Debug.Log("Xxxx");
+            transform.Translate(0,2*Time.deltaTime,0);
+        }
+
+        private void Update()
+        {
+            if (canMove == false)
+            {
+                return;
+            }
+
+            MoveObj();;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
+

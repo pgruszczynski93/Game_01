@@ -30,6 +30,7 @@ namespace SpaceInvaders
             {
                 GameObject currentProjectile = _currentProjectile.projectilePrefabs[i];
                 currentProjectile.SetActive(true);
+                currentProjectile.GetComponent<SIProjectileBehaviour>().MoveObj();
             }
         }
     }
