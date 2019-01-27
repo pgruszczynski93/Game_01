@@ -1,54 +1,59 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace SpaceInvaders
 {
-    public class SIPlayerMovement : SIMovement
+    public class SIPlayerMovement : SIMovement, IMoveable
     {
-        [Range(0,1)] [SerializeField] private float _lerpStep;
-        private Transform _cachedTransform;
-        private Vector2 _startPosition;
+        private const float SLOW_SPEED = 15f;
+        private const float FAST_SPEED = 45f;
+
+        protected Dictionary<MovementType, float> _movementSpeeds;
 
         public float InputMovementValue { get; set; }
+
+        protected override void OnEnable()
+        {
+            SIEventsHandler.OnObjectMovement += MoveObj;
+        }
+
+        protected override void OnDisable()
+        {
+            SIEventsHandler.OnObjectMovement -= MoveObj;
+        }
 
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
 
-            _cachedTransform = transform;
-            _startPosition = _cachedTransform.position;
+            _movementSpeeds = new Dictionary<MovementType, float>
+            {
+                {MovementType.Basic, BASIC_SPEED},
+                {MovementType.Fast, FAST_SPEED},
+                {MovementType.Slow, SLOW_SPEED}
+            };
+            BASIC_SPEED = 30f;
             _currentMovementSpeed = BASIC_SPEED;
         }
 
-        protected override void OnEnable()
+        private void SetMovementSpeed(MovementType movementType)
         {
-            SIEventsHandler.OnPlayerMove += MoveObject;
+            if (_movementSpeeds.TryGetValue(movementType, out float currentSpeed) == false)
+            {
+                Debug.Log("No key in _movementSpeeds dictionary - current speed setup with default.");
+                _currentMovementSpeed = BASIC_SPEED;
+                return;
+            }
+
+            _currentMovementSpeed = _movementSpeeds[movementType];
         }
 
-        protected override void OnDisable()
+        public void MoveObj()
         {
-            SIEventsHandler.OnPlayerMove -= MoveObject;
-        }
+            InputMovementValue = Input.GetAxis("Horizontal");
 
-        protected override void MoveObject()
-        {
-            base.MoveObject();
-
-            float dt = Time.deltaTime;
-            InputMovementValue = Input.GetAxis("Horizontal") * dt;
-            float horizontalMoveSpeed = InputMovementValue * _currentMovementSpeed;
-
-            Vector2 currentPosition = _cachedTransform.position;
-            Vector2 newPosition = new Vector2(_cachedTransform.position.x + horizontalMoveSpeed, _startPosition.y);
-            Vector2 smoothedPosition = Vector2.Lerp(currentPosition, newPosition, _lerpStep);
-
-            Vector2 objectInCameraBoundsPos = _mainCamera.WorldToViewportPoint(smoothedPosition);
-            objectInCameraBoundsPos.x = Mathf.Clamp(objectInCameraBoundsPos.x, CAMERA_MIN_PERCENT_OFFSET,
-                CAMERA_MAX_PERCENT_OFFSET);
-
-            objectInCameraBoundsPos = _mainCamera.ViewportToWorldPoint(objectInCameraBoundsPos);
-
-            _cachedTransform.position = objectInCameraBoundsPos;
-
+            MoveObject(InputMovementValue);
         }
     }
 }

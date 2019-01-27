@@ -5,18 +5,22 @@ namespace SpaceInvaders
 {
     public class SIMovement : MonoBehaviour
     {
-        protected const float SLOW_SPEED = 15f;
-        protected const float BASIC_SPEED = 30f;
-        protected const float FAST_SPEED = 45f;
+        protected float BASIC_SPEED;
 
         protected const float CAMERA_MIN_PERCENT_OFFSET = 0.05f;
+        protected const float VERTICAL_MOVEMENT_VIEWPORT_STEP = 0.1f;
         protected const float CAMERA_MAX_PERCENT_OFFSET = 0.95f;
 
         [SerializeField] protected MovementType _movementType;
-        [SerializeField] protected float _currentMovementSpeed;
+        [Range(0, 1)] [SerializeField] private float _lerpStep;
         [SerializeField] protected Camera _mainCamera;
 
-        protected Dictionary<MovementType, float> _movementSpeeds;
+        [SerializeField] protected float _currentMovementSpeed;
+
+        private float _dt;
+        private Transform _cachedTransform;
+        private Vector2 _startPosition;
+
 
         public MovementType CurrentMovementType
         {
@@ -31,37 +35,53 @@ namespace SpaceInvaders
 
         protected virtual void SetInitialReferences()
         {
-            _movementSpeeds = new Dictionary<MovementType, float>
-            {
-                {MovementType.Basic, BASIC_SPEED},
-                {MovementType.Fast, FAST_SPEED},
-                {MovementType.Slow, SLOW_SPEED}
-            };
-
-            _currentMovementSpeed = BASIC_SPEED;
+            _cachedTransform = transform;
+            _startPosition = _cachedTransform.position;
         }
 
         protected virtual void OnEnable(){}
 
         protected virtual void OnDisable() {}
 
-        protected virtual void MoveObject() {}
-
-        protected void SetMovementSpeed(MovementType movementType)
+        protected virtual void MoveObject(float movementValue, bool moveDownEnabled = false)
         {
-            if (_movementSpeeds.TryGetValue(movementType, out float currentSpeed) == false)
+            if (_mainCamera == null)
             {
-                Debug.Log("No key in _movementSpeeds dictionary - current speed setup with default.");
-                _currentMovementSpeed = BASIC_SPEED;
+                Debug.LogError("No camera attached");
                 return;
             }
 
-            _currentMovementSpeed = _movementSpeeds[movementType];
+            _dt = Time.deltaTime;
+            float horizontalMoveSpeed = _dt * movementValue * _currentMovementSpeed;
+
+            Vector2 currentPosition = _cachedTransform.position;
+            Vector2 newPosition = new Vector2(currentPosition.x + horizontalMoveSpeed, currentPosition.y);
+            Vector2 smoothedPosition = Vector2.Lerp(currentPosition, newPosition, _lerpStep);
+
+            Vector2 objectInCameraBoundsPos = _mainCamera.WorldToViewportPoint(smoothedPosition);
+            objectInCameraBoundsPos.x = Mathf.Clamp(objectInCameraBoundsPos.x, CAMERA_MIN_PERCENT_OFFSET,
+                CAMERA_MAX_PERCENT_OFFSET);
+
+            if (moveDownEnabled)
+            {
+                TryToMoveObjectDown(ref objectInCameraBoundsPos);
+            }
+
+            objectInCameraBoundsPos = _mainCamera.ViewportToWorldPoint(objectInCameraBoundsPos);
+
+            _cachedTransform.position = objectInCameraBoundsPos;
+
         }
 
-        protected virtual void Update()
+        private void TryToMoveObjectDown(ref Vector2 objectInCameraBoundsPos)
         {
-            SIEventsHandler.OnPlayerMove?.Invoke();
+            if ((objectInCameraBoundsPos.x >= CAMERA_MAX_PERCENT_OFFSET || objectInCameraBoundsPos.x <= CAMERA_MIN_PERCENT_OFFSET))
+                //|| (_cachedTransform.localPosition.y >= CAMERA_MAX_PERCENT_OFFSET ||
+                //    _cachedTransform.localPosition.y <= CAMERA_MIN_PERCENT_OFFSET))
+            {
+                objectInCameraBoundsPos.y -= VERTICAL_MOVEMENT_VIEWPORT_STEP;
+                _currentMovementSpeed = -_currentMovementSpeed;
+            }
         }
     }
 }

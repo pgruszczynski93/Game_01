@@ -10,14 +10,16 @@ namespace SpaceInvaders
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private Vector2 _scrollOffset;
 
+        private float _dt;
+
         protected void OnEnable()
         {
-            SIEventsHandler.OnPlayerMove += MoveObj;
+            SIEventsHandler.OnObjectMovement += MoveObj;
         }
 
         protected void OnDisable()
         {
-            SIEventsHandler.OnPlayerMove -= MoveObj;
+            SIEventsHandler.OnObjectMovement -= MoveObj;
         }
 
         public void MoveObj()
@@ -26,8 +28,10 @@ namespace SpaceInvaders
             {
                 return;
             }
+
+            _dt = Time.deltaTime;
             _scrollOffset.x = SIPlayerBehaviour.Instance.PlayerMovemnt.InputMovementValue;
-            _meshRenderer.material.mainTextureOffset += new Vector2(_scrollOffset.x * _xScalingFactor, _scrollOffset.y * Time.deltaTime);
+            _meshRenderer.material.mainTextureOffset += (new Vector2(_scrollOffset.x * _xScalingFactor, _scrollOffset.y) * _dt);
         }
     }
 }

@@ -4,8 +4,6 @@ namespace SpaceInvaders
 {
     public class SIGameMasterBehaviour : SIGenericSingleton<SIGameMasterBehaviour>
     {
-        [SerializeField] private Camera _mainCamera;
-
         protected override void Awake()
         {
             base.Awake();
@@ -16,6 +14,16 @@ namespace SpaceInvaders
         private void SetInitialReferences()
         {
 
+        }
+
+        private void Update()
+        {
+            OnMovementUpdate();
+        }
+
+        private void OnMovementUpdate()
+        {
+            SIEventsHandler.OnObjectMovement?.Invoke();
         }
     }
 }
