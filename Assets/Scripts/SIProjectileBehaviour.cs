@@ -62,9 +62,9 @@ namespace SpaceInvaders
 
         private void CheckIsProjectileOnScreen()
         {
-            Vector3 projectileViewportPosition =
+            Vector3 projectileViewportPosition = 
                 _mainCamera.WorldToViewportPoint(_cachedProjectileTransform.localPosition);
-            if (projectileViewportPosition.IsObjectInScreenVerticalBounds())
+            if (projectileViewportPosition.IsObjectInScreenVerticalBounds3D())
             {
                 ResetProjectile();
             }

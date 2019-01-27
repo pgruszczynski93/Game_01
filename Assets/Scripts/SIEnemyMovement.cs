@@ -8,7 +8,7 @@ namespace SpaceInvaders
         {
             base.SetInitialReferences();
 
-            BASIC_SPEED = 3f;
+            BASIC_SPEED = 10f;
         }
 
         protected override void OnEnable()
@@ -23,7 +23,7 @@ namespace SpaceInvaders
 
         public void MoveObj()
         {
-            MoveObject(BASIC_SPEED, true);
+            MoveObject(2, true);
         }
     }
 }

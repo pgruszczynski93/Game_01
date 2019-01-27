@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace SpaceInvaders
 {
@@ -8,6 +9,7 @@ namespace SpaceInvaders
         protected float BASIC_SPEED;
 
         protected const float VERTICAL_MOVEMENT_VIEWPORT_STEP = 0.1f;
+
 
         [SerializeField] protected MovementType _movementType;
         [Range(0, 1)] [SerializeField] private float _lerpStep;
@@ -68,7 +70,6 @@ namespace SpaceInvaders
             objectInCameraBoundsPos = _mainCamera.ViewportToWorldPoint(objectInCameraBoundsPos);
 
             _cachedTransform.position = objectInCameraBoundsPos;
-
         }
 
         private Vector2 TryToMoveObjectDown(Vector2 objectInCameraBoundsPos)
