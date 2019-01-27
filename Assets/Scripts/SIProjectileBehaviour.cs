@@ -13,6 +13,7 @@ namespace SpaceInvaders
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private ParticleSystem _particles;
 
+        private Camera _mainCamera;
         private Vector2 _moveForce;
         private Vector2 _parentResetPosition;
         
@@ -24,11 +25,13 @@ namespace SpaceInvaders
         private void OnEnable()
         {
             ResetProjectile();
+            SIEventsHandler.OnObjectMovement += CheckIsProjectileOnScreen;
         }
 
         private void OnDisable()
         {
             ResetProjectile();
+            SIEventsHandler.OnObjectMovement -= CheckIsProjectileOnScreen;
         }
 
         private void SetInitialReferences()
@@ -37,6 +40,8 @@ namespace SpaceInvaders
             {
                 return;
             }
+
+            _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _moveForce = _cachedParentTransform.up.normalized;
             _parentResetPosition = new Vector2(0,0);
             _spriteRenderer.enabled = false;
@@ -50,6 +55,16 @@ namespace SpaceInvaders
         private void OnTriggerEnter2D(Collider2D collider2D)
         {
             if (collider2D.gameObject.CompareTag("Enemy"))
+            {
+                ResetProjectile();
+            }
+        }
+
+        private void CheckIsProjectileOnScreen()
+        {
+            Vector3 projectileViewportPosition =
+                _mainCamera.WorldToViewportPoint(_cachedProjectileTransform.localPosition);
+            if (projectileViewportPosition.IsObjectInScreenVerticalBounds())
             {
                 ResetProjectile();
             }

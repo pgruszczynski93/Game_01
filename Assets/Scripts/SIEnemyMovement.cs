@@ -8,7 +8,7 @@ namespace SpaceInvaders
         {
             base.SetInitialReferences();
 
-            BASIC_SPEED = 4f;
+            BASIC_SPEED = 3f;
         }
 
         protected override void OnEnable()

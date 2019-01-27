@@ -27,14 +27,15 @@ namespace SpaceInvaders
         {
             base.SetInitialReferences();
 
+            BASIC_SPEED = 30f;
             _movementSpeeds = new Dictionary<MovementType, float>
             {
                 {MovementType.Basic, BASIC_SPEED},
                 {MovementType.Fast, FAST_SPEED},
                 {MovementType.Slow, SLOW_SPEED}
             };
-            BASIC_SPEED = 30f;
-            _currentMovementSpeed = BASIC_SPEED;
+
+            _currentMovementSpeed = _movementSpeeds[0];
         }
 
         private void SetMovementSpeed(MovementType movementType)
