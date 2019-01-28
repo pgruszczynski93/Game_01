@@ -2,17 +2,21 @@
 
 namespace SpaceInvaders
 {
-    public class SIEnemiesMasterBehaviour : SIGenericSingleton<SIEnemiesMasterBehaviour>
+    public class SIEnemiesSingleGridBehaviour : MonoBehaviour
     {
-        [SerializeField] private SIEnemyMovement[] _movingEnemies;
+        [SerializeField] private GameObject[] _enemiesInGrid;
 
         private int _totalEnemies;
         private int _livingEnemies;
         private int _speedMultiplier;
 
-        protected override void Awake()
+        public GameObject[] EnemiesInGrid
         {
-            base.Awake();
+            get { return _enemiesInGrid; }
+        }
+
+        protected void Awake()
+        {
             SetInitialReferences();
         }
 
@@ -30,7 +34,7 @@ namespace SpaceInvaders
 
         private void SetInitialReferences()
         {
-            _totalEnemies = _movingEnemies.Length;
+            _totalEnemies = _enemiesInGrid.Length;
             _livingEnemies = _totalEnemies;
         }
 
