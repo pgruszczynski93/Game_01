@@ -21,13 +21,6 @@ namespace SpaceInvaders
         protected override void Awake()
         {
             base.Awake();
-
-            SetInitialReferences();
-        }
-
-        private void SetInitialReferences()
-        {
-
         }
 
         private void Update()

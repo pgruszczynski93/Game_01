@@ -11,4 +11,4 @@ namespace SpaceInvaders
         public static Action OnEnemyDeath = delegate { };
         public static Action<float> OnEnemySpeedMultiplierChanged = delegate { };
     }
-}
+}   

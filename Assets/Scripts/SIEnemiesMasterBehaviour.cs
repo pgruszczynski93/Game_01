@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIEnemyGridBehaviour : SIGenericSingleton<SIEnemyGridBehaviour>
+    public class SIEnemiesMasterBehaviour : SIGenericSingleton<SIEnemiesMasterBehaviour>
     {
-
-        [SerializeField] private int _totalEnemies;
-        [SerializeField] private int _livingEnemies;
-        [SerializeField] private int _speedMultiplier;
         [SerializeField] private SIEnemyMovement[] _movingEnemies;
+
+        private int _totalEnemies;
+        private int _livingEnemies;
+        private int _speedMultiplier;
 
         protected override void Awake()
         {
@@ -47,7 +46,7 @@ namespace SpaceInvaders
                 return;
             }
 
-            float newMultiplier = _livingEnemies == 1 ? 6.0f : 3.0f;
+            float newMultiplier = _livingEnemies == 1 ? 6.0f : 4.0f;
 
             SIEventsHandler.OnEnemySpeedMultiplierChanged?.Invoke(newMultiplier);
         }

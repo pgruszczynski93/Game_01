@@ -23,7 +23,6 @@ namespace SpaceInvaders
 
                     if (existingInstancesCount == 1)
                     {
-
                         _instance = existingInstances[0];
                     }
 
@@ -47,7 +46,6 @@ namespace SpaceInvaders
                 DestroyImmediate(gameObject);
                 return;
             }
-
             _instance = this as T;
             DontDestroyOnLoad(gameObject);
         }
