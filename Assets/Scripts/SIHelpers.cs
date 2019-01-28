@@ -1,8 +1,18 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 
 namespace SpaceInvaders
 {
+    [System.Serializable]
+    public class SimpleTween2DInfo
+    {
+        public float durationTime;
+        public AnimationCurve animationCurve;
+        [HideInInspector] public Vector3 startPos;
+        [HideInInspector] public Vector3 endPos;
+    }
+
     public static class SIHelpers
     {
         public static float CAMERA_MIN_VIEWPORT_X = 0.03125f;
@@ -19,7 +29,6 @@ namespace SpaceInvaders
 
             return false;
         }
-        
 
         public static bool IsObjectInScreenVerticalBounds3D(this Vector3 objectViewportPos)
         {
@@ -54,5 +63,28 @@ namespace SpaceInvaders
             return Mathf.Round(x / offset) * offset;
         }
 
+        public static IEnumerator SimpleTween3D(Action<Vector3> onTweenAction, SimpleTween2DInfo tweenInfo, Action onTweenEnd = null)
+        {
+            float currentTime = 0.0f;
+            float animationProgress = 0.0f;
+            float curveProgress = 0.0f;
+
+            while (currentTime < tweenInfo.durationTime)
+            {
+
+                animationProgress = Mathf.Clamp01(currentTime / tweenInfo.durationTime);
+                curveProgress = tweenInfo.animationCurve.Evaluate(animationProgress);
+
+                onTweenAction?.Invoke(Vector3.Lerp(tweenInfo.startPos, tweenInfo.endPos,
+                    currentTime / tweenInfo.durationTime));
+
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+
+            onTweenAction?.Invoke(tweenInfo.endPos);
+            onTweenEnd.Invoke();
+            yield return null;
+        }
     }
 }

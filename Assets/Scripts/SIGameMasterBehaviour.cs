@@ -4,6 +4,7 @@ namespace SpaceInvaders
 {
     public class SIGameMasterBehaviour : SIGenericSingleton<SIGameMasterBehaviour>
     {
+        [SerializeField] private bool _isGameStarted;
         [SerializeField] private Camera _mainCamera;
 
         public Camera MainCamera
@@ -18,6 +19,16 @@ namespace SpaceInvaders
             }
         }
 
+        private void OnEnable()
+        {
+            SIEventsHandler.OnGameStarted += StartGame;
+        }
+
+        private void OnDisable()
+        {
+            SIEventsHandler.OnGameStarted -= StartGame;
+        }
+
         protected override void Awake()
         {
             base.Awake();
@@ -25,12 +36,28 @@ namespace SpaceInvaders
 
         private void Update()
         {
-            OnMovementUpdate();
+            if (_isGameStarted == false)
+            {
+                return;
+            }
+
+
+            OnUpdateMovements();
         }
 
-        private void OnMovementUpdate()
+        private void OnUpdateMovements()
         {
             SIEventsHandler.OnObjectMovement?.Invoke();
+        }
+
+        public void OnGameStarted()
+        {
+            SIEventsHandler.OnGameStarted?.Invoke();
+        }
+
+        private void StartGame()
+        {
+            _isGameStarted = true;
         }
     }
 }

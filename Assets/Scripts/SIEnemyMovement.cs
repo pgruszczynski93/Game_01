@@ -26,7 +26,10 @@ namespace SpaceInvaders
 
         public void MoveObj()
         {
-            MoveObject(_moveStep, true);
+            if (SIEnemiesGridsMaster.Instance.IsEnemyMovementAllowed)
+            {
+                MoveObject(_moveStep, true);
+            }
         }
 
         private void UpdateMovementStep(float newStep)
