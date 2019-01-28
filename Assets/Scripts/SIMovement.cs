@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
     public class SIMovement : MonoBehaviour
     {
-        protected float BASIC_SPEED;
 
         protected const float VERTICAL_MOVEMENT_VIEWPORT_STEP = 0.1f;
-
 
         [SerializeField] protected MovementType _movementType;
         [Range(0, 1)] [SerializeField] private float _lerpStep;

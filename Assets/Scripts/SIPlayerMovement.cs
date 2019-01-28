@@ -7,6 +7,7 @@ namespace SpaceInvaders
     public class SIPlayerMovement : SIMovement, IMoveable
     {
         private const float SLOW_SPEED = 15f;
+        private const float BASIC_SPEED = 30f;
         private const float FAST_SPEED = 45f;
 
         protected Dictionary<MovementType, float> _movementSpeeds;
@@ -27,7 +28,6 @@ namespace SpaceInvaders
         {
             base.SetInitialReferences();
 
-            BASIC_SPEED = 30f;
             _movementSpeeds = new Dictionary<MovementType, float>
             {
                 {MovementType.Basic, BASIC_SPEED},
