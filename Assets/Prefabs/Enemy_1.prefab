@@ -167,7 +167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6deb8c900ff920c47a3a23b6f35e7742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _raycastDistance: 0.25
   _spriteRenderer: {fileID: 3578970843817802861}
+  _collisionMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &275861281402422653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,3 +199,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5aaf8d2c79ac5149b81bef25f605cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _projectileController: {fileID: 0}
+  _isAbleToShoot: 0

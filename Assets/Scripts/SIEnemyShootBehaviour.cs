@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SIEnemyShootBehaviour : MonoBehaviour
+namespace SpaceInvaders
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SIEnemyShootBehaviour : SIShootBehaviour
     {
-        
+        [SerializeField] private bool _isAbleToShoot;
+
+        protected override void OnEnable()
+        {
+            SIEventsHandler.OnEnemyShoot += Shoot;
+        }
+
+        protected override void OnDisable()
+        {
+            SIEventsHandler.OnEnemyShoot -= Shoot;
+        }
+
+        protected override void Shoot()
+        {
+            Debug.Log("strzelam " + gameObject.name);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

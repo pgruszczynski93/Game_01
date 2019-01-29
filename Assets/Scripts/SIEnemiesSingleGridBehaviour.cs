@@ -1,14 +1,16 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceInvaders
 {
     public class SIEnemiesSingleGridBehaviour : MonoBehaviour, IMoveable
     {
-        [SerializeField] private GameObject[] _enemiesInGrid;
         [SerializeField] private SimpleTween2DInfo _enemyGridTweenInfo;
-        [SerializeField] private GameObject[] _enemiesAbleToShoot;
-        [SerializeField] private LayerMask _collisionMask;
+
+        [SerializeField] private GameObject[] _enemiesInGrid;
+        [SerializeField] private List<GameObject> _enemiesAbleToShoot;
+
 
         private int _totalEnemies;
         private int _livingEnemies;
@@ -39,7 +41,7 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath += UpdateCurrentSpeedMultiplier;
             SIEventsHandler.OnEnemyDeath += CheckEnemyWaveEnd;
 
-            SIEventsHandler.OnObjectMovement += GetEnemiesAbleToShoot;
+            SIEventsHandler.OnSwitchShootableEnemy += UpdateAbleToShootEnemies;
         }
 
         private void OnDisable()
@@ -48,30 +50,25 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= UpdateCurrentSpeedMultiplier;
             SIEventsHandler.OnEnemyDeath -= CheckEnemyWaveEnd;
 
-            SIEventsHandler.OnObjectMovement += GetEnemiesAbleToShoot;
+            SIEventsHandler.OnSwitchShootableEnemy -= UpdateAbleToShootEnemies;
         }
 
 
         private void SetInitialReferences()
         {
-            if (_enemiesInGrid == null || _enemyGridTweenInfo == null || _enemiesInGrid.Length == 0)
+            if (_enemiesInGrid == null || _enemyGridTweenInfo == null || _enemiesInGrid.Length == 0 || _enemiesAbleToShoot == null)
             {
                 Debug.LogError("Enemies grid array fields aren't initialized.");
                 return;
             }
 
+            _gridSize = 0.5f;
             _enemiesInRow = 11;
             _totalEnemies = _enemiesInGrid.Length;
             _livingEnemies = _totalEnemies;
             _cachedTransform = transform;
-            _enemiesAbleToShoot = new GameObject[_enemiesInRow];
             _enemyGridTweenInfo.startPos = SIEnemiesGridsMaster.Instance.GridInitialPosition;
             _enemyGridTweenInfo.endPos = SIEnemiesGridsMaster.Instance.GridScenePosition;
-            _gridSize = 0.5f;
-            _raycastOffset = new Vector2(0.0f, -_gridSize/2);
-            _raycastDirection = Vector2.down;
-            _shotAbilityRefreshTime = 0.2f;
-            _lastRefreshTime = 0.0f;
         }
 
         private void DecreaseEnemiesCount()
@@ -121,28 +118,23 @@ namespace SpaceInvaders
             _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
         }
 
-        private void GetEnemiesAbleToShoot()
+        private void UpdateAbleToShootEnemies(SIShootedEnemyInfo enemiesInfo)
         {
-            float timeSinceStartup = Time.time;
-
-            if (timeSinceStartup > _lastRefreshTime)
+            if (_enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0)
             {
-                Vector2 enemyRaycastPosition;
-
-                for (int i = 0; i < _totalEnemies; i++)
-                {
-                    enemyRaycastPosition = _enemiesInGrid[i].transform.position;
-                    enemyRaycastPosition += _raycastOffset;
-                    RaycastHit2D raycastHit2D = Physics2D.Raycast(enemyRaycastPosition, _raycastDirection, _gridSize, _collisionMask);
-
-                    //Debug.DrawRay(enemyRaycastPosition, _raycastDirection, Color.blue);
-                    if (raycastHit2D.collider != null)
-                    {
-                    }
-                }
-                _lastRefreshTime = timeSinceStartup + _shotAbilityRefreshTime;
+                Debug.Log("Stop UpdateAbleToShootEnemies()");
+                return;
             }
 
+            if (_enemiesAbleToShoot.Contains(enemiesInfo.currentShootableEnemy))
+            {
+                _enemiesAbleToShoot.Remove(enemiesInfo.currentShootableEnemy);
+
+                if (enemiesInfo.nextShootableEnemy != null)
+                {
+                    _enemiesAbleToShoot.Add(enemiesInfo.nextShootableEnemy);
+                }
+            }
         }
     }
 }
