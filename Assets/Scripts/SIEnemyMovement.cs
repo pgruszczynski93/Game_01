@@ -36,5 +36,6 @@ namespace SpaceInvaders
         {
             _moveStep = newStep;
         }
+
     }
 }

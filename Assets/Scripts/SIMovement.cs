@@ -13,9 +13,10 @@ namespace SpaceInvaders
         [SerializeField] protected float _currentMovementSpeed;
 
         private float _dt;
-        private Transform _cachedTransform;
-        private Vector2 _startPosition;
+
+        protected Vector2 _startPosition;
         protected Camera _mainCamera;
+        protected Transform _cachedTransform;
 
         public MovementType CurrentMovementType
         {

@@ -23,6 +23,11 @@
         Laser3x
     }
 
+    public enum AddedTags
+    {
+
+    }
+
     public enum Events
     {
         OnPlayerMove, 

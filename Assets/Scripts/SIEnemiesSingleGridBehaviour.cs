@@ -6,12 +6,14 @@ namespace SpaceInvaders
     public class SIEnemiesSingleGridBehaviour : MonoBehaviour, IMoveable
     {
         [SerializeField] private GameObject[] _enemiesInGrid;
-
         [SerializeField] private SimpleTween2DInfo _enemyGridTweenInfo;
+        [SerializeField] private GameObject[] _enemiesAbleToShoot;
 
         private int _totalEnemies;
         private int _livingEnemies;
         private int _speedMultiplier;
+        private int _enemiesInRow;
+        private float _gridSize;
 
         private Transform _cachedTransform;
 
@@ -30,6 +32,8 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath += DecreaseEnemiesCount;
             SIEventsHandler.OnEnemyDeath += UpdateCurrentSpeedMultiplier;
             SIEventsHandler.OnEnemyDeath += CheckEnemyWaveEnd;
+
+            SIEventsHandler.OnObjectMovement += GetEnemiesAbleToShoot;
         }
 
         private void OnDisable()
@@ -37,7 +41,10 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= DecreaseEnemiesCount;
             SIEventsHandler.OnEnemyDeath -= UpdateCurrentSpeedMultiplier;
             SIEventsHandler.OnEnemyDeath -= CheckEnemyWaveEnd;
+
+            SIEventsHandler.OnObjectMovement += GetEnemiesAbleToShoot;
         }
+
 
         private void SetInitialReferences()
         {
@@ -46,9 +53,12 @@ namespace SpaceInvaders
                 Debug.LogError("Enemies grid array fields aren't initialized.");
                 return;
             }
+
+            _enemiesInRow = 11;
             _totalEnemies = _enemiesInGrid.Length;
             _livingEnemies = _totalEnemies;
             _cachedTransform = transform;
+            _enemiesAbleToShoot = new GameObject[_enemiesInRow];
             _enemyGridTweenInfo.startPos = SIEnemiesGridsMaster.Instance.GridInitialPosition;
             _enemyGridTweenInfo.endPos = SIEnemiesGridsMaster.Instance.GridScenePosition;
         }
@@ -90,7 +100,7 @@ namespace SpaceInvaders
             yield return StartCoroutine(SIHelpers.SimpleTween3D((newPosition) =>
                 {
                     _cachedTransform.position = newPosition;
-                }, _enemyGridTweenInfo, () => { SIEnemiesGridsMaster.Instance.IsEnemyMovementAllowed = true; }));
+                }, _enemyGridTweenInfo, () => { SIEnemiesGridsMaster.Instance.EnableGridMovements(); }));
 
             StopAllCoroutines();
         }
@@ -98,6 +108,16 @@ namespace SpaceInvaders
         public void ResetGrid()
         {
             _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
+        }
+
+        private void GetEnemiesAbleToShoot()
+        {
+            Vector2 verticalNeighbourPosition;
+
+            for (int i = 0; i < _totalEnemies; i++)
+            {
+
+            }
         }
     }
 }

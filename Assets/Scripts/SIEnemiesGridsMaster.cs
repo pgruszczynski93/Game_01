@@ -12,10 +12,8 @@ namespace SpaceInvaders
         [SerializeField] private Transform _gridSceneTransform;
 
         [SerializeField] private GameObject _enemiesGrid_1;
-        [SerializeField] private GameObject _enemiesGrid_2;
 
         [SerializeField] private SIEnemiesSingleGridBehaviour _enemiesGridBehaviour_1;
-        [SerializeField] private SIEnemiesSingleGridBehaviour _enemiesGridBehaviour_2;
 
 
         public bool IsEnemyMovementAllowed
@@ -43,6 +41,16 @@ namespace SpaceInvaders
         private void MoveEnemiesWave()
         {
             _enemiesGridBehaviour_1.MoveObj();
+        }
+
+        public void EnableGridMovements()
+        {
+            _isEnemyMovementAllowed = true;
+        }
+
+        public void DisableGridMovements()
+        {
+            _isEnemyMovementAllowed = false;
         }
 
         //protected override void Awake()

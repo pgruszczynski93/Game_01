@@ -6,21 +6,15 @@ namespace SpaceInvaders
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        private bool _isEnemyDead = false;
+        public bool IsEnemyDead { get; set; } = false;
 
-        private void OnTriggerEnter2D(Collider2D collider2D)
+        public void Death()
         {
-            if (collider2D.gameObject.CompareTag("Projectile") && _isEnemyDead == false)
+            if (IsEnemyDead == false)
             {
-                Death();
-                SIEventsHandler.OnEnemyDeath?.Invoke();
+                IsEnemyDead = true;
+                gameObject.SetActive(false);
             }
-        }
-
-        private void Death()
-        {
-            _isEnemyDead = true;
-            gameObject.SetActive(false);
         }
     }
 }

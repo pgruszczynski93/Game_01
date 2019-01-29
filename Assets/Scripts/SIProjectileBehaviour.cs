@@ -26,12 +26,14 @@ namespace SpaceInvaders
         {
             ResetProjectile();
             SIEventsHandler.OnObjectMovement += CheckIsProjectileOnScreen;
+            SIEventsHandler.OnEnemyDeath += ResetProjectile;
         }
 
         private void OnDisable()
         {
             ResetProjectile();
             SIEventsHandler.OnObjectMovement -= CheckIsProjectileOnScreen;
+            SIEventsHandler.OnEnemyDeath += ResetProjectile;
         }
 
         private void SetInitialReferences()
@@ -50,14 +52,6 @@ namespace SpaceInvaders
         public void MoveObj()
         {
             Move();
-        }
-
-        private void OnTriggerEnter2D(Collider2D collider2D)
-        {
-            if (collider2D.gameObject.CompareTag("Enemy"))
-            {
-                ResetProjectile();
-            }
         }
 
         private void CheckIsProjectileOnScreen()
@@ -87,7 +81,7 @@ namespace SpaceInvaders
             }
         }
 
-        private void ResetProjectile()
+        public void ResetProjectile()
         {
             if(_cachedProjectileTransform == null || _cachedParentTransform == null)
             {
