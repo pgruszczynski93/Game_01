@@ -17,17 +17,20 @@ namespace SpaceInvaders
 
                     if (existingInstancesCount > 1)
                     {
+                        Debug.Log("MANY " + typeof(T));
                         Debug.LogError("To many instances of " + typeof(T) + " objects ");
-
                     }
 
                     if (existingInstancesCount == 1)
                     {
                         _instance = existingInstances[0];
+                        Debug.Log("ONE " + typeof(T) +" " + _instance.GetInstanceID() + " " + _instance.name);
                     }
 
                     if (existingInstancesCount == 0)
                     {
+                        Debug.Log("ZERO " + typeof(T));
+
                         GameObject singleInstance = new GameObject();
                         singleInstance.name = typeof(T).Name;
                         _instance = singleInstance.AddComponent<T>();
@@ -43,9 +46,12 @@ namespace SpaceInvaders
         {
             if (_instance != null)
             {
+                Debug.Log("DESTROY " + typeof(T) +" "+ gameObject.GetInstanceID());
+
                 DestroyImmediate(gameObject);
                 return;
             }
+            Debug.Log("LET LIVE " + typeof(T) + " " + gameObject.GetInstanceID());
             _instance = this as T;
             DontDestroyOnLoad(gameObject);
         }

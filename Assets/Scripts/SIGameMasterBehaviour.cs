@@ -29,11 +29,6 @@ namespace SpaceInvaders
             SIEventsHandler.OnGameStarted -= StartGame;
         }
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
         private void Update()
         {
             if (_isGameStarted == false)
