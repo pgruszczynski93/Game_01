@@ -179,7 +179,7 @@ namespace SpaceInvaders
             while (SIEnemiesGridsMaster.Instance.IsEnemyMovementAllowed && enemiesAbleToShootCount > 0)
             {
                 enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
-                enemySelectedToShootIndex = Random.Range(0, enemiesAbleToShootCount - 1);
+                enemySelectedToShootIndex = Random.Range(0, (enemiesAbleToShootCount > 0) ? enemiesAbleToShootCount - 1 : 0);
                 timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
                 _enemiesAbleToShoot[enemySelectedToShootIndex].InvokeShoot();
                 yield return new WaitForSeconds(timeToNextShoot);
