@@ -9,8 +9,9 @@ namespace SpaceInvaders
         [SerializeField] private SimpleTween2DInfo _enemyGridTweenInfo;
 
         [SerializeField] private GameObject[] _enemiesInGrid;
-        [SerializeField] private List<GameObject> _enemiesAbleToShoot;
+        [SerializeField] private List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
 
+        private bool _isShootingAvailableForWave;
 
         private int _totalEnemies;
         private int _livingEnemies;
@@ -20,6 +21,8 @@ namespace SpaceInvaders
         private float _gridSize;
         private float _lastRefreshTime;
         private float _shotAbilityRefreshTime;
+        [SerializeField] private float _shotTimeMinBreak;
+        [SerializeField] private float _shotTimeMaxBreak;
 
         private Transform _cachedTransform;
         private Vector2 _raycastDirection;
@@ -64,6 +67,8 @@ namespace SpaceInvaders
 
             _gridSize = 0.5f;
             _enemiesInRow = 11;
+            _shotTimeMinBreak = 0.1f;
+            _shotTimeMaxBreak = 0.5f;
             _totalEnemies = _enemiesInGrid.Length;
             _livingEnemies = _totalEnemies;
             _cachedTransform = transform;
@@ -110,7 +115,7 @@ namespace SpaceInvaders
                     _cachedTransform.position = newPosition;
                 }, _enemyGridTweenInfo, () => { SIEnemiesGridsMaster.Instance.EnableGridMovements(); }));
 
-            StopAllCoroutines();
+            StopCoroutine(GridInitialMovementRoutine());
         }
         
         public void ResetGrid()
@@ -141,13 +146,43 @@ namespace SpaceInvaders
         {
             for (int i = 0; i < _enemiesAbleToShoot.Count; i++)
             {
-                _enemiesAbleToShoot[i].GetComponent<SIEnemyShootBehaviour>().InvokeShoot();
+                _enemiesAbleToShoot[i].InvokeShoot();
             }
         }
 
-        void Update()
+        public void StartShooting()
         {
-            ShootWithAbleEnemies();
+            StartCoroutine(EnemiesShootingRoutine());
+        }
+
+        public void StopShooting()
+        {
+            StopCoroutine(EnemiesShootingRoutine());
+        }
+
+        private IEnumerator EnemiesShootingRoutine()
+        {
+            if (_enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0)
+            {
+                Debug.Log("Can't setup enemies shooting routine");
+                yield break;
+            }
+
+            int enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
+            int enemySelectedToShootIndex = 0;
+            float timeToNextShoot = 0.0f;
+
+            while (SIEnemiesGridsMaster.Instance.IsEnemyMovementAllowed && enemiesAbleToShootCount > 0)
+            {
+                enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
+                enemySelectedToShootIndex = Random.Range(0, enemiesAbleToShootCount - 1);
+                timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
+                _enemiesAbleToShoot[enemySelectedToShootIndex].InvokeShoot();
+                yield return new WaitForSeconds(timeToNextShoot);
+            }
+
+            yield return null;
+
         }
     }
 }

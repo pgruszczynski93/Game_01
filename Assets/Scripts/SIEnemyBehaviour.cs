@@ -52,21 +52,27 @@ namespace SpaceInvaders
             RaycastHit2D raycastHit2D =
                 Physics2D.Raycast(raycastPosition, Vector2.up, _raycastDistance, _collisionMask);
 
-            
+            SIEnemyShootBehaviour enemyShotBehaviour = gameObject.GetComponent<SIEnemyShootBehaviour>();
+
+            if (enemyShotBehaviour == null)
+            {
+                Debug.LogError("Enemy hasn't attached SIEnemyShootBehaviour");
+                return null;
+            }
 
             if (raycastHit2D.collider == null)
             {
                 return new SIShootedEnemyInfo()
                 {
-                    currentShootableEnemy = gameObject,
+                    currentShootableEnemy = enemyShotBehaviour,
                     nextShootableEnemy = null
                 };
             }
 
             return new SIShootedEnemyInfo()
             {
-                currentShootableEnemy = gameObject,
-                nextShootableEnemy = raycastHit2D.transform.parent.gameObject
+                currentShootableEnemy = enemyShotBehaviour,
+                nextShootableEnemy = raycastHit2D.transform.parent.gameObject.GetComponent<SIEnemyShootBehaviour>()
             };
         }
     }

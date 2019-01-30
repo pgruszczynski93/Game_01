@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace SpaceInvaders
+﻿namespace SpaceInvaders
 {
     public class SIEnemyColliderBehaviour : SIMainColliderBehaviour<SIEnemyBehaviour>
     {

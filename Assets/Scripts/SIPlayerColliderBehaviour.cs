@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -15,6 +13,7 @@ namespace SpaceInvaders
         {
             onCollisionCallback -= OnPlayerHitted;
         }
+
 
         private void OnPlayerHitted()
         {

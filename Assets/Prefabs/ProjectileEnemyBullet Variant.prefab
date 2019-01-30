@@ -59,14 +59,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a28021aaf9974c44ab9649561cbb128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isMoving: 0
+  _isMoving: 1
   _forceScaleFactor: 10
   _rigidbody2D: {fileID: 8006916338232305856}
   _cachedParentTransform: {fileID: 0}
   _cachedProjectileTransform: {fileID: 83660340984032088}
   _spriteRenderer: {fileID: 83660340984032091}
   _particles: {fileID: 3459125200639763611}
---- !u!114 &3872306845341368738
+--- !u!114 &4294540926391779462
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,10 +75,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 83660340984032090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04d0d7010881bc74eb9abf24f1f267b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 14391b56c3ef4c04eb634460640cccaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectTag: Enemy
+  _objectTags:
+  - Player
+  - Projectile
   _colliderParentBehaviour: {fileID: 2547567598819386936}
 --- !u!1001 &3657446688174983061
 PrefabInstance:

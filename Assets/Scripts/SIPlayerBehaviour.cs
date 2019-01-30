@@ -6,6 +6,7 @@ namespace SpaceInvaders
     {
         [SerializeField] private SIPlayerMovement _playerMovement;
         [SerializeField] private SIPlayerShootBehaviour _playerShoot;
+        [SerializeField] private SIPlayerProjectilesController _playerProjectileController;
 
         public SIPlayerMovement PlayerMovemnt
         {
@@ -15,6 +16,11 @@ namespace SpaceInvaders
         public SIPlayerShootBehaviour PlayerShoot
         {
             get { return _playerShoot; }
+        }
+
+        public SIPlayerProjectilesController ProjectileController
+        {
+            get { return _playerProjectileController; }
         }
     }
 }

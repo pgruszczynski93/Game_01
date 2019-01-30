@@ -40,13 +40,8 @@ namespace SpaceInvaders
 
         public void InvokeShoot()
         {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                Debug.Log("stzrelam");
-                Shoot();
-                _isAbleToShoot = false;
-            }
-
+            Shoot();
+            _isAbleToShoot = false;
         }
     }
 

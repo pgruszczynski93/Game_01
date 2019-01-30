@@ -16,7 +16,9 @@ namespace SpaceInvaders
         private Camera _mainCamera;
         private Vector2 _moveForce;
         private Vector2 _parentResetPosition;
-        
+
+        public bool IsMoving { get => _isMoving; set => _isMoving = value; }
+
         private void Awake()
         {
             SetInitialReferences();

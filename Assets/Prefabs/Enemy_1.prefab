@@ -70,7 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0f435254aebd4418b6cf6d4e27e9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectTag: Projectile
+  _objectTags:
+  - Projectile
   _colliderParentBehaviour: {fileID: 7944746669716650107}
 --- !u!1 &2676229917223812512
 GameObject:
@@ -104,7 +105,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 6239268577152547790}
-  - {fileID: 6022088036787190138}
+  - {fileID: 4698860576044419641}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -225,45 +226,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4809321717479220977}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6167696667032921445}
-  m_Father: {fileID: 6022088036787190138}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8264603273439123872
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6022088036787190138}
-  m_Layer: 0
-  m_Name: Projectile1x
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6022088036787190138
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264603273439123872}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4698860576044419641}
   m_Father: {fileID: 3796128085518428701}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2214790424902242346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6167696667032921447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14391b56c3ef4c04eb634460640cccaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectTags:
+  - Projectile
+  _colliderParentBehaviour: {fileID: 8641265189700970501}
 --- !u!1001 &6102720352981323325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -350,14 +335,26 @@ PrefabInstance:
         type: 3}
       propertyPath: _cachedParentTransform
       value: 
-      objectReference: {fileID: 6022088036787190138}
+      objectReference: {fileID: 4698860576044419641}
+    - target: {fileID: 3872306845341368738, guid: f2f6699e44a64314bbd0fce6134cf685,
+        type: 3}
+      propertyPath: _objectTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3872306845341368738, guid: f2f6699e44a64314bbd0fce6134cf685,
         type: 3}
       propertyPath: _objectTag
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3872306845341368738, guid: f2f6699e44a64314bbd0fce6134cf685, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f2f6699e44a64314bbd0fce6134cf685, type: 3}
+--- !u!1 &6167696667032921447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 83660340984032090, guid: f2f6699e44a64314bbd0fce6134cf685,
+    type: 3}
+  m_PrefabInstance: {fileID: 6102720352981323325}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6167696667032921445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 83660340984032088, guid: f2f6699e44a64314bbd0fce6134cf685,
@@ -370,7 +367,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6102720352981323325}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6167696667032921447}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a28021aaf9974c44ab9649561cbb128, type: 3}
