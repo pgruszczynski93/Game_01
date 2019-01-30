@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders
 {
-    public class SIPlayerShootBehaviour : SIShootBehaviour
+    public class SIPlayerShootBehaviour : SIShootBehaviour<SIProjectilesController>
     {
         protected override void OnEnable()
         {

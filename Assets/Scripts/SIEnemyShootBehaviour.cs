@@ -1,26 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIEnemyShootBehaviour : SIShootBehaviour
+    public class SIEnemyShootBehaviour : SIShootBehaviour<SIProjectileBehaviour>
     {
         [SerializeField] private bool _isAbleToShoot;
 
         protected override void OnEnable()
         {
-            SIEventsHandler.OnEnemyShoot += Shoot;
+
         }
 
         protected override void OnDisable()
         {
-            SIEventsHandler.OnEnemyShoot -= Shoot;
+
+        }
+
+        private void Start()
+        {
+            SetInitialReferences();
+        }
+
+        private void SetInitialReferences()
+        {
+            _isAbleToShoot = true;
         }
 
         protected override void Shoot()
         {
-            Debug.Log("strzelam " + gameObject.name);
+            if (_projectileController == null)
+            {
+                Debug.LogError("Enemy's projectile isn't assigned.");
+                return;
+            }
+
+            _projectileController.gameObject.SetActive(true);
+            _projectileController.MoveObj();
+        }
+
+        public void InvokeShoot()
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                Debug.Log("stzrelam");
+                Shoot();
+                _isAbleToShoot = false;
+            }
+
         }
     }
 

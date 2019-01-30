@@ -1259,7 +1259,7 @@ GameObject:
   - component: {fileID: 628177689}
   - component: {fileID: 628177690}
   m_Layer: 0
-  m_Name: '[EnemiesGrids]'
+  m_Name: '[EnemiesGrid]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2639,6 +2639,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3144cfbc065766249aefd843721793d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyGridTweenInfo:
+    durationTime: 1
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.27738205
+        value: 0.6860468
+        inSlope: 1.1748941
+        outSlope: 1.1748941
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.4671297
+        outWeight: 0.24464467
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    startPos: {x: 0, y: 0, z: 0}
+    endPos: {x: 0, y: 0, z: 0}
   _enemiesInGrid:
   - {fileID: 1615021186}
   - {fileID: 580557791}
@@ -2695,44 +2732,18 @@ MonoBehaviour:
   - {fileID: 447682073}
   - {fileID: 1193844788}
   - {fileID: 1668140364}
-  _enemyGridTweenInfo:
-    durationTime: 3
-    animationCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.27738205
-        value: 0.6860468
-        inSlope: 1.1748941
-        outSlope: 1.1748941
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.4671297
-        outWeight: 0.24464467
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    startPos: {x: 0, y: 0, z: 0}
-    endPos: {x: 0, y: 0, z: 0}
-  _enemiesAbleToShoot: []
+  _enemiesAbleToShoot:
+  - {fileID: 102308012}
+  - {fileID: 174285734}
+  - {fileID: 1012325928}
+  - {fileID: 653290078}
+  - {fileID: 1095850052}
+  - {fileID: 1297802402}
+  - {fileID: 380585377}
+  - {fileID: 1321011321}
+  - {fileID: 447682073}
+  - {fileID: 1193844788}
+  - {fileID: 1668140364}
 --- !u!1001 &1176223590
 PrefabInstance:
   m_ObjectHideFlags: 0

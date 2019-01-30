@@ -136,6 +136,19 @@ namespace SpaceInvaders
                 }
             }
         }
+
+        public void ShootWithAbleEnemies()
+        {
+            for (int i = 0; i < _enemiesAbleToShoot.Count; i++)
+            {
+                _enemiesAbleToShoot[i].GetComponent<SIEnemyShootBehaviour>().InvokeShoot();
+            }
+        }
+
+        void Update()
+        {
+            ShootWithAbleEnemies();
+        }
     }
 }
 

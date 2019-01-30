@@ -2,9 +2,9 @@
 
 namespace SpaceInvaders
 {
-    public class SIShootBehaviour : MonoBehaviour
+    public class SIShootBehaviour<T> : MonoBehaviour where T: MonoBehaviour
     {
-        [SerializeField] protected SIProjectilesController _projectileController;
+        [SerializeField] protected T _projectileController;
 
         protected virtual void OnEnable() {}
 
