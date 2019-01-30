@@ -56,6 +56,10 @@ namespace SpaceInvaders
             SIEventsHandler.OnSwitchShootableEnemy -= UpdateAbleToShootEnemies;
         }
 
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
 
         private void SetInitialReferences()
         {
@@ -67,8 +71,8 @@ namespace SpaceInvaders
 
             _gridSize = 0.5f;
             _enemiesInRow = 11;
-            _shotTimeMinBreak = 0.1f;
-            _shotTimeMaxBreak = 0.5f;
+            _shotTimeMinBreak = 0.4f;
+            _shotTimeMaxBreak = 1f;
             _totalEnemies = _enemiesInGrid.Length;
             _livingEnemies = _totalEnemies;
             _cachedTransform = transform;

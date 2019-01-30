@@ -29,6 +29,7 @@ namespace SpaceInvaders
             ResetProjectile();
             SIEventsHandler.OnObjectMovement += CheckIsProjectileOnScreen;
             SIEventsHandler.OnEnemyDeath += ResetProjectile;
+            SIEventsHandler.OnPlayerHit += ResetProjectile;
         }
 
         private void OnDisable()
@@ -36,6 +37,7 @@ namespace SpaceInvaders
             ResetProjectile();
             SIEventsHandler.OnObjectMovement -= CheckIsProjectileOnScreen;
             SIEventsHandler.OnEnemyDeath += ResetProjectile;
+            SIEventsHandler.OnPlayerHit += ResetProjectile;
         }
 
         private void SetInitialReferences()
@@ -75,11 +77,11 @@ namespace SpaceInvaders
 
             if (_isMoving == false)
             {
+                EnableParticles(true);
                 _isMoving = true;
                 _spriteRenderer.enabled = true;
                 _cachedProjectileTransform.parent = null;
                 _rigidbody2D.AddForce(_moveForce.normalized * _forceScaleFactor, ForceMode2D.Impulse);
-                EnableParticles(true);
             }
         }
 
@@ -90,12 +92,13 @@ namespace SpaceInvaders
                 return;
             }
 
+            EnableParticles(false);
             _isMoving = false;
             _spriteRenderer.enabled = false;
             _rigidbody2D.velocity = new Vector2(0,0);
             _cachedProjectileTransform.parent = _cachedParentTransform;
             _cachedProjectileTransform.localPosition = _parentResetPosition;
-            EnableParticles(false);
+            //gameObject.SetActive(false);
         }
 
         private void EnableParticles(bool canEnableParcles)
@@ -105,13 +108,15 @@ namespace SpaceInvaders
                 return;
             }
 
+            _particles.gameObject.SetActive(canEnableParcles);
+
             if (canEnableParcles)
             {
                 _particles.Play();
             }
             else
             {
-                _particles.Pause();
+                _particles.Stop();
             }
         }
     }

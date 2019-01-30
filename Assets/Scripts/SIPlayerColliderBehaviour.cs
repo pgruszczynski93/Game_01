@@ -18,6 +18,7 @@ namespace SpaceInvaders
         private void OnPlayerHitted()
         {
             Debug.Log(" DOSTALEM!");
+            SIEventsHandler.OnPlayerHit?.Invoke();
         }
     }
 }
