@@ -2,23 +2,25 @@
 
 namespace SpaceInvaders
 {
-    public class SIEnemyBehaviour : MonoBehaviour
+    public class SIEnemyBehaviour : MonoBehaviour, IRespawnable
     {
         [SerializeField] private float _raycastDistance;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private LayerMask _collisionMask;
+        [SerializeField] private BoxCollider2D _collider;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+
         private Vector2 _raycastOffset;
 
         public bool IsEnemyDead { get; set; } = false;
 
         private void OnEnable()
         {
-
+            SIEventsHandler.OnWaveEnd += Respawn;
         }
 
         private void OnDisable()
         {
-
+            SIEventsHandler.OnWaveEnd += Respawn;
         }
 
         private void Start()
@@ -40,8 +42,20 @@ namespace SpaceInvaders
                 SIEventsHandler.OnSwitchShootableEnemy?.Invoke(nextShootableEnemyInfo);
 
                 IsEnemyDead = true;
-                gameObject.SetActive(false);
+                EnableEnemyVisibility(false);
             }
+        }
+
+
+        private void EnableEnemyVisibility(bool canEnable)
+        {
+            if (_collider == null || _spriteRenderer == null)
+            {
+                return;
+            }
+            _collider.enabled = canEnable;
+            _spriteRenderer.enabled = canEnable;
+            //gameObject.SetActive(canEnable);
         }
 
         public SIShootedEnemyInfo ShootAbleEnemy()
@@ -74,6 +88,11 @@ namespace SpaceInvaders
                 currentShootableEnemy = enemyShotBehaviour,
                 nextShootableEnemy = raycastHit2D.transform.parent.gameObject.GetComponent<SIEnemyShootBehaviour>()
             };
+        }
+
+        public void Respawn()
+        {
+            EnableEnemyVisibility(true);
         }
     }
 }

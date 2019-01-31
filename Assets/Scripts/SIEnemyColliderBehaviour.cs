@@ -1,7 +1,10 @@
-﻿namespace SpaceInvaders
+﻿using UnityEngine;
+
+namespace SpaceInvaders
 {
     public class SIEnemyColliderBehaviour : SIMainColliderBehaviour<SIEnemyBehaviour>
     {
+
         protected override void OnEnable()
         {
             onCollisionCallback += _colliderParentBehaviour.Death;

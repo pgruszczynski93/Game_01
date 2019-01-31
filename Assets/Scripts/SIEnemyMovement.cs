@@ -6,6 +6,8 @@ namespace SpaceInvaders
     {
         private float _moveStep;
 
+        private bool _canEnemyMove;
+
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
@@ -16,25 +18,35 @@ namespace SpaceInvaders
         {
             SIEventsHandler.OnObjectMovement += MoveObj;
             SIEventsHandler.OnEnemySpeedMultiplierChanged += UpdateMovementStep;
+            SIEventsHandler.OnWaveEnd += ResetEnemy;
         }
 
         protected override void OnDisable()
         {
             SIEventsHandler.OnObjectMovement -= MoveObj;
             SIEventsHandler.OnEnemySpeedMultiplierChanged -= UpdateMovementStep;
+            SIEventsHandler.OnWaveEnd -= ResetEnemy;
         }
 
         public void MoveObj()
         {
-            if (SIEnemiesGridsMaster.Instance.IsEnemyMovementAllowed)
+            if (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed == false)
             {
-                MoveObject(_moveStep, true);
+                return;
             }
+
+            MoveObject(_moveStep, true);
         }
 
         private void UpdateMovementStep(float newStep)
         {
             _moveStep = newStep;
+        }
+
+        private void ResetEnemy()
+        {
+            Debug.Log("Reset EnemyPos");
+            _cachedTransform.position = _startPosition;
         }
 
     }

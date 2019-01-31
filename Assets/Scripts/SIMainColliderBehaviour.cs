@@ -59,6 +59,10 @@ namespace SpaceInvaders
                 hasHittedObjectGivenTag = collider2D.gameObject.CompareTag(_objectTags[i]);
                 if (hasHittedObjectGivenTag)
                 {
+                    if (typeof(T) == typeof(SIPlayerProjectileColliderBehaviour))
+                    {
+                        Debug.Log("udezam w " + collider2D.name);
+                    }
                     onCollisionCallback?.Invoke();
                     return;
                 }

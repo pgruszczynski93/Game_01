@@ -45,6 +45,8 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath += CheckEnemyWaveEnd;
 
             SIEventsHandler.OnSwitchShootableEnemy += UpdateAbleToShootEnemies;
+
+            SIEventsHandler.OnWaveEnd += ResetEnemyGrid;
         }
 
         private void OnDisable()
@@ -54,6 +56,8 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= CheckEnemyWaveEnd;
 
             SIEventsHandler.OnSwitchShootableEnemy -= UpdateAbleToShootEnemies;
+
+            SIEventsHandler.OnWaveEnd -= ResetEnemyGrid;
         }
 
         private void OnDestroy()
@@ -80,6 +84,14 @@ namespace SpaceInvaders
             _enemyGridTweenInfo.endPos = SIEnemiesGridsMaster.Instance.GridScenePosition;
         }
 
+        public void ResetEnemyGrid()
+        {
+            Debug.Log("resetuje siatke");
+            SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
+            _livingEnemies = _totalEnemies;
+            _cachedTransform = SIEnemiesGridsMaster.Instance.GridInitialTrasnform;
+        }
+
         private void DecreaseEnemiesCount()
         {
             --_livingEnemies;
@@ -104,7 +116,16 @@ namespace SpaceInvaders
                 return;
             }
             Debug.Log("WAVE END ");
-            //SIEventsHandler.OnWaveEnd?.Invoke();
+            SIEventsHandler.OnWaveEnd?.Invoke();
+        }
+
+        //DEBUG_WAVE_STOP
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                SIEventsHandler.OnWaveEnd?.Invoke();
+            }
         }
 
         public void MoveObj()
@@ -161,6 +182,7 @@ namespace SpaceInvaders
 
         public void StopShooting()
         {
+            Debug.Log("koniec falio - przestaje strzelac");
             StopCoroutine(EnemiesShootingRoutine());
         }
 
@@ -176,11 +198,10 @@ namespace SpaceInvaders
             int enemySelectedToShootIndex = 0;
             float timeToNextShoot = 0.0f;
 
-            while (SIEnemiesGridsMaster.Instance.IsEnemyMovementAllowed && enemiesAbleToShootCount > 0)
+            while (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed && enemiesAbleToShootCount > 0)
             {
                 enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
                 enemySelectedToShootIndex = Random.Range(0, (enemiesAbleToShootCount > 0) ? enemiesAbleToShootCount - 1 : 0);
-                Debug.Log("shooting " + enemySelectedToShootIndex);
                 timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
                 if (enemySelectedToShootIndex >= 0)
                 {

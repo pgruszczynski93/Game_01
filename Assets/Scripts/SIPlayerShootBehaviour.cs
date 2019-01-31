@@ -18,7 +18,7 @@ namespace SpaceInvaders
 
         protected override void Shoot()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && SIEnemiesGridsMaster.Instance.IsEnemyMovementAllowed)
+            if (Input.GetKeyDown(KeyCode.Space) && SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed)
             {
                 _projectileController.Shoot();
             }
