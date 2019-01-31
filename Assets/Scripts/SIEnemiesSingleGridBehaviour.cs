@@ -180,8 +180,12 @@ namespace SpaceInvaders
             {
                 enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
                 enemySelectedToShootIndex = Random.Range(0, (enemiesAbleToShootCount > 0) ? enemiesAbleToShootCount - 1 : 0);
+                Debug.Log("shooting " + enemySelectedToShootIndex);
                 timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
-                _enemiesAbleToShoot[enemySelectedToShootIndex].InvokeShoot();
+                if (enemySelectedToShootIndex >= 0)
+                {
+                    _enemiesAbleToShoot[enemySelectedToShootIndex].InvokeShoot();
+                }
                 yield return new WaitForSeconds(timeToNextShoot);
             }
 
