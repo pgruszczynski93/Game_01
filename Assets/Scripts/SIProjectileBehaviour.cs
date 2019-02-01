@@ -91,7 +91,7 @@ namespace SpaceInvaders
         {
             if(_cachedProjectileTransform == null || _cachedParentTransform == null || _projectileCollider == null)
             {
-                Debug.Log("Assign proper values first");
+                Debug.LogError("Assign proper values first");
                 return;
             }
 

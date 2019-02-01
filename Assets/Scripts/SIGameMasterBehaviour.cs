@@ -19,6 +19,13 @@ namespace SpaceInvaders
             }
         }
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            Application.targetFrameRate = SISettings.APPLICATION_TARGET_FRAMERATE;
+        }
+
         private void OnEnable()
         {
             SIEventsHandler.OnGameStarted += StartGame;
@@ -52,6 +59,7 @@ namespace SpaceInvaders
 
         private void StartGame()
         {
+            Debug.Log("tu nie dzialam");
             _isGameStarted = true;
         }
     }

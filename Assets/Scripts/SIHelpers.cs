@@ -15,8 +15,8 @@ namespace SpaceInvaders
 
     public static class SIHelpers
     {
-        public static float CAMERA_MIN_VIEWPORT_X = 0.03125f;
-        public static float CAMERA_MAX_VIEWPORT_X = 0.96875f;
+        public static float CAMERA_MIN_VIEWPORT_X = 0.05f;
+        public static float CAMERA_MAX_VIEWPORT_X = 0.95f;
         public static float CAMERA_MIN_VIEWPORT_Y = 0.0f;
         public static float CAMERA_MAX_VIEWPORT_Y = 1.0f;
 

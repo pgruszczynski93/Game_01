@@ -59,6 +59,8 @@ namespace SpaceInvaders
             objectInCameraBoundsPos.x = Mathf.Clamp(objectInCameraBoundsPos.x, SIHelpers.CAMERA_MIN_VIEWPORT_X,
                 SIHelpers.CAMERA_MAX_VIEWPORT_X);
 
+            //Debug.Log(objectInCameraBoundsPos.ToString("F4"));
+
             if (moveDownEnabled)
             {
                 objectInCameraBoundsPos = TryToMoveObjectDown(objectInCameraBoundsPos);
