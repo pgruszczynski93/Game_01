@@ -48,7 +48,7 @@ namespace SpaceInvaders
         public void EnableGridMovements()
         {
             _isEnemyInGridMovementAllowed = true;
-            //_enemiesGridBehaviour.StartShooting();
+            _enemiesGridBehaviour.StartShooting();
         }
 
         public void DisableGridMovements()

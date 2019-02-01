@@ -12,6 +12,7 @@ namespace SpaceInvaders
         [SerializeField] private Transform _cachedProjectileTransform;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private ParticleSystem _particles;
+        [SerializeField] private BoxCollider2D _projectileCollider;
 
         private Camera _mainCamera;
         private Vector2 _moveForce;
@@ -78,6 +79,7 @@ namespace SpaceInvaders
             if (_isMoving == false)
             {
                 EnableParticles(true);
+                _projectileCollider.enabled = true;
                 _isMoving = true;
                 _spriteRenderer.enabled = true;
                 _cachedProjectileTransform.parent = null;
@@ -87,12 +89,14 @@ namespace SpaceInvaders
 
         public void ResetProjectile()
         {
-            if(_cachedProjectileTransform == null || _cachedParentTransform == null)
+            if(_cachedProjectileTransform == null || _cachedParentTransform == null || _projectileCollider == null)
             {
+                Debug.Log("Assign proper values first");
                 return;
             }
 
             EnableParticles(false);
+            _projectileCollider.enabled = false;
             _isMoving = false;
             _spriteRenderer.enabled = false;
             _rigidbody2D.velocity = new Vector2(0,0);
