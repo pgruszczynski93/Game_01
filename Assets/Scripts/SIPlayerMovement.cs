@@ -9,6 +9,7 @@ namespace SpaceInvaders
         private const float SLOW_SPEED = 15f;
         private const float BASIC_SPEED = 30f;
         private const float FAST_SPEED = 45f;
+        private const float MAX_ROTATION_ANGLE = 40;
 
         protected Dictionary<MovementType, float> _movementSpeeds;
 
@@ -55,6 +56,14 @@ namespace SpaceInvaders
             InputMovementValue = Input.GetAxis("Horizontal");
 
             MoveObject(InputMovementValue);
+            RotateObject(InputMovementValue);
+        }
+
+        private void RotateObject(float rotateValue)
+        {
+            Quaternion fromRotation = _cachedTransform.rotation;
+            Quaternion toRotation = Quaternion.Euler(0, -rotateValue * MAX_ROTATION_ANGLE, 0);
+            _cachedTransform.rotation = Quaternion.Slerp(fromRotation, toRotation, _lerpStep);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace SpaceInvaders
         protected const float VERTICAL_MOVEMENT_VIEWPORT_STEP = 0.1f;
 
         [SerializeField] protected MovementType _movementType;
-        [Range(0, 1)] [SerializeField] private float _lerpStep;
+        [Range(0, 1)] [SerializeField] protected float _lerpStep;
 
         [SerializeField] protected float _currentMovementSpeed;
 
