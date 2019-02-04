@@ -130,7 +130,7 @@ namespace SpaceInvaders
 
         public void MoveObj()
         {
-            StartCoroutine(GridInitialMovementRoutine());
+            //StartCoroutine(GridInitialMovementRoutine());
         }
 
         private IEnumerator GridInitialMovementRoutine()

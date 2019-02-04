@@ -63,6 +63,25 @@ namespace SpaceInvaders
             return Mathf.Round(x / offset) * offset;
         }
 
+        public static void SISimpleLogger<T>(T sendingObject, string message, SimpleLoggerTypes logType) where T : MonoBehaviour
+        {
+#if UNITY_EDITOR
+            string formattedMessage = string.Format("{0}(): {1}", typeof(T), message);
+            switch (logType)
+            {
+                case SimpleLoggerTypes.Log:
+                    Debug.Log(formattedMessage);
+                    break;
+                case SimpleLoggerTypes.Warning:
+                    Debug.LogWarning(formattedMessage);
+                    break;
+                case SimpleLoggerTypes.Error:
+                    Debug.LogError(formattedMessage);
+                    break;
+            }
+#endif
+        }
+
         public static IEnumerator SimpleTween3D(Action<Vector3> onTweenAction, SimpleTween2DInfo tweenInfo, Action onTweenEnd = null)
         {
             float currentTime = 0.0f;

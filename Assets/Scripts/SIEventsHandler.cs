@@ -16,6 +16,7 @@ namespace SpaceInvaders
         public static Action OnEnemyDeath = delegate { };
         public static Action OnWaveEnd = delegate { };
         public static Action<float> OnEnemySpeedMultiplierChanged = delegate { };
+        public static Action<SIBonusInfo> OnStatisticsUpdate = delegate { };
         public static Action<SIShootedEnemyInfo> OnSwitchShootableEnemy = delegate { };
     }
 }   
