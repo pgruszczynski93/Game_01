@@ -8,6 +8,9 @@ namespace SpaceInvaders
         [SerializeField] private SIProjectileInfo _currentProjectile;
         [SerializeField] private List<SIProjectileInfo> _availableProjectiles;
 
+        public List<SIProjectileInfo> AvailableProjectiles { get => _availableProjectiles; set => _availableProjectiles = value; }
+        public SIProjectileInfo CurrentProjectile { get => _currentProjectile; set => _currentProjectile = value; }
+
         private void Start()
         {
             SetInitialReferences();
@@ -21,14 +24,24 @@ namespace SpaceInvaders
                 return;
             }
 
-            _currentProjectile = _availableProjectiles[0];
+            CurrentProjectile = _availableProjectiles[0];
+        }
+
+        public void SetCurrentProjectile(WeaponType weaponType)
+        {
+            int weapon = (int) weaponType;
+            if (weapon > 3)
+            {
+                return;     // temporary remove it when alsers will be implemented 
+            }
+            _currentProjectile = _availableProjectiles[weapon];
         }
 
         public void Shoot()
         {
-            for (int i = 0; i < _currentProjectile.projectilePrefabs.Length; i++)
+            for (int i = 0; i < CurrentProjectile.projectilePrefabs.Length; i++)
             {
-                GameObject currentProjectile = _currentProjectile.projectilePrefabs[i];
+                GameObject currentProjectile = CurrentProjectile.projectilePrefabs[i];
                 currentProjectile.SetActive(true);
                 currentProjectile.GetComponent<SIProjectileBehaviour>().MoveObj();
             }
@@ -39,17 +52,17 @@ namespace SpaceInvaders
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
-                _currentProjectile = _availableProjectiles[0];
+                CurrentProjectile = _availableProjectiles[0];
             }
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                _currentProjectile = _availableProjectiles[1];
+                CurrentProjectile = _availableProjectiles[1];
             }
 
             if (Input.GetKeyDown(KeyCode.V))
             {
-                _currentProjectile = _availableProjectiles[2];
+                CurrentProjectile = _availableProjectiles[2];
             }
         }
     }

@@ -11,6 +11,7 @@ namespace SpaceInvaders
         [SerializeField] private SIPlayerMovement _playerMovement;
         [SerializeField] private SIPlayerShootBehaviour _playerShoot;
         [SerializeField] private SIPlayerProjectilesController _playerProjectileController;
+        [SerializeField] private SIPlayerShieldBehaviour _shieldBehaviour;
 
         public SIPlayerMovement PlayerMovemnt
         {
@@ -37,12 +38,12 @@ namespace SpaceInvaders
 
         private void OnEnable()
         {
-            SIEventsHandler.OnStatisticsUpdate += UpdatePlayerStatistics;
+            SIEventsHandler.OnBonusCollision += UpdatePlayerStatistics;
         }
 
         private void OnDisable()
         {
-            SIEventsHandler.OnStatisticsUpdate -= UpdatePlayerStatistics;
+            SIEventsHandler.OnBonusCollision -= UpdatePlayerStatistics;
         }
 
         private void SetInitialReferences()
@@ -63,18 +64,53 @@ namespace SpaceInvaders
                 return;
             }
 
-            ModifyStatistics(bonusInfo);
+            ParseBonus(bonusInfo);
+        }
+
+        private void ParseBonus(SIBonusInfo bonusInfo)
+        {
+            switch (bonusInfo.bonusType)
+            {
+                case BonusType.Life:
+                    ModifyStatistics(bonusInfo);
+                    break;
+                case BonusType.Shield:
+                    EnableShield();
+                    break;
+                case BonusType.Weapon:
+                    ModifyCurrentWeapon(bonusInfo.bonusStatistics.gainedWeaponType);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void ModifyStatistics(SIBonusInfo bonusInfo)
         {
-            SIHelpers.SISimpleLogger(this, "Statistics update.", SimpleLoggerTypes.Log);
+            SIHelpers.SISimpleLogger(this, "Statistics update for "+bonusInfo.bonusType, SimpleLoggerTypes.Log);
 
             _playerStatistics.currentHealth += bonusInfo.bonusStatistics.gainedHealth;
             _playerStatistics.currentHealth = Mathf.Clamp(_playerStatistics.currentHealth, MIN_HEALTH, MAX_HEALTH);
 
             SIHelpers.SISimpleLogger(this, PlayerStatisticsText() , SimpleLoggerTypes.Log);
+        }
 
+        private void EnableShield()
+        {
+            if (_shieldBehaviour == null)
+            {
+                SIHelpers.SISimpleLogger(this, "Behaviour is not assigned.", SimpleLoggerTypes.Error);
+                return;
+
+            }
+            _shieldBehaviour.EnableShield(true);
+            SIHelpers.SISimpleLogger(this, "Shield enabled.", SimpleLoggerTypes.Log);
+        }
+
+        private void ModifyCurrentWeapon(WeaponType weaponType)
+        {
+            SIHelpers.SISimpleLogger(this, "Weapon changed to " + weaponType, SimpleLoggerTypes.Log);
+            _playerProjectileController.SetCurrentProjectile(weaponType);
         }
 
         public string PlayerStatisticsText()

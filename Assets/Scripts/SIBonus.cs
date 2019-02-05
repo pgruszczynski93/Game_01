@@ -2,6 +2,7 @@
 
 namespace SpaceInvaders
 {
+    [RequireComponent(typeof(SIBonusColliderBehaviour))]
     public class SIBonus : MonoBehaviour
     {
         [SerializeField] private SIBonusInfo _bonusInfo;
