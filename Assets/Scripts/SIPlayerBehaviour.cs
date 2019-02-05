@@ -101,7 +101,6 @@ namespace SpaceInvaders
             {
                 SIHelpers.SISimpleLogger(this, "Behaviour is not assigned.", SimpleLoggerTypes.Error);
                 return;
-
             }
             _shieldBehaviour.EnableShield(true);
             SIHelpers.SISimpleLogger(this, "Shield enabled.", SimpleLoggerTypes.Log);
