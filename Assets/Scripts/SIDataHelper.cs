@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace SpaceInvaders
 {
@@ -11,7 +12,6 @@ namespace SpaceInvaders
         public int currentScore;
         public int currentWave;
         public WeaponType currentWeaponType;
-        //public List<BonusType> activeBonuses;
     }
 
     [Serializable]
@@ -28,6 +28,7 @@ namespace SpaceInvaders
     {
         public BonusType bonusType;
         public SICollectibleStatistics bonusStatistics;
+        public UnityEvent OnBonusFinishEvent;
     }
 
     [Serializable]

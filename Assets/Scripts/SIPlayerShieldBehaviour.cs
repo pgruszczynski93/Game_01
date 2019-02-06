@@ -17,6 +17,7 @@ namespace SpaceInvaders
             if (_shield.activeSelf && canBeEnabled == false)
             {
                 _shield.SetActive(false);
+                SIHelpers.SISimpleLogger(this, "Shield disabled ", SimpleLoggerTypes.Log);
                 return;
             }
             _shield.SetActive(canBeEnabled);

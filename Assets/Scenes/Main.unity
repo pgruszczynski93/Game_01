@@ -1296,8 +1296,24 @@ MonoBehaviour:
     bonusStatistics:
       gainedHealth: 1
       gainedScore: 12
-      gainedWeaponType: 0
+      gainedWeaponType: 2
       durationTime: 3
+    OnBonusFinishEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1187039474}
+          m_MethodName: ResetCurrentProjectile
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!54 &626766696
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1380,7 +1396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626766693}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.4, y: -3.35, z: 0}
+  m_LocalPosition: {x: 2.17, y: -4.11, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2208,6 +2224,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1283701522}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1090406712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 86967797912582622, guid: e2855eae7d088094c84e15e88475139a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3677294488476665162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ab61e1f547d5b45b079577c2408637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1110216933 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7824974046286267488, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
@@ -2477,12 +2505,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusInfo:
-    bonusType: 2
+    bonusType: 1
     bonusStatistics:
       gainedHealth: 1
       gainedScore: 5
       gainedWeaponType: 0
-      durationTime: 5
+      durationTime: 3
+    OnBonusFinishEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1090406712}
+          m_MethodName: EnableShield
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!54 &1178702894
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2565,7 +2609,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178702891}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.96, y: -4.02, z: 0}
+  m_LocalPosition: {x: -1.45, y: -3.31, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2599,6 +2643,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5aaf8d2c79ac5149b81bef25f605cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1187039474 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 822644587, guid: e2855eae7d088094c84e15e88475139a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3677294488476665162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3c2f3a60145df40b8d5d909c592e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1193220087 stripped
@@ -3297,12 +3353,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusInfo:
-    bonusType: 0
+    bonusType: 2
     bonusStatistics:
       gainedHealth: 0
       gainedScore: 5
-      gainedWeaponType: 2
-      durationTime: 0
+      gainedWeaponType: 3
+      durationTime: 5
+    OnBonusFinishEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1187039474}
+          m_MethodName: ResetCurrentProjectile
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!54 &1454134961
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3385,7 +3457,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1454134958}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.01, y: -3.4, z: 0}
+  m_LocalPosition: {x: 1.51, y: -3.4, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4647,7 +4719,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061872480}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.91, y: -4.02, z: 0}
+  m_LocalPosition: {x: -2.23, y: -4.02, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4686,7 +4758,23 @@ MonoBehaviour:
       gainedHealth: 1
       gainedScore: 5
       gainedWeaponType: 0
-      durationTime: 0
+      durationTime: 5
+    OnBonusFinishEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1090406712}
+          m_MethodName: EnableShield
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!54 &2061872487
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5113,41 +5201,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3677294487844861586, guid: e2855eae7d088094c84e15e88475139a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 86705097805634715, guid: e2855eae7d088094c84e15e88475139a,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 86705097805634715, guid: e2855eae7d088094c84e15e88475139a,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 86705097805634715, guid: e2855eae7d088094c84e15e88475139a,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 86705097805634715, guid: e2855eae7d088094c84e15e88475139a,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 86705097805634715, guid: e2855eae7d088094c84e15e88475139a,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.0047908053
-      objectReference: {fileID: 0}
-    - target: {fileID: 86705097805634715, guid: e2855eae7d088094c84e15e88475139a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.025423214
-      objectReference: {fileID: 0}
-    - target: {fileID: 86705097805634715, guid: e2855eae7d088094c84e15e88475139a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0

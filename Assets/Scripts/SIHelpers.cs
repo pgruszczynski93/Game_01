@@ -64,7 +64,7 @@ namespace SpaceInvaders
             return Mathf.Round(x / offset) * offset;
         }
 
-        public static void UniqueList<T>(this List<T> list, T elementToInsert)
+        public static void AddUnique<T>(this List<T> list, T elementToInsert)
         {
             if (list.Contains(elementToInsert))
             {
