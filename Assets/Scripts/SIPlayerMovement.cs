@@ -53,8 +53,16 @@ namespace SpaceInvaders
 
         public void MoveObj()
         {
+#if UNITY_EDITOR
             InputMovementValue = Input.GetAxis("Horizontal");
 
+#elif UNITY_ANDROID
+// replace it later - refactor
+            if (Input.touchCount > 0)
+            {
+                InputMovementValue = Input.touches[0].deltaPosition.x;
+            }
+#endif
             MoveObject(InputMovementValue);
             RotateObject(InputMovementValue);
         }
