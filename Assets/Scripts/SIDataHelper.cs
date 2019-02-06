@@ -20,6 +20,7 @@ namespace SpaceInvaders
         public int gainedHealth;
         public int gainedScore;
         public WeaponType gainedWeaponType;
+        public float durationTime;
     }
 
     [Serializable]

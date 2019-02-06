@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -12,6 +13,7 @@ namespace SpaceInvaders
         [SerializeField] private SIPlayerShootBehaviour _playerShoot;
         [SerializeField] private SIPlayerProjectilesController _playerProjectileController;
         [SerializeField] private SIPlayerShieldBehaviour _shieldBehaviour;
+        [SerializeField] private SITimeBonusesManager _timeBonusesManager;
 
         public SIPlayerMovement PlayerMovemnt
         {
@@ -48,12 +50,24 @@ namespace SpaceInvaders
 
         private void SetInitialReferences()
         {
+            if (_playerStatistics == null ||
+                _playerMovement == null ||
+                _playerShoot == null ||
+                _playerProjectileController == null ||
+                _shieldBehaviour == null ||
+                _timeBonusesManager == null)
+            {
+                SIHelpers.SISimpleLogger(this, "Assign references in editor first. ", SimpleLoggerTypes.Error);
+                return;
+            }
+
             _playerStatistics = new SIStatistics
             {
                 currentHealth = 3,
                 currentWave = 1,
                 currentWeaponType = WeaponType.Projectile
             };
+
         }
 
         public void UpdatePlayerStatistics(SIBonusInfo bonusInfo)
@@ -67,8 +81,17 @@ namespace SpaceInvaders
             ParseBonus(bonusInfo);
         }
 
+
         private void ParseBonus(SIBonusInfo bonusInfo)
         {
+            if (_timeBonusesManager == null)
+            {
+                SIHelpers.SISimpleLogger(this, "Behaviour is not assigned.", SimpleLoggerTypes.Error);
+                return;
+            }
+
+            _timeBonusesManager.ManageTimeScheduledBonuses(bonusInfo);
+
             switch (bonusInfo.bonusType)
             {
                 case BonusType.Life:
@@ -87,6 +110,12 @@ namespace SpaceInvaders
 
         private void ModifyStatistics(SIBonusInfo bonusInfo)
         {
+            if (bonusInfo == null)
+            {
+                SIHelpers.SISimpleLogger(this, "BonusInfo object is null", SimpleLoggerTypes.Error);
+                return;
+            }
+
             SIHelpers.SISimpleLogger(this, "Statistics update for "+bonusInfo.bonusType, SimpleLoggerTypes.Log);
 
             _playerStatistics.currentHealth += bonusInfo.bonusStatistics.gainedHealth;
@@ -95,6 +124,7 @@ namespace SpaceInvaders
             SIHelpers.SISimpleLogger(this, PlayerStatisticsText() , SimpleLoggerTypes.Log);
         }
 
+
         private void EnableShield()
         {
             if (_shieldBehaviour == null)
@@ -102,13 +132,13 @@ namespace SpaceInvaders
                 SIHelpers.SISimpleLogger(this, "Behaviour is not assigned.", SimpleLoggerTypes.Error);
                 return;
             }
+
             _shieldBehaviour.EnableShield(true);
             SIHelpers.SISimpleLogger(this, "Shield enabled.", SimpleLoggerTypes.Log);
         }
 
         private void ModifyCurrentWeapon(WeaponType weaponType)
         {
-            SIHelpers.SISimpleLogger(this, "Weapon changed to " + weaponType, SimpleLoggerTypes.Log);
             _playerProjectileController.SetCurrentProjectile(weaponType);
         }
 

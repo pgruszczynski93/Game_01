@@ -9,9 +9,9 @@
 
     public enum BonusType
     {
+        Life,
+        Shield,
         Weapon, 
-        Life, 
-        Shield
     }
 
     public enum MovementType
@@ -29,6 +29,7 @@
 
     public enum WeaponType
     {
+        None,
         Projectile, 
         Projectile2x,
         Projectile3x,

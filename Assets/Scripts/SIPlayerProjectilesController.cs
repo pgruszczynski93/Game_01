@@ -24,17 +24,25 @@ namespace SpaceInvaders
                 return;
             }
 
-            CurrentProjectile = _availableProjectiles[0];
+            _currentProjectile = _availableProjectiles[0];
         }
 
         public void SetCurrentProjectile(WeaponType weaponType)
         {
             int weapon = (int) weaponType;
-            if (weapon > 3)
+            SIHelpers.SISimpleLogger(this, "Trying to change weapon from " + (int)_currentProjectile.projectileType + " to " + (int)weaponType, SimpleLoggerTypes.Log);
+            if (weapon < (int)_currentProjectile.projectileType)
             {
                 return;     // temporary remove it when alsers will be implemented 
             }
-            _currentProjectile = _availableProjectiles[weapon];
+            SIHelpers.SISimpleLogger(this, "Weapon changed to " + weaponType, SimpleLoggerTypes.Log);
+            int weaponIndex = weapon - 1;
+            _currentProjectile = _availableProjectiles[weaponIndex];
+        }
+
+        public void ResetCurrentProjectile()
+        {
+            _currentProjectile = _availableProjectiles[0];
         }
 
         public void Shoot()

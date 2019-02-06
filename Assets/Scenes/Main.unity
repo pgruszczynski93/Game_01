@@ -1296,7 +1296,8 @@ MonoBehaviour:
     bonusStatistics:
       gainedHealth: 1
       gainedScore: 12
-      gainedWeaponType: 4
+      gainedWeaponType: 0
+      durationTime: 3
 --- !u!54 &626766696
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1379,7 +1380,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626766693}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.31, y: -3.35, z: 0}
+  m_LocalPosition: {x: 1.4, y: -3.35, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2480,7 +2481,8 @@ MonoBehaviour:
     bonusStatistics:
       gainedHealth: 1
       gainedScore: 5
-      gainedWeaponType: 2
+      gainedWeaponType: 0
+      durationTime: 5
 --- !u!54 &1178702894
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3299,7 +3301,8 @@ MonoBehaviour:
     bonusStatistics:
       gainedHealth: 0
       gainedScore: 5
-      gainedWeaponType: 1
+      gainedWeaponType: 2
+      durationTime: 0
 --- !u!54 &1454134961
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4683,6 +4686,7 @@ MonoBehaviour:
       gainedHealth: 1
       gainedScore: 5
       gainedWeaponType: 0
+      durationTime: 0
 --- !u!54 &2061872487
 Rigidbody:
   m_ObjectHideFlags: 0

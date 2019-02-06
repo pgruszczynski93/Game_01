@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace SpaceInvaders
 {
@@ -61,6 +62,17 @@ namespace SpaceInvaders
         {
             float x = pos;
             return Mathf.Round(x / offset) * offset;
+        }
+
+        public static void UniqueList<T>(this List<T> list, T elementToInsert)
+        {
+            if (list.Contains(elementToInsert))
+            {
+                Debug.Log("List contains given element - update stopped.");
+                return;
+            }
+
+            list.Add(elementToInsert);
         }
 
         public static void SISimpleLogger<T>(T sendingObject, string message, SimpleLoggerTypes logType) where T : MonoBehaviour
