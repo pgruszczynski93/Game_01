@@ -7,19 +7,26 @@ namespace SpaceInvaders
 
         protected override void OnEnable()
         {
-            onCollisionCallback += _colliderParentBehaviour.Death;
-            onCollisionCallback += InvokeEnemyDeathCallback;
+            _onCollisionActions["Projectile"] += _colliderParentBehaviour.Death;
+            _onCollisionActions["Projectile"] += InvokeEnemyDeathCallback;
+            _onCollisionActions["Projectile"] += OnCollisionMessage;
         }
 
         protected override void OnDisable()
         {
-            onCollisionCallback -= _colliderParentBehaviour.Death;
-            onCollisionCallback -= InvokeEnemyDeathCallback;
+            _onCollisionActions["Projectile"] -= _colliderParentBehaviour.Death;
+            _onCollisionActions["Projectile"] -= InvokeEnemyDeathCallback;
+            _onCollisionActions["Projectile"] -= OnCollisionMessage;
         }
 
-        private void InvokeEnemyDeathCallback()
+        private void InvokeEnemyDeathCallback(MonoBehaviour collisionBehaviour = null)
         {
             SIEventsHandler.OnEnemyDeath?.Invoke();
+        }
+
+        private void OnCollisionMessage(MonoBehaviour collisionBehaviour = null)
+        {
+            SIHelpers.SISimpleLogger(this, gameObject.name + " - collision detected ", SimpleLoggerTypes.Log);
         }
     }
 }

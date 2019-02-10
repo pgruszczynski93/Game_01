@@ -6,8 +6,9 @@ namespace SpaceInvaders
     {
         [SerializeField] private float _raycastDistance;
         [SerializeField] private LayerMask _collisionMask;
-        [SerializeField] private BoxCollider2D _collider;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private MeshRenderer _meshRenderer;
+        [SerializeField] private BoxCollider[] _colliders;
+
 
         private Vector2 _raycastOffset;
 
@@ -33,7 +34,7 @@ namespace SpaceInvaders
             _raycastOffset = new Vector2(0.0f, 0.25f);
         }
 
-        public void Death()
+        public void Death(MonoBehaviour collisionBehaviour = null)
         {
             if (IsEnemyDead == false)
             {
@@ -49,12 +50,16 @@ namespace SpaceInvaders
 
         private void EnableEnemyVisibility(bool canEnable)
         {
-            if (_collider == null || _spriteRenderer == null)
+            if (_colliders == null || _meshRenderer == null)
             {
                 return;
             }
-            _collider.enabled = canEnable;
-            _spriteRenderer.enabled = canEnable;
+
+            for (int i = 0; i < _colliders.Length; i++)
+            {
+                _colliders[i].enabled = canEnable;
+            }
+            _meshRenderer.enabled = canEnable;
             //gameObject.SetActive(canEnable);
         }
 

@@ -4,12 +4,12 @@
     {
         protected override void OnEnable()
         {
-            onCollisionCallback += _colliderParentBehaviour.ResetProjectile;
+            //onCollisionCallback += _colliderParentBehaviour.ResetProjectile;
         }
 
         protected override void OnDisable()
         {
-            onCollisionCallback -= _colliderParentBehaviour.ResetProjectile;
+            //onCollisionCallback -= _colliderParentBehaviour.ResetProjectile;
         }
     }
 }

@@ -12,8 +12,6 @@ namespace SpaceInvaders
 
         protected delegate void CustomCollisonDelegate(MonoBehaviour collisionBehaviour = null);
 
-        protected Action onCollisionCallback = delegate { };    // obsolete - remove later
-
         protected Dictionary<string, CustomCollisonDelegate> _onCollisionActions;
 
         protected virtual void Awake()
