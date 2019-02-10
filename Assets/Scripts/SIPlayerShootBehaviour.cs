@@ -23,6 +23,11 @@ namespace SpaceInvaders
                 _projectileController.Shoot();
             }
         }
+
+        public void Debug_Shot()
+        {
+            _projectileController.Shoot();
+        }
     }
 }
 
