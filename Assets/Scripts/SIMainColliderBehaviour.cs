@@ -78,6 +78,7 @@ namespace SpaceInvaders
 
                 if (hasHittedObjectGivenTag)
                 {
+                    Debug.Log(_objectTags[i]);
                     _onCollisionActions[_objectTags[i]]?.Invoke();
                     return;
                 }
