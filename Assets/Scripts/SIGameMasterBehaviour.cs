@@ -29,11 +29,13 @@ namespace SpaceInvaders
         private void OnEnable()
         {
             SIEventsHandler.OnGameStarted += StartGame;
+            SIEventsHandler.OnGameQuit += QuitGame;
         }
 
         private void OnDisable()
         {
             SIEventsHandler.OnGameStarted -= StartGame;
+            SIEventsHandler.OnGameQuit -= QuitGame;
         }
 
         private void Update()
@@ -45,6 +47,7 @@ namespace SpaceInvaders
 
             OnUpdateMovements();
             OnDebugInputHandling();
+            OnGameQuitCallback();
         }
 
         private void OnDebugInputHandling()
@@ -52,6 +55,19 @@ namespace SpaceInvaders
             if (Input.GetKeyDown(KeyCode.L))
             {
                 SIEventsHandler.OnDebugInputHandling?.Invoke();
+            }
+        }
+
+        private void OnGameQuitCallback()
+        {
+            SIEventsHandler.OnGameQuit?.Invoke();
+        }
+
+        private void QuitGame()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
             }
         }
 

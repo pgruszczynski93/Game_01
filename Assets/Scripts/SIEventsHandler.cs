@@ -7,6 +7,7 @@ namespace SpaceInvaders
     {
         public static Action OnGameStarted = delegate { };
         public static Action OnGameFinished = delegate { };
+        public static Action OnGameQuit = delegate { };
         public static Action OnEnemiesRespawn = delegate { };
         public static Action OnObjectMovement = delegate { };
         public static Action OnPlayerShoot = delegate { };
