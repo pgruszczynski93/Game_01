@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1913830052}
-  - component: {fileID: 86967797912582622}
+  - component: {fileID: 1608886188183894926}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -218,7 +218,7 @@ Transform:
   m_Father: {fileID: 3677294487844861586}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &86967797912582622
+--- !u!114 &1608886188183894926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,10 +227,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1913830051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3ab61e1f547d5b45b079577c2408637, type: 3}
+  m_Script: {fileID: 11500000, guid: 77c5896dd0cb3154db4647c3b8cf637d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shield: {fileID: 2640097634031494074}
+  _effectVFX: {fileID: 2640097634031494074}
 --- !u!1 &1955470059
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
   _playerMovement: {fileID: 710538201}
   _playerShoot: {fileID: 545388514}
   _playerProjectileController: {fileID: 822644587}
-  _shieldBehaviour: {fileID: 86967797912582622}
+  _shieldVfxBehaviour: {fileID: 1608886188183894926}
   _timeBonusesManager: {fileID: 8733147251714419125}
 --- !u!114 &710538201
 MonoBehaviour:

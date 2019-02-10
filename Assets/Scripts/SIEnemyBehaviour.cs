@@ -7,8 +7,8 @@ namespace SpaceInvaders
         [SerializeField] private float _raycastDistance;
         [SerializeField] private LayerMask _collisionMask;
         [SerializeField] private MeshRenderer _meshRenderer;
-        [SerializeField] private BoxCollider[] _colliders;
-
+        [SerializeField] private GameObject _colliderParent;
+        [SerializeField] private SIVFXManager _destroyVFX;
 
         private Vector2 _raycastOffset;
 
@@ -17,11 +17,13 @@ namespace SpaceInvaders
         private void OnEnable()
         {
             SIEventsHandler.OnWaveEnd += Respawn;
+            SIEventsHandler.OnDebugInputHandling += Debug_Respawn;
         }
 
         private void OnDisable()
         {
             SIEventsHandler.OnWaveEnd += Respawn;
+            SIEventsHandler.OnDebugInputHandling -= Debug_Respawn;
         }
 
         private void Start()
@@ -39,27 +41,25 @@ namespace SpaceInvaders
             if (IsEnemyDead == false)
             {
                 SIShootedEnemyInfo nextShootableEnemyInfo = ShootAbleEnemy();
-
                 SIEventsHandler.OnSwitchShootableEnemy?.Invoke(nextShootableEnemyInfo);
-
-                IsEnemyDead = true;
                 EnableEnemyVisibility(false);
+                IsEnemyDead = true;
             }
         }
 
 
         private void EnableEnemyVisibility(bool canEnable)
         {
-            if (_colliders == null || _meshRenderer == null)
+            if (_colliderParent == null || 
+                _meshRenderer == null ||
+                _destroyVFX == null)
             {
                 return;
             }
 
-            for (int i = 0; i < _colliders.Length; i++)
-            {
-                _colliders[i].enabled = canEnable;
-            }
+            _colliderParent.SetActive(canEnable);
             _meshRenderer.enabled = canEnable;
+            _destroyVFX.OnEnableVFXCallback(canEnable == false);
             //gameObject.SetActive(canEnable);
         }
 
@@ -97,7 +97,13 @@ namespace SpaceInvaders
 
         public void Respawn()
         {
+            IsEnemyDead = false;
             EnableEnemyVisibility(true);
+        }
+
+        private void Debug_Respawn()
+        {
+            Respawn();
         }
     }
 }

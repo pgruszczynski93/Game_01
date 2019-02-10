@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -12,7 +11,7 @@ namespace SpaceInvaders
         [SerializeField] private SIPlayerMovement _playerMovement;
         [SerializeField] private SIPlayerShootBehaviour _playerShoot;
         [SerializeField] private SIPlayerProjectilesController _playerProjectileController;
-        [SerializeField] private SIPlayerShieldBehaviour _shieldBehaviour;
+        [SerializeField] private SIVFXManager _shieldVfxBehaviour;
         [SerializeField] private SITimeBonusesManager _timeBonusesManager;
 
         public SIPlayerMovement PlayerMovemnt
@@ -54,7 +53,7 @@ namespace SpaceInvaders
                 _playerMovement == null ||
                 _playerShoot == null ||
                 _playerProjectileController == null ||
-                _shieldBehaviour == null ||
+                _shieldVfxBehaviour == null ||
                 _timeBonusesManager == null)
             {
                 SIHelpers.SISimpleLogger(this, "Assign references in editor first. ", SimpleLoggerTypes.Error);
@@ -127,13 +126,13 @@ namespace SpaceInvaders
 
         private void EnableShield()
         {
-            if (_shieldBehaviour == null)
+            if (_shieldVfxBehaviour == null)
             {
                 SIHelpers.SISimpleLogger(this, "Behaviour is not assigned.", SimpleLoggerTypes.Error);
                 return;
             }
 
-            _shieldBehaviour.EnableShield(true);
+            _shieldVfxBehaviour.OnEnableVFXCallback(true);
             SIHelpers.SISimpleLogger(this, "Shield enabled.", SimpleLoggerTypes.Log);
         }
 

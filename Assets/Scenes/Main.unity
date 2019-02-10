@@ -11995,7 +11995,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1090406712}
-          m_MethodName: EnableShield
+          m_MethodName: EnableVFX
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -12003,7 +12003,7 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
@@ -18205,17 +18205,17 @@ PrefabInstance:
     - target: {fileID: 6171958699512689287, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3801683442844375375, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 906240866107204133, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2, type: 3}
@@ -19078,7 +19078,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1090406712}
-          m_MethodName: EnableShield
+          m_MethodName: EnableVFX
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -19086,7 +19086,7 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
@@ -19447,7 +19447,7 @@ PrefabInstance:
     - target: {fileID: 2560944195660791283, guid: ff26e07da7d4d264ca47860c2204ada4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff26e07da7d4d264ca47860c2204ada4, type: 3}

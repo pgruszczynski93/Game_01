@@ -43,8 +43,16 @@ namespace SpaceInvaders
                 return;
             }
 
-
             OnUpdateMovements();
+            OnDebugInputHandling();
+        }
+
+        private void OnDebugInputHandling()
+        {
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                SIEventsHandler.OnDebugInputHandling?.Invoke();
+            }
         }
 
         private void OnUpdateMovements()
