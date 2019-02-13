@@ -52,7 +52,7 @@ namespace SpaceInvaders
         {
             if (_movementSpeeds.TryGetValue(movementType, out float currentSpeed) == false)
             {
-                Debug.Log("No key in _movementSpeeds dictionary - current speed setup with default.");
+                SIHelpers.SISimpleLogger(this, "No key in _movementSpeeds dictionary - current speed setup with default.", SimpleLoggerTypes.Error);
                 _currentMovementSpeed = BASIC_SPEED;
                 return;
             }

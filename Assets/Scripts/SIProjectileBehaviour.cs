@@ -29,16 +29,12 @@ namespace SpaceInvaders
         {
             ResetProjectile();
             SIEventsHandler.OnObjectMovement += CheckIsProjectileOnScreen;
-            SIEventsHandler.OnEnemyDeath += ResetProjectile;
-            SIEventsHandler.OnPlayerHit += ResetProjectile;
         }
 
         private void OnDisable()
         {
             ResetProjectile();
             SIEventsHandler.OnObjectMovement -= CheckIsProjectileOnScreen;
-            SIEventsHandler.OnEnemyDeath += ResetProjectile;
-            SIEventsHandler.OnPlayerHit += ResetProjectile;
         }
 
         private void SetInitialReferences()
@@ -96,9 +92,11 @@ namespace SpaceInvaders
         {
             if(_cachedProjectileTransform == null || _cachedParentTransform == null || _projectileCollider == null)
             {
-                Debug.LogError("Assign proper values first");
+                SIHelpers.SISimpleLogger(this, "Assign proper values.", SimpleLoggerTypes.Error);
                 return;
             }
+
+            SIHelpers.SISimpleLogger(this, "Reset projectile.", SimpleLoggerTypes.Log);
 
             EnableParticles(false);
             _projectileCollider.enabled = false;

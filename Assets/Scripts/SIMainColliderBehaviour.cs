@@ -25,7 +25,7 @@ namespace SpaceInvaders
 
             if (AreAllTagsCorrect() == false)
             {
-                Debug.LogError("Specify collision tags first.");
+                SIHelpers.SISimpleLogger(this, "Enter collision tags first", SimpleLoggerTypes.Error);
                 return;
             }
 
@@ -78,7 +78,6 @@ namespace SpaceInvaders
 
                 if (hasHittedObjectGivenTag)
                 {
-                    Debug.Log(_objectTags[i]);
                     _onCollisionActions[_objectTags[i]]?.Invoke();
                     return;
                 }

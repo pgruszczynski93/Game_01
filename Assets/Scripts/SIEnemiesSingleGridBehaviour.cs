@@ -6,8 +6,9 @@ namespace SpaceInvaders
 {
     public class SIEnemiesSingleGridBehaviour : MonoBehaviour, IMoveable
     {
-        [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
 
+        [SerializeField] private int _enemiesInRow;
+        [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
         [SerializeField] private GameObject[] _enemiesInGrid;
         [SerializeField] private List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
 
@@ -16,7 +17,6 @@ namespace SpaceInvaders
         private int _totalEnemies;
         private int _livingEnemies;
         private int _speedMultiplier;
-        private int _enemiesInRow;
 
         private float _gridSize;
         private float _lastRefreshTime;
@@ -74,7 +74,7 @@ namespace SpaceInvaders
             }
 
             _gridSize = 0.5f;
-            _enemiesInRow = 11;
+            _enemiesInRow = 5;
             _shotTimeMinBreak = 0.4f;
             _shotTimeMaxBreak = 1f;
             _totalEnemies = _enemiesInGrid.Length;
@@ -177,7 +177,7 @@ namespace SpaceInvaders
 
         public void StartShooting()
         {
-            //StartCoroutine(EnemiesShootingRoutine());
+            StartCoroutine(EnemiesShootingRoutine());
         }
 
         public void StopShooting()
