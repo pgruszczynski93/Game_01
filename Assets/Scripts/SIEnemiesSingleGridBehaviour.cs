@@ -86,7 +86,7 @@ namespace SpaceInvaders
 
         public void ResetEnemyGrid()
         {
-            Debug.Log("resetuje siatke");
+            SIHelpers.SISimpleLogger(this, "ResetEnemyGrid: Grid reset", SimpleLoggerTypes.Log);
             SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
             _livingEnemies = _totalEnemies;
             _cachedTransform = SIEnemiesGridsMaster.Instance.GridInitialTrasnform;
@@ -152,10 +152,11 @@ namespace SpaceInvaders
         {
             if (_enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0)
             {
-                Debug.Log("Stop UpdateAbleToShootEnemies()");
+                SIHelpers.SISimpleLogger(this, "UpdateAbleToShootEnemies() stopped.", SimpleLoggerTypes.Error);
                 return;
             }
 
+            SIHelpers.SISimpleLogger(this, "UpdateAbleToShootEnemies() next enemy " + enemiesInfo.nextShootableEnemy, SimpleLoggerTypes.Log);
             if (_enemiesAbleToShoot.Contains(enemiesInfo.currentShootableEnemy))
             {
                 _enemiesAbleToShoot.Remove(enemiesInfo.currentShootableEnemy);

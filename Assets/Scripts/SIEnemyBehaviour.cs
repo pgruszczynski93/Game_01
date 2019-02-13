@@ -10,7 +10,7 @@ namespace SpaceInvaders
         [SerializeField] private GameObject _colliderParent;
         [SerializeField] private SIVFXManager _destroyVFX;
 
-        private Vector2 _raycastOffset;
+        private Vector3 _raycastOffset;
 
         public bool IsEnemyDead { get; set; } = false;
 
@@ -33,7 +33,7 @@ namespace SpaceInvaders
 
         private void SetInitialReferences()
         {
-            _raycastOffset = new Vector2(0.0f, 0.25f);
+            _raycastOffset = new Vector3(0.0f, 0.25f);
         }
 
         public void Death(MonoBehaviour collisionBehaviour = null)
@@ -65,34 +65,45 @@ namespace SpaceInvaders
 
         public SIShootedEnemyInfo ShootAbleEnemy()
         {
-            Vector2 raycastPosition = transform.position;
+            Vector3 raycastPosition = transform.position;
             raycastPosition += _raycastOffset;
 
-            RaycastHit2D raycastHit2D =
-                Physics2D.Raycast(raycastPosition, Vector2.up, _raycastDistance, _collisionMask);
-
+            RaycastHit raycastHitInfo;
             SIEnemyShootBehaviour enemyShotBehaviour = gameObject.GetComponent<SIEnemyShootBehaviour>();
+            SIEnemyShootBehaviour nextShootingEnemyBehaviour;
 
             if (enemyShotBehaviour == null)
             {
-                Debug.LogError("Enemy hasn't attached SIEnemyShootBehaviour");
+                SIHelpers.SISimpleLogger(this, "Enemy hasn't attached SIEnemyShootBehaviour", SimpleLoggerTypes.Log);
                 return null;
             }
 
-            if (raycastHit2D.collider == null)
+            SIShootedEnemyInfo shootInfo = new SIShootedEnemyInfo()
             {
-                return new SIShootedEnemyInfo()
+                currentShootableEnemy = enemyShotBehaviour
+            };
+
+            if (Physics.Raycast(raycastPosition, Vector3.up, out raycastHitInfo, _raycastDistance, _collisionMask))
+            {
+                if (raycastHitInfo.collider != null && raycastHitInfo.collider.CompareTag("Enemy"))
                 {
-                    currentShootableEnemy = enemyShotBehaviour,
-                    nextShootableEnemy = null
-                };
+                    nextShootingEnemyBehaviour = raycastHitInfo.transform.parent.parent.parent.gameObject.GetComponent<SIEnemyShootBehaviour>();
+
+                    if (nextShootingEnemyBehaviour == null)
+                    {
+                        SIHelpers.SISimpleLogger(this, "Next enemy doen's have attached SIEnemyShootBehaviour", SimpleLoggerTypes.Log);
+                        shootInfo.currentShootableEnemy = null;
+                        return shootInfo;
+                    }
+
+                    SIHelpers.SISimpleLogger(this, "<color=blue>Shootable switched </color>" + nextShootingEnemyBehaviour.gameObject.name, SimpleLoggerTypes.Log);
+                    Debug.DrawRay(raycastPosition, Vector3.up, Color.red, 1f);
+
+                    shootInfo.nextShootableEnemy = nextShootingEnemyBehaviour;
+                }
             }
 
-            return new SIShootedEnemyInfo()
-            {
-                currentShootableEnemy = enemyShotBehaviour,
-                nextShootableEnemy = raycastHit2D.transform.parent.gameObject.GetComponent<SIEnemyShootBehaviour>()
-            };
+            return shootInfo;
         }
 
         public void Respawn()
