@@ -9,14 +9,12 @@ namespace SpaceInvaders
         private float SLOW_SPEED = 15f;
         private float BASIC_SPEED = 30f;
         private float FAST_SPEED = 45f;
-        private const float MAX_ROTATION_ANGLE = 40;
 
         [SerializeField] private float _touchTreshold;
         private Touch _mainTouch;
         private Vector2 _normalizedTouchDelta;
         protected Dictionary<MovementType, float> _movementSpeeds;
         
-
         public float InputMovementValue { get; set; }
 
         protected override void OnEnable()
@@ -29,10 +27,12 @@ namespace SpaceInvaders
             SIEventsHandler.OnObjectMovement -= MoveObj;
         }
 
+
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
 
+            MAX_ROTATION_ANGLE = 40f;
 #if UNITY_ANDROID && !UNITY_EDITOR
             SLOW_SPEED = 7.5f;
             BASIC_SPEED = 12.5f;
@@ -94,9 +94,9 @@ namespace SpaceInvaders
 
         private void RotateObject(float rotateValue)
         {
-            Quaternion fromRotation = _cachedTransform.rotation;
-            Quaternion toRotation = Quaternion.Euler(0, -rotateValue * MAX_ROTATION_ANGLE, 0);
-            _cachedTransform.rotation = Quaternion.Slerp(fromRotation, toRotation, _lerpStep);
+            _fromRotation = _cachedTransform.rotation;
+            _toRotation = Quaternion.Euler(0, -rotateValue * MAX_ROTATION_ANGLE, 0);
+            _cachedTransform.rotation = Quaternion.Slerp(_fromRotation, _toRotation, _lerpStep);
         }
     }
 }

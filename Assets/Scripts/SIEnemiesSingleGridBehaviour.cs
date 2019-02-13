@@ -6,7 +6,7 @@ namespace SpaceInvaders
 {
     public class SIEnemiesSingleGridBehaviour : MonoBehaviour, IMoveable
     {
-        [SerializeField] private SimpleTween2DInfo _enemyGridTweenInfo;
+        [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
 
         [SerializeField] private GameObject[] _enemiesInGrid;
         [SerializeField] private List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
@@ -80,8 +80,8 @@ namespace SpaceInvaders
             _totalEnemies = _enemiesInGrid.Length;
             _livingEnemies = _totalEnemies;
             _cachedTransform = transform;
-            _enemyGridTweenInfo.startPos = SIEnemiesGridsMaster.Instance.GridInitialPosition;
-            _enemyGridTweenInfo.endPos = SIEnemiesGridsMaster.Instance.GridScenePosition;
+            _enemyGridTweenInfo.startValue = SIEnemiesGridsMaster.Instance.GridInitialPosition;
+            _enemyGridTweenInfo.endValue = SIEnemiesGridsMaster.Instance.GridScenePosition;
         }
 
         public void ResetEnemyGrid()

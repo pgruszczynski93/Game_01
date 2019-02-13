@@ -7,6 +7,14 @@
         Error
     }
 
+    public enum MovementDirection
+    {
+        Up,
+        Down,
+        Left, 
+        Right
+    }
+
     public enum BonusType
     {
         Life,

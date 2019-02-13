@@ -5,23 +5,28 @@ using System.Collections.Generic;
 
 namespace SpaceInvaders
 {
-    [System.Serializable]
-    public class SimpleTween2DInfo
+    [Serializable]
+    public class SimpleTweenInfo<T>
     {
         public float durationTime;
         public AnimationCurve animationCurve;
-        [HideInInspector] public Vector3 startPos;
-        [HideInInspector] public Vector3 endPos;
+        [HideInInspector] public T startValue;
+        [HideInInspector] public T endValue;
     }
+
+    [Serializable]
+    public class VectorTweenInfo : SimpleTweenInfo<Vector3>{}
+    [Serializable]
+    public class QuaternionTweenInfo : SimpleTweenInfo<Quaternion> {}
 
     public static class SIHelpers
     {
-        public static float CAMERA_MIN_VIEWPORT_X = 0.05f;
-        public static float CAMERA_MAX_VIEWPORT_X = 0.95f;
+        public static float CAMERA_MIN_VIEWPORT_X = 0.075f;
+        public static float CAMERA_MAX_VIEWPORT_X = 0.925f;
         public static float CAMERA_MIN_VIEWPORT_Y = 0.0f;
         public static float CAMERA_MAX_VIEWPORT_Y = 1.0f;
 
-        public static bool IsObjectInScreenHorizontalBounds2D(this Vector2 objectViewportPos)
+        public static bool IsObjectInScreenHorizontalBounds3D(this Vector3 objectViewportPos)
         {
             if (objectViewportPos.x >= CAMERA_MAX_VIEWPORT_X || objectViewportPos.x <= CAMERA_MIN_VIEWPORT_X)
             {
@@ -94,7 +99,9 @@ namespace SpaceInvaders
 #endif
         }
 
-        public static IEnumerator SimpleTween3D(Action<Vector3> onTweenAction, SimpleTween2DInfo tweenInfo, Action onTweenEnd = null)
+        public static IEnumerator SimpleTween3D(Action<Vector3> onTweenAction, 
+                                                VectorTweenInfo tweenInfo,
+                                                Action onTweenEnd = null)
         {
             float currentTime = 0.0f;
             float animationProgress = 0.0f;
@@ -106,15 +113,40 @@ namespace SpaceInvaders
                 animationProgress = Mathf.Clamp01(currentTime / tweenInfo.durationTime);
                 curveProgress = tweenInfo.animationCurve.Evaluate(animationProgress);
 
-                onTweenAction?.Invoke(Vector3.Lerp(tweenInfo.startPos, tweenInfo.endPos,
+                onTweenAction?.Invoke(Vector3.Lerp(tweenInfo.startValue, tweenInfo.endValue,
                     currentTime / tweenInfo.durationTime));
 
                 currentTime += Time.deltaTime;
                 yield return null;
             }
 
-            onTweenAction?.Invoke(tweenInfo.endPos);
+            onTweenAction?.Invoke(tweenInfo.endValue);
             onTweenEnd.Invoke();
+            yield return null;
+        }
+
+        public static IEnumerator SimpleTween3D(Action<Quaternion> onTweenAction,
+            QuaternionTweenInfo tweenInfo,
+            Action onTweenEnd = null)
+        {
+            float currentTime = 0.0f;
+            float animationProgress = 0.0f;
+            float curveProgress = 0.0f;
+
+            while (currentTime < tweenInfo.durationTime)
+            {
+                animationProgress = Mathf.Clamp01(currentTime / tweenInfo.durationTime);
+                curveProgress = tweenInfo.animationCurve.Evaluate(animationProgress);
+
+                onTweenAction?.Invoke(Quaternion.Slerp(tweenInfo.startValue, tweenInfo.endValue,
+                    currentTime / tweenInfo.durationTime));
+
+                currentTime += Time.deltaTime;
+                yield return null;
+            }
+
+            onTweenAction?.Invoke(tweenInfo.endValue);
+            onTweenEnd?.Invoke();
             yield return null;
         }
     }
