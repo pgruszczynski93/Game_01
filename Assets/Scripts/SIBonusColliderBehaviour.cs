@@ -2,6 +2,8 @@
 
 namespace SpaceInvaders
 {
+    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Rigidbody))]
     public class SIBonusColliderBehaviour : SIMainColliderBehaviour<SIBonusColliderBehaviour>
     {
         protected override void OnEnable()

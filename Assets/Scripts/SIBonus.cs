@@ -10,7 +10,6 @@ namespace SpaceInvaders
         public SIBonusInfo BonusInfo { get => _bonusInfo; set => _bonusInfo = value; }
 
 
-        // move to scriptableobject
     }
 
 }
