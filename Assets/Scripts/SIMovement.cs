@@ -1,22 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
     public class SIMovement : MonoBehaviour
     {
-
         protected const float VERTICAL_MOVEMENT_VIEWPORT_STEP = 0.1f;
+        protected float MAX_ROTATION_ANGLE;
 
         [SerializeField] protected MovementType _movementType;
-        [Range(0, 1)] [SerializeField] private float _lerpStep;
-
+        [SerializeField] protected MovementDirection _movementDirection;
+        [Range(0, 1)] [SerializeField] protected float _lerpStep;
         [SerializeField] protected float _currentMovementSpeed;
 
         private float _dt;
-
         protected Vector2 _startPosition;
-        protected Camera _mainCamera;
+        protected Quaternion _fromRotation;
+        protected Quaternion _toRotation;
         protected Transform _cachedTransform;
+        protected Camera _mainCamera;
+
+        protected Func<Vector3, Vector3> onScreenEdgeAction;
 
         public MovementType CurrentMovementType
         {
@@ -51,33 +55,24 @@ namespace SpaceInvaders
             _dt = Time.deltaTime;
             float horizontalMoveSpeed = _dt * movementValue * _currentMovementSpeed;
 
-            Vector2 currentPosition = _cachedTransform.position;
-            Vector2 newPosition = new Vector2(currentPosition.x + horizontalMoveSpeed, currentPosition.y);
-            Vector2 smoothedPosition = Vector2.Lerp(currentPosition, newPosition, _lerpStep);
+            Vector3 currentPosition = _cachedTransform.position;
+            Vector3 newPosition = new Vector2(currentPosition.x + horizontalMoveSpeed, currentPosition.y);
+            Vector3 smoothedPosition = Vector2.Lerp(currentPosition, newPosition, _lerpStep);
 
-            Vector2 objectInCameraBoundsPos = _mainCamera.WorldToViewportPoint(smoothedPosition);
+            Vector3 objectInCameraBoundsPos = _mainCamera.WorldToViewportPoint(smoothedPosition);
             objectInCameraBoundsPos.x = Mathf.Clamp(objectInCameraBoundsPos.x, SIHelpers.CAMERA_MIN_VIEWPORT_X,
                 SIHelpers.CAMERA_MAX_VIEWPORT_X);
 
+            //Debug.Log(objectInCameraBoundsPos.ToString("F4"));
+
             if (moveDownEnabled)
             {
-                objectInCameraBoundsPos = TryToMoveObjectDown(objectInCameraBoundsPos);
+                objectInCameraBoundsPos = onScreenEdgeAction.Invoke(objectInCameraBoundsPos);
             }
 
             objectInCameraBoundsPos = _mainCamera.ViewportToWorldPoint(objectInCameraBoundsPos);
 
             _cachedTransform.position = objectInCameraBoundsPos;
-        }
-
-        private Vector2 TryToMoveObjectDown(Vector2 objectInCameraBoundsPos)
-        {
-            if (objectInCameraBoundsPos.IsObjectInScreenHorizontalBounds2D())
-            {
-                objectInCameraBoundsPos.y -= VERTICAL_MOVEMENT_VIEWPORT_STEP;
-                _currentMovementSpeed = -_currentMovementSpeed;
-            }
-
-            return objectInCameraBoundsPos;
         }
     }
 }

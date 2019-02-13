@@ -19,14 +19,23 @@ namespace SpaceInvaders
             }
         }
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            Application.targetFrameRate = SISettings.APPLICATION_TARGET_FRAMERATE;
+        }
+
         private void OnEnable()
         {
             SIEventsHandler.OnGameStarted += StartGame;
+            SIEventsHandler.OnGameQuit += QuitGame;
         }
 
         private void OnDisable()
         {
             SIEventsHandler.OnGameStarted -= StartGame;
+            SIEventsHandler.OnGameQuit -= QuitGame;
         }
 
         private void Update()
@@ -36,8 +45,30 @@ namespace SpaceInvaders
                 return;
             }
 
-
             OnUpdateMovements();
+            OnDebugInputHandling();
+            OnGameQuitCallback();
+        }
+
+        private void OnDebugInputHandling()
+        {
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                SIEventsHandler.OnDebugInputHandling?.Invoke();
+            }
+        }
+
+        private void OnGameQuitCallback()
+        {
+            SIEventsHandler.OnGameQuit?.Invoke();
+        }
+
+        private void QuitGame()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
         }
 
         private void OnUpdateMovements()

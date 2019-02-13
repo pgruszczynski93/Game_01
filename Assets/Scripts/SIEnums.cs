@@ -1,5 +1,27 @@
 ﻿namespace SpaceInvaders
 {
+    public enum SimpleLoggerTypes
+    {
+        Log, 
+        Warning,
+        Error
+    }
+
+    public enum MovementDirection
+    {
+        Up,
+        Down,
+        Left, 
+        Right
+    }
+
+    public enum BonusType
+    {
+        Life,
+        Shield,
+        Weapon, 
+    }
+
     public enum MovementType
     {
         Basic,
@@ -15,6 +37,7 @@
 
     public enum WeaponType
     {
+        None,
         Projectile, 
         Projectile2x,
         Projectile3x,

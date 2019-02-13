@@ -6,12 +6,15 @@ namespace SpaceInvaders
 {
     public class SIPlayerMovement : SIMovement, IMoveable
     {
-        private const float SLOW_SPEED = 15f;
-        private const float BASIC_SPEED = 30f;
-        private const float FAST_SPEED = 45f;
+        private float SLOW_SPEED = 15f;
+        private float BASIC_SPEED = 30f;
+        private float FAST_SPEED = 45f;
 
+        [SerializeField] private float _touchTreshold;
+        private Touch _mainTouch;
+        private Vector2 _normalizedTouchDelta;
         protected Dictionary<MovementType, float> _movementSpeeds;
-
+        
         public float InputMovementValue { get; set; }
 
         protected override void OnEnable()
@@ -24,11 +27,18 @@ namespace SpaceInvaders
             SIEventsHandler.OnObjectMovement -= MoveObj;
         }
 
+
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
 
-            _movementSpeeds = new Dictionary<MovementType, float>
+            MAX_ROTATION_ANGLE = 40f;
+#if UNITY_ANDROID && !UNITY_EDITOR
+            SLOW_SPEED = 7.5f;
+            BASIC_SPEED = 12.5f;
+            FAST_SPEED = 20f;
+#endif
+        _movementSpeeds = new Dictionary<MovementType, float>
             {
                 {MovementType.Basic, BASIC_SPEED},
                 {MovementType.Fast, FAST_SPEED},
@@ -52,9 +62,41 @@ namespace SpaceInvaders
 
         public void MoveObj()
         {
+#if UNITY_EDITOR
             InputMovementValue = Input.GetAxis("Horizontal");
 
+#elif UNITY_ANDROID
+            CalculateMobileInputValue();
+#endif
             MoveObject(InputMovementValue);
+            RotateObject(InputMovementValue);
+        }
+
+        private void CalculateMobileInputValue()
+        {
+            if (Input.touchCount > 0)
+            {
+                _mainTouch = Input.GetTouch(0);
+                _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
+
+                if ((_mainTouch.phase == TouchPhase.Began || _mainTouch.phase == TouchPhase.Moved)
+                    && _normalizedTouchDelta.magnitude > _touchTreshold)
+                {
+                    _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
+                    InputMovementValue = _normalizedTouchDelta.x;
+                }
+                else
+                {
+                    InputMovementValue = 0f;
+                }
+            }
+        }
+
+        private void RotateObject(float rotateValue)
+        {
+            _fromRotation = _cachedTransform.rotation;
+            _toRotation = Quaternion.Euler(0, -rotateValue * MAX_ROTATION_ANGLE, 0);
+            _cachedTransform.rotation = Quaternion.Slerp(_fromRotation, _toRotation, _lerpStep);
         }
     }
 }

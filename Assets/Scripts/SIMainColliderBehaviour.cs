@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceInvaders
@@ -9,9 +10,11 @@ namespace SpaceInvaders
         [SerializeField] protected string[] _objectTags;
         [SerializeField] protected T _colliderParentBehaviour;
 
-        protected Action onCollisionCallback = delegate { };    // 
+        protected delegate void CustomCollisonDelegate(MonoBehaviour collisionBehaviour = null);
 
-        protected virtual void Start()
+        protected Dictionary<string, CustomCollisonDelegate> _onCollisionActions;
+
+        protected virtual void Awake()
         {
             SetInitialReferences();
         }
@@ -25,6 +28,15 @@ namespace SpaceInvaders
                 Debug.LogError("Specify collision tags first.");
                 return;
             }
+
+            _onCollisionActions = new Dictionary<string, CustomCollisonDelegate>()
+            {
+                {"Player", delegate { }},
+                {"Enemy", delegate { }},
+                {"Projectile", delegate { }},
+                {"EnemyProjectile", delegate { }},
+                {"Bonus", delegate { }}
+            };
         }
 
         private bool AreAllTagsCorrect()
@@ -50,16 +62,24 @@ namespace SpaceInvaders
 
         protected virtual void OnDisable(){}
 
-        protected virtual void OnTriggerEnter2D(Collider2D collider2D)
+        protected virtual void OnTriggerEnter(Collider collider)
         {
             bool hasHittedObjectGivenTag = false;
 
+            if(collider.gameObject.CompareTag("Bonus"))
+            {
+                _onCollisionActions["Bonus"]?.Invoke(collider.gameObject.GetComponent<SIBonus>());
+                return;
+            }
+
             for (int i = 0; i < _objectTagsCount; i++)
             {
-                hasHittedObjectGivenTag = collider2D.gameObject.CompareTag(_objectTags[i]);
+                hasHittedObjectGivenTag = collider.gameObject.CompareTag(_objectTags[i]);
+
                 if (hasHittedObjectGivenTag)
                 {
-                    onCollisionCallback?.Invoke();
+                    Debug.Log(_objectTags[i]);
+                    _onCollisionActions[_objectTags[i]]?.Invoke();
                     return;
                 }
             }

@@ -6,7 +6,7 @@ namespace SpaceInvaders
 {
     public class SIEnemiesSingleGridBehaviour : MonoBehaviour, IMoveable
     {
-        [SerializeField] private SimpleTween2DInfo _enemyGridTweenInfo;
+        [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
 
         [SerializeField] private GameObject[] _enemiesInGrid;
         [SerializeField] private List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
@@ -45,6 +45,8 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath += CheckEnemyWaveEnd;
 
             SIEventsHandler.OnSwitchShootableEnemy += UpdateAbleToShootEnemies;
+
+            SIEventsHandler.OnWaveEnd += ResetEnemyGrid;
         }
 
         private void OnDisable()
@@ -54,6 +56,8 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= CheckEnemyWaveEnd;
 
             SIEventsHandler.OnSwitchShootableEnemy -= UpdateAbleToShootEnemies;
+
+            SIEventsHandler.OnWaveEnd -= ResetEnemyGrid;
         }
 
         private void OnDestroy()
@@ -76,8 +80,16 @@ namespace SpaceInvaders
             _totalEnemies = _enemiesInGrid.Length;
             _livingEnemies = _totalEnemies;
             _cachedTransform = transform;
-            _enemyGridTweenInfo.startPos = SIEnemiesGridsMaster.Instance.GridInitialPosition;
-            _enemyGridTweenInfo.endPos = SIEnemiesGridsMaster.Instance.GridScenePosition;
+            _enemyGridTweenInfo.startValue = SIEnemiesGridsMaster.Instance.GridInitialPosition;
+            _enemyGridTweenInfo.endValue = SIEnemiesGridsMaster.Instance.GridScenePosition;
+        }
+
+        public void ResetEnemyGrid()
+        {
+            Debug.Log("resetuje siatke");
+            SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
+            _livingEnemies = _totalEnemies;
+            _cachedTransform = SIEnemiesGridsMaster.Instance.GridInitialTrasnform;
         }
 
         private void DecreaseEnemiesCount()
@@ -104,7 +116,16 @@ namespace SpaceInvaders
                 return;
             }
             Debug.Log("WAVE END ");
-            //SIEventsHandler.OnWaveEnd?.Invoke();
+            SIEventsHandler.OnWaveEnd?.Invoke();
+        }
+
+        //DEBUG_WAVE_STOP
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                SIEventsHandler.OnWaveEnd?.Invoke();
+            }
         }
 
         public void MoveObj()
@@ -156,11 +177,12 @@ namespace SpaceInvaders
 
         public void StartShooting()
         {
-            StartCoroutine(EnemiesShootingRoutine());
+            //StartCoroutine(EnemiesShootingRoutine());
         }
 
         public void StopShooting()
         {
+            Debug.Log("koniec falio - przestaje strzelac");
             StopCoroutine(EnemiesShootingRoutine());
         }
 
@@ -176,11 +198,10 @@ namespace SpaceInvaders
             int enemySelectedToShootIndex = 0;
             float timeToNextShoot = 0.0f;
 
-            while (SIEnemiesGridsMaster.Instance.IsEnemyMovementAllowed && enemiesAbleToShootCount > 0)
+            while (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed && enemiesAbleToShootCount > 0)
             {
                 enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
                 enemySelectedToShootIndex = Random.Range(0, (enemiesAbleToShootCount > 0) ? enemiesAbleToShootCount - 1 : 0);
-                Debug.Log("shooting " + enemySelectedToShootIndex);
                 timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
                 if (enemySelectedToShootIndex >= 0)
                 {
