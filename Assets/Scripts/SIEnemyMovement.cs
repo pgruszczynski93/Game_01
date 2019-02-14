@@ -15,10 +15,23 @@ namespace SpaceInvaders
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
+
+            ResetMovementProperties();
+        }
+
+
+        protected override void ResetMovementProperties()
+        {
+            base.ResetMovementProperties();
+            
+            SIHelpers.SISimpleLogger(this, "<color=blue>Reset enemy</color>", SimpleLoggerTypes.Log);
+
+            MAX_ROTATION_ANGLE = 20;
             _moveStep = 2;
             _rotationDirection = 1;
-            MAX_ROTATION_ANGLE = 20;
             _enemyObjectOrientation = Quaternion.Euler(90, 0, 180);
+            _cachedTransform.localRotation = _enemyObjectOrientation;
+            _currentMovementSpeed = _initialMovementSpeed;
         }
 
         protected override void OnEnable()
@@ -56,14 +69,14 @@ namespace SpaceInvaders
                 objectInCameraBoundsPos.y -= VERTICAL_MOVEMENT_VIEWPORT_STEP;
 
                 StopAllCoroutines();
-                SetMovementProperties();
+                SetMovementDirectionProperties();
                 StartCoroutine(RotateRoutine());
             }
 
             return objectInCameraBoundsPos;
         }
 
-        private void SetMovementProperties()
+        private void SetMovementDirectionProperties()
         {
             _currentMovementSpeed = -_currentMovementSpeed;
             if (_currentMovementSpeed > 0)
@@ -94,12 +107,6 @@ namespace SpaceInvaders
                     _cachedTransform.rotation = outQuaternion;
                 }, _tweenInfo, null));
 
-            //SetTweenInfoValues();
-
-            //yield return StartCoroutine(SIHelpers.SimpleTween3D((outQuaternion) =>
-            //{
-            //    _cachedTransform.rotation = outQuaternion;
-            //}, _tweenInfo, null));
         }
 
         private void UpdateMovementStep(float newStep)
@@ -110,6 +117,8 @@ namespace SpaceInvaders
         private void ResetEnemy()
         {
             _cachedTransform.position = _startPosition;
+
+            ResetMovementProperties();
         }
 
     }

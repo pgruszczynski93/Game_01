@@ -45,8 +45,10 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath += CheckEnemyWaveEnd;
 
             SIEventsHandler.OnSwitchShootableEnemy += UpdateAbleToShootEnemies;
-
             SIEventsHandler.OnWaveEnd += ResetEnemyGrid;
+
+            SIEventsHandler.OnDebugInputHandling += Debug_ResetWave;
+
         }
 
         private void OnDisable()
@@ -56,8 +58,9 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= CheckEnemyWaveEnd;
 
             SIEventsHandler.OnSwitchShootableEnemy -= UpdateAbleToShootEnemies;
-
             SIEventsHandler.OnWaveEnd -= ResetEnemyGrid;
+
+            SIEventsHandler.OnDebugInputHandling -= Debug_ResetWave;
         }
 
         private void OnDestroy()
@@ -84,12 +87,31 @@ namespace SpaceInvaders
             _enemyGridTweenInfo.endValue = SIEnemiesGridsMaster.Instance.GridScenePosition;
         }
 
+        private void GetEnemiesAbleToShoot()
+        {
+            // Note: first initialization is made in Unity Editor (drag and drop).
+
+            for (int i = _totalEnemies - 1; i > _totalEnemies - _enemiesInRow; i--)
+            {
+                SIEnemyShootBehaviour enemyAbleToShoot = _enemiesInGrid[i].GetComponent<SIEnemyShootBehaviour>();
+                if (enemyAbleToShoot == null)
+                {
+                    SIHelpers.SISimpleLogger(this, "Enemy has no SIEnemyShootBehaviour attached. ", SimpleLoggerTypes.Error);
+                    return;
+                }
+
+                _enemiesAbleToShoot.Add(enemyAbleToShoot);
+            }
+        }
+
         public void ResetEnemyGrid()
         {
             SIHelpers.SISimpleLogger(this, "ResetEnemyGrid: Grid reset", SimpleLoggerTypes.Log);
             SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
+
+            GetEnemiesAbleToShoot();
             _livingEnemies = _totalEnemies;
-            _cachedTransform = SIEnemiesGridsMaster.Instance.GridInitialTrasnform;
+            _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialTrasnform.position;
         }
 
         private void DecreaseEnemiesCount()
@@ -115,15 +137,14 @@ namespace SpaceInvaders
             {
                 return;
             }
-            Debug.Log("WAVE END ");
             SIEventsHandler.OnWaveEnd?.Invoke();
         }
 
-        //DEBUG_WAVE_STOP
-        void Update()
+        private void Debug_ResetWave()
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
+                SIHelpers.SISimpleLogger(this, "Debug_ResetWave()", SimpleLoggerTypes.Log);
                 SIEventsHandler.OnWaveEnd?.Invoke();
             }
         }
@@ -183,7 +204,7 @@ namespace SpaceInvaders
 
         public void StopShooting()
         {
-            Debug.Log("koniec falio - przestaje strzelac");
+            SIHelpers.SISimpleLogger(this, "StopShooting(): shooting stopped - wave resetting " , SimpleLoggerTypes.Log);
             StopCoroutine(EnemiesShootingRoutine());
         }
 

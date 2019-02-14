@@ -114,7 +114,11 @@ namespace SpaceInvaders
 
         private void Debug_Respawn()
         {
-            Respawn();
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                SIHelpers.SISimpleLogger(this, "Debug_Respawn()", SimpleLoggerTypes.Log);
+                Respawn();
+            }
         }
     }
 }

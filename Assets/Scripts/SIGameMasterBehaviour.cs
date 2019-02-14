@@ -52,10 +52,7 @@ namespace SpaceInvaders
 
         private void OnDebugInputHandling()
         {
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                SIEventsHandler.OnDebugInputHandling?.Invoke();
-            }
+            SIEventsHandler.OnDebugInputHandling?.Invoke();
         }
 
         private void OnGameQuitCallback()

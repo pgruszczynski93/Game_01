@@ -32,12 +32,15 @@ namespace SpaceInvaders
         {
             SIEventsHandler.OnGameStarted += MoveEnemiesWave;
             SIEventsHandler.OnWaveEnd += DisableGridMovements;
+            SIEventsHandler.OnWaveEnd += MoveEnemiesWave;
+
         }
 
         private void OnDisable()
         {
             SIEventsHandler.OnGameStarted -= MoveEnemiesWave;
             SIEventsHandler.OnWaveEnd -= DisableGridMovements;
+            SIEventsHandler.OnWaveEnd -= MoveEnemiesWave;
         }
 
         private void MoveEnemiesWave()

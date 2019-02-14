@@ -14,6 +14,7 @@ namespace SpaceInvaders
         [SerializeField] protected float _currentMovementSpeed;
 
         private float _dt;
+        [SerializeField] protected float _initialMovementSpeed;
         protected Vector2 _startPosition;
         protected Quaternion _fromRotation;
         protected Quaternion _toRotation;
@@ -38,7 +39,10 @@ namespace SpaceInvaders
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _cachedTransform = transform;
             _startPosition = _cachedTransform.position;
+            _initialMovementSpeed = _currentMovementSpeed;
         }
+
+        protected virtual void ResetMovementProperties(){}
 
         protected virtual void OnEnable(){}
 
