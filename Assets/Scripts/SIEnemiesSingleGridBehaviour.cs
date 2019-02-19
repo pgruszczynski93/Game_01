@@ -6,7 +6,6 @@ namespace SpaceInvaders
 {
     public class SIEnemiesSingleGridBehaviour : MonoBehaviour, IMoveable
     {
-
         [SerializeField] private int _enemiesInRow;
         [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
         [SerializeField] private GameObject[] _enemiesInGrid;
@@ -234,6 +233,11 @@ namespace SpaceInvaders
 
             yield return null;
 
+        }
+
+        public void StopObj()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

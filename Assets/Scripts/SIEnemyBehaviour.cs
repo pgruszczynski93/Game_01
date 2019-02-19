@@ -5,14 +5,14 @@ namespace SpaceInvaders
     public class SIEnemyBehaviour : MonoBehaviour, IRespawnable
     {
         [SerializeField] private float _raycastDistance;
+        [SerializeField] private SIStatistics _enemyStatistics;
         [SerializeField] private LayerMask _collisionMask;
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private GameObject _colliderParent;
         [SerializeField] private SIVFXManager _destroyVFX;
+        [SerializeField] private SIEnemyMovement _enemyMovement;
 
         private Vector3 _raycastOffset;
-
-        public bool IsEnemyDead { get; set; } = false;
 
         private void OnEnable()
         {
@@ -34,26 +34,29 @@ namespace SpaceInvaders
         private void SetInitialReferences()
         {
             _raycastOffset = new Vector3(0.0f, 0.25f);
+            _enemyStatistics.isAlive = true;
         }
 
         public void Death(MonoBehaviour collisionBehaviour = null)
         {
-            if (IsEnemyDead == false)
+            if (_enemyStatistics.isAlive)
             {
                 SIShootedEnemyInfo nextShootableEnemyInfo = ShootAbleEnemy();
                 SIEventsHandler.OnSwitchShootableEnemy?.Invoke(nextShootableEnemyInfo);
                 EnableEnemyVisibility(false);
-                IsEnemyDead = true;
+                _enemyMovement.StopObj();
+                _enemyStatistics.isAlive = false;
             }
         }
-
 
         private void EnableEnemyVisibility(bool canEnable)
         {
             if (_colliderParent == null || 
                 _meshRenderer == null ||
-                _destroyVFX == null)
+                _destroyVFX == null ||
+                _enemyMovement == null)
             {
+                SIHelpers.SISimpleLogger(this, "EnableEnemyVisibility() - references aren't assigned.", SimpleLoggerTypes.Error);
                 return;
             }
 
@@ -108,7 +111,7 @@ namespace SpaceInvaders
 
         public void Respawn()
         {
-            IsEnemyDead = false;
+            _enemyStatistics.isAlive = true;
             EnableEnemyVisibility(true);
         }
 

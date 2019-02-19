@@ -5,11 +5,10 @@ namespace SpaceInvaders
 {
     public class SIEnemyMovement : SIMovement, IMoveable
     {
-        private bool _canEnemyMove;
         private int _rotationDirection;
-        private float _moveStep;
-        private Quaternion _enemyObjectOrientation;
+        [SerializeField] private float _movementValueMultiplier;
 
+        private Quaternion _enemyObjectOrientation;
         [SerializeField] private QuaternionTweenInfo _tweenInfo;
 
         protected override void SetInitialReferences()
@@ -19,7 +18,6 @@ namespace SpaceInvaders
             ResetMovementProperties();
         }
 
-
         protected override void ResetMovementProperties()
         {
             base.ResetMovementProperties();
@@ -27,11 +25,12 @@ namespace SpaceInvaders
             SIHelpers.SISimpleLogger(this, "<color=blue>Reset enemy</color>", SimpleLoggerTypes.Log);
 
             MAX_ROTATION_ANGLE = 20;
-            _moveStep = 2;
+            _movementValueMultiplier = 1.5f;
             _rotationDirection = 1;
             _enemyObjectOrientation = Quaternion.Euler(90, 0, 180);
             _cachedTransform.localRotation = _enemyObjectOrientation;
             _currentMovementSpeed = _initialMovementSpeed;
+            _canObjectMove = true;
         }
 
         protected override void OnEnable()
@@ -53,12 +52,12 @@ namespace SpaceInvaders
 
         public void MoveObj()
         {
-            if (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed == false)
+            if (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed == false || _canObjectMove == false)
             {
                 return;
             }
 
-            MoveObject(_moveStep, true);
+            MoveObject(_movementValueMultiplier, true);
 
         }
 
@@ -111,7 +110,7 @@ namespace SpaceInvaders
 
         private void UpdateMovementStep(float newStep)
         {
-            _moveStep = newStep;
+            _movementValueMultiplier = newStep;
         }
 
         private void ResetEnemy()
@@ -121,5 +120,9 @@ namespace SpaceInvaders
             ResetMovementProperties();
         }
 
+        public void StopObj()
+        {
+            _canObjectMove = false;
+        }
     }
 }

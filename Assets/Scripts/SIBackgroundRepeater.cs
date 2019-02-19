@@ -43,5 +43,10 @@ namespace SpaceInvaders
             float newPosition = Mathf.Repeat(Time.time * _speed, _repeatDistance);
             _cachedTransform.position = _startPosition + (_direction * newPosition);
         }
+
+        public void StopObj()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace SpaceInvaders
     [Serializable]
     public class SIStatistics
     {
+        public bool isAlive;
         public int currentHealth;
         public int currentScore;
         public int currentWave;

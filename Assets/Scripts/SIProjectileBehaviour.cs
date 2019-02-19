@@ -127,6 +127,11 @@ namespace SpaceInvaders
                 _particles.Stop();
             }
         }
+
+        public void StopObj()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
 }

@@ -27,7 +27,6 @@ namespace SpaceInvaders
             SIEventsHandler.OnObjectMovement -= MoveObj;
         }
 
-
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
@@ -97,6 +96,11 @@ namespace SpaceInvaders
             _fromRotation = _cachedTransform.rotation;
             _toRotation = Quaternion.Euler(0, -rotateValue * MAX_ROTATION_ANGLE, 0);
             _cachedTransform.rotation = Quaternion.Slerp(_fromRotation, _toRotation, _lerpStep);
+        }
+
+        public void StopObj()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

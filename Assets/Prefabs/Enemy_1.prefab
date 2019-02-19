@@ -158,12 +158,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _raycastDistance: 0.5
+  _enemyStatistics:
+    isAlive: 0
+    currentHealth: 0
+    currentScore: 0
+    currentWave: 0
+    currentWeaponType: 0
   _collisionMask:
     serializedVersion: 2
     m_Bits: 256
   _meshRenderer: {fileID: 1881762110048184449}
   _colliderParent: {fileID: 6197922684793495672}
   _destroyVFX: {fileID: 9168323593088370388}
+  _enemyMovement: {fileID: 275861281402422653}
 --- !u!114 &275861281402422653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,11 +183,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e430ff49553df41a8b42a00c993b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canObjectMove: 0
   _movementType: 0
   _movementDirection: 0
   _lerpStep: 0.35
   _currentMovementSpeed: 2.5
   _initialMovementSpeed: 0
+  _movementValueMultiplier: 0
   _tweenInfo:
     durationTime: 0.25
     animationCurve:
@@ -506,14 +515,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMoving: 0
-  _forceScaleFactor: 1
+  _forceScaleFactor: 4.2
   _rigidbody: {fileID: 6868970296195430129}
   _cachedParentTransform: {fileID: 4698860576044419641}
   _cachedProjectileTransform: {fileID: 1342410204974039246}
   _meshRenderer: {fileID: 2512472609524698963}
   _particles: {fileID: 8206344931202847515}
   _projectileCollider: {fileID: 1646616927178526776}
-  _vfxManager: {fileID: 4579619091672328030}
 --- !u!114 &4579619091672328030
 MonoBehaviour:
   m_ObjectHideFlags: 0

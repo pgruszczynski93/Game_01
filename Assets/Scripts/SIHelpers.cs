@@ -34,7 +34,6 @@ namespace SpaceInvaders
             TryToAddToCoroutineWaitCache(waitTime);
 
             yield return CoroutineWaitCache[waitTime];
-            Debug.Log("CZEKAM  + " +waitTime);
             onWaitFinished?.Invoke();
         }
 
