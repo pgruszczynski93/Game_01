@@ -5,7 +5,7 @@ namespace SpaceInvaders
     public class SIProjectileBehaviour : MonoBehaviour, IMoveable
     {
         [SerializeField] private bool _isMoving;
-        [Range(1f,20f)][SerializeField] private float _forceScaleFactor;
+        [Range( 0.01f,20f)][SerializeField] private float _forceScaleFactor;
         [SerializeField] private Rigidbody _rigidbody;
 
         [SerializeField] private Transform _cachedParentTransform;
@@ -105,6 +105,7 @@ namespace SpaceInvaders
             _rigidbody.velocity = new Vector2(0,0);
             _cachedProjectileTransform.parent = _cachedParentTransform;
             _cachedProjectileTransform.localPosition = _parentResetPosition;
+
             //gameObject.SetActive(false);
         }
 

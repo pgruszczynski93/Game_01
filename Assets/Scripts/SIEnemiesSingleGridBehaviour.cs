@@ -90,7 +90,7 @@ namespace SpaceInvaders
         private void GetEnemiesAbleToShoot()
         {
             // Note: first initialization is made in Unity Editor (drag and drop).
-
+            _enemiesAbleToShoot.Clear();
             for (int i = _totalEnemies - 1; i > _totalEnemies - _enemiesInRow; i--)
             {
                 SIEnemyShootBehaviour enemyAbleToShoot = _enemiesInGrid[i].GetComponent<SIEnemyShootBehaviour>();
@@ -111,7 +111,7 @@ namespace SpaceInvaders
 
             GetEnemiesAbleToShoot();
             _livingEnemies = _totalEnemies;
-            _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialTrasnform.position;
+            _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
         }
 
         private void DecreaseEnemiesCount()

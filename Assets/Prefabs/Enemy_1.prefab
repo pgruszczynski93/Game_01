@@ -88,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4020240761886779446}
   m_Layer: 8
-  m_Name: ExplosionVFX
+  m_Name: EnemyExplosionVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,6 +180,7 @@ MonoBehaviour:
   _movementDirection: 0
   _lerpStep: 0.35
   _currentMovementSpeed: 2.5
+  _initialMovementSpeed: 0
   _tweenInfo:
     durationTime: 0.25
     animationCurve:
@@ -253,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectVFX: {fileID: 968318236054731268}
+  _parentTransform: {fileID: 8156722595000982454}
 --- !u!1 &3426704194481364134
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +422,7 @@ GameObject:
   - component: {fileID: 8156722595000982454}
   - component: {fileID: 7742854077500983066}
   m_Layer: 8
-  m_Name: Graphics3D
+  m_Name: EnemyGraphics3D
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,13 +506,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMoving: 0
-  _forceScaleFactor: 5
+  _forceScaleFactor: 1
   _rigidbody: {fileID: 6868970296195430129}
   _cachedParentTransform: {fileID: 4698860576044419641}
   _cachedProjectileTransform: {fileID: 1342410204974039246}
   _meshRenderer: {fileID: 2512472609524698963}
   _particles: {fileID: 8206344931202847515}
   _projectileCollider: {fileID: 1646616927178526776}
+  _vfxManager: {fileID: 4579619091672328030}
+--- !u!114 &4579619091672328030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421598164140938629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c5896dd0cb3154db4647c3b8cf637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effectVFX: {fileID: 7965666265448475081}
+  _parentTransform: {fileID: 1342410204974039246}
 --- !u!1 &6171958699512689287
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,21 +795,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2135761235993091964, guid: f142162e014253b4f91ca17907366168,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135761235993091964, guid: f142162e014253b4f91ca17907366168,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2135761235993091964, guid: f142162e014253b4f91ca17907366168,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3019215686242233917, guid: f142162e014253b4f91ca17907366168,
         type: 3}
       propertyPath: m_Size.y
@@ -808,28 +810,36 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: -0.16
       objectReference: {fileID: 0}
+    - target: {fileID: 2135761235993091964, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135761235993091964, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135761235993091964, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4615088356763934125, guid: f142162e014253b4f91ca17907366168,
         type: 3}
       propertyPath: _colliderParentBehaviour
       value: 
       objectReference: {fileID: 641713421112421484}
+    - target: {fileID: 4615088356763934125, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: _destroyVFX
+      value: 
+      objectReference: {fileID: 4579619091672328030}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f142162e014253b4f91ca17907366168, type: 3}
---- !u!4 &1342410204974039246 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3287257246736072395, guid: f142162e014253b4f91ca17907366168,
-    type: 3}
-  m_PrefabInstance: {fileID: 4557535021625146885}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1646616927178526776 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 3019215686242233917, guid: f142162e014253b4f91ca17907366168,
-    type: 3}
-  m_PrefabInstance: {fileID: 4557535021625146885}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &6868970296195430129 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 6948176693457471732, guid: f142162e014253b4f91ca17907366168,
+--- !u!1 &7965666265448475081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5887373181240481740, guid: f142162e014253b4f91ca17907366168,
     type: 3}
   m_PrefabInstance: {fileID: 4557535021625146885}
   m_PrefabAsset: {fileID: 0}
@@ -842,6 +852,30 @@ ParticleSystem:
 --- !u!23 &2512472609524698963 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2153148823038341462, guid: f142162e014253b4f91ca17907366168,
+    type: 3}
+  m_PrefabInstance: {fileID: 4557535021625146885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &6868970296195430129 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 6948176693457471732, guid: f142162e014253b4f91ca17907366168,
+    type: 3}
+  m_PrefabInstance: {fileID: 4557535021625146885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1646616927178526776 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3019215686242233917, guid: f142162e014253b4f91ca17907366168,
+    type: 3}
+  m_PrefabInstance: {fileID: 4557535021625146885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1342410204974039246 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3287257246736072395, guid: f142162e014253b4f91ca17907366168,
+    type: 3}
+  m_PrefabInstance: {fileID: 4557535021625146885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5421598164140938629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8359524486144961408, guid: f142162e014253b4f91ca17907366168,
     type: 3}
   m_PrefabInstance: {fileID: 4557535021625146885}
   m_PrefabAsset: {fileID: 0}

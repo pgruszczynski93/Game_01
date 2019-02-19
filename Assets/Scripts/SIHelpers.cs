@@ -25,6 +25,28 @@ namespace SpaceInvaders
         public static float CAMERA_MAX_VIEWPORT_X = 0.925f;
         public static float CAMERA_MIN_VIEWPORT_Y = 0.0f;
         public static float CAMERA_MAX_VIEWPORT_Y = 1.0f;
+        public static Vector3 VectorZero = new Vector3(0f, 0f, 0f);
+
+        public static Dictionary<float, WaitForSeconds> CoroutineWaitCache = new Dictionary<float, WaitForSeconds>();
+
+        public static IEnumerator CustomDelayRoutine(float waitTime, Action onWaitFinished = null)
+        {
+            TryToAddToCoroutineWaitCache(waitTime);
+
+            yield return CoroutineWaitCache[waitTime];
+            Debug.Log("CZEKAM  + " +waitTime);
+            onWaitFinished?.Invoke();
+        }
+
+        private static void TryToAddToCoroutineWaitCache(float waitTime)
+        {
+            WaitForSeconds wfs;
+            if (CoroutineWaitCache.TryGetValue(waitTime, out wfs) == false)
+            {
+                wfs = new WaitForSeconds(waitTime);
+                CoroutineWaitCache.Add(waitTime, wfs);
+            }
+        }
 
         public static bool IsObjectInScreenHorizontalBounds3D(this Vector3 objectViewportPos)
         {

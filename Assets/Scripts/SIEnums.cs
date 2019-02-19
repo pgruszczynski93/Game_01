@@ -1,5 +1,12 @@
 ﻿namespace SpaceInvaders
 {
+    public enum VFXActions
+    {
+        EnableVFX,
+        EnableAndDetachVFX,
+        EnableAndAttachVFX
+    }
+
     public enum SimpleLoggerTypes
     {
         Log, 
