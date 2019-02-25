@@ -35,7 +35,7 @@ namespace SpaceInvaders
 
         protected override void OnEnable()
         {
-            SIEventsHandler.OnObjectMovement += MoveObj;
+            SIEventsHandler.OnObjectsMovement += MoveObj;
             SIEventsHandler.OnEnemySpeedMultiplierChanged += UpdateMovementStep;
             SIEventsHandler.OnWaveEnd += ResetEnemy;
             onScreenEdgeAction += TryToMoveObjectDown;
@@ -43,7 +43,7 @@ namespace SpaceInvaders
 
         protected override void OnDisable()
         {
-            SIEventsHandler.OnObjectMovement -= MoveObj;
+            SIEventsHandler.OnObjectsMovement -= MoveObj;
             SIEventsHandler.OnEnemySpeedMultiplierChanged -= UpdateMovementStep;
             SIEventsHandler.OnWaveEnd -= ResetEnemy;
 

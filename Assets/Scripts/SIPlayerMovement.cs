@@ -19,12 +19,12 @@ namespace SpaceInvaders
 
         protected override void OnEnable()
         {
-            SIEventsHandler.OnObjectMovement += MoveObj;
+            SIEventsHandler.OnObjectsMovement += MoveObj;
         }
 
         protected override void OnDisable()
         {
-            SIEventsHandler.OnObjectMovement -= MoveObj;
+            SIEventsHandler.OnObjectsMovement -= MoveObj;
         }
 
         protected override void SetInitialReferences()

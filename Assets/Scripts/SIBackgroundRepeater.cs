@@ -13,12 +13,12 @@ namespace SpaceInvaders
 
         private void OnEnable()
         {
-            SIEventsHandler.OnObjectMovement += MoveObj;
+            SIEventsHandler.OnObjectsMovement += MoveObj;
         }
 
         private void OnDisable()
         {
-            SIEventsHandler.OnObjectMovement -= MoveObj;
+            SIEventsHandler.OnObjectsMovement -= MoveObj;
         }
 
         private void Start()

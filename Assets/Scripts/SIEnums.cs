@@ -1,5 +1,10 @@
 ﻿namespace SpaceInvaders
 {
+    public enum ShaderProperties
+    {
+        EmissionPower,
+    }
+
     public enum VFXActions
     {
         EnableVFX,

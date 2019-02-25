@@ -11,6 +11,7 @@ namespace SpaceInvaders
         [SerializeField] private GameObject _colliderParent;
         [SerializeField] private SIVFXManager _destroyVFX;
         [SerializeField] private SIEnemyMovement _enemyMovement;
+        [SerializeField] private SIBonusParentManager _bonusManager;
 
         private Vector3 _raycastOffset;
 
@@ -45,6 +46,7 @@ namespace SpaceInvaders
                 SIEventsHandler.OnSwitchShootableEnemy?.Invoke(nextShootableEnemyInfo);
                 EnableEnemyVisibility(false);
                 _enemyMovement.StopObj();
+                _bonusManager.DropBonus();
                 _enemyStatistics.isAlive = false;
             }
         }
@@ -54,7 +56,8 @@ namespace SpaceInvaders
             if (_colliderParent == null || 
                 _meshRenderer == null ||
                 _destroyVFX == null ||
-                _enemyMovement == null)
+                _enemyMovement == null ||
+                _bonusManager == null)
             {
                 SIHelpers.SISimpleLogger(this, "EnableEnemyVisibility() - references aren't assigned.", SimpleLoggerTypes.Error);
                 return;

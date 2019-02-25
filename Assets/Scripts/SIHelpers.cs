@@ -26,6 +26,7 @@ namespace SpaceInvaders
         public static float CAMERA_MIN_VIEWPORT_Y = 0.0f;
         public static float CAMERA_MAX_VIEWPORT_Y = 1.0f;
         public static Vector3 VectorZero = new Vector3(0f, 0f, 0f);
+        public static Vector3 VectorDown = new Vector3(0f, -1f, 0f);
 
         public static Dictionary<float, WaitForSeconds> CoroutineWaitCache = new Dictionary<float, WaitForSeconds>();
 

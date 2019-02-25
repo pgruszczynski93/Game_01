@@ -28,13 +28,13 @@ namespace SpaceInvaders
         private void OnEnable()
         {
             ResetProjectile();
-            SIEventsHandler.OnObjectMovement += CheckIsProjectileOnScreen;
+            SIEventsHandler.OnObjectsMovement += CheckIsProjectileOnScreen;
         }
 
         private void OnDisable()
         {
             ResetProjectile();
-            SIEventsHandler.OnObjectMovement -= CheckIsProjectileOnScreen;
+            SIEventsHandler.OnObjectsMovement -= CheckIsProjectileOnScreen;
         }
 
         private void SetInitialReferences()
