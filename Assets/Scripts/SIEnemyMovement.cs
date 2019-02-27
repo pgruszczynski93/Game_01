@@ -63,7 +63,7 @@ namespace SpaceInvaders
 
         private Vector3 TryToMoveObjectDown(Vector3 objectInCameraBoundsPos)
         {
-            if (objectInCameraBoundsPos.IsObjectInScreenHorizontalBounds3D())
+            if (objectInCameraBoundsPos.IsObjectOutOfHorizontalViewportBounds3D())
             { 
                 objectInCameraBoundsPos.y -= VERTICAL_MOVEMENT_VIEWPORT_STEP;
 
@@ -115,7 +115,7 @@ namespace SpaceInvaders
 
         private void ResetEnemy()
         {
-            _cachedTransform.position = _startPosition;
+            _cachedTransform.localPosition = _startPosition;
 
             ResetMovementProperties();
         }

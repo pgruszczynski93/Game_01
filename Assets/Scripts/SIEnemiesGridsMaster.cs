@@ -30,7 +30,7 @@ namespace SpaceInvaders
             SIEventsHandler.OnGameStarted += MoveEnemiesGrid;
 
             SIEventsHandler.OnWaveEnd += DisableGridMovements;
-            SIEventsHandler.OnWaveEnd += MoveEnemiesGrid;
+            SIEventsHandler.OnWaveEnd += MoveEnemiesGridWithDelay;
         }
 
         private void OnDisable()
@@ -38,7 +38,7 @@ namespace SpaceInvaders
             SIEventsHandler.OnGameStarted -= MoveEnemiesGrid;
 
             SIEventsHandler.OnWaveEnd -= DisableGridMovements;
-            SIEventsHandler.OnWaveEnd -= MoveEnemiesGrid;
+            SIEventsHandler.OnWaveEnd -= MoveEnemiesGridWithDelay;
         }
 
         private void MoveEnemiesGrid()

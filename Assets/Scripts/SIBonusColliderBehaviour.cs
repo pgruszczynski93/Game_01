@@ -20,6 +20,8 @@ namespace SpaceInvaders
         {
             SIHelpers.SISimpleLogger(this, "Destroying bonus object.", SimpleLoggerTypes.Log);
 
+            Debug.Log("<color=red>BONUS STOPPED COLLIDER </color>");
+
             gameObject.SetActive(false);
         }
     }

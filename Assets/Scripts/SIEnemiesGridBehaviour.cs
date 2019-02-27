@@ -90,7 +90,7 @@ namespace SpaceInvaders
         {
             // Note: first initialization is made in Unity Editor (drag and drop).
             _enemiesAbleToShoot.Clear();
-            for (int i = _totalEnemies - 1; i > _totalEnemies - _enemiesInRow; i--)
+            for (int i = _totalEnemies - 1; i >= _totalEnemies - _enemiesInRow; i--)
             {
                 SIEnemyShootBehaviour enemyAbleToShoot = _enemiesInGrid[i].GetComponent<SIEnemyShootBehaviour>();
                 if (enemyAbleToShoot == null)
@@ -170,11 +170,11 @@ namespace SpaceInvaders
 
         private void UpdateAbleToShootEnemies(SIShootedEnemyInfo enemiesInfo)
         {
-            if (_enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0)
-            {
-                SIHelpers.SISimpleLogger(this, "UpdateAbleToShootEnemies() stopped.", SimpleLoggerTypes.Error);
-                return;
-            }
+            //if (_enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0)
+            //{
+            //    SIHelpers.SISimpleLogger(this, "UpdateAbleToShootEnemies() stopped.", SimpleLoggerTypes.Error);
+            //    return;
+            //}
 
             SIHelpers.SISimpleLogger(this, "UpdateAbleToShootEnemies() next enemy " + enemiesInfo.nextShootableEnemy, SimpleLoggerTypes.Log);
             if (_enemiesAbleToShoot.Contains(enemiesInfo.currentShootableEnemy))
@@ -198,7 +198,7 @@ namespace SpaceInvaders
 
         public void StartShooting()
         {
-            StartCoroutine(EnemiesShootingRoutine());
+            //StartCoroutine(EnemiesShootingRoutine());
         }
 
         public void StopShooting()

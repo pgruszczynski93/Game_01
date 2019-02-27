@@ -48,7 +48,7 @@ namespace SpaceInvaders
             }
         }
 
-        public static bool IsObjectInScreenHorizontalBounds3D(this Vector3 objectViewportPos)
+        public static bool IsObjectOutOfHorizontalViewportBounds3D(this Vector3 objectViewportPos)
         {
             if (objectViewportPos.x >= CAMERA_MAX_VIEWPORT_X || objectViewportPos.x <= CAMERA_MIN_VIEWPORT_X)
             {
@@ -58,7 +58,7 @@ namespace SpaceInvaders
             return false;
         }
 
-        public static bool IsObjectInScreenVerticalBounds3D(this Vector3 objectViewportPos)
+        public static bool IsObjectOutOfViewportVerticalBounds3D(this Vector3 objectViewportPos)
         {
             if(objectViewportPos.y >= CAMERA_MAX_VIEWPORT_Y || objectViewportPos.y <= CAMERA_MIN_VIEWPORT_Y)
             {

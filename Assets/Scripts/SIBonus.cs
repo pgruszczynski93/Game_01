@@ -67,7 +67,10 @@ namespace SpaceInvaders
 
         private void TryToResetObject()
         {
-            if (_cachedTransform.position.IsObjectInScreenVerticalBounds3D() == false)
+            Vector3 bonusViewPortPosition =
+                SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_cachedTransform.position);
+
+            if (bonusViewPortPosition.IsObjectOutOfViewportVerticalBounds3D())
             {
                 StopObj();
             }
@@ -82,10 +85,12 @@ namespace SpaceInvaders
         {
             _rigidbody.velocity = SIHelpers.VectorZero;
             _cachedTransform.position = _startPosition;
+            gameObject.SetActive(false);
         }
     }
 
-    /*
+    /* WYCZYSCIC KOD
+     *
      * 1. dopisać mechanike dropienia bonusow:
      * a) bonusy przypisane do kazdego enemy - ok
      * b) bonusy dropią z odpowiednimi szansami ( do sprawdzenia) - ok: do testow
@@ -94,6 +99,6 @@ namespace SpaceInvaders
      *
      * 2. poprawic dropienie bonusow
      * 3. poprawic reset bonusow
-     * 4. 
+     * 4. dodac eventy
      */
 }

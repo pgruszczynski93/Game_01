@@ -39,7 +39,7 @@ namespace SpaceInvaders
         {
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _cachedTransform = transform;
-            _startPosition = _cachedTransform.position;
+            _startPosition = _cachedTransform.localPosition;
             _initialMovementSpeed = _currentMovementSpeed;
         }
 
