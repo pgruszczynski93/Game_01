@@ -198,7 +198,7 @@ namespace SpaceInvaders
 
         public void StartShooting()
         {
-            //StartCoroutine(EnemiesShootingRoutine());
+            StartCoroutine(EnemiesShootingRoutine());
         }
 
         public void StopShooting()

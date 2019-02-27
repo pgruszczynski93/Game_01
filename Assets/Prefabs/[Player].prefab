@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectVFX: {fileID: 2640097634031494074}
+  _parentTransform: {fileID: 0}
 --- !u!1 &1955470059
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +510,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerStatistics:
+    isAlive: 0
+    canDropBonus: 0
     currentHealth: 0
     currentScore: 0
     currentWave: 0
@@ -530,9 +533,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820f7a43b23eac346bd0bc681f3f5b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canObjectMove: 0
   _movementType: 0
+  _movementDirection: 0
   _lerpStep: 0.35
   _currentMovementSpeed: 0.5
+  _initialMovementSpeed: 0
   _touchTreshold: 0.25
 --- !u!114 &545388514
 MonoBehaviour:
@@ -1518,6 +1524,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833339256221992720, guid: c0ba51ccdb990f44d8a9baa6f27465cb,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833339256221992720, guid: c0ba51ccdb990f44d8a9baa6f27465cb,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833339256221992720, guid: c0ba51ccdb990f44d8a9baa6f27465cb,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0ba51ccdb990f44d8a9baa6f27465cb, type: 3}
