@@ -14,7 +14,7 @@ namespace SpaceInvaders
         {
             if (_projectileController == null)
             {
-                Debug.Log("No projectile controller attached.");
+                SIHelpers.SISimpleLogger(this, "No projectile controller attached.", SimpleLoggerTypes.Error);
                 return;
             }
         }

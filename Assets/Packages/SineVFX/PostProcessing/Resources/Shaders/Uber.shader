@@ -19,6 +19,7 @@ Shader "Hidden/Post FX/Uber Shader"
         #pragma target 3.0
 
         #pragma multi_compile __ UNITY_COLORSPACE_GAMMA
+/*
         #pragma multi_compile __ CHROMATIC_ABERRATION
         #pragma multi_compile __ DEPTH_OF_FIELD DEPTH_OF_FIELD_COC_VIEW
         #pragma multi_compile __ BLOOM BLOOM_LENS_DIRT
@@ -27,7 +28,7 @@ Shader "Hidden/Post FX/Uber Shader"
         #pragma multi_compile __ GRAIN
         #pragma multi_compile __ VIGNETTE_CLASSIC VIGNETTE_MASKED
         #pragma multi_compile __ DITHERING
-
+*/
         #include "UnityCG.cginc"
         #include "Bloom.cginc"
         #include "ColorGrading.cginc"

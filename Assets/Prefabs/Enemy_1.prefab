@@ -632,7 +632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3187074275270867311
 Transform:
   m_ObjectHideFlags: 0
@@ -953,6 +953,16 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: -0.16
       objectReference: {fileID: 0}
+    - target: {fileID: 4615088356763934125, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: _colliderParentBehaviour
+      value: 
+      objectReference: {fileID: 641713421112421484}
+    - target: {fileID: 4615088356763934125, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: _destroyVFX
+      value: 
+      objectReference: {fileID: 4579619091672328030}
     - target: {fileID: 2135761235993091964, guid: f142162e014253b4f91ca17907366168,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -968,16 +978,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4615088356763934125, guid: f142162e014253b4f91ca17907366168,
-        type: 3}
-      propertyPath: _colliderParentBehaviour
-      value: 
-      objectReference: {fileID: 641713421112421484}
-    - target: {fileID: 4615088356763934125, guid: f142162e014253b4f91ca17907366168,
-        type: 3}
-      propertyPath: _destroyVFX
-      value: 
-      objectReference: {fileID: 4579619091672328030}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f142162e014253b4f91ca17907366168, type: 3}
 --- !u!54 &6868970296195430129 stripped
