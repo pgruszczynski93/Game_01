@@ -7,6 +7,7 @@ namespace SpaceInvaders
     {
         [SerializeField] private SIProjectileInfo _currentProjectile;
         [SerializeField] private List<SIProjectileInfo> _availableProjectilesPrefabs;
+        [SerializeField] private SIProjectilesReloader[] _projectileReloaders;
 
         public List<SIProjectileInfo> AvailableProjectiles { get => _availableProjectilesPrefabs; set => _availableProjectilesPrefabs = value; }
         public SIProjectileInfo CurrentProjectile { get => _currentProjectile; set => _currentProjectile = value; }
@@ -47,12 +48,17 @@ namespace SpaceInvaders
 
         public void Shoot()
         {
-            for (int i = 0; i < CurrentProjectile.projectilePrefabs.Length; i++)
+
+            for (int i = 0; i < _projectileReloaders.Length; i++)
             {
-                GameObject currentProjectile = CurrentProjectile.projectilePrefabs[i];
-                currentProjectile.SetActive(true);
-                currentProjectile.GetComponent<SIProjectileBehaviour>().MoveObj();
+                _projectileReloaders[i].ShootAndReloadProjectile();
             }
+            //for (int i = 0; i < CurrentProjectile.projectilePrefabs.Length; i++)
+            //{
+            //    GameObject currentProjectile = CurrentProjectile.projectilePrefabs[i];
+            //    currentProjectile.SetActive(true);
+            //    currentProjectile.GetComponent<SIProjectileBehaviour>().MoveObj();
+            //}
         }
 
         //DEBUG_

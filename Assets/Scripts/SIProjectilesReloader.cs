@@ -8,6 +8,7 @@ namespace SpaceInvaders
         [SerializeField] private int _availableProjectilesCount;
         [SerializeField] private float _nextReloadTime;
         [SerializeField] private float _reloadTime;
+        [SerializeField] private SIProjectileBehaviour _currentProjectile;
         [SerializeField] private GameObject[] _availableProjectiles;
 
         private void Awake()
@@ -15,16 +16,6 @@ namespace SpaceInvaders
             SetInitialReferences();
         }
         
-        private void OnEnable()
-        {
-            SIEventsHandler.OnPlayerShoot += ReloadProjectile;
-        }
-
-        private void OnDisable()
-        {
-            SIEventsHandler.OnPlayerShoot -= ReloadProjectile;
-        }
-
         private void SetInitialReferences()
         {
             if (_availableProjectiles == null ||
@@ -37,18 +28,36 @@ namespace SpaceInvaders
             _availableProjectilesCount = _availableProjectiles.Length;
         }
 
-        private void ReloadProjectile()
+        public void ShootAndReloadProjectile()
         {
             float timeFromStart = Time.time;
-            if (Input.GetKeyDown(KeyCode.R) && timeFromStart > _nextReloadTime)
+            if (timeFromStart > _nextReloadTime)
             {
                 _nextReloadTime = timeFromStart + _reloadTime;
-                Debug.Log("REload " + _availableProjectiles[_projectileIndex].name);
-                GetNextProjectile();
+
+                if (CanShootCurrentProjectile() == false)
+                {
+                    SIHelpers.SISimpleLogger(this, "Shoot failed! - No SIProjectileBehaviour component attached", SimpleLoggerTypes.Error);
+                    return;
+                }
+
+                SetNextProjectile();
             }
         }
 
-        private void GetNextProjectile()
+        private bool CanShootCurrentProjectile()
+        {
+            _currentProjectile = _availableProjectiles[_projectileIndex].GetComponent<SIProjectileBehaviour>();
+            if (_currentProjectile == null)
+            {
+                return false;
+            }
+
+            _currentProjectile.MoveObj();
+            return true;
+        }
+
+        private void SetNextProjectile()
         {
             ++_projectileIndex;
             if (_projectileIndex > _availableProjectilesCount - 1)
