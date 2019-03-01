@@ -6,6 +6,9 @@ namespace SpaceInvaders
 {
     public class SIEnemiesGridBehaviour : MonoBehaviour, IMoveable
     {
+        private const float MOVEMENT_STEP_1 = 7f;
+        private const float MOVEMENT_STEP_2 = 5f;
+
         [SerializeField] private int _enemiesInRow;
         [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
         [SerializeField] private GameObject[] _enemiesInGrid;
@@ -125,7 +128,7 @@ namespace SpaceInvaders
                 return;
             }
 
-            float newMultiplier = _livingEnemies == 1 ? 6.0f : 4.0f;
+            float newMultiplier = _livingEnemies == 1 ? MOVEMENT_STEP_1 : MOVEMENT_STEP_2;
 
             SIEventsHandler.OnEnemySpeedMultiplierChanged?.Invoke(newMultiplier);
         }

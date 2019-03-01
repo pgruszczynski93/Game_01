@@ -6,6 +6,8 @@ namespace SpaceInvaders
     public class SIEnemyMovement : SIMovement, IMoveable
     {
         private int _rotationDirection;
+        private float _speedIncrementValue;
+        private float _currentMovementValueMultiplier;
         [SerializeField] private float _movementValueMultiplier;
 
         private Quaternion _enemyObjectOrientation;
@@ -26,6 +28,8 @@ namespace SpaceInvaders
 
             MAX_ROTATION_ANGLE = 20;
             _movementValueMultiplier = 1.5f;
+            _currentMovementValueMultiplier = _movementValueMultiplier;
+            _speedIncrementValue = 0.2f;
             _rotationDirection = 1;
             _enemyObjectOrientation = Quaternion.Euler(90, 0, 180);
             _cachedTransform.localRotation = _enemyObjectOrientation;
@@ -57,7 +61,7 @@ namespace SpaceInvaders
                 return;
             }
 
-            MoveObject(_movementValueMultiplier, true);
+            MoveObject(_currentMovementValueMultiplier, true);
 
         }
 
@@ -78,6 +82,8 @@ namespace SpaceInvaders
         private void SetMovementDirectionProperties()
         {
             _currentMovementSpeed = -_currentMovementSpeed;
+            _currentMovementValueMultiplier += _speedIncrementValue;
+
             if (_currentMovementSpeed > 0)
             {
                 _movementDirection = MovementDirection.Right;
@@ -110,12 +116,13 @@ namespace SpaceInvaders
 
         private void UpdateMovementStep(float newStep)
         {
-            _movementValueMultiplier = newStep;
+            _currentMovementValueMultiplier = newStep;
         }
 
         private void ResetEnemy()
         {
             _cachedTransform.localPosition = _startPosition;
+            _currentMovementValueMultiplier = _movementValueMultiplier;
 
             ResetMovementProperties();
         }
