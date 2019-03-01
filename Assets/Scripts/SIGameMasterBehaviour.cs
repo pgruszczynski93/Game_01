@@ -6,6 +6,7 @@ namespace SpaceInvaders
     {
         [SerializeField] private bool _isGameStarted;
         [SerializeField] private Camera _mainCamera;
+        [SerializeField] private SIPlayerBehaviour _player;
 
         public Camera MainCamera
         {
@@ -16,6 +17,20 @@ namespace SpaceInvaders
                     Debug.LogError("No camera assigned!");
                 }
                 return _mainCamera;
+            }
+        }
+
+        public SIPlayerBehaviour Player
+        {
+            get
+            {
+                if (_player == null)
+                {
+                    SIHelpers.SISimpleLogger(this, "No player assigned to SIGameMasterBehaviour", SimpleLoggerTypes.Error);
+                    return null;
+                }
+
+                return _player;
             }
         }
 
@@ -46,21 +61,24 @@ namespace SpaceInvaders
             }
 
             OnUpdateMovements();
+            OnShadersUpdateCallback();
             OnDebugInputHandling();
             OnGameQuitCallback();
         }
 
         private void OnDebugInputHandling()
         {
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                SIEventsHandler.OnDebugInputHandling?.Invoke();
-            }
+            SIEventsHandler.OnDebugInputHandling?.Invoke();
         }
 
         private void OnGameQuitCallback()
         {
             SIEventsHandler.OnGameQuit?.Invoke();
+        }
+
+        private void OnShadersUpdateCallback()
+        {
+            SIEventsHandler.OnShadersUpdate?.Invoke();
         }
 
         private void QuitGame()
@@ -73,7 +91,7 @@ namespace SpaceInvaders
 
         private void OnUpdateMovements()
         {
-            SIEventsHandler.OnObjectMovement?.Invoke();
+            SIEventsHandler.OnObjectsMovement?.Invoke();
         }
 
         public void OnGameStarted()

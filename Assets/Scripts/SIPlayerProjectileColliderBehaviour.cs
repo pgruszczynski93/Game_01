@@ -7,14 +7,21 @@ namespace SpaceInvaders
     {
         protected override void OnEnable()
         {
-            _onCollisionActions["Enemy"] += _colliderParentBehaviour.OnCollisionResetProjectile;
-            _onCollisionActions["Enemy"] += OnCollisionMessage;
+
+            for (int i = 0; i < _objectTags.Length; i++)
+            {
+                _onCollisionActions[_objectTags[i]] += _colliderParentBehaviour.OnCollisionResetProjectile;
+                _onCollisionActions[_objectTags[i]] += OnCollisionMessage;
+            }
         }
 
         protected override void OnDisable()
         {
-            _onCollisionActions["Enemy"] -= _colliderParentBehaviour.OnCollisionResetProjectile;
-            _onCollisionActions["Enemy"] -= OnCollisionMessage;
+            for (int i = 0; i < _objectTags.Length; i++)
+            {
+                _onCollisionActions[_objectTags[i]] -= _colliderParentBehaviour.OnCollisionResetProjectile;
+                _onCollisionActions[_objectTags[i]] -= OnCollisionMessage;
+            }
         }
 
         private void OnCollisionMessage(MonoBehaviour collisionBehaviour = null)

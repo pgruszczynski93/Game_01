@@ -14,12 +14,12 @@ namespace SpaceInvaders
 
         protected void OnEnable()
         {
-            SIEventsHandler.OnObjectMovement += MoveObj;
+            SIEventsHandler.OnObjectsMovement += MoveObj;
         }
 
         protected void OnDisable()
         {
-            SIEventsHandler.OnObjectMovement -= MoveObj;
+            SIEventsHandler.OnObjectsMovement -= MoveObj;
         }
 
         public void MoveObj()
@@ -32,6 +32,11 @@ namespace SpaceInvaders
             _dt = Time.deltaTime;
             _scrollOffset.x = SIPlayerBehaviour.Instance.PlayerMovemnt.InputMovementValue;
             _meshRenderer.material.mainTextureOffset += (new Vector2(_scrollOffset.x * _xScalingFactor, _scrollOffset.y) * _dt);
+        }
+
+        public void StopObj()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

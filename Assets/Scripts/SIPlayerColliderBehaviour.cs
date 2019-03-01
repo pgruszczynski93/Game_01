@@ -24,7 +24,7 @@ namespace SpaceInvaders
         private void OnPlayerHitted(MonoBehaviour collisionBehaviour = null)
         {
             SIHelpers.SISimpleLogger(this, "Player's got hit.", SimpleLoggerTypes.Log);
-            SIEventsHandler.OnPlayerHit?.Invoke();
+            //SIEventsHandler.OnPlayerHit?.Invoke();
         }
 
         private void OnBonusGained(MonoBehaviour collisionBehaviour = null)

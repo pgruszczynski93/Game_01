@@ -7,18 +7,18 @@ namespace SpaceInvaders
         protected override void OnEnable()
         {
             SIEventsHandler.OnPlayerShoot += Shoot;
-            SIEventsHandler.OnObjectMovement += SIEventsHandler.OnPlayerShoot;
+            SIEventsHandler.OnObjectsMovement += SIEventsHandler.OnPlayerShoot;
         }
 
         protected override void OnDisable()
         {
             SIEventsHandler.OnPlayerShoot -= Shoot;
-            SIEventsHandler.OnObjectMovement -= SIEventsHandler.OnPlayerShoot;
+            SIEventsHandler.OnObjectsMovement -= SIEventsHandler.OnPlayerShoot;
         }
 
         protected override void Shoot()
         {
-            if (Input.GetKeyDown(KeyCode.Space))// && SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed */)
+            if (Input.GetKeyDown(KeyCode.Space) && SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed)
             {
                 _projectileController.Shoot();
             }

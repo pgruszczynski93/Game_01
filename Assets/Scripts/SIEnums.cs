@@ -1,5 +1,17 @@
 ﻿namespace SpaceInvaders
 {
+    public enum ShaderProperties
+    {
+        EmissionPower,
+    }
+
+    public enum VFXActions
+    {
+        EnableVFX,
+        EnableAndDetachVFX,
+        EnableAndAttachVFX
+    }
+
     public enum SimpleLoggerTypes
     {
         Log, 

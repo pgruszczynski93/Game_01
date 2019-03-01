@@ -2,6 +2,8 @@
 
 namespace SpaceInvaders
 {
+    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Rigidbody))]
     public class SIBonusColliderBehaviour : SIMainColliderBehaviour<SIBonusColliderBehaviour>
     {
         protected override void OnEnable()
@@ -17,6 +19,8 @@ namespace SpaceInvaders
         private void OnPlayerInteraction(MonoBehaviour collisionBehaviour)
         {
             SIHelpers.SISimpleLogger(this, "Destroying bonus object.", SimpleLoggerTypes.Log);
+
+            Debug.Log("<color=red>BONUS STOPPED COLLIDER </color>");
 
             gameObject.SetActive(false);
         }

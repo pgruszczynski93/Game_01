@@ -25,8 +25,30 @@ namespace SpaceInvaders
         public static float CAMERA_MAX_VIEWPORT_X = 0.925f;
         public static float CAMERA_MIN_VIEWPORT_Y = 0.0f;
         public static float CAMERA_MAX_VIEWPORT_Y = 1.0f;
+        public static Vector3 VectorZero = new Vector3(0f, 0f, 0f);
+        public static Vector3 VectorDown = new Vector3(0f, -1f, 0f);
 
-        public static bool IsObjectInScreenHorizontalBounds3D(this Vector3 objectViewportPos)
+        public static Dictionary<float, WaitForSeconds> CoroutineWaitCache = new Dictionary<float, WaitForSeconds>();
+
+        public static IEnumerator CustomDelayRoutine(float waitTime, Action onWaitFinished = null)
+        {
+            TryToAddToCoroutineWaitCache(waitTime);
+
+            yield return CoroutineWaitCache[waitTime];
+            onWaitFinished?.Invoke();
+        }
+
+        private static void TryToAddToCoroutineWaitCache(float waitTime)
+        {
+            WaitForSeconds wfs;
+            if (CoroutineWaitCache.TryGetValue(waitTime, out wfs) == false)
+            {
+                wfs = new WaitForSeconds(waitTime);
+                CoroutineWaitCache.Add(waitTime, wfs);
+            }
+        }
+
+        public static bool IsObjectOutOfHorizontalViewportBounds3D(this Vector3 objectViewportPos)
         {
             if (objectViewportPos.x >= CAMERA_MAX_VIEWPORT_X || objectViewportPos.x <= CAMERA_MIN_VIEWPORT_X)
             {
@@ -36,7 +58,7 @@ namespace SpaceInvaders
             return false;
         }
 
-        public static bool IsObjectInScreenVerticalBounds3D(this Vector3 objectViewportPos)
+        public static bool IsObjectOutOfViewportVerticalBounds3D(this Vector3 objectViewportPos)
         {
             if(objectViewportPos.y >= CAMERA_MAX_VIEWPORT_Y || objectViewportPos.y <= CAMERA_MIN_VIEWPORT_Y)
             {

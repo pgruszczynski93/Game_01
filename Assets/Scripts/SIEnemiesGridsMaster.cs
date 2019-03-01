@@ -11,10 +11,7 @@ namespace SpaceInvaders
         [SerializeField] private Transform _gridInitialTrasnform;
         [SerializeField] private Transform _gridSceneTransform;
 
-        [SerializeField] private GameObject _enemiesGrid_1;
-
-        [SerializeField] private SIEnemiesSingleGridBehaviour _enemiesGridBehaviour;
-
+        [SerializeField] private SIEnemiesGridBehaviour _enemiesGridBehaviour;
 
         public bool IsEnemyInGridMovementAllowed
         {
@@ -30,19 +27,32 @@ namespace SpaceInvaders
 
         private void OnEnable()
         {
-            SIEventsHandler.OnGameStarted += MoveEnemiesWave;
+            SIEventsHandler.OnGameStarted += MoveEnemiesGrid;
+
             SIEventsHandler.OnWaveEnd += DisableGridMovements;
+            SIEventsHandler.OnWaveEnd += MoveEnemiesGridWithDelay;
         }
 
         private void OnDisable()
         {
-            SIEventsHandler.OnGameStarted -= MoveEnemiesWave;
+            SIEventsHandler.OnGameStarted -= MoveEnemiesGrid;
+
             SIEventsHandler.OnWaveEnd -= DisableGridMovements;
+            SIEventsHandler.OnWaveEnd -= MoveEnemiesGridWithDelay;
         }
 
-        private void MoveEnemiesWave()
+        private void MoveEnemiesGrid()
         {
             _enemiesGridBehaviour.MoveObj();
+        }
+
+        private void MoveEnemiesGridWithDelay()
+        {
+            //sprawdzic to
+            StartCoroutine(SIHelpers.CustomDelayRoutine(3, () =>
+            {
+                MoveEnemiesGrid();
+            }));
         }
 
         public void EnableGridMovements()
@@ -57,15 +67,5 @@ namespace SpaceInvaders
             _enemiesGridBehaviour.StopShooting();
         }
 
-
-
-        //protected override void Awake()
-        //{
-
-        //}
-
-        //private void SetInitialReferences()
-        //{
-        //}
     }
 }

@@ -19,14 +19,13 @@ namespace SpaceInvaders
 
         protected override void OnEnable()
         {
-            SIEventsHandler.OnObjectMovement += MoveObj;
+            SIEventsHandler.OnObjectsMovement += MoveObj;
         }
 
         protected override void OnDisable()
         {
-            SIEventsHandler.OnObjectMovement -= MoveObj;
+            SIEventsHandler.OnObjectsMovement -= MoveObj;
         }
-
 
         protected override void SetInitialReferences()
         {
@@ -52,7 +51,7 @@ namespace SpaceInvaders
         {
             if (_movementSpeeds.TryGetValue(movementType, out float currentSpeed) == false)
             {
-                Debug.Log("No key in _movementSpeeds dictionary - current speed setup with default.");
+                SIHelpers.SISimpleLogger(this, "No key in _movementSpeeds dictionary - current speed setup with default.", SimpleLoggerTypes.Error);
                 _currentMovementSpeed = BASIC_SPEED;
                 return;
             }
@@ -97,6 +96,11 @@ namespace SpaceInvaders
             _fromRotation = _cachedTransform.rotation;
             _toRotation = Quaternion.Euler(0, -rotateValue * MAX_ROTATION_ANGLE, 0);
             _cachedTransform.rotation = Quaternion.Slerp(_fromRotation, _toRotation, _lerpStep);
+        }
+
+        public void StopObj()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

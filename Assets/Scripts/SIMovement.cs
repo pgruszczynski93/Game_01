@@ -8,12 +8,14 @@ namespace SpaceInvaders
         protected const float VERTICAL_MOVEMENT_VIEWPORT_STEP = 0.1f;
         protected float MAX_ROTATION_ANGLE;
 
+        [SerializeField] protected bool _canObjectMove;
         [SerializeField] protected MovementType _movementType;
         [SerializeField] protected MovementDirection _movementDirection;
         [Range(0, 1)] [SerializeField] protected float _lerpStep;
         [SerializeField] protected float _currentMovementSpeed;
 
         private float _dt;
+        [SerializeField] protected float _initialMovementSpeed;
         protected Vector2 _startPosition;
         protected Quaternion _fromRotation;
         protected Quaternion _toRotation;
@@ -37,8 +39,11 @@ namespace SpaceInvaders
         {
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _cachedTransform = transform;
-            _startPosition = _cachedTransform.position;
+            _startPosition = _cachedTransform.localPosition;
+            _initialMovementSpeed = _currentMovementSpeed;
         }
+
+        protected virtual void ResetMovementProperties(){}
 
         protected virtual void OnEnable(){}
 

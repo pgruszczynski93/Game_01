@@ -5,7 +5,7 @@ namespace SpaceInvaders
     public class SIProjectileBehaviour : MonoBehaviour, IMoveable
     {
         [SerializeField] private bool _isMoving;
-        [Range(1f,20f)][SerializeField] private float _forceScaleFactor;
+        [Range( 0.01f,20f)][SerializeField] private float _forceScaleFactor;
         [SerializeField] private Rigidbody _rigidbody;
 
         [SerializeField] private Transform _cachedParentTransform;
@@ -28,17 +28,13 @@ namespace SpaceInvaders
         private void OnEnable()
         {
             ResetProjectile();
-            SIEventsHandler.OnObjectMovement += CheckIsProjectileOnScreen;
-            SIEventsHandler.OnEnemyDeath += ResetProjectile;
-            SIEventsHandler.OnPlayerHit += ResetProjectile;
+            SIEventsHandler.OnObjectsMovement += CheckIsProjectileOnScreen;
         }
 
         private void OnDisable()
         {
             ResetProjectile();
-            SIEventsHandler.OnObjectMovement -= CheckIsProjectileOnScreen;
-            SIEventsHandler.OnEnemyDeath += ResetProjectile;
-            SIEventsHandler.OnPlayerHit += ResetProjectile;
+            SIEventsHandler.OnObjectsMovement -= CheckIsProjectileOnScreen;
         }
 
         private void SetInitialReferences()
@@ -63,7 +59,7 @@ namespace SpaceInvaders
         {
             Vector3 projectileViewportPosition = 
                 _mainCamera.WorldToViewportPoint(_cachedProjectileTransform.localPosition);
-            if (projectileViewportPosition.IsObjectInScreenVerticalBounds3D())
+            if (projectileViewportPosition.IsObjectOutOfViewportVerticalBounds3D())
             {
                 ResetProjectile();
             }
@@ -96,9 +92,11 @@ namespace SpaceInvaders
         {
             if(_cachedProjectileTransform == null || _cachedParentTransform == null || _projectileCollider == null)
             {
-                Debug.LogError("Assign proper values first");
+                SIHelpers.SISimpleLogger(this, "Assign proper values.", SimpleLoggerTypes.Error);
                 return;
             }
+
+            SIHelpers.SISimpleLogger(this, "Reset projectile.", SimpleLoggerTypes.Log);
 
             EnableParticles(false);
             _projectileCollider.enabled = false;
@@ -107,6 +105,7 @@ namespace SpaceInvaders
             _rigidbody.velocity = new Vector2(0,0);
             _cachedProjectileTransform.parent = _cachedParentTransform;
             _cachedProjectileTransform.localPosition = _parentResetPosition;
+
             //gameObject.SetActive(false);
         }
 
@@ -127,6 +126,11 @@ namespace SpaceInvaders
             {
                 _particles.Stop();
             }
+        }
+
+        public void StopObj()
+        {
+            throw new System.NotImplementedException();
         }
     }
 
