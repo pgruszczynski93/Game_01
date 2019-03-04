@@ -9,6 +9,8 @@ namespace SpaceInvaders
         [SerializeField] private Dictionary<BonusType, SIBonusInfo> _activeTimeDrivenBonuses;
         [SerializeField] private List<BonusType> _editorActiveBonuses_debug;
 
+        private SIUIManager _uiManager;
+
         private void Start()
         {
             SetInitialReferences();
@@ -16,6 +18,7 @@ namespace SpaceInvaders
 
         private void SetInitialReferences()
         {
+            _uiManager = SIUIManager.Instance;
             _activeTimeDrivenBonuses = new Dictionary<BonusType, SIBonusInfo>();
             _editorActiveBonuses_debug = new List<BonusType>();
         }
@@ -58,7 +61,9 @@ namespace SpaceInvaders
         private IEnumerator FinishBonusLifecycleRoutine(SIBonusInfo bonusInfo)
         {
             SIHelpers.SISimpleLogger(this, "Finishing bonus lifecycle "+bonusInfo.bonusType, SimpleLoggerTypes.Log);
+            SIUIManager.Instance.BonusUISlots[bonusInfo.bonusType].EnableBonusSlot(true);
             yield return new WaitForSeconds(bonusInfo.bonusStatistics.durationTime);
+            SIUIManager.Instance.BonusUISlots[bonusInfo.bonusType].EnableBonusSlot(false);
             bonusInfo.OnBonusFinishEvent?.Invoke();
             ResetAppliedBonus(bonusInfo.bonusType);
         }
@@ -101,6 +106,7 @@ namespace SpaceInvaders
             SIHelpers.SISimpleLogger(this, "End of bonus " + bonusType, SimpleLoggerTypes.Log);
             float resetValue = bonusType == BonusType.Shield ? 0.0f : 1.0f;
             _activeTimeDrivenBonuses[bonusType].bonusStatistics.durationTime = resetValue;
+            _editorActiveBonuses_debug.Clear();
         }
     }
 }
