@@ -105,7 +105,7 @@ namespace SpaceInvaders
         public static void SISimpleLogger<T>(T sendingObject, string message, SimpleLoggerTypes logType) where T : MonoBehaviour
         {
 #if UNITY_EDITOR
-            string formattedMessage = string.Format("{0}(): {1}", typeof(T), message);
+            string formattedMessage = string.Format("[{0}]: {1}(): {2}", Time.realtimeSinceStartup, typeof(T), message);
             switch (logType)
             {
                 case SimpleLoggerTypes.Log:

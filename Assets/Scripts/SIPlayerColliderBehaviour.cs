@@ -4,6 +4,9 @@ namespace SpaceInvaders
 {
     public class SIPlayerColliderBehaviour : SIMainColliderBehaviour<SIPlayerBehaviour>
     {
+
+        [SerializeField] private bool _isVFX;
+
         protected override void OnEnable()
         {
             //onCollisionCallback += OnPlayerHitted;
@@ -23,6 +26,11 @@ namespace SpaceInvaders
 
         private void OnPlayerHitted(MonoBehaviour collisionBehaviour = null)
         {
+            if (_isVFX)
+            {
+                return;
+            }
+
             SIHelpers.SISimpleLogger(this, "Player's got hit.", SimpleLoggerTypes.Log);
             //SIEventsHandler.OnPlayerHit?.Invoke();
         }

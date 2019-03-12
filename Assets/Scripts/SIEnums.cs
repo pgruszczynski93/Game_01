@@ -31,7 +31,8 @@
     {
         Life,
         Shield,
-        Weapon, 
+        Weapon2x,
+        Weapon3x
     }
 
     public enum MovementType

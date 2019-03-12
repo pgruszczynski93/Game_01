@@ -32,17 +32,18 @@ namespace SpaceInvaders
             {
                 {BonusType.Life, 0.65f},
                 {BonusType.Shield, 0.75f},
-                {BonusType.Weapon, 0.85f}
+                {BonusType.Weapon2x, 0.85f},
+                {BonusType.Weapon3x, 0.9f},
             };
 
-            _weaponDropChances = new Dictionary<WeaponType, float>()
-            {
-                //{WeaponType.Laser, 0.5f },
-                //{WeaponType.Laser2x, 0.6f },
-                //{WeaponType.Laser3x, 0.65f },
-                {WeaponType.Projectile2x, 0.7f},
-                {WeaponType.Projectile3x, 0.85f},
-            };
+            //_weaponDropChances = new Dictionary<WeaponType, float>()
+            //{
+            //    //{WeaponType.Laser, 0.5f },
+            //    //{WeaponType.Laser2x, 0.6f },
+            //    //{WeaponType.Laser3x, 0.65f },
+            //    {WeaponType.Projectile2x, 0.7f},
+            //    {WeaponType.Projectile3x, 0.85f},
+            //};
         }
 
         public void DropBonus()
@@ -60,7 +61,7 @@ namespace SpaceInvaders
                 _droppedBonusIndex = 0;
             }
             else if (currentDropChance >= _bonusDropChances[BonusType.Shield] &&
-                     currentDropChance < _bonusDropChances[BonusType.Weapon])
+                     currentDropChance < _bonusDropChances[BonusType.Weapon2x])
             {
                 SIHelpers.SISimpleLogger(this, "DropBonus() - shield bonus dropped", SimpleLoggerTypes.Log);
                 _droppedBonusIndex = 1;
@@ -68,8 +69,10 @@ namespace SpaceInvaders
             else
             {
                 SIHelpers.SISimpleLogger(this, "DropBonus() - weapon bonus dropped", SimpleLoggerTypes.Log);
-                _droppedBonusIndex = DropWeaponBonus();
+                _droppedBonusIndex = (currentDropChance < _bonusDropChances[BonusType.Weapon3x]) ? 2 : 3;
             }
+
+            // SPRA#WDZI BVONUSY DODAWANE W EDYTORZE
 
             _droppedBonus = _availableBonuses[_droppedBonusIndex];
             _droppedBonus.SetActive(true);
@@ -83,21 +86,6 @@ namespace SpaceInvaders
                 return;
             }
             _droppedBonusIndex = 0;
-        }
-
-        private int DropWeaponBonus()
-        {
-            float weaponTypeChance = Random.Range(0.7f, 1.0f);
-            int droppedWeaponIndex = 2; 
-
-            if (weaponTypeChance >= _weaponDropChances[WeaponType.Projectile3x])
-            {
-                droppedWeaponIndex = 3;
-                return droppedWeaponIndex;
-            }
-            // currentIndexes: 2,3 - for 2x, 3x projectiles
-
-            return droppedWeaponIndex;
         }
     }
 }

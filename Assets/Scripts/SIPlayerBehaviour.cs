@@ -104,7 +104,8 @@ namespace SpaceInvaders
                 case BonusType.Shield:
                     EnableShield();
                     break;
-                case BonusType.Weapon:
+                case BonusType.Weapon2x:
+                case BonusType.Weapon3x:
                     ModifyCurrentWeapon(bonusInfo.bonusStatistics.gainedWeaponType);
                     break;
                 default:

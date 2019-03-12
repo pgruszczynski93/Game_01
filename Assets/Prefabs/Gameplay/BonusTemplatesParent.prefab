@@ -47,7 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7515c85957ffd34796c72025b02f568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _droppedBonusIndex: 0
   _bonusDropTreshold: 0.65
+  _droppedBonus: {fileID: 0}
   _availableBonuses:
   - {fileID: 1049033478554503739}
   - {fileID: 6842891637516641233}
@@ -482,16 +484,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 734936725374884712, guid: 0f519c44a3d3fc04c9da3e936ff057d7,
-        type: 3}
-      propertyPath: _bonusInfo.OnBonusFinishEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 734936725374884715, guid: 0f519c44a3d3fc04c9da3e936ff057d7,
         type: 3}
       propertyPath: _colliderParentBehaviour
       value: 
       objectReference: {fileID: 6842891637516641236}
+    - target: {fileID: 734936725374884712, guid: 0f519c44a3d3fc04c9da3e936ff057d7,
+        type: 3}
+      propertyPath: _bonusInfo.OnBonusFinishEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8091013131178773902, guid: 0f519c44a3d3fc04c9da3e936ff057d7,
         type: 3}
       propertyPath: _renderer
