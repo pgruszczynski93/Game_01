@@ -28,15 +28,15 @@ namespace SpaceInvaders
             _currentProjectile = _availableProjectilesPrefabs[0];
         }
 
-        public void SetCurrentProjectile(WeaponType weaponType)
+        public void SetCurrentProjectile(CollectibleLevel collectibleLevel)
         {
-            int weapon = (int) weaponType;
-            SIHelpers.SISimpleLogger(this, "Trying to change weapon from " + (int)_currentProjectile.projectileType + " to " + (int)weaponType, SimpleLoggerTypes.Log);
+            int weapon = (int) collectibleLevel;
+            SIHelpers.SISimpleLogger(this, "Trying to change weapon from " + (int)_currentProjectile.projectileType + " to " + (int)collectibleLevel, SimpleLoggerTypes.Log);
             if (weapon < (int)_currentProjectile.projectileType)
             {
                 return;     // temporary remove it when alsers will be implemented 
             }
-            SIHelpers.SISimpleLogger(this, "Weapon changed to " + weaponType, SimpleLoggerTypes.Log);
+            SIHelpers.SISimpleLogger(this, "Weapon changed to " + collectibleLevel, SimpleLoggerTypes.Log);
             int weaponIndex = weapon - 1;
             _currentProjectile = _availableProjectilesPrefabs[weaponIndex];
         }

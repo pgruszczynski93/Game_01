@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,7 +22,7 @@ namespace SpaceInvaders
         public int currentHealth;
         public int currentScore;
         public int currentWave;
-        public WeaponType currentWeaponType;
+        public CollectibleLevel currentCollectibleLevel;
     }
 
     [Serializable]
@@ -29,7 +30,7 @@ namespace SpaceInvaders
     {
         public int gainedHealth;
         public int gainedScore;
-        public WeaponType gainedWeaponType;
+        public CollectibleLevel gainedCollectibleLevel;
         public float durationTime;
     }
 
@@ -44,7 +45,7 @@ namespace SpaceInvaders
     [Serializable]
     public class SIProjectileInfo
     {
-        public WeaponType projectileType;
+        public CollectibleLevel projectileType;
         public GameObject[] projectilePrefabs;
         public Transform[] projectileParents;
     }

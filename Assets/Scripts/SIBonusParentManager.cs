@@ -12,7 +12,7 @@ namespace SpaceInvaders
         [SerializeField] private GameObject[] _availableBonuses;
 
         private Dictionary<BonusType, float> _bonusDropChances;
-        private Dictionary<WeaponType, float> _weaponDropChances;
+        private Dictionary<CollectibleLevel, float> _weaponDropChances;
 
         private void Awake()
         {
@@ -32,8 +32,9 @@ namespace SpaceInvaders
             {
                 {BonusType.Life, 0.65f},
                 {BonusType.Shield, 0.75f},
-                {BonusType.Weapon2x, 0.85f},
-                {BonusType.Weapon3x, 0.9f},
+                {BonusType.Weapon, 0.85f},
+//                {BonusType.Weapon2x, 0.85f},
+//                {BonusType.Weapon3x, 0.9f},
             };
 
             //_weaponDropChances = new Dictionary<WeaponType, float>()
@@ -61,7 +62,7 @@ namespace SpaceInvaders
                 _droppedBonusIndex = 0;
             }
             else if (currentDropChance >= _bonusDropChances[BonusType.Shield] &&
-                     currentDropChance < _bonusDropChances[BonusType.Weapon2x])
+                     currentDropChance < _bonusDropChances[BonusType.Weapon])
             {
                 SIHelpers.SISimpleLogger(this, "DropBonus() - shield bonus dropped", SimpleLoggerTypes.Log);
                 _droppedBonusIndex = 1;
@@ -69,10 +70,10 @@ namespace SpaceInvaders
             else
             {
                 SIHelpers.SISimpleLogger(this, "DropBonus() - weapon bonus dropped", SimpleLoggerTypes.Log);
-                _droppedBonusIndex = (currentDropChance < _bonusDropChances[BonusType.Weapon3x]) ? 2 : 3;
+//                _droppedBonusIndex = (currentDropChance < _bonusDropChances[BonusType.Weapon3x]) ? 2 : 3;
+                _droppedBonusIndex = 2;
             }
 
-            // SPRA#WDZI BVONUSY DODAWANE W EDYTORZE
 
             _droppedBonus = _availableBonuses[_droppedBonusIndex];
             _droppedBonus.SetActive(true);

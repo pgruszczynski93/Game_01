@@ -31,8 +31,7 @@
     {
         Life,
         Shield,
-        Weapon2x,
-        Weapon3x
+        Weapon,
     }
 
     public enum MovementType
@@ -48,15 +47,19 @@
         Special
     }
 
-    public enum WeaponType
+    public enum CollectibleLevel
     {
-        None,
-        Projectile, 
-        Projectile2x,
-        Projectile3x,
-        Laser,
-        Laser2x,
-        Laser3x
+        Zero,
+        First, 
+        Second,
+        Third,
+        Fourth,
+        Fifth,
+        Sixth,
+        Seventh,
+        Eight,
+        Nineth,
+        Tenth
     }
 
     public enum AddedTags

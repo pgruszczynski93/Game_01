@@ -69,7 +69,7 @@ namespace SpaceInvaders
             {
                 currentHealth = 3,
                 currentWave = 1,
-                currentWeaponType = WeaponType.Projectile
+                currentCollectibleLevel = CollectibleLevel.First
             };
 
         }
@@ -104,9 +104,8 @@ namespace SpaceInvaders
                 case BonusType.Shield:
                     EnableShield();
                     break;
-                case BonusType.Weapon2x:
-                case BonusType.Weapon3x:
-                    ModifyCurrentWeapon(bonusInfo.bonusStatistics.gainedWeaponType);
+                case BonusType.Weapon:
+                    ModifyCurrentWeapon(bonusInfo.bonusStatistics.gainedCollectibleLevel);
                     break;
                 default:
                     break;
@@ -142,7 +141,7 @@ namespace SpaceInvaders
             SIHelpers.SISimpleLogger(this, "Shield enabled.", SimpleLoggerTypes.Log);
         }
 
-        private void ModifyCurrentWeapon(WeaponType weaponType)
+        private void ModifyCurrentWeapon(CollectibleLevel collectibleLevel)
         {
             // to do: add new projectile prefabs, then the rest of code will be working
            // _playerProjectileController.SetCurrentProjectile(weaponType);

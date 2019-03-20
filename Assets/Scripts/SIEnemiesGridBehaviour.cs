@@ -37,7 +37,7 @@ namespace SpaceInvaders
 
         protected void Awake()
         {
-            SetInitialReferences();
+            Initialize();
         }
 
         private void OnEnable()
@@ -70,7 +70,7 @@ namespace SpaceInvaders
             StopAllCoroutines();
         }
 
-        private void SetInitialReferences()
+        private void Initialize()
         {
             if (_enemiesInGrid == null || _enemyGridTweenInfo == null || _enemiesInGrid.Length == 0 || _enemiesAbleToShoot == null)
             {

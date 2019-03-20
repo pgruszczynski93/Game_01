@@ -7,70 +7,29 @@ namespace SpaceInvaders
     public class SITimeBonusesManager : MonoBehaviour
     {
         [SerializeField] private Dictionary<BonusType, SIBonusInfo> _activeTimeDrivenBonuses;
+        [SerializeField] private Dictionary<BonusType, Coroutine> _bonusCoroutines;
 
         private SIUIManager _uiManager;
 
         private void Start()
         {
-            SetInitialReferences();
+            Initialize();
         }
 
-        private void SetInitialReferences()
+        private void Initialize()
         {
             _uiManager = SIUIManager.Instance;
             _activeTimeDrivenBonuses = new Dictionary<BonusType, SIBonusInfo>();
-        }
-
-        private void Debug_ShowCurrentBonuses()
-        {
-            SIHelpers.SISimpleLogger(this, "Active bonuses: ", SimpleLoggerTypes.Log);
-
-            foreach (var q in _activeTimeDrivenBonuses)
+            _bonusCoroutines = new Dictionary<BonusType, Coroutine>
             {
-                SIHelpers.SISimpleLogger(this, "<color=green> Bonus: </color>" + q.Key + " value: " + q.Value.bonusStatistics, SimpleLoggerTypes.Log);
-                if (IsBonusWeapon(q.Value.bonusType))
-                {
-                    SIHelpers.SISimpleLogger(this, "Collected weapon time: "+q.Value.bonusStatistics.gainedWeaponType, SimpleLoggerTypes.Log);
-                }
-            }
+                {BonusType.Life, null},
+                {BonusType.Weapon, null},
+                {BonusType.Shield, null},
+            };
         }
-
-        private bool IsBonusWeapon(BonusType bonusType)
-        {
-            return bonusType == BonusType.Weapon2x || bonusType == BonusType.Weapon3x;
-        }
-
-
-
-        public void ManageTimeScheduledBonuses(SIBonusInfo bonusInfo)
-        {
-            if (_activeTimeDrivenBonuses == null)
-            {
-                SIHelpers.SISimpleLogger(this, "Can't manage time schedluled bonuses.", SimpleLoggerTypes.Error);
-                return;
-            }
-
-            SIHelpers.SISimpleLogger(this, "<color=blue> Bonus Parsing </color>", SimpleLoggerTypes.Log);
-
-            if (bonusInfo.bonusStatistics.durationTime > 0)
-            {
-                TryToAddBonus(bonusInfo);
-                Debug_ShowCurrentBonuses();
-            }
-        }
-
-        private void InitializeBonuses()
-        {
-            //StopAllCoroutines();
-            foreach (KeyValuePair<BonusType, SIBonusInfo> pair in _activeTimeDrivenBonuses)
-            {
-                StartCoroutine(RunBonusLifecycleRoutine(pair.Value));
-            }
-        }
-
+        
         private IEnumerator RunBonusLifecycleRoutine(SIBonusInfo bonusInfo)
         {
-            SIHelpers.SISimpleLogger(this, "Finishing bonus lifecycle "+bonusInfo.bonusType, SimpleLoggerTypes.Log);
             SIUIManager.Instance.BonusUISlots[bonusInfo.bonusType].EnableBonusSlot(true);
             for (float i = bonusInfo.bonusStatistics.durationTime; i >= 0; i -= 0.25f)
             {
@@ -83,6 +42,27 @@ namespace SpaceInvaders
             ResetAppliedBonus(bonusInfo.bonusType);
         }
 
+        private void Debug_ShowCurrentBonuses()
+        {
+            SIHelpers.SISimpleLogger(this, "Active bonuses: ", SimpleLoggerTypes.Log);
+
+            foreach (var q in _activeTimeDrivenBonuses)
+            {
+                SIHelpers.SISimpleLogger(this, "<color=green> Bonus: </color>" + q.Key + " value: " + q.Value.bonusStatistics, SimpleLoggerTypes.Log);
+            }
+        }
+
+        public void ManageTimeScheduledBonuses(SIBonusInfo bonusInfo)
+        {
+            SIHelpers.SISimpleLogger(this, "<color=blue> Bonus Parsing </color>", SimpleLoggerTypes.Log);
+
+            if (bonusInfo.bonusStatistics.durationTime <= 0) 
+                return;
+            
+            TryToAddBonus(bonusInfo);
+            Debug_ShowCurrentBonuses();
+        }
+
 
         private void TryToAddBonus(SIBonusInfo bonusInfo)
         {
@@ -91,43 +71,60 @@ namespace SpaceInvaders
             switch (bonusInfo.bonusType)
             {
                 case BonusType.Shield:
-                    CompareBonus(bonusInfo.bonusType, bonusInfo.bonusStatistics.durationTime, bonusInfo);
+                    SIHelpers.SISimpleLogger(this, "V Shield " , SimpleLoggerTypes.Log);
+                    CompareBonus(bonusInfo.bonusType, bonusInfo);
                     break;
-                case BonusType.Weapon2x:
-                case BonusType.Weapon3x:
-                    CompareBonus(bonusInfo.bonusType, (float) bonusInfo.bonusStatistics.gainedWeaponType, bonusInfo);
+                case BonusType.Weapon:
+                    SIHelpers.SISimpleLogger(this, "V Weapon " , SimpleLoggerTypes.Log);
+                    CompareBonus(bonusInfo.bonusType,  bonusInfo);
+                    break;
+                case BonusType.Life:
                     break;
                 default:
                     break;
             }
         }
          
-        private void CompareBonus(BonusType dictionaryKey, float compareValue, SIBonusInfo bonusInfo)
+        private void CompareBonus(BonusType dictionaryKey, SIBonusInfo bonusInfo)
         {
+            SIHelpers.SISimpleLogger(this, "V CompareBonus " , SimpleLoggerTypes.Log);
+
             if (_activeTimeDrivenBonuses.ContainsKey(dictionaryKey) == false)
             {
                 SIHelpers.SISimpleLogger(this, "<color=blue> Bonus added to dictionary </color>", SimpleLoggerTypes.Log);
                 _activeTimeDrivenBonuses.Add(dictionaryKey, bonusInfo);
             }
-
-            float currentDictionaryValue = GetActiveBonusComparatorValue(dictionaryKey);
-
-            SIHelpers.SISimpleLogger(this,"Compare v " + compareValue + " DICT VALUE " + currentDictionaryValue, SimpleLoggerTypes.Log);
-
-
-            //dodac usuwanie korutyny aktywnego bonusa - np dla broni roznego typu tj jak mamy bron 2 a zlapiemy 3, przerwij 2 wstaw 3 i odpal
-            if (compareValue >= currentDictionaryValue)  //remove later equails sign
-            {
-                _activeTimeDrivenBonuses[dictionaryKey] = bonusInfo;
-                StopCoroutine(RunBonusLifecycleRoutine(bonusInfo));
-                InitializeBonuses();
-            }
+            
+            Debug.Log("DUPA 1");
+            TryToUpdateBonuses(dictionaryKey, bonusInfo);
         }
 
-        private float GetActiveBonusComparatorValue(BonusType dictionaryKey)
+        
+        private void TryToUpdateBonuses(BonusType dictionaryKey, SIBonusInfo bonusInfo)
         {
-            return dictionaryKey == BonusType.Shield ? _activeTimeDrivenBonuses[dictionaryKey].bonusStatistics.durationTime :
-                  (float) _activeTimeDrivenBonuses[dictionaryKey].bonusStatistics.gainedWeaponType;
+            int newBonusLevel = (int)bonusInfo.bonusStatistics.gainedCollectibleLevel;
+            int currentCachedBonusLevel = GetActiveBonusComparatorValue(dictionaryKey);
+            Debug.Log("DUPA 2");
+
+            SIHelpers.SISimpleLogger(this,"Compare v " + newBonusLevel + " DICT VALUE " + currentCachedBonusLevel, SimpleLoggerTypes.Log);
+
+            if (newBonusLevel >= currentCachedBonusLevel)  
+            {
+
+                SIHelpers.SISimpleLogger(this, "<color=blue> Breaking coroutine with dictionary update </color>", SimpleLoggerTypes.Log);
+
+                if (_bonusCoroutines[dictionaryKey] != null)
+                {
+                    StopCoroutine(_bonusCoroutines[dictionaryKey]);
+                }
+                _bonusCoroutines[dictionaryKey] = StartCoroutine(RunBonusLifecycleRoutine(bonusInfo));
+            }
+
+        }
+
+        private int GetActiveBonusComparatorValue(BonusType dictionaryKey)
+        {
+            return (int)_activeTimeDrivenBonuses[dictionaryKey].bonusStatistics.gainedCollectibleLevel;
         }
 
         private void ResetAppliedBonus(BonusType bonusType)

@@ -29,8 +29,8 @@ namespace SpaceInvaders
             {
                 {BonusType.Life,  _availableBonusSlots[0]},
                 {BonusType.Shield,  _availableBonusSlots[1]},
-                {BonusType.Weapon2x,  _availableBonusSlots[2]},
-                {BonusType.Weapon3x,  _availableBonusSlots[3]},
+                {BonusType.Weapon,  _availableBonusSlots[2]},
+//                {BonusType.Weapon3x,  _availableBonusSlots[3]},
             };
         }
     }
