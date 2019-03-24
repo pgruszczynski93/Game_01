@@ -24,13 +24,13 @@ namespace SpaceInvaders
         {
             get
             {
-                if (_player == null)
+                if (_player != null)
                 {
-                    SIHelpers.SISimpleLogger(this, "No player assigned to SIGameMasterBehaviour", SimpleLoggerTypes.Error);
-                    return null;
+                    return _player;
                 }
+                SIHelpers.SISimpleLogger(this, "No player assigned to SIGameMasterBehaviour", SimpleLoggerTypes.Error);
+                return null;
 
-                return _player;
             }
         }
 
