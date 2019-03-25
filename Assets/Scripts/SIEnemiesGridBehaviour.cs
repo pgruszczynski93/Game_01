@@ -130,7 +130,7 @@ namespace SpaceInvaders
 
             float newMultiplier = _livingEnemies == 1 ? MOVEMENT_STEP_1 : MOVEMENT_STEP_2;
 
-            SIEventsHandler.OnEnemySpeedMultiplierChanged?.Invoke(newMultiplier);
+            SIEventsHandler.BroadcastOnEnemySpeedMultiplierChanged(newMultiplier);
         }
 
         private void CheckEnemyWaveEnd()
@@ -139,7 +139,8 @@ namespace SpaceInvaders
             {
                 return;
             }
-            SIEventsHandler.OnWaveEnd?.Invoke();
+            
+            SIEventsHandler.BroadcastOnWaveEnd();
         }
 
         private void Debug_ResetWave()
@@ -147,13 +148,13 @@ namespace SpaceInvaders
             if (Input.GetKeyDown(KeyCode.G))
             {
                 SIHelpers.SISimpleLogger(this, "Debug_ResetWave()", SimpleLoggerTypes.Log);
-                SIEventsHandler.OnWaveEnd?.Invoke();
+                SIEventsHandler.BroadcastOnWaveEnd();
             }
         }
 
         public void MoveObj()
         {
-          //  StartCoroutine(GridInitialMovementRoutine());
+            StartCoroutine(GridInitialMovementRoutine());
         }
 
         private IEnumerator GridInitialMovementRoutine()

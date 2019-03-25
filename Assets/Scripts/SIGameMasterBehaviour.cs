@@ -60,6 +60,11 @@ namespace SpaceInvaders
                 return;
             }
 
+            RunGameLoop();
+        }
+
+        private void RunGameLoop()
+        {
             OnUpdateMovements();
             OnShadersUpdateCallback();
             OnDebugInputHandling();
@@ -68,17 +73,17 @@ namespace SpaceInvaders
 
         private void OnDebugInputHandling()
         {
-            SIEventsHandler.OnDebugInputHandling?.Invoke();
+            SIEventsHandler.BroadcastOnDebugInputHandling();
         }
 
         private void OnGameQuitCallback()
         {
-            SIEventsHandler.OnGameQuit?.Invoke();
+            SIEventsHandler.BroadcastOnGameQuit();
         }
 
         private void OnShadersUpdateCallback()
         {
-            SIEventsHandler.OnShadersUpdate?.Invoke();
+            SIEventsHandler.BroadcastOnShadersUpdate();
         }
 
         private void QuitGame()
@@ -91,12 +96,12 @@ namespace SpaceInvaders
 
         private void OnUpdateMovements()
         {
-            SIEventsHandler.OnObjectsMovement?.Invoke();
+            SIEventsHandler.BroadcastOnObjectsMovement();
         }
 
         public void OnGameStarted()
         {
-            SIEventsHandler.OnGameStarted?.Invoke();
+            SIEventsHandler.BroadcastOnGameStarted();
         }
 
         private void StartGame()

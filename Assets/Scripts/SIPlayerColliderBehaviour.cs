@@ -46,7 +46,7 @@ namespace SpaceInvaders
             SIHelpers.SISimpleLogger(this, "Player got bonus.", SimpleLoggerTypes.Log);
 
             SIBonus bonus = collisionBehaviour as SIBonus;
-            SIEventsHandler.OnBonusCollision(bonus.BonusInfo);
+            SIEventsHandler.BroadcastOnBonusCollision(bonus.BonusInfo);
         }
     }
 }

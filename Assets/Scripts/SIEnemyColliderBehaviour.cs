@@ -26,7 +26,7 @@ namespace SpaceInvaders
 
         private void InvokeEnemyDeathCallback(MonoBehaviour collisionBehaviour = null)
         {
-            SIEventsHandler.OnEnemyDeath?.Invoke();
+            SIEventsHandler.BroadcastOnEnemyDeath();
         }
 
         private void OnCollisionMessage(MonoBehaviour collisionBehaviour = null)

@@ -43,7 +43,7 @@ namespace SpaceInvaders
             if (_enemyStatistics.isAlive)
             {
                 SIShootedEnemyInfo nextShootableEnemyInfo = ShootAbleEnemy();
-                SIEventsHandler.OnSwitchShootableEnemy?.Invoke(nextShootableEnemyInfo);
+                SIEventsHandler.BroadcastOnSwitchShootableEnemy(nextShootableEnemyInfo);
                 EnableEnemyVisibility(false);
                 _enemyMovement.StopObj();
                 _bonusManager.DropBonus();
