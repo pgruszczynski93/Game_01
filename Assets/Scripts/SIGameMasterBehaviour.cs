@@ -14,8 +14,9 @@ namespace SpaceInvaders
             {
                 if (_mainCamera == null)
                 {
-                    Debug.LogError("No camera assigned!");
+                    SIHelpers.SISimpleLogger(this, "No camera assigned!", SimpleLoggerTypes.Error);
                 }
+
                 return _mainCamera;
             }
         }
@@ -28,9 +29,9 @@ namespace SpaceInvaders
                 {
                     return _player;
                 }
+
                 SIHelpers.SISimpleLogger(this, "No player assigned to SIGameMasterBehaviour", SimpleLoggerTypes.Error);
                 return null;
-
             }
         }
 
@@ -43,16 +44,31 @@ namespace SpaceInvaders
 
         private void OnEnable()
         {
+            AssignEvents();
+        }
+
+        private void AssignEvents()
+        {
             SIEventsHandler.OnGameStarted += StartGame;
             SIEventsHandler.OnGameQuit += QuitGame;
         }
 
         private void OnDisable()
         {
+            RemoveEvents();
+        }
+
+        private void RemoveEvents()
+        {
             SIEventsHandler.OnGameStarted -= StartGame;
             SIEventsHandler.OnGameQuit -= QuitGame;
         }
 
+        private void StartGame()
+        {
+            _isGameStarted = true;
+        }
+        
         private void Update()
         {
             if (_isGameStarted == false)
@@ -102,11 +118,6 @@ namespace SpaceInvaders
         public void OnGameStarted()
         {
             SIEventsHandler.BroadcastOnGameStarted();
-        }
-
-        private void StartGame()
-        {
-            _isGameStarted = true;
         }
     }
 }

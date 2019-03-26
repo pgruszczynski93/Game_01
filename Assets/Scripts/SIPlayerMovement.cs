@@ -13,7 +13,7 @@ namespace SpaceInvaders
         [SerializeField] private float _touchTreshold;
         private Touch _mainTouch;
         private Vector2 _normalizedTouchDelta;
-        protected Dictionary<MovementType, float> _movementSpeeds;
+        private Dictionary<MovementType, float> _movementSpeeds;
         
         public float InputMovementValue { get; set; }
 
@@ -27,9 +27,9 @@ namespace SpaceInvaders
             SIEventsHandler.OnObjectsMovement -= MoveObj;
         }
 
-        protected override void SetInitialReferences()
+        protected override void Initialize()
         {
-            base.SetInitialReferences();
+            base.Initialize();
 
             MAX_ROTATION_ANGLE = 40f;
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -64,7 +64,7 @@ namespace SpaceInvaders
 #if UNITY_EDITOR
             InputMovementValue = Input.GetAxis("Horizontal");
 
-#elif UNITY_ANDROID
+#elif UNITY_ANDROID && !UNITY_EDITOR
             CalculateMobileInputValue();
 #endif
             MoveObject(InputMovementValue);
@@ -73,21 +73,23 @@ namespace SpaceInvaders
 
         private void CalculateMobileInputValue()
         {
-            if (Input.touchCount > 0)
+            if (Input.touchCount <= 0)
             {
-                _mainTouch = Input.GetTouch(0);
-                _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
+                return;
+            }
+            
+            _mainTouch = Input.GetTouch(0);
+            _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
 
-                if ((_mainTouch.phase == TouchPhase.Began || _mainTouch.phase == TouchPhase.Moved)
-                    && _normalizedTouchDelta.magnitude > _touchTreshold)
-                {
-                    _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
-                    InputMovementValue = _normalizedTouchDelta.x;
-                }
-                else
-                {
-                    InputMovementValue = 0f;
-                }
+            if ((_mainTouch.phase == TouchPhase.Began || _mainTouch.phase == TouchPhase.Moved)
+                && _normalizedTouchDelta.magnitude > _touchTreshold)
+            {
+                _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
+                InputMovementValue = _normalizedTouchDelta.x;
+            }
+            else
+            {
+                InputMovementValue = 0f;
             }
         }
 

@@ -32,10 +32,10 @@ namespace SpaceInvaders
 
         protected virtual void Awake()
         {
-            SetInitialReferences();
+            Initialize();
         }
 
-        protected virtual void SetInitialReferences()
+        protected virtual void Initialize()
         {
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _cachedTransform = transform;

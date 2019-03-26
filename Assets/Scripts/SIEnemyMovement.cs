@@ -13,9 +13,9 @@ namespace SpaceInvaders
         private Quaternion _enemyObjectOrientation;
         [SerializeField] private QuaternionTweenInfo _tweenInfo;
 
-        protected override void SetInitialReferences()
+        protected override void Initialize()
         {
-            base.SetInitialReferences();
+            base.Initialize();
 
             ResetMovementProperties();
         }
