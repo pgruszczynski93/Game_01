@@ -19,25 +19,32 @@ namespace SpaceInvaders
             set { _isEnemyInGridMovementAllowed = value; }
         }
 
-        public Transform GridInitialTrasnform { get => _gridInitialTrasnform; set => _gridInitialTrasnform = value; }
-        public Transform GridSceneTrasnform { get => _gridSceneTransform; set => _gridSceneTransform = value; }
-
-        public Vector3 GridInitialPosition { get => GridInitialTrasnform.localPosition; }
-        public Vector3 GridScenePosition { get => GridSceneTrasnform.localPosition; }
+        public Vector3 GridInitialPosition => _gridInitialTrasnform.localPosition;
+        public Vector3 GridScenePosition => _gridSceneTransform.localPosition;
 
         private void OnEnable()
         {
-            SIEventsHandler.OnGameStarted += MoveEnemiesGrid;
-
-            SIEventsHandler.OnWaveEnd += DisableGridMovements;
-            SIEventsHandler.OnWaveEnd += MoveEnemiesGridWithDelay;
+            AssignEvents();
         }
 
         private void OnDisable()
         {
+            RemoveEvents();
+        }
+
+        private void AssignEvents()
+        {
+            SIEventsHandler.OnGameStarted += MoveEnemiesGrid;
+
+            SIEventsHandler.OnWaveEnd += DisableGridMovementsWithShooting;
+            SIEventsHandler.OnWaveEnd += MoveEnemiesGridWithDelay;
+        }
+
+        private void RemoveEvents()
+        {
             SIEventsHandler.OnGameStarted -= MoveEnemiesGrid;
 
-            SIEventsHandler.OnWaveEnd -= DisableGridMovements;
+            SIEventsHandler.OnWaveEnd -= DisableGridMovementsWithShooting;
             SIEventsHandler.OnWaveEnd -= MoveEnemiesGridWithDelay;
         }
 
@@ -48,24 +55,19 @@ namespace SpaceInvaders
 
         private void MoveEnemiesGridWithDelay()
         {
-            //sprawdzic to
-            StartCoroutine(SIHelpers.CustomDelayRoutine(3, () =>
-            {
-                MoveEnemiesGrid();
-            }));
+            StartCoroutine(SIHelpers.CustomDelayRoutine(SIConstants.NEW_WAVE_COOLDOWN, MoveEnemiesGrid));
         }
 
-        public void EnableGridMovements()
+        public void EnableGridMovementsWithShooting()
         {
             _isEnemyInGridMovementAllowed = true;
             _enemiesGridBehaviour.StartShooting();
         }
 
-        public void DisableGridMovements()
+        public void DisableGridMovementsWithShooting()
         {
             _isEnemyInGridMovementAllowed = false;
             _enemiesGridBehaviour.StopShooting();
         }
-
     }
 }

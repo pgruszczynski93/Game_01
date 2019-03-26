@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -68,7 +69,7 @@ namespace SpaceInvaders
         {
             _isGameStarted = true;
         }
-        
+
         private void Update()
         {
             if (_isGameStarted == false)
@@ -106,7 +107,11 @@ namespace SpaceInvaders
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Application.Quit();
+#if UNITY_ANDROID && !UNITY_EDITOR
+                    Application.Quit();
+#elif UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
             }
         }
 

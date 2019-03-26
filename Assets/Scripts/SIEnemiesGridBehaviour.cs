@@ -6,9 +6,6 @@ namespace SpaceInvaders
 {
     public class SIEnemiesGridBehaviour : MonoBehaviour, IMoveable
     {
-        private const float MOVEMENT_STEP_1 = 7f;
-        private const float MOVEMENT_STEP_2 = 5f;
-
         [SerializeField] private int _enemiesInRow;
         [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
         [SerializeField] private GameObject[] _enemiesInGrid;
@@ -30,17 +27,22 @@ namespace SpaceInvaders
         private Vector2 _raycastDirection;
         private Vector2 _raycastOffset;
 
-        public GameObject[] EnemiesInGrid
-        {
-            get { return _enemiesInGrid; }
-        }
-
         protected void Awake()
         {
             Initialize();
         }
 
         private void OnEnable()
+        {
+            AssignEvents();
+        }
+
+        private void OnDisable()
+        {
+            RemoveEvents();
+        }
+
+        private void AssignEvents()
         {
             SIEventsHandler.OnEnemyDeath += DecreaseEnemiesCount;
             SIEventsHandler.OnEnemyDeath += UpdateCurrentSpeedMultiplier;
@@ -50,10 +52,9 @@ namespace SpaceInvaders
             SIEventsHandler.OnWaveEnd += ResetEnemyGrid;
 
             SIEventsHandler.OnDebugInputHandling += Debug_ResetWave;
-
         }
 
-        private void OnDisable()
+        private void RemoveEvents()
         {
             SIEventsHandler.OnEnemyDeath -= DecreaseEnemiesCount;
             SIEventsHandler.OnEnemyDeath -= UpdateCurrentSpeedMultiplier;
@@ -72,7 +73,8 @@ namespace SpaceInvaders
 
         private void Initialize()
         {
-            if (_enemiesInGrid == null || _enemyGridTweenInfo == null || _enemiesInGrid.Length == 0 || _enemiesAbleToShoot == null)
+            if (_enemiesInGrid == null || _enemyGridTweenInfo == null || _enemiesInGrid.Length == 0 ||
+                _enemiesAbleToShoot == null)
             {
                 Debug.LogError("Enemies grid array fields aren't initialized.");
                 return;
@@ -95,10 +97,12 @@ namespace SpaceInvaders
             _enemiesAbleToShoot.Clear();
             for (int i = _totalEnemies - 1; i >= _totalEnemies - _enemiesInRow; i--)
             {
+                // remove get component here - use interface!!!!!!!!!!!!!!!!
                 SIEnemyShootBehaviour enemyAbleToShoot = _enemiesInGrid[i].GetComponent<SIEnemyShootBehaviour>();
                 if (enemyAbleToShoot == null)
                 {
-                    SIHelpers.SISimpleLogger(this, "Enemy has no SIEnemyShootBehaviour attached. ", SimpleLoggerTypes.Error);
+                    SIHelpers.SISimpleLogger(this, "Enemy has no SIEnemyShootBehaviour attached. ",
+                        SimpleLoggerTypes.Error);
                     return;
                 }
 
@@ -123,12 +127,14 @@ namespace SpaceInvaders
 
         private void UpdateCurrentSpeedMultiplier()
         {
-            if (_livingEnemies > 2)
+            if (_livingEnemies > SIConstants.ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP)
             {
                 return;
             }
 
-            float newMultiplier = _livingEnemies == 1 ? MOVEMENT_STEP_1 : MOVEMENT_STEP_2;
+            float newMultiplier = _livingEnemies == SIConstants.ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP
+                ? SIConstants.ENEMYGRID_MOVEMENT_STEP_2
+                : SIConstants.ENEMYGRID_MOVEMENT_STEP_1;
 
             SIEventsHandler.BroadcastOnEnemySpeedMultiplierChanged(newMultiplier);
         }
@@ -139,7 +145,7 @@ namespace SpaceInvaders
             {
                 return;
             }
-            
+
             SIEventsHandler.BroadcastOnWaveEnd();
         }
 
@@ -159,14 +165,13 @@ namespace SpaceInvaders
 
         private IEnumerator GridInitialMovementRoutine()
         {
-            yield return StartCoroutine(SIHelpers.SimpleTween3D((newPosition) =>
-                {
-                    _cachedTransform.position = newPosition;
-                }, _enemyGridTweenInfo, () => { SIEnemiesGridsMaster.Instance.EnableGridMovements(); }));
+            yield return StartCoroutine(SIHelpers.SimpleTween3D(
+                (newPosition) => { _cachedTransform.position = newPosition; }, _enemyGridTweenInfo,
+                () => { SIEnemiesGridsMaster.Instance.EnableGridMovementsWithShooting(); }));
 
             StopCoroutine(GridInitialMovementRoutine());
         }
-        
+
         public void ResetGrid()
         {
             _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
@@ -174,21 +179,16 @@ namespace SpaceInvaders
 
         private void UpdateAbleToShootEnemies(SIShootedEnemyInfo enemiesInfo)
         {
-            //if (_enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0)
-            //{
-            //    SIHelpers.SISimpleLogger(this, "UpdateAbleToShootEnemies() stopped.", SimpleLoggerTypes.Error);
-            //    return;
-            //}
-
-            SIHelpers.SISimpleLogger(this, "UpdateAbleToShootEnemies() next enemy " + enemiesInfo.nextShootableEnemy, SimpleLoggerTypes.Log);
-            if (_enemiesAbleToShoot.Contains(enemiesInfo.currentShootableEnemy))
+            if (_enemiesAbleToShoot.Contains(enemiesInfo.currentShootableEnemy) == false)
             {
-                _enemiesAbleToShoot.Remove(enemiesInfo.currentShootableEnemy);
+                return;
+            }
 
-                if (enemiesInfo.nextShootableEnemy != null)
-                {
-                    _enemiesAbleToShoot.Add(enemiesInfo.nextShootableEnemy);
-                }
+            _enemiesAbleToShoot.Remove(enemiesInfo.currentShootableEnemy);
+
+            if (enemiesInfo.nextShootableEnemy != null)
+            {
+                _enemiesAbleToShoot.Add(enemiesInfo.nextShootableEnemy);
             }
         }
 
@@ -207,7 +207,7 @@ namespace SpaceInvaders
 
         public void StopShooting()
         {
-            SIHelpers.SISimpleLogger(this, "StopShooting(): shooting stopped - wave resetting " , SimpleLoggerTypes.Log);
+            SIHelpers.SISimpleLogger(this, "StopShooting(): shooting stopped - wave resetting ", SimpleLoggerTypes.Log);
             StopCoroutine(EnemiesShootingRoutine());
         }
 
@@ -226,17 +226,18 @@ namespace SpaceInvaders
             while (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed && enemiesAbleToShootCount > 0)
             {
                 enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
-                enemySelectedToShootIndex = Random.Range(0, (enemiesAbleToShootCount > 0) ? enemiesAbleToShootCount - 1 : 0);
+                enemySelectedToShootIndex =
+                    Random.Range(0, (enemiesAbleToShootCount > 0) ? enemiesAbleToShootCount - 1 : 0);
                 timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
                 if (enemySelectedToShootIndex >= 0)
                 {
                     _enemiesAbleToShoot[enemySelectedToShootIndex].InvokeShoot();
                 }
+
                 yield return new WaitForSeconds(timeToNextShoot);
             }
 
             yield return null;
-
         }
 
         public void StopObj()
@@ -245,4 +246,3 @@ namespace SpaceInvaders
         }
     }
 }
-
