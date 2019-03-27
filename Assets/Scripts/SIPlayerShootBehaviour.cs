@@ -6,15 +6,15 @@ namespace SpaceInvaders
     {
         protected override void OnEnable()
         {
-            SIEventsHandler.OnObjectsMovement += Shoot;
+            SIEventsHandler.OnObjectsMovement += InvokeShoot;
         }
 
         protected override void OnDisable()
         {
-            SIEventsHandler.OnObjectsMovement -= Shoot;
+            SIEventsHandler.OnObjectsMovement -= InvokeShoot;
         }
 
-        protected override void Shoot()
+        protected override void InvokeShoot()
         {
             if (Input.GetKeyDown(KeyCode.Space) && SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed)
             {

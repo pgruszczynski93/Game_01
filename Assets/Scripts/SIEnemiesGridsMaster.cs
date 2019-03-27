@@ -50,7 +50,7 @@ namespace SpaceInvaders
 
         private void MoveEnemiesGrid()
         {
-            _enemiesGridBehaviour.MoveObj();
+            _enemiesGridBehaviour.MoveEnemiesGrid();
         }
 
         private void MoveEnemiesGridWithDelay()

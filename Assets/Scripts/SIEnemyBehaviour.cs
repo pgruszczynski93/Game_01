@@ -42,7 +42,7 @@ namespace SpaceInvaders
         {
             if (_enemyStatistics.isAlive)
             {
-                SIShootedEnemyInfo nextShootableEnemyInfo = ShootAbleEnemy();
+                SIShootedEnemyInfo nextShootableEnemyInfo = TryToAssignNextShootableEnemy();
                 SIEventsHandler.BroadcastOnSwitchShootableEnemy(nextShootableEnemyInfo);
                 EnableEnemyVisibility(false);
                 _enemyMovement.StopObj();
@@ -53,23 +53,13 @@ namespace SpaceInvaders
 
         private void EnableEnemyVisibility(bool canEnable)
         {
-            if (_colliderParent == null || 
-                _meshRenderer == null ||
-                _destroyVFX == null ||
-                _enemyMovement == null ||
-                _bonusManager == null)
-            {
-                SIHelpers.SISimpleLogger(this, "EnableEnemyVisibility() - references aren't assigned.", SimpleLoggerTypes.Error);
-                return;
-            }
-
             _colliderParent.SetActive(canEnable);
-            _meshRenderer.enabled = canEnable;
+            //_meshRenderer.enabled = canEnable;
             _destroyVFX.OnEnableVFXCallback(canEnable == false);
             //gameObject.SetActive(canEnable);
         }
 
-        public SIShootedEnemyInfo ShootAbleEnemy()
+        public SIShootedEnemyInfo TryToAssignNextShootableEnemy()
         {
             Vector3 raycastPosition = transform.position;
             raycastPosition += _raycastOffset;

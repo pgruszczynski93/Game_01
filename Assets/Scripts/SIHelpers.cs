@@ -48,6 +48,12 @@ namespace SpaceInvaders
             }
         }
 
+        public static WaitForSeconds GetWFSCachedValue(float waitTime)
+        {
+            TryToAddToCoroutineWaitCache(waitTime);
+            return CoroutineWaitCache[waitTime];
+        }
+
         public static bool IsObjectOutOfHorizontalViewportBounds3D(this Vector3 objectViewportPos)
         {
             if (objectViewportPos.x >= CAMERA_MAX_VIEWPORT_X || objectViewportPos.x <= CAMERA_MIN_VIEWPORT_X)

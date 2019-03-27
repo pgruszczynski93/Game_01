@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIEnemiesGridBehaviour : MonoBehaviour, IMoveable
+    public class SIEnemiesGridBehaviour : MonoBehaviour
     {
         [SerializeField] private int _enemiesInRow;
         [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
         [SerializeField] private GameObject[] _enemiesInGrid;
-        [SerializeField] private List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
+        [SerializeField] private List<IShootable> _enemiesAbleToShoot;
 
         private bool _isShootingAvailableForWave;
 
@@ -17,7 +17,6 @@ namespace SpaceInvaders
         private int _livingEnemies;
         private int _speedMultiplier;
 
-        private float _gridSize;
         private float _lastRefreshTime;
         private float _shotAbilityRefreshTime;
         [SerializeField] private float _shotTimeMinBreak;
@@ -30,6 +29,7 @@ namespace SpaceInvaders
         protected void Awake()
         {
             Initialize();
+            GetEnemiesAbleToShoot();
         }
 
         private void OnEnable()
@@ -73,36 +73,25 @@ namespace SpaceInvaders
 
         private void Initialize()
         {
-            if (_enemiesInGrid == null || _enemyGridTweenInfo == null || _enemiesInGrid.Length == 0 ||
-                _enemiesAbleToShoot == null)
-            {
-                Debug.LogError("Enemies grid array fields aren't initialized.");
-                return;
-            }
-
-            _gridSize = 0.5f;
-            _enemiesInRow = 5;
-            _shotTimeMinBreak = 0.4f;
-            _shotTimeMaxBreak = 1f;
+            _enemiesInRow = SIConstants.ENEMIES_IN_ROW;
+            _shotTimeMinBreak = SIConstants.ENEMY_MIN_SHOOT_DELAY;
+            _shotTimeMaxBreak = SIConstants.ENEMY_MAX_SHOOT_DELAY;
             _totalEnemies = _enemiesInGrid.Length;
             _livingEnemies = _totalEnemies;
             _cachedTransform = transform;
             _enemyGridTweenInfo.startValue = SIEnemiesGridsMaster.Instance.GridInitialPosition;
             _enemyGridTweenInfo.endValue = SIEnemiesGridsMaster.Instance.GridScenePosition;
+            _enemiesAbleToShoot = new List<IShootable>();
         }
 
         private void GetEnemiesAbleToShoot()
         {
-            // Note: first initialization is made in Unity Editor (drag and drop).
             _enemiesAbleToShoot.Clear();
             for (int i = _totalEnemies - 1; i >= _totalEnemies - _enemiesInRow; i--)
             {
-                // remove get component here - use interface!!!!!!!!!!!!!!!!
-                SIEnemyShootBehaviour enemyAbleToShoot = _enemiesInGrid[i].GetComponent<SIEnemyShootBehaviour>();
+                IShootable enemyAbleToShoot = _enemiesInGrid[i].GetComponent<SIEnemyShootBehaviour>();
                 if (enemyAbleToShoot == null)
                 {
-                    SIHelpers.SISimpleLogger(this, "Enemy has no SIEnemyShootBehaviour attached. ",
-                        SimpleLoggerTypes.Error);
                     return;
                 }
 
@@ -113,11 +102,11 @@ namespace SpaceInvaders
         public void ResetEnemyGrid()
         {
             SIHelpers.SISimpleLogger(this, "ResetEnemyGrid: Grid reset", SimpleLoggerTypes.Log);
-            SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
 
-            GetEnemiesAbleToShoot();
+            SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
             _livingEnemies = _totalEnemies;
             _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
+            GetEnemiesAbleToShoot();
         }
 
         private void DecreaseEnemiesCount()
@@ -133,8 +122,8 @@ namespace SpaceInvaders
             }
 
             float newMultiplier = _livingEnemies == SIConstants.ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP
-                ? SIConstants.ENEMYGRID_MOVEMENT_STEP_2
-                : SIConstants.ENEMYGRID_MOVEMENT_STEP_1;
+                ? SIConstants.ENEMYGRID_MOVEMENT_STEP_1
+                : SIConstants.ENEMYGRID_MOVEMENT_STEP_2;
 
             SIEventsHandler.BroadcastOnEnemySpeedMultiplierChanged(newMultiplier);
         }
@@ -151,14 +140,14 @@ namespace SpaceInvaders
 
         private void Debug_ResetWave()
         {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                SIHelpers.SISimpleLogger(this, "Debug_ResetWave()", SimpleLoggerTypes.Log);
-                SIEventsHandler.BroadcastOnWaveEnd();
-            }
+            if (Input.GetKeyDown(KeyCode.G) == false) 
+                return;
+            
+            SIHelpers.SISimpleLogger(this, "Debug_ResetWave()", SimpleLoggerTypes.Log);
+            SIEventsHandler.BroadcastOnWaveEnd();
         }
 
-        public void MoveObj()
+        public void MoveEnemiesGrid()
         {
             StartCoroutine(GridInitialMovementRoutine());
         }
@@ -196,7 +185,7 @@ namespace SpaceInvaders
         {
             for (int i = 0; i < _enemiesAbleToShoot.Count; i++)
             {
-                _enemiesAbleToShoot[i].InvokeShoot();
+                _enemiesAbleToShoot[i].Shoot();
             }
         }
 
@@ -219,6 +208,7 @@ namespace SpaceInvaders
                 yield break;
             }
 
+            bool anyEnemyIsAlive;
             int enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
             int enemySelectedToShootIndex = 0;
             float timeToNextShoot = 0.0f;
@@ -226,23 +216,16 @@ namespace SpaceInvaders
             while (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed && enemiesAbleToShootCount > 0)
             {
                 enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
-                enemySelectedToShootIndex =
-                    Random.Range(0, (enemiesAbleToShootCount > 0) ? enemiesAbleToShootCount - 1 : 0);
+                anyEnemyIsAlive = enemiesAbleToShootCount > 0;
+                enemySelectedToShootIndex = Random.Range(0, (anyEnemyIsAlive) ? enemiesAbleToShootCount - 1 : 0);
                 timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
                 if (enemySelectedToShootIndex >= 0)
                 {
-                    _enemiesAbleToShoot[enemySelectedToShootIndex].InvokeShoot();
+                    _enemiesAbleToShoot[enemySelectedToShootIndex].Shoot();
                 }
 
-                yield return new WaitForSeconds(timeToNextShoot);
+                yield return SIHelpers.GetWFSCachedValue(timeToNextShoot);
             }
-
-            yield return null;
-        }
-
-        public void StopObj()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

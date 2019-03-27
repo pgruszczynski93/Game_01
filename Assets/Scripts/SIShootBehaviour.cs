@@ -10,7 +10,7 @@ namespace SpaceInvaders
 
         protected virtual void OnDisable() {}
 
-        protected virtual void Shoot()
+        protected virtual void InvokeShoot()
         {
             if (_projectileController == null)
             {
