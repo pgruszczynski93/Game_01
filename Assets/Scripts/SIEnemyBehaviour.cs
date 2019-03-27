@@ -40,23 +40,32 @@ namespace SpaceInvaders
 
         public void Death(MonoBehaviour collisionBehaviour = null)
         {
-            if (_enemyStatistics.isAlive)
+            if (_enemyStatistics.isAlive == false)
             {
-                SIShootedEnemyInfo nextShootableEnemyInfo = TryToAssignNextShootableEnemy();
-                SIEventsHandler.BroadcastOnSwitchShootableEnemy(nextShootableEnemyInfo);
-                EnableEnemyVisibility(false);
-                _enemyMovement.StopObj();
-                _bonusManager.DropBonus();
-                _enemyStatistics.isAlive = false;
+                return;
+            } 
+            
+            SIShootedEnemyInfo nextShootableEnemyInfo = TryToAssignNextShootableEnemy();
+            
+            EnableEnemyVisibility(false);
+            _enemyMovement.StopObj();
+            _bonusManager.DropBonus();
+            _enemyStatistics.isAlive = false;
+            
+            if (nextShootableEnemyInfo == null || nextShootableEnemyInfo.nextShootableEnemy == null)
+            {
+                return;
             }
+            
+            SIEventsHandler.BroadcastOnSwitchShootableEnemy(nextShootableEnemyInfo);
+
         }
 
         private void EnableEnemyVisibility(bool canEnable)
         {
             _colliderParent.SetActive(canEnable);
-            //_meshRenderer.enabled = canEnable;
+            _meshRenderer.enabled = canEnable;
             _destroyVFX.OnEnableVFXCallback(canEnable == false);
-            //gameObject.SetActive(canEnable);
         }
 
         public SIShootedEnemyInfo TryToAssignNextShootableEnemy()

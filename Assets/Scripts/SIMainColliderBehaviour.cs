@@ -64,6 +64,8 @@ namespace SpaceInvaders
 
         protected virtual void OnTriggerEnter(Collider collider)
         {
+            
+            // ZDEBUGPOWAC TO!!!!!!!!!!!!!!!!!!!
             bool hasHittedObjectGivenTag = false;
 
             if(collider.gameObject.CompareTag("Bonus"))
