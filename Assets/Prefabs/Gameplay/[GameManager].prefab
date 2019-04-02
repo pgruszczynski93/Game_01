@@ -69,6 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7025270549699991142}
+  - component: {fileID: 3461506718661510166}
   - component: {fileID: 7025270549699991145}
   - component: {fileID: 31742441}
   m_Layer: 0
@@ -94,6 +95,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3461506718661510166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025270549699991144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 704d56f39ccb42f99c1f6bce1033b191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isEditorLoggingDisabled: 0
+  _isAndroidLoggingDisabled: 0
 --- !u!114 &7025270549699991145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isGameStarted: 0
   _mainCamera: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!114 &31742441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,5 +139,4 @@ MonoBehaviour:
   _isEnemyInGridMovementAllowed: 0
   _gridInitialTrasnform: {fileID: 127853309}
   _gridSceneTransform: {fileID: 417006359}
-  _enemiesGrid_1: {fileID: 0}
   _enemiesGridBehaviour: {fileID: 0}

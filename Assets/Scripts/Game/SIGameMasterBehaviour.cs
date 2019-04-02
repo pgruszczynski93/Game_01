@@ -36,13 +36,6 @@ namespace SpaceInvaders
             }
         }
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            Application.targetFrameRate = SISettings.APPLICATION_TARGET_FRAMERATE;
-        }
-
         private void OnEnable()
         {
             AssignEvents();
