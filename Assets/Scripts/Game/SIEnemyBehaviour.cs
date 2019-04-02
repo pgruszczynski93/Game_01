@@ -102,7 +102,7 @@ namespace SpaceInvaders
                     }
 
                     SIHelpers.SISimpleLogger(this, "<color=blue>Shootable switched </color>" + nextShootingEnemyBehaviour.gameObject.name, SimpleLoggerTypes.Log);
-                    Debug.DrawRay(raycastPosition, Vector3.up, Color.red, 1f);
+//                    Debug.DrawRay(raycastPosition, Vector3.up, Color.red, 1f);
 
                     shootInfo.nextShootableEnemy = nextShootingEnemyBehaviour;
                 }

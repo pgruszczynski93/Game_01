@@ -16,10 +16,10 @@ namespace SpaceInvaders
 
         protected virtual void Awake()
         {
-            SetInitialReferences();
+            Initialize();
         }
 
-        private void SetInitialReferences()
+        private void Initialize()
         {
             _objectTagsCount = _objectTags.Length;
 
@@ -31,11 +31,11 @@ namespace SpaceInvaders
 
             _onCollisionActions = new Dictionary<string, CustomCollisonDelegate>()
             {
-                {"Player", delegate { }},
-                {"Enemy", delegate { }},
-                {"Projectile", delegate { }},
-                {"EnemyProjectile", delegate { }},
-                {"Bonus", delegate { }}
+                {SIStrings.PLAYER, delegate { }},
+                {SIStrings.ENEMY, delegate { }},
+                {SIStrings.PROJECTILE, delegate { }},
+                {SIStrings.ENEMY_PROJECTILE, delegate { }},
+                {SIStrings.BONUS, delegate { }}
             };
         }
 
@@ -62,21 +62,24 @@ namespace SpaceInvaders
 
         protected virtual void OnDisable(){}
 
-        protected virtual void OnTriggerEnter(Collider collider)
+        protected virtual void OnTriggerEnter(Collider triggerCollider)
         {
             
             // ZDEBUGPOWAC TO!!!!!!!!!!!!!!!!!!!
+            // problem z colliderami
             bool hasHittedObjectGivenTag = false;
 
-            if(collider.gameObject.CompareTag("Bonus"))
+            GameObject hittedObject = triggerCollider.gameObject;
+
+            if(hittedObject.CompareTag(SIStrings.BONUS))
             {
-                _onCollisionActions["Bonus"]?.Invoke(collider.gameObject.GetComponent<SIBonus>());
+                _onCollisionActions[SIStrings.BONUS]?.Invoke(hittedObject.GetComponent<SIBonus>());
                 return;
             }
 
             for (int i = 0; i < _objectTagsCount; i++)
             {
-                hasHittedObjectGivenTag = collider.gameObject.CompareTag(_objectTags[i]);
+                hasHittedObjectGivenTag = hittedObject.CompareTag(_objectTags[i]);
 
                 if (hasHittedObjectGivenTag)
                 {
