@@ -1,6 +1,6 @@
 namespace SpaceInvaders
 {
-    public static class SIStrings
+    public static class SIStringTags
     {
         public const string PLAYER = "Player";
         public const string ENEMY = "Enemy";

@@ -96,6 +96,8 @@ MonoBehaviour:
   _destroyVFX: {fileID: 9168323593088370388}
   _enemyMovement: {fileID: 275861281402422653}
   _bonusManager: {fileID: 1114935955244104923}
+  _projectileParent: {fileID: 641713421112421484}
+  _shootBehaviour: {fileID: 8529467507697743990}
 --- !u!114 &275861281402422653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +218,7 @@ Transform:
   m_GameObject: {fileID: 3426704194481364134}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -10.83, z: -0}
-  m_LocalScale: {x: 2.92708, y: 10.249978, z: 1}
+  m_LocalScale: {x: 3.3661418, y: 11.4031, z: 1}
   m_Children: []
   m_Father: {fileID: 3187074275270867311}
   m_RootOrder: 0
@@ -266,6 +268,7 @@ MonoBehaviour:
   - Player
   - Projectile
   _colliderParentBehaviour: {fileID: 7944746669716650107}
+  _parentShootBehaviour: {fileID: 8529467507697743990}
 --- !u!1 &4521149832610781887
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,6 +463,7 @@ MonoBehaviour:
   - Player
   - Projectile
   _colliderParentBehaviour: {fileID: 7944746669716650107}
+  _parentShootBehaviour: {fileID: 8529467507697743990}
 --- !u!1 &6197922684793495672
 GameObject:
   m_ObjectHideFlags: 0

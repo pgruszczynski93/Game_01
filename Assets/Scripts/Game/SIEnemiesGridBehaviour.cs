@@ -29,7 +29,6 @@ namespace SpaceInvaders
         protected void Awake()
         {
             Initialize();
-            GetEnemiesAbleToShoot();
         }
 
         private void OnEnable()
@@ -82,6 +81,7 @@ namespace SpaceInvaders
             _enemyGridTweenInfo.startValue = SIEnemiesGridsMaster.Instance.GridInitialPosition;
             _enemyGridTweenInfo.endValue = SIEnemiesGridsMaster.Instance.GridScenePosition;
             _enemiesAbleToShoot = new List<IShootable>();
+            GetEnemiesAbleToShoot();
         }
 
         private void GetEnemiesAbleToShoot()
@@ -89,7 +89,7 @@ namespace SpaceInvaders
             _enemiesAbleToShoot.Clear();
             for (int i = _totalEnemies - 1; i >= _totalEnemies - _enemiesInRow; i--)
             {
-                IShootable enemyAbleToShoot = _enemiesInGrid[i].GetComponent<SIEnemyShootBehaviour>();
+                SIEnemyShootBehaviour enemyAbleToShoot = _enemiesInGrid[i].GetComponent<SIEnemyShootBehaviour>();
                 if (enemyAbleToShoot == null)
                 {
                     return;
@@ -101,8 +101,9 @@ namespace SpaceInvaders
 
         public void ResetEnemyGrid()
         {
-            SIHelpers.SISimpleLogger(this, "ResetEnemyGrid: Grid reset", SimpleLoggerTypes.Log);
+            StartCoroutine(SIHelpers.CustomDelayRoutine(SIConstants.END_WAVE_DELAY * 10f));
 
+            SIHelpers.SISimpleLogger(this, "ResetEnemyGrid: Grid reset", SimpleLoggerTypes.Log);
             SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
             _livingEnemies = _totalEnemies;
             _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;

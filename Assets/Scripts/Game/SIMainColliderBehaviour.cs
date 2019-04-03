@@ -31,11 +31,11 @@ namespace SpaceInvaders
 
             _onCollisionActions = new Dictionary<string, CustomCollisonDelegate>()
             {
-                {SIStrings.PLAYER, delegate { }},
-                {SIStrings.ENEMY, delegate { }},
-                {SIStrings.PROJECTILE, delegate { }},
-                {SIStrings.ENEMY_PROJECTILE, delegate { }},
-                {SIStrings.BONUS, delegate { }}
+                {SIStringTags.PLAYER, delegate { }},
+                {SIStringTags.ENEMY, delegate { }},
+                {SIStringTags.PROJECTILE, delegate { }},
+                {SIStringTags.ENEMY_PROJECTILE, delegate { }},
+                {SIStringTags.BONUS, delegate { }}
             };
         }
 
@@ -71,9 +71,9 @@ namespace SpaceInvaders
 
             GameObject hittedObject = triggerCollider.gameObject;
 
-            if(hittedObject.CompareTag(SIStrings.BONUS))
+            if(hittedObject.CompareTag(SIStringTags.BONUS))
             {
-                _onCollisionActions[SIStrings.BONUS]?.Invoke(hittedObject.GetComponent<SIBonus>());
+                _onCollisionActions[SIStringTags.BONUS]?.Invoke(hittedObject.GetComponent<SIBonus>());
                 return;
             }
 

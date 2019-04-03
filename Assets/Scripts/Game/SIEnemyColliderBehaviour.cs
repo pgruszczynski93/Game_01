@@ -4,6 +4,13 @@ namespace SpaceInvaders
 {
     public class SIEnemyColliderBehaviour : SIMainColliderBehaviour<SIEnemyBehaviour>
     {
+        [SerializeField] private SIEnemyShootBehaviour _parentShootBehaviour;
+
+        public SIEnemyShootBehaviour ParentShootBehaviour
+        {
+            get => _parentShootBehaviour;
+        } 
+        
         protected override void OnEnable()
         {
             for (int i = 0; i < _objectTags.Length; i++)

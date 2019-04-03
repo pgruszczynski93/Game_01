@@ -12,10 +12,22 @@ namespace SpaceInvaders
         [SerializeField] private SIVFXManager _destroyVFX;
         [SerializeField] private SIEnemyMovement _enemyMovement;
         [SerializeField] private SIBonusParentManager _bonusManager;
+        [SerializeField] private SIProjectileBehaviour _projectileParent;
+        [SerializeField] private SIEnemyShootBehaviour _shootBehaviour;
 
         private Vector3 _raycastOffset;
 
         private void OnEnable()
+        {
+            AssignEvents();
+        }
+
+        public SIEnemyShootBehaviour ShootBehaviour
+        {
+            get => _shootBehaviour;
+        }
+        
+        private void AssignEvents()
         {
             SIEventsHandler.OnWaveEnd += Respawn;
             SIEventsHandler.OnDebugInputHandling += Debug_Respawn;
@@ -23,16 +35,21 @@ namespace SpaceInvaders
 
         private void OnDisable()
         {
+            RemoveEvents();
+        }
+
+        private void RemoveEvents()
+        {
             SIEventsHandler.OnWaveEnd += Respawn;
             SIEventsHandler.OnDebugInputHandling -= Debug_Respawn;
         }
 
         private void Start()
         {
-            SetInitialReferences();
+            Initialize();
         }
 
-        private void SetInitialReferences()
+        private void Initialize()
         {
             _raycastOffset = new Vector3(0.0f, 0.25f);
             _enemyStatistics.isAlive = true;
@@ -45,14 +62,15 @@ namespace SpaceInvaders
                 return;
             } 
             
-            SIShootedEnemyInfo nextShootableEnemyInfo = TryToAssignNextShootableEnemy();
+            SIShootedEnemyInfo nextShootableEnemyInfo = NextShootableEnemy();
             
             EnableEnemyVisibility(false);
             _enemyMovement.StopObj();
             _bonusManager.DropBonus();
             _enemyStatistics.isAlive = false;
+            _projectileParent.enabled = false;
             
-            if (nextShootableEnemyInfo == null || nextShootableEnemyInfo.nextShootableEnemy == null)
+            if (nextShootableEnemyInfo.currentShootableEnemy == null)
             {
                 return;
             }
@@ -65,44 +83,37 @@ namespace SpaceInvaders
         {
             _colliderParent.SetActive(canEnable);
             _meshRenderer.enabled = canEnable;
+            _projectileParent.enabled = canEnable;
             _destroyVFX.OnEnableVFXCallback(canEnable == false);
         }
 
-        public SIShootedEnemyInfo TryToAssignNextShootableEnemy()
+        public SIShootedEnemyInfo NextShootableEnemy()
         {
             Vector3 raycastPosition = transform.position;
             raycastPosition += _raycastOffset;
 
             RaycastHit raycastHitInfo;
-            SIEnemyShootBehaviour enemyShotBehaviour = gameObject.GetComponent<SIEnemyShootBehaviour>();
             SIEnemyShootBehaviour nextShootingEnemyBehaviour;
-
-            if (enemyShotBehaviour == null)
-            {
-                SIHelpers.SISimpleLogger(this, "Enemy hasn't attached SIEnemyShootBehaviour", SimpleLoggerTypes.Log);
-                return null;
-            }
 
             SIShootedEnemyInfo shootInfo = new SIShootedEnemyInfo()
             {
-                currentShootableEnemy = enemyShotBehaviour
+                currentShootableEnemy = _shootBehaviour
             };
 
             if (Physics.Raycast(raycastPosition, Vector3.up, out raycastHitInfo, _raycastDistance, _collisionMask))
             {
-                if (raycastHitInfo.collider != null && raycastHitInfo.collider.CompareTag("Enemy"))
+                if (raycastHitInfo.collider != null && raycastHitInfo.collider.CompareTag(SIStringTags.ENEMY))
                 {
-                    nextShootingEnemyBehaviour = raycastHitInfo.transform.parent.parent.parent.gameObject.GetComponent<SIEnemyShootBehaviour>();
+                    GameObject shootableGameObject = raycastHitInfo.transform.gameObject;
+                    nextShootingEnemyBehaviour = shootableGameObject.GetComponent<SIEnemyColliderBehaviour>().ParentShootBehaviour;
 
                     if (nextShootingEnemyBehaviour == null)
                     {
-                        SIHelpers.SISimpleLogger(this, "Next enemy doen's have attached SIEnemyShootBehaviour", SimpleLoggerTypes.Log);
                         shootInfo.currentShootableEnemy = null;
                         return shootInfo;
                     }
 
-                    SIHelpers.SISimpleLogger(this, "<color=blue>Shootable switched </color>" + nextShootingEnemyBehaviour.gameObject.name, SimpleLoggerTypes.Log);
-//                    Debug.DrawRay(raycastPosition, Vector3.up, Color.red, 1f);
+                    Debug.DrawRay(raycastPosition, Vector3.up, Color.red, 1f);
 
                     shootInfo.nextShootableEnemy = nextShootingEnemyBehaviour;
                 }
@@ -119,11 +130,12 @@ namespace SpaceInvaders
 
         private void Debug_Respawn()
         {
-            if (Input.GetKeyDown(KeyCode.L))
+            if (!Input.GetKeyDown(KeyCode.L))
             {
-                SIHelpers.SISimpleLogger(this, "Debug_Respawn()", SimpleLoggerTypes.Log);
-                Respawn();
+                return;
             }
+            SIHelpers.SISimpleLogger(this, "Debug_Respawn()", SimpleLoggerTypes.Log);
+            Respawn();
         }
     }
 }
