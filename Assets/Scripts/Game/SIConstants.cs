@@ -4,6 +4,8 @@ namespace SpaceInvaders
     {
         public const int ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP = 2;
         public const int ENEMIES_IN_ROW = 5;
+        public const int ENEMIES_IN_COLUMN = 3;
+        public const int ENEMIES_TOTAL = 15;
 
         public const float NEW_WAVE_COOLDOWN = 3f;
         public const float ENEMYGRID_MOVEMENT_STEP_1 = 5f;

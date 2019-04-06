@@ -19,8 +19,15 @@ namespace SpaceInvaders
         public static event Action OnDebugInputHandling = delegate { };
         public static event Action OnWaveEnd = delegate { };
         public static event Action<float> OnEnemySpeedMultiplierChanged = delegate { };
+
+        public static event Action<int> OnShootingEnemiesUpdate = delegate { };
         public static event Action<SIBonusInfo> OnBonusCollision = delegate { };
-        public static event Action<SIShootedEnemyInfo> OnSwitchShootableEnemy = delegate { };
+
+        public static void BroadcastOnShootingEnemiesUpdate(int index)
+        {
+            OnShootingEnemiesUpdate?.Invoke(index);
+        }
+
         public static void BroadcastOnGameStarted()
         {
             OnGameStarted?.Invoke();
@@ -95,12 +102,6 @@ namespace SpaceInvaders
         {
             OnBonusCollision?.Invoke(bonusInfo);
         }
-        
-        public static void BroadcastOnSwitchShootableEnemy(SIShootedEnemyInfo enemyInfo)
-        {
-            OnSwitchShootableEnemy?.Invoke(enemyInfo);
-        }
-        
         
     }
 }   

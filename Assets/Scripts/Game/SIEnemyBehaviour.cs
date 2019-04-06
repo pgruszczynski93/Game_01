@@ -4,9 +4,9 @@ namespace SpaceInvaders
 {
     public class SIEnemyBehaviour : MonoBehaviour, IRespawnable
     {
-        [SerializeField] private float _raycastDistance;
+        public int enemyIndex;
+        
         [SerializeField] private SIStatistics _enemyStatistics;
-        [SerializeField] private LayerMask _collisionMask;
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private GameObject _colliderParent;
         [SerializeField] private SIVFXManager _destroyVFX;
@@ -14,8 +14,6 @@ namespace SpaceInvaders
         [SerializeField] private SIBonusParentManager _bonusManager;
         [SerializeField] private SIProjectileBehaviour _projectileParent;
         [SerializeField] private SIEnemyShootBehaviour _shootBehaviour;
-
-        private Vector3 _raycastOffset;
 
         private void OnEnable()
         {
@@ -51,8 +49,12 @@ namespace SpaceInvaders
 
         private void Initialize()
         {
-            _raycastOffset = new Vector3(0.0f, 0.25f);
             _enemyStatistics.isAlive = true;
+        }
+
+        public bool IsEnemyAlive()
+        {
+            return _enemyStatistics.isAlive;
         }
 
         public void Death(MonoBehaviour collisionBehaviour = null)
@@ -62,21 +64,13 @@ namespace SpaceInvaders
                 return;
             } 
             
-            SIShootedEnemyInfo nextShootableEnemyInfo = NextShootableEnemy();
-            
             EnableEnemyVisibility(false);
             _enemyMovement.StopObj();
             _bonusManager.DropBonus();
             _enemyStatistics.isAlive = false;
             _projectileParent.enabled = false;
-            
-            if (nextShootableEnemyInfo.currentShootableEnemy == null)
-            {
-                return;
-            }
-            
-            SIEventsHandler.BroadcastOnSwitchShootableEnemy(nextShootableEnemyInfo);
 
+            SIEventsHandler.BroadcastOnShootingEnemiesUpdate(enemyIndex);
         }
 
         private void EnableEnemyVisibility(bool canEnable)
@@ -85,41 +79,6 @@ namespace SpaceInvaders
             _meshRenderer.enabled = canEnable;
             _projectileParent.enabled = canEnable;
             _destroyVFX.OnEnableVFXCallback(canEnable == false);
-        }
-
-        public SIShootedEnemyInfo NextShootableEnemy()
-        {
-            Vector3 raycastPosition = transform.position;
-            raycastPosition += _raycastOffset;
-
-            RaycastHit raycastHitInfo;
-            SIEnemyShootBehaviour nextShootingEnemyBehaviour;
-
-            SIShootedEnemyInfo shootInfo = new SIShootedEnemyInfo()
-            {
-                currentShootableEnemy = _shootBehaviour
-            };
-
-            if (Physics.Raycast(raycastPosition, Vector3.up, out raycastHitInfo, _raycastDistance, _collisionMask))
-            {
-                if (raycastHitInfo.collider != null && raycastHitInfo.collider.CompareTag(SIStringTags.ENEMY))
-                {
-                    GameObject shootableGameObject = raycastHitInfo.transform.gameObject;
-                    nextShootingEnemyBehaviour = shootableGameObject.GetComponent<SIEnemyColliderBehaviour>().ParentShootBehaviour;
-
-                    if (nextShootingEnemyBehaviour == null)
-                    {
-                        shootInfo.currentShootableEnemy = null;
-                        return shootInfo;
-                    }
-
-                    Debug.DrawRay(raycastPosition, Vector3.up, Color.red, 1f);
-
-                    shootInfo.nextShootableEnemy = nextShootingEnemyBehaviour;
-                }
-            }
-
-            return shootInfo;
         }
 
         public void Respawn()

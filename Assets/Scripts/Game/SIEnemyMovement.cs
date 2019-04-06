@@ -61,7 +61,7 @@ namespace SpaceInvaders
                 return;
             }
 
-            MoveObject(_currentMovementValueMultiplier, true);
+            //MoveObject(_currentMovementValueMultiplier, true);
 
         }
 

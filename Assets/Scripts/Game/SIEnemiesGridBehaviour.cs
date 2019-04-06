@@ -8,8 +8,8 @@ namespace SpaceInvaders
     {
         [SerializeField] private int _enemiesInRow;
         [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
-        [SerializeField] private GameObject[] _enemiesInGrid;
-        [SerializeField] private List<IShootable> _enemiesAbleToShoot;
+        [SerializeField] private SIEnemyBehaviour[] _enemies;
+        [SerializeField] private List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
 
         private bool _isShootingAvailableForWave;
 
@@ -47,7 +47,8 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath += UpdateCurrentSpeedMultiplier;
             SIEventsHandler.OnEnemyDeath += CheckEnemyWaveEnd;
 
-            SIEventsHandler.OnSwitchShootableEnemy += UpdateAbleToShootEnemies;
+            SIEventsHandler.OnShootingEnemiesUpdate += UpdateShootingEnemies;
+
             SIEventsHandler.OnWaveEnd += ResetEnemyGrid;
 
             SIEventsHandler.OnDebugInputHandling += Debug_ResetWave;
@@ -58,11 +59,20 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= DecreaseEnemiesCount;
             SIEventsHandler.OnEnemyDeath -= UpdateCurrentSpeedMultiplier;
             SIEventsHandler.OnEnemyDeath -= CheckEnemyWaveEnd;
+            SIEventsHandler.OnShootingEnemiesUpdate -= UpdateShootingEnemies;
 
-            SIEventsHandler.OnSwitchShootableEnemy -= UpdateAbleToShootEnemies;
+
             SIEventsHandler.OnWaveEnd -= ResetEnemyGrid;
 
             SIEventsHandler.OnDebugInputHandling -= Debug_ResetWave;
+        }
+
+        void AssignEnemyIndexes()
+        {
+            for (int i = 0; i < SIConstants.ENEMIES_TOTAL; i++)
+            {
+                _enemies[i].enemyIndex = i;
+            }
         }
 
         private void OnDestroy()
@@ -75,12 +85,13 @@ namespace SpaceInvaders
             _enemiesInRow = SIConstants.ENEMIES_IN_ROW;
             _shotTimeMinBreak = SIConstants.ENEMY_MIN_SHOOT_DELAY;
             _shotTimeMaxBreak = SIConstants.ENEMY_MAX_SHOOT_DELAY;
-            _totalEnemies = _enemiesInGrid.Length;
+            _totalEnemies = _enemies.Length;
             _livingEnemies = _totalEnemies;
             _cachedTransform = transform;
             _enemyGridTweenInfo.startValue = SIEnemiesGridsMaster.Instance.GridInitialPosition;
             _enemyGridTweenInfo.endValue = SIEnemiesGridsMaster.Instance.GridScenePosition;
-            _enemiesAbleToShoot = new List<IShootable>();
+            _enemiesAbleToShoot = new List<SIEnemyShootBehaviour>();
+            AssignEnemyIndexes();
             GetEnemiesAbleToShoot();
         }
 
@@ -89,7 +100,7 @@ namespace SpaceInvaders
             _enemiesAbleToShoot.Clear();
             for (int i = _totalEnemies - 1; i >= _totalEnemies - _enemiesInRow; i--)
             {
-                SIEnemyShootBehaviour enemyAbleToShoot = _enemiesInGrid[i].GetComponent<SIEnemyShootBehaviour>();
+                SIEnemyShootBehaviour enemyAbleToShoot = _enemies[i].ShootBehaviour;
                 if (enemyAbleToShoot == null)
                 {
                     return;
@@ -141,9 +152,9 @@ namespace SpaceInvaders
 
         private void Debug_ResetWave()
         {
-            if (Input.GetKeyDown(KeyCode.G) == false) 
+            if (Input.GetKeyDown(KeyCode.G) == false)
                 return;
-            
+
             SIHelpers.SISimpleLogger(this, "Debug_ResetWave()", SimpleLoggerTypes.Log);
             SIEventsHandler.BroadcastOnWaveEnd();
         }
@@ -167,27 +178,55 @@ namespace SpaceInvaders
             _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
         }
 
-        private void UpdateAbleToShootEnemies(SIShootedEnemyInfo enemiesInfo)
+        private void UpdateShootingEnemies(int index)
         {
-            if (_enemiesAbleToShoot.Contains(enemiesInfo.currentShootableEnemy) == false)
+            SIEnemyShootBehaviour deathEnemy = _enemies[index].ShootBehaviour;
+            bool isDeathEnemyShootable = IsDeathEnemyShootable(deathEnemy);
+
+            _enemiesAbleToShoot.Remove(deathEnemy);
+
+            // poprawić tego ifa tak by nie przepuszczał dalej gdy jest 2 rzad
+            Debug.LogWarning("Pased " + (isDeathEnemyShootable == false || index < SIConstants.ENEMIES_IN_ROW));
+
+            if (isDeathEnemyShootable == false || index < SIConstants.ENEMIES_IN_ROW)
             {
                 return;
             }
 
-            _enemiesAbleToShoot.Remove(enemiesInfo.currentShootableEnemy);
-
-            if (enemiesInfo.nextShootableEnemy != null)
-            {
-                _enemiesAbleToShoot.Add(enemiesInfo.nextShootableEnemy);
-            }
+            SIEnemyShootBehaviour newShootable = GetNextShootableEnemy(index);
+            _enemiesAbleToShoot.Add(newShootable);
         }
 
-        public void ShootWithAbleEnemies()
+        private SIEnemyShootBehaviour GetNextShootableEnemy(int index)
         {
-            for (int i = 0; i < _enemiesAbleToShoot.Count; i++)
+            const int enemiesInRow = SIConstants.ENEMIES_IN_ROW;
+            int killedEnemyRow = index / enemiesInRow;
+            int firstVerticalNeighbour;
+            int secondVerticalNeighbour;
+
+            if (killedEnemyRow == 2)
             {
-                _enemiesAbleToShoot[i].Shoot();
+                firstVerticalNeighbour = index - enemiesInRow;
+                secondVerticalNeighbour = firstVerticalNeighbour - enemiesInRow;
             }
+            else
+            {
+                firstVerticalNeighbour = index + enemiesInRow;
+                secondVerticalNeighbour = index - enemiesInRow;
+            }
+
+            Debug.LogWarning(string.Format("FIRST {0}, SECOND {1} ALIVE F  {2} ALIVE s {3} ", firstVerticalNeighbour,
+                secondVerticalNeighbour, _enemies[firstVerticalNeighbour].IsEnemyAlive(),
+                _enemies[secondVerticalNeighbour].IsEnemyAlive()));
+
+            return _enemies[firstVerticalNeighbour].IsEnemyAlive()
+                ? _enemies[firstVerticalNeighbour].ShootBehaviour
+                : _enemies[secondVerticalNeighbour].ShootBehaviour;
+        }
+
+        private bool IsDeathEnemyShootable(SIEnemyShootBehaviour shootingEnemy)
+        {
+            return _enemiesAbleToShoot.Contains(shootingEnemy);
         }
 
         public void StartShooting()
