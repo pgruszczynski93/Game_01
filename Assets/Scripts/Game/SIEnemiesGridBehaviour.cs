@@ -182,46 +182,57 @@ namespace SpaceInvaders
         {
             SIEnemyShootBehaviour deathEnemy = _enemies[index].ShootBehaviour;
             bool isDeathEnemyShootable = IsDeathEnemyShootable(deathEnemy);
+            int killedEnemyRow = index / SIConstants.ENEMIES_IN_ROW;
 
             _enemiesAbleToShoot.Remove(deathEnemy);
 
             // poprawić tego ifa tak by nie przepuszczał dalej gdy jest 2 rzad
-            Debug.LogWarning("Pased " + (isDeathEnemyShootable == false || index < SIConstants.ENEMIES_IN_ROW));
-
-            if (isDeathEnemyShootable == false || index < SIConstants.ENEMIES_IN_ROW)
+            if (isDeathEnemyShootable == false || killedEnemyRow == 0)
             {
                 return;
             }
 
-            SIEnemyShootBehaviour newShootable = GetNextShootableEnemy(index);
+            if (IsPossibleToChangeShootingEnemy(index, killedEnemyRow, out int firstVerticalNeighbour,
+                out int secondVerticalNeighbour) == false)
+            {
+                return;
+            }
+
+            SIEnemyShootBehaviour newShootable = GetNextShootableEnemy(firstVerticalNeighbour, secondVerticalNeighbour);
             _enemiesAbleToShoot.Add(newShootable);
         }
 
-        private SIEnemyShootBehaviour GetNextShootableEnemy(int index)
+        private bool IsPossibleToChangeShootingEnemy(int index, int killedEnemyRow, out int firstVerticalNeighbour,
+            out int secondVerticalNeighbour)
         {
-            const int enemiesInRow = SIConstants.ENEMIES_IN_ROW;
-            int killedEnemyRow = index / enemiesInRow;
-            int firstVerticalNeighbour;
-            int secondVerticalNeighbour;
-
             if (killedEnemyRow == 2)
             {
-                firstVerticalNeighbour = index - enemiesInRow;
-                secondVerticalNeighbour = firstVerticalNeighbour - enemiesInRow;
+                firstVerticalNeighbour = index - SIConstants.ENEMIES_IN_ROW;
+                secondVerticalNeighbour = firstVerticalNeighbour - SIConstants.ENEMIES_IN_ROW;
+                if (AreAllBehindNeighboursDead(firstVerticalNeighbour, secondVerticalNeighbour))
+                {
+                    return false;
+                }
             }
             else
             {
-                firstVerticalNeighbour = index + enemiesInRow;
-                secondVerticalNeighbour = index - enemiesInRow;
+                firstVerticalNeighbour = index + SIConstants.ENEMIES_IN_ROW;
+                secondVerticalNeighbour = index - SIConstants.ENEMIES_IN_ROW;
             }
 
-            Debug.LogWarning(string.Format("FIRST {0}, SECOND {1} ALIVE F  {2} ALIVE s {3} ", firstVerticalNeighbour,
-                secondVerticalNeighbour, _enemies[firstVerticalNeighbour].IsEnemyAlive(),
-                _enemies[secondVerticalNeighbour].IsEnemyAlive()));
+            return true;
+        }
 
-            return _enemies[firstVerticalNeighbour].IsEnemyAlive()
-                ? _enemies[firstVerticalNeighbour].ShootBehaviour
-                : _enemies[secondVerticalNeighbour].ShootBehaviour;
+        private bool AreAllBehindNeighboursDead(int indexOfFirst, int indexOfSecond)
+        {
+            return _enemies[indexOfFirst].IsEnemyAlive() == false && _enemies[indexOfSecond].IsEnemyAlive() == false;
+        }
+
+        private SIEnemyShootBehaviour GetNextShootableEnemy(int indexOfFirst, int indexOfSecond)
+        {
+            return _enemies[indexOfFirst].IsEnemyAlive()
+                ? _enemies[indexOfFirst].ShootBehaviour
+                : _enemies[indexOfSecond].ShootBehaviour;
         }
 
         private bool IsDeathEnemyShootable(SIEnemyShootBehaviour shootingEnemy)
@@ -257,11 +268,12 @@ namespace SpaceInvaders
             {
                 enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
                 anyEnemyIsAlive = enemiesAbleToShootCount > 0;
-                enemySelectedToShootIndex = Random.Range(0, (anyEnemyIsAlive) ? enemiesAbleToShootCount - 1 : 0);
+                // shift rand value to be in (0, n-1) size lenght value
+                enemySelectedToShootIndex = Random.Range(1, (anyEnemyIsAlive) ? enemiesAbleToShootCount + 1 : 0);
                 timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
                 if (enemySelectedToShootIndex >= 0)
                 {
-                    _enemiesAbleToShoot[enemySelectedToShootIndex].Shoot();
+                    _enemiesAbleToShoot[enemySelectedToShootIndex-1].Shoot();
                 }
 
                 yield return SIHelpers.GetWFSCachedValue(timeToNextShoot);
