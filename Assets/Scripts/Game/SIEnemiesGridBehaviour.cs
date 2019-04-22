@@ -23,8 +23,6 @@ namespace SpaceInvaders
         [SerializeField] private float _shotTimeMaxBreak;
 
         private Transform _cachedTransform;
-        private Vector2 _raycastDirection;
-        private Vector2 _raycastOffset;
 
         protected void Awake()
         {
@@ -183,10 +181,11 @@ namespace SpaceInvaders
             SIEnemyShootBehaviour deathEnemy = _enemies[index].ShootBehaviour;
             bool isDeathEnemyShootable = IsDeathEnemyShootable(deathEnemy);
             int killedEnemyRow = index / SIConstants.ENEMIES_IN_ROW;
+            
+            Debug.LogWarning("KILLED " + index);
 
             _enemiesAbleToShoot.Remove(deathEnemy);
 
-            // poprawić tego ifa tak by nie przepuszczał dalej gdy jest 2 rzad
             if (isDeathEnemyShootable == false || killedEnemyRow == 0)
             {
                 return;
@@ -209,21 +208,18 @@ namespace SpaceInvaders
             {
                 firstVerticalNeighbour = index - SIConstants.ENEMIES_IN_ROW;
                 secondVerticalNeighbour = firstVerticalNeighbour - SIConstants.ENEMIES_IN_ROW;
-                if (AreAllBehindNeighboursDead(firstVerticalNeighbour, secondVerticalNeighbour))
-                {
-                    return false;
-                }
+
             }
             else
             {
                 firstVerticalNeighbour = index + SIConstants.ENEMIES_IN_ROW;
                 secondVerticalNeighbour = index - SIConstants.ENEMIES_IN_ROW;
             }
-
-            return true;
+            
+            return AreNeighboursDead(firstVerticalNeighbour, secondVerticalNeighbour) == false;
         }
 
-        private bool AreAllBehindNeighboursDead(int indexOfFirst, int indexOfSecond)
+        private bool AreNeighboursDead(int indexOfFirst, int indexOfSecond)
         {
             return _enemies[indexOfFirst].IsEnemyAlive() == false && _enemies[indexOfSecond].IsEnemyAlive() == false;
         }

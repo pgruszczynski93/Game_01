@@ -11,7 +11,7 @@ namespace SpaceInvaders
             for (int i = 0; i < _objectTags.Length; i++)
             {
                 _onCollisionActions[_objectTags[i]] += EnableDestroyVFX;
-                _onCollisionActions[_objectTags[i]] += _colliderParentBehaviour.OnCollisionResetProjectile;
+                _onCollisionActions[_objectTags[i]] += _colliderParentBehaviour.OnEnemyDeathResetProjectile;
                 _onCollisionActions[_objectTags[i]] += OnCollisionMessage;
             }
         }
@@ -21,7 +21,7 @@ namespace SpaceInvaders
             for (int i = 0; i < _objectTags.Length; i++)
             {
                 _onCollisionActions[_objectTags[i]] -= EnableDestroyVFX;
-                _onCollisionActions[_objectTags[i]] -= _colliderParentBehaviour.OnCollisionResetProjectile;
+                _onCollisionActions[_objectTags[i]] -= _colliderParentBehaviour.OnEnemyDeathResetProjectile;
                 _onCollisionActions[_objectTags[i]] -= OnCollisionMessage;
             }
         }
@@ -33,7 +33,6 @@ namespace SpaceInvaders
 
         private void EnableDestroyVFX(MonoBehaviour collisionBehaviour = null)
         {
-            // p[oprawić efekt pocisku tak by zostawał w miejscu po uderzeniu!! - zrobic gameobject ktory sie odczepia w momencie uderzenia i ma efekt - potem powraca do pozycji poczatkowej
             if (_destroyVFX != null)
             {
                 _destroyVFX.OnEnableAndDetachVFXCallback(true);
