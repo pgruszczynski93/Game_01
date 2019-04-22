@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6deb8c900ff920c47a3a23b6f35e7742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _raycastDistance: 0.5
+  enemyIndex: 0
   _enemyStatistics:
     isAlive: 0
     canDropBonus: 0
@@ -88,9 +88,6 @@ MonoBehaviour:
     currentScore: 0
     currentWave: 0
     currentCollectibleLevel: 0
-  _collisionMask:
-    serializedVersion: 2
-    m_Bits: 256
   _meshRenderer: {fileID: 1881762110048184449}
   _colliderParent: {fileID: 6197922684793495672}
   _destroyVFX: {fileID: 9168323593088370388}
@@ -364,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMoving: 0
-  _forceScaleFactor: 4.2
+  _forceScaleFactor: 3.5
   _rigidbody: {fileID: 6868970296195430129}
   _cachedParentTransform: {fileID: 4698860576044419641}
   _cachedProjectileTransform: {fileID: 1342410204974039246}

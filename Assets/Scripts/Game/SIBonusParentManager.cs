@@ -16,10 +16,10 @@ namespace SpaceInvaders
 
         private void Awake()
         {
-            SetInitialReferences();
+            Initialize();
         }
 
-        private void SetInitialReferences()
+        private void Initialize()
         {
             if (_availableBonuses == null)
             {

@@ -14,10 +14,10 @@ namespace SpaceInvaders
 
         private void Start()
         {
-            SetInitialReferences();
+            Initialize();
         }
 
-        private void SetInitialReferences()
+        private void Initialize()
         {
             if (_availableProjectilesPrefabs == null)
             {
@@ -46,6 +46,7 @@ namespace SpaceInvaders
             _currentProjectile = _availableProjectilesPrefabs[0];
         }
 
+        // poprawić tak by naboje wracaly do slotu dopiero po przekroczneiu ekranu a nie po smierci wroga
         public void Shoot()
         {
 

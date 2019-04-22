@@ -67,14 +67,16 @@ namespace SpaceInvaders
 
         private Vector3 TryToMoveObjectDown(Vector3 objectInCameraBoundsPos)
         {
-            if (objectInCameraBoundsPos.IsObjectOutOfHorizontalViewportBounds3D())
-            { 
-                objectInCameraBoundsPos.y -= VERTICAL_MOVEMENT_VIEWPORT_STEP;
-
-                StopAllCoroutines();
-                SetMovementDirectionProperties();
-                StartCoroutine(RotateRoutine());
+            if (!objectInCameraBoundsPos.IsObjectOutOfHorizontalViewportBounds3D())
+            {
+                return objectInCameraBoundsPos;
             }
+            
+            objectInCameraBoundsPos.y -= VERTICAL_MOVEMENT_VIEWPORT_STEP;
+
+            StopAllCoroutines();
+            SetMovementDirectionProperties();
+            StartCoroutine(RotateRoutine());
 
             return objectInCameraBoundsPos;
         }

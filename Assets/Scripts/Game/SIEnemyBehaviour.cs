@@ -68,7 +68,7 @@ namespace SpaceInvaders
             _enemyMovement.StopObj();
             _bonusManager.DropBonus();
             _enemyStatistics.isAlive = false;
-            _projectileParent.enabled = false;
+            //_projectileParent.enabled = false;
 
             SIEventsHandler.BroadcastOnShootingEnemiesUpdate(enemyIndex);
         }
@@ -77,7 +77,6 @@ namespace SpaceInvaders
         {
             _colliderParent.SetActive(canEnable);
             _meshRenderer.enabled = canEnable;
-            _projectileParent.enabled = canEnable;
             _destroyVFX.OnEnableVFXCallback(canEnable == false);
         }
 

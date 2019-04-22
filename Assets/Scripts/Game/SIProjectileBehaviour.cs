@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -17,12 +18,13 @@ namespace SpaceInvaders
         private Camera _mainCamera;
         private Vector3 _moveForce;
         private Vector3 _parentResetPosition;
+        private WaitUntil _waitUnitil;
 
         public bool IsMoving { get => _isMoving; set => _isMoving = value; }
 
         private void Awake()
         {
-            SetInitialReferences();
+            Initialize();
         }
 
         private void OnEnable()
@@ -37,13 +39,14 @@ namespace SpaceInvaders
             SIEventsHandler.OnObjectsMovement -= CheckIsProjectileOnScreen;
         }
 
-        private void SetInitialReferences()
+        private void Initialize()
         {
             if (_cachedParentTransform == null)
             {
                 return;
             }
-
+            
+            _waitUnitil = new WaitUntil(() => _isMoving == false);
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _moveForce = _cachedParentTransform.up.normalized;
             _parentResetPosition = new Vector2(0,0);
@@ -67,25 +70,35 @@ namespace SpaceInvaders
 
         private void Move()
         {
-            if (_rigidbody == null)
+            if (_rigidbody == null || _isMoving)
             {
                 return;
             }
 
-            if (_isMoving == false)
-            {
-                EnableParticles(true);
-                _projectileCollider.enabled = true;
-                _isMoving = true;
-                _meshRenderer.enabled = true;
-                _cachedProjectileTransform.parent = null;
-                _rigidbody.AddForce(_moveForce.normalized * _forceScaleFactor, ForceMode.Impulse);
-            }
+            EnableParticles(true);
+            _projectileCollider.enabled = true;
+            _isMoving = true;
+            _meshRenderer.enabled = true;
+            _cachedProjectileTransform.parent = null;
+            _rigidbody.AddForce(_moveForce.normalized * _forceScaleFactor, ForceMode.Impulse);
         }
 
-        public void OnCollisionResetProjectile(MonoBehaviour collisionBehaviour = null)
+        public void OnEnemyDeathResetProjectile(MonoBehaviour collisionBehaviour = null)
+        {
+            StartCoroutine(WaitForOutOfScreenRoutine());
+            ResetProjectile();
+        }
+        
+        //split it to two classes playerprojectile & enemies projectile - more extensibility
+        public void OnPlayerProjectileHitsEnemy(MonoBehaviour collisionBehaviour = null)
         {
             ResetProjectile();
+        }
+
+        private IEnumerator WaitForOutOfScreenRoutine()
+        {
+            yield return _waitUnitil;
+            Debug.Log("CHUJ DUPA CYCKI +++++++++++++++++++++++++++");
         }
 
         public void ResetProjectile()

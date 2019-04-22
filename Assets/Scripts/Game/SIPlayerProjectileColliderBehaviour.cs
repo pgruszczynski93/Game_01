@@ -10,7 +10,7 @@ namespace SpaceInvaders
 
             for (int i = 0; i < _objectTags.Length; i++)
             {
-                _onCollisionActions[_objectTags[i]] += _colliderParentBehaviour.OnCollisionResetProjectile;
+                _onCollisionActions[_objectTags[i]] += _colliderParentBehaviour.OnPlayerProjectileHitsEnemy;
                 _onCollisionActions[_objectTags[i]] += OnCollisionMessage;
             }
         }
@@ -19,7 +19,7 @@ namespace SpaceInvaders
         {
             for (int i = 0; i < _objectTags.Length; i++)
             {
-                _onCollisionActions[_objectTags[i]] -= _colliderParentBehaviour.OnCollisionResetProjectile;
+                _onCollisionActions[_objectTags[i]] -= _colliderParentBehaviour.OnPlayerProjectileHitsEnemy;
                 _onCollisionActions[_objectTags[i]] -= OnCollisionMessage;
             }
         }
