@@ -14,7 +14,8 @@ namespace SpaceInvaders
         private Touch _mainTouch;
         private Vector2 _normalizedTouchDelta;
         private Dictionary<MovementType, float> _movementSpeeds;
-        
+        [SerializeField] private Joystick _joystick;
+
         public float InputMovementValue { get; set; }
 
         protected override void OnEnable()
@@ -73,24 +74,30 @@ namespace SpaceInvaders
 
         private void CalculateMobileInputValue()
         {
-            if (Input.touchCount <= 0)
+            if (_joystick == null)
             {
                 return;
             }
-            
-            _mainTouch = Input.GetTouch(0);
-            _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
 
-            if ((_mainTouch.phase == TouchPhase.Began || _mainTouch.phase == TouchPhase.Moved)
-                && _normalizedTouchDelta.magnitude > _touchTreshold)
-            {
-                _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
-                InputMovementValue = _normalizedTouchDelta.x;
-            }
-            else
-            {
-                InputMovementValue = 0f;
-            }
+            InputMovementValue = _joystick.Horizontal;
+//            if (Input.touchCount <= 0)
+//            {
+//                return;
+//            }
+//            
+//            _mainTouch = Input.GetTouch(0);
+//            _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
+//
+//            if ((_mainTouch.phase == TouchPhase.Began || _mainTouch.phase == TouchPhase.Moved)
+//                && _normalizedTouchDelta.magnitude > _touchTreshold)
+//            {
+//                _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
+//                InputMovementValue = _normalizedTouchDelta.x;
+//            }
+//            else
+//            {
+//                InputMovementValue = 0f;
+//            }
         }
 
         private void RotateObject(float rotateValue)

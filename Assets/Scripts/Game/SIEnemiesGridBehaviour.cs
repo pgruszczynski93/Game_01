@@ -110,8 +110,7 @@ namespace SpaceInvaders
 
         public void ResetEnemyGrid()
         {
-            StartCoroutine(SIHelpers.CustomDelayRoutine(SIConstants.END_WAVE_DELAY * 10f));
-
+//            StartCoroutine(SIHelpers.CustomDelayRoutine(SIConstants.END_WAVE_DELAY));
             SIHelpers.SISimpleLogger(this, "ResetEnemyGrid: Grid reset", SimpleLoggerTypes.Log);
             SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
             _livingEnemies = _totalEnemies;
