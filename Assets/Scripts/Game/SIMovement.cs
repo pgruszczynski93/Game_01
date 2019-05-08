@@ -30,7 +30,7 @@ namespace SpaceInvaders
             get { return _movementType; }
         }
 
-        protected virtual void Awake()
+        protected void Awake()
         {
             Initialize();
         }
@@ -49,6 +49,7 @@ namespace SpaceInvaders
 
         protected virtual void OnDisable() {}
 
+        //dorobic ruch pionowy 
         protected virtual void MoveObject(float movementValue, bool moveDownEnabled = false)
         {
             if (_mainCamera == null)
@@ -61,8 +62,8 @@ namespace SpaceInvaders
             float horizontalMoveSpeed = _dt * movementValue * _currentMovementSpeed;
 
             Vector3 currentPosition = _cachedTransform.position;
-            Vector3 newPosition = new Vector2(currentPosition.x + horizontalMoveSpeed, currentPosition.y);
-            Vector3 smoothedPosition = Vector2.Lerp(currentPosition, newPosition, _lerpStep);
+            Vector3 newPosition = new Vector3(currentPosition.x + horizontalMoveSpeed, currentPosition.y);
+            Vector3 smoothedPosition = Vector3.Lerp(currentPosition, newPosition, _lerpStep);
 
             Vector3 objectInCameraBoundsPos = _mainCamera.WorldToViewportPoint(smoothedPosition);
             objectInCameraBoundsPos.x = Mathf.Clamp(objectInCameraBoundsPos.x, SIHelpers.CAMERA_MIN_VIEWPORT_X,
