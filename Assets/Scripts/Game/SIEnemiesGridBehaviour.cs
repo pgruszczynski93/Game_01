@@ -59,7 +59,6 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= CheckEnemyWaveEnd;
             SIEventsHandler.OnShootingEnemiesUpdate -= UpdateShootingEnemies;
 
-
             SIEventsHandler.OnWaveEnd -= ResetEnemyGrid;
 
             SIEventsHandler.OnDebugInputHandling -= Debug_ResetWave;
@@ -110,7 +109,6 @@ namespace SpaceInvaders
 
         public void ResetEnemyGrid()
         {
-//            StartCoroutine(SIHelpers.CustomDelayRoutine(SIConstants.END_WAVE_DELAY));
             SIHelpers.SISimpleLogger(this, "ResetEnemyGrid: Grid reset", SimpleLoggerTypes.Log);
             SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
             _livingEnemies = _totalEnemies;
@@ -144,7 +142,11 @@ namespace SpaceInvaders
                 return;
             }
 
-            SIEventsHandler.BroadcastOnWaveEnd();
+            StartCoroutine(SIHelpers.CustomDelayRoutine(SIConstants.END_WAVE_DELAY, () =>
+            {
+                SIEventsHandler.BroadcastOnWaveEnd();
+            }));
+
         }
 
         private void Debug_ResetWave()

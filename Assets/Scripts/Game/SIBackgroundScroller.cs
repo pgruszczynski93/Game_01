@@ -5,8 +5,8 @@ namespace SpaceInvaders
     [RequireComponent(typeof(MeshRenderer))]
     public class SIBackgroundScroller : MonoBehaviour, IMoveable
     {
-        [Range(0.01f, 1f)][SerializeField] private float _xScalingFactor;
-        [Range(0.01f, 1f)][SerializeField] private float _yScalingFactor;
+        [Range(-1f, 1f)][SerializeField] private float _xScalingFactor;
+        [Range(-1f, 1f)][SerializeField] private float _yScalingFactor;
 
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private Vector2 _scrollOffset;
