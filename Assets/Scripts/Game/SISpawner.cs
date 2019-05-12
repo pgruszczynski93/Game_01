@@ -2,9 +2,8 @@
 
 namespace SpaceInvaders
 {
-    public class SISpawner : SIGenericSingleton<SISpawner>, IRespawnable
+    public class SISpawner : MonoBehaviour
     {
-
         protected virtual void OnEnable()
         {
             //SIEventsHandler.OnWaveEnd += Respawn;
@@ -13,10 +12,6 @@ namespace SpaceInvaders
         protected virtual void OnDisable()
         {
             //SIEventsHandler.OnWaveEnd += Respawn;
-        }
-
-        public void Respawn()
-        {
         }
     }
 

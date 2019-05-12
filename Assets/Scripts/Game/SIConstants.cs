@@ -6,6 +6,8 @@ namespace SpaceInvaders
         public const int ENEMIES_IN_ROW = 5;
         public const int ENEMIES_IN_COLUMN = 3;
         public const int ENEMIES_TOTAL = 15;
+        public const int MAX_SPAWNED_ASTEROIDS = 20;
+        
 
         public const float NEW_WAVE_COOLDOWN = 3f;
         public const float ENEMYGRID_MOVEMENT_STEP_1 = 5f;

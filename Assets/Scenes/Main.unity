@@ -1173,7 +1173,7 @@ GameObject:
   - component: {fileID: 633363828}
   - component: {fileID: 633363827}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ShootButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1196,7 +1196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -258, y: 143}
+  m_AnchoredPosition: {x: -249, y: 180}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &633363827
@@ -1238,7 +1238,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 633363828}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1082920292}
+        m_MethodName: Debug_Shot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &633363828
@@ -3526,12 +3537,12 @@ PrefabInstance:
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 230
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 192
+      value: 240
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
@@ -4494,12 +4505,12 @@ PrefabInstance:
     - target: {fileID: 3461506718661510166, guid: 91a8466d08e25db469192c053cd1a7bf,
         type: 3}
       propertyPath: _isEditorLoggingDisabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3461506718661510166, guid: 91a8466d08e25db469192c053cd1a7bf,
         type: 3}
       propertyPath: _isAndroidLoggingDisabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8274390074243520242, guid: 91a8466d08e25db469192c053cd1a7bf, type: 3}

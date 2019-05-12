@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -34,6 +33,18 @@ namespace SpaceInvaders
                 SIHelpers.SISimpleLogger(this, "No player assigned to SIGameMasterBehaviour", SimpleLoggerTypes.Error);
                 return null;
             }
+        }
+        
+
+        // Initialization in Start because, Awake is taken by signleton and some scripts may depend from it.
+        protected void Start()
+        {
+            InitializeSpawners();
+        }
+
+        private void InitializeSpawners()
+        {
+            SIEventsHandler.BroadcastOnSpawnObject();
         }
 
         private void OnEnable()
