@@ -266,9 +266,9 @@ namespace SpaceInvaders
                 enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
                 anyEnemyIsAlive = enemiesAbleToShootCount > 0;
                 // shift rand value to be in (0, n-1) size lenght value
-                enemySelectedToShootIndex = Random.Range(1, (anyEnemyIsAlive) ? enemiesAbleToShootCount + 1 : 0);
+                enemySelectedToShootIndex = Random.Range(1, (anyEnemyIsAlive) ? enemiesAbleToShootCount + 1 : 1);
                 timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
-                if (enemySelectedToShootIndex >= 0)
+                if (anyEnemyIsAlive)
                 {
                     _enemiesAbleToShoot[enemySelectedToShootIndex-1].Shoot();
                 }

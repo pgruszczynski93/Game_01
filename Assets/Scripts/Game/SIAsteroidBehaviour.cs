@@ -23,11 +23,11 @@ namespace SpaceInvaders
         
         public void MoveObj()
         {
+            _rigidbody.AddForce(Vector3.forward * 100);
         }
-
         public void StopObj()
         {
-            
+            _rigidbody.velocity = SIHelpers.VectorZero;
         }
     }
 }
