@@ -4,13 +4,15 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
+    [ExecuteInEditMode]
     public class SIAsteroidSpawner : SISpawner, IRespawnable
     {
+        [SerializeField] private bool test;
+        
         [SerializeField] private float _shotTimeMinBreak;
         [SerializeField] private float _shotTimeMaxBreak;
         
         [SerializeField] private Transform _asteroidsTemplateParent;
-        [SerializeField] private Vector3[] _asteroidsBoundariesPositions;
         [SerializeField] private Transform[] _asteroidsBoundaries;
         [SerializeField] private List<GameObject> _asteroids;
         [SerializeField] private List<SIAsteroidBehaviour> _spawnedAsteroids;
@@ -40,18 +42,46 @@ namespace SpaceInvaders
         private void Initialize()
         {
             _asteroidsTemplateParent = transform;
-
-            SetBoundariesPositions();
         }
 
-        private void SetBoundariesPositions()
+        private Vector3 GetOutOfScreenPosition(int parentIndex)
         {
-            _asteroidsBoundariesPositions = new Vector3[SIConstants.ASTEROID_BOUNDARIES];
-            for (int i = 0; i < SIConstants.ASTEROID_BOUNDARIES; i++)
+            Camera mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
+
+            float xPosition;
+            float yPosition;
+            float zPosition = 12f;
+
+            float maxPosition = SIConstants.VIEWPORT_SPAWN_MAX;
+            float minPosition = SIConstants.VIEWPORT_SPAWN_MIN;
+
+            Vector3 viewportToWorldVector;
+            
+            switch (parentIndex)
             {
-                _asteroidsBoundariesPositions[i] = _asteroidsBoundaries[i].position;
+                case 0:
+                    xPosition = -minPosition;
+                    yPosition = Random.Range(0f, 1f);
+                    break;
+                case 1:
+                    xPosition = maxPosition;
+                    yPosition = Random.Range(0f, 1f);
+                    break;
+                case 2:
+                    xPosition = Random.Range(0f, 1f);
+                    yPosition = -minPosition;
+                    break;
+                default:
+                    xPosition = Random.Range(0f, 1f);
+                    yPosition = maxPosition;
+                    break;
             }
+            
+            
+            viewportToWorldVector = mainCamera.ViewportToWorldPoint(new Vector3(xPosition, yPosition, zPosition));
+            return viewportToWorldVector;
         }
+
 
         public void Spawn()
         {
@@ -64,12 +94,15 @@ namespace SpaceInvaders
 
             int asteroidPrefabsCount = _asteroids.Count;
             _spawnedAsteroids = new List<SIAsteroidBehaviour>();
+            Transform playerTarget = SIGameMasterBehaviour.Instance.Player.transform;
 
             for (int i = 0; i < SIConstants.MAX_SPAWNED_ASTEROIDS; i++)
             {
                 int spawnedPrefabIndex = Random.Range(0, asteroidPrefabsCount);
-                int spawnedParentIndex = Random.Range(0, SIConstants.ASTEROID_BOUNDARIES - 2);    // skipping forward & backward colliders
-                GameObject asteroidObject = Instantiate(_asteroids[spawnedPrefabIndex], _asteroidsBoundaries[spawnedParentIndex]);
+                int spawnedParentIndex = Random.Range(0, SIConstants.SCREEN_EDGES);    // skipping forward & backward colliders
+                GameObject asteroidObject = Instantiate(_asteroids[spawnedPrefabIndex], _asteroidsTemplateParent);
+                Transform asteroidTransform = asteroidObject.transform;
+                asteroidTransform.position = GetOutOfScreenPosition(spawnedParentIndex);
                 asteroidObject.SetActive(true);
                 SIAsteroidBehaviour asteroid = asteroidObject.GetComponent<SIAsteroidBehaviour>();
                 _spawnedAsteroids.Add(asteroid);
@@ -88,21 +121,15 @@ namespace SpaceInvaders
             
             while (true)
             {
-                asteroidIndex = Random.Range(0, SIConstants.ASTEROID_BOUNDARIES);
-                timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
-                _spawnedAsteroids[asteroidIndex].MoveObj();
-                yield return SIHelpers.GetWFSCachedValue(timeToNextShoot);
-            }
-        }
+                asteroidIndex = 0;
+                for (asteroidIndex = 0; asteroidIndex < SIConstants.MAX_SPAWNED_ASTEROIDS; asteroidIndex++)
+                {
+                    _spawnedAsteroids[asteroidIndex].MoveObj();
+                    yield return SIHelpers.CustomDelayRoutine(0.25f);
+                }
 
-        private bool IsPointInBoundaries(Vector3 pointCoords)
-        {
-            return pointCoords.x >= _asteroidsBoundariesPositions[0].x &&
-                   pointCoords.x <= _asteroidsBoundariesPositions[1].x &&
-                   pointCoords.y >= _asteroidsBoundariesPositions[2].y &&
-                   pointCoords.y <= _asteroidsBoundariesPositions[3].y &&
-                   pointCoords.z >= _asteroidsBoundariesPositions[4].z &&
-                   pointCoords.z <= _asteroidsBoundariesPositions[5].z;
+                yield return SIHelpers.CustomDelayRoutine(0.25f);
+            }
         }
 
         public void Respawn()

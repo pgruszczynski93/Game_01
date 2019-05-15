@@ -5,6 +5,8 @@ namespace SpaceInvaders
     public class SIAsteroidBehaviour : MonoBehaviour, IMoveable
     {
 
+        private bool _isMoving;
+        
         [SerializeField] private Rigidbody _rigidbody;
 
         private void Start()
@@ -17,13 +19,17 @@ namespace SpaceInvaders
             if (_rigidbody == null)
             {
                 Debug.LogError("No rigidbody attached.", this);
-                return;
             }
         }
         
         public void MoveObj()
         {
-            _rigidbody.AddForce(Vector3.forward * 100);
+            if (_isMoving != false)
+            {
+                return;
+            }
+            _rigidbody.AddForce(Vector3.left * 100);
+            _isMoving = true;
         }
         public void StopObj()
         {
