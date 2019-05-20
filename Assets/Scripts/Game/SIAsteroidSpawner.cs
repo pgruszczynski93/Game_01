@@ -125,10 +125,10 @@ namespace SpaceInvaders
                 for (asteroidIndex = 0; asteroidIndex < SIConstants.MAX_SPAWNED_ASTEROIDS; asteroidIndex++)
                 {
                     _spawnedAsteroids[asteroidIndex].MoveObj();
-                    yield return SIHelpers.CustomDelayRoutine(0.25f);
+                    yield return SIHelpers.CustomDelayRoutine(1.25f);
                 }
 
-                yield return SIHelpers.CustomDelayRoutine(0.25f);
+                yield return SIHelpers.CustomDelayRoutine(1.25f);
             }
         }
 

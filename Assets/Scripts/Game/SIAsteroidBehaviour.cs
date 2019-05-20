@@ -6,7 +6,9 @@ namespace SpaceInvaders
     {
 
         private bool _isMoving;
+        private Transform _cachedTransform;
         
+        private SIPlayerBehaviour _player;
         [SerializeField] private Rigidbody _rigidbody;
 
         private void Start()
@@ -20,6 +22,12 @@ namespace SpaceInvaders
             {
                 Debug.LogError("No rigidbody attached.", this);
             }
+
+            _cachedTransform = transform;
+            _player = SIGameMasterBehaviour.Instance.Player;
+            Vector3 toPlayerDirection = (_player.transform.position - _cachedTransform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(toPlayerDirection, Vector3.up);
+            _cachedTransform.rotation = lookRotation;
         }
         
         public void MoveObj()
@@ -28,7 +36,7 @@ namespace SpaceInvaders
             {
                 return;
             }
-            _rigidbody.AddForce(Vector3.left * 100);
+            _rigidbody.AddForce(_cachedTransform.forward * 5f, ForceMode.Impulse);
             _isMoving = true;
         }
         public void StopObj()
