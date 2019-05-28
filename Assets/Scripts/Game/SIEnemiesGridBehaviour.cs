@@ -160,7 +160,7 @@ namespace SpaceInvaders
 
         public void MoveEnemiesGrid()
         {
-            StartCoroutine(GridInitialMovementRoutine());
+            //StartCoroutine(GridInitialMovementRoutine());
         }
 
         private IEnumerator GridInitialMovementRoutine()
@@ -183,8 +183,6 @@ namespace SpaceInvaders
             bool isDeathEnemyShootable = IsDeathEnemyShootable(deathEnemy);
             int killedEnemyRow = index / SIConstants.ENEMIES_IN_ROW;
             
-            Debug.LogWarning("KILLED " + index);
-
             _enemiesAbleToShoot.Remove(deathEnemy);
 
             if (isDeathEnemyShootable == false || killedEnemyRow == 0)

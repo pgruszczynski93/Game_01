@@ -10,8 +10,6 @@ namespace SpaceInvaders
         public const int SCREEN_EDGES = 4;
 
 
-        public const float VIEWPORT_SPAWN_MIN = 0.25f;
-        public const float VIEWPORT_SPAWN_MAX = 1.25f;
         public const float NEW_WAVE_COOLDOWN = 3f;
         public const float ENEMYGRID_MOVEMENT_STEP_1 = 5f;
         public const float ENEMYGRID_MOVEMENT_STEP_2 = 7f;

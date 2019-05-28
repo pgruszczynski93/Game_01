@@ -25,6 +25,10 @@ namespace SpaceInvaders
         public static float CAMERA_MAX_VIEWPORT_X = 0.925f;
         public static float CAMERA_MIN_VIEWPORT_Y = 0.0f;
         public static float CAMERA_MAX_VIEWPORT_Y = 1.0f;
+        
+        public const float VIEWPORT_SPAWN_MIN = -0.25f;
+        public const float VIEWPORT_SPAWN_MAX = 1.25f;
+        
         public static Vector3 VectorZero = new Vector3(0f, 0f, 0f);
         public static Vector3 VectorDown = new Vector3(0f, -1f, 0f);
 
@@ -41,11 +45,11 @@ namespace SpaceInvaders
         private static void TryToAddToCoroutineWaitCache(float waitTime)
         {
             WaitForSeconds wfs;
-            if (CoroutineWaitCache.TryGetValue(waitTime, out wfs) == false)
-            {
-                wfs = new WaitForSeconds(waitTime);
-                CoroutineWaitCache.Add(waitTime, wfs);
-            }
+            if (CoroutineWaitCache.TryGetValue(waitTime, out wfs))
+                return;
+            
+            wfs = new WaitForSeconds(waitTime);
+            CoroutineWaitCache.Add(waitTime, wfs);
         }
 
         public static WaitForSeconds GetWFSCachedValue(float waitTime)
@@ -56,22 +60,18 @@ namespace SpaceInvaders
 
         public static bool IsObjectOutOfHorizontalViewportBounds3D(this Vector3 objectViewportPos)
         {
-            if (objectViewportPos.x >= CAMERA_MAX_VIEWPORT_X || objectViewportPos.x <= CAMERA_MIN_VIEWPORT_X)
-            {
-                return true;
-            }
-
-            return false;
+            return objectViewportPos.x >= CAMERA_MAX_VIEWPORT_X || objectViewportPos.x <= CAMERA_MIN_VIEWPORT_X;
         }
 
         public static bool IsObjectOutOfViewportVerticalBounds3D(this Vector3 objectViewportPos)
         {
-            if(objectViewportPos.y >= CAMERA_MAX_VIEWPORT_Y || objectViewportPos.y <= CAMERA_MIN_VIEWPORT_Y)
-            {
-                return true;
-            }
+            return objectViewportPos.y >= CAMERA_MAX_VIEWPORT_Y || objectViewportPos.y <= CAMERA_MIN_VIEWPORT_Y;
+        }
 
-            return false;
+        public static bool IsObjectVisibleInTheScreen(this Vector3 objectViewportPos)
+        {
+            return objectViewportPos.x >= VIEWPORT_SPAWN_MIN && objectViewportPos.x <= VIEWPORT_SPAWN_MAX &&
+                   objectViewportPos.y >= VIEWPORT_SPAWN_MIN && objectViewportPos.y <= VIEWPORT_SPAWN_MAX;
         }
 
         public static Vector3 SnapToGrid(Vector3 pos, float offset)

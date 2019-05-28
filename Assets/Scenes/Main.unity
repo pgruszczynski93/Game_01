@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df171ec49874361a5c23c3061dadef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _asteroidState: 0
   _rigidbody: {fileID: 35966980}
 --- !u!54 &35966980
 Rigidbody:
@@ -1682,6 +1683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df171ec49874361a5c23c3061dadef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _asteroidState: 0
   _rigidbody: {fileID: 1201226817}
 --- !u!54 &1201226817
 Rigidbody:
@@ -1971,6 +1973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df171ec49874361a5c23c3061dadef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _asteroidState: 0
   _rigidbody: {fileID: 1455821073}
 --- !u!54 &1455821073
 Rigidbody:
@@ -4071,12 +4074,12 @@ PrefabInstance:
     - target: {fileID: 3461506718661510166, guid: 91a8466d08e25db469192c053cd1a7bf,
         type: 3}
       propertyPath: _isEditorLoggingDisabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3461506718661510166, guid: 91a8466d08e25db469192c053cd1a7bf,
         type: 3}
       propertyPath: _isAndroidLoggingDisabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8274390074243520242, guid: 91a8466d08e25db469192c053cd1a7bf, type: 3}
