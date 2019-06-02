@@ -10,6 +10,9 @@ namespace SpaceInvaders
 
         private SIPlayerBehaviour _player;
         private Camera _mainCamera;
+
+        [SerializeField] private float _minForce;
+        [SerializeField] private float _maxForce;
         [SerializeField] private AsteroidState _asteroidState;
         [SerializeField] private Rigidbody _rigidbody;
 
@@ -50,14 +53,7 @@ namespace SpaceInvaders
             _startPosition = _cachedTransform.position;
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _player = SIGameMasterBehaviour.Instance.Player;
-            Vector3 toPlayerDirection = (_player.transform.position - _startPosition).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(toPlayerDirection, Vector3.up);
-            _cachedTransform.rotation = lookRotation;
-            Debug.Log(toPlayerDirection);
-            //naprawic rotacje asterodi
-//            Vector3 localEulerAngles = _cachedTransform.localEulerAngles;
-//            Vector3 eulerRotation = new Vector3(localEulerAngles.x, 90.0f, localEulerAngles.z);
-//            _cachedTransform.rotation = Quaternion.Euler(eulerRotation);
+            RotateTowardsScreen();
         }
 
         public void MoveObj()
@@ -67,7 +63,10 @@ namespace SpaceInvaders
                 return;
             }
 
-            _rigidbody.AddForce(_cachedTransform.forward * 5f, ForceMode.Impulse);
+            Vector3 forward = _cachedTransform.forward;
+            float forceMultiplier = Random.Range(_minForce, _maxForce);
+            _rigidbody.AddForce(forward * forceMultiplier, ForceMode.Impulse);
+            _rigidbody.AddTorque(forward * forceMultiplier, ForceMode.Impulse);
             _isMoving = true;
         }
 
@@ -77,10 +76,16 @@ namespace SpaceInvaders
             _rigidbody.velocity = SIHelpers.VectorZero;
             _asteroidState = AsteroidState.ReadyToMove;
             _cachedTransform.position = _startPosition;
+            RotateTowardsScreen();
+        }
+
+        private void RotateTowardsScreen()
+        {
+            //currently rotates towards player
             Vector3 toPlayerDirection = (_player.transform.position - _startPosition).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(toPlayerDirection, Vector3.up);
             _cachedTransform.rotation = lookRotation;
-            Debug.Log(toPlayerDirection);
+            //naprawić rotacje - wprwadzic kąty 90;270
 //            Vector3 localEulerAngles = _cachedTransform.localEulerAngles;
 //            Vector3 eulerRotation = new Vector3(localEulerAngles.x, 90.0f, localEulerAngles.z);
 //            _cachedTransform.rotation = Quaternion.Euler(eulerRotation);
@@ -107,8 +112,6 @@ namespace SpaceInvaders
             {
                 _asteroidState = AsteroidState.OnScreen;
             }
-//            
-
         }
     }
 }

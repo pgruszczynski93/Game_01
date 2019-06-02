@@ -9,14 +9,14 @@ namespace SpaceInvaders
     {
         [SerializeField] private bool test;
 
-        [SerializeField] private float _shotTimeMinBreak;
-        [SerializeField] private float _shotTimeMaxBreak;
+        [SerializeField] private float _minTimeOffset;
+        [SerializeField] private float _maxTimeOffset;
         
         [SerializeField] private Transform _asteroidsTemplateParent;
-        [SerializeField] private Transform[] _asteroidsBoundaries;
-        [SerializeField] private List<GameObject> _asteroids;
+        [SerializeField] private List<GameObject> _asteroidsPrefabs;
         [SerializeField] private List<SIAsteroidBehaviour> _spawnedAsteroids;
 
+        [SerializeField] int _asteroidPrefabsCount;
         private Camera _mainCamera;
 
         private void Start()
@@ -59,6 +59,7 @@ namespace SpaceInvaders
         private void Initialize()
         {
             _asteroidsTemplateParent = transform;
+            _asteroidPrefabsCount = _asteroidsPrefabs.Count;
         }
 
         private Vector3 GetOutOfScreenPosition(int parentIndex)
@@ -67,7 +68,7 @@ namespace SpaceInvaders
 
             float xPosition;
             float yPosition;
-            float zPosition = 15f;
+            float zPosition = 25f;
 
             Vector3 viewportToWorldVector;
             Vector3 viewportPosition;
@@ -100,21 +101,19 @@ namespace SpaceInvaders
 
         public void Spawn()
         {
-            if (_asteroids == null || _asteroids.Count == 0 || _asteroidsBoundaries == null ||
-                _asteroidsBoundaries.Length == 0)
+            if (_asteroidsPrefabs == null || _asteroidsPrefabs.Count == 0)
             {
                 Debug.LogError("No asteroid's attached.", this);
                 return;
             }
 
-            int asteroidPrefabsCount = _asteroids.Count;
             _spawnedAsteroids = new List<SIAsteroidBehaviour>();
 
             for (int i = 0; i < SIConstants.MAX_SPAWNED_ASTEROIDS; i++)
             {
-                int spawnedPrefabIndex = Random.Range(0, asteroidPrefabsCount);
+                int spawnedPrefabIndex = Random.Range(0, _asteroidPrefabsCount);
                 int spawnedParentIndex = Random.Range(0, SIConstants.SCREEN_EDGES);    // skipping forward & backward colliders
-                GameObject asteroidObject = Instantiate(_asteroids[spawnedPrefabIndex], _asteroidsTemplateParent);
+                GameObject asteroidObject = Instantiate(_asteroidsPrefabs[spawnedPrefabIndex], _asteroidsTemplateParent);
                 Transform asteroidTransform = asteroidObject.transform;
                 asteroidTransform.position = GetOutOfScreenPosition(spawnedParentIndex);
                 asteroidObject.SetActive(true);
@@ -132,10 +131,11 @@ namespace SpaceInvaders
         {
             for (int i = 0; i < SIConstants.MAX_SPAWNED_ASTEROIDS; i++)
             {
+                int spawnedPrefabIndex = Random.Range(0, _asteroidPrefabsCount);
                 int spawnedParentIndex = Random.Range(0, SIConstants.SCREEN_EDGES);   
-                GameObject asteroidObject = _asteroids[i];
+                GameObject asteroidObject = _asteroidsPrefabs[spawnedPrefabIndex];
                 Transform asteroidTransform = asteroidObject.transform;
-                asteroidTransform.localPosition = GetOutOfScreenPosition(spawnedParentIndex);
+                asteroidTransform.position = GetOutOfScreenPosition(spawnedParentIndex);
             }
         }
 
@@ -146,14 +146,13 @@ namespace SpaceInvaders
             
             while (true)
             {
-                asteroidIndex = 0;
                 for (asteroidIndex = 0; asteroidIndex < SIConstants.MAX_SPAWNED_ASTEROIDS; asteroidIndex++)
                 {
                     _spawnedAsteroids[asteroidIndex].MoveObj();
-                    yield return SIHelpers.CustomDelayRoutine(0.55f);
+                    yield return SIHelpers.CustomDelayRoutine(Random.Range(_minTimeOffset, _maxTimeOffset));
                 }
 
-                yield return SIHelpers.CustomDelayRoutine(1.25f/*, () => ResetAsteroids()*/);
+                yield return SIHelpers.CustomDelayRoutine(SIConstants.ASTEROIDS_RESPAWN_DELAY/* , ResetAsteroids*/);
             }
         }
 

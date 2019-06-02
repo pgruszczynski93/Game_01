@@ -210,6 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df171ec49874361a5c23c3061dadef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minForce: 1
+  _maxForce: 5
   _asteroidState: 0
   _rigidbody: {fileID: 35966980}
 --- !u!54 &35966980
@@ -356,17 +358,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test: 0
-  _shotTimeMinBreak: 0
-  _shotTimeMaxBreak: 0
+  _minTimeOffset: 0.4
+  _maxTimeOffset: 1.5
   _asteroidsTemplateParent: {fileID: 135232084}
-  _asteroidsBoundaries:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _asteroids:
+  _asteroidsPrefabs:
   - {fileID: 35966977}
   - {fileID: 1201226814}
   - {fileID: 1455821070}
@@ -391,6 +386,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _asteroidPrefabsCount: 3
 --- !u!1 &190608593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1683,6 +1679,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df171ec49874361a5c23c3061dadef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minForce: 0.5
+  _maxForce: 4
   _asteroidState: 0
   _rigidbody: {fileID: 1201226817}
 --- !u!54 &1201226817
@@ -1973,6 +1971,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df171ec49874361a5c23c3061dadef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minForce: 1
+  _maxForce: 5.5
   _asteroidState: 0
   _rigidbody: {fileID: 1455821073}
 --- !u!54 &1455821073
