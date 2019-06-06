@@ -6,13 +6,19 @@ namespace SpaceInvaders
         public const int ENEMIES_IN_ROW = 5;
         public const int ENEMIES_IN_COLUMN = 3;
         public const int ENEMIES_TOTAL = 15;
+        public const int MAX_SPAWNED_ASTEROIDS = 20;
+        public const int SCREEN_EDGES = 4;
 
+
+        public const float ASTEROIDS_RESPAWN_DELAY = 1.2f;
         public const float NEW_WAVE_COOLDOWN = 3f;
         public const float ENEMYGRID_MOVEMENT_STEP_1 = 5f;
         public const float ENEMYGRID_MOVEMENT_STEP_2 = 7f;
         public const float ENEMIES_GRID_OFFSET = 0.5f;
         public const float ENEMY_MIN_SHOOT_DELAY = 0.4f;
         public const float ENEMY_MAX_SHOOT_DELAY = 1f;
-        public const float END_WAVE_DELAY = 0.1f;
+        public const float END_WAVE_DELAY = 1f;
+        public const float MIN_ASTEROID_Z = 15f;
+        public const float MAX_ASTEROID_Z = 27f;
     }
 }

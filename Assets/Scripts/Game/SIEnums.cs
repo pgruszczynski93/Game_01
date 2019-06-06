@@ -11,6 +11,12 @@
         EnableAndDetachVFX,
         EnableAndAttachVFX
     }
+    
+    public enum AsteroidState
+    {
+        ReadyToMove,
+        OnScreen,
+    }
 
     public enum SimpleLoggerTypes
     {

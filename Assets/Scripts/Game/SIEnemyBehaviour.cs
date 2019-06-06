@@ -80,6 +80,11 @@ namespace SpaceInvaders
             _destroyVFX.OnEnableVFXCallback(canEnable == false);
         }
 
+        public void Spawn()
+        {
+            
+        }
+        
         public void Respawn()
         {
             _enemyStatistics.isAlive = true;

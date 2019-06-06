@@ -7,6 +7,8 @@ namespace SpaceInvaders
     {
         public static event Action OnGameStarted = delegate { };
         public static event Action OnGameFinished = delegate { };
+        
+        public static event Action OnSpawnObject = delegate { };
         public static event Action OnGameQuit = delegate { };
         public static event Action OnEnemiesRespawn = delegate { };
         public static event Action OnObjectsMovement = delegate { };
@@ -26,6 +28,11 @@ namespace SpaceInvaders
         public static void BroadcastOnShootingEnemiesUpdate(int index)
         {
             OnShootingEnemiesUpdate?.Invoke(index);
+        }
+
+        public static void BroadcastOnSpawnObject()
+        {
+            OnSpawnObject?.Invoke();
         }
 
         public static void BroadcastOnGameStarted()

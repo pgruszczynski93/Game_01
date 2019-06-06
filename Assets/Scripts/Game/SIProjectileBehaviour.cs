@@ -98,7 +98,6 @@ namespace SpaceInvaders
         private IEnumerator WaitForOutOfScreenRoutine()
         {
             yield return _waitUnitil;
-            Debug.Log("CHUJ DUPA CYCKI +++++++++++++++++++++++++++");
         }
 
         public void ResetProjectile()

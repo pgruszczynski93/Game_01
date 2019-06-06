@@ -59,7 +59,6 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= CheckEnemyWaveEnd;
             SIEventsHandler.OnShootingEnemiesUpdate -= UpdateShootingEnemies;
 
-
             SIEventsHandler.OnWaveEnd -= ResetEnemyGrid;
 
             SIEventsHandler.OnDebugInputHandling -= Debug_ResetWave;
@@ -110,8 +109,6 @@ namespace SpaceInvaders
 
         public void ResetEnemyGrid()
         {
-            StartCoroutine(SIHelpers.CustomDelayRoutine(SIConstants.END_WAVE_DELAY * 10f));
-
             SIHelpers.SISimpleLogger(this, "ResetEnemyGrid: Grid reset", SimpleLoggerTypes.Log);
             SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
             _livingEnemies = _totalEnemies;
@@ -145,7 +142,11 @@ namespace SpaceInvaders
                 return;
             }
 
-            SIEventsHandler.BroadcastOnWaveEnd();
+            StartCoroutine(SIHelpers.CustomDelayRoutine(SIConstants.END_WAVE_DELAY, () =>
+            {
+                SIEventsHandler.BroadcastOnWaveEnd();
+            }));
+
         }
 
         private void Debug_ResetWave()
@@ -182,8 +183,6 @@ namespace SpaceInvaders
             bool isDeathEnemyShootable = IsDeathEnemyShootable(deathEnemy);
             int killedEnemyRow = index / SIConstants.ENEMIES_IN_ROW;
             
-            Debug.LogWarning("KILLED " + index);
-
             _enemiesAbleToShoot.Remove(deathEnemy);
 
             if (isDeathEnemyShootable == false || killedEnemyRow == 0)
@@ -265,9 +264,9 @@ namespace SpaceInvaders
                 enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
                 anyEnemyIsAlive = enemiesAbleToShootCount > 0;
                 // shift rand value to be in (0, n-1) size lenght value
-                enemySelectedToShootIndex = Random.Range(1, (anyEnemyIsAlive) ? enemiesAbleToShootCount + 1 : 0);
+                enemySelectedToShootIndex = Random.Range(1, (anyEnemyIsAlive) ? enemiesAbleToShootCount + 1 : 1);
                 timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
-                if (enemySelectedToShootIndex >= 0)
+                if (anyEnemyIsAlive)
                 {
                     _enemiesAbleToShoot[enemySelectedToShootIndex-1].Shoot();
                 }
