@@ -6,11 +6,10 @@ namespace SpaceInvaders
 {
     public class SIPlayerMovement : SIMovement, IMoveable
     {
-        private float SLOW_SPEED = 15f;
-        private float BASIC_SPEED = 30f;
+        private float SLOW_SPEED = 25f;
+        private float BASIC_SPEED = 35f;
         private float FAST_SPEED = 45f;
 
-        [SerializeField] private float _touchTreshold;
         private Touch _mainTouch;
         private Vector2 _normalizedTouchDelta;
         private Dictionary<MovementType, float> _movementSpeeds;
@@ -33,11 +32,11 @@ namespace SpaceInvaders
             base.Initialize();
 
             MAX_ROTATION_ANGLE = 40f;
-#if UNITY_ANDROID && !UNITY_EDITOR
-            SLOW_SPEED = 7.5f;
-            BASIC_SPEED = 12.5f;
-            FAST_SPEED = 20f;
-#endif
+//#if UNITY_ANDROID && !UNITY_EDITOR
+//            SLOW_SPEED = 7.5f;
+//            BASIC_SPEED = 12.5f;
+//            FAST_SPEED = 20f;
+//#endif
         _movementSpeeds = new Dictionary<MovementType, float>
             {
                 {MovementType.Basic, BASIC_SPEED},
@@ -80,24 +79,6 @@ namespace SpaceInvaders
             }
 
             InputMovementValue = _joystick.Horizontal;
-//            if (Input.touchCount <= 0)
-//            {
-//                return;
-//            }
-//            
-//            _mainTouch = Input.GetTouch(0);
-//            _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
-//
-//            if ((_mainTouch.phase == TouchPhase.Began || _mainTouch.phase == TouchPhase.Moved)
-//                && _normalizedTouchDelta.magnitude > _touchTreshold)
-//            {
-//                _normalizedTouchDelta = _mainTouch.deltaPosition.normalized;
-//                InputMovementValue = _normalizedTouchDelta.x;
-//            }
-//            else
-//            {
-//                InputMovementValue = 0f;
-//            }
         }
 
         private void RotateObject(float rotateValue)

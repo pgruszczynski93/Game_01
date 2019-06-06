@@ -24,12 +24,6 @@ namespace SpaceInvaders
 
         protected Func<Vector3, Vector3> onScreenEdgeAction;
 
-        public MovementType CurrentMovementType
-        {
-            set { _movementType = value; }
-            get { return _movementType; }
-        }
-
         protected void Awake()
         {
             Initialize();

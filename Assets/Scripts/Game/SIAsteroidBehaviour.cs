@@ -81,14 +81,19 @@ namespace SpaceInvaders
 
         private void RotateTowardsScreen()
         {
-            //currently rotates towards player
             Vector3 toPlayerDirection = (_player.transform.position - _startPosition).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(toPlayerDirection, Vector3.up);
             _cachedTransform.rotation = lookRotation;
-            //naprawić rotacje - wprwadzic kąty 90;270
-//            Vector3 localEulerAngles = _cachedTransform.localEulerAngles;
-//            Vector3 eulerRotation = new Vector3(localEulerAngles.x, 90.0f, localEulerAngles.z);
-//            _cachedTransform.rotation = Quaternion.Euler(eulerRotation);
+            Vector3 localEulerAngles = _cachedTransform.localEulerAngles;
+            Vector3 eulerRotation = new Vector3(localEulerAngles.x, ConvertEulerY(localEulerAngles.y), localEulerAngles.z);
+            _cachedTransform.rotation = Quaternion.Euler(eulerRotation);
+        }
+
+        private float ConvertEulerY(float localEulerY)
+        {
+            if (localEulerY >= 0.0f && localEulerY <= 180.0f)
+                return 90.0f;
+            return 270.0f;
         }
 
         public void StopObj()

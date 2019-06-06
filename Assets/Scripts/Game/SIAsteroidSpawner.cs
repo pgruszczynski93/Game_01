@@ -68,7 +68,7 @@ namespace SpaceInvaders
 
             float xPosition;
             float yPosition;
-            float zPosition = 25f;
+            float zPosition = Random.Range(SIConstants.MIN_ASTEROID_Z, SIConstants.MAX_ASTEROID_Z);
 
             Vector3 viewportToWorldVector;
             Vector3 viewportPosition;
