@@ -76,22 +76,28 @@ namespace SpaceInvaders
 
         private void Update()
         {
+            HandleUpdate();
+        }
+
+        private void HandleUpdate()
+        {
+            OnUpdateIndependentMovements();
+            
             if (_isGameStarted == false)
             {
                 return;
             }
-
-            RunGameLoop();
-        }
-
-        private void RunGameLoop()
-        {
             OnUpdateMovements();
             OnShadersUpdateCallback();
             OnDebugInputHandling();
             OnGameQuitCallback();
         }
 
+        private void OnUpdateIndependentMovements()
+        {
+            SIEventsHandler.BroadcastOnGameIndependentObjectsMovement();
+        }
+        
         private void OnDebugInputHandling()
         {
             SIEventsHandler.BroadcastOnDebugInputHandling();
