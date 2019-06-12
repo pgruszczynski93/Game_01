@@ -6,9 +6,9 @@ namespace SpaceInvaders
 {
     public class SIPlayerMovement : SIMovement, IMoveable
     {
-        private float SLOW_SPEED = 25f;
-        private float BASIC_SPEED = 35f;
-        private float FAST_SPEED = 45f;
+        private float SLOW_SPEED = 20f;
+        private float BASIC_SPEED = 25f;
+        private float FAST_SPEED = 30f;
 
         private Touch _mainTouch;
         private Vector2 _normalizedTouchDelta;

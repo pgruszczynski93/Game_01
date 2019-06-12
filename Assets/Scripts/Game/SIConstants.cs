@@ -11,7 +11,7 @@ namespace SpaceInvaders
 
 
         public const float ASTEROIDS_RESPAWN_DELAY = 1.2f;
-        public const float NEW_WAVE_COOLDOWN = 3f;
+        public const float NEW_WAVE_COOLDOWN = 1f;
         public const float ENEMYGRID_MOVEMENT_STEP_1 = 5f;
         public const float ENEMYGRID_MOVEMENT_STEP_2 = 7f;
         public const float ENEMIES_GRID_OFFSET = 0.5f;
