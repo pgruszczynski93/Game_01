@@ -1325,19 +1325,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e3dffd295844a49bbd454c96177845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1151845345 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7089611953591753695, guid: 643dc00ed43498e44ad70822b931f722,
-    type: 3}
-  m_PrefabInstance: {fileID: 7089611952591525950}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1151845347 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7089611953591753693, guid: 643dc00ed43498e44ad70822b931f722,
     type: 3}
   m_PrefabInstance: {fileID: 7089611952591525950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151845345}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3144cfbc065766249aefd843721793d8, type: 3}
@@ -3110,6 +3104,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4607504781790589168, guid: ff26e07da7d4d264ca47860c2204ada4,
+        type: 3}
+      propertyPath: _speed
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881219726427245793, guid: ff26e07da7d4d264ca47860c2204ada4,
+        type: 3}
+      propertyPath: _speed
+      value: 1.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff26e07da7d4d264ca47860c2204ada4, type: 3}
 --- !u!1001 &2140103831045023130
@@ -3704,33 +3708,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 31742441, guid: 91a8466d08e25db469192c053cd1a7bf, type: 3}
-      propertyPath: _enemiesGrid_1
-      value: 
-      objectReference: {fileID: 1151845345}
-    - target: {fileID: 31742441, guid: 91a8466d08e25db469192c053cd1a7bf, type: 3}
       propertyPath: _enemiesGridBehaviour
       value: 
       objectReference: {fileID: 1151845347}
-    - target: {fileID: 417006359, guid: 91a8466d08e25db469192c053cd1a7bf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 127853309, guid: 91a8466d08e25db469192c053cd1a7bf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3461506718661510166, guid: 91a8466d08e25db469192c053cd1a7bf,
-        type: 3}
-      propertyPath: _isEditorLoggingDisabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3461506718661510166, guid: 91a8466d08e25db469192c053cd1a7bf,
-        type: 3}
-      propertyPath: _isAndroidLoggingDisabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8274390074243520242, guid: 91a8466d08e25db469192c053cd1a7bf, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91a8466d08e25db469192c053cd1a7bf, type: 3}
 --- !u!1001 &7089611952591525950
 PrefabInstance:

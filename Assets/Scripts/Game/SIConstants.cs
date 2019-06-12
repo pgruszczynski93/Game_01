@@ -17,8 +17,8 @@ namespace SpaceInvaders
         public const float ENEMIES_GRID_OFFSET = 0.5f;
         public const float ENEMY_MIN_SHOOT_DELAY = 0.4f;
         public const float ENEMY_MAX_SHOOT_DELAY = 1f;
-        public const float END_WAVE_DELAY = 1f;
-        public const float MIN_ASTEROID_Z = 15f;
+        public const float END_WAVE_DELAY = 3f;
+        public const float MIN_ASTEROID_Z = 15.5f;
         public const float MAX_ASTEROID_Z = 27f;
     }
 }

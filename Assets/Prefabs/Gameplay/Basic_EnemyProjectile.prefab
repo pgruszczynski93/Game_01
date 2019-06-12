@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3019215686242233917}
   - component: {fileID: 6948176693457471732}
   - component: {fileID: 4615088356763934125}
+  - component: {fileID: 4579619091672328030}
   m_Layer: 8
   m_Name: Basic_EnemyProjectile
   m_TagString: EnemyProjectile
@@ -59,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 8359524486144961408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 2135761235993091964}
   - {fileID: 4394943228708959262}
@@ -77,8 +78,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.5, y: 1.33, z: 0.59}
+  m_Center: {x: 0, y: -0.16, z: 0}
 --- !u!54 &6948176693457471732
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -93,7 +94,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &4615088356763934125
 MonoBehaviour:
@@ -111,7 +112,21 @@ MonoBehaviour:
   - Player
   - Projectile
   _colliderParentBehaviour: {fileID: 0}
-  _destroyVFX: {fileID: 0}
+  _destroyVFX: {fileID: 4579619091672328030}
+--- !u!114 &4579619091672328030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359524486144961408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c5896dd0cb3154db4647c3b8cf637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effectVFX: {fileID: 5887373181240481740}
+  _parentTransform: {fileID: 3287257246736072395}
 --- !u!1001 &2140103830937066080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168,16 +183,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4664812115985692, guid: ff96c31f3b7e9e3418c7de97600b9219, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664812115985692, guid: ff96c31f3b7e9e3418c7de97600b9219, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4664812115985692, guid: ff96c31f3b7e9e3418c7de97600b9219, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664812115985692, guid: ff96c31f3b7e9e3418c7de97600b9219, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5884687391728834414, guid: ff96c31f3b7e9e3418c7de97600b9219,
         type: 3}
@@ -202,10 +217,6 @@ PrefabInstance:
     - target: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
       propertyPath: m_Name
       value: WFX_Explosion Small
-      objectReference: {fileID: 0}
-    - target: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -251,24 +262,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 19900014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11400000, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
 --- !u!4 &7044909181172862152 stripped
 Transform:

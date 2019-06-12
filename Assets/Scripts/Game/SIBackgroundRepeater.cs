@@ -13,24 +13,34 @@ namespace SpaceInvaders
 
         private void OnEnable()
         {
-            SIEventsHandler.OnObjectsMovement += MoveObj;
+            AssignEvents();
         }
-
+        
         private void OnDisable()
         {
-            SIEventsHandler.OnObjectsMovement -= MoveObj;
+            RemoveEvents();
+        }
+
+        private void AssignEvents()
+        {
+            SIEventsHandler.OnGameIndependentObjectsMovement += MoveObj;
+        }
+
+        private void RemoveEvents()
+        {
+            SIEventsHandler.OnGameIndependentObjectsMovement -= MoveObj;
         }
 
         private void Start()
         {
-            SetInitialReferences();
+            Initialise();
         }
 
-        private void SetInitialReferences()
+        private void Initialise()
         {
             _cachedTransform = transform;
             _startPosition = _cachedTransform.position;
-            float eulerAnglesZ = transform.eulerAngles.z;
+            float eulerAnglesZ = _cachedTransform.eulerAngles.z;
 
             _direction = new Vector3(
                 Mathf.Cos(eulerAnglesZ * Mathf.Deg2Rad),
