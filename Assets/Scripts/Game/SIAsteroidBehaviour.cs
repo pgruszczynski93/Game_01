@@ -7,12 +7,12 @@ namespace SpaceInvaders
         private bool _isMoving;
         private Transform _cachedTransform;
         private Vector3 _startPosition;
-
-        private SIPlayerBehaviour _player;
         private Camera _mainCamera;
+        private SIPlayerBehaviour _player;
 
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxForce;
+        
         [SerializeField] private AsteroidState _asteroidState;
         [SerializeField] private Rigidbody _rigidbody;
 
@@ -50,7 +50,7 @@ namespace SpaceInvaders
 
             _asteroidState = AsteroidState.ReadyToMove;
             _cachedTransform = transform;
-            _startPosition = _cachedTransform.position;
+            _startPosition = _cachedTransform.localPosition;
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _player = SIGameMasterBehaviour.Instance.Player;
             RotateTowardsScreen();
@@ -63,10 +63,11 @@ namespace SpaceInvaders
                 return;
             }
 
-            Vector3 forward = _cachedTransform.forward;
             float forceMultiplier = Random.Range(_minForce, _maxForce);
-            _rigidbody.AddForce(forward * forceMultiplier, ForceMode.Impulse);
-            _rigidbody.AddTorque(forward * forceMultiplier, ForceMode.Impulse);
+            Vector3 forward = _cachedTransform.forward;
+            Vector3 multipliedMoveVector = forward * forceMultiplier;
+            _rigidbody.AddForce(multipliedMoveVector, ForceMode.Impulse);
+            _rigidbody.AddTorque(multipliedMoveVector, ForceMode.Impulse);
             _isMoving = true;
         }
 
@@ -74,19 +75,20 @@ namespace SpaceInvaders
         {
             _isMoving = false;
             _rigidbody.velocity = SIHelpers.VectorZero;
+            _rigidbody.angularVelocity = SIHelpers.VectorZero;
             _asteroidState = AsteroidState.ReadyToMove;
-            _cachedTransform.position = _startPosition;
+            _cachedTransform.localPosition = _startPosition;
             RotateTowardsScreen();
         }
 
         private void RotateTowardsScreen()
         {
-            Vector3 toPlayerDirection = (_player.transform.position - _startPosition).normalized;
+            Vector3 toPlayerDirection = (_player.transform.localPosition - _startPosition).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(toPlayerDirection, Vector3.up);
-            _cachedTransform.rotation = lookRotation;
-            Vector3 localEulerAngles = _cachedTransform.localEulerAngles;
-            Vector3 eulerRotation = new Vector3(localEulerAngles.x, ConvertEulerY(localEulerAngles.y), localEulerAngles.z);
-            _cachedTransform.rotation = Quaternion.Euler(eulerRotation);
+//            _cachedTransform.localRotation = lookRotation;
+//            Vector3 localEulerAngles = _cachedTransform.localEulerAngles;
+//            Vector3 eulerRotation = new Vector3(localEulerAngles.x, ConvertEulerY(localEulerAngles.y), localEulerAngles.z);
+//            _cachedTransform.localRotation = Quaternion.Euler(eulerRotation);
         }
 
         private float ConvertEulerY(float localEulerY)
@@ -103,7 +105,7 @@ namespace SpaceInvaders
 
         void CheckIsObjectVisibleOnScreen()
         {
-            Vector3 currentPosition = _cachedTransform.position;
+            Vector3 currentPosition = _cachedTransform.localPosition;
             Vector3 viewportPosition = _mainCamera.WorldToViewportPoint(currentPosition);
             bool isObjectVisible = viewportPosition.IsObjectVisibleInTheScreen();
             

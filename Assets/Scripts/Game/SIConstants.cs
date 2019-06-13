@@ -6,7 +6,6 @@ namespace SpaceInvaders
         public const int ENEMIES_IN_ROW = 5;
         public const int ENEMIES_IN_COLUMN = 3;
         public const int ENEMIES_TOTAL = 15;
-        public const int MAX_SPAWNED_ASTEROIDS = 20;
         public const int SCREEN_EDGES = 4;
 
 
