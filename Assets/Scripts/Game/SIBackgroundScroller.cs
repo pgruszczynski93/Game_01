@@ -15,12 +15,23 @@ namespace SpaceInvaders
 
         protected void OnEnable()
         {
-            SIEventsHandler.OnObjectsMovement += MoveObj;
+            AssignEvents();
         }
-
+        
         protected void OnDisable()
         {
-            SIEventsHandler.OnObjectsMovement -= MoveObj;
+            RemoveEvents();
+        }
+
+
+        private void AssignEvents()
+        {
+            SIEventsHandler.OnGameIndependentObjectsMovement += MoveObj;
+        }
+
+        private void RemoveEvents()
+        {
+            SIEventsHandler.OnGameIndependentObjectsMovement -= MoveObj;
         }
 
         public void MoveObj()

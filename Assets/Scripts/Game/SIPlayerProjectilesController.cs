@@ -54,31 +54,6 @@ namespace SpaceInvaders
             {
                 _projectileReloaders[i].ShootAndReloadProjectile();
             }
-            //for (int i = 0; i < CurrentProjectile.projectilePrefabs.Length; i++)
-            //{
-            //    GameObject currentProjectile = CurrentProjectile.projectilePrefabs[i];
-            //    currentProjectile.SetActive(true);
-            //    currentProjectile.GetComponent<SIProjectileBehaviour>().MoveObj();
-            //}
         }
-
-        //DEBUG_
-        //private void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.X))
-        //    {
-        //        CurrentProjectile = _availableProjectilesPrefabs[0];
-        //    }
-
-        //    if (Input.GetKeyDown(KeyCode.C))
-        //    {
-        //        CurrentProjectile = _availableProjectilesPrefabs[1];
-        //    }
-
-        //    if (Input.GetKeyDown(KeyCode.V))
-        //    {
-        //        CurrentProjectile = _availableProjectilesPrefabs[2];
-        //    }
-        //}
     }
 }
