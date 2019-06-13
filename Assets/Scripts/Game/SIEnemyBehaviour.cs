@@ -68,7 +68,8 @@ namespace SpaceInvaders
             _enemyMovement.StopObj();
             _bonusManager.DropBonus();
             _enemyStatistics.isAlive = false;
-            //_projectileParent.enabled = false;
+            _projectileParent.ResetProjectile();
+            _projectileParent.enabled = false;
 
             SIEventsHandler.BroadcastOnShootingEnemiesUpdate(enemyIndex);
         }

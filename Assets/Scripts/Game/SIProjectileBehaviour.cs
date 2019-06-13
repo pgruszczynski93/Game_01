@@ -29,7 +29,6 @@ namespace SpaceInvaders
 
         private void OnEnable()
         {
-            ResetProjectile();
             AssignEvents();
         }
 
@@ -40,7 +39,6 @@ namespace SpaceInvaders
 
         private void OnDisable()
         {
-            ResetProjectile();
             RemoveEvents();
         }
 
@@ -112,10 +110,8 @@ namespace SpaceInvaders
 
         public void ResetProjectile()
         {
-            SIHelpers.SISimpleLogger(this, "Reset projectile.", SimpleLoggerTypes.Log);
-
             EnableParticles(false);
-            //_projectileCollider.enabled = false;
+            _projectileCollider.enabled = false;
             _isMoving = false;
             _meshRenderer.enabled = false;
             _rigidbody.velocity = new Vector2(0,0);
@@ -123,16 +119,16 @@ namespace SpaceInvaders
             _cachedProjectileTransform.localPosition = _parentResetPosition;
         }
 
-        private void EnableParticles(bool canEnableParcles)
+        private void EnableParticles(bool canEnableParticles)
         {
             if (_particles == null)
             {
                 return;
             }
 
-            _particles.gameObject.SetActive(canEnableParcles);
+            _particles.gameObject.SetActive(canEnableParticles);
 
-            if (canEnableParcles)
+            if (canEnableParticles)
             {
                 _particles.Play();
             }

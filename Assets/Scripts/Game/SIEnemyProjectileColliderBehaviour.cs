@@ -12,7 +12,6 @@ namespace SpaceInvaders
             {
                 _onCollisionActions[_objectTags[i]] += EnableDestroyVFX;
                 _onCollisionActions[_objectTags[i]] += _colliderParentBehaviour.OnEnemyDeathResetProjectile;
-                _onCollisionActions[_objectTags[i]] += OnCollisionMessage;
             }
         }
 
@@ -22,21 +21,15 @@ namespace SpaceInvaders
             {
                 _onCollisionActions[_objectTags[i]] -= EnableDestroyVFX;
                 _onCollisionActions[_objectTags[i]] -= _colliderParentBehaviour.OnEnemyDeathResetProjectile;
-                _onCollisionActions[_objectTags[i]] -= OnCollisionMessage;
             }
-        }
-
-        private void OnCollisionMessage(MonoBehaviour collisionBehaviour = null)
-        {
-            SIHelpers.SISimpleLogger(this, gameObject.name + " - collision detected ", SimpleLoggerTypes.Log);
         }
 
         private void EnableDestroyVFX(MonoBehaviour collisionBehaviour = null)
         {
-            if (_destroyVFX != null)
-            {
-                _destroyVFX.OnEnableAndDetachVFXCallback(true);
-            }
+            if (_destroyVFX == null)
+                return;
+
+            _destroyVFX.OnEnableAndDetachVFXCallback(true);
         }
     }
 }

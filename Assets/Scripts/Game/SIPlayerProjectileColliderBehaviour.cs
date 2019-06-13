@@ -11,7 +11,6 @@ namespace SpaceInvaders
             for (int i = 0; i < _objectTags.Length; i++)
             {
                 _onCollisionActions[_objectTags[i]] += _colliderParentBehaviour.OnPlayerProjectileHitsEnemy;
-                _onCollisionActions[_objectTags[i]] += OnCollisionMessage;
             }
         }
 
@@ -20,13 +19,7 @@ namespace SpaceInvaders
             for (int i = 0; i < _objectTags.Length; i++)
             {
                 _onCollisionActions[_objectTags[i]] -= _colliderParentBehaviour.OnPlayerProjectileHitsEnemy;
-                _onCollisionActions[_objectTags[i]] -= OnCollisionMessage;
             }
-        }
-
-        private void OnCollisionMessage(MonoBehaviour collisionBehaviour = null)
-        {
-            SIHelpers.SISimpleLogger(this, gameObject.name + " - collision detected ", SimpleLoggerTypes.Log);
         }
     }
 }

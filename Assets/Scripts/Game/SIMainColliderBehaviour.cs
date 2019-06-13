@@ -10,9 +10,9 @@ namespace SpaceInvaders
         [SerializeField] protected string[] _objectTags;
         [SerializeField] protected T _colliderParentBehaviour;
 
-        protected delegate void CustomCollisonDelegate(MonoBehaviour collisionBehaviour = null);
+        protected delegate void CustomCollisionDelegate(MonoBehaviour collisionBehaviour = null);
 
-        protected Dictionary<string, CustomCollisonDelegate> _onCollisionActions;
+        protected Dictionary<string, CustomCollisionDelegate> _onCollisionActions;
 
         protected virtual void Awake()
         {
@@ -29,7 +29,7 @@ namespace SpaceInvaders
                 return;
             }
 
-            _onCollisionActions = new Dictionary<string, CustomCollisonDelegate>()
+            _onCollisionActions = new Dictionary<string, CustomCollisionDelegate>()
             {
                 {SIStringTags.PLAYER, delegate { }},
                 {SIStringTags.ENEMY, delegate { }},
@@ -52,13 +52,7 @@ namespace SpaceInvaders
             return true;
         }
 
-        protected virtual void OnEnable()
-        {
-            if (_colliderParentBehaviour == null)
-            {
-                Debug.LogError("No root behaviour assigned.");
-            }
-        }
+        protected virtual void OnEnable(){}
 
         protected virtual void OnDisable(){}
 
@@ -67,7 +61,7 @@ namespace SpaceInvaders
             
             // ZDEBUGPOWAC TO!!!!!!!!!!!!!!!!!!!
             // problem z colliderami
-            bool hasHittedObjectGivenTag = false;
+            bool hasHittedObjectGivenTag;
 
             GameObject hittedObject = triggerCollider.gameObject;
 
