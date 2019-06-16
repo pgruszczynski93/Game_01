@@ -160,7 +160,7 @@ namespace SpaceInvaders
 
         public void MoveEnemiesGrid()
         {
-            StartCoroutine(GridInitialMovementRoutine());
+            //StartCoroutine(GridInitialMovementRoutine());
         }
 
         private IEnumerator GridInitialMovementRoutine()

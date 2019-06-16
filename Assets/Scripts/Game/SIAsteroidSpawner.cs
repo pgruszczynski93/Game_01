@@ -12,6 +12,7 @@ namespace SpaceInvaders
         [SerializeField] private List<GameObject> _asteroidsPrefabs;
         [SerializeField] private List<SIAsteroidBehaviour> _spawnedAsteroids;
 
+        private float _cameraZ;
         private Camera _mainCamera;
 
         private void Start()
@@ -55,15 +56,12 @@ namespace SpaceInvaders
 
         private Vector3 GetOutOfScreenPosition(int parentIndex)
         {
-            _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
 
-            float xPosition;
-            float yPosition;
-            float zPosition = Random.Range(SIConstants.MIN_ASTEROID_Z, SIConstants.MAX_ASTEROID_Z);
+            float xPosition = 0f;
+            float yPosition = 0f;
+            float zPosition = Random.Range(SIConstants.MIN_ASTEROID_Z, SIConstants.MAX_ASTEROID_Z) - _cameraZ;
 
             float randomizedCoord = Random.Range(0f, 1f);
-            Vector3 viewportToWorldVector;
-            Vector3 viewportPosition;
 
             switch (parentIndex)
             {
@@ -84,9 +82,10 @@ namespace SpaceInvaders
                     yPosition = SIHelpers.VIEWPORT_SPAWN_MAX;
                     break;
             }
+            
 
-            viewportPosition = new Vector3(xPosition, yPosition, zPosition);
-            viewportToWorldVector = _mainCamera.ViewportToWorldPoint(viewportPosition);
+            Vector3 viewportPosition = new Vector3(xPosition, yPosition, zPosition);
+            Vector3 viewportToWorldVector = _mainCamera.ViewportToWorldPoint(viewportPosition);
             return viewportToWorldVector;
         }
 
@@ -99,13 +98,14 @@ namespace SpaceInvaders
                 return;
             }
 
+            _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
+            _cameraZ = _mainCamera.transform.position.z;
             _spawnedAsteroids = new List<SIAsteroidBehaviour>();
 
             for (int i = 0; i < _spawnerConfig.maxAsteroidsToSpawn; i++)
             {
                 int spawnedPrefabIndex = Random.Range(0, _spawnerConfig.asteroidVariantsCount);
-                int spawnedParentIndex =
-                    Random.Range(0, SIConstants.SCREEN_EDGES); // skipping forward & backward colliders
+                int spawnedParentIndex = Random.Range(0, SIConstants.SCREEN_EDGES);
                 
                 GameObject asteroidObject =
                     Instantiate(_asteroidsPrefabs[spawnedPrefabIndex], _asteroidsTemplateParent);

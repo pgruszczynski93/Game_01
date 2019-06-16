@@ -35,6 +35,7 @@ namespace SpaceInvaders
         private void AssignEvents()
         {
             SIEventsHandler.OnObjectsMovement += CheckIsProjectileOnScreen;
+            SIEventsHandler.OnWaveEnd += ResetProjectile;
         }
 
         private void OnDisable()
@@ -45,6 +46,7 @@ namespace SpaceInvaders
         private void RemoveEvents()
         {
             SIEventsHandler.OnObjectsMovement -= CheckIsProjectileOnScreen;
+            SIEventsHandler.OnWaveEnd -= ResetProjectile;
         }
 
         private void Initialize()
@@ -88,7 +90,7 @@ namespace SpaceInvaders
             _isMoving = true;
             _meshRenderer.enabled = true;
             _cachedProjectileTransform.parent = null;
-            _rigidbody.AddForce(_moveForce.normalized * _forceScaleFactor, ForceMode.Impulse);
+            _rigidbody.AddForce(_moveForce * _forceScaleFactor, ForceMode.Impulse);
         }
 
         public void OnEnemyDeathResetProjectile(MonoBehaviour collisionBehaviour = null)
@@ -114,7 +116,8 @@ namespace SpaceInvaders
             _projectileCollider.enabled = false;
             _isMoving = false;
             _meshRenderer.enabled = false;
-            _rigidbody.velocity = new Vector2(0,0);
+            _rigidbody.velocity = SIHelpers.VectorZero;
+            _rigidbody.angularVelocity = SIHelpers.VectorZero;
             _cachedProjectileTransform.parent = _cachedParentTransform;
             _cachedProjectileTransform.localPosition = _parentResetPosition;
         }

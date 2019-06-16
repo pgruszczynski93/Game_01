@@ -46,6 +46,7 @@ namespace SpaceInvaders
             if (_rigidbody == null)
             {
                 Debug.LogError("No rigidbody attached.", this);
+                return;
             }
 
             _asteroidState = AsteroidState.ReadyToMove;
@@ -81,14 +82,15 @@ namespace SpaceInvaders
             RotateTowardsScreen();
         }
 
+
         private void RotateTowardsScreen()
         {
             Vector3 toPlayerDirection = (_player.transform.localPosition - _startPosition).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(toPlayerDirection, Vector3.up);
-//            _cachedTransform.localRotation = lookRotation;
-//            Vector3 localEulerAngles = _cachedTransform.localEulerAngles;
-//            Vector3 eulerRotation = new Vector3(localEulerAngles.x, ConvertEulerY(localEulerAngles.y), localEulerAngles.z);
-//            _cachedTransform.localRotation = Quaternion.Euler(eulerRotation);
+            _cachedTransform.localRotation = lookRotation;
+            Vector3 localEulerAngles = _cachedTransform.localEulerAngles;
+            Vector3 eulerRotation = new Vector3(localEulerAngles.x, ConvertEulerY(localEulerAngles.y), localEulerAngles.z);
+            _cachedTransform.localRotation = Quaternion.Euler(eulerRotation);
         }
 
         private float ConvertEulerY(float localEulerY)
