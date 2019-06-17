@@ -69,17 +69,14 @@ namespace SpaceInvaders
 
             EnableFVX(canBeEnabled);
 
-            StartCoroutine(SIHelpers.CustomDelayRoutine(1.5f, () =>
-            {
-                ResetEffectParent();
-            }));
+            StartCoroutine(SIHelpers.CustomDelayRoutine(1.5f, ResetEffectParent));
         }
 
         public void ResetEffectParent()
         {
             _effectCachedTransform.parent = _parentTransform;
             SIHelpers.SISimpleLogger(this, "<color=red>Reset and parenting to</color> : " + _parentTransform.gameObject.name, SimpleLoggerTypes.Log);
-//            _effectCachedTransform.localPosition = SIHelpers.VectorZero;
+            _effectCachedTransform.localPosition = SIHelpers.VectorZero;
             EnableFVX(false);
         }
 

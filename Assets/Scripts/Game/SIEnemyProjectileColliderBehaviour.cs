@@ -29,8 +29,6 @@ namespace SpaceInvaders
             if (_destroyVFX == null)
                 return;
             
-            Debug.Log("UDERZAM");
-
             _destroyVFX.HandleOnEnableAndDetachVFX(true);
         }
     }

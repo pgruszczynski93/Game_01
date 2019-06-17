@@ -137,14 +137,10 @@ namespace SpaceInvaders
 
             if (canEnableParticles)
             {
-                        Debug.Log("PLAY");
-
                 _particles.Play();
             }
             else
             {
-                
-                Debug.Log("stop");
                 _particles.Stop();
             }
         }
