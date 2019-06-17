@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4394943228708959262
 Transform:
   m_ObjectHideFlags: 0
@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 3287257246736072395}
   - component: {fileID: 3019215686242233917}
   - component: {fileID: 6948176693457471732}
+  - component: {fileID: 9090830206323607395}
   - component: {fileID: 4615088356763934125}
   - component: {fileID: 4579619091672328030}
   m_Layer: 8
@@ -96,6 +97,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &9090830206323607395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359524486144961408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a28021aaf9974c44ab9649561cbb128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isMoving: 0
+  _forceScaleFactor: 3.5
+  _rigidbody: {fileID: 6948176693457471732}
+  _cachedParentTransform: {fileID: 0}
+  _meshRenderer: {fileID: 2153148823038341462}
+  _particles: {fileID: 7044909181188065672}
+  _projectileCollider: {fileID: 3019215686242233917}
 --- !u!114 &4615088356763934125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +131,7 @@ MonoBehaviour:
   _objectTags:
   - Player
   - Projectile
-  _colliderParentBehaviour: {fileID: 0}
+  _colliderParentBehaviour: {fileID: 9090830206323607395}
   _destroyVFX: {fileID: 4579619091672328030}
 --- !u!114 &4579619091672328030
 MonoBehaviour:
@@ -127,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effectVFX: {fileID: 5887373181240481740}
   _parentTransform: {fileID: 3287257246736072395}
+  _effectCachedTransform: {fileID: 0}
 --- !u!1001 &2140103830937066080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -207,6 +228,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2140103830937066080}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &2153148823038341462 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23266121993218870, guid: ff96c31f3b7e9e3418c7de97600b9219,
+    type: 3}
+  m_PrefabInstance: {fileID: 2140103830937066080}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7044909181172995654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -217,6 +244,10 @@ PrefabInstance:
     - target: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
       propertyPath: m_Name
       value: WFX_Explosion Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -271,6 +302,12 @@ PrefabInstance:
 --- !u!4 &7044909181172862152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400014, guid: 5332791ebce075d4a9e56f4581e7fb47,
+    type: 3}
+  m_PrefabInstance: {fileID: 7044909181172995654}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7044909181188065672 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19800014, guid: 5332791ebce075d4a9e56f4581e7fb47,
     type: 3}
   m_PrefabInstance: {fileID: 7044909181172995654}
   m_PrefabAsset: {fileID: 0}

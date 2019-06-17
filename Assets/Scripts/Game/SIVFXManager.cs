@@ -11,7 +11,7 @@ namespace SpaceInvaders
         private Dictionary<VFXActions, Action<bool>> _onVFXEnabled;
 
         [SerializeField] private Transform _parentTransform;
-        private Transform _effectCachedTransform;
+        [SerializeField] private Transform _effectCachedTransform;
 
         private void Awake()
         {
@@ -69,7 +69,7 @@ namespace SpaceInvaders
 
             EnableFVX(canBeEnabled);
 
-            StartCoroutine(SIHelpers.CustomDelayRoutine(0.35f, () =>
+            StartCoroutine(SIHelpers.CustomDelayRoutine(1.5f, () =>
             {
                 ResetEffectParent();
             }));
@@ -79,14 +79,13 @@ namespace SpaceInvaders
         {
             _effectCachedTransform.parent = _parentTransform;
             SIHelpers.SISimpleLogger(this, "<color=red>Reset and parenting to</color> : " + _parentTransform.gameObject.name, SimpleLoggerTypes.Log);
-            _effectCachedTransform.localPosition = SIHelpers.VectorZero;
+//            _effectCachedTransform.localPosition = SIHelpers.VectorZero;
             EnableFVX(false);
         }
 
         private void EnableAndAttachVFX(bool canBeEnabled)
         {
             SIHelpers.SISimpleLogger(this, "EnableAndAttachVFX not implemented!", SimpleLoggerTypes.Error);
-            return;
         }
 
         public void OnEnableVFXCallback(bool canBeEnabled)
@@ -94,7 +93,7 @@ namespace SpaceInvaders
             _onVFXEnabled[VFXActions.EnableVFX]?.Invoke(canBeEnabled);
         }
 
-        public void OnEnableAndDetachVFXCallback(bool canBeEnabled)
+        public void HandleOnEnableAndDetachVFX(bool canBeEnabled)
         {
             _onVFXEnabled[VFXActions.EnableAndDetachVFX]?.Invoke(canBeEnabled);
         }

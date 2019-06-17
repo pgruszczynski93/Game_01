@@ -63,7 +63,7 @@ namespace SpaceInvaders
             return objectViewportPos.x >= CAMERA_MAX_VIEWPORT_X || objectViewportPos.x <= CAMERA_MIN_VIEWPORT_X;
         }
 
-        public static bool IsObjectOutOfViewportVerticalBounds3D(this Vector3 objectViewportPos)
+        public static bool IsObjectOutOfVerticalViewportBounds3D(this Vector3 objectViewportPos)
         {
             return objectViewportPos.y >= CAMERA_MAX_VIEWPORT_Y || objectViewportPos.y <= CAMERA_MIN_VIEWPORT_Y;
         }

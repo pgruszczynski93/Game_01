@@ -70,7 +70,7 @@ namespace SpaceInvaders
             Vector3 bonusViewPortPosition =
                 SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_cachedTransform.position);
 
-            if (bonusViewPortPosition.IsObjectOutOfViewportVerticalBounds3D())
+            if (bonusViewPortPosition.IsObjectOutOfVerticalViewportBounds3D())
             {
                 StopObj();
             }

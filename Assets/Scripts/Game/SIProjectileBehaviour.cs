@@ -6,25 +6,25 @@ namespace SpaceInvaders
     public class SIProjectileBehaviour : MonoBehaviour, IMoveable
     {
         [SerializeField] private bool _isMoving;
-        [Range( 0.01f,20f)][SerializeField] private float _forceScaleFactor;
+        [Range(0.01f, 20f)][SerializeField] private float _forceScaleFactor;
         [SerializeField] private Rigidbody _rigidbody;
 
         [SerializeField] private Transform _cachedParentTransform;
-        [SerializeField] private Transform _cachedProjectileTransform;
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private ParticleSystem _particles;
         [SerializeField] private BoxCollider _projectileCollider;
 
         private Camera _mainCamera;
         private Vector3 _moveForce;
-        private Vector3 _parentResetPosition;
-        private WaitUntil _waitUnitil;
+        private Vector3 _parentRelativeLocalPos;
+        private Transform _cachedTransform;
+        private WaitUntil _waitUntil;
 
         public bool IsMoving { get => _isMoving; set => _isMoving = value; }
 
         private void Awake()
         {
-            Initialize();
+            Initialise();
         }
 
         private void OnEnable()
@@ -49,17 +49,18 @@ namespace SpaceInvaders
             SIEventsHandler.OnWaveEnd -= ResetProjectile;
         }
 
-        private void Initialize()
+        private void Initialise()
         {
             if (_cachedParentTransform == null)
             {
                 return;
             }
             
-            _waitUnitil = new WaitUntil(() => _isMoving == false);
+            _waitUntil = new WaitUntil(() => _isMoving == false);
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _moveForce = _cachedParentTransform.up.normalized;
-            _parentResetPosition = new Vector2(0,0);
+            _cachedTransform = transform;
+            _parentRelativeLocalPos = _cachedTransform.localPosition;
             _meshRenderer.enabled = false;
         }
 
@@ -71,8 +72,11 @@ namespace SpaceInvaders
         private void CheckIsProjectileOnScreen()
         {
             Vector3 projectileViewportPosition = 
-                _mainCamera.WorldToViewportPoint(_cachedProjectileTransform.localPosition);
-            if (projectileViewportPosition.IsObjectOutOfViewportVerticalBounds3D())
+                _mainCamera.WorldToViewportPoint(_cachedTransform.localPosition);
+
+            bool isOutOfVerticalBounds = projectileViewportPosition.IsObjectOutOfVerticalViewportBounds3D();
+//            Debug.Log(isOutOfVerticalBounds + " " + projectileViewportPosition);
+            if (isOutOfVerticalBounds)
             {
                 ResetProjectile();
             }
@@ -89,7 +93,7 @@ namespace SpaceInvaders
             _projectileCollider.enabled = true;
             _isMoving = true;
             _meshRenderer.enabled = true;
-            _cachedProjectileTransform.parent = null;
+            _cachedTransform.parent = null;
             _rigidbody.AddForce(_moveForce * _forceScaleFactor, ForceMode.Impulse);
         }
 
@@ -107,7 +111,7 @@ namespace SpaceInvaders
 
         private IEnumerator WaitForOutOfScreenRoutine()
         {
-            yield return _waitUnitil;
+            yield return _waitUntil;
         }
 
         public void ResetProjectile()
@@ -118,8 +122,8 @@ namespace SpaceInvaders
             _meshRenderer.enabled = false;
             _rigidbody.velocity = SIHelpers.VectorZero;
             _rigidbody.angularVelocity = SIHelpers.VectorZero;
-            _cachedProjectileTransform.parent = _cachedParentTransform;
-            _cachedProjectileTransform.localPosition = _parentResetPosition;
+            _cachedTransform.parent = _cachedParentTransform;
+            _cachedTransform.localPosition = _parentRelativeLocalPos;
         }
 
         private void EnableParticles(bool canEnableParticles)
@@ -133,10 +137,14 @@ namespace SpaceInvaders
 
             if (canEnableParticles)
             {
+                        Debug.Log("PLAY");
+
                 _particles.Play();
             }
             else
             {
+                
+                Debug.Log("stop");
                 _particles.Stop();
             }
         }

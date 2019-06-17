@@ -26,7 +26,7 @@ namespace SpaceInvaders
 
         protected void Awake()
         {
-            Initialize();
+            Initialise();
         }
 
         private void OnEnable()
@@ -77,7 +77,7 @@ namespace SpaceInvaders
             StopAllCoroutines();
         }
 
-        private void Initialize()
+        private void Initialise()
         {
             _enemiesInRow = SIConstants.ENEMIES_IN_ROW;
             _shotTimeMinBreak = SIConstants.ENEMY_MIN_SHOOT_DELAY;
@@ -160,7 +160,7 @@ namespace SpaceInvaders
 
         public void MoveEnemiesGrid()
         {
-            //StartCoroutine(GridInitialMovementRoutine());
+            StartCoroutine(GridInitialMovementRoutine());
         }
 
         private IEnumerator GridInitialMovementRoutine()
