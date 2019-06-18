@@ -68,8 +68,7 @@ namespace SpaceInvaders
             _enemyMovement.StopObj();
             _bonusManager.DropBonus();
             _enemyStatistics.isAlive = false;
-            // poczekaj az pocisk jest za ekranem i wtedy reset
-            _projectileBehaviour.ResetProjectile();
+            _projectileBehaviour.OnEnemyDeathResetProjectile();
             _projectileBehaviour.enabled = false;
 
             SIEventsHandler.BroadcastOnShootingEnemiesUpdate(enemyIndex);

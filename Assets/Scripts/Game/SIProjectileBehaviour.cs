@@ -75,11 +75,11 @@ namespace SpaceInvaders
                 _mainCamera.WorldToViewportPoint(_cachedTransform.localPosition);
 
             bool isOutOfVerticalBounds = projectileViewportPosition.IsObjectOutOfVerticalViewportBounds3D();
-//            Debug.Log(isOutOfVerticalBounds + " " + projectileViewportPosition);
-            if (isOutOfVerticalBounds)
-            {
-                ResetProjectile();
-            }
+
+            if (!isOutOfVerticalBounds) 
+                return;
+            ResetProjectile();
+//            enabled = false;
         }
 
         private void Move()
