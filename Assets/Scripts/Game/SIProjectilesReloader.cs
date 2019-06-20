@@ -53,7 +53,7 @@ namespace SpaceInvaders
                 return false;
             }
 
-            _currentProjectile.MoveObj();
+            _currentProjectile.MoveProjectile();
             return true;
         }
 

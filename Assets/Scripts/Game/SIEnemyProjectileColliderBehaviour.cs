@@ -10,8 +10,8 @@ namespace SpaceInvaders
         {
             for (int i = 0; i < _objectTags.Length; i++)
             {
-                _onCollisionActions[_objectTags[i]] += EnableDestroyVFX;
-                _onCollisionActions[_objectTags[i]] += _colliderParentBehaviour.OnEnemyDeathResetProjectile;
+                _onCollisionActions[_objectTags[i]] += EnableDestroyVfx;
+                _onCollisionActions[_objectTags[i]] += _colliderParentBehaviour.HandleProjectileHit;
             }
         }
 
@@ -19,12 +19,12 @@ namespace SpaceInvaders
         {
             for (int i = 0; i < _objectTags.Length; i++)
             {
-                _onCollisionActions[_objectTags[i]] -= EnableDestroyVFX;
-                _onCollisionActions[_objectTags[i]] -= _colliderParentBehaviour.OnEnemyDeathResetProjectile;
+                _onCollisionActions [_objectTags[i]] -= EnableDestroyVfx;
+                _onCollisionActions[_objectTags[i]] -= _colliderParentBehaviour.HandleProjectileHit;
             }
         }
 
-        private void EnableDestroyVFX(MonoBehaviour collisionBehaviour = null)
+        private void EnableDestroyVfx(MonoBehaviour collisionBehaviour = null)
         {
             if (_destroyVFX == null)
                 return;

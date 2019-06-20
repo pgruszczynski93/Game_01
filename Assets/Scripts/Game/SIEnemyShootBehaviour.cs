@@ -7,7 +7,7 @@ namespace SpaceInvaders
         protected override void InvokeShoot()
         {
             _projectileController.gameObject.SetActive(true);
-            _projectileController.MoveObj();
+            _projectileController.MoveProjectile();
         }
 
         public void Shoot()
