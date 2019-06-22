@@ -36,20 +36,12 @@ namespace SpaceInvaders
 
         private void OnBonusGained(MonoBehaviour collisionBehaviour = null)
         {
-            if (collisionBehaviour == null)
-            {
-                SIHelpers.SISimpleLogger(this, "Can't assign bonuses to the player.", SimpleLoggerTypes.Error);
-                return;
-            }
-
-            SIHelpers.SISimpleLogger(this, "Player got bonus.", SimpleLoggerTypes.Log);
-
             SIBonus bonus = collisionBehaviour as SIBonus;
-            
-            if (bonus != null)
-            {
-                SIEventsHandler.BroadcastOnBonusCollision(bonus.BonusInfo);
-            }
+
+            if (bonus == null)
+                return;
+
+            SIEventsHandler.BroadcastOnBonusCollision(bonus.BonusInfo);
         }
     }
 }

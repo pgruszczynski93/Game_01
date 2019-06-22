@@ -18,7 +18,6 @@ namespace SpaceInvaders
 
         private void OnPlayerInteraction(MonoBehaviour collisionBehaviour)
         {
-            SIHelpers.SISimpleLogger(this, "Destroying bonus object.", SimpleLoggerTypes.Log);
             gameObject.SetActive(false);
         }
     }

@@ -55,17 +55,16 @@ namespace SpaceInvaders
             if (_effectVFX.activeSelf && canBeEnabled == false)
             {
                 _effectVFX.SetActive(false);
-                SIHelpers.SISimpleLogger(this, "Effect disabled ", SimpleLoggerTypes.Log);
                 return;
             }
-            SIHelpers.SISimpleLogger(this, "Effect applied ", SimpleLoggerTypes.Log);
+//            SIHelpers.SISimpleLogger(this, "Effect applied ", SimpleLoggerTypes.Log);
             _effectVFX.SetActive(canBeEnabled);
         }
 
         private void EnableAndDetachVFX(bool canBeEnabled)
         {
             _effectCachedTransform.parent = null;
-            SIHelpers.SISimpleLogger(this, "EnableAndDetachVFX()", SimpleLoggerTypes.Log);
+//            SIHelpers.SISimpleLogger(this, "EnableAndDetachVFX()", SimpleLoggerTypes.Log);
 
             EnableFVX(canBeEnabled);
 
@@ -75,14 +74,14 @@ namespace SpaceInvaders
         public void ResetEffectParent()
         {
             _effectCachedTransform.parent = _parentTransform;
-            SIHelpers.SISimpleLogger(this, "<color=red>Reset and parenting to</color> : " + _parentTransform.gameObject.name, SimpleLoggerTypes.Log);
+//            SIHelpers.SISimpleLogger(this, "<color=red>Reset and parenting to</color> : " + _parentTransform.gameObject.name, SimpleLoggerTypes.Log);
             _effectCachedTransform.localPosition = SIHelpers.VectorZero;
             EnableFVX(false);
         }
 
         private void EnableAndAttachVFX(bool canBeEnabled)
         {
-            SIHelpers.SISimpleLogger(this, "EnableAndAttachVFX not implemented!", SimpleLoggerTypes.Error);
+//            SIHelpers.SISimpleLogger(this, "EnableAndAttachVFX not implemented!", SimpleLoggerTypes.Error);
         }
 
         public void OnEnableVFXCallback(bool canBeEnabled)

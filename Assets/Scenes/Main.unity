@@ -1503,6 +1503,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &1230859786 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3042232474446412033, guid: 9e5b603f399fa2a43966f4b3d0cd3cbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3042232474312000340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 789b1f8df2f14747874576a2fc7aef10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1364467063
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,17 +3185,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3042232474446412033, guid: 9e5b603f399fa2a43966f4b3d0cd3cbb,
-        type: 3}
-      propertyPath: _minTimeOffset
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3042232474446412033, guid: 9e5b603f399fa2a43966f4b3d0cd3cbb,
-        type: 3}
-      propertyPath: _spawnerConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 1fd133198e76a0649a5c676af216e4c1,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e5b603f399fa2a43966f4b3d0cd3cbb, type: 3}
 --- !u!1001 &3677294488476665162
@@ -3638,6 +3639,16 @@ PrefabInstance:
       propertyPath: _enemiesGridBehaviour
       value: 
       objectReference: {fileID: 1151845347}
+    - target: {fileID: 209404499001459856, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: _configurableObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 209404499001459856, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: _configurableObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 1230859786}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91a8466d08e25db469192c053cd1a7bf, type: 3}
 --- !u!1001 &7089611952591525950

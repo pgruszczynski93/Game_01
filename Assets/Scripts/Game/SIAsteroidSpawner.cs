@@ -5,12 +5,11 @@ using UnityEngine;
 namespace SpaceInvaders
 {
     [ExecuteInEditMode]
-    public class SIAsteroidSpawner : SISpawner, IRespawnable
+    public class SIAsteroidSpawner : SISpawner, IConfigurableObject, IRespawnable
     {
-        [SerializeField] private AsteroidSpawnerConfig _spawnerConfig;
+        [SerializeField] private AsteroidSpawnerSettings _spawnerSettings;
         [SerializeField] private Transform _asteroidsTemplateParent;
-        [SerializeField] private List<GameObject> _asteroidsPrefabs;
-        [SerializeField] private List<SIAsteroidBehaviour> _spawnedAsteroids;
+        [SerializeField] private SIAsteroidBehaviour[] _spawnedAsteroids;
 
         private float _cameraZ;
         private Camera _mainCamera;
@@ -18,6 +17,11 @@ namespace SpaceInvaders
         private void Start()
         {
             Initialise();
+        }
+        
+        public void Configure(ScriptableSettingsMaster settings)
+        {
+            _spawnerSettings = settings.asteroidSpawnerConfigurator.asteroidSpawnerSettings;
         }
 
         protected override void OnEnable()
@@ -92,7 +96,7 @@ namespace SpaceInvaders
 
         public void Spawn()
         {
-            if (_asteroidsPrefabs == null || _asteroidsPrefabs.Count == 0)
+            if (_spawnerSettings.asteroidVariants == null || _spawnerSettings.asteroidVariants.Length == 0)
             {
                 Debug.LogError("No asteroid's attached.", this);
                 return;
@@ -100,22 +104,22 @@ namespace SpaceInvaders
 
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _cameraZ = _mainCamera.transform.position.z;
-            _spawnedAsteroids = new List<SIAsteroidBehaviour>();
+            _spawnedAsteroids = new SIAsteroidBehaviour[_spawnerSettings.maxAsteroidsToSpawn];
 
-            for (int i = 0; i < _spawnerConfig.maxAsteroidsToSpawn; i++)
+            for (int i = 0; i < _spawnerSettings.maxAsteroidsToSpawn; i++)
             {
-                int spawnedPrefabIndex = Random.Range(0, _spawnerConfig.asteroidVariantsCount);
+                int spawnedPrefabIndex = Random.Range(0, _spawnerSettings.asteroidVariantsCount);
                 int spawnedParentIndex = Random.Range(0, SIConstants.SCREEN_EDGES);
                 
                 GameObject asteroidObject =
-                    Instantiate(_asteroidsPrefabs[spawnedPrefabIndex], _asteroidsTemplateParent);
+                    Instantiate(_spawnerSettings.asteroidVariants[spawnedPrefabIndex], _asteroidsTemplateParent);
                 
                 Transform asteroidTransform = asteroidObject.transform;
                 asteroidTransform.localPosition =
                     asteroidTransform.InverseTransformPoint(GetOutOfScreenPosition(spawnedParentIndex));
                 asteroidObject.SetActive(true);
                 SIAsteroidBehaviour asteroid = asteroidObject.GetComponent<SIAsteroidBehaviour>();
-                _spawnedAsteroids.Add(asteroid);
+                _spawnedAsteroids[i] = asteroid;
             }
         }
         
@@ -134,11 +138,11 @@ namespace SpaceInvaders
 
             while (true)
             {
-                for (asteroidIndex = 0; asteroidIndex < _spawnerConfig.maxAsteroidsToSpawn; asteroidIndex++)
+                for (asteroidIndex = 0; asteroidIndex < _spawnerSettings.maxAsteroidsToSpawn; asteroidIndex++)
                 {
                     _spawnedAsteroids[asteroidIndex].MoveObj();
-                    yield return SIHelpers.CustomDelayRoutine(Random.Range(_spawnerConfig.minTimeOffset,
-                        _spawnerConfig.maxTimeOffset));
+                    yield return SIHelpers.CustomDelayRoutine(Random.Range(_spawnerSettings.minTimeOffset,
+                        _spawnerSettings.maxTimeOffset));
                 }
 
                 yield return SIHelpers.CustomDelayRoutine(SIConstants.ASTEROIDS_RESPAWN_DELAY);

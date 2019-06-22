@@ -1,5 +1,6 @@
 ﻿namespace SpaceInvaders
 {
+
     public enum ShaderProperties
     {
         EmissionPower,
