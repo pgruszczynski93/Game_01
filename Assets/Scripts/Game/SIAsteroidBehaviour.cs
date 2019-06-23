@@ -4,21 +4,21 @@ namespace SpaceInvaders
 {
     public class SIAsteroidBehaviour : MonoBehaviour, IMoveable
     {
-        private bool _isMoving;
-        private Transform _cachedTransform;
-        private Vector3 _startPosition;
-        private Camera _mainCamera;
-        private SIPlayerBehaviour _player;
-
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxForce;
-        
+
         [SerializeField] private AsteroidState _asteroidState;
         [SerializeField] private Rigidbody _rigidbody;
 
+        private bool _isMoving;
+        private Transform _cachedTransform;
+        private Vector3 _startPosition;
+        private SIScreenController _screenController;
+        private SIPlayerBehaviour _player;
+
         private void Start()
         {
-            Initialize();
+            Initialise();
         }
 
         private void OnEnable()
@@ -33,15 +33,15 @@ namespace SpaceInvaders
 
         private void AssignEvents()
         {
-            SIEventsHandler.OnObjectsMovement += CheckIsObjectVisibleOnScreen;
+            SIEventsHandler.OnObjectsMovement += ManageObjectVisibility;
         }
 
         private void RemoveEvents()
         {
-            SIEventsHandler.OnObjectsMovement -= CheckIsObjectVisibleOnScreen;
+            SIEventsHandler.OnObjectsMovement -= ManageObjectVisibility;
         }
 
-        private void Initialize()
+        private void Initialise()
         {
             if (_rigidbody == null)
             {
@@ -52,12 +52,15 @@ namespace SpaceInvaders
             _asteroidState = AsteroidState.ReadyToMove;
             _cachedTransform = transform;
             _startPosition = _cachedTransform.localPosition;
-            _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
-            _player = SIGameMasterBehaviour.Instance.Player;
+
+            SIGameMasterBehaviour gmInstance = SIGameMasterBehaviour.Instance;
+            _player = gmInstance.Player;
+            _screenController = gmInstance.ScreenController;
+
             RotateTowardsScreen();
         }
 
-        public void MoveObj()
+        public void MoveObject()
         {
             if (_isMoving)
             {
@@ -89,7 +92,8 @@ namespace SpaceInvaders
             Quaternion lookRotation = Quaternion.LookRotation(toPlayerDirection, Vector3.up);
             _cachedTransform.localRotation = lookRotation;
             Vector3 localEulerAngles = _cachedTransform.localEulerAngles;
-            Vector3 eulerRotation = new Vector3(localEulerAngles.x, ConvertEulerY(localEulerAngles.y), localEulerAngles.z);
+            Vector3 eulerRotation =
+                new Vector3(localEulerAngles.x, ConvertEulerY(localEulerAngles.y), localEulerAngles.z);
             _cachedTransform.localRotation = Quaternion.Euler(eulerRotation);
         }
 
@@ -100,24 +104,24 @@ namespace SpaceInvaders
             return 270.0f;
         }
 
-        public void StopObj()
+        public void StopObject()
         {
             Reset();
         }
 
-        void CheckIsObjectVisibleOnScreen()
+        void ManageObjectVisibility()
         {
             Vector3 currentPosition = _cachedTransform.localPosition;
-            Vector3 viewportPosition = _mainCamera.WorldToViewportPoint(currentPosition);
-            bool isObjectVisible = viewportPosition.IsObjectVisibleInTheScreen();
+            bool isObjectVisible = _screenController.IsInTheSpawnSpace(currentPosition);
             
+
             if (isObjectVisible == false && _asteroidState == AsteroidState.OnScreen)
             {
-                StopObj();
+                StopObject();
                 return;
             }
 
-            if (isObjectVisible)
+            if(isObjectVisible)
             {
                 _asteroidState = AsteroidState.OnScreen;
             }

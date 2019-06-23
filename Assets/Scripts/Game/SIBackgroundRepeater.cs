@@ -23,12 +23,12 @@ namespace SpaceInvaders
 
         private void AssignEvents()
         {
-            SIEventsHandler.OnGameIndependentObjectsMovement += MoveObj;
+            SIEventsHandler.OnGameIndependentObjectsMovement += MoveObject;
         }
 
         private void RemoveEvents()
         {
-            SIEventsHandler.OnGameIndependentObjectsMovement -= MoveObj;
+            SIEventsHandler.OnGameIndependentObjectsMovement -= MoveObject;
         }
 
         private void Start()
@@ -48,13 +48,13 @@ namespace SpaceInvaders
                 0);
         }
 
-        public void MoveObj()
+        public void MoveObject()
         {
             float newPosition = Mathf.Repeat(Time.time * _speed, _repeatDistance);
             _cachedTransform.position = _startPosition + (_direction * newPosition);
         }
 
-        public void StopObj()
+        public void StopObject()
         {
             throw new System.NotImplementedException();
         }

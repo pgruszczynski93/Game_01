@@ -3,7 +3,7 @@ namespace SpaceInvaders
 {
     public interface IMoveable
     {
-        void MoveObj();
-        void StopObj();
+        void MoveObject();
+        void StopObject();
     }
 }

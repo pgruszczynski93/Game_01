@@ -72,16 +72,16 @@ namespace SpaceInvaders
 
             if (bonusViewPortPosition.IsObjectOutOfVerticalViewportBounds3D())
             {
-                StopObj();
+                StopObject();
             }
         }
 
-        public void MoveObj()
+        public void MoveObject()
         {
             _rigidbody.AddForce(SIHelpers.VectorDown * _forceMultiplier, ForceMode.Impulse);
         }
 
-        public void StopObj()
+        public void StopObject()
         {
             _rigidbody.velocity = SIHelpers.VectorZero;
             _cachedTransform.position = _startPosition;

@@ -65,7 +65,7 @@ namespace SpaceInvaders
             } 
             
             EnableEnemyVisibility(false);
-            _enemyMovement.StopObj();
+            _enemyMovement.StopObject();
             _bonusManager.DropBonus();
             _enemyStatistics.isAlive = false;
             _projectileBehaviour.HandleWaitOnProjectileReset();

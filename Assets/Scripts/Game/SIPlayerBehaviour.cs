@@ -35,11 +35,12 @@ namespace SpaceInvaders
         {
             get { return _shieldVfxBehaviour; }
         }
+        
 
         protected override void Awake()
         {
             base.Awake();
-            SetInitialReferences();
+            Initialise();
         }
 
         private void OnEnable()
@@ -52,7 +53,7 @@ namespace SpaceInvaders
             SIEventsHandler.OnBonusCollision -= UpdatePlayerStatistics;
         }
 
-        private void SetInitialReferences()
+        private void Initialise()
         {
             if (_playerStatistics == null ||
                 _playerMovement == null ||

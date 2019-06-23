@@ -70,6 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7025270549699991142}
   - component: {fileID: 209404499001459856}
+  - component: {fileID: 8230506474900905940}
   - component: {fileID: 3461506718661510166}
   - component: {fileID: 7025270549699991145}
   - component: {fileID: 31742441}
@@ -110,7 +111,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableSettingsMaster: {fileID: 11400000, guid: 518d39a5e2ab6dd4dad29cf9190ff8f3,
     type: 2}
-  _configurableObjects: []
+  _configurableObjects:
+  - {fileID: 0}
+--- !u!114 &8230506474900905940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025270549699991144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46740f5587324c689dd9705fb17425d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraOffsetZ: 0
+  _leftWorldEdge: 0
+  _rightWorldEdge: 0
+  _topWorldEdge: 0
+  _bottomWorldEdge: 0
+  _mainCamera: {fileID: 0}
 --- !u!114 &3461506718661510166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isGameStarted: 0
   _mainCamera: {fileID: 0}
+  _screenController: {fileID: 8230506474900905940}
   _player: {fileID: 0}
 --- !u!114 &31742441
 MonoBehaviour:

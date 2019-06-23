@@ -6,6 +6,7 @@ namespace SpaceInvaders
     {
         [SerializeField] private bool _isGameStarted;
         [SerializeField] private Camera _mainCamera;
+        [SerializeField] private SIScreenController _screenController;
         [SerializeField] private SIPlayerBehaviour _player;
 
         public Camera MainCamera
@@ -18,6 +19,19 @@ namespace SpaceInvaders
                 }
 
                 return _mainCamera;
+            }
+        }
+
+        public SIScreenController ScreenController
+        {
+            get
+            {
+                if (_screenController != null)
+                    return _screenController;
+                
+                Debug.LogError("No Screen controller assigned!", this);
+                return null;
+
             }
         }
 

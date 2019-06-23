@@ -61,8 +61,8 @@ namespace SpaceInvaders
         private Vector3 GetOutOfScreenPosition(int parentIndex)
         {
 
-            float xPosition = 0f;
-            float yPosition = 0f;
+            float xPosition;
+            float yPosition;
             float zPosition = Random.Range(SIConstants.MIN_ASTEROID_Z, SIConstants.MAX_ASTEROID_Z) - _cameraZ;
 
             float randomizedCoord = Random.Range(0f, 1f);
@@ -140,7 +140,7 @@ namespace SpaceInvaders
             {
                 for (asteroidIndex = 0; asteroidIndex < _spawnerSettings.maxAsteroidsToSpawn; asteroidIndex++)
                 {
-                    _spawnedAsteroids[asteroidIndex].MoveObj();
+                    _spawnedAsteroids[asteroidIndex].MoveObject();
                     yield return SIHelpers.CustomDelayRoutine(Random.Range(_spawnerSettings.minTimeOffset,
                         _spawnerSettings.maxTimeOffset));
                 }

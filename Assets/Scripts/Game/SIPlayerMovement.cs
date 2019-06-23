@@ -19,12 +19,12 @@ namespace SpaceInvaders
 
         protected override void OnEnable()
         {
-            SIEventsHandler.OnObjectsMovement += MoveObj;
+            SIEventsHandler.OnObjectsMovement += MoveObject;
         }
 
         protected override void OnDisable()
         {
-            SIEventsHandler.OnObjectsMovement -= MoveObj;
+            SIEventsHandler.OnObjectsMovement -= MoveObject;
         }
 
         protected override void Initialize()
@@ -59,7 +59,7 @@ namespace SpaceInvaders
             _currentMovementSpeed = _movementSpeeds[movementType];
         }
 
-        public void MoveObj()
+        public void MoveObject()
         {
 #if UNITY_EDITOR
             InputMovementValue = Input.GetAxis("Horizontal");
@@ -80,7 +80,7 @@ namespace SpaceInvaders
 
             InputMovementValue = _joystick.Horizontal;
         }
-
+        
         private void RotateObject(float rotateValue)
         {
             _fromRotation = _cachedTransform.rotation;
@@ -88,7 +88,7 @@ namespace SpaceInvaders
             _cachedTransform.rotation = Quaternion.Slerp(_fromRotation, _toRotation, _lerpStep);
         }
 
-        public void StopObj()
+        public void StopObject()
         {
             throw new System.NotImplementedException();
         }
