@@ -12,12 +12,12 @@ namespace SpaceInvaders
         {
             get
             {
-                if (_mainCamera == null)
-                {
-                    SIHelpers.SISimpleLogger(this, "No camera assigned!", SimpleLoggerTypes.Error);
-                }
+                if (_mainCamera != null) 
+                    return _mainCamera;
+                
+                SIHelpers.SISimpleLogger(this, "No camera assigned!", SimpleLoggerTypes.Error);
+                return null;
 
-                return _mainCamera;
             }
         }
 
@@ -26,9 +26,7 @@ namespace SpaceInvaders
             get
             {
                 if (_player != null)
-                {
                     return _player;
-                }
 
                 SIHelpers.SISimpleLogger(this, "No player assigned to SIGameMasterBehaviour", SimpleLoggerTypes.Error);
                 return null;
@@ -84,9 +82,8 @@ namespace SpaceInvaders
             OnUpdateIndependentMovements();
             
             if (_isGameStarted == false)
-            {
                 return;
-            }
+                
             OnUpdateMovements();
             OnShadersUpdateCallback();
             OnDebugInputHandling();
@@ -127,7 +124,7 @@ namespace SpaceInvaders
 
         private void OnUpdateMovements()
         {
-            SIEventsHandler.BroadcastOnObjectsMovement();
+            SIEventsHandler.BroadcastOnUpdate();
         }
 
         public void OnGameStarted()

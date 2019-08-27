@@ -13,12 +13,8 @@ namespace SpaceInvaders
         public static event Action OnEnemiesRespawn = delegate { };
 
         public static event Action OnGameIndependentObjectsMovement = delegate {}; 
-        public static event Action OnObjectsMovement = delegate { };
+        public static event Action OnUpdate = delegate { };
         public static event Action OnShadersUpdate = delegate { };
-        public static event Action OnPlayerShoot = delegate { };
-        public static event Action OnEnemyShoot = delegate { };
-        public static event Action OnPlayerDeath = delegate { };
-        public static event Action OnPlayerHit = delegate { };
         public static event Action OnEnemyDeath = delegate { };
         public static event Action OnDebugInputHandling = delegate { };
         public static event Action OnWaveEnd = delegate { };
@@ -62,34 +58,14 @@ namespace SpaceInvaders
             OnEnemiesRespawn?.Invoke();
         }
         
-        public static void BroadcastOnObjectsMovement()
+        public static void BroadcastOnUpdate()
         {
-            OnObjectsMovement?.Invoke();
+            OnUpdate?.Invoke();
         }
         
         public static void BroadcastOnShadersUpdate()
         {
             OnShadersUpdate?.Invoke();
-        }
-        
-        public static void BroadcastOnPlayerShoot()
-        {
-            OnPlayerShoot?.Invoke();
-        }
-        
-        public static void BroadcastOnEnemyShoot()
-        {
-            OnEnemyShoot?.Invoke();
-        }
-        
-        public static void BroadcastOnPlayerDeath()
-        {
-            OnPlayerDeath?.Invoke();
-        }
-        
-        public static void BroadcastOnPlayerHit()
-        {
-            OnPlayerHit?.Invoke();
         }
         
         public static void BroadcastOnEnemyDeath()

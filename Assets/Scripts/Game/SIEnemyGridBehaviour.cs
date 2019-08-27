@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIEnemiesGridBehaviour : MonoBehaviour
+    public class SIEnemyGridBehaviour : MonoBehaviour
     {
         [SerializeField] private int _enemiesInRow;
         [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
@@ -99,9 +99,7 @@ namespace SpaceInvaders
             {
                 SIEnemyShootBehaviour enemyAbleToShoot = _enemies[i].ShootBehaviour;
                 if (enemyAbleToShoot == null)
-                {
                     return;
-                }
 
                 _enemiesAbleToShoot.Add(enemyAbleToShoot);
             }
@@ -124,9 +122,7 @@ namespace SpaceInvaders
         private void UpdateCurrentSpeedMultiplier()
         {
             if (_livingEnemies > SIConstants.ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP)
-            {
                 return;
-            }
 
             float newMultiplier = _livingEnemies == SIConstants.ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP
                 ? SIConstants.ENEMYGRID_MOVEMENT_STEP_1

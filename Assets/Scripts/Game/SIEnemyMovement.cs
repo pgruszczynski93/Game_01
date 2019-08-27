@@ -39,7 +39,7 @@ namespace SpaceInvaders
 
         protected override void OnEnable()
         {
-            SIEventsHandler.OnObjectsMovement += MoveObj;
+            SIEventsHandler.OnUpdate += MoveObject;
             SIEventsHandler.OnEnemySpeedMultiplierChanged += UpdateMovementStep;
             SIEventsHandler.OnWaveEnd += ResetEnemy;
             onScreenEdgeAction += TryToMoveObjectDown;
@@ -47,14 +47,14 @@ namespace SpaceInvaders
 
         protected override void OnDisable()
         {
-            SIEventsHandler.OnObjectsMovement -= MoveObj;
+            SIEventsHandler.OnUpdate -= MoveObject;
             SIEventsHandler.OnEnemySpeedMultiplierChanged -= UpdateMovementStep;
             SIEventsHandler.OnWaveEnd -= ResetEnemy;
 
             onScreenEdgeAction -= TryToMoveObjectDown;
         }
 
-        public void MoveObj()
+        public void MoveObject()
         {
             if (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed == false || _canObjectMove == false)
             {
@@ -129,7 +129,7 @@ namespace SpaceInvaders
             ResetMovementProperties();
         }
 
-        public void StopObj()
+        public void StopObject()
         {
             _canObjectMove = false;
         }

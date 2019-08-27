@@ -77,7 +77,7 @@ namespace SpaceInvaders
 
             _droppedBonus = _availableBonuses[_droppedBonusIndex];
             _droppedBonus.SetActive(true);
-            _droppedBonus.GetComponent<SIBonus>().MoveObj();
+            _droppedBonus.GetComponent<SIBonus>().MoveObject();
         }
 
         public void ResetBonus()

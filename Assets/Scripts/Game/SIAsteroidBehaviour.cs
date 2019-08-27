@@ -4,44 +4,21 @@ namespace SpaceInvaders
 {
     public class SIAsteroidBehaviour : MonoBehaviour, IMoveable
     {
-        private bool _isMoving;
-        private Transform _cachedTransform;
-        private Vector3 _startPosition;
-        private Camera _mainCamera;
-        private SIPlayerBehaviour _player;
-
+        [SerializeField] private Color _gizmoColor;
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxForce;
         
         [SerializeField] private AsteroidState _asteroidState;
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private Renderer _renderer;
 
-        private void Start()
-        {
-            Initialize();
-        }
-
-        private void OnEnable()
-        {
-            AssignEvents();
-        }
-
-        private void OnDisable()
-        {
-            RemoveEvents();
-        }
-
-        private void AssignEvents()
-        {
-            SIEventsHandler.OnObjectsMovement += CheckIsObjectVisibleOnScreen;
-        }
-
-        private void RemoveEvents()
-        {
-            SIEventsHandler.OnObjectsMovement -= CheckIsObjectVisibleOnScreen;
-        }
-
-        private void Initialize()
+        private bool _isMoving;
+        private Transform _cachedTransform;
+        private Vector3 _startPosition;
+        private Camera _mainCamera;
+        private SIPlayerBehaviour _player;
+        
+        private void Initialise()
         {
             if (_rigidbody == null)
             {
@@ -56,13 +33,43 @@ namespace SpaceInvaders
             _player = SIGameMasterBehaviour.Instance.Player;
             RotateTowardsScreen();
         }
+        
+        private void Start()
+        {
+            Initialise();
+        }
 
-        public void MoveObj()
+        private void OnEnable()
+        {
+            AssignEvents();
+        }
+
+        private void OnDisable()
+        {
+            RemoveEvents();
+        }
+
+        private void AssignEvents()
+        {
+            SIEventsHandler.OnUpdate += CheckIsObjectVisibleOnScreen;
+        }
+
+        private void RemoveEvents()
+        {
+            SIEventsHandler.OnUpdate -= CheckIsObjectVisibleOnScreen;
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = _gizmoColor;
+            Bounds bounds = _renderer.bounds;
+            Gizmos.DrawWireCube(bounds.center, bounds.size);
+        }
+
+        public void MoveObject()
         {
             if (_isMoving)
-            {
                 return;
-            }
 
             float forceMultiplier = Random.Range(_minForce, _maxForce);
             Vector3 forward = _cachedTransform.forward;
@@ -100,20 +107,18 @@ namespace SpaceInvaders
             return 270.0f;
         }
 
-        public void StopObj()
+        public void StopObject()
         {
             Reset();
         }
 
         void CheckIsObjectVisibleOnScreen()
         {
-            Vector3 currentPosition = _cachedTransform.localPosition;
-            Vector3 viewportPosition = _mainCamera.WorldToViewportPoint(currentPosition);
-            bool isObjectVisible = viewportPosition.IsObjectVisibleInTheScreen();
+            bool isObjectVisible = SIScreenUtils.IsInCameraFrustum(_renderer, _mainCamera);
             
             if (isObjectVisible == false && _asteroidState == AsteroidState.OnScreen)
             {
-                StopObj();
+                StopObject();
                 return;
             }
 

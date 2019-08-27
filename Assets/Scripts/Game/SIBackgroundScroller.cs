@@ -26,15 +26,15 @@ namespace SpaceInvaders
 
         private void AssignEvents()
         {
-            SIEventsHandler.OnGameIndependentObjectsMovement += MoveObj;
+            SIEventsHandler.OnGameIndependentObjectsMovement += MoveObject;
         }
 
         private void RemoveEvents()
         {
-            SIEventsHandler.OnGameIndependentObjectsMovement -= MoveObj;
+            SIEventsHandler.OnGameIndependentObjectsMovement -= MoveObject;
         }
 
-        public void MoveObj()
+        public void MoveObject()
         {
             if (_meshRenderer == null)
             {
@@ -46,7 +46,7 @@ namespace SpaceInvaders
             _meshRenderer.material.mainTextureOffset += (new Vector2(_scrollOffset.x * _xScalingFactor, _scrollOffset.y * _yScalingFactor) * _dt);
         }
 
-        public void StopObj()
+        public void StopObject()
         {
             throw new System.NotImplementedException();
         }

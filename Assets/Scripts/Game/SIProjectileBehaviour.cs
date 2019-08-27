@@ -37,7 +37,7 @@ namespace SpaceInvaders
 
         private void AssignEvents()
         {
-            SIEventsHandler.OnObjectsMovement += CheckIsProjectileOnScreen;
+            SIEventsHandler.OnUpdate += CheckIsProjectileOnScreen;
             SIEventsHandler.OnWaveEnd += StopAndResetProjectile;
         }
 
@@ -48,7 +48,7 @@ namespace SpaceInvaders
 
         private void RemoveEvents()
         {
-            SIEventsHandler.OnObjectsMovement -= CheckIsProjectileOnScreen;
+            SIEventsHandler.OnUpdate -= CheckIsProjectileOnScreen;
             SIEventsHandler.OnWaveEnd -= StopAndResetProjectile;
         }
 

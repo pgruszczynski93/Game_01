@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SpaceInvaders
 {
@@ -14,11 +14,8 @@ namespace SpaceInvaders
         private float _cameraZ;
         private Camera _mainCamera;
 
-        private void Start()
-        {
-            Initialise();
-        }
-        
+        public SIAsteroidBehaviour[] SpawnedAsteroids => _spawnedAsteroids;
+
         public void Configure(ScriptableSettingsMaster settings)
         {
             _spawnerSettings = settings.asteroidSpawnerConfigurator.asteroidSpawnerSettings;
@@ -33,7 +30,6 @@ namespace SpaceInvaders
         private void AssignEvents()
         {
             SIEventsHandler.OnSpawnObject += Spawn;
-            SIEventsHandler.OnGameStarted += StartAsteroidsMovements;
         }
 
         protected override void OnDisable()
@@ -45,17 +41,6 @@ namespace SpaceInvaders
         private void RemoveEvents()
         {
             SIEventsHandler.OnSpawnObject -= Spawn;
-            SIEventsHandler.OnGameStarted -= StartAsteroidsMovements;
-        }
-
-        private void OnDestroy()
-        {
-            StopAllCoroutines();
-        }
-
-        private void Initialise()
-        {
-            _asteroidsTemplateParent = transform;
         }
 
         private Vector3 GetOutOfScreenPosition(int parentIndex)
@@ -89,8 +74,8 @@ namespace SpaceInvaders
             
 
             Vector3 viewportPosition = new Vector3(xPosition, yPosition, zPosition);
-            Vector3 viewportToWorldVector = _mainCamera.ViewportToWorldPoint(viewportPosition);
-            return viewportToWorldVector;
+            Vector3 viewportToWorldPosition = _mainCamera.ViewportToWorldPoint(viewportPosition);
+            return viewportToWorldPosition;
         }
 
 
@@ -101,9 +86,10 @@ namespace SpaceInvaders
                 Debug.LogError("No asteroid's attached.", this);
                 return;
             }
-
+            
+            _asteroidsTemplateParent = transform;
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
-            _cameraZ = _mainCamera.transform.position.z;
+            _cameraZ = _mainCamera.transform.localPosition.z;
             _spawnedAsteroids = new SIAsteroidBehaviour[_spawnerSettings.maxAsteroidsToSpawn];
 
             for (int i = 0; i < _spawnerSettings.maxAsteroidsToSpawn; i++)
@@ -123,30 +109,7 @@ namespace SpaceInvaders
             }
         }
         
-        public void Respawn()
-        {
-        }
+        public void Respawn() {}
 
-        private void StartAsteroidsMovements()
-        {
-            StartCoroutine(SpawnedObjectsRoutine());
-        }
-
-        private IEnumerator SpawnedObjectsRoutine()
-        {
-            int asteroidIndex;
-
-            while (true)
-            {
-                for (asteroidIndex = 0; asteroidIndex < _spawnerSettings.maxAsteroidsToSpawn; asteroidIndex++)
-                {
-                    _spawnedAsteroids[asteroidIndex].MoveObj();
-                    yield return SIHelpers.CustomDelayRoutine(Random.Range(_spawnerSettings.minTimeOffset,
-                        _spawnerSettings.maxTimeOffset));
-                }
-
-                yield return SIHelpers.CustomDelayRoutine(SIConstants.ASTEROIDS_RESPAWN_DELAY);
-            }
-        }
     }
 }

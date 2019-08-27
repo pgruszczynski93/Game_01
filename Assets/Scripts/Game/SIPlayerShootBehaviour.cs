@@ -6,12 +6,12 @@ namespace SpaceInvaders
     {
         protected override void OnEnable()
         {
-            SIEventsHandler.OnObjectsMovement += InvokeShoot;
+            SIEventsHandler.OnUpdate += InvokeShoot;
         }
 
         protected override void OnDisable()
         {
-            SIEventsHandler.OnObjectsMovement -= InvokeShoot;
+            SIEventsHandler.OnUpdate -= InvokeShoot;
         }
 
         protected override void InvokeShoot()
