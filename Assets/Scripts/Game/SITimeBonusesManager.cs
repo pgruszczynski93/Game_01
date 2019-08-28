@@ -36,7 +36,7 @@ namespace SpaceInvaders
 //                Debug.Log("I : " + i + " "  + bonusInfo.bonusStatistics.durationTime);
 //                yield return new WaitForSeconds(0.25f);
 //            }
-            yield return SIHelpers.CustomDelayRoutine(bonusInfo.bonusStatistics.durationTime);
+            yield return SIWaitUtils.WaitForCachedSeconds(bonusInfo.bonusStatistics.durationTime);
             SIUIManager.Instance.BonusUISlots[bonusInfo.bonusType].EnableBonusSlot(false);
             bonusInfo.OnBonusFinishEvent?.Invoke();
             ResetAppliedBonus(bonusInfo.bonusType);

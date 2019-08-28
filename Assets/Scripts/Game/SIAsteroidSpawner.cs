@@ -97,15 +97,14 @@ namespace SpaceInvaders
                 int spawnedPrefabIndex = Random.Range(0, _spawnerSettings.asteroidVariantsCount);
                 int spawnedParentIndex = Random.Range(0, SIConstants.SCREEN_EDGES);
                 
-                GameObject asteroidObject =
+                SIAsteroidBehaviour asteroidBehaviour =
                     Instantiate(_spawnerSettings.asteroidVariants[spawnedPrefabIndex], _asteroidsTemplateParent);
                 
-                Transform asteroidTransform = asteroidObject.transform;
+                Transform asteroidTransform = asteroidBehaviour.transform;
                 asteroidTransform.localPosition =
                     asteroidTransform.InverseTransformPoint(GetOutOfScreenPosition(spawnedParentIndex));
-                asteroidObject.SetActive(true);
-                SIAsteroidBehaviour asteroid = asteroidObject.GetComponent<SIAsteroidBehaviour>();
-                _spawnedAsteroids[i] = asteroid;
+                asteroidBehaviour.gameObject.SetActive(true);
+                _spawnedAsteroids[i] = asteroidBehaviour;
             }
         }
         

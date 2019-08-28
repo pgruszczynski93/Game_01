@@ -55,7 +55,7 @@ namespace SpaceInvaders
 
         private void MoveEnemiesGridWithDelay()
         {
-            StartCoroutine(SIHelpers.CustomDelayRoutine(SIConstants.NEW_WAVE_COOLDOWN, MoveEnemiesGrid));
+            StartCoroutine(SIWaitUtils.WaitAndInvoke(SIConstants.NEW_WAVE_COOLDOWN, MoveEnemiesGrid));
         }
 
         public void EnableGridMovementsWithShooting()

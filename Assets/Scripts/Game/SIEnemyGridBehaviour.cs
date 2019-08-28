@@ -138,7 +138,7 @@ namespace SpaceInvaders
                 return;
             }
 
-            StartCoroutine(SIHelpers.CustomDelayRoutine(SIConstants.END_WAVE_DELAY, () =>
+            StartCoroutine(SIWaitUtils.WaitAndInvoke(SIConstants.END_WAVE_DELAY, () =>
             {
                 SIEventsHandler.BroadcastOnWaveEnd();
             }));
@@ -267,7 +267,7 @@ namespace SpaceInvaders
                     _enemiesAbleToShoot[enemySelectedToShootIndex-1].Shoot();
                 }
 
-                yield return SIHelpers.GetWFSCachedValue(timeToNextShoot);
+                yield return SIWaitUtils.WaitForCachedSeconds(timeToNextShoot);
             }
         }
     }

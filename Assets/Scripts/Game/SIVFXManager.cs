@@ -68,7 +68,7 @@ namespace SpaceInvaders
 
             EnableFVX(canBeEnabled);
 
-            StartCoroutine(SIHelpers.CustomDelayRoutine(1.5f, ResetEffectParent));
+            StartCoroutine(SIWaitUtils.WaitAndInvoke(1.5f, ResetEffectParent));
         }
 
         public void ResetEffectParent()

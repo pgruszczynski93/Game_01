@@ -32,32 +32,6 @@ namespace SpaceInvaders
         public static Vector3 VectorZero = new Vector3(0f, 0f, 0f);
         public static Vector3 VectorDown = new Vector3(0f, -1f, 0f);
 
-        public static Dictionary<float, WaitForSeconds> CoroutineWaitCache = new Dictionary<float, WaitForSeconds>();
-
-        public static IEnumerator CustomDelayRoutine(float waitTime, Action onWaitFinished = null)
-        {
-            TryToAddToCoroutineWaitCache(waitTime);
-
-            yield return CoroutineWaitCache[waitTime];
-            onWaitFinished?.Invoke();
-        }
-
-        private static void TryToAddToCoroutineWaitCache(float waitTime)
-        {
-            WaitForSeconds wfs;
-            if (CoroutineWaitCache.TryGetValue(waitTime, out wfs))
-                return;
-            
-            wfs = new WaitForSeconds(waitTime);
-            CoroutineWaitCache.Add(waitTime, wfs);
-        }
-
-        public static WaitForSeconds GetWFSCachedValue(float waitTime)
-        {
-            TryToAddToCoroutineWaitCache(waitTime);
-            return CoroutineWaitCache[waitTime];
-        }
-
         public static bool IsObjectOutOfHorizontalViewportBounds3D(this Vector3 objectViewportPos)
         {
             return objectViewportPos.x >= CAMERA_MAX_VIEWPORT_X || objectViewportPos.x <= CAMERA_MIN_VIEWPORT_X;

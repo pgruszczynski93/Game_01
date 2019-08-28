@@ -4,10 +4,9 @@ namespace SpaceInvaders
 {
     public class SIAsteroidBehaviour : MonoBehaviour, IMoveable
     {
-        [SerializeField] private Color _gizmoColor;
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxForce;
-        
+
         [SerializeField] private AsteroidState _asteroidState;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Renderer _renderer;
@@ -17,7 +16,7 @@ namespace SpaceInvaders
         private Vector3 _startPosition;
         private Camera _mainCamera;
         private SIPlayerBehaviour _player;
-        
+
         private void Initialise()
         {
             if (_rigidbody == null)
@@ -33,7 +32,7 @@ namespace SpaceInvaders
             _player = SIGameMasterBehaviour.Instance.Player;
             RotateTowardsScreen();
         }
-        
+
         private void Start()
         {
             Initialise();
@@ -61,7 +60,7 @@ namespace SpaceInvaders
 
         void OnDrawGizmos()
         {
-            Gizmos.color = _gizmoColor;
+            Gizmos.color = Color.cyan;
             Bounds bounds = _renderer.bounds;
             Gizmos.DrawWireCube(bounds.center, bounds.size);
         }
@@ -96,7 +95,8 @@ namespace SpaceInvaders
             Quaternion lookRotation = Quaternion.LookRotation(toPlayerDirection, Vector3.up);
             _cachedTransform.localRotation = lookRotation;
             Vector3 localEulerAngles = _cachedTransform.localEulerAngles;
-            Vector3 eulerRotation = new Vector3(localEulerAngles.x, ConvertEulerY(localEulerAngles.y), localEulerAngles.z);
+            Vector3 eulerRotation =
+                new Vector3(localEulerAngles.x, ConvertEulerY(localEulerAngles.y), localEulerAngles.z);
             _cachedTransform.localRotation = Quaternion.Euler(eulerRotation);
         }
 
@@ -115,7 +115,7 @@ namespace SpaceInvaders
         void CheckIsObjectVisibleOnScreen()
         {
             bool isObjectVisible = SIScreenUtils.IsInCameraFrustum(_renderer, _mainCamera);
-            
+
             if (isObjectVisible == false && _asteroidState == AsteroidState.OnScreen)
             {
                 StopObject();

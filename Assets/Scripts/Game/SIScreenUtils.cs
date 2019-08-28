@@ -9,7 +9,5 @@ namespace SpaceInvaders
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
             return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
         }
-        
-        
     }
 }
