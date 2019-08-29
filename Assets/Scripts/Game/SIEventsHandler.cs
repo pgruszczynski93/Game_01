@@ -20,8 +20,15 @@ namespace SpaceInvaders
         public static event Action OnWaveEnd = delegate { };
         public static event Action<float> OnEnemySpeedMultiplierChanged = delegate { };
 
+        public static event Action<Vector3> OnInputCollected = delegate { };
+
         public static event Action<int> OnShootingEnemiesUpdate = delegate { };
         public static event Action<SIBonusInfo> OnBonusCollision = delegate { };
+
+        public static void BroadcastOnInputCollected(Vector3 inputVector)
+        {
+            OnInputCollected?.Invoke(inputVector);
+        }
 
         public static void BroadcastOnShootingEnemiesUpdate(int index)
         {
