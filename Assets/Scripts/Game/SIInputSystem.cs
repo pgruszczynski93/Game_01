@@ -22,7 +22,6 @@ namespace SpaceInvaders
             }
 
             _initialised = true;
-            _verticalAxis = 0f;
             _depthAxis = 0f;
         }
 
@@ -56,15 +55,14 @@ namespace SpaceInvaders
 #if UNITY_EDITOR
 
             _horizontalAxis = Input.GetAxis("Horizontal");
+            _verticalAxis = Input.GetAxis("Vertical");
 
 #elif UNITY_ANDROID && !UNITY_EDITOR
-
             _horizontalAxis = _joystick.Horizontal;
+            _verticalAxis = _joystick.Vertical;
             
 #endif
-
-            _inputVector = new Vector3(_horizontalAxis, _verticalAxis, _depthAxis);
-            Debug.Log(_inputVector);
+             _inputVector = new Vector3(_horizontalAxis, _verticalAxis, _depthAxis);
             SIEventsHandler.BroadcastOnInputCollected(_inputVector);
         }
     }

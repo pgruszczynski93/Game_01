@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders
 {
-    public class SIBackgroundRepeater : MonoBehaviour, IMoveable
+    public class SIBackgroundRepeater : MonoBehaviour, ICanMove
     {
         [SerializeField] private float _repeatDistance;
         [SerializeField] private float _speed;

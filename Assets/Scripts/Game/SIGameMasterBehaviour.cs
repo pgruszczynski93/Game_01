@@ -7,6 +7,7 @@ namespace SpaceInvaders
         [SerializeField] private bool _isGameStarted;
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private SIPlayerBehaviour _player;
+        [SerializeField] private SIScreenAreaCalculator _screeenAreaCalculator;
 
         public Camera MainCamera
         {
@@ -32,6 +33,8 @@ namespace SpaceInvaders
                 return null;
             }
         }
+
+        public SIScreenAreaCalculator ScreenAreaCalculator => _screeenAreaCalculator;
         
 
         // Initialization in Start because, Awake is taken by signleton and some scripts may depend from it.

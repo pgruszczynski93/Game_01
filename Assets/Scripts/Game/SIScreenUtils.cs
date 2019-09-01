@@ -10,4 +10,5 @@ namespace SpaceInvaders
             return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
         }
     }
+    
 }

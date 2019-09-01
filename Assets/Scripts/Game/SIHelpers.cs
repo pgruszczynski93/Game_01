@@ -100,6 +100,11 @@ namespace SpaceInvaders
             }
 #endif
         }
+        
+        
+        // do wywalenia
+        
+        //
 
         public static IEnumerator SimpleTween3D(Action<Vector3> onTweenAction, 
                                                 VectorTweenInfo tweenInfo,

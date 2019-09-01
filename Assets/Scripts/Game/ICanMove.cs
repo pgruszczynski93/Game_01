@@ -1,7 +1,7 @@
 ﻿
 namespace SpaceInvaders
 {
-    public interface IMoveable
+    public interface ICanMove
     {
         void MoveObject();
         void StopObject();

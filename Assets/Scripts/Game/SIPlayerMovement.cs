@@ -1,96 +1,125 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using MinesEvader;
 
 namespace SpaceInvaders
 {
-    public class SIPlayerMovement : SIMovement, IMoveable
+    public class SIPlayerMovement : SIMovement, ICanMove
     {
-        private float SLOW_SPEED = 20f;
-        private float BASIC_SPEED = 25f;
-        private float FAST_SPEED = 30f;
-
-        private Touch _mainTouch;
-        private Vector2 _normalizedTouchDelta;
+        private float _rightScreenOffset;
+        private float _leftScreenOFfset;
+        private ScreenEdges _screenEdges;
+        private Vector3 _inputVector;
         private Dictionary<MovementType, float> _movementSpeeds;
-        [SerializeField] private Joystick _joystick;
 
-        public float InputMovementValue { get; set; }
+        protected override void Initialise()
+        {
+            base.Initialise();
+
+            _movementSpeeds = new Dictionary<MovementType, float>
+            {
+                {MovementType.Slow, 15f},
+                {MovementType.Basic, 20f},
+                {MovementType.Fast, 25f},
+            };
+
+            _screenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.AllScreenEdges;
+            _rightScreenOffset = _screenEdges.rightScreenEdge - _screenEdgeOffset;
+            _leftScreenOFfset = _screenEdges.leftScreenEdge + _screenEdgeOffset;
+            _currentMovementSpeed = _movementSpeeds[0];
+        }
 
         protected override void OnEnable()
         {
-            SIEventsHandler.OnUpdate += MoveObject;
+            AssignEvents();
         }
 
         protected override void OnDisable()
         {
+            RemoveEvents();
+        }
+
+        private void AssignEvents()
+        {
+            SIEventsHandler.OnUpdate += MoveObject;
+            SIEventsHandler.OnInputCollected += HandleInputCollected;
+        }
+
+        private void RemoveEvents()
+        {
             SIEventsHandler.OnUpdate -= MoveObject;
+            SIEventsHandler.OnInputCollected += HandleInputCollected;
         }
 
-        protected override void Initialize()
+        void HandleInputCollected(Vector3 inputVector)
         {
-            base.Initialize();
-
-            MAX_ROTATION_ANGLE = 40f;
-//#if UNITY_ANDROID && !UNITY_EDITOR
-//            SLOW_SPEED = 7.5f;
-//            BASIC_SPEED = 12.5f;
-//            FAST_SPEED = 20f;
-//#endif
-        _movementSpeeds = new Dictionary<MovementType, float>
-            {
-                {MovementType.Basic, BASIC_SPEED},
-                {MovementType.Fast, FAST_SPEED},
-                {MovementType.Slow, SLOW_SPEED}
-            };
-
-            _currentMovementSpeed = _movementSpeeds[0];
+            _inputVector = inputVector;
         }
 
-        private void SetMovementSpeed(MovementType movementType)
-        {
-            if (_movementSpeeds.TryGetValue(movementType, out float currentSpeed) == false)
-            {
-                SIHelpers.SISimpleLogger(this, "No key in _movementSpeeds dictionary - current speed setup with default.", SimpleLoggerTypes.Error);
-                _currentMovementSpeed = BASIC_SPEED;
-                return;
-            }
+        #region UNUSED_METHODS
 
-            _currentMovementSpeed = _movementSpeeds[movementType];
-        }
+//        private void SetMovementSpeed(MovementType movementType)
+//        {
+//            if (_movementSpeeds.TryGetValue(movementType, out float currentSpeed) == false)
+//            {
+//                SIHelpers.SISimpleLogger(this, "No key in _movementSpeeds dictionary - current speed setup with default.", SimpleLoggerTypes.Error);
+//                _currentMovementSpeed = BASIC_SPEED;
+//                return;
+//            }
+//
+//            _currentMovementSpeed = _movementSpeeds[movementType];
+//        }
+
+        #endregion
 
         public void MoveObject()
         {
-#if UNITY_EDITOR
-            InputMovementValue = Input.GetAxis("Horizontal");
-
-#elif UNITY_ANDROID && !UNITY_EDITOR
-            CalculateMobileInputValue();
-#endif
-            MoveObject(InputMovementValue);
-            RotateObject(InputMovementValue);
-        }
-
-        private void CalculateMobileInputValue()
-        {
-            if (_joystick == null)
-            {
+            if (_canMove == false)
                 return;
-            }
 
-            InputMovementValue = _joystick.Horizontal;
-        }
-
-        private void RotateObject(float rotateValue)
-        {
-            _fromRotation = _cachedTransform.rotation;
-            _toRotation = Quaternion.Euler(0, -rotateValue * MAX_ROTATION_ANGLE, 0);
-            _cachedTransform.rotation = Quaternion.Slerp(_fromRotation, _toRotation, _lerpStep);
+            UpdatePosition();
+            UpdateRotation();
         }
 
         public void StopObject()
         {
-            throw new System.NotImplementedException();
+            //todo: stop conditiions
+
+            if (_canMove)
+                return;
+
+            _canMove = false;
+        }
+
+        protected override void UpdatePosition()
+        {
+            _dt = Time.deltaTime;
+            float horizontalMovementDelta = _dt * _inputVector.x * _currentMovementSpeed;
+            float verticalMovementDelta = _dt * _inputVector.y * _currentMovementSpeed;
+
+            Vector3 currentPosition = _cachedTransform.position;
+            Vector3 newPosition = new Vector3(currentPosition.x + horizontalMovementDelta,
+                currentPosition.y /* + verticalMovementDelta*/);
+            Vector3 smoothedPosition = Vector3.Lerp(currentPosition, newPosition, _smoothMovementStep);
+
+            float clampedHorizontalPos =
+                Mathf.Clamp(smoothedPosition.x, _leftScreenOFfset, _rightScreenOffset);
+
+            //NOTE: for now vertical movement is locked - remove it when necessary and tweak.
+//            float clampedVerticalPos = Mathf.Clamp(smoothedPosition.y, _screenEdges.bottomScreenEdge,
+//                _screenEdges.topScreenEdge);
+            float clampedVerticalPos = smoothedPosition.y;
+
+            smoothedPosition = new Vector3(clampedHorizontalPos, clampedVerticalPos, smoothedPosition.z);
+            _cachedTransform.position = smoothedPosition;
+        }
+
+        protected override void UpdateRotation()
+        {
+            _fromRotation = _cachedTransform.rotation;
+            _toRotation = Quaternion.Euler(0, -_inputVector.x * _maxRotationAngle, 0);
+            _cachedTransform.rotation = Quaternion.Slerp(_fromRotation, _toRotation, _smoothMovementStep);
         }
     }
 }

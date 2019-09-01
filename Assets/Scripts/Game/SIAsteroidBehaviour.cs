@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIAsteroidBehaviour : MonoBehaviour, IMoveable
+    public class SIAsteroidBehaviour : MonoBehaviour, ICanMove
     {
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxForce;

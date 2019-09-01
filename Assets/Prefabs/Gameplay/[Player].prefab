@@ -566,13 +566,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820f7a43b23eac346bd0bc681f3f5b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canObjectMove: 0
-  _movementType: 0
-  _movementDirection: 0
-  _lerpStep: 0.35
-  _currentMovementSpeed: 0.5
+  _canMove: 0
   _initialMovementSpeed: 0
-  _joystick: {fileID: 0}
+  _currentMovementSpeed: 0.5
+  _movementDirection: 0
+  _screenEdgeOffset: 1
+  _smoothMovementStep: 0.4
+  _maxRotationAngle: 30
 --- !u!114 &545388514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,7 +947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _cachedParentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
@@ -960,11 +960,6 @@ PrefabInstance:
       propertyPath: _projectileCollider
       value: 
       objectReference: {fileID: 1121181288067300014}
-    - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 4138123286398597337, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_Constraints
@@ -1188,7 +1183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _cachedParentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
@@ -1201,11 +1196,6 @@ PrefabInstance:
       propertyPath: _projectileCollider
       value: 
       objectReference: {fileID: 1529035087635466124}
-    - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 4138123286398597337, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_Constraints
@@ -1321,7 +1311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _cachedParentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
@@ -1334,11 +1324,6 @@ PrefabInstance:
       propertyPath: _projectileCollider
       value: 
       objectReference: {fileID: 1381769659626806951}
-    - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 4138123286398597337, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_Constraints
@@ -1454,7 +1439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _cachedParentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
@@ -1467,11 +1452,6 @@ PrefabInstance:
       propertyPath: _projectileCollider
       value: 
       objectReference: {fileID: 2563147193740672712}
-    - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 4138123286398597337, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_Constraints
@@ -1587,7 +1567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _cachedParentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
@@ -1600,11 +1580,6 @@ PrefabInstance:
       propertyPath: _projectileCollider
       value: 
       objectReference: {fileID: 3595291044412241949}
-    - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 4138123286398597337, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_Constraints
@@ -1828,7 +1803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _cachedParentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
@@ -1841,11 +1816,6 @@ PrefabInstance:
       propertyPath: _projectileCollider
       value: 
       objectReference: {fileID: 5934108927703369740}
-    - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 4138123286398597337, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_Constraints
@@ -1946,7 +1916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _cachedParentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
@@ -1959,11 +1929,6 @@ PrefabInstance:
       propertyPath: _projectileCollider
       value: 
       objectReference: {fileID: 6709575833689596613}
-    - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 4138123286398597337, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_Constraints
@@ -2079,7 +2044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _cachedParentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
@@ -2092,11 +2057,6 @@ PrefabInstance:
       propertyPath: _projectileCollider
       value: 
       objectReference: {fileID: 7239275017047398980}
-    - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 4138123286398597337, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_Constraints
@@ -2275,7 +2235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _cachedParentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
@@ -2288,11 +2248,6 @@ PrefabInstance:
       propertyPath: _projectileCollider
       value: 
       objectReference: {fileID: 7649616316121845990}
-    - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 4138123286398597337, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_Constraints
@@ -2408,7 +2363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _cachedParentTransform
+      propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
@@ -2421,11 +2376,6 @@ PrefabInstance:
       propertyPath: _projectileCollider
       value: 
       objectReference: {fileID: 8419601832624188098}
-    - target: {fileID: 6988760744698151395, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 1243456219927810678}
     - target: {fileID: 4138123286398597337, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_Constraints

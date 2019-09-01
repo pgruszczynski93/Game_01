@@ -3,7 +3,7 @@
 namespace SpaceInvaders
 {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
-    public class SIBonus : MonoBehaviour, IMoveable
+    public class SIBonus : MonoBehaviour, ICanMove
     {
         [SerializeField] private float _forceMultiplier;
         [SerializeField] private Rigidbody _rigidbody;
