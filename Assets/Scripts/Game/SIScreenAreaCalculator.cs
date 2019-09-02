@@ -13,30 +13,14 @@ namespace SpaceInvaders
     public class SIScreenAreaCalculator : MonoBehaviour
     {
         [SerializeField] private float _cameraOffsetZ;
-        [SerializeField] private ScreenEdges _screenEdges;
 
-        private bool initialised;
         private Camera _mainCamera;
+        private ScreenEdges _screenEdges;
 
-        public ScreenEdges AllScreenEdges => _screenEdges;
-
-        void Start()
+        public ScreenEdges CalculateWorldLimits()
         {
-            Initialise();
-        }
-
-        void Initialise()
-        {
-            if (initialised)
-                return;
-
-            initialised = true;
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
-            CalculateWorldLimits();
-        }
-
-        private void CalculateWorldLimits()
-        {
+            
             _cameraOffsetZ = _mainCamera.transform.localPosition.z + _mainCamera.nearClipPlane;
 
             Vector3 viewportMaxDimensions = new Vector3(1, 1, _cameraOffsetZ);
@@ -49,6 +33,8 @@ namespace SpaceInvaders
                 topScreenEdge = -Mathf.Round(worldMaxDimensions.y),
                 bottomScreenEdge = Mathf.Round(worldMaxDimensions.y)
             };
+
+            return _screenEdges;
         }
     }
 }

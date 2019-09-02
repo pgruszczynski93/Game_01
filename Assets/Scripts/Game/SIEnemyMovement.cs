@@ -3,38 +3,39 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIEnemyMovement : SIMovement, IMoveable
+    public class SIEnemyMovement : SIMovement, ICanMove
     {
+        [SerializeField] private float _horizontalMovementMultiplier;
+        [SerializeField] private float _verticalMovementDownstep;
+
+        //todo: przerobić uzywajac napisanego smoothutilsa
+//        [SerializeField] private QuaternionTweenInfo _tweenInfo;
+
         private int _rotationDirection;
         private float _speedIncrementValue;
-        private float _currentMovementValueMultiplier;
-        [SerializeField] private float _movementValueMultiplier;
-
+        private float _currentMovementMultiplier;
         private Quaternion _enemyObjectOrientation;
-        [SerializeField] private QuaternionTweenInfo _tweenInfo;
 
-        protected override void Initialize()
+        protected override void Initialise()
         {
-            base.Initialize();
+            base.Initialise();
 
-            ResetMovementProperties();
+            ResetMovement();
         }
 
-        protected override void ResetMovementProperties()
+        protected override void ResetMovement()
         {
-            base.ResetMovementProperties();
-            
-            SIHelpers.SISimpleLogger(this, "<color=blue>Reset enemy</color>", SimpleLoggerTypes.Log);
+            base.ResetMovement();
 
-            MAX_ROTATION_ANGLE = 20;
-            _movementValueMultiplier = 1.5f;
-            _currentMovementValueMultiplier = _movementValueMultiplier;
+            _maxRotationAngle = 20;
+            _horizontalMovementMultiplier = 1.5f;
+            _currentMovementMultiplier = _horizontalMovementMultiplier;
             _speedIncrementValue = 0.2f;
             _rotationDirection = 1;
             _enemyObjectOrientation = Quaternion.Euler(90, 0, 180);
             _cachedTransform.localRotation = _enemyObjectOrientation;
             _currentMovementSpeed = _initialMovementSpeed;
-            _canObjectMove = true;
+            _canMove = true;
         }
 
         protected override void OnEnable()
@@ -42,7 +43,6 @@ namespace SpaceInvaders
             SIEventsHandler.OnUpdate += MoveObject;
             SIEventsHandler.OnEnemySpeedMultiplierChanged += UpdateMovementStep;
             SIEventsHandler.OnWaveEnd += ResetEnemy;
-            onScreenEdgeAction += TryToMoveObjectDown;
         }
 
         protected override void OnDisable()
@@ -50,88 +50,102 @@ namespace SpaceInvaders
             SIEventsHandler.OnUpdate -= MoveObject;
             SIEventsHandler.OnEnemySpeedMultiplierChanged -= UpdateMovementStep;
             SIEventsHandler.OnWaveEnd -= ResetEnemy;
-
-            onScreenEdgeAction -= TryToMoveObjectDown;
         }
 
         public void MoveObject()
         {
-            if (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed == false || _canObjectMove == false)
-            {
+            if (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed == false || _canMove == false)
                 return;
-            }
 
-            MoveObject(_currentMovementValueMultiplier, true);
-
+            UpdatePosition();
+            UpdateRotation();
         }
 
-        private Vector3 TryToMoveObjectDown(Vector3 objectInCameraBoundsPos)
+        protected override void UpdatePosition()
         {
-            if (!objectInCameraBoundsPos.IsObjectOutOfHorizontalViewportBounds3D())
+            _dt = Time.deltaTime;
+
+            Vector3 currentPosition = _cachedTransform.position;
+
+            float horizontalMovementDelta = _dt * _currentMovementMultiplier * _currentMovementSpeed;
+            bool isInScreenBounds = IsInHorizontalScreenBounds(currentPosition);
+
+            if (isInScreenBounds)
             {
-                return objectInCameraBoundsPos;
-            }
-            
-            objectInCameraBoundsPos.y -= VERTICAL_MOVEMENT_VIEWPORT_STEP;
-
-            StopAllCoroutines();
-            SetMovementDirectionProperties();
-            StartCoroutine(RotateRoutine());
-
-            return objectInCameraBoundsPos;
-        }
-
-        private void SetMovementDirectionProperties()
-        {
-            _currentMovementSpeed = -_currentMovementSpeed;
-            _currentMovementValueMultiplier += _speedIncrementValue;
-
-            if (_currentMovementSpeed > 0)
-            {
-                _movementDirection = MovementDirection.Right;
-                _rotationDirection = 1;
+                Vector3 newPosition = new Vector3(currentPosition.x + horizontalMovementDelta,
+                    currentPosition.y);
+                Vector3 smoothedPosition = Vector3.Lerp(currentPosition, newPosition, _smoothMovementStep);
+                _cachedTransform.position = smoothedPosition;
             }
             else
             {
-                _movementDirection = MovementDirection.Left;
-                _rotationDirection = -1;
+                float clampedHorizontalPos =
+                    Mathf.Clamp(currentPosition.x, _leftScreenOffset, _rightScreenOffset);
+
+                _cachedTransform.position = new Vector3(
+                    clampedHorizontalPos,
+                    currentPosition.y - _verticalMovementDownstep,
+                    currentPosition.z);
+
+
+                UpdateMovementProperties();
             }
+            
+            //todo: a lot of tests, update grid accordingly to the speed, next refactor iteration
+            //todo: now there's no acceleration each downstep
         }
 
-        private void SetTweenInfoValues(float zAngle = 0.0f)
+        protected override void UpdateRotation()
         {
-            _tweenInfo.startValue = _cachedTransform.rotation;
-            _tweenInfo.endValue = Quaternion.Euler(90, 0, 180 + zAngle);
         }
 
-
-        private IEnumerator RotateRoutine()
+        private bool IsInHorizontalScreenBounds(Vector3 currentPosition)
         {
-            SetTweenInfoValues(_rotationDirection * MAX_ROTATION_ANGLE);
+            float horizontalPosition = currentPosition.x;
+            return horizontalPosition >= _leftScreenOffset && horizontalPosition <= _rightScreenOffset;
+        }
 
-            yield return StartCoroutine(SIHelpers.SimpleTween3D((outQuaternion) =>
-                {
-                    _cachedTransform.rotation = outQuaternion;
-                }, _tweenInfo, null));
-
+        private void UpdateMovementProperties()
+        {
+            _currentMovementSpeed = -_currentMovementSpeed;
+//            _currentMovementMultiplier += _speedIncrementValue;
+            _rotationDirection = (_currentMovementSpeed > 0) ? 1 : -1;
         }
 
         private void UpdateMovementStep(float newStep)
         {
-            _currentMovementValueMultiplier = newStep;
+            _currentMovementMultiplier = newStep;
         }
 
         private void ResetEnemy()
         {
             _cachedTransform.localPosition = _startPosition;
-            _currentMovementValueMultiplier = _movementValueMultiplier;
+            _currentMovementMultiplier = _horizontalMovementMultiplier;
 
-            ResetMovementProperties();
+            ResetMovement();
         }
 
         public void StopObject()
         {
-            _canObjectMove = false;
+            _canMove = false;
         }
+
+//        private void SetTweenInfoValues(float zAngle = 0.0f)
+//        {
+//            _tweenInfo.startValue = _cachedTransform.rotation;
+//            _tweenInfo.endValue = Quaternion.Euler(90, 0, 180 + zAngle);
+//        }
+
+//
+//        private IEnumerator RotateRoutine()
+//        {
+//            SetTweenInfoValues(_rotationDirection * _maxRotationAngle);
+//
+//            yield return StartCoroutine(SIHelpers.SimpleTween3D((outQuaternion) =>
+//                {
+//                    _cachedTransform.rotation = outQuaternion;
+//                }, _tweenInfo, null));
+//
+//        }
     }
 }

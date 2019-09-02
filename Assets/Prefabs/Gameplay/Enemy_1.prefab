@@ -107,59 +107,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e430ff49553df41a8b42a00c993b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canObjectMove: 0
-  _movementType: 0
-  _movementDirection: 0
-  _lerpStep: 0.35
-  _currentMovementSpeed: 2.5
+  _canMove: 0
   _initialMovementSpeed: 0
-  _movementValueMultiplier: 0
-  _tweenInfo:
-    durationTime: 0.25
-    animationCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.29356667
-        value: 0.17153428
-        inSlope: 1.6307253
-        outSlope: 1.6307253
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.44040665
-      - serializedVersion: 3
-        time: 0.6203858
-        value: 0.68221015
-        inSlope: 1.5324996
-        outSlope: 1.5324996
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.37030032
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    startValue: {x: 0, y: 0, z: 0, w: 0}
-    endValue: {x: 0, y: 0, z: 0, w: 0}
+  _currentMovementSpeed: 2.5
+  _movementDirection: 0
+  _screenEdgeOffset: 0.3
+  _smoothMovementStep: 0.4
+  _maxRotationAngle: 20
+  _horizontalMovementMultiplier: 1
+  _verticalMovementDownstep: 0.75
 --- !u!114 &8529467507697743990
 MonoBehaviour:
   m_ObjectHideFlags: 0

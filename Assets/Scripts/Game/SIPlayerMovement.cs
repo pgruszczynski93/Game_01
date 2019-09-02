@@ -7,9 +7,6 @@ namespace SpaceInvaders
 {
     public class SIPlayerMovement : SIMovement, ICanMove
     {
-        private float _rightScreenOffset;
-        private float _leftScreenOFfset;
-        private ScreenEdges _screenEdges;
         private Vector3 _inputVector;
         private Dictionary<MovementType, float> _movementSpeeds;
 
@@ -24,9 +21,7 @@ namespace SpaceInvaders
                 {MovementType.Fast, 25f},
             };
 
-            _screenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.AllScreenEdges;
-            _rightScreenOffset = _screenEdges.rightScreenEdge - _screenEdgeOffset;
-            _leftScreenOFfset = _screenEdges.leftScreenEdge + _screenEdgeOffset;
+
             _currentMovementSpeed = _movementSpeeds[0];
         }
 
@@ -104,9 +99,10 @@ namespace SpaceInvaders
             Vector3 smoothedPosition = Vector3.Lerp(currentPosition, newPosition, _smoothMovementStep);
 
             float clampedHorizontalPos =
-                Mathf.Clamp(smoothedPosition.x, _leftScreenOFfset, _rightScreenOffset);
+                Mathf.Clamp(smoothedPosition.x, _leftScreenOffset, _rightScreenOffset);
 
             //NOTE: for now vertical movement is locked - remove it when necessary and tweak.
+            
 //            float clampedVerticalPos = Mathf.Clamp(smoothedPosition.y, _screenEdges.bottomScreenEdge,
 //                _screenEdges.topScreenEdge);
             float clampedVerticalPos = smoothedPosition.y;
