@@ -8,7 +8,8 @@ namespace SpaceInvaders
         public const int ENEMIES_TOTAL = 15;
         public const int SCREEN_EDGES = 4;
 
-
+        public const float GRID_LEFT_EDGE = -3f;
+        public const float GRID_RIGHT_EDGE = 3f;
         public const float ASTEROIDS_RESPAWN_DELAY = 1.2f;
         public const float NEW_WAVE_COOLDOWN = 1f;
         public const float ENEMYGRID_MOVEMENT_STEP_1 = 5f;

@@ -7,6 +7,8 @@ namespace SpaceInvaders
     public class SIEnemyGridBehaviour : MonoBehaviour
     {
         [SerializeField] private int _enemiesInRow;
+        [SerializeField] private float _shotTimeMinBreak;
+        [SerializeField] private float _shotTimeMaxBreak;
         [SerializeField] private VectorTweenInfo _enemyGridTweenInfo;
         [SerializeField] private SIEnemyBehaviour[] _enemies;
         [SerializeField] private List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
@@ -19,10 +21,8 @@ namespace SpaceInvaders
 
         private float _lastRefreshTime;
         private float _shotAbilityRefreshTime;
-        [SerializeField] private float _shotTimeMinBreak;
-        [SerializeField] private float _shotTimeMaxBreak;
 
-        private Transform _cachedTransform;
+        private Transform _thisTransform;
 
         protected void Awake()
         {
@@ -44,11 +44,8 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath += DecreaseEnemiesCount;
             SIEventsHandler.OnEnemyDeath += UpdateCurrentSpeedMultiplier;
             SIEventsHandler.OnEnemyDeath += CheckEnemyWaveEnd;
-
             SIEventsHandler.OnShootingEnemiesUpdate += UpdateShootingEnemies;
-
             SIEventsHandler.OnWaveEnd += ResetEnemyGrid;
-
             SIEventsHandler.OnDebugInputHandling += Debug_ResetWave;
         }
 
@@ -58,9 +55,7 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= UpdateCurrentSpeedMultiplier;
             SIEventsHandler.OnEnemyDeath -= CheckEnemyWaveEnd;
             SIEventsHandler.OnShootingEnemiesUpdate -= UpdateShootingEnemies;
-
             SIEventsHandler.OnWaveEnd -= ResetEnemyGrid;
-
             SIEventsHandler.OnDebugInputHandling -= Debug_ResetWave;
         }
 
@@ -84,7 +79,7 @@ namespace SpaceInvaders
             _shotTimeMaxBreak = SIConstants.ENEMY_MAX_SHOOT_DELAY;
             _totalEnemies = _enemies.Length;
             _livingEnemies = _totalEnemies;
-            _cachedTransform = transform;
+            _thisTransform = transform;
             _enemyGridTweenInfo.startValue = SIEnemiesGridsMaster.Instance.GridInitialPosition;
             _enemyGridTweenInfo.endValue = SIEnemiesGridsMaster.Instance.GridScenePosition;
             _enemiesAbleToShoot = new List<SIEnemyShootBehaviour>();
@@ -110,7 +105,7 @@ namespace SpaceInvaders
             SIHelpers.SISimpleLogger(this, "ResetEnemyGrid: Grid reset", SimpleLoggerTypes.Log);
             SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
             _livingEnemies = _totalEnemies;
-            _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
+            _thisTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
             GetEnemiesAbleToShoot();
         }
 
@@ -162,7 +157,7 @@ namespace SpaceInvaders
         private IEnumerator GridInitialMovementRoutine()
         {
             yield return StartCoroutine(SIHelpers.SimpleTween3D(
-                (newPosition) => { _cachedTransform.position = newPosition; }, _enemyGridTweenInfo,
+                (newPosition) => { _thisTransform.position = newPosition; }, _enemyGridTweenInfo,
                 () => { SIEnemiesGridsMaster.Instance.EnableGridMovementsWithShooting(); }));
 
             StopCoroutine(GridInitialMovementRoutine());
@@ -170,7 +165,7 @@ namespace SpaceInvaders
 
         public void ResetGrid()
         {
-            _cachedTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
+            _thisTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
         }
 
         private void UpdateShootingEnemies(int index)
@@ -238,7 +233,6 @@ namespace SpaceInvaders
 
         public void StopShooting()
         {
-            SIHelpers.SISimpleLogger(this, "StopShooting(): shooting stopped - wave resetting ", SimpleLoggerTypes.Log);
             StopCoroutine(EnemiesShootingRoutine());
         }
 

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Tadeusz\.Rider2018.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Tadeusz\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_SpaceInvaders.467752732.00" t="ExcludeRecursive" />
-    <e p="I:\Unity Projects\SpaceInvaders" t="IncludeRecursive">
+    <e p="C:\Unity Projects\SpaceInvaders" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -333,6 +331,8 @@
           <e p="Configs" t="Include">
             <e p="AsteroidSpawnerConfigurator.cs" t="Include" />
             <e p="AsteroidSpawnerSettings.cs" t="Include" />
+            <e p="GridMovementConfigurator.cs" t="Include" />
+            <e p="GridMovementSettings.cs" t="Include" />
             <e p="IConfigurableObject.cs" t="Include" />
             <e p="ScriptableSettingsMaster.cs" t="Include" />
             <e p="SIGameConfiguratorBehaviour.cs" t="Include" />
@@ -341,11 +341,12 @@
             <e p="SILoggerExtension.cs" t="Include" />
           </e>
           <e p="Game" t="Include">
+            <e p="ICanMove.cs" t="Include" />
             <e p="IExtendedMonoBehaviour.cs" t="Include" />
-            <e p="IMoveable.cs" t="Include" />
             <e p="IProjectile.cs" t="Include" />
             <e p="IRespawnable.cs" t="Include" />
             <e p="IShootable.cs" t="Include" />
+            <e p="IUpdateTransform.cs" t="Include" />
             <e p="SIAsteroidBehaviour.cs" t="Include" />
             <e p="SIAsteroidsMaster.cs" t="Include" />
             <e p="SIAsteroidSpawner.cs" t="Include" />
@@ -370,7 +371,10 @@
             <e p="SIFPSDisplay.cs" t="Include" />
             <e p="SIGameMasterBehaviour.cs" t="Include" />
             <e p="SIGenericSingleton.cs" t="Include" />
+            <e p="SIGridLimiter.cs" t="Include" />
+            <e p="SIGridMovement.cs" t="Include" />
             <e p="SIHelpers.cs" t="Include" />
+            <e p="SIInputSystem.cs" t="Include" />
             <e p="SIMainColliderBehaviour.cs" t="Include" />
             <e p="SIMovement.cs" t="Include" />
             <e p="SIPlayableObject.cs" t="Include" />
@@ -382,6 +386,7 @@
             <e p="SIPlayerShootBehaviour.cs" t="Include" />
             <e p="SIProjectileBehaviour.cs" t="Include" />
             <e p="SIProjectilesReloader.cs" t="Include" />
+            <e p="SIScreenAreaCalculator.cs" t="Include" />
             <e p="SIScreenUtils.cs" t="Include" />
             <e p="SISettings.cs" t="Include" />
             <e p="SISettingsConsts.cs" t="Include" />
@@ -396,13 +401,12 @@
           </e>
         </e>
       </e>
-      <e p="Library" t="ExcludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
       <e p="SpaceInvaders.sln" t="IncludeFlat" />
-      <e p="Temp" t="ExcludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
-      </e>
+      <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
+    <e p="C:\Users\range\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\range\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_SpaceInvaders.514308886.00" t="ExcludeRecursive" />
   </component>
 </project>

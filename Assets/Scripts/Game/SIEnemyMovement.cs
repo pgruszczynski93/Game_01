@@ -40,14 +40,14 @@ namespace SpaceInvaders
 
         protected override void OnEnable()
         {
-            SIEventsHandler.OnUpdate += MoveObject;
+//            SIEventsHandler.OnUpdate += MoveObject;
             SIEventsHandler.OnEnemySpeedMultiplierChanged += UpdateMovementStep;
             SIEventsHandler.OnWaveEnd += ResetEnemy;
         }
 
         protected override void OnDisable()
         {
-            SIEventsHandler.OnUpdate -= MoveObject;
+//            SIEventsHandler.OnUpdate -= MoveObject;
             SIEventsHandler.OnEnemySpeedMultiplierChanged -= UpdateMovementStep;
             SIEventsHandler.OnWaveEnd -= ResetEnemy;
         }
