@@ -3,13 +3,20 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
+    [System.Serializable]
+    public struct LocalGridMinMax
+    {
+        public float localGridHorizontalMin;
+        public float localGridHorizontalMax;
+    }
+
     public class SIGridLimiter : MonoBehaviour
     {
-        [SerializeField] private float _localGridHorizontalMin;
-        [SerializeField] private float _localGridHorizontalMax;
+        [SerializeField] private LocalGridMinMax minMaxPair;
         [SerializeField] private SIEnemyBehaviour[] _enemies;
 
         private bool _initialised;
+
         private void OnEnable()
         {
             AssignEvents();
@@ -40,7 +47,7 @@ namespace SpaceInvaders
             for (int i = 0; i < _enemies.Length; i++)
             {
                 enemy = _enemies[i];
-                if(enemy.IsEnemyAlive() == false)
+                if (enemy.IsEnemyAlive() == false)
                     continue;
 
 
@@ -53,33 +60,38 @@ namespace SpaceInvaders
         private void ResetGridMinMax()
         {
             // intentionally assigned min as max horizontal value and the same for max...
-            _localGridHorizontalMax = SIConstants.GRID_LEFT_EDGE;
-            _localGridHorizontalMin = SIConstants.GRID_RIGHT_EDGE;
+            minMaxPair.localGridHorizontalMax = SIConstants.GRID_LEFT_EDGE;
+            minMaxPair.localGridHorizontalMin = SIConstants.GRID_RIGHT_EDGE;
         }
 
         private void FindNewGridDimensions(float xLocalPos)
         {
-            if (xLocalPos < _localGridHorizontalMin)
+            if (xLocalPos < minMaxPair.localGridHorizontalMin && xLocalPos <= 0f)
             {
-                _localGridHorizontalMin = xLocalPos;
+                minMaxPair.localGridHorizontalMin = xLocalPos;
             }
 
-            else if (xLocalPos > _localGridHorizontalMax)
+            else if (xLocalPos > minMaxPair.localGridHorizontalMax  && xLocalPos >= 0f)
             {
-                _localGridHorizontalMax = xLocalPos;
+                minMaxPair.localGridHorizontalMax = xLocalPos;
             }
         }
 
-        public float HalfGridLength()
+        public LocalGridMinMax CalculateGridMinMax()
         {
             if (_initialised == false)
             {
                 _initialised = true;
-                ResetGridMinMax();
-                return Mathf.Abs(_localGridHorizontalMax - _localGridHorizontalMin) * 0.5f;
+
+                minMaxPair = new LocalGridMinMax
+                {
+                    localGridHorizontalMax = SIConstants.GRID_RIGHT_EDGE,
+                    localGridHorizontalMin = SIConstants.GRID_LEFT_EDGE,
+                };
             }
+
             TryToUpdateGridDimensions();
-            return Mathf.Abs(_localGridHorizontalMax - _localGridHorizontalMin) * 0.5f;
+            return minMaxPair;
         }
     }
 }

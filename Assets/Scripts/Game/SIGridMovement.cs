@@ -6,12 +6,7 @@ namespace SpaceInvaders
 {
     public class SIGridMovement : MonoBehaviour, IUpdateTransform, ICanMove, IConfigurableObject
     {
-        [Range(1, 10), SerializeField] private float _initialMovementSpeed;
-        [Range(1, 10), SerializeField] private float _initialSpeedMultiplier;
-        [Range(0, 5), SerializeField] private float _newWaveInitialSpeedChange;
-        [Range(0, 1), SerializeField] private float _gridDownStep;
-        [Range(0, 2), SerializeField] private float _speedMultiplierStep;
-        [Range(0, 1), SerializeField] private float _smoothMovementStep;
+        [SerializeField] private float _initialMovementSpeed;
         [SerializeField] private float _currentMovementSpeed;
         [SerializeField] private float _currentSpeedMultiplier;
         [SerializeField] private SIGridLimiter _gridLimiter;
@@ -22,7 +17,8 @@ namespace SpaceInvaders
         private float _dt;
         private float _rightScreenEdgeOffset;
         private float _leftScreenEdgeOffset;
-        
+
+        private LocalGridMinMax _gridMinMax;
         private ScreenEdges _screenEdges;
         private Transform _thisTransform;
 
@@ -34,6 +30,7 @@ namespace SpaceInvaders
 
             _canMove = true;
             _thisTransform = transform;
+            _initialMovementSpeed = _gridMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
             _screenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculateWorldLimits();
             UpdateMovementOffsets();
@@ -74,12 +71,14 @@ namespace SpaceInvaders
 //            SIEventsHandler.OnEnemySpeedMultiplierChanged -= UpdateMovementStep;
             SIEventsHandler.OnWaveEnd -= ResetGridMovement;
         }
-        
+
         private void UpdateMovementOffsets()
         {
-            float halfGridLength = _gridLimiter.HalfGridLength();
-            _rightScreenEdgeOffset = _screenEdges.rightScreenEdge - halfGridLength;
-            _leftScreenEdgeOffset = _screenEdges.leftScreenEdge + halfGridLength;
+            _gridMinMax = _gridLimiter.CalculateGridMinMax();
+            _rightScreenEdgeOffset = _screenEdges.rightScreenEdge - _gridMinMax.localGridHorizontalMax -
+                                     _gridMovementSettings.enemyWidthOffset;
+            _leftScreenEdgeOffset = _screenEdges.leftScreenEdge - _gridMinMax.localGridHorizontalMin +
+                                    _gridMovementSettings.enemyWidthOffset;
         }
 
         public void MoveObject()
@@ -99,9 +98,8 @@ namespace SpaceInvaders
         public void UpdatePosition()
         {
             _dt = Time.deltaTime;
-            
-            Vector3 currentPosition = _thisTransform.position;
 
+            Vector3 currentPosition = _thisTransform.position;
             float horizontalMovementDelta = _dt * _currentSpeedMultiplier * _currentMovementSpeed;
             bool isInScreenBounds = IsInHorizontalScreenBounds(currentPosition);
 
@@ -109,7 +107,8 @@ namespace SpaceInvaders
             {
                 Vector3 newPosition = new Vector3(currentPosition.x + horizontalMovementDelta,
                     currentPosition.y);
-                Vector3 smoothedPosition = Vector3.Lerp(currentPosition, newPosition, _smoothMovementStep);
+                Vector3 smoothedPosition =
+                    Vector3.Lerp(currentPosition, newPosition, _gridMovementSettings.smoothMovementStep);
                 _thisTransform.position = smoothedPosition;
             }
             else
@@ -119,7 +118,7 @@ namespace SpaceInvaders
 
                 _thisTransform.position = new Vector3(
                     clampedHorizontalPos,
-                    currentPosition.y - _gridDownStep,
+                    currentPosition.y - _gridMovementSettings.gridDownStep,
                     currentPosition.z);
 
 
@@ -135,22 +134,21 @@ namespace SpaceInvaders
         void UpdateMovementProperties()
         {
             _currentMovementSpeed = -_currentMovementSpeed;
-            _currentSpeedMultiplier += _speedMultiplierStep;
+            _currentSpeedMultiplier += _gridMovementSettings.speedMultiplierStep;
         }
-        
+
         private bool IsInHorizontalScreenBounds(Vector3 currentPosition)
         {
             float horizontalPosition = currentPosition.x;
             return horizontalPosition >= _leftScreenEdgeOffset && horizontalPosition <= _rightScreenEdgeOffset;
         }
-        
+
         private void ResetGridMovement()
         {
             _canMove = true;
-            _initialMovementSpeed += _initialSpeedMultiplier;
+            _initialMovementSpeed += _gridMovementSettings.newWaveInitialSpeedChange;
             _currentMovementSpeed = _initialMovementSpeed;
-            _currentSpeedMultiplier = _initialSpeedMultiplier;
+            _currentSpeedMultiplier = _gridMovementSettings.initialSpeedMultiplier;
         }
-        
     }
 }
