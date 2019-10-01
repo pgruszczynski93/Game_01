@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceInvaders
@@ -12,6 +13,7 @@ namespace SpaceInvaders
 
     public class SIGridLimiter : MonoBehaviour
     {
+        private const float MIN_MAX_TOLERANCE = 1e-05f;
         [SerializeField] private LocalGridMinMax minMaxPair;
         [SerializeField] private SIEnemyBehaviour[] _enemies;
 
@@ -29,12 +31,12 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIEventsHandler.OnWaveEnd += ResetGridMinMax;
+            SIEventsHandler.OnWaveEnd += TryToResetGridMinMax;
         }
 
         void RemoveEvents()
         {
-            SIEventsHandler.OnWaveEnd -= ResetGridMinMax;
+            SIEventsHandler.OnWaveEnd -= TryToResetGridMinMax;
         }
 
         private void TryToUpdateGridDimensions()
@@ -43,7 +45,7 @@ namespace SpaceInvaders
             float xLocalPos;
             Transform enemyTransform;
             SIEnemyBehaviour enemy;
-            ResetGridMinMax();
+            TryToResetGridMinMax();
             for (int i = 0; i < _enemies.Length; i++)
             {
                 enemy = _enemies[i];
@@ -57,24 +59,20 @@ namespace SpaceInvaders
             }
         }
 
-        private void ResetGridMinMax()
+        private void TryToResetGridMinMax()
         {
             // intentionally assigned min as max horizontal value and the same for max...
-            minMaxPair.localGridHorizontalMax = SIConstants.GRID_LEFT_EDGE;
-            minMaxPair.localGridHorizontalMin = SIConstants.GRID_RIGHT_EDGE;
+            minMaxPair.localGridHorizontalMax = 2*SIConstants.GRID_LEFT_EDGE;
+            minMaxPair.localGridHorizontalMin = 2*SIConstants.GRID_RIGHT_EDGE;
         }
 
         private void FindNewGridDimensions(float xLocalPos)
         {
-            if (xLocalPos < minMaxPair.localGridHorizontalMin && xLocalPos <= 0f)
-            {
+            if (xLocalPos < minMaxPair.localGridHorizontalMin)
                 minMaxPair.localGridHorizontalMin = xLocalPos;
-            }
 
-            else if (xLocalPos > minMaxPair.localGridHorizontalMax  && xLocalPos >= 0f)
-            {
+            if (xLocalPos > minMaxPair.localGridHorizontalMax)
                 minMaxPair.localGridHorizontalMax = xLocalPos;
-            }
         }
 
         public LocalGridMinMax CalculateGridMinMax()
