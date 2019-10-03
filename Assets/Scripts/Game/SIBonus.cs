@@ -34,7 +34,7 @@ namespace SpaceInvaders
 
             _bonusInfo.OnBonusFinishEvent.RemoveListener(() =>
             {
-                SIGameMasterBehaviour.Instance.Player.ShieldVfxBehaviour.OnEnableVFXCallback(false);
+                SIGameMasterBehaviour.Instance.Player.ShieldVfxBehaviour.TryToEnableVFX(false);
             });
         }
 
@@ -61,7 +61,7 @@ namespace SpaceInvaders
 
             _bonusInfo.OnBonusFinishEvent.AddListener(() =>
             {
-                SIGameMasterBehaviour.Instance.Player.ShieldVfxBehaviour.OnEnableVFXCallback(false);
+                SIGameMasterBehaviour.Instance.Player.ShieldVfxBehaviour.TryToEnableAndDetachVFX(false);
             });
         }
 

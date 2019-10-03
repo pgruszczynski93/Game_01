@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5208480553105349291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.51, y: -3.4, z: 0}
-  m_LocalScale: {x: 0.29400003, y: 0.29400003, z: 0.29400003}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 5208480553559586603}
   m_Father: {fileID: 0}
@@ -62,7 +62,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 42
   m_CollisionDetection: 0
 --- !u!114 &5208480553105349301
 MonoBehaviour:
@@ -83,7 +83,7 @@ MonoBehaviour:
     bonusStatistics:
       gainedHealth: 0
       gainedScore: 5
-      gainedWeaponType: 2
+      gainedCollectibleLevel: 0
       durationTime: 10
     OnBonusFinishEvent:
       m_PersistentCalls:
@@ -99,8 +99,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
 --- !u!114 &5208480553105349290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 8825375892576467841, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.007950969
+      value: -0.007951
       objectReference: {fileID: 0}
     - target: {fileID: 8825375892576467841, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
         type: 3}
@@ -217,23 +215,28 @@ PrefabInstance:
     - target: {fileID: 8825375892576467841, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.85669535
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8825375892576467841, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.46556327
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8825375892576467841, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.4884
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8825375892576467843, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5f741c79467d2e241bed77ade8b975cd, type: 2}
+    - target: {fileID: 8825375892576467842, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300002, guid: 30b0c87680e76604a959637052b5e8ac, type: 3}
     - target: {fileID: 1308423479, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a, type: 3}
       propertyPath: _renderer
       value: 

@@ -62,7 +62,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 42
   m_CollisionDetection: 0
 --- !u!114 &734936725374884712
 MonoBehaviour:
@@ -83,7 +83,7 @@ MonoBehaviour:
     bonusStatistics:
       gainedHealth: 1
       gainedScore: 5
-      gainedWeaponType: 0
+      gainedCollectibleLevel: 0
       durationTime: 5
     OnBonusFinishEvent:
       m_PersistentCalls:
@@ -99,8 +99,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
 --- !u!114 &734936725374884715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,18 +215,23 @@ PrefabInstance:
     - target: {fileID: 8825375892576467841, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1666672
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8825375892576467841, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6666675
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8825375892576467841, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8825375892576467842, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300002, guid: 30b0c87680e76604a959637052b5e8ac, type: 3}
     - target: {fileID: 1308423479, guid: 187bbc5e40cfcb64d8fd2af77e70dd6a, type: 3}
       propertyPath: _renderer
       value: 

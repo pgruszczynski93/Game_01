@@ -260,8 +260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectVFX: {fileID: 2640097634031494074}
-  _parentTransform: {fileID: 0}
-  _effectCachedTransform: {fileID: 0}
+  _parentTransform: {fileID: 1913830052}
+  _effectTransform: {fileID: 2640097634031494053}
 --- !u!1 &1955470059
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +569,6 @@ MonoBehaviour:
   _canMove: 0
   _initialMovementSpeed: 0
   _currentMovementSpeed: 0.5
-  _movementDirection: 0
   _screenEdgeOffset: 1
   _smoothMovementStep: 0.4
   _maxRotationAngle: 30

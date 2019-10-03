@@ -77,7 +77,7 @@ namespace SpaceInvaders
         {
             _colliderParent.SetActive(canEnable);
             _meshRenderer.enabled = canEnable;
-            _destroyVFX.OnEnableVFXCallback(canEnable == false);
+            _destroyVFX.TryToEnableAndDetachVFX(canEnable == false);
         }
 
         public void Spawn()

@@ -137,7 +137,7 @@ namespace SpaceInvaders
                 return;
             }
 
-            ShieldVfxBehaviour.OnEnableVFXCallback(true);
+            ShieldVfxBehaviour.TryToEnableVFX(true);
             SIHelpers.SISimpleLogger(this, "Shield enabled.", SimpleLoggerTypes.Log);
         }
 

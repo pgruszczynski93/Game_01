@@ -75,8 +75,10 @@ namespace SpaceInvaders
             }
 
 
+            // TODO: NAPRAWIC DROPIENIE BONUSOW!!!!!!!!!! TAK ZEBY JE DE I REPARENTOWAC
             _droppedBonus = _availableBonuses[_droppedBonusIndex];
             _droppedBonus.SetActive(true);
+            _droppedBonus.transform.parent = null;
             _droppedBonus.GetComponent<SIBonus>().MoveObject();
         }
 

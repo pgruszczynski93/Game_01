@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 2676229917223812512}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4698860576044419641}
   - {fileID: 8156722595000982454}
@@ -102,15 +102,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2676229917223812512}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4e430ff49553df41a8b42a00c993b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _canMove: 0
   _initialMovementSpeed: 0
-  _currentMovementSpeed: 2.5
-  _movementDirection: 0
+  _currentMovementSpeed: 3.2
   _screenEdgeOffset: 0.3
   _smoothMovementStep: 0.4
   _maxRotationAngle: 20
@@ -142,8 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effectVFX: {fileID: 968318236054731268}
-  _parentTransform: {fileID: 8156722595000982454}
-  _effectCachedTransform: {fileID: 0}
+  _parentTransform: {fileID: 3796128085518428701}
 --- !u!1 &3426704194481364134
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,10 +466,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1542133456123660, guid: 805fa5d4d7f98eb43abf27378bf9a5e1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 805fa5d4d7f98eb43abf27378bf9a5e1, type: 3}
 --- !u!4 &1891633446904763375 stripped
@@ -568,34 +562,9 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 4.000001
       objectReference: {fileID: 0}
-    - target: {fileID: 6842891637516641233, guid: a8e8bcca8ef7f96489ca5f1b59c593ce,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6842891637516641239, guid: a8e8bcca8ef7f96489ca5f1b59c593ce,
         type: 3}
       propertyPath: _bonusInfo.OnBonusFinishEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6842891637516641239, guid: a8e8bcca8ef7f96489ca5f1b59c593ce,
-        type: 3}
-      propertyPath: _bonusInfo.OnBonusFinishEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6842891636916246559, guid: a8e8bcca8ef7f96489ca5f1b59c593ce,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 479222154122907373, guid: a8e8bcca8ef7f96489ca5f1b59c593ce,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1049033478554503739, guid: a8e8bcca8ef7f96489ca5f1b59c593ce,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -687,19 +656,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9090830206323607395, guid: f142162e014253b4f91ca17907366168,
         type: 3}
-      propertyPath: _cachedParentTransform
-      value: 
-      objectReference: {fileID: 4698860576044419641}
-    - target: {fileID: 9090830206323607395, guid: f142162e014253b4f91ca17907366168,
-        type: 3}
       propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 4698860576044419641}
-    - target: {fileID: 7044909181173092584, guid: f142162e014253b4f91ca17907366168,
+    - target: {fileID: 4579619091672328030, guid: f142162e014253b4f91ca17907366168,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: _effectTransform
+      value: 
+      objectReference: {fileID: 1342410204974039246}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f142162e014253b4f91ca17907366168, type: 3}
 --- !u!4 &1342410204974039246 stripped

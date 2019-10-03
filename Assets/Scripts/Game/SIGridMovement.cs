@@ -130,7 +130,7 @@ namespace SpaceInvaders
         {
             //Intentionally not implemented.
         }
-
+ 
         void UpdateMovementProperties()
         {
             _currentMovementSpeed = -_currentMovementSpeed;

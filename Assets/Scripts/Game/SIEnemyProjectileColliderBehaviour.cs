@@ -29,7 +29,7 @@ namespace SpaceInvaders
             if (_destroyVFX == null)
                 return;
             
-            _destroyVFX.HandleOnEnableAndDetachVFX(true);
+            _destroyVFX.TryToEnableAndDetachVFX(true);
         }
     }
 }
