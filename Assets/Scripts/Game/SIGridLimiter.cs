@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    [System.Serializable]
+    [Serializable]
     public struct LocalGridMinMax
     {
         public float localGridHorizontalMin;
@@ -13,7 +13,6 @@ namespace SpaceInvaders
 
     public class SIGridLimiter : MonoBehaviour
     {
-        private const float MIN_MAX_TOLERANCE = 1e-05f;
         [SerializeField] private LocalGridMinMax minMaxPair;
         [SerializeField] private SIEnemyBehaviour[] _enemies;
 
@@ -31,12 +30,12 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIEventsHandler.OnWaveEnd += TryToResetGridMinMax;
+            SIEventsHandler.OnWaveEnd += InitialReset;
         }
 
         void RemoveEvents()
         {
-            SIEventsHandler.OnWaveEnd -= TryToResetGridMinMax;
+            SIEventsHandler.OnWaveEnd -= InitialReset;
         }
 
         private void TryToUpdateGridDimensions()
@@ -59,11 +58,17 @@ namespace SpaceInvaders
             }
         }
 
+        void InitialReset()
+        {
+            minMaxPair.localGridHorizontalMax = SIConstants.GRID_RIGHT_EDGE;
+            minMaxPair.localGridHorizontalMin = SIConstants.GRID_LEFT_EDGE;
+        }
+
         private void TryToResetGridMinMax()
         {
             // intentionally assigned min as max horizontal value and the same for max...
-            minMaxPair.localGridHorizontalMax = 2*SIConstants.GRID_LEFT_EDGE;
-            minMaxPair.localGridHorizontalMin = 2*SIConstants.GRID_RIGHT_EDGE;
+            minMaxPair.localGridHorizontalMax = SIConstants.GRID_LEFT_EDGE;
+            minMaxPair.localGridHorizontalMin = SIConstants.GRID_RIGHT_EDGE;
         }
 
         private void FindNewGridDimensions(float xLocalPos)

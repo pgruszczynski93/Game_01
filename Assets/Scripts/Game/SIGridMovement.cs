@@ -135,6 +135,8 @@ namespace SpaceInvaders
         {
             _currentMovementSpeed = -_currentMovementSpeed;
             _currentSpeedMultiplier += _gridMovementSettings.speedMultiplierStep;
+            _currentSpeedMultiplier = Mathf.Clamp(_currentSpeedMultiplier, _gridMovementSettings.movementSpeedMultiplierMin,
+                _gridMovementSettings.movementSpeedMultiplierMax);
         }
 
         private bool IsInHorizontalScreenBounds(Vector3 currentPosition)
@@ -147,8 +149,11 @@ namespace SpaceInvaders
         {
             _canMove = true;
             _initialMovementSpeed += _gridMovementSettings.newWaveInitialSpeedChange;
+            _initialMovementSpeed = Mathf.Clamp(_initialMovementSpeed, _gridMovementSettings.initialMovementSpeedMin,
+                _gridMovementSettings.initialMovementSpeedMax);
             _currentMovementSpeed = _initialMovementSpeed;
             _currentSpeedMultiplier = _gridMovementSettings.initialSpeedMultiplier;
+            UpdateMovementOffsets();
         }
     }
 }

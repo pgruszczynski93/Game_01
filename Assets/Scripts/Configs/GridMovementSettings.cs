@@ -15,7 +15,7 @@ namespace SpaceInvaders
         [Range(0, 1)] public float enemyWidthOffset;
         [Range(0f, 5f)] public float initialMovementSpeedMin;
         [Range(5f, 10f)] public float initialMovementSpeedMax;
-        [Range(0f, 5f)] public float movementSpeedMin;
-        [Range(5f, 10f)] public float movementSpeedMax;
+        [Range(0f, 5f)] public float movementSpeedMultiplierMin;
+        [Range(5f, 10f)] public float movementSpeedMultiplierMax;
     }
 }
