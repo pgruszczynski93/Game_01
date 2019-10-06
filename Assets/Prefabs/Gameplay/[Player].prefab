@@ -261,7 +261,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effectVFX: {fileID: 2640097634031494074}
   _parentTransform: {fileID: 1913830052}
-  _effectTransform: {fileID: 2640097634031494053}
 --- !u!1 &1955470059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2142,6 +2141,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23750490241137498, guid: 8811851aa03c34b49a7d22b2f2c25891,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 84e10ea08b49e9a4fb4cc4283650eb32, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8811851aa03c34b49a7d22b2f2c25891, type: 3}
 --- !u!4 &7779584579758523149 stripped
