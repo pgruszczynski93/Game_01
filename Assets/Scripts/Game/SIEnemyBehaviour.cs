@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders
 {
-    public class SIEnemyBehaviour : MonoBehaviour, IRespawnable
+    public class SIEnemyBehaviour : MonoBehaviour
     {
         public int enemyIndex;
         

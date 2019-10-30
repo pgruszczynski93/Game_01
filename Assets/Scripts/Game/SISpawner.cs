@@ -1,18 +1,42 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
     public class SISpawner : MonoBehaviour
     {
-        protected virtual void OnEnable()
+        bool _initialised;
+
+        protected virtual void Initialise()
         {
-            //SIEventsHandler.OnWaveEnd += Respawn;
+            if (_initialised)
+                return;
+
+            _initialised = true;
         }
 
-        protected virtual void OnDisable()
+        protected virtual void LoadSetup() { }
+
+        protected void OnEnable()
         {
-            //SIEventsHandler.OnWaveEnd += Respawn;
+            AssignEvents();
         }
+
+        protected void OnDisable()
+        {
+            RemoveEvents();
+        }
+
+        protected virtual void AssignEvents() { }
+
+        protected virtual void RemoveEvents() { }
+
+        protected virtual void TryToSpawn()
+        {
+            LoadSetup();
+            Initialise();
+        }
+
+        protected virtual void TryToRespawn() { }
     }
-
 }

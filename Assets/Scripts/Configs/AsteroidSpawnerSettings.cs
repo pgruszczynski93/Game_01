@@ -8,6 +8,5 @@ namespace SpaceInvaders
         [Range(0, 20)] public int asteroidVariantsCount;
         [Range(0, 100)] public int maxAsteroidsToSpawn;
         public SIAsteroidBehaviour[] asteroidVariants;
-
     }
 }

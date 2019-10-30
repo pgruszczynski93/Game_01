@@ -12,7 +12,7 @@ namespace SpaceInvaders
         public static event Action OnGameQuit = delegate { };
         public static event Action OnEnemiesRespawn = delegate { };
 
-        public static event Action OnGameIndependentObjectsMovement = delegate {}; 
+        public static event Action OnNonPlayableUpdate = delegate {}; 
         public static event Action OnUpdate = delegate { };
         public static event Action OnShadersUpdate = delegate { };
         public static event Action OnEnemyDeath = delegate { };
@@ -50,9 +50,9 @@ namespace SpaceInvaders
             OnGameFinished?.Invoke();
         }
 
-        public static void BroadcastOnGameIndependentObjectsMovement()
+        public static void BroadcastOnNonPlayableUpdate()
         {
-            OnGameIndependentObjectsMovement?.Invoke();
+            OnNonPlayableUpdate?.Invoke();
         }
 
         public static void BroadcastOnGameQuit()

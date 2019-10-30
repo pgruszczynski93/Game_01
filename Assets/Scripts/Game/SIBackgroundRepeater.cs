@@ -4,39 +4,39 @@ namespace SpaceInvaders
 {
     public class SIBackgroundRepeater : MonoBehaviour, ICanMove
     {
-        [SerializeField] private float _repeatDistance;
-        [SerializeField] private float _speed;
+        [SerializeField] float _repeatDistance;
+        [SerializeField] float _speed;
 
-        private Vector3 _startPosition;
-        private Vector3 _direction;
-        private Transform _cachedTransform;
+        Vector3 _startPosition;
+        Vector3 _direction;
+        Transform _cachedTransform;
 
-        private void OnEnable()
+        void OnEnable()
         {
             AssignEvents();
         }
-        
-        private void OnDisable()
+
+        void OnDisable()
         {
             RemoveEvents();
         }
 
-        private void AssignEvents()
+        void AssignEvents()
         {
-            SIEventsHandler.OnGameIndependentObjectsMovement += MoveObject;
+            SIEventsHandler.OnNonPlayableUpdate += MoveObject;
         }
 
-        private void RemoveEvents()
+        void RemoveEvents()
         {
-            SIEventsHandler.OnGameIndependentObjectsMovement -= MoveObject;
+            SIEventsHandler.OnNonPlayableUpdate -= MoveObject;
         }
 
-        private void Start()
+        void Start()
         {
             Initialise();
         }
 
-        private void Initialise()
+        void Initialise()
         {
             _cachedTransform = transform;
             _startPosition = _cachedTransform.position;
@@ -51,7 +51,7 @@ namespace SpaceInvaders
         public void MoveObject()
         {
             float newPosition = Mathf.Repeat(Time.time * _speed, _repeatDistance);
-            _cachedTransform.position = _startPosition + (_direction * newPosition);
+            _cachedTransform.position = _startPosition + _direction * newPosition;
         }
 
         public void StopObject()

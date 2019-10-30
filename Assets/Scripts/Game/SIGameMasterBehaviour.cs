@@ -4,10 +4,10 @@ namespace SpaceInvaders
 {
     public class SIGameMasterBehaviour : SIGenericSingleton<SIGameMasterBehaviour>
     {
-        [SerializeField] private bool _isGameStarted;
-        [SerializeField] private Camera _mainCamera;
-        [SerializeField] private SIPlayerBehaviour _player;
-        [SerializeField] private SIScreenAreaCalculator _screeenAreaCalculator;
+        [SerializeField] bool _isGameStarted;
+        [SerializeField] Camera _mainCamera;
+        [SerializeField] SIPlayerBehaviour _player;
+        [SerializeField] SIScreenAreaCalculator _screeenAreaCalculator;
 
         public Camera MainCamera
         {
@@ -43,46 +43,46 @@ namespace SpaceInvaders
             InitializeSpawners();
         }
 
-        private void InitializeSpawners()
+        void InitializeSpawners()
         {
             SIEventsHandler.BroadcastOnSpawnObject();
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
             AssignEvents();
         }
 
-        private void AssignEvents()
+        void AssignEvents()
         {
             SIEventsHandler.OnGameStarted += StartGame;
             SIEventsHandler.OnGameQuit += QuitGame;
         }
 
-        private void OnDisable()
+        void OnDisable()
         {
             RemoveEvents();
         }
 
-        private void RemoveEvents()
+        void RemoveEvents()
         {
             SIEventsHandler.OnGameStarted -= StartGame;
             SIEventsHandler.OnGameQuit -= QuitGame;
         }
 
-        private void StartGame()
+        void StartGame()
         {
             _isGameStarted = true;
         }
 
-        private void Update()
+        void Update()
         {
-            HandleUpdate();
+            HandleOnUpdate();
         }
 
-        private void HandleUpdate()
+        void HandleOnUpdate()
         {
-            OnUpdateIndependentMovements();
+            OnUpdateNoPlayableObjects();
             
             if (_isGameStarted == false)
                 return;
@@ -93,27 +93,27 @@ namespace SpaceInvaders
             OnGameQuitCallback();
         }
 
-        private void OnUpdateIndependentMovements()
+        void OnUpdateNoPlayableObjects()
         {
-            SIEventsHandler.BroadcastOnGameIndependentObjectsMovement();
+            SIEventsHandler.BroadcastOnNonPlayableUpdate();
         }
-        
-        private void OnDebugInputHandling()
+
+        void OnDebugInputHandling()
         {
             SIEventsHandler.BroadcastOnDebugInputHandling();
         }
 
-        private void OnGameQuitCallback()
+        void OnGameQuitCallback()
         {
             SIEventsHandler.BroadcastOnGameQuit();
         }
 
-        private void OnShadersUpdateCallback()
+        void OnShadersUpdateCallback()
         {
             SIEventsHandler.BroadcastOnShadersUpdate();
         }
 
-        private void QuitGame()
+        void QuitGame()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -125,7 +125,7 @@ namespace SpaceInvaders
             }
         }
 
-        private void OnUpdateMovements()
+        void OnUpdateMovements()
         {
             SIEventsHandler.BroadcastOnUpdate();
         }

@@ -8,7 +8,7 @@ namespace SpaceInvaders
         [Range(0f, 2.5f)] public float minAsteroidMoveDelay;
         [Range(2.5f, 5f)] public float maxAsteroidMoveDelay;
 
-        [SerializeField] private SIAsteroidSpawner _asteroidsSpawner;
+        [SerializeField] SIAsteroidSpawner _asteroidsSpawner;
 
         protected void OnEnable()
         {
@@ -20,30 +20,30 @@ namespace SpaceInvaders
             RemoveEvents();
         }
 
-        private void AssignEvents()
+        void AssignEvents()
         {
             SIEventsHandler.OnGameStarted += InvokeAsteroidsMovement;
         }
 
-        private void RemoveEvents()
+        void RemoveEvents()
         {
             SIEventsHandler.OnGameStarted -= InvokeAsteroidsMovement;
         }
 
-        private void OnDestroy()
+        void OnDestroy()
         {
             StopAllCoroutines();
         }
 
-        private void InvokeAsteroidsMovement()
+        void InvokeAsteroidsMovement()
         {
             if (_asteroidsSpawner == null)
                 return;
-            
+
             StartCoroutine(AsteroidsMovementRoutine());
         }
 
-        private IEnumerator AsteroidsMovementRoutine()
+        IEnumerator AsteroidsMovementRoutine()
         {
             SIAsteroidBehaviour[] asteroids = _asteroidsSpawner.SpawnedAsteroids;
             int asteroidsCount = asteroids.Length;

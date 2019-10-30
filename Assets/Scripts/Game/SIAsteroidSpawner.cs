@@ -1,53 +1,56 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace SpaceInvaders
 {
     [ExecuteInEditMode]
-    public class SIAsteroidSpawner : SISpawner, IConfigurableObject, IRespawnable
+    public class SIAsteroidSpawner : SISpawner
     {
-        [SerializeField] private AsteroidSpawnerSettings _spawnerSettings;
-        [SerializeField] private Transform _asteroidsTemplateParent;
-        [SerializeField] private SIAsteroidBehaviour[] _spawnedAsteroids;
+        [SerializeField] AsteroidSpawnerSetup _spawnerSetup;
+        [SerializeField] AsteroidSpawnerSettings _spawnerSettings;
+        [SerializeField] Transform _asteroidsTemplateParent;
+        [SerializeField] SIAsteroidBehaviour[] _spawnedAsteroids;
 
-        private float _cameraZ;
-        private Camera _mainCamera;
+        float _cameraZ;
+        Camera _mainCamera;
 
         public SIAsteroidBehaviour[] SpawnedAsteroids => _spawnedAsteroids;
 
-        public void Configure(ScriptableSettingsMaster settings)
+        protected override void LoadSetup()
         {
-            _spawnerSettings = settings.asteroidSpawnerConfigurator.asteroidSpawnerSettings;
+            base.LoadSetup();
+            if (_spawnerSetup == null)
+            {            
+                Debug.LogError("No asteroid's spawner setup attached.", this);
+                return;
+            }
+            _spawnerSettings = _spawnerSetup.asteroidSpawnerSettings;
+        }
+        protected override void Initialise()
+        {
+            base.Initialise();
+            _asteroidsTemplateParent = transform;
+            _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
+            _cameraZ = _mainCamera.transform.localPosition.z;
+            _spawnedAsteroids = new SIAsteroidBehaviour[_spawnerSettings.maxAsteroidsToSpawn];
         }
 
-        protected override void OnEnable()
+        protected override void AssignEvents()
         {
-            base.OnEnable();
-            AssignEvents();
+            base.AssignEvents();
+            SIEventsHandler.OnSpawnObject += TryToSpawn;
         }
 
-        private void AssignEvents()
+        protected override void RemoveEvents()
         {
-            SIEventsHandler.OnSpawnObject += Spawn;
+            base.RemoveEvents();
+            SIEventsHandler.OnSpawnObject -= TryToSpawn;
         }
 
-        protected override void OnDisable()
+        Vector3 CalculateOutOfViewportPosition(int parentIndex)
         {
-            base.OnDisable();
-            RemoveEvents();
-        }
-
-        private void RemoveEvents()
-        {
-            SIEventsHandler.OnSpawnObject -= Spawn;
-        }
-
-        private Vector3 GetOutOfScreenPosition(int parentIndex)
-        {
-
-            float xPosition = 0f;
-            float yPosition = 0f;
+            float xPosition;
+            float yPosition;
             float zPosition = Random.Range(SIConstants.MIN_ASTEROID_Z, SIConstants.MAX_ASTEROID_Z) - _cameraZ;
 
             float randomizedCoord = Random.Range(0f, 1f);
@@ -71,44 +74,35 @@ namespace SpaceInvaders
                     yPosition = SIHelpers.VIEWPORT_SPAWN_MAX;
                     break;
             }
-            
 
             Vector3 viewportPosition = new Vector3(xPosition, yPosition, zPosition);
             Vector3 viewportToWorldPosition = _mainCamera.ViewportToWorldPoint(viewportPosition);
             return viewportToWorldPosition;
         }
 
-
-        public void Spawn()
+        protected override void TryToSpawn()
         {
-            if (_spawnerSettings.asteroidVariants == null || _spawnerSettings.asteroidVariants.Length == 0)
-            {
-                Debug.LogError("No asteroid's attached.", this);
-                return;
-            }
-            
-            _asteroidsTemplateParent = transform;
-            _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
-            _cameraZ = _mainCamera.transform.localPosition.z;
-            _spawnedAsteroids = new SIAsteroidBehaviour[_spawnerSettings.maxAsteroidsToSpawn];
+            base.TryToSpawn();
 
             for (int i = 0; i < _spawnerSettings.maxAsteroidsToSpawn; i++)
             {
                 int spawnedPrefabIndex = Random.Range(0, _spawnerSettings.asteroidVariantsCount);
                 int spawnedParentIndex = Random.Range(0, SIConstants.SCREEN_EDGES);
-                
-                SIAsteroidBehaviour asteroidBehaviour =
-                    Instantiate(_spawnerSettings.asteroidVariants[spawnedPrefabIndex], _asteroidsTemplateParent);
-                
-                Transform asteroidTransform = asteroidBehaviour.transform;
-                asteroidTransform.localPosition =
-                    asteroidTransform.InverseTransformPoint(GetOutOfScreenPosition(spawnedParentIndex));
-                asteroidBehaviour.gameObject.SetActive(true);
-                _spawnedAsteroids[i] = asteroidBehaviour;
+
+                AssignToParentAndCacheSpawnedObject(spawnedPrefabIndex, spawnedParentIndex, i);
             }
         }
-        
-        public void Respawn() {}
 
+        void AssignToParentAndCacheSpawnedObject(int spawnedPrefabIndex, int spawnedParentIndex, int i)
+        {
+            SIAsteroidBehaviour asteroidBehaviour =
+                Instantiate(_spawnerSettings.asteroidVariants[spawnedPrefabIndex], _asteroidsTemplateParent);
+
+            Transform asteroidTransform = asteroidBehaviour.transform;
+            asteroidTransform.localPosition =
+                asteroidTransform.InverseTransformPoint(CalculateOutOfViewportPosition(spawnedParentIndex));
+            asteroidBehaviour.gameObject.SetActive(true);
+            _spawnedAsteroids[i] = asteroidBehaviour;
+        }
     }
 }

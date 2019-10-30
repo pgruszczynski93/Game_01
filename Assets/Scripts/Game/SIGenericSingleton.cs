@@ -46,12 +46,9 @@ namespace SpaceInvaders
         {
             if (_instance != null)
             {
-                Debug.Log("DESTROY " + typeof(T) +" "+ gameObject.GetInstanceID());
-
                 DestroyImmediate(gameObject);
                 return;
             }
-            Debug.Log("LET LIVE " + typeof(T) + " " + gameObject.GetInstanceID());
             _instance = this as T;
             DontDestroyOnLoad(gameObject);
         }
