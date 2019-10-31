@@ -2,78 +2,53 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIGridMovement : MonoBehaviour, IUpdateTransform, ICanMove
+    public class SIGridMovement : SIMovementBehaviour
     {
-        [SerializeField] float _initialMovementSpeed;
-        [SerializeField] float _currentMovementSpeed;
-        [SerializeField] float _currentSpeedMultiplier;
-        [SerializeField] SIGridLimiter _gridLimiter;
         [SerializeField] GridMovementSetup _gridMovementSetup;
         [SerializeField] GridMovementSettings _gridMovementSettings;
 
-        bool _initialised;
-        bool _canMove;
-        float _dt;
+        [SerializeField] float _currentSpeedMultiplier;
+        [Range(0f, 3f), SerializeField] protected float _screenEdgeOffset;
+        [SerializeField] SIGridLimiter _gridLimiter;
+
         float _rightScreenEdgeOffset;
         float _leftScreenEdgeOffset;
 
         LocalGridMinMax _gridMinMax;
         ScreenEdges _screenEdges;
-        Transform _thisTransform;
 
-        void Initialise()
+        protected override void Initialise()
         {
-            if (_initialised)
-                return;
-            _initialised = true;
+            base.Initialise();
 
-            LoadSetup();
             _canMove = true;
-            _thisTransform = transform;
+            _gridMovementSettings = _gridMovementSetup.gridMovementSettings;
+            _screenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculateWorldLimits();
+            _rightScreenEdgeOffset = _screenEdges.rightScreenEdge - _screenEdgeOffset;
+            _leftScreenEdgeOffset = _screenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _gridMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
-            _screenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculateWorldLimits();
             UpdateMovementOffsets();
         }
 
-        void LoadSetup()
+        protected override void AssignEvents()
         {
-            if (_gridMovementSetup == null)
-            {            
-                Debug.LogError("No grid's setup attached.", this);
-                return;
-            }
-            _gridMovementSettings = _gridMovementSetup.gridMovementSettings;
-        }
-
-        void Start()
-        {
-            Initialise();
-        }
-
-        void OnEnable()
-        {
-            AssignEvents();
-        }
-
-        void OnDisable()
-        {
-            RemoveEvents();
-        }
-
-        void AssignEvents()
-        {
-            SIEventsHandler.OnUpdate += MoveObject;
+            SIEventsHandler.OnUpdate += TryToMoveObject;
             SIEventsHandler.OnEnemyDeath += UpdateMovementOffsets;
-//            SIEventsHandler.OnEnemySpeedMultiplierChanged += UpdateMovementStep;
+            SIEventsHandler.OnEnemySpeedMultiplierChanged += TryToUpdateCurrentGridMovementSpeed;
             SIEventsHandler.OnWaveEnd += ResetGridMovement;
         }
 
-        void RemoveEvents()
+        void TryToUpdateCurrentGridMovementSpeed(float multiplier)
         {
-            SIEventsHandler.OnUpdate -= MoveObject;
+            _currentSpeedMultiplier += multiplier;
+        }
+
+        protected override void RemoveEvents()
+        {
+            SIEventsHandler.OnUpdate -= TryToMoveObject;
             SIEventsHandler.OnEnemyDeath -= UpdateMovementOffsets;
-//            SIEventsHandler.OnEnemySpeedMultiplierChanged -= UpdateMovementStep;
+            SIEventsHandler.OnEnemySpeedMultiplierChanged -= TryToUpdateCurrentGridMovementSpeed;
             SIEventsHandler.OnWaveEnd -= ResetGridMovement;
         }
 
@@ -86,7 +61,7 @@ namespace SpaceInvaders
                                     _gridMovementSettings.enemyWidthOffset;
         }
 
-        public void MoveObject()
+        protected override void TryToMoveObject()
         {
             if (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed == false || _canMove == false)
                 return;
@@ -95,12 +70,12 @@ namespace SpaceInvaders
             UpdateRotation();
         }
 
-        public void StopObject()
+        protected override void TryToStopObject()
         {
             _canMove = false;
         }
 
-        public void UpdatePosition()
+        protected override void UpdatePosition()
         {
             _dt = Time.deltaTime;
 
@@ -110,28 +85,36 @@ namespace SpaceInvaders
 
             if (isInScreenBounds)
             {
-                Vector3 newPosition = new Vector3(currentPosition.x + horizontalMovementDelta,
-                    currentPosition.y);
-                Vector3 smoothedPosition =
-                    Vector3.Lerp(currentPosition, newPosition, _gridMovementSettings.smoothMovementStep);
-                _thisTransform.position = smoothedPosition;
+                MoveObjectInScreenBounds(currentPosition, horizontalMovementDelta);
             }
             else
             {
-                float clampedHorizontalPos =
-                    Mathf.Clamp(currentPosition.x, _leftScreenEdgeOffset, _rightScreenEdgeOffset);
-
-                _thisTransform.position = new Vector3(
-                    clampedHorizontalPos,
-                    currentPosition.y - _gridMovementSettings.gridDownStep,
-                    currentPosition.z);
-
-
+                ClampObjectMovementPosition(currentPosition);
                 UpdateMovementProperties();
             }
         }
 
-        public void UpdateRotation()
+        void ClampObjectMovementPosition(Vector3 currentPosition)
+        {
+            float clampedHorizontalPos =
+                Mathf.Clamp(currentPosition.x, _leftScreenEdgeOffset, _rightScreenEdgeOffset);
+
+            _thisTransform.position = new Vector3(
+                clampedHorizontalPos,
+                currentPosition.y - _gridMovementSettings.gridDownStep,
+                currentPosition.z);
+        }
+
+        void MoveObjectInScreenBounds(Vector3 currentPosition, float horizontalMovementDelta)
+        {
+            Vector3 newPosition = new Vector3(currentPosition.x + horizontalMovementDelta,
+                currentPosition.y);
+            Vector3 smoothedPosition =
+                Vector3.Lerp(currentPosition, newPosition, _gridMovementSettings.movementSmoothStep);
+            _thisTransform.position = smoothedPosition;
+        }
+
+        protected override void UpdateRotation()
         {
             //Intentionally not implemented.
         }
@@ -141,8 +124,8 @@ namespace SpaceInvaders
             _currentMovementSpeed = -_currentMovementSpeed;
             _currentSpeedMultiplier += _gridMovementSettings.speedMultiplierStep;
             _currentSpeedMultiplier = Mathf.Clamp(_currentSpeedMultiplier,
-                _gridMovementSettings.movementSpeedMultiplierMin,
-                _gridMovementSettings.movementSpeedMultiplierMax);
+                _initialMovementSpeed,
+                _gridMovementSettings.maxMovementSpeedMultiplier);
         }
 
         bool IsInHorizontalScreenBounds(Vector3 currentPosition)
@@ -154,10 +137,10 @@ namespace SpaceInvaders
         void ResetGridMovement()
         {
             _canMove = true;
-            _initialMovementSpeed += _gridMovementSettings.newWaveInitialSpeedChange;
-            _initialMovementSpeed = Mathf.Clamp(_initialMovementSpeed, _gridMovementSettings.initialMovementSpeedMin,
-                _gridMovementSettings.initialMovementSpeedMax);
-            _currentMovementSpeed = _initialMovementSpeed;
+            _currentMovementSpeed = Mathf.Abs(_currentMovementSpeed);
+            _currentMovementSpeed += _gridMovementSettings.newWaveInitialSpeedChange;
+            _currentMovementSpeed = Mathf.Clamp(_currentMovementSpeed, _initialMovementSpeed,
+                _gridMovementSettings.maxMovementSpeed);
             _currentSpeedMultiplier = _gridMovementSettings.initialSpeedMultiplier;
             UpdateMovementOffsets();
         }

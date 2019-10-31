@@ -6,6 +6,6 @@ namespace SpaceInvaders
     public class ScriptableSettingsMaster : ScriptableObject
     {
         public AsteroidSpawnerSetup asteroidSpawnerSetup;
-        public GridMovementSetup gridMovementSetup;
+        public MovementSetup gridMovementSetup;
     }
 }

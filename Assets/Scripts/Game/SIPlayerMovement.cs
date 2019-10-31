@@ -1,74 +1,53 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using MinesEvader;
+﻿using DG.Tweening;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIPlayerMovement : SIMovement, ICanMove
+    public class SIPlayerMovement : SIMovementBehaviour
     {
-        private Vector3 _inputVector;
-        private Dictionary<MovementType, float> _movementSpeeds;
+        [SerializeField] PlayerMovementSetup _playerMovementSetup;
+        [SerializeField] PlayerMovementSettings _playerMovementSettings;
+
+        [Range(0f, 3f), SerializeField] protected float _screenEdgeOffset;
+
+        float _rightScreenOffset;
+        float _leftScreenOffset;
+        Vector3 _inputValue;
+        ScreenEdges _screenEdges;
+        Quaternion _fromRotation;
+        Quaternion _toRotation;
 
         protected override void Initialise()
         {
             base.Initialise();
 
-            _movementSpeeds = new Dictionary<MovementType, float>
-            {
-                {MovementType.Slow, 15f},
-                {MovementType.Basic, 20f},
-                {MovementType.Fast, 25f},
-            };
-
-
-            _currentMovementSpeed = _movementSpeeds[0];
+            _canMove = true;
+            _playerMovementSettings = _playerMovementSetup.playerMovementSettings;
+            _screenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculateWorldLimits();
+            _rightScreenOffset = _screenEdges.rightScreenEdge - _screenEdgeOffset;
+            _leftScreenOffset = _screenEdges.leftScreenEdge + _screenEdgeOffset;
+            _initialMovementSpeed = _playerMovementSettings.initialMovementSpeed;
+            _currentMovementSpeed = _initialMovementSpeed;
         }
 
-        protected override void OnEnable()
+        protected override void AssignEvents()
         {
-            AssignEvents();
-        }
-
-        protected override void OnDisable()
-        {
-            RemoveEvents();
-        }
-
-        private void AssignEvents()
-        {
-            SIEventsHandler.OnUpdate += MoveObject;
+            SIEventsHandler.OnUpdate += TryToMoveObject;
             SIEventsHandler.OnInputCollected += HandleInputCollected;
         }
 
-        private void RemoveEvents()
+        protected override void RemoveEvents()
         {
-            SIEventsHandler.OnUpdate -= MoveObject;
+            SIEventsHandler.OnUpdate -= TryToMoveObject;
             SIEventsHandler.OnInputCollected += HandleInputCollected;
         }
 
         void HandleInputCollected(Vector3 inputVector)
         {
-            _inputVector = inputVector;
+            _inputValue = inputVector;
         }
 
-        #region UNUSED_METHODS
-
-//        private void SetMovementSpeed(MovementType movementType)
-//        {
-//            if (_movementSpeeds.TryGetValue(movementType, out float currentSpeed) == false)
-//            {
-//                SIHelpers.SISimpleLogger(this, "No key in _movementSpeeds dictionary - current speed setup with default.", SimpleLoggerTypes.Error);
-//                _currentMovementSpeed = BASIC_SPEED;
-//                return;
-//            }
-//
-//            _currentMovementSpeed = _movementSpeeds[movementType];
-//        }
-
-        #endregion
-
-        public void MoveObject()
+        protected override void TryToMoveObject()
         {
             if (_canMove == false)
                 return;
@@ -77,7 +56,7 @@ namespace SpaceInvaders
             UpdateRotation();
         }
 
-        public void StopObject()
+        protected override void TryToStopObject()
         {
             //todo: stop conditiions
 
@@ -90,32 +69,34 @@ namespace SpaceInvaders
         protected override void UpdatePosition()
         {
             _dt = Time.deltaTime;
-            float horizontalMovementDelta = _dt * _inputVector.x * _currentMovementSpeed;
-            float verticalMovementDelta = _dt * _inputVector.y * _currentMovementSpeed;
+            float horizontalMovementDelta = _dt * _inputValue.x * _currentMovementSpeed;
+            float verticalMovementDelta = _dt * _inputValue.y * _currentMovementSpeed;
 
-            Vector3 currentPosition = _cachedTransform.position;
+            Vector3 currentPosition = _thisTransform.position;
             Vector3 newPosition = new Vector3(currentPosition.x + horizontalMovementDelta,
-                currentPosition.y /* + verticalMovementDelta*/);
-            Vector3 smoothedPosition = Vector3.Lerp(currentPosition, newPosition, _smoothMovementStep);
+                currentPosition.y /* + verticalMovementDelta*/, 0f);
+            Vector3 smoothedPosition =
+                Vector3.Lerp(currentPosition, newPosition, _playerMovementSettings.movementSmoothStep);
 
             float clampedHorizontalPos =
                 Mathf.Clamp(smoothedPosition.x, _leftScreenOffset, _rightScreenOffset);
 
             //NOTE: for now vertical movement is locked - remove it when necessary and tweak.
-            
+
 //            float clampedVerticalPos = Mathf.Clamp(smoothedPosition.y, _screenEdges.bottomScreenEdge,
 //                _screenEdges.topScreenEdge);
             float clampedVerticalPos = smoothedPosition.y;
 
             smoothedPosition = new Vector3(clampedHorizontalPos, clampedVerticalPos, smoothedPosition.z);
-            _cachedTransform.position = smoothedPosition;
+            _thisTransform.position = smoothedPosition;
         }
 
         protected override void UpdateRotation()
         {
-            _fromRotation = _cachedTransform.rotation;
-            _toRotation = Quaternion.Euler(0, -_inputVector.x * _maxRotationAngle, 0);
-            _cachedTransform.rotation = Quaternion.Slerp(_fromRotation, _toRotation, _smoothMovementStep);
+            _fromRotation = _thisTransform.rotation;
+            _toRotation = Quaternion.Euler(0, -_inputValue.x * _playerMovementSettings.maxRotationAngle, 0);
+            _thisTransform.rotation =
+                Quaternion.Slerp(_fromRotation, _toRotation, _playerMovementSettings.movementSmoothStep);
         }
     }
 }

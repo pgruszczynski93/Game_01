@@ -4,14 +4,14 @@ namespace SpaceInvaders
 {
     public class SIInputSystem : MonoBehaviour
     {
-        [SerializeField] private Joystick _joystick;
+        [SerializeField] Joystick _joystick;
 
-        private bool _initialised;
+        bool _initialised;
 
-        private float _horizontalAxis;
-        private float _verticalAxis;
-        private float _depthAxis;
-        private Vector3 _inputVector;
+        float _horizontalAxis;
+        float _verticalAxis;
+        float _depthAxis;
+        Vector3 _inputVector;
 
         void Initialise()
         {
@@ -50,7 +50,7 @@ namespace SpaceInvaders
             SIEventsHandler.OnUpdate -= GetInput;
         }
 
-        private void GetInput()
+        void GetInput()
         {
 #if UNITY_EDITOR
 
@@ -60,9 +60,9 @@ namespace SpaceInvaders
 #elif UNITY_ANDROID && !UNITY_EDITOR
             _horizontalAxis = _joystick.Horizontal;
             _verticalAxis = _joystick.Vertical;
-            
+
 #endif
-             _inputVector = new Vector3(_horizontalAxis, _verticalAxis, _depthAxis);
+            _inputVector = new Vector3(_horizontalAxis, _verticalAxis, _depthAxis);
             SIEventsHandler.BroadcastOnInputCollected(_inputVector);
         }
     }

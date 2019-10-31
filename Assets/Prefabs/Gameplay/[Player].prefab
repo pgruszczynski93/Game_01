@@ -657,12 +657,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820f7a43b23eac346bd0bc681f3f5b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canMove: 0
   _initialMovementSpeed: 0
+  _playerMovementSetup: {fileID: 11400000, guid: b36ed5cdf66b3fb43a64f5b2b68b8e99,
+    type: 2}
+  _playerMovementSettings:
+    initialMovementSpeed: 0
+    initialSpeedMultiplier: 0
+    movementSmoothStep: 0
+    maxMovementSpeed: 0
+    maxMovementSpeedMultiplier: 0
+    easeType: 0
+    easeTime: 0
+    maxRotationAngle: 0
   _currentMovementSpeed: 0.5
   _screenEdgeOffset: 1
-  _smoothMovementStep: 0.4
-  _maxRotationAngle: 30
 --- !u!114 &545388514
 MonoBehaviour:
   m_ObjectHideFlags: 0

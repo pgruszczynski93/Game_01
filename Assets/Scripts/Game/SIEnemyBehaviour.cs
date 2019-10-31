@@ -10,7 +10,6 @@ namespace SpaceInvaders
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private GameObject _colliderParent;
         [SerializeField] private SIVFXManager _destroyVFX;
-        [SerializeField] private SIEnemyMovement _enemyMovement;
         [SerializeField] private SIBonusParentManager _bonusManager;
         [SerializeField] private SIProjectileBehaviour _projectileBehaviour;
         [SerializeField] private SIEnemyShootBehaviour _shootBehaviour;
@@ -65,7 +64,6 @@ namespace SpaceInvaders
             } 
             
             EnableEnemyVisibility(false);
-            _enemyMovement.StopObject();
             _bonusManager.DropBonus();
             _enemyStatistics.isAlive = false;
             _projectileBehaviour.HandleWaitOnProjectileReset();

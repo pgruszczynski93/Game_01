@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceInvaders
@@ -13,17 +12,17 @@ namespace SpaceInvaders
 
     public class SIGridLimiter : MonoBehaviour
     {
-        [SerializeField] private LocalGridMinMax minMaxPair;
-        [SerializeField] private SIEnemyBehaviour[] _enemies;
+        [SerializeField] LocalGridMinMax minMaxPair;
+        [SerializeField] SIEnemyBehaviour[] _enemies;
 
-        private bool _initialised;
+        bool _initialised;
 
-        private void OnEnable()
+        void OnEnable()
         {
             AssignEvents();
         }
 
-        private void OnDisable()
+        void OnDisable()
         {
             RemoveEvents();
         }
@@ -38,9 +37,8 @@ namespace SpaceInvaders
             SIEventsHandler.OnWaveEnd -= InitialReset;
         }
 
-        private void TryToUpdateGridDimensions()
+        void TryToUpdateGridDimensions()
         {
-            Debug.Log("[SIGridLimiter] Grid recalculates.");
             float xLocalPos;
             Transform enemyTransform;
             SIEnemyBehaviour enemy;
@@ -64,14 +62,14 @@ namespace SpaceInvaders
             minMaxPair.localGridHorizontalMin = SIConstants.GRID_LEFT_EDGE;
         }
 
-        private void TryToResetGridMinMax()
+        void TryToResetGridMinMax()
         {
             // intentionally assigned min as max horizontal value and the same for max...
             minMaxPair.localGridHorizontalMax = SIConstants.GRID_LEFT_EDGE;
             minMaxPair.localGridHorizontalMin = SIConstants.GRID_RIGHT_EDGE;
         }
 
-        private void FindNewGridDimensions(float xLocalPos)
+        void FindNewGridDimensions(float xLocalPos)
         {
             if (xLocalPos < minMaxPair.localGridHorizontalMin)
                 minMaxPair.localGridHorizontalMin = xLocalPos;
@@ -89,7 +87,7 @@ namespace SpaceInvaders
                 minMaxPair = new LocalGridMinMax
                 {
                     localGridHorizontalMax = SIConstants.GRID_RIGHT_EDGE,
-                    localGridHorizontalMin = SIConstants.GRID_LEFT_EDGE,
+                    localGridHorizontalMin = SIConstants.GRID_LEFT_EDGE
                 };
             }
 

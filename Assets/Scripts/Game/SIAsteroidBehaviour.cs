@@ -77,7 +77,7 @@ namespace SpaceInvaders
             _isMoving = true;
         }
 
-        void Reset()
+        void ResetMovement()
         {
             _isMoving = false;
             _rigidbody.velocity = SIHelpers.VectorZero;
@@ -108,7 +108,7 @@ namespace SpaceInvaders
 
         public void StopObject()
         {
-            Reset();
+            ResetMovement();
         }
 
         void CheckIsObjectVisibleOnScreen()

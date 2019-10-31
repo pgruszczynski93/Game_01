@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f586c56156b247d7b454557a6a6db869, type: 3}
-  m_Name: Grid Movement Config
+  m_Script: {fileID: 11500000, guid: fd576b35cd4f467194f759d9b86a53bb, type: 3}
+  m_Name: Player Movement Config
   m_EditorClassIdentifier: 
-  gridMovementSettings:
-    initialMovementSpeed: 1
+  playerMovementSettings:
+    initialMovementSpeed: 20
     initialSpeedMultiplier: 1
     movementSmoothStep: 0.4
-    maxMovementSpeed: 30
-    maxMovementSpeedMultiplier: 10
-    newWaveInitialSpeedChange: 0.2
-    gridDownStep: 0.25
-    speedMultiplierStep: 0.2
-    enemyWidthOffset: 0.25
+    maxMovementSpeed: 45
+    maxMovementSpeedMultiplier: 1
+    easeType: 27
+    easeTime: 1
+    maxRotationAngle: 40
