@@ -5,29 +5,31 @@ namespace SpaceInvaders
 {
     public class SIEventsHandler
     {
-        public static event Action OnGameStarted = delegate { };
-        public static event Action OnGameFinished = delegate { };
+        public static event Action OnGameStarted;
+        public static event Action OnGameFinished;
+        public static event Action OnSpawnObject;
+        public static event Action OnGameQuit;
+        public static event Action OnEnemiesRespawn;
+        public static event Action OnNonPlayableUpdate;
+        public static event Action OnUpdate;
+        public static event Action OnShadersUpdate;
+        public static event Action OnEnemyDeath;
+        public static event Action OnDebugInputHandling;
+        public static event Action OnWaveEnd;
+        public static event Action OnShootInputReceived;
+        public static event Action<float> OnEnemySpeedMultiplierChanged;
+        public static event Action<Vector3> OnAxesInputReceived;
+        public static event Action<int> OnShootingEnemiesUpdate;
+        public static event Action<SIBonusInfo> OnBonusCollision;
 
-        public static event Action OnSpawnObject = delegate { };
-        public static event Action OnGameQuit = delegate { };
-        public static event Action OnEnemiesRespawn = delegate { };
-
-        public static event Action OnNonPlayableUpdate = delegate {}; 
-        public static event Action OnUpdate = delegate { };
-        public static event Action OnShadersUpdate = delegate { };
-        public static event Action OnEnemyDeath = delegate { };
-        public static event Action OnDebugInputHandling = delegate { };
-        public static event Action OnWaveEnd = delegate { };
-        public static event Action<float> OnEnemySpeedMultiplierChanged = delegate { };
-
-        public static event Action<Vector3> OnInputCollected = delegate { };
-
-        public static event Action<int> OnShootingEnemiesUpdate = delegate { };
-        public static event Action<SIBonusInfo> OnBonusCollision = delegate { };
-
-        public static void BroadcastOnInputCollected(Vector3 inputVector)
+        public static void BroadcastOnShootInputReceived()
         {
-            OnInputCollected?.Invoke(inputVector);
+            OnShootInputReceived?.Invoke();
+        }
+
+        public static void BroadcastOnAxesInputReceived(Vector3 inputVector)
+        {
+            OnAxesInputReceived?.Invoke(inputVector);
         }
 
         public static void BroadcastOnShootingEnemiesUpdate(int index)

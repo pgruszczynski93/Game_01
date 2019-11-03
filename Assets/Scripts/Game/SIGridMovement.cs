@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIGridMovement : SIMovementBehaviour
+    public class SIGridMovement : SIMovement
     {
         [SerializeField] GridMovementSetup _gridMovementSetup;
         [SerializeField] GridMovementSettings _gridMovementSettings;

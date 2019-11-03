@@ -42,15 +42,36 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIEventsHandler.OnUpdate += GetInput;
+            SIEventsHandler.OnUpdate += TryToGetInput;
         }
 
         void RemoveEvents()
         {
-            SIEventsHandler.OnUpdate -= GetInput;
+            SIEventsHandler.OnUpdate -= TryToGetInput;
         }
 
-        void GetInput()
+        void TryToGetInput()
+        {
+            GetAxes();
+            TryToSendShootAction();
+        }
+
+        void TryToSendShootAction()
+        {
+            if (!SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed)
+                return;
+            
+            if(IsShootingKeyPressed())
+                SIEventsHandler.BroadcastOnShootInputReceived();
+                
+        }
+
+        bool IsShootingKeyPressed()
+        {
+            return Input.GetKeyDown(KeyCode.Space);
+        }
+
+        void GetAxes()
         {
 #if UNITY_EDITOR
 
@@ -63,7 +84,7 @@ namespace SpaceInvaders
 
 #endif
             _inputVector = new Vector3(_horizontalAxis, _verticalAxis, _depthAxis);
-            SIEventsHandler.BroadcastOnInputCollected(_inputVector);
+            SIEventsHandler.BroadcastOnAxesInputReceived(_inputVector);
         }
     }
 }

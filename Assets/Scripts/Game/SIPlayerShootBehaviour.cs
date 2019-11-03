@@ -2,29 +2,29 @@
 
 namespace SpaceInvaders
 {
-    public class SIPlayerShootBehaviour : SIShootBehaviour<SIPlayerProjectilesController>
+    public class SIPlayerShootBehaviour : SIShootBehaviour
     {
-        protected override void OnEnable()
+        protected override void AssignEvents()
         {
-            SIEventsHandler.OnUpdate += InvokeShoot;
+            SIEventsHandler.OnShootInputReceived += TryToShootProjectile;
         }
 
-        protected override void OnDisable()
+        protected override void RemoveEvents()
         {
-            SIEventsHandler.OnUpdate -= InvokeShoot;
+            SIEventsHandler.OnShootInputReceived -= TryToShootProjectile;
         }
 
-        protected override void InvokeShoot()
+        protected override void TryToShootProjectile()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed)
-            {
-                _projectileController.Shoot();
-            }
+            if (!SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed)
+                return;
+            
+            _projectilesController.Shoot();
         }
 
         public void Debug_Shot()
         {
-            _projectileController.Shoot();
+            _projectilesController.Shoot();
         }
     }
 }

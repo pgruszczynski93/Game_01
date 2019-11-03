@@ -341,11 +341,12 @@
             </e>
           </e>
         </e>
-        <e p="PROJECT_INFO.txt" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Configs" t="Include">
             <e p="AsteroidSpawnerSettings.cs" t="Include" />
             <e p="AsteroidSpawnerSetup.cs" t="Include" />
+            <e p="EntitySettings.cs" t="Include" />
+            <e p="EntitySetup.cs" t="Include" />
             <e p="GridMovementSettings.cs" t="Include" />
             <e p="GridMovementSetup.cs" t="Include" />
             <e p="MovementSettings.cs" t="Include" />
@@ -361,7 +362,6 @@
             <e p="ICanMove.cs" t="Include" />
             <e p="IExtendedMonoBehaviour.cs" t="Include" />
             <e p="IProjectile.cs" t="Include" />
-            <e p="IShootable.cs" t="Include" />
             <e p="IUpdateTransform.cs" t="Include" />
             <e p="SIAsteroidBehaviour.cs" t="Include" />
             <e p="SIAsteroidsMaster.cs" t="Include" />
@@ -382,6 +382,7 @@
             <e p="SIEnemyMovement.cs" t="Include" />
             <e p="SIEnemyProjectileColliderBehaviour.cs" t="Include" />
             <e p="SIEnemyShootBehaviour.cs" t="Include" />
+            <e p="SIEntity.cs" t="Include" />
             <e p="SIEnums.cs" t="Include" />
             <e p="SIEventsHandler.cs" t="Include" />
             <e p="SIFPSDisplay.cs" t="Include" />
@@ -392,8 +393,7 @@
             <e p="SIHelpers.cs" t="Include" />
             <e p="SIInputSystem.cs" t="Include" />
             <e p="SIMainColliderBehaviour.cs" t="Include" />
-            <e p="SIMovementBehaviour.cs" t="Include" />
-            <e p="SIPlayableObject.cs" t="Include" />
+            <e p="SIMovement.cs" t="Include" />
             <e p="SIPlayerBehaviour.cs" t="Include" />
             <e p="SIPlayerColliderBehaviour.cs" t="Include" />
             <e p="SIPlayerMovement.cs" t="Include" />
@@ -409,6 +409,7 @@
             <e p="SIShaderModifier.cs" t="Include" />
             <e p="SIShootBehaviour.cs" t="Include" />
             <e p="SISpawner.cs" t="Include" />
+            <e p="SIStatistics.cs" t="Include" />
             <e p="SIStringTags.cs" t="Include" />
             <e p="SITimeBonusesManager.cs" t="Include" />
             <e p="SIUIManager.cs" t="Include" />

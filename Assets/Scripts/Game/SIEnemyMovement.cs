@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIEnemyMovement : SIMovementBehaviour
+    public class SIEnemyMovement : SIMovement
     {
         protected override void UpdatePosition()
         {

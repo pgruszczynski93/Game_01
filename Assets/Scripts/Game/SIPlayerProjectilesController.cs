@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIPlayerProjectilesController : MonoBehaviour, IShootable
+    public class SIPlayerProjectilesController : MonoBehaviour
     {
         [SerializeField] private SIProjectileInfo _currentProjectile;
         [SerializeField] private List<SIProjectileInfo> _availableProjectilesPrefabs;

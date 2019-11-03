@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIPlayerMovement : SIMovementBehaviour
+    public class SIPlayerMovement : SIMovement
     {
         [SerializeField] PlayerMovementSetup _playerMovementSetup;
         [SerializeField] PlayerMovementSettings _playerMovementSettings;
@@ -33,16 +33,16 @@ namespace SpaceInvaders
         protected override void AssignEvents()
         {
             SIEventsHandler.OnUpdate += TryToMoveObject;
-            SIEventsHandler.OnInputCollected += HandleInputCollected;
+            SIEventsHandler.OnAxesInputReceived += HandleAxesInputReceived;
         }
 
         protected override void RemoveEvents()
         {
             SIEventsHandler.OnUpdate -= TryToMoveObject;
-            SIEventsHandler.OnInputCollected += HandleInputCollected;
+            SIEventsHandler.OnAxesInputReceived += HandleAxesInputReceived;
         }
 
-        void HandleInputCollected(Vector3 inputVector)
+        void HandleAxesInputReceived(Vector3 inputVector)
         {
             _inputValue = inputVector;
         }

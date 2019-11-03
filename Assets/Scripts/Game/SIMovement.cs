@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public abstract class SIMovementBehaviour : MonoBehaviour
+    public abstract class SIMovement : MonoBehaviour
     {
         protected bool _canMove;
         protected bool _initialised;

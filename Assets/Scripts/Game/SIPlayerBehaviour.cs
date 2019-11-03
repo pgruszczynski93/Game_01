@@ -4,37 +4,26 @@ namespace SpaceInvaders
 {
     public class SIPlayerBehaviour : SIGenericSingleton<SIPlayerBehaviour>
     {
-        private const int MIN_HEALTH = 0;
-        private const int MAX_HEALTH = 6;
+        const int MIN_HEALTH = 0;
+        const int MAX_HEALTH = 6;
 
-        [SerializeField] private SIStatistics _playerStatistics;
-        [SerializeField] private SIPlayerMovement _playerMovement;
-        [SerializeField] private SIPlayerShootBehaviour _playerShoot;
-        [SerializeField] private SIPlayerProjectilesController _playerProjectileController;
-        [SerializeField] private SIVFXManager _shieldVfxBehaviour;
-        [SerializeField] private SITimeBonusesManager _timeBonusesManager;
+        [SerializeField] SIPlayerMovement _playerMovement;
 
-        public SIPlayerMovement PlayerMovemnt
-        {
-            get { return _playerMovement; }
-        }
+        [SerializeField] SIStatistics _playerStatistics;
+        [SerializeField] SIPlayerShootBehaviour _playerShoot;
+        [SerializeField] SIPlayerProjectilesController _playerProjectileController;
+        [SerializeField] SIVFXManager _shieldVfxBehaviour;
+        [SerializeField] SITimeBonusesManager _timeBonusesManager;
 
-        public SIPlayerShootBehaviour PlayerShoot
-        {
-            get { return _playerShoot; }
-        }
+        public SIPlayerMovement PlayerMovement => _playerMovement;
 
-        public SIPlayerProjectilesController ProjectileController
-        {
-            get { return _playerProjectileController; }
-        }
+        public SIPlayerShootBehaviour PlayerShoot => _playerShoot;
+
+        public SIPlayerProjectilesController ProjectileController => _playerProjectileController;
 
         public SIStatistics PlayerStatistics { get => _playerStatistics; set => _playerStatistics = value; }
 
-        public SIVFXManager ShieldVfxBehaviour
-        {
-            get { return _shieldVfxBehaviour; }
-        }
+        public SIVFXManager ShieldVfxBehaviour => _shieldVfxBehaviour;
 
         protected override void Awake()
         {
@@ -42,29 +31,18 @@ namespace SpaceInvaders
             SetInitialReferences();
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
             SIEventsHandler.OnBonusCollision += UpdatePlayerStatistics;
         }
 
-        private void OnDisable()
+        void OnDisable()
         {
             SIEventsHandler.OnBonusCollision -= UpdatePlayerStatistics;
         }
 
-        private void SetInitialReferences()
+        void SetInitialReferences()
         {
-            if (_playerStatistics == null ||
-                _playerMovement == null ||
-                _playerShoot == null ||
-                _playerProjectileController == null ||
-                ShieldVfxBehaviour == null ||
-                _timeBonusesManager == null)
-            {
-                SIHelpers.SISimpleLogger(this, "Assign references in editor first. ", SimpleLoggerTypes.Error);
-                return;
-            }
-
             _playerStatistics = new SIStatistics
             {
                 currentHealth = 3,
@@ -86,7 +64,7 @@ namespace SpaceInvaders
         }
 
 
-        private void ParseBonus(SIBonusInfo bonusInfo)
+        void ParseBonus(SIBonusInfo bonusInfo)
         {
             if (_timeBonusesManager == null)
             {
@@ -112,7 +90,7 @@ namespace SpaceInvaders
             }
         }
 
-        private void ModifyStatistics(SIBonusInfo bonusInfo)
+        void ModifyStatistics(SIBonusInfo bonusInfo)
         {
             if (bonusInfo == null)
             {
@@ -129,7 +107,7 @@ namespace SpaceInvaders
         }
 
 
-        private void EnableShield()
+        void EnableShield()
         {
             if (ShieldVfxBehaviour == null)
             {
@@ -141,7 +119,7 @@ namespace SpaceInvaders
             SIHelpers.SISimpleLogger(this, "Shield enabled.", SimpleLoggerTypes.Log);
         }
 
-        private void ModifyCurrentWeapon(CollectibleLevel collectibleLevel)
+        void ModifyCurrentWeapon(CollectibleLevel collectibleLevel)
         {
             // to do: add new projectile prefabs, then the rest of code will be working
            // _playerProjectileController.SetCurrentProjectile(weaponType);

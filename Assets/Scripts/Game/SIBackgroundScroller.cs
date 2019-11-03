@@ -48,16 +48,16 @@ namespace SpaceInvaders
         private void AssignEvents()
         {
             SIEventsHandler.OnNonPlayableUpdate += MoveObject;
-            SIEventsHandler.OnInputCollected += HandleInputCollected;
+            SIEventsHandler.OnAxesInputReceived += HandleAxesInputReceived;
         }
 
         private void RemoveEvents()
         {
             SIEventsHandler.OnNonPlayableUpdate -= MoveObject;
-            SIEventsHandler.OnInputCollected -= HandleInputCollected;
+            SIEventsHandler.OnAxesInputReceived -= HandleAxesInputReceived;
         }
 
-        private void HandleInputCollected(Vector3 inputVector)
+        private void HandleAxesInputReceived(Vector3 inputVector)
         {
             _horizontalScrollValue = inputVector.x;
         }

@@ -2,17 +2,17 @@
 
 namespace SpaceInvaders
 {
-    public class SIEnemyShootBehaviour : SIShootBehaviour<SIProjectileBehaviour>, IShootable
+    public class SIEnemyShootBehaviour :  SIShootBehaviour
     {
-        protected override void InvokeShoot()
+        protected override void TryToShootProjectile()
         {
-            _projectileController.gameObject.SetActive(true);
-            _projectileController.MoveProjectile();
+            _projectilesController.gameObject.SetActive(true);
+//            _projectilesController.MoveProjectile();
         }
 
         public void Shoot()
         {
-            InvokeShoot();
+//            InvokeShoot();
         }
     }
 

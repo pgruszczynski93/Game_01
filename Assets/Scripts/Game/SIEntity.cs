@@ -1,25 +1,25 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public abstract class SIShootBehaviour : MonoBehaviour
+    public class SIEntity : MonoBehaviour
     {
-        [SerializeField] protected SIPlayerProjectilesController _projectilesController;
+        [SerializeField] EntitySetup _entitySetup;
+        [SerializeField] EntitySettings _entitySettings;
+        
+        [SerializeField] SIStatistics _statistics;
 
         bool _initialised;
+
+        public SIStatistics Statistics => _statistics;
 
         protected virtual void Initialise()
         {
             if (_initialised)
                 return;
 
-            if (_projectilesController == null)
-            {
-                Debug.LogError("No projectile controller attached.", this);
-                return;
-            }
-            
             _initialised = true;
+            _entitySettings = _entitySetup.entitySettings;
         }
 
         void Start()
@@ -37,8 +37,6 @@ namespace SpaceInvaders
             RemoveEvents();
         }
 
-        protected abstract void TryToShootProjectile();
-        
         protected virtual void AssignEvents() { }
 
         protected virtual void RemoveEvents() { }
