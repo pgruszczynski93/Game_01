@@ -17,11 +17,17 @@ namespace SpaceInvaders
         public static event Action OnDebugInputHandling;
         public static event Action OnWaveEnd;
         public static event Action OnShootInputReceived;
+        public static event Action OnReloading;
         public static event Action<float> OnEnemySpeedMultiplierChanged;
         public static event Action<Vector3> OnAxesInputReceived;
         public static event Action<int> OnShootingEnemiesUpdate;
         public static event Action<SIBonusInfo> OnBonusCollision;
 
+        public static void BroadcastOnReloading()
+        {
+            OnReloading?.Invoke();
+        }
+        
         public static void BroadcastOnShootInputReceived()
         {
             OnShootInputReceived?.Invoke();

@@ -633,6 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbed8f33d46f7cd4bb3884ae6ca1337b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerMovement: {fileID: 710538201}
   _playerStatistics:
     isAlive: 0
     canDropBonus: 0
@@ -640,7 +641,6 @@ MonoBehaviour:
     currentScore: 0
     currentWave: 0
     currentCollectibleLevel: 0
-  _playerMovement: {fileID: 710538201}
   _playerShoot: {fileID: 545388514}
   _playerProjectileController: {fileID: 822644587}
   _shieldVfxBehaviour: {fileID: 1608886188183894926}
@@ -658,6 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialMovementSpeed: 0
+  _currentMovementSpeed: 0.5
   _playerMovementSetup: {fileID: 11400000, guid: b36ed5cdf66b3fb43a64f5b2b68b8e99,
     type: 2}
   _playerMovementSettings:
@@ -669,7 +670,6 @@ MonoBehaviour:
     easeType: 0
     easeTime: 0
     maxRotationAngle: 0
-  _currentMovementSpeed: 0.5
   _screenEdgeOffset: 1
 --- !u!114 &545388514
 MonoBehaviour:
@@ -683,7 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a57356ac738104ebffba44c7e668d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileController: {fileID: 822644587}
+  _projectilesController: {fileID: 822644587}
 --- !u!114 &8733147251714419125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1116,14 +1116,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4258939108324726115}
     m_Modifications:
-    - target: {fileID: 1253142483436318, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
-      propertyPath: m_Name
-      value: PS_Parent (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1253142483436318, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 4521404770085940, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.32
@@ -1167,6 +1159,14 @@ PrefabInstance:
     - target: {fileID: 4521404770085940, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253142483436318, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
+      propertyPath: m_Name
+      value: PS_Parent (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253142483436318, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 1706519164850726, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1832,14 +1832,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5451937587114457309}
     m_Modifications:
-    - target: {fileID: 1253142483436318, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
-      propertyPath: m_Name
-      value: PS_Parent
-      objectReference: {fileID: 0}
-    - target: {fileID: 1253142483436318, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 4521404770085940, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.377
@@ -1883,6 +1875,14 @@ PrefabInstance:
     - target: {fileID: 4521404770085940, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253142483436318, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
+      propertyPath: m_Name
+      value: PS_Parent
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253142483436318, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 1706519164850726, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
       propertyPath: m_StaticEditorFlags
