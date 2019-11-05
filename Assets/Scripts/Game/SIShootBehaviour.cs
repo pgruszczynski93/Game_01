@@ -4,7 +4,7 @@ namespace SpaceInvaders
 {
     public abstract class SIShootBehaviour : MonoBehaviour
     {
-        [SerializeField] protected SIPlayerProjectilesController _projectilesController;
+        [SerializeField] protected SIWeaponReloader weaponReloader;
 
         bool _initialised;
 
@@ -13,7 +13,7 @@ namespace SpaceInvaders
             if (_initialised)
                 return;
 
-            if (_projectilesController == null)
+            if (weaponReloader == null)
             {
                 Debug.LogError("No projectile controller attached.", this);
                 return;

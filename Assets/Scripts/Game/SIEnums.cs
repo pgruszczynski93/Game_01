@@ -1,18 +1,5 @@
 ﻿namespace SpaceInvaders
 {
-
-    public enum ShaderProperties
-    {
-        EmissionPower,
-    }
-
-    public enum VFXActions
-    {
-        EnableVFX,
-        EnableAndDetachVFX,
-        EnableAndAttachVFX
-    }
-    
     public enum AsteroidState
     {
         ReadyToMove,
@@ -26,32 +13,11 @@
         Error
     }
 
-    public enum MovementDirection
-    {
-        Up,
-        Down,
-        Left, 
-        Right
-    }
-
     public enum BonusType
     {
         Life,
         Shield,
         Weapon,
-    }
-
-    public enum MovementType
-    {
-        Basic,
-        Fast,
-        Slow
-    }
-
-    public enum EnemyType
-    {
-        Basic, 
-        Special
     }
 
     public enum CollectibleLevel
@@ -69,16 +35,12 @@
         Tenth
     }
 
-    public enum AddedTags
+    public enum WeaponTier
     {
-
+        Tier_1,
+        Tier_2, 
+        Tier_3, 
+        Tier_4, 
+        Tier_5
     }
-
-    public enum Events
-    {
-        OnPlayerMove, 
-        OnPlayerShoot
-    }
-
-
 }

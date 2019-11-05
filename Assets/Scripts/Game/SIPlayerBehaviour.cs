@@ -11,15 +11,12 @@ namespace SpaceInvaders
 
         [SerializeField] SIStatistics _playerStatistics;
         [SerializeField] SIPlayerShootBehaviour _playerShoot;
-        [SerializeField] SIPlayerProjectilesController _playerProjectileController;
         [SerializeField] SIVFXManager _shieldVfxBehaviour;
         [SerializeField] SITimeBonusesManager _timeBonusesManager;
 
         public SIPlayerMovement PlayerMovement => _playerMovement;
 
         public SIPlayerShootBehaviour PlayerShoot => _playerShoot;
-
-        public SIPlayerProjectilesController ProjectileController => _playerProjectileController;
 
         public SIStatistics PlayerStatistics { get => _playerStatistics; set => _playerStatistics = value; }
 

@@ -30,12 +30,4 @@ namespace SpaceInvaders
         public SICollectibleStatistics bonusStatistics;
         public UnityEvent OnBonusFinishEvent;
     }
-
-    [Serializable]
-    public class SIProjectileInfo
-    {
-        public CollectibleLevel projectileType;
-        public GameObject[] projectilePrefabs;
-        public Transform[] projectileParents;
-    }
 }

@@ -6,7 +6,7 @@ namespace SpaceInvaders
     {
         protected override void TryToShootProjectile()
         {
-            _projectilesController.gameObject.SetActive(true);
+            weaponReloader.gameObject.SetActive(true);
 //            _projectilesController.MoveProjectile();
         }
 

@@ -19,12 +19,12 @@ namespace SpaceInvaders
             if (!SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed)
                 return;
             
-            _projectilesController.Shoot();
+            weaponReloader.TryToShootAndReload();
         }
 
         public void Debug_Shot()
         {
-            _projectilesController.Shoot();
+            weaponReloader.TryToShootAndReload();
         }
     }
 }
