@@ -5,12 +5,13 @@ namespace SpaceInvaders
 {
     public class SIWeaponReloader : MonoBehaviour
     {
-        [SerializeField] SIWeaponData _currentWeaponData;
+        [SerializeField] SIWeaponHolderData _currentWeaponHolderData;
         [SerializeField] SIWeaponHolder[] _weaponHolders;
 
         int _projectileIndex;
         int _availableWeaponsCount;
         float _nextReloadTime;
+        float _timeFromStart;
         
         SIWeaponHolder _currentWeaponHolder;
         Dictionary<WeaponTier, SIWeaponHolder> _allWeapons;
@@ -30,7 +31,8 @@ namespace SpaceInvaders
 
             _allWeapons = new Dictionary<WeaponTier, SIWeaponHolder>
             {
-                {WeaponTier.Tier_1, _weaponHolders[0]}
+                {WeaponTier.Tier_1, _weaponHolders[0]},
+                {WeaponTier.Tier_2, _weaponHolders[1]},
             };
 
             UpdateCurrentWeaponTier(WeaponTier.Tier_1);
@@ -39,10 +41,14 @@ namespace SpaceInvaders
         void UpdateCurrentWeaponTier(WeaponTier weaponTier)
         {
             _currentWeaponHolder = _allWeapons[weaponTier];
-            _currentWeaponData = _currentWeaponHolder.GetWeaponData();
-            _availableWeaponsCount = _currentWeaponData.availableWeapons.Length;
+            _currentWeaponHolderData = _currentWeaponHolder.GetWeaponHolderData();
+            _availableWeaponsCount = _currentWeaponHolderData.availableWeapons.Length;
         }
-        
+
+        public void Debug_UpdateWeapon(int weapon)
+        {
+            UpdateCurrentWeaponTier((WeaponTier)weapon);
+        }
 
         void OnEnable()
         {
@@ -66,17 +72,17 @@ namespace SpaceInvaders
 
         public void TryToShootAndReload()
         {
-            float timeFromStart = Time.time;
-            if (timeFromStart <= _nextReloadTime)
+            _timeFromStart = Time.time;
+            if (_timeFromStart <= _nextReloadTime)
                 return;
 
-            _nextReloadTime = timeFromStart + _currentWeaponData.weaponSettings.reloadTime;
+            _nextReloadTime = _timeFromStart + _currentWeaponHolderData.weaponHolderSettings.reloadTime;
             SelectNextProjectile();
         }
 
         void SelectNextProjectile()
         {
-            _currentWeaponData.availableWeapons[_projectileIndex].MoveProjectile();
+            _currentWeaponHolderData.availableWeapons[_projectileIndex].TryToLaunchWeaponEntities();
             ++_projectileIndex;
             if (_projectileIndex > _availableWeaponsCount - 1)
                 _projectileIndex = 0;

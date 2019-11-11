@@ -354,8 +354,10 @@
             <e p="PlayerMovementSettings.cs" t="Include" />
             <e p="PlayerMovementSetup.cs" t="Include" />
             <e p="ScriptableSettingsMaster.cs" t="Include" />
-            <e p="WeaponSettings.cs" t="Include" />
-            <e p="WeaponSetup.cs" t="Include" />
+            <e p="SIWeaponSettings.cs" t="Include" />
+            <e p="SIWeaponSetup.cs" t="Include" />
+            <e p="WeaponHolderSettings.cs" t="Include" />
+            <e p="WeaponHolderSetup.cs" t="Include" />
           </e>
           <e p="Editor" t="Include">
             <e p="SILoggerExtension.cs" t="Include" />
@@ -363,7 +365,6 @@
           <e p="Game" t="Include">
             <e p="ICanMove.cs" t="Include" />
             <e p="IExtendedMonoBehaviour.cs" t="Include" />
-            <e p="IProjectile.cs" t="Include" />
             <e p="IUpdateTransform.cs" t="Include" />
             <e p="SIAsteroidBehaviour.cs" t="Include" />
             <e p="SIAsteroidsMaster.cs" t="Include" />
@@ -390,18 +391,18 @@
             <e p="SIFPSDisplay.cs" t="Include" />
             <e p="SIGameMasterBehaviour.cs" t="Include" />
             <e p="SIGenericSingleton.cs" t="Include" />
-            <e p="SIGridLimiter.cs" t="Include" />
             <e p="SIGridMovement.cs" t="Include" />
+            <e p="SIGridMovementLimiter.cs" t="Include" />
             <e p="SIHelpers.cs" t="Include" />
             <e p="SIInputSystem.cs" t="Include" />
             <e p="SIMainColliderBehaviour.cs" t="Include" />
             <e p="SIMovement.cs" t="Include" />
             <e p="SIPlayerBehaviour.cs" t="Include" />
             <e p="SIPlayerColliderBehaviour.cs" t="Include" />
+            <e p="SIPlayerEntity.cs" t="Include" />
             <e p="SIPlayerMovement.cs" t="Include" />
             <e p="SIPlayerProjectileColliderBehaviour.cs" t="Include" />
             <e p="SIPlayerShootBehaviour.cs" t="Include" />
-            <e p="SIProjectileBehaviour.cs" t="Include" />
             <e p="SIScreenAreaCalculator.cs" t="Include" />
             <e p="SIScreenUtils.cs" t="Include" />
             <e p="SISettings.cs" t="Include" />
@@ -415,8 +416,10 @@
             <e p="SIUIManager.cs" t="Include" />
             <e p="SIVFXManager.cs" t="Include" />
             <e p="SIWaitUtils.cs" t="Include" />
-            <e p="SIWeaponData.cs" t="Include" />
+            <e p="SIWeaponBehaviour.cs" t="Include" />
+            <e p="SIWeaponEntity.cs" t="Include" />
             <e p="SIWeaponHolder.cs" t="Include" />
+            <e p="SIWeaponHolderData.cs" t="Include" />
             <e p="SIWeaponReloader.cs" t="Include" />
           </e>
         </e>

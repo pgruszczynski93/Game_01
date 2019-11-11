@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIPlayerProjectileColliderBehaviour : SIMainColliderBehaviour<SIProjectileBehaviour>
+    public class SIPlayerProjectileColliderBehaviour : SIMainColliderBehaviour<SIWeaponEntity>
     {
         protected override void OnEnable()
         {

@@ -9,13 +9,13 @@ namespace SpaceInvaders
 
         [SerializeField] float _currentSpeedMultiplier;
         [Range(0f, 3f), SerializeField] protected float _screenEdgeOffset;
-        [SerializeField] SIGridLimiter _gridLimiter;
+        [SerializeField] SIGridMovementLimiter gridMovementLimiter;
 
         float _rightScreenEdgeOffset;
         float _leftScreenEdgeOffset;
 
         LocalGridMinMax _gridMinMax;
-        ScreenEdges _screenEdges;
+        ScreenEdges _worldScreenEdges;
 
         protected override void Initialise()
         {
@@ -23,9 +23,9 @@ namespace SpaceInvaders
 
             _canMove = true;
             _gridMovementSettings = _gridMovementSetup.gridMovementSettings;
-            _screenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculateWorldLimits();
-            _rightScreenEdgeOffset = _screenEdges.rightScreenEdge - _screenEdgeOffset;
-            _leftScreenEdgeOffset = _screenEdges.leftScreenEdge + _screenEdgeOffset;
+            _worldScreenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
+            _rightScreenEdgeOffset = _worldScreenEdges.rightScreenEdge - _screenEdgeOffset;
+            _leftScreenEdgeOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _gridMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
             UpdateMovementOffsets();
@@ -54,10 +54,10 @@ namespace SpaceInvaders
 
         void UpdateMovementOffsets()
         {
-            _gridMinMax = _gridLimiter.CalculateGridMinMax();
-            _rightScreenEdgeOffset = _screenEdges.rightScreenEdge - _gridMinMax.localGridHorizontalMax -
+            _gridMinMax = gridMovementLimiter.CalculateGridMinMax();
+            _rightScreenEdgeOffset = _worldScreenEdges.rightScreenEdge - _gridMinMax.localGridHorizontalMax -
                                      _gridMovementSettings.enemyWidthOffset;
-            _leftScreenEdgeOffset = _screenEdges.leftScreenEdge - _gridMinMax.localGridHorizontalMin +
+            _leftScreenEdgeOffset = _worldScreenEdges.leftScreenEdge - _gridMinMax.localGridHorizontalMin +
                                     _gridMovementSettings.enemyWidthOffset;
         }
 
@@ -81,9 +81,11 @@ namespace SpaceInvaders
 
             Vector3 currentPosition = _thisTransform.position;
             float horizontalMovementDelta = _dt * _currentSpeedMultiplier * _currentMovementSpeed;
-            bool isInScreenBounds = IsInHorizontalScreenBounds(currentPosition);
+            bool isInHorizontalLimits =
+                SIScreenUtils.IsInHorizontalWorldScreenLimit(currentPosition, _leftScreenEdgeOffset,
+                    _rightScreenEdgeOffset);
 
-            if (isInScreenBounds)
+            if (isInHorizontalLimits)
             {
                 MoveObjectInScreenBounds(currentPosition, horizontalMovementDelta);
             }
@@ -126,12 +128,6 @@ namespace SpaceInvaders
             _currentSpeedMultiplier = Mathf.Clamp(_currentSpeedMultiplier,
                 _initialMovementSpeed,
                 _gridMovementSettings.maxMovementSpeedMultiplier);
-        }
-
-        bool IsInHorizontalScreenBounds(Vector3 currentPosition)
-        {
-            float horizontalPosition = currentPosition.x;
-            return horizontalPosition >= _leftScreenEdgeOffset && horizontalPosition <= _rightScreenEdgeOffset;
         }
 
         void ResetGridMovement()

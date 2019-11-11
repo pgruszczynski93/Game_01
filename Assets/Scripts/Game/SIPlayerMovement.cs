@@ -13,7 +13,7 @@ namespace SpaceInvaders
         float _rightScreenOffset;
         float _leftScreenOffset;
         Vector3 _inputValue;
-        ScreenEdges _screenEdges;
+        ScreenEdges _worldScreenEdges;
         Quaternion _fromRotation;
         Quaternion _toRotation;
 
@@ -23,9 +23,9 @@ namespace SpaceInvaders
 
             _canMove = true;
             _playerMovementSettings = _playerMovementSetup.playerMovementSettings;
-            _screenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculateWorldLimits();
-            _rightScreenOffset = _screenEdges.rightScreenEdge - _screenEdgeOffset;
-            _leftScreenOffset = _screenEdges.leftScreenEdge + _screenEdgeOffset;
+            _worldScreenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
+            _rightScreenOffset = _worldScreenEdges.rightScreenEdge - _screenEdgeOffset;
+            _leftScreenOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _playerMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
         }

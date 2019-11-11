@@ -91,9 +91,8 @@ MonoBehaviour:
   _meshRenderer: {fileID: 1881762110048184449}
   _colliderParent: {fileID: 6197922684793495672}
   _destroyVFX: {fileID: 9168323593088370388}
-  _enemyMovement: {fileID: 275861281402422653}
   _bonusManager: {fileID: 1114935955244104923}
-  _projectileBehaviour: {fileID: 4690076923023407462}
+  weaponBehaviour: {fileID: 4690076923023407462}
   _shootBehaviour: {fileID: 8529467507697743990}
 --- !u!114 &275861281402422653
 MonoBehaviour:
@@ -107,14 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e430ff49553df41a8b42a00c993b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canMove: 0
   _initialMovementSpeed: 0
   _currentMovementSpeed: 3.2
-  _screenEdgeOffset: 0.3
-  _smoothMovementStep: 0.4
-  _maxRotationAngle: 20
-  _horizontalMovementMultiplier: 1
-  _verticalMovementDownstep: 0.75
 --- !u!114 &8529467507697743990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5aaf8d2c79ac5149b81bef25f605cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileController: {fileID: 4690076923023407462}
+  weaponReloader: {fileID: 0}
 --- !u!114 &9168323593088370388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,16 +657,42 @@ PrefabInstance:
       propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 4698860576044419641}
+    - target: {fileID: 9090830206323607395, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: _weaponCollider
+      value: 
+      objectReference: {fileID: 1646616927178526776}
+    - target: {fileID: 9090830206323607395, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4579619091672328030, guid: f142162e014253b4f91ca17907366168,
         type: 3}
       propertyPath: _effectTransform
       value: 
       objectReference: {fileID: 1342410204974039246}
+    - target: {fileID: 4579619091672328030, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4615088356763934125, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f142162e014253b4f91ca17907366168, type: 3}
 --- !u!4 &1342410204974039246 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3287257246736072395, guid: f142162e014253b4f91ca17907366168,
+    type: 3}
+  m_PrefabInstance: {fileID: 4557535021625146885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1646616927178526776 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3019215686242233917, guid: f142162e014253b4f91ca17907366168,
     type: 3}
   m_PrefabInstance: {fileID: 4557535021625146885}
   m_PrefabAsset: {fileID: 0}
@@ -684,7 +703,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 4557535021625146885}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a28021aaf9974c44ab9649561cbb128, type: 3}
   m_Name: 

@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace SpaceInvaders
 {
-    [System.Serializable]
+    [Serializable]
     public struct ScreenEdges
     {
         public float leftScreenEdge;
@@ -10,17 +11,25 @@ namespace SpaceInvaders
         public float topScreenEdge;
         public float bottomScreenEdge;
     }
+
     public class SIScreenAreaCalculator : MonoBehaviour
     {
-        [SerializeField] private float _cameraOffsetZ;
+        [SerializeField] float _cameraOffsetZ;
 
-        private Camera _mainCamera;
-        private ScreenEdges _screenEdges;
+        Camera _mainCamera;
+        ScreenEdges _screenEdges;
 
-        public ScreenEdges CalculateWorldLimits()
+        void Awake()
+        {
+            CalculateWorldLimits();
+        }
+
+        public ScreenEdges CalculatedScreenEdges => _screenEdges;
+        
+        void CalculateWorldLimits()
         {
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
-            
+
             _cameraOffsetZ = _mainCamera.transform.localPosition.z + _mainCamera.nearClipPlane;
 
             Vector3 viewportMaxDimensions = new Vector3(1, 1, _cameraOffsetZ);
@@ -33,8 +42,6 @@ namespace SpaceInvaders
                 topScreenEdge = -Mathf.Round(worldMaxDimensions.y),
                 bottomScreenEdge = Mathf.Round(worldMaxDimensions.y)
             };
-
-            return _screenEdges;
         }
     }
 }

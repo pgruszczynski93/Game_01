@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders
 {
-    public class SIEnemyProjectileColliderBehaviour : SIMainColliderBehaviour<SIProjectileBehaviour>
+    public class SIEnemyProjectileColliderBehaviour : SIMainColliderBehaviour<SIWeaponEntity>
     {
         [SerializeField] private SIVFXManager _destroyVFX;
 

@@ -180,12 +180,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraOffsetZ: 0
-  _mainCamera: {fileID: 0}
-  _screenEdges:
-    leftScreenEdge: 0
-    rightScreenEdge: 0
-    topScreenEdge: 0
-    bottomScreenEdge: 0
 --- !u!1 &7025270549699991144
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,9 +190,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7025270549699991142}
   - component: {fileID: 7025270549699991145}
-  - component: {fileID: 209404499001459856}
   - component: {fileID: 3461506718661510166}
   - component: {fileID: 31742441}
+  - component: {fileID: 7686111096949202862}
   m_Layer: 0
   m_Name: '[GameManager]'
   m_TagString: Untagged
@@ -239,21 +233,6 @@ MonoBehaviour:
   _mainCamera: {fileID: 0}
   _player: {fileID: 0}
   _screeenAreaCalculator: {fileID: 7234290583865494630}
---- !u!114 &209404499001459856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7025270549699991144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddb132a87f094bb089d218a8ea42e3a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scriptableSettingsMaster: {fileID: 11400000, guid: 518d39a5e2ab6dd4dad29cf9190ff8f3,
-    type: 2}
-  _configurableObjects: []
 --- !u!114 &3461506718661510166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,3 +263,16 @@ MonoBehaviour:
   _gridInitialTrasnform: {fileID: 127853309}
   _gridSceneTransform: {fileID: 417006359}
   enemyGridBehaviour: {fileID: 0}
+--- !u!114 &7686111096949202862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025270549699991144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13da1c1a44544d9a924d6f9097da7da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _joystick: {fileID: 0}

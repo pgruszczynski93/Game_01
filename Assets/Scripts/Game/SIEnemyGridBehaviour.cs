@@ -133,11 +133,8 @@ namespace SpaceInvaders
                 return;
             }
 
-            StartCoroutine(SIWaitUtils.WaitAndInvoke(SIConstants.END_WAVE_DELAY, () =>
-            {
-                SIEventsHandler.BroadcastOnWaveEnd();
-            }));
-
+            StartCoroutine(SIWaitUtils.WaitAndInvoke(SIConstants.END_WAVE_DELAY,
+                () => { SIEventsHandler.BroadcastOnWaveEnd(); }));
         }
 
         private void Debug_ResetWave()
@@ -173,7 +170,7 @@ namespace SpaceInvaders
             SIEnemyShootBehaviour deathEnemy = _enemies[index].ShootBehaviour;
             bool isDeathEnemyShootable = IsDeathEnemyShootable(deathEnemy);
             int killedEnemyRow = index / SIConstants.ENEMIES_IN_ROW;
-            
+
             _enemiesAbleToShoot.Remove(deathEnemy);
 
             if (isDeathEnemyShootable == false || killedEnemyRow == 0)
@@ -182,7 +179,7 @@ namespace SpaceInvaders
             }
 
             if (IsPossibleToChangeShootingEnemy(index, killedEnemyRow, out int firstVerticalNeighbour,
-                out int secondVerticalNeighbour) == false)
+                    out int secondVerticalNeighbour) == false)
             {
                 return;
             }
@@ -198,14 +195,13 @@ namespace SpaceInvaders
             {
                 firstVerticalNeighbour = index - SIConstants.ENEMIES_IN_ROW;
                 secondVerticalNeighbour = firstVerticalNeighbour - SIConstants.ENEMIES_IN_ROW;
-
             }
             else
             {
                 firstVerticalNeighbour = index + SIConstants.ENEMIES_IN_ROW;
                 secondVerticalNeighbour = index - SIConstants.ENEMIES_IN_ROW;
             }
-            
+
             return AreNeighboursDead(firstVerticalNeighbour, secondVerticalNeighbour) == false;
         }
 
@@ -258,7 +254,7 @@ namespace SpaceInvaders
                 timeToNextShoot = Random.Range(_shotTimeMinBreak, _shotTimeMaxBreak);
                 if (anyEnemyIsAlive)
                 {
-                    _enemiesAbleToShoot[enemySelectedToShootIndex-1].Shoot();
+                    _enemiesAbleToShoot[enemySelectedToShootIndex - 1].Shoot();
                 }
 
                 yield return SIWaitUtils.WaitForCachedSeconds(timeToNextShoot);

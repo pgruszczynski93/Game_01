@@ -5,14 +5,14 @@ namespace SpaceInvaders
 {
     public class SIWeaponHolder : MonoBehaviour
     {
-        [SerializeField] WeaponSetup _weaponSetup;
-        [SerializeField] SIProjectileBehaviour[] _availableWeapons;
+        [SerializeField] WeaponHolderSetup weaponHolderSetup;
+        [SerializeField] SIWeaponBehaviour[] _availableWeapons;
 
-        public SIWeaponData GetWeaponData()
+        public SIWeaponHolderData GetWeaponHolderData()
         {
-            return new SIWeaponData
+            return new SIWeaponHolderData
             {
-                weaponSettings = _weaponSetup.weaponSettings,
+                weaponHolderSettings = weaponHolderSetup.weaponHolderSettings,
                 availableWeapons = _availableWeapons
             };
         }

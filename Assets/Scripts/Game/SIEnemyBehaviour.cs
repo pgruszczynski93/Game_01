@@ -11,7 +11,7 @@ namespace SpaceInvaders
         [SerializeField] private GameObject _colliderParent;
         [SerializeField] private SIVFXManager _destroyVFX;
         [SerializeField] private SIBonusParentManager _bonusManager;
-        [SerializeField] private SIProjectileBehaviour _projectileBehaviour;
+        [SerializeField] private SIWeaponEntity weaponEntity;
         [SerializeField] private SIEnemyShootBehaviour _shootBehaviour;
 
         private void OnEnable()
@@ -66,7 +66,7 @@ namespace SpaceInvaders
             EnableEnemyVisibility(false);
             _bonusManager.DropBonus();
             _enemyStatistics.isAlive = false;
-            _projectileBehaviour.HandleWaitOnProjectileReset();
+            weaponEntity.HandleWaitOnProjectileReset();
 
             SIEventsHandler.BroadcastOnShootingEnemiesUpdate(enemyIndex);
         }
@@ -86,7 +86,7 @@ namespace SpaceInvaders
         public void Respawn()
         {
             _enemyStatistics.isAlive = true;
-            _projectileBehaviour.enabled = true;
+            weaponEntity.enabled = true;
             EnableEnemyVisibility(true);
         }
 

@@ -10,7 +10,7 @@ namespace SpaceInvaders
         public float localGridHorizontalMax;
     }
 
-    public class SIGridLimiter : MonoBehaviour
+    public class SIGridMovementLimiter : MonoBehaviour
     {
         [SerializeField] LocalGridMinMax minMaxPair;
         [SerializeField] SIEnemyBehaviour[] _enemies;

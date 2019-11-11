@@ -16,15 +16,12 @@ namespace SpaceInvaders
 
         protected override void TryToShootProjectile()
         {
-            if (!SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed)
-                return;
-            
             weaponReloader.TryToShootAndReload();
         }
 
         public void Debug_Shot()
         {
-            weaponReloader.TryToShootAndReload();
+            TryToShootProjectile();
         }
     }
 }
