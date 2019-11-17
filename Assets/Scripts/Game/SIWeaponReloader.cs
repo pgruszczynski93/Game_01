@@ -12,10 +12,11 @@ namespace SpaceInvaders
         int _availableWeaponsCount;
         float _nextReloadTime;
         float _timeFromStart;
-        
+        WeaponTier _lastWeaponTier;
+
         SIWeaponHolder _currentWeaponHolder;
         Dictionary<WeaponTier, SIWeaponHolder> _allWeapons;
-        
+
         void Start()
         {
             Initialise();
@@ -29,6 +30,7 @@ namespace SpaceInvaders
                 return;
             }
 
+            _lastWeaponTier = WeaponTier.Tier_0; // Tier_0 means no weapon: initialization.
             _allWeapons = new Dictionary<WeaponTier, SIWeaponHolder>
             {
                 {WeaponTier.Tier_1, _weaponHolders[0]},
@@ -36,20 +38,37 @@ namespace SpaceInvaders
                 {WeaponTier.Tier_3, _weaponHolders[2]},
                 {WeaponTier.Tier_4, _weaponHolders[3]}
             };
-
+            ResetAllWeaponHolders();
             UpdateCurrentWeaponTier(WeaponTier.Tier_1);
         }
 
+        void ResetAllWeaponHolders()
+        {
+            for (var i = 0; i < _weaponHolders.Length; i++)
+            {
+                _weaponHolders[i].gameObject.SetActive(false);
+            }
+        }
         void UpdateCurrentWeaponTier(WeaponTier weaponTier)
         {
+            if (_lastWeaponTier == weaponTier)
+                return;
+            
             _currentWeaponHolder = _allWeapons[weaponTier];
+            _currentWeaponHolder.gameObject.SetActive(true);
+            _projectileIndex = 0;
             _currentWeaponHolderData = _currentWeaponHolder.GetWeaponHolderData();
             _availableWeaponsCount = _currentWeaponHolderData.availableWeapons.Length;
+            if (_lastWeaponTier != 0)
+            {
+                _allWeapons[_lastWeaponTier].gameObject.SetActive(false);
+            }
+            _lastWeaponTier = weaponTier;
         }
 
         public void Debug_UpdateWeapon(int weapon)
         {
-            UpdateCurrentWeaponTier((WeaponTier)weapon);
+            UpdateCurrentWeaponTier((WeaponTier) weapon);
         }
 
         void OnEnable()
