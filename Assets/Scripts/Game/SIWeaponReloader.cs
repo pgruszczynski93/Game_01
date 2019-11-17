@@ -34,6 +34,7 @@ namespace SpaceInvaders
                 {WeaponTier.Tier_1, _weaponHolders[0]},
                 {WeaponTier.Tier_2, _weaponHolders[1]},
                 {WeaponTier.Tier_3, _weaponHolders[2]},
+                {WeaponTier.Tier_4, _weaponHolders[3]}
             };
 
             UpdateCurrentWeaponTier(WeaponTier.Tier_1);
