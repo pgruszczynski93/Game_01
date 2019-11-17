@@ -6,40 +6,37 @@ namespace SpaceInvaders
     public class SIWeaponEntity : SIEntity
     {
         [SerializeField] SIWeaponSetup _weaponSetup;
-        [SerializeField] SIWeaponSettings _weaponSettins;
+        [SerializeField] SIWeaponSettings _weaponSettings;
         [SerializeField] Rigidbody _rigidbody;
         [SerializeField] Transform _parentTransform;
         [SerializeField] ParticleSystem _particles;
         [SerializeField] BoxCollider _weaponCollider;
         [SerializeField] MeshRenderer _meshRenderer;
 
-        bool _initialised;
         bool _isMoving;
 
         float _topWorldLimit;
         float _bottomWorldLimit;
         Vector3 _moveForce;
         Vector3 _parentRelativeLocalPos;
+        Vector3 _initialLocalAngles;
         Transform _thisTransform;
         WaitUntil _waitForProjectileReset;
 
-        void Initialise()
+        protected override void Initialise()
         {
-            if (_initialised)
-                return;
-
-            _weaponSettins = _weaponSetup.weaponSettings;
-            _initialised = true;
+            _weaponSettings = _weaponSetup.weaponSettings;
             _isMoving = false;
             _meshRenderer.enabled = false;
-            _moveForce = _parentTransform.up.normalized;
             _thisTransform = transform;
+            _moveForce = _thisTransform.forward;
             _parentRelativeLocalPos = _thisTransform.localPosition;
+            _initialLocalAngles = _thisTransform.localEulerAngles;
             _waitForProjectileReset = new WaitUntil(() => _isMoving == false);
 
             ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
-            _topWorldLimit = screenWorldEdges.topScreenEdge + _weaponSettins.movementLimitOffset;
-            _bottomWorldLimit = screenWorldEdges.bottomScreenEdge - _weaponSettins.movementLimitOffset;
+            _topWorldLimit = screenWorldEdges.topScreenEdge + _weaponSettings.movementLimitOffset;
+            _bottomWorldLimit = screenWorldEdges.bottomScreenEdge - _weaponSettings.movementLimitOffset;
         }
 
         void Start()
@@ -79,7 +76,7 @@ namespace SpaceInvaders
             _weaponCollider.enabled = true;
             _thisTransform.parent = null;
             TryToEnableParticles(true);
-            _rigidbody.AddForce(_moveForce * _weaponSettins.launchForceMultiplier, ForceMode.Impulse);
+            _rigidbody.AddForce(_moveForce * _weaponSettings.launchForceMultiplier, ForceMode.Impulse);
         }
 
         void StopAndResetProjectile()
@@ -91,7 +88,8 @@ namespace SpaceInvaders
 
             _thisTransform.parent = _parentTransform;
             _thisTransform.localPosition = _parentRelativeLocalPos;
-
+            _thisTransform.localRotation = Quaternion.Euler(_initialLocalAngles);
+;
             _rigidbody.velocity = SIHelpers.VectorZero;
             _rigidbody.angularVelocity = SIHelpers.VectorZero;
         }

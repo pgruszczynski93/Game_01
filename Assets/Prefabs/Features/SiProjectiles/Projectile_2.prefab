@@ -115,11 +115,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5879548493502444239, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _colliderParentBehaviour
-      value: 
-      objectReference: {fileID: 6326372532579419105}
     - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: _weaponSetup
@@ -131,6 +126,11 @@ PrefabInstance:
       propertyPath: _parentTransform
       value: 
       objectReference: {fileID: 3987774402489715931}
+    - target: {fileID: 5879548493502444239, guid: 7cf98d259fa45e640af8522055ca2cad,
+        type: 3}
+      propertyPath: _colliderParentBehaviour
+      value: 
+      objectReference: {fileID: 3696016632076259402}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cf98d259fa45e640af8522055ca2cad, type: 3}
 --- !u!4 &9172943389648968140 stripped
@@ -218,11 +218,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5879548493502444239, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _colliderParentBehaviour
-      value: 
-      objectReference: {fileID: 3696016632076259402}
     - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: _parentTransform
@@ -234,6 +229,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ffb8bcd4ebc2db948a8c88f7b83e52e8,
         type: 2}
+    - target: {fileID: 5879548493502444239, guid: 7cf98d259fa45e640af8522055ca2cad,
+        type: 3}
+      propertyPath: _colliderParentBehaviour
+      value: 
+      objectReference: {fileID: 6326372532579419105}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cf98d259fa45e640af8522055ca2cad, type: 3}
 --- !u!4 &2003537433520720487 stripped
