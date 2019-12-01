@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceInvaders
 {
     public class SIMainColliderBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private int _objectTagsCount;
+        int _objectTagsCount;
         [SerializeField] protected string[] _objectTags;
         [SerializeField] protected T _colliderParentBehaviour;
 
@@ -19,7 +18,7 @@ namespace SpaceInvaders
             Initialize();
         }
 
-        private void Initialize()
+        void Initialize()
         {
             _objectTagsCount = _objectTags.Length;
 
@@ -29,7 +28,7 @@ namespace SpaceInvaders
                 return;
             }
 
-            _onCollisionActions = new Dictionary<string, CustomCollisionDelegate>()
+            _onCollisionActions = new Dictionary<string, CustomCollisionDelegate>
             {
                 {SIStringTags.PLAYER, delegate { }},
                 {SIStringTags.ENEMY, delegate { }},
@@ -39,33 +38,28 @@ namespace SpaceInvaders
             };
         }
 
-        private bool AreAllTagsCorrect()
+        bool AreAllTagsCorrect()
         {
             for (int i = 0; i < _objectTagsCount; i++)
-            {
                 if (string.IsNullOrEmpty(_objectTags[i]))
-                {
                     return false;
-                }
-            }
 
             return true;
         }
 
-        protected virtual void OnEnable(){}
+        protected virtual void OnEnable() { }
 
-        protected virtual void OnDisable(){}
+        protected virtual void OnDisable() { }
 
         protected virtual void OnTriggerEnter(Collider triggerCollider)
         {
-            
             // ZDEBUGPOWAC TO!!!!!!!!!!!!!!!!!!!
             // problem z colliderami
             bool hasHittedObjectGivenTag;
 
             GameObject hittedObject = triggerCollider.gameObject;
 
-            if(hittedObject.CompareTag(SIStringTags.BONUS))
+            if (hittedObject.CompareTag(SIStringTags.BONUS))
             {
                 _onCollisionActions[SIStringTags.BONUS]?.Invoke(hittedObject.GetComponent<SIBonus>());
                 return;
@@ -82,6 +76,5 @@ namespace SpaceInvaders
                 }
             }
         }
-
     }
 }

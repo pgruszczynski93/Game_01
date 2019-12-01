@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SITargetFollower.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SITargetFollower.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/ProjectilesRoot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/ProjectilesRoot.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/ProjectilesRoot.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/ProjectilesRoot.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponReloader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponReloader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/WeaponSettings/Weapon Holder 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/WeaponSettings/Weapon Holder 1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/WeaponSettings/Weapon Holder 2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/WeaponSettings/Weapon Holder 2.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/WeaponSettings/Weapon Holder 3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/WeaponSettings/Weapon Holder 3.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/WeaponSettings/Weapon Holder 4.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/WeaponSettings/Weapon Holder 4.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIMainColliderBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIMainColliderBehaviour.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +57,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIDataHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIVFXManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIAsteroidBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SITargetFollower.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponHolderData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Packages/Joystick Pack/Scripts/Base/Joystick.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/IUpdateTransform.cs" root0="FORCE_HIGHLIGHTING" />
@@ -100,8 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/GridMovementSetup.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/ScriptableSettingsMaster.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/MovementSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/PlayerMovementSetup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/MovementSetup.cs" />
@@ -151,6 +158,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponEntity.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponReloader.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIMainColliderBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SITargetFollower.cs" />
       </list>
     </option>
   </component>
@@ -192,10 +201,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="15272">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="10424">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="15272" />
+      <option name="pid" value="10424" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -270,6 +279,9 @@
       <workItem from="1573491058980" duration="15555000" />
       <workItem from="1574000713231" duration="3472000" />
       <workItem from="1574007786716" duration="1451000" />
+      <workItem from="1574101486259" duration="1203000" />
+      <workItem from="1575135324354" duration="600000" />
+      <workItem from="1575229057977" duration="1929000" />
     </task>
     <servers />
   </component>
@@ -309,19 +321,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponEntity.cs</url>
-          <line>98</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponEntity.cs" initialLine="98">
-            <startOffsets>
-              <option value="3190" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3334" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
