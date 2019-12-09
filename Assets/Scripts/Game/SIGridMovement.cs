@@ -41,7 +41,7 @@ namespace SpaceInvaders
 
         void TryToUpdateCurrentGridMovementSpeed(float multiplier)
         {
-            _currentSpeedMultiplier += multiplier;
+//            _currentSpeedMultiplier += multiplier;
         }
 
         protected override void RemoveEvents()
@@ -124,7 +124,7 @@ namespace SpaceInvaders
         void UpdateMovementProperties()
         {
             _currentMovementSpeed = -_currentMovementSpeed;
-            _currentSpeedMultiplier += _gridMovementSettings.speedMultiplierStep;
+//            _currentSpeedMultiplier += _gridMovementSettings.speedMultiplierStep;
             _currentSpeedMultiplier = Mathf.Clamp(_currentSpeedMultiplier,
                 _initialMovementSpeed,
                 _gridMovementSettings.maxMovementSpeedMultiplier);

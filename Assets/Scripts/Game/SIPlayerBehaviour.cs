@@ -11,7 +11,7 @@ namespace SpaceInvaders
 
         [SerializeField] SIStatistics _playerStatistics;
         [SerializeField] SIPlayerShootBehaviour _playerShoot;
-        [SerializeField] SIVFXManager _shieldVfxBehaviour;
+        [SerializeField] SIVFXBehaviour _shieldVfxBehaviour;
         [SerializeField] SITimeBonusesManager _timeBonusesManager;
 
         public SIPlayerMovement PlayerMovement => _playerMovement;
@@ -20,7 +20,7 @@ namespace SpaceInvaders
 
         public SIStatistics PlayerStatistics { get => _playerStatistics; set => _playerStatistics = value; }
 
-        public SIVFXManager ShieldVfxBehaviour => _shieldVfxBehaviour;
+        public SIVFXBehaviour ShieldVfxBehaviour => _shieldVfxBehaviour;
 
         protected override void Awake()
         {
@@ -112,7 +112,7 @@ namespace SpaceInvaders
                 return;
             }
 
-            ShieldVfxBehaviour.TryToEnableVFX(true);
+//            ShieldVfxBehaviour.TryToEnableVFX(true);
             SIHelpers.SISimpleLogger(this, "Shield enabled.", SimpleLoggerTypes.Log);
         }
 

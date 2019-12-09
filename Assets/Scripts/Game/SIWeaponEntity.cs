@@ -103,7 +103,7 @@ namespace SpaceInvaders
             StopAndResetProjectile();
         }
 
-        public void HandleProjectileHit(MonoBehaviour collisionBehaviour = null)
+        public void HandleProjectileHit()
         {
             StopAndResetProjectile();
         }

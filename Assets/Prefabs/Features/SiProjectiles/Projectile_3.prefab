@@ -67,31 +67,20 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _weaponSetup
-      value: 
-      objectReference: {fileID: 11400000, guid: ffb8bcd4ebc2db948a8c88f7b83e52e8,
-        type: 2}
-    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 6916623991065263412}
     - target: {fileID: 7242268266983628899, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 7242268266983628899, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000000006275726
+      value: -0.14
       objectReference: {fileID: 0}
     - target: {fileID: 7242268266983628899, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.9233345e-15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7242268266983628899, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
@@ -133,11 +122,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 5879548493502444239, guid: 7cf98d259fa45e640af8522055ca2cad,
+    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _colliderParentBehaviour
+      propertyPath: _weaponSetup
       value: 
-      objectReference: {fileID: 4566765624982204942}
+      objectReference: {fileID: 11400000, guid: ffb8bcd4ebc2db948a8c88f7b83e52e8,
+        type: 2}
+    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
+        type: 3}
+      propertyPath: _parentTransform
+      value: 
+      objectReference: {fileID: 6916623991065263412}
     - target: {fileID: 5383830723396559061, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -153,6 +148,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5879548493502444239, guid: 7cf98d259fa45e640af8522055ca2cad,
+        type: 3}
+      propertyPath: _colliderParentBehaviour
+      value: 
+      objectReference: {fileID: 4566765624982204942}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cf98d259fa45e640af8522055ca2cad, type: 3}
 --- !u!4 &8315436845959445384 stripped
@@ -190,17 +190,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _weaponSetup
-      value: 
-      objectReference: {fileID: 11400000, guid: ffb8bcd4ebc2db948a8c88f7b83e52e8,
-        type: 2}
-    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 6916623991065263412}
     - target: {fileID: 7242268266983628899, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -271,11 +260,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.19999999
       objectReference: {fileID: 0}
-    - target: {fileID: 5879548493502444239, guid: 7cf98d259fa45e640af8522055ca2cad,
+    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _colliderParentBehaviour
+      propertyPath: _weaponSetup
       value: 
-      objectReference: {fileID: 603529973951210002}
+      objectReference: {fileID: 11400000, guid: ffb8bcd4ebc2db948a8c88f7b83e52e8,
+        type: 2}
+    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
+        type: 3}
+      propertyPath: _parentTransform
+      value: 
+      objectReference: {fileID: 6916623991065263412}
     - target: {fileID: 5383830723396559061, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -291,6 +286,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5879548493502444239, guid: 7cf98d259fa45e640af8522055ca2cad,
+        type: 3}
+      propertyPath: _colliderParentBehaviour
+      value: 
+      objectReference: {fileID: 603529973951210002}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cf98d259fa45e640af8522055ca2cad, type: 3}
 --- !u!4 &4928661694633585556 stripped
@@ -328,26 +328,15 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _weaponSetup
-      value: 
-      objectReference: {fileID: 11400000, guid: ffb8bcd4ebc2db948a8c88f7b83e52e8,
-        type: 2}
-    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
-        type: 3}
-      propertyPath: _parentTransform
-      value: 
-      objectReference: {fileID: 6916623991065263412}
     - target: {fileID: 7242268266983628899, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4
+      value: -0.32
       objectReference: {fileID: 0}
     - target: {fileID: 7242268266983628899, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.14
       objectReference: {fileID: 0}
     - target: {fileID: 7242268266983628899, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
@@ -394,11 +383,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: 5879548493502444239, guid: 7cf98d259fa45e640af8522055ca2cad,
+    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
-      propertyPath: _colliderParentBehaviour
+      propertyPath: _weaponSetup
       value: 
-      objectReference: {fileID: 6620644276390814117}
+      objectReference: {fileID: 11400000, guid: ffb8bcd4ebc2db948a8c88f7b83e52e8,
+        type: 2}
+    - target: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
+        type: 3}
+      propertyPath: _parentTransform
+      value: 
+      objectReference: {fileID: 6916623991065263412}
     - target: {fileID: 5383830723396559061, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -414,6 +409,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5879548493502444239, guid: 7cf98d259fa45e640af8522055ca2cad,
+        type: 3}
+      propertyPath: _colliderParentBehaviour
+      value: 
+      objectReference: {fileID: 6620644276390814117}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cf98d259fa45e640af8522055ca2cad, type: 3}
 --- !u!4 &1722472954771761187 stripped

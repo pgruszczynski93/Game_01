@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3796128085518428701}
   - component: {fileID: 7944746669716650107}
-  - component: {fileID: 275861281402422653}
   - component: {fileID: 8529467507697743990}
   - component: {fileID: 9168323593088370388}
   m_Layer: 8
@@ -90,24 +89,9 @@ MonoBehaviour:
     currentCollectibleLevel: 0
   _meshRenderer: {fileID: 1881762110048184449}
   _colliderParent: {fileID: 6197922684793495672}
-  _destroyVFX: {fileID: 9168323593088370388}
   _bonusManager: {fileID: 1114935955244104923}
-  weaponBehaviour: {fileID: 4690076923023407462}
+  weaponEntity: {fileID: 0}
   _shootBehaviour: {fileID: 8529467507697743990}
---- !u!114 &275861281402422653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2676229917223812512}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e430ff49553df41a8b42a00c993b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _initialMovementSpeed: 0
-  _currentMovementSpeed: 3.2
 --- !u!114 &8529467507697743990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +99,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2676229917223812512}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5aaf8d2c79ac5149b81bef25f605cbd, type: 3}
   m_Name: 
@@ -128,7 +112,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2676229917223812512}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77c5896dd0cb3154db4647c3b8cf637d, type: 3}
   m_Name: 
@@ -209,10 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0f435254aebd4418b6cf6d4e27e9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectTags:
-  - Player
-  - Projectile
-  _colliderParentBehaviour: {fileID: 7944746669716650107}
+  _collisionTag: 1
+  _collidesWithTags: 0000000002000000
 --- !u!1 &4521149832610781887
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,10 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0f435254aebd4418b6cf6d4e27e9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectTags:
-  - Player
-  - Projectile
-  _colliderParentBehaviour: {fileID: 7944746669716650107}
+  _collisionTag: 1
+  _collidesWithTags: 0000000002000000
 --- !u!1 &6197922684793495672
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,6 +577,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Basic_EnemyProjectile
       objectReference: {fileID: 0}
+    - target: {fileID: 8359524486144961408, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3287257246736072395, guid: f142162e014253b4f91ca17907366168,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -667,6 +652,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4615088356763934125, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4579619091672328030, guid: f142162e014253b4f91ca17907366168,
         type: 3}
       propertyPath: _effectTransform
@@ -677,12 +667,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4615088356763934125, guid: f142162e014253b4f91ca17907366168,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9090830206323607395, guid: f142162e014253b4f91ca17907366168, type: 3}
+    - {fileID: 4615088356763934125, guid: f142162e014253b4f91ca17907366168, type: 3}
+    - {fileID: 4579619091672328030, guid: f142162e014253b4f91ca17907366168, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f142162e014253b4f91ca17907366168, type: 3}
 --- !u!4 &1342410204974039246 stripped
 Transform:
@@ -696,18 +684,6 @@ BoxCollider:
     type: 3}
   m_PrefabInstance: {fileID: 4557535021625146885}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4690076923023407462 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9090830206323607395, guid: f142162e014253b4f91ca17907366168,
-    type: 3}
-  m_PrefabInstance: {fileID: 4557535021625146885}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a28021aaf9974c44ab9649561cbb128, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7803653839540469083
 PrefabInstance:
   m_ObjectHideFlags: 0

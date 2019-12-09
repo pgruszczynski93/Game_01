@@ -1,47 +1,47 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIPlayerColliderBehaviour : SIMainColliderBehaviour<SIPlayerBehaviour>
+    public class SIPlayerColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
-
-        [SerializeField] private bool _isVFX;
-
-        protected override void OnEnable()
+        public Action OnCollisionDetected { get; set; }
+        public CollisionTag GetCollisionTag()
         {
-            //onCollisionCallback += OnPlayerHitted;
-            _onCollisionActions["Enemy"] += OnPlayerHitted;
-            _onCollisionActions["EnemyProjectile"] += OnPlayerHitted;
-            _onCollisionActions["Bonus"] += OnBonusGained;
+            return _collisionTag;
         }
 
-        protected override void OnDisable()
+        protected override void AssignEvents()
         {
-            //onCollisionCallback -= OnPlayerHitted;
-            _onCollisionActions["Enemy"] -= OnPlayerHitted;
-            _onCollisionActions["EnemyProjectile"] -= OnPlayerHitted;
-            _onCollisionActions["Bonus"] -= OnBonusGained;
+            base.AssignEvents();
+            OnCollisionDetected += HandleOnCollisionDetected;
         }
 
-
-        private void OnPlayerHitted(MonoBehaviour collisionBehaviour = null)
+        protected override void RemoveEvents()
         {
-            if (_isVFX)
-            {
-                return;
-            }
-
-            SIHelpers.SISimpleLogger(this, "Player's got hit.", SimpleLoggerTypes.Log);
+            base.RemoveEvents();
+            OnCollisionDetected -= HandleOnCollisionDetected;
         }
 
-        private void OnBonusGained(MonoBehaviour collisionBehaviour = null)
+        protected override void HandleOnCollisionDetected()
         {
-            SIBonus bonus = collisionBehaviour as SIBonus;
-
-            if (bonus == null)
-                return;
-
-            SIEventsHandler.BroadcastOnBonusCollision(bonus.BonusInfo);
+            DetectPlayerHit();
         }
+
+        void DetectPlayerHit()
+        {
+            Debug.Log("Player got hit.");
+        }
+
+//        void OnBonusGained(MonoBehaviour collisionBehaviour = null)                
+//        void OnBonusGained(MonoBehaviour collisionBehaviour = null)                
+//        {
+//            SIBonus bonus = collisionBehaviour as SIBonus;
+//
+//            if (bonus == null)
+//                return;
+//
+//            SIEventsHandler.BroadcastOnBonusCollision(bonus.BonusInfo);
+//        }
     }
 }

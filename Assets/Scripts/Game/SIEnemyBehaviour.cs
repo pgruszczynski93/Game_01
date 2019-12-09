@@ -9,7 +9,7 @@ namespace SpaceInvaders
         [SerializeField] private SIStatistics _enemyStatistics;
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private GameObject _colliderParent;
-        [SerializeField] private SIVFXManager _destroyVFX;
+//        [SerializeField] private SIVFXManager _destroyVFX;
         [SerializeField] private SIBonusParentManager _bonusManager;
         [SerializeField] private SIWeaponEntity weaponEntity;
         [SerializeField] private SIEnemyShootBehaviour _shootBehaviour;
@@ -75,7 +75,7 @@ namespace SpaceInvaders
         {
             _colliderParent.SetActive(canEnable);
             _meshRenderer.enabled = canEnable;
-            _destroyVFX.TryToEnableAndDetachVFX(canEnable == false);
+//            _destroyVFX.TryToEnableAndDetachVFX(canEnable == false);
         }
 
         public void Spawn()
@@ -86,7 +86,7 @@ namespace SpaceInvaders
         public void Respawn()
         {
             _enemyStatistics.isAlive = true;
-            weaponEntity.enabled = true;
+            //weaponEntity.enabled = true;
             EnableEnemyVisibility(true);
         }
 

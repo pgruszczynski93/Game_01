@@ -1,28 +1,34 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIEnemyColliderBehaviour : SIMainColliderBehaviour<SIEnemyBehaviour>
+    public class SIEnemyColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
-        protected override void OnEnable()
+        public Action OnCollisionDetected { get; set; }
+        public CollisionTag GetCollisionTag()
         {
-            for (int i = 0; i < _objectTags.Length; i++)
-            {
-                _onCollisionActions[_objectTags[i]] += _colliderParentBehaviour.Death;
-                _onCollisionActions[_objectTags[i]] += InvokeEnemyDeathCallback;
-            }
+            return _collisionTag;
         }
 
-        protected override void OnDisable()
+        protected override void AssignEvents()
         {
-            for (int i = 0; i < _objectTags.Length; i++)
-            {
-                _onCollisionActions[_objectTags[i]] -= _colliderParentBehaviour.Death;
-                _onCollisionActions[_objectTags[i]] -= InvokeEnemyDeathCallback;
-            }
+            base.AssignEvents();
+            OnCollisionDetected += HandleOnCollisionDetected;
         }
 
-        private void InvokeEnemyDeathCallback(MonoBehaviour collisionBehaviour = null)
+        protected override void RemoveEvents()
+        {
+            base.RemoveEvents();
+            OnCollisionDetected -= HandleOnCollisionDetected;
+        }
+
+        protected override void HandleOnCollisionDetected()
+        {
+            DetectHit();
+        }
+
+        void DetectHit()
         {
             SIEventsHandler.BroadcastOnEnemyDeath();
         }

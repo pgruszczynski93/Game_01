@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 4588476074549325596}
   - component: {fileID: 8239192319316162013}
   - component: {fileID: 5124090254389568652}
-  - component: {fileID: 7473242681527821109}
+  - component: {fileID: 1037659223620657603}
   m_Layer: 8
   m_Name: Collider_2
   m_TagString: Player
@@ -231,7 +231,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7473242681527821109
+--- !u!114 &1037659223620657603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,12 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86356aa3e14ad7d46ac008d6f1e704c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectTags:
-  - Enemy
-  - EnemyProjectile
-  - Bonus
-  _colliderParentBehaviour: {fileID: 0}
-  _isVFX: 0
+  _collisionTag: 0
+  _collidesWithTags: 0100000003000000
 --- !u!1 &3677294487844861596
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +543,7 @@ GameObject:
   - component: {fileID: 7947932327291914463}
   - component: {fileID: 7207040096522789867}
   - component: {fileID: 5619069368804406156}
-  - component: {fileID: 3229957759098764944}
+  - component: {fileID: 7643605370018180640}
   m_Layer: 8
   m_Name: Collider_1
   m_TagString: Player
@@ -598,7 +594,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3229957759098764944
+--- !u!114 &7643605370018180640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -610,12 +606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86356aa3e14ad7d46ac008d6f1e704c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectTags:
-  - Enemy
-  - EnemyProjectile
-  - Bonus
-  _colliderParentBehaviour: {fileID: 0}
-  _isVFX: 0
+  _collisionTag: 0
+  _collidesWithTags: 0100000003000000
 --- !u!1001 &923884882842902949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -899,11 +891,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5963984687013762420, guid: ecf912430a1bb734ca29ecfb318a4372,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8158895124924691111, guid: ecf912430a1bb734ca29ecfb318a4372,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.385
+      objectReference: {fileID: 0}
+    - target: {fileID: 252218994711565172, guid: ecf912430a1bb734ca29ecfb318a4372,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.363
+      objectReference: {fileID: 0}
+    - target: {fileID: 8071085123951225544, guid: ecf912430a1bb734ca29ecfb318a4372,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7076480113640763976, guid: ecf912430a1bb734ca29ecfb318a4372,
         type: 3}
       propertyPath: _target
       value: 
       objectReference: {fileID: 998630233605939790}
+    - target: {fileID: 6971840901281256886, guid: ecf912430a1bb734ca29ecfb318a4372,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965101632398234767, guid: ecf912430a1bb734ca29ecfb318a4372,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310439106324233068, guid: ecf912430a1bb734ca29ecfb318a4372,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecf912430a1bb734ca29ecfb318a4372, type: 3}
 --- !u!114 &7481287448914582482 stripped

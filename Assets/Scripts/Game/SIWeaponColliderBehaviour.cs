@@ -1,11 +1,13 @@
-﻿using System;
+using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIBonusColliderBehaviour : SIColliderBehaviour, ICanCollide
+    public class SIWeaponColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
+        [SerializeField] SIWeaponEntity _weaponEntity;
+        [SerializeField] SIParticleSystemVFX _particlesVfx;
         public Action OnCollisionDetected { get; set; }
-
         public CollisionTag GetCollisionTag()
         {
             return _collisionTag;
@@ -30,7 +32,16 @@ namespace SpaceInvaders
 
         void DetectHit()
         {
-            SIEventsHandler.BroadcastOnEnemyDeath();
+            TryToDisplayVFX();
+            _weaponEntity.HandleProjectileHit();
+        }
+
+        void TryToDisplayVFX()
+        {
+            if (_particlesVfx == null)
+                return;
+
+            _particlesVfx.TryToManageVFX(true, true, true);
         }
     }
 }

@@ -363,6 +363,7 @@
             <e p="SILoggerExtension.cs" t="Include" />
           </e>
           <e p="Game" t="Include">
+            <e p="ICanCollide.cs" t="Include" />
             <e p="ICanMove.cs" t="Include" />
             <e p="IExtendedMonoBehaviour.cs" t="Include" />
             <e p="IUpdateTransform.cs" t="Include" />
@@ -375,6 +376,7 @@
             <e p="SIBonusColliderBehaviour.cs" t="Include" />
             <e p="SIBonusParentManager.cs" t="Include" />
             <e p="SIBonusSlotBehaviour.cs" t="Include" />
+            <e p="SIColliderBehaviour.cs" t="Include" />
             <e p="SIConstants.cs" t="Include" />
             <e p="SIConstantsHelpers.cs" t="Include" />
             <e p="SIDataHelper.cs" t="Include" />
@@ -383,31 +385,32 @@
             <e p="SIEnemyColliderBehaviour.cs" t="Include" />
             <e p="SIEnemyGridBehaviour.cs" t="Include" />
             <e p="SIEnemyMovement.cs" t="Include" />
-            <e p="SIEnemyProjectileColliderBehaviour.cs" t="Include" />
             <e p="SIEnemyShootBehaviour.cs" t="Include" />
             <e p="SIEntity.cs" t="Include" />
             <e p="SIEnums.cs" t="Include" />
             <e p="SIEventsHandler.cs" t="Include" />
             <e p="SIFPSDisplay.cs" t="Include" />
             <e p="SIGameMasterBehaviour.cs" t="Include" />
+            <e p="SIGameObjectVFX.cs" t="Include" />
             <e p="SIGenericSingleton.cs" t="Include" />
             <e p="SIGridMovement.cs" t="Include" />
             <e p="SIGridMovementLimiter.cs" t="Include" />
             <e p="SIHelpers.cs" t="Include" />
             <e p="SIInputSystem.cs" t="Include" />
-            <e p="SIMainColliderBehaviour.cs" t="Include" />
             <e p="SIMovement.cs" t="Include" />
+            <e p="SIParticleSystemVFX.cs" t="Include" />
+            <e p="SIParticleVFX.cs" t="Include" />
             <e p="SIPlayerBehaviour.cs" t="Include" />
             <e p="SIPlayerColliderBehaviour.cs" t="Include" />
             <e p="SIPlayerEntity.cs" t="Include" />
             <e p="SIPlayerMovement.cs" t="Include" />
-            <e p="SIPlayerProjectileColliderBehaviour.cs" t="Include" />
             <e p="SIPlayerShootBehaviour.cs" t="Include" />
             <e p="SIScreenAreaCalculator.cs" t="Include" />
             <e p="SIScreenUtils.cs" t="Include" />
             <e p="SISettings.cs" t="Include" />
             <e p="SISettingsConsts.cs" t="Include" />
             <e p="SIShaderModifier.cs" t="Include" />
+            <e p="SIShieldBehaviour.cs" t="Include" />
             <e p="SIShootBehaviour.cs" t="Include" />
             <e p="SISpawner.cs" t="Include" />
             <e p="SIStatistics.cs" t="Include" />
@@ -415,9 +418,10 @@
             <e p="SITargetFollower.cs" t="Include" />
             <e p="SITimeBonusesManager.cs" t="Include" />
             <e p="SIUIManager.cs" t="Include" />
-            <e p="SIVFXManager.cs" t="Include" />
+            <e p="SIVFXBehaviour.cs" t="Include" />
             <e p="SIWaitUtils.cs" t="Include" />
             <e p="SIWeaponBehaviour.cs" t="Include" />
+            <e p="SIWeaponColliderBehaviour.cs" t="Include" />
             <e p="SIWeaponEntity.cs" t="Include" />
             <e p="SIWeaponHolder.cs" t="Include" />
             <e p="SIWeaponHolderData.cs" t="Include" />

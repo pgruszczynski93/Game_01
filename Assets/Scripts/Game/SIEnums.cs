@@ -6,6 +6,14 @@
         OnScreen,
     }
 
+    public enum CollisionTag
+    {
+        Player, 
+        Enemy, 
+        PlayerWeapon,
+        EnemyWeapon,
+        Bonus
+    }
     public enum SimpleLoggerTypes
     {
         Log, 
