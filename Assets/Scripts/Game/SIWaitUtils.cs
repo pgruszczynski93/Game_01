@@ -7,18 +7,18 @@ namespace SpaceInvaders
 {
     public static class SIWaitUtils
     {
-        private static Dictionary<float, WaitForSeconds> WaitForSecondsCache = new Dictionary<float, WaitForSeconds>(); 
-        
-        private static void TryToAddToCoroutineWaitCache(float waitTime)
+        static readonly Dictionary<float, WaitForSeconds> WaitForSecondsCache = new Dictionary<float, WaitForSeconds>();
+
+        static void TryToAddToCoroutineWaitCache(float waitTime)
         {
             WaitForSeconds wfs;
             if (WaitForSecondsCache.TryGetValue(waitTime, out wfs))
                 return;
-            
+
             wfs = new WaitForSeconds(waitTime);
             WaitForSecondsCache.Add(waitTime, wfs);
         }
-        
+
         public static IEnumerator WaitForCachedSeconds(float waitTime)
         {
             TryToAddToCoroutineWaitCache(waitTime);
@@ -35,10 +35,7 @@ namespace SpaceInvaders
         public static IEnumerator SkipFrames(int totalFrames)
         {
             int framesToSkip = totalFrames;
-            while (framesToSkip-- > 0)
-            {
-                yield return null;
-            }
+            while (framesToSkip-- > 0) yield return null;
         }
     }
 }

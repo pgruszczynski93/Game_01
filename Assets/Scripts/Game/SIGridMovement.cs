@@ -63,11 +63,11 @@ namespace SpaceInvaders
 
         protected override void TryToMoveObject()
         {
-            if (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed == false || _canMove == false)
-                return;
-
-            UpdatePosition();
-            UpdateRotation();
+//            if (SIEnemiesGridsMaster.Instance.IsEnemyGridMovementAllowed == false || _canMove == false)
+//                return;
+//
+//            UpdatePosition();
+//            UpdateRotation();
         }
 
         protected override void TryToStopObject()

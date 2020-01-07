@@ -26,6 +26,10 @@
         Life,
         Shield,
         Weapon,
+        TimeSlowDown, 
+        Teleportation, 
+        MassiveKill, 
+        Hacking,
     }
 
     public enum CollectibleLevel

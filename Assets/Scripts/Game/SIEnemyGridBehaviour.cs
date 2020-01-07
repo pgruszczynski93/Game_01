@@ -103,7 +103,7 @@ namespace SpaceInvaders
         public void ResetEnemyGrid()
         {
             SIHelpers.SISimpleLogger(this, "ResetEnemyGrid: Grid reset", SimpleLoggerTypes.Log);
-            SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed = false;
+            SIEnemiesGridsMaster.Instance.IsEnemyGridMovementAllowed = false;
             _livingEnemies = _totalEnemies;
             _thisTransform.position = SIEnemiesGridsMaster.Instance.GridInitialPosition;
             GetEnemiesAbleToShoot();
@@ -153,11 +153,12 @@ namespace SpaceInvaders
 
         private IEnumerator GridInitialMovementRoutine()
         {
-            yield return StartCoroutine(SIHelpers.SimpleTween3D(
-                (newPosition) => { _thisTransform.position = newPosition; }, _enemyGridTweenInfo,
-                () => { SIEnemiesGridsMaster.Instance.EnableGridMovementsWithShooting(); }));
+            yield return null;
+            SIEnemiesGridsMaster.Instance.EnableGridMovementsWithShooting();
+//            yield return StartCoroutine(SIHelpers.SimpleTween3D(
+//                (newPosition) => { _thisTransform.position = newPosition; }, _enemyGridTweenInfo,
+//                () => { SIEnemiesGridsMaster.Instance.EnableGridMovementsWithShooting(); }));
 
-            StopCoroutine(GridInitialMovementRoutine());
         }
 
         public void ResetGrid()
@@ -245,7 +246,7 @@ namespace SpaceInvaders
             int enemySelectedToShootIndex = 0;
             float timeToNextShoot = 0.0f;
 
-            while (SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed && enemiesAbleToShootCount > 0)
+            while (SIEnemiesGridsMaster.Instance.IsEnemyGridMovementAllowed && enemiesAbleToShootCount > 0)
             {
                 enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
                 anyEnemyIsAlive = enemiesAbleToShootCount > 0;

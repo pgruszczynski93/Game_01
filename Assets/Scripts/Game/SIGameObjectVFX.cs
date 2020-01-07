@@ -9,13 +9,11 @@ namespace SpaceInvaders
         protected Transform _effectTransform;
         protected override void Initialise()
         {
-            base.Initialise();
             _effectTransform = _effectVFX.transform;
         }
 
         protected override void ResetVFX()
         {
-            base.ResetVFX();
             _effectTransform.parent = _parentTransform;
             _effectTransform.localPosition = SIHelpers.VectorZero;
             ForceDisableVFX();

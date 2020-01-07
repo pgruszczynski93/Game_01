@@ -5,40 +5,35 @@ namespace SpaceInvaders
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
     public class SIBonus : MonoBehaviour, ICanMove
     {
-        [SerializeField] private float _forceMultiplier;
-        [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private SIBonusInfo _bonusInfo;
+        [SerializeField] float _forceMultiplier;
+        [SerializeField] Rigidbody _rigidbody;
 
-        private Transform _cachedTransform;
-        private Vector3 _startPosition;
+        Transform _cachedTransform;
+        Vector3 _startPosition;
 
-        public SIBonusInfo BonusInfo
-        {
-            get => _bonusInfo;
-            set => _bonusInfo = value;
-        }
+        [field: SerializeField] public SIBonusInfo BonusInfo { get; set; }
 
-        private void Awake()
+        void Awake()
         {
             SetInitialReferences();
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
             SIEventsHandler.OnUpdate += TryToResetObject;
         }
 
-        private void OnDisable()
+        void OnDisable()
         {
             SIEventsHandler.OnUpdate -= TryToResetObject;
 
-            _bonusInfo.OnBonusFinishEvent.RemoveListener(() =>
+            BonusInfo.OnBonusFinishEvent.RemoveListener(() =>
             {
                 //SIGameMasterBehaviour.Instance.Player.ShieldVfxBehaviour.TryToEnableVFX(false);
             });
         }
 
-        private void SetInitialReferences()
+        void SetInitialReferences()
         {
             if (SIGameMasterBehaviour.Instance.Player == null || _rigidbody == null)
             {
@@ -52,28 +47,22 @@ namespace SpaceInvaders
             TryToAddShieldEventListener();
         }
 
-        private void TryToAddShieldEventListener()
+        void TryToAddShieldEventListener()
         {
-            if (_bonusInfo.bonusType != BonusType.Shield)
-            {
-                return;
-            }
+            if (BonusInfo.bonusType != BonusType.Shield) return;
 
-            _bonusInfo.OnBonusFinishEvent.AddListener(() =>
+            BonusInfo.OnBonusFinishEvent.AddListener(() =>
             {
 //                SIGameMasterBehaviour.Instance.Player.ShieldVfxBehaviour.TryToEnableAndDetachVFX(false);
             });
         }
 
-        private void TryToResetObject()
+        void TryToResetObject()
         {
             Vector3 bonusViewPortPosition =
                 SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_cachedTransform.position);
 
-            if (bonusViewPortPosition.IsInVerticalViewportSpace())
-            {
-                StopObject();
-            }
+            if (bonusViewPortPosition.IsInVerticalViewportSpace()) StopObject();
         }
 
         public void MoveObject()

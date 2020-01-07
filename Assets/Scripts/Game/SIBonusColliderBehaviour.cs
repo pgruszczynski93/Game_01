@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -30,7 +31,7 @@ namespace SpaceInvaders
 
         void DetectHit()
         {
-            SIEventsHandler.BroadcastOnEnemyDeath();
+            Debug.Log("bonus");
         }
     }
 }

@@ -6,17 +6,17 @@ namespace SpaceInvaders
 {
     public class SIEnemiesGridsMaster : SIGenericSingleton<SIEnemiesGridsMaster>
     {
-        [SerializeField] private bool _isEnemyInGridMovementAllowed;
+        [SerializeField] private bool _isEnemyGridMovementAllowed;
 
         [SerializeField] private Transform _gridInitialTrasnform;
         [SerializeField] private Transform _gridSceneTransform;
 
         [SerializeField] private SIEnemyGridBehaviour enemyGridBehaviour;
 
-        public bool IsEnemyInGridMovementAllowed
+        public bool IsEnemyGridMovementAllowed
         {
-            get { return _isEnemyInGridMovementAllowed; }
-            set { _isEnemyInGridMovementAllowed = value; }
+            get { return _isEnemyGridMovementAllowed; }
+            set { _isEnemyGridMovementAllowed = value; }
         }
 
         public Vector3 GridInitialPosition => _gridInitialTrasnform.localPosition;
@@ -60,13 +60,13 @@ namespace SpaceInvaders
 
         public void EnableGridMovementsWithShooting()
         {
-            _isEnemyInGridMovementAllowed = true;
+            _isEnemyGridMovementAllowed = true;
             enemyGridBehaviour.StartShooting();
         }
 
         public void DisableGridMovementsWithShooting()
         {
-            _isEnemyInGridMovementAllowed = false;
+            _isEnemyGridMovementAllowed = false;
             enemyGridBehaviour.StopShooting();
         }
     }

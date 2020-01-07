@@ -96,6 +96,9 @@ namespace SpaceInvaders
 
         void CheckIsProjectileOnScreen()
         {
+            if (_thisTransform == null)
+                return;
+            
             bool isInVerticalSpace =
                 SIScreenUtils.IsInVerticalWorldScreenLimit(_thisTransform.position, _bottomWorldLimit, _topWorldLimit);
             if (isInVerticalSpace)

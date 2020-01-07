@@ -2,57 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ICanCollide.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ICanCollide.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIColliderBehaviour.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIColliderBehaviour.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIGameObjectVFX.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIGameObjectVFX.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIParticleSystemVFX.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIParticleSystemVFX.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIParticleVFX.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIParticleVFX.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBehaviour.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBehaviour.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponColliderBehaviour.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponColliderBehaviour.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/LRP/LRP_Materials/stribog_mat_lrp.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/LRP/LRP_Materials/stribog_mat_lrp.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Radegost/SG_radogost_albedo_3.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Radegost/SG_radogost_albedo_3.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Radegost/SG_radogost_emission.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Radegost/SG_radogost_emission.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Radegost/SG_radogost_normal_map_2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Radegost/SG_radogost_normal_map_2.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Radegost/SG_radogost_occlusion.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Radegost/SG_radogost_occlusion.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Radegost/SG_radogost_specular.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Radegost/SG_radogost_specular.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Stribog/SG_stribog_albedo_2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Stribog/SG_stribog_albedo_2.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Stribog/SG_stribog_emission.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Stribog/SG_stribog_emission.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Stribog/SG_stribog_normal_map_2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Stribog/SG_stribog_normal_map_2.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Stribog/SG_stribog_occlusion.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Stribog/SG_stribog_occlusion.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Stribog/SG_stribog_specular.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Custom Graphics/PNG/SpaceShips/Stribog/SG_stribog_specular.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/JMO Assets/WarFX/_Effects/Explosions/WFX_Explosion Small.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/JMO Assets/WarFX/_Effects/Explosions/WFX_Explosion Small.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/PlayerBasicProjectile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/PlayerBasicProjectile.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/PlayerProjectilesRoot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/PlayerProjectilesRoot.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/Projectile_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/Projectile_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/Projectile_2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/Projectile_2.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/Projectile_3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/Projectile_3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/Enemy_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/Enemy_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/Projectile_4.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/Projectile_4.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/VFX_SmallExplosion.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiProjectiles/VFX_SmallExplosion.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/IExtendedMonoBehaviour.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/IExtendedMonoBehaviour.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/IUpdateTransform.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/IUpdateTransform.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonus.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusColliderBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusColliderBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyColliderBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyColliderBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyProjectileColliderBehaviour.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyProjectileColliderBehaviour.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemiesGridsMaster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemiesGridsMaster.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyGridBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyGridBehaviour.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIGameObjectVFX.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIGameObjectVFX.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIGridMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIGridMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIMainColliderBehaviour.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIMainColliderBehaviour.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerColliderBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerColliderBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerProjectileColliderBehaviour.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerProjectileColliderBehaviour.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIVFXManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIVFXBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIVFXManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIVFXBehaviour.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIInputSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIInputSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIWaitUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWaitUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponColliderBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponColliderBehaviour.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponEntity.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,6 +46,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyShootBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIBackgroundScroller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyMovement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4CD14385-55E6-4C0E-AEDA-2393D3C9CF4A/26/5d0e99b5/Behaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/509B38DE-0BB8-4FDE-A4B2-340764259EC3/25/bdc912da/ParticleSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
@@ -92,7 +69,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ICanMove.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/GridMovementSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/IExtendedMonoBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4CD14385-55E6-4C0E-AEDA-2393D3C9CF4A/8a/9147425c/Component.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyColliderBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/PlayerMovementSettings.cs" root0="FORCE_HIGHLIGHTING" />
@@ -105,7 +81,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponHolderData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Packages/JMO Assets/WarFX/Scripts/CFX_AutoDestructShuriken.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Packages/Joystick Pack/Scripts/Base/Joystick.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/IUpdateTransform.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIParticleVFX.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIAsteroidSpawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4CD14385-55E6-4C0E-AEDA-2393D3C9CF4A/49/2a50d501/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
@@ -156,9 +131,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerProjectilesController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIProjectileController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIShootBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIProjectilesReloader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/WeaponHolder.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEventsHandler.cs" />
@@ -186,27 +158,30 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIMainColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SITestCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerProjectileColliderBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponEntity.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ICanCollide.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyGridBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyColliderBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIGridMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIVFXManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIParticleVFX.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIVFXController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldVFX.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIVFXBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIGameObjectVFX.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonus.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIParticleSystemVFX.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponColliderBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIGameObjectVFX.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWaitUtils.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponEntity.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIGridMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemiesGridsMaster.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyGridBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusColliderBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" />
       </list>
     </option>
   </component>
@@ -248,10 +223,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="15212">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="13340">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="15212" />
+      <option name="pid" value="13340" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -334,6 +309,8 @@
       <workItem from="1575815316226" duration="3141000" />
       <workItem from="1575837253815" duration="6221000" />
       <workItem from="1575915356791" duration="5914000" />
+      <workItem from="1578343558466" duration="5200000" />
+      <workItem from="1578432370516" duration="3181000" />
     </task>
     <servers />
   </component>
@@ -376,26 +353,26 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponColliderBehaviour.cs</url>
-          <line>43</line>
+          <line>41</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponColliderBehaviour.cs" initialLine="43">
             <startOffsets>
-              <option value="1091" />
+              <option value="1025" />
             </startOffsets>
             <endOffsets>
-              <option value="1138" />
+              <option value="1072" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponColliderBehaviour.cs</url>
-          <line>40</line>
+          <line>38</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponColliderBehaviour.cs" initialLine="40">
             <startOffsets>
-              <option value="1027" />
+              <option value="961" />
             </startOffsets>
             <endOffsets>
-              <option value="1053" />
+              <option value="987" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="23" />
@@ -454,13 +431,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Game/SIGameObjectVFX.cs</url>
-          <line>47</line>
+          <line>45</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/SIGameObjectVFX.cs" initialLine="47">
             <startOffsets>
-              <option value="1399" />
+              <option value="1339" />
             </startOffsets>
             <endOffsets>
-              <option value="1465" />
+              <option value="1405" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="30" />
@@ -470,10 +447,10 @@
           <line>31</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWaitUtils.cs" initialLine="31">
             <startOffsets>
-              <option value="998" />
+              <option value="962" />
             </startOffsets>
             <endOffsets>
-              <option value="1023" />
+              <option value="987" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="31" />

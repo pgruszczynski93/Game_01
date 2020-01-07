@@ -58,7 +58,7 @@ namespace SpaceInvaders
 
         void TryToSendShootAction()
         {
-            if (!SIEnemiesGridsMaster.Instance.IsEnemyInGridMovementAllowed)
+            if (!SIEnemiesGridsMaster.Instance.IsEnemyGridMovementAllowed)
                 return;
             
             if(IsShootingKeyPressed())
