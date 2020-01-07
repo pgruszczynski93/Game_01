@@ -10,7 +10,6 @@ namespace SpaceInvaders
         public int currentHealth;
         public int currentScore;
         public int currentWave;
-        public CollectibleLevel currentCollectibleLevel;
     }
 
 }

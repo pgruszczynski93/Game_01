@@ -32,21 +32,6 @@
         Hacking,
     }
 
-    public enum CollectibleLevel
-    {
-        Zero,
-        First, 
-        Second,
-        Third,
-        Fourth,
-        Fifth,
-        Sixth,
-        Seventh,
-        Eight,
-        Nineth,
-        Tenth
-    }
-
     public enum WeaponTier
     {
         Tier_0,

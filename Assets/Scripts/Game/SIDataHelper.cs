@@ -19,7 +19,6 @@ namespace SpaceInvaders
     {
         public int gainedHealth;
         public int gainedScore;
-        public CollectibleLevel gainedCollectibleLevel;
         public float durationTime;
     }
 
@@ -27,7 +26,6 @@ namespace SpaceInvaders
     public class SIBonusInfo
     {
         public BonusType bonusType;
-        public SICollectibleStatistics bonusStatistics;
         public UnityEvent OnBonusFinishEvent;
     }
 }

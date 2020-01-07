@@ -44,7 +44,7 @@ namespace SpaceInvaders
             {
                 currentHealth = 3,
                 currentWave = 1,
-                currentCollectibleLevel = CollectibleLevel.First
+//                currentCollectibleLevel = CollectibleLevel.First
             };
 
         }
@@ -80,7 +80,7 @@ namespace SpaceInvaders
                     EnableShield();
                     break;
                 case BonusType.Weapon:
-                    ModifyCurrentWeapon(bonusInfo.bonusStatistics.gainedCollectibleLevel);
+//                    ModifyCurrentWeapon(bonusInfo.bonusStatistics.gainedCollectibleLevel);
                     break;
                 default:
                     break;
@@ -97,7 +97,7 @@ namespace SpaceInvaders
 
             SIHelpers.SISimpleLogger(this, "Statistics update for "+bonusInfo.bonusType, SimpleLoggerTypes.Log);
 
-            _playerStatistics.currentHealth += bonusInfo.bonusStatistics.gainedHealth;
+//            _playerStatistics.currentHealth += bonusInfo.bonusStatistics.gainedHealth;
             _playerStatistics.currentHealth = Mathf.Clamp(_playerStatistics.currentHealth, MIN_HEALTH, MAX_HEALTH);
 
             SIHelpers.SISimpleLogger(this, PlayerStatisticsText() , SimpleLoggerTypes.Log);
@@ -116,11 +116,11 @@ namespace SpaceInvaders
             SIHelpers.SISimpleLogger(this, "Shield enabled.", SimpleLoggerTypes.Log);
         }
 
-        void ModifyCurrentWeapon(CollectibleLevel collectibleLevel)
-        {
-            // to do: add new projectile prefabs, then the rest of code will be working
-           // _playerProjectileController.SetCurrentProjectile(weaponType);
-        }
+//        void ModifyCurrentWeapon(CollectibleLevel collectibleLevel)
+//        {
+//            // to do: add new projectile prefabs, then the rest of code will be working
+//           // _playerProjectileController.SetCurrentProjectile(weaponType);
+//        }
 
         public string PlayerStatisticsText()
         {
