@@ -4,6 +4,6 @@ namespace SpaceInvaders
     public class BonusSettings
     {
         public BonusType bonusType;
-
+    
     }
 }
