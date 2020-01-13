@@ -13,19 +13,4 @@ namespace SpaceInvaders
         public float effectMaxValue;
         public float effectSpeed;
     }
-
-    [Serializable]
-    public class SICollectibleStatistics
-    {
-        public int gainedHealth;
-        public int gainedScore;
-        public float durationTime;
-    }
-
-    [Serializable]
-    public class SIBonusInfo
-    {
-        public BonusType bonusType;
-        public UnityEvent OnBonusFinishEvent;
-    }
 }

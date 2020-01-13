@@ -30,12 +30,12 @@ namespace SpaceInvaders
 
         void OnEnable()
         {
-            SIEventsHandler.OnBonusCollision += UpdatePlayerStatistics;
+//            SIEventsHandler.OnBonusCollision += UpdatePlayerStatistics;
         }
 
         void OnDisable()
         {
-            SIEventsHandler.OnBonusCollision -= UpdatePlayerStatistics;
+//            SIEventsHandler.OnBonusCollision -= UpdatePlayerStatistics;
         }
 
         void SetInitialReferences()
@@ -49,59 +49,59 @@ namespace SpaceInvaders
 
         }
 
-        public void UpdatePlayerStatistics(SIBonusInfo bonusInfo)
-        {
-            if (_playerStatistics == null)
-            {
-                SIHelpers.SISimpleLogger(this, "Can't update statistics.", SimpleLoggerTypes.Warning);
-                return;
-            }
+//        public void UpdatePlayerStatistics(SIBonusInfo bonusInfo)
+//        {
+//            if (_playerStatistics == null)
+//            {
+//                SIHelpers.SISimpleLogger(this, "Can't update statistics.", SimpleLoggerTypes.Warning);
+//                return;
+//            }
+//
+////            ParseBonus(bonusInfo);
+//        }
 
-            ParseBonus(bonusInfo);
-        }
 
+//        void ParseBonus(SIBonusInfo bonusInfo)
+//        {
+//            if (_timeBonusesManager == null)
+//            {
+//                SIHelpers.SISimpleLogger(this, "Behaviour is not assigned.", SimpleLoggerTypes.Error);
+//                return;
+//            }
+//
+//            _timeBonusesManager.ManageTimeScheduledBonuses(bonusInfo);
+//
+//            switch (bonusInfo.bonusType)
+//            {
+//                case BonusType.Life:
+//                    ModifyStatistics(bonusInfo);
+//                    break;
+//                case BonusType.Shield:
+//                    EnableShield();
+//                    break;
+//                case BonusType.Weapon:
+////                    ModifyCurrentWeapon(bonusInfo.bonusStatistics.gainedCollectibleLevel);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
 
-        void ParseBonus(SIBonusInfo bonusInfo)
-        {
-            if (_timeBonusesManager == null)
-            {
-                SIHelpers.SISimpleLogger(this, "Behaviour is not assigned.", SimpleLoggerTypes.Error);
-                return;
-            }
-
-            _timeBonusesManager.ManageTimeScheduledBonuses(bonusInfo);
-
-            switch (bonusInfo.bonusType)
-            {
-                case BonusType.Life:
-                    ModifyStatistics(bonusInfo);
-                    break;
-                case BonusType.Shield:
-                    EnableShield();
-                    break;
-                case BonusType.Weapon:
-//                    ModifyCurrentWeapon(bonusInfo.bonusStatistics.gainedCollectibleLevel);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        void ModifyStatistics(SIBonusInfo bonusInfo)
-        {
-            if (bonusInfo == null)
-            {
-                SIHelpers.SISimpleLogger(this, "BonusInfo object is null", SimpleLoggerTypes.Error);
-                return;
-            }
-
-            SIHelpers.SISimpleLogger(this, "Statistics update for "+bonusInfo.bonusType, SimpleLoggerTypes.Log);
-
-//            _playerStatistics.currentHealth += bonusInfo.bonusStatistics.gainedHealth;
-            _playerStatistics.currentHealth = Mathf.Clamp(_playerStatistics.currentHealth, MIN_HEALTH, MAX_HEALTH);
-
-            SIHelpers.SISimpleLogger(this, PlayerStatisticsText() , SimpleLoggerTypes.Log);
-        }
+//        void ModifyStatistics(SIBonusInfo bonusInfo)
+//        {
+//            if (bonusInfo == null)
+//            {
+//                SIHelpers.SISimpleLogger(this, "BonusInfo object is null", SimpleLoggerTypes.Error);
+//                return;
+//            }
+//
+//            SIHelpers.SISimpleLogger(this, "Statistics update for "+bonusInfo.bonusType, SimpleLoggerTypes.Log);
+//
+////            _playerStatistics.currentHealth += bonusInfo.bonusStatistics.gainedHealth;
+//            _playerStatistics.currentHealth = Mathf.Clamp(_playerStatistics.currentHealth, MIN_HEALTH, MAX_HEALTH);
+//
+//            SIHelpers.SISimpleLogger(this, PlayerStatisticsText() , SimpleLoggerTypes.Log);
+//        }
 
 
         void EnableShield()

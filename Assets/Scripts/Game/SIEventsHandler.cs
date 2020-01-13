@@ -22,7 +22,6 @@ namespace SpaceInvaders
         public static event Action<float> OnEnemySpeedMultiplierChanged;
         public static event Action<Vector3> OnAxesInputReceived;
         public static event Action<int> OnShootingEnemiesUpdate;
-        public static event Action<SIBonusInfo> OnBonusCollision;
 
         public static void BroadcastOnWeaponTierUpdate(WeaponTier weaponTier)
         {
@@ -107,11 +106,5 @@ namespace SpaceInvaders
         {
             OnEnemySpeedMultiplierChanged?.Invoke(multiplier);
         }
-        
-        public static void BroadcastOnBonusCollision(SIBonusInfo bonusInfo)
-        {
-            OnBonusCollision?.Invoke(bonusInfo);
-        }
-        
     }
 }   

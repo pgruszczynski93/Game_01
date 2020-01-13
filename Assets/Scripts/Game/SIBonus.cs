@@ -5,75 +5,67 @@ namespace SpaceInvaders
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
     public class SIBonus : MonoBehaviour, ICanMove
     {
-        [SerializeField] float _forceMultiplier;
-        [SerializeField] Rigidbody _rigidbody;
+        [SerializeField] protected BonusSetup _bonusSetup;
+        [SerializeField] protected Rigidbody _rigidbody;
+        protected BonusSettings _bonusSettings;
 
-        Transform _cachedTransform;
+        bool _initialised;
+        Transform _thisTransform;
         Vector3 _startPosition;
 
-        [field: SerializeField] public SIBonusInfo BonusInfo { get; set; }
-
-        void Awake()
+        protected virtual void Initialise()
         {
-            SetInitialReferences();
+            if (_initialised)
+                return;
+            _initialised = true;
+            _thisTransform = transform;
+            _startPosition = _thisTransform.position;
+            _bonusSettings = _bonusSetup.bonusSettings;
+        }
+        
+        void Start()
+        {
+            Initialise();
+        }
+        
+        void OnEnable()
+        {
+            AssignEvents();
+        }
+        
+        void OnDisable()
+        {
+            RemoveEvents();
         }
 
-        void OnEnable()
+        protected virtual void AssignEvents()
         {
             SIEventsHandler.OnUpdate += TryToResetObject;
         }
 
-        void OnDisable()
+        protected virtual void RemoveEvents()
         {
             SIEventsHandler.OnUpdate -= TryToResetObject;
-
-            BonusInfo.OnBonusFinishEvent.RemoveListener(() =>
-            {
-                //SIGameMasterBehaviour.Instance.Player.ShieldVfxBehaviour.TryToEnableVFX(false);
-            });
         }
 
-        void SetInitialReferences()
-        {
-            if (SIGameMasterBehaviour.Instance.Player == null || _rigidbody == null)
-            {
-                SIHelpers.SISimpleLogger(this, "SetInitialReferences - no player assigned.", SimpleLoggerTypes.Error);
-                return;
-            }
 
-            _cachedTransform = transform;
-            _startPosition = _cachedTransform.position;
-
-            TryToAddShieldEventListener();
-        }
-
-        void TryToAddShieldEventListener()
-        {
-            if (BonusInfo.bonusType != BonusType.Shield) return;
-
-            BonusInfo.OnBonusFinishEvent.AddListener(() =>
-            {
-//                SIGameMasterBehaviour.Instance.Player.ShieldVfxBehaviour.TryToEnableAndDetachVFX(false);
-            });
-        }
-
-        void TryToResetObject()
+        protected void TryToResetObject()
         {
             Vector3 bonusViewPortPosition =
-                SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_cachedTransform.position);
+                SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
 
             if (bonusViewPortPosition.IsInVerticalViewportSpace()) StopObject();
         }
 
         public void MoveObject()
         {
-            _rigidbody.AddForce(SIHelpers.VectorDown * _forceMultiplier, ForceMode.Impulse);
+            _rigidbody.AddForce(SIHelpers.VectorDown * _bonusSettings.releaseForceMultiplier, ForceMode.Impulse);
         }
 
         public void StopObject()
         {
             _rigidbody.velocity = SIHelpers.VectorZero;
-            _cachedTransform.position = _startPosition;
+            _thisTransform.position = _startPosition;
             gameObject.SetActive(false);
         }
     }
