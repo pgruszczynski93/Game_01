@@ -27,7 +27,7 @@ namespace SpaceInvaders
 
         void EnableShield()
         {
-            _shieldVfx.TryToManageVFX(true, false, true);
+            _shieldVfx.TryToManageVFX(true, false, false);
         }
     }
 }
