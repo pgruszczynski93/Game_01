@@ -1,11 +1,13 @@
 using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIShieldBonus : SIBonus, IBonus
+    public class SIShieldBonus : SIBonus
     {
-        public Action OnBonusStarted { get; set; }
-        public Action OnBonusActive { get; set; }
-        public Action OnBonusFinished { get; set; }
+        public override BonusSettings GetBonusSettings()
+        {
+            return _bonusSettings;
+        }
     }
 }

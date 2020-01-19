@@ -12,15 +12,11 @@ namespace SpaceInvaders
         [SerializeField] SIStatistics _playerStatistics;
         [SerializeField] SIPlayerShootBehaviour _playerShoot;
         [SerializeField] SIVFXBehaviour _shieldVfxBehaviour;
-        [SerializeField] SITimeBonusesManager _timeBonusesManager;
-
         public SIPlayerMovement PlayerMovement => _playerMovement;
 
         public SIPlayerShootBehaviour PlayerShoot => _playerShoot;
 
         public SIStatistics PlayerStatistics { get => _playerStatistics; set => _playerStatistics = value; }
-
-        public SIVFXBehaviour ShieldVfxBehaviour => _shieldVfxBehaviour;
 
         protected override void Awake()
         {
@@ -106,11 +102,11 @@ namespace SpaceInvaders
 
         void EnableShield()
         {
-            if (ShieldVfxBehaviour == null)
-            {
-                SIHelpers.SISimpleLogger(this, "Behaviour is not assigned.", SimpleLoggerTypes.Error);
-                return;
-            }
+//            if (ShieldVfxBehaviour == null)
+//            {
+//                SIHelpers.SISimpleLogger(this, "Behaviour is not assigned.", SimpleLoggerTypes.Error);
+//                return;
+//            }
 
 //            ShieldVfxBehaviour.TryToEnableVFX(true);
             SIHelpers.SISimpleLogger(this, "Shield enabled.", SimpleLoggerTypes.Log);

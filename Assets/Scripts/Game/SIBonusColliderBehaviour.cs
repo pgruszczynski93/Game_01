@@ -5,6 +5,7 @@ namespace SpaceInvaders
 {
     public class SIBonusColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
+        [SerializeField] SIBonus _bonusBehaviour;
         public Action OnCollisionDetected { get; set; }
 
         public CollisionTag GetCollisionTag()
@@ -26,12 +27,10 @@ namespace SpaceInvaders
 
         protected override void HandleOnCollisionDetected()
         {
-            DetectHit();
-        }
-
-        void DetectHit()
-        {
-            Debug.Log("bonus");
+            BonusSettings bonusSettings = _bonusBehaviour.GetBonusSettings();
+            Debug.Log($"[SIBonusColliderBehaviour] Bonus received {bonusSettings.bonusType}");
+            SIEventsHandler.BroadcastOnBonusCollected(bonusSettings);
+            _bonusBehaviour.BroadcastOnBonusEnabled();
         }
     }
 }

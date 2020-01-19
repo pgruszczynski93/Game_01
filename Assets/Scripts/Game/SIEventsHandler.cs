@@ -19,10 +19,15 @@ namespace SpaceInvaders
         public static event Action OnShootInputReceived;
         public static event Action OnReloading;
         public static event Action<WeaponTier> OnWeaponTierUpdate;
+        public static event Action<BonusSettings> OnBonusCollected;
         public static event Action<float> OnEnemySpeedMultiplierChanged;
         public static event Action<Vector3> OnAxesInputReceived;
         public static event Action<int> OnShootingEnemiesUpdate;
 
+        public static void BroadcastOnBonusCollected(BonusSettings bonusSettings)
+        {
+            OnBonusCollected?.Invoke(bonusSettings);
+        }
         public static void BroadcastOnWeaponTierUpdate(WeaponTier weaponTier)
         {
             OnWeaponTierUpdate?.Invoke(weaponTier);

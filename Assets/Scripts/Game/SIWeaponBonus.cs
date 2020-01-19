@@ -4,8 +4,19 @@ namespace SpaceInvaders
 {
     public class SIWeaponBonus : SIBonus, IBonus
     {
-        public Action OnBonusStarted { get; set; }
-        public Action OnBonusActive { get; set; }
-        public Action OnBonusFinished { get; set; }
+        public override BonusSettings GetBonusSettings()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ActivateBonus()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FinishBonus()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

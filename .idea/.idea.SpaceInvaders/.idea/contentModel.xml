@@ -365,6 +365,7 @@
             <e p="SILoggerExtension.cs" t="Include" />
           </e>
           <e p="Game" t="Include">
+            <e p="IBonus.cs" t="Include" />
             <e p="ICanCollide.cs" t="Include" />
             <e p="ICanMove.cs" t="Include" />
             <e p="SIAsteroidBehaviour.cs" t="Include" />
@@ -374,7 +375,7 @@
             <e p="SIBackgroundScroller.cs" t="Include" />
             <e p="SIBonus.cs" t="Include" />
             <e p="SIBonusColliderBehaviour.cs" t="Include" />
-            <e p="SIBonusParentManager.cs" t="Include" />
+            <e p="SIBonusSelector.cs" t="Include" />
             <e p="SIBonusSlotBehaviour.cs" t="Include" />
             <e p="SIColliderBehaviour.cs" t="Include" />
             <e p="SIConstants.cs" t="Include" />
@@ -397,10 +398,12 @@
             <e p="SIGridMovementLimiter.cs" t="Include" />
             <e p="SIHelpers.cs" t="Include" />
             <e p="SIInputSystem.cs" t="Include" />
+            <e p="SILifeBonus.cs" t="Include" />
             <e p="SIMovement.cs" t="Include" />
             <e p="SIParticleSystemVFX.cs" t="Include" />
             <e p="SIParticleVFX.cs" t="Include" />
             <e p="SIPlayerBehaviour.cs" t="Include" />
+            <e p="SIPlayerBonusesManager.cs" t="Include" />
             <e p="SIPlayerColliderBehaviour.cs" t="Include" />
             <e p="SIPlayerEntity.cs" t="Include" />
             <e p="SIPlayerMovement.cs" t="Include" />
@@ -411,16 +414,17 @@
             <e p="SISettingsConsts.cs" t="Include" />
             <e p="SIShaderModifier.cs" t="Include" />
             <e p="SIShieldBehaviour.cs" t="Include" />
+            <e p="SIShieldBonus.cs" t="Include" />
             <e p="SIShootBehaviour.cs" t="Include" />
             <e p="SISpawner.cs" t="Include" />
             <e p="SIStatistics.cs" t="Include" />
             <e p="SIStringTags.cs" t="Include" />
             <e p="SITargetFollower.cs" t="Include" />
-            <e p="SITimeBonusesManager.cs" t="Include" />
             <e p="SIUIManager.cs" t="Include" />
             <e p="SIVFXBehaviour.cs" t="Include" />
             <e p="SIWaitUtils.cs" t="Include" />
             <e p="SIWeaponBehaviour.cs" t="Include" />
+            <e p="SIWeaponBonus.cs" t="Include" />
             <e p="SIWeaponColliderBehaviour.cs" t="Include" />
             <e p="SIWeaponEntity.cs" t="Include" />
             <e p="SIWeaponHolder.cs" t="Include" />

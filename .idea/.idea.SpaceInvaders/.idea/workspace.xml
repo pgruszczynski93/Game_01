@@ -2,16 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSetup.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSetup.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusSelector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[GameManager].prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[GameManager].prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Shield Bonus.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Shield Bonus.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusParentManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusParentManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIDataHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIDataHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/IBonus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/IBonus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusColliderBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusColliderBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusParentManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusParentManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusSelector.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIEventsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIEventsHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SILifeBonus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SILifeBonus.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIStatistics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIStatistics.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SITimeBonusesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SITimeBonusesManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBonus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBonus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SITimeBonusesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBonusesManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SITimeBonusesManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBonusesManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponBonus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponBonus.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +47,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIParticleSystemVFX.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIBonusColliderBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Prefabs/VFX/Shield_VFX.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIColliderBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIMovement.cs" root0="FORCE_HIGHLIGHTING" />
@@ -48,6 +62,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIGameObjectVFX.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/SIWeaponSetup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerEntity.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBonus.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ICanMove.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/GridMovementSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
@@ -58,6 +73,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIStringTags.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/GridMovementSetup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIDataHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponBonus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SILifeBonus.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIVFXBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIAsteroidBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SITargetFollower.cs" root0="FORCE_HIGHLIGHTING" />
@@ -83,7 +100,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponReloader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/AsteroidSpawnerSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/MovementSettings.cs.meta" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIBonusParentManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIBonusSelector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/MovementSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIGridMovementLimiter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -100,13 +117,14 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIScreenAreaCalculator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIConstants.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIStatistics.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/IBonus.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIGameMasterBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SISettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIGenericSingleton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIBackgroundRepeater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SISpawner.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SITimeBonusesManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBonusesManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIBonus.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/SIGridMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" root0="FORCE_HIGHLIGHTING" />
@@ -115,15 +133,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/WeaponSettings.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEntity.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerEntity.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/WeaponHolderSetup.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponHolder.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/WeaponHolderSettings.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SIWeaponSetup.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerShootBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIGridMovementLimiter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIHelpers.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIMovementLimiter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIScreenAreaCalculator.cs" />
@@ -137,7 +146,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIMainColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SITestCollider.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerProjectileColliderBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/ICanCollide.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyColliderBehaviour.cs" />
@@ -145,7 +153,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIVFXManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIParticleVFX.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIVFXController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldVFX.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIVFXBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIParticleSystemVFX.cs" />
@@ -156,16 +163,27 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIGridMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemiesGridsMaster.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyGridBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusColliderBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonus.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusParentManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIStatistics.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SITimeBonusesManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSetup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIDataHelper.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSetup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SITimeBonusesManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEventsHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SILifeBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusParentManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBonusManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/IBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIShieldBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusColliderBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusSelector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBonusesManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBehaviour.cs" />
       </list>
     </option>
   </component>
@@ -207,10 +225,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="13340">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="7800">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="13340" />
+      <option name="pid" value="7800" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -294,7 +312,12 @@
       <workItem from="1575837253815" duration="6221000" />
       <workItem from="1575915356791" duration="5914000" />
       <workItem from="1578343558466" duration="5200000" />
-      <workItem from="1578432370516" duration="3806000" />
+      <workItem from="1578432370516" duration="4171000" />
+      <workItem from="1578518192256" duration="3023000" />
+      <workItem from="1578950356436" duration="3867000" />
+      <workItem from="1579035715611" duration="1200000" />
+      <workItem from="1579122771767" duration="3594000" />
+      <workItem from="1579460537414" duration="8476000" />
     </task>
     <servers />
   </component>
@@ -438,6 +461,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/SIBonusSelector.cs</url>
+          <line>66</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/SIPlayerBonusManager.cs" initialLine="66">
+            <startOffsets>
+              <option value="1579" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1622" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

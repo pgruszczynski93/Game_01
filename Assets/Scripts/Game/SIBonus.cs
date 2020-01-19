@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
-    public class SIBonus : MonoBehaviour, ICanMove
+    public abstract class SIBonus : MonoBehaviour, ICanMove
     {
+        public static event Action OnBonusEnabled;
+        
         [SerializeField] protected BonusSetup _bonusSetup;
         [SerializeField] protected Rigidbody _rigidbody;
         protected BonusSettings _bonusSettings;
@@ -13,6 +16,7 @@ namespace SpaceInvaders
         Transform _thisTransform;
         Vector3 _startPosition;
 
+        public abstract BonusSettings GetBonusSettings();
         protected virtual void Initialise()
         {
             if (_initialised)
@@ -22,44 +26,44 @@ namespace SpaceInvaders
             _startPosition = _thisTransform.position;
             _bonusSettings = _bonusSetup.bonusSettings;
         }
-        
+
         void Start()
         {
             Initialise();
         }
-        
+
         void OnEnable()
         {
             AssignEvents();
         }
-        
+
         void OnDisable()
         {
             RemoveEvents();
         }
 
-        protected virtual void AssignEvents()
+        protected void AssignEvents()
         {
             SIEventsHandler.OnUpdate += TryToResetObject;
         }
 
-        protected virtual void RemoveEvents()
+        protected void RemoveEvents()
         {
             SIEventsHandler.OnUpdate -= TryToResetObject;
         }
-
 
         protected void TryToResetObject()
         {
             Vector3 bonusViewPortPosition =
                 SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
 
-            if (bonusViewPortPosition.IsInVerticalViewportSpace()) StopObject();
+            if (bonusViewPortPosition.IsInVerticalViewportSpace()) 
+                StopObject();
         }
 
         public void MoveObject()
         {
-            _rigidbody.AddForce(SIHelpers.VectorDown * _bonusSettings.releaseForceMultiplier, ForceMode.Impulse);
+            _rigidbody.AddForce(SIHelpers.VectorDown * _bonusSettings.bonusProperties.releaseForceMultiplier, ForceMode.Impulse);
         }
 
         public void StopObject()
@@ -68,18 +72,10 @@ namespace SpaceInvaders
             _thisTransform.position = _startPosition;
             gameObject.SetActive(false);
         }
-    }
 
-    /* WYCZYSCIC KOD
-     *
-     * 1. dopisać mechanike dropienia bonusow:
-     * a) bonusy przypisane do kazdego enemy - ok
-     * b) bonusy dropią z odpowiednimi szansami ( do sprawdzenia) - ok: do testow
-     * c) bonusy po przekroczneiu ekranu/ colizji wracaja na swoje miejsce: ok - testy
-     * d) napisac w postaci menager
-     *
-     * 2. poprawic dropienie bonusow
-     * 3. poprawic reset bonusow
-     * 4. dodac eventy
-     */
+        public void BroadcastOnBonusEnabled()
+        {
+            OnBonusEnabled?.Invoke();
+        }
+    }
 }
