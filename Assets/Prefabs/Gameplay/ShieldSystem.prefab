@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 940190355484994573}
   - component: {fileID: 4808196440264988249}
   - component: {fileID: 5429325113526965383}
+  - component: {fileID: 7452524598574816550}
   m_Layer: 8
   m_Name: ShieldCollider
   m_TagString: Untagged
@@ -25,11 +26,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148337670910193098}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 779636636344267331}
+  m_Father: {fileID: 4494660089158688645}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &4808196440264988249
@@ -61,6 +62,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7452524598574816550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148337670910193098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01ed3f8049044ee87521d9d5ec64c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collisionTag: 2
+  _collidesWithTags: 0100000003000000
+--- !u!1 &707345826056900329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4494660089158688645}
+  m_Layer: 0
+  m_Name: ShieldRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4494660089158688645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707345826056900329}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 940190355484994573}
+  - {fileID: 779636635238889480}
+  m_Father: {fileID: 779636636344267331}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &779636635238889484
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +137,7 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 2.6381, y: 2.6381, z: 2.6381}
   m_Children: []
-  m_Father: {fileID: 779636636344267331}
+  m_Father: {fileID: 4494660089158688645}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &779636635238889481
@@ -151,7 +198,7 @@ GameObject:
   - component: {fileID: 7689585324934520163}
   - component: {fileID: 6034507516090906618}
   m_Layer: 0
-  m_Name: Shield
+  m_Name: ShieldSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,12 +211,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779636636344267332}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 940190355484994573}
-  - {fileID: 779636635238889480}
+  - {fileID: 4494660089158688645}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -185,6 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a1ebb1037a445d83de0f4d4e4030cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rootObject: {fileID: 707345826056900329}
   _shieldVfx: {fileID: 6034507516090906618}
 --- !u!114 &6034507516090906618
 MonoBehaviour:

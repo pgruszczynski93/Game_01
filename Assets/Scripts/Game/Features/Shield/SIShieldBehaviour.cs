@@ -4,7 +4,9 @@ namespace SpaceInvaders
 {
     public class SIShieldBehaviour : MonoBehaviour
     {
+        [SerializeField] GameObject  _rootObject;
         [SerializeField] SIGameObjectVFX _shieldVfx;
+
         void OnEnable()
         {    
             AssignEvents();
@@ -27,7 +29,18 @@ namespace SpaceInvaders
 
         void EnableShield()
         {
+            EnableNecessaryObjects();
             _shieldVfx.TryToManageVFX(true, false, false);
+        }
+
+        void EnableNecessaryObjects()
+        {
+            _rootObject.SetActive(true);
+        }
+
+        void DisableNecessaryObjects()
+        {
+            _rootObject.SetActive(false);
         }
     }
 }

@@ -12,7 +12,7 @@
         Enemy, 
         PlayerWeapon,
         EnemyWeapon,
-        Bonus
+        Bonus,
     }
     public enum SimpleLoggerTypes
     {
