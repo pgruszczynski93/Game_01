@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -24,6 +25,7 @@ namespace SpaceInvaders
 
         protected override void HandleOnCollisionDetected()
         {
+            Debug.Log("[SIShieldColliderBehaviour] Shield hit!");
         }
     }
 }
