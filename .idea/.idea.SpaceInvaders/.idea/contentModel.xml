@@ -365,71 +365,99 @@
             <e p="SILoggerExtension.cs" t="Include" />
           </e>
           <e p="Game" t="Include">
-            <e p="IBonus.cs" t="Include" />
-            <e p="ICanCollide.cs" t="Include" />
-            <e p="ICanMove.cs" t="Include" />
-            <e p="SIAsteroidBehaviour.cs" t="Include" />
-            <e p="SIAsteroidsMaster.cs" t="Include" />
-            <e p="SIAsteroidSpawner.cs" t="Include" />
-            <e p="SIBackgroundRepeater.cs" t="Include" />
-            <e p="SIBackgroundScroller.cs" t="Include" />
-            <e p="SIBonus.cs" t="Include" />
-            <e p="SIBonusColliderBehaviour.cs" t="Include" />
-            <e p="SIBonusSelector.cs" t="Include" />
-            <e p="SIBonusSlotBehaviour.cs" t="Include" />
-            <e p="SIColliderBehaviour.cs" t="Include" />
-            <e p="SIConstants.cs" t="Include" />
-            <e p="SIConstantsHelpers.cs" t="Include" />
-            <e p="SIDataHelper.cs" t="Include" />
-            <e p="SIEnemiesGridsMaster.cs" t="Include" />
-            <e p="SIEnemyBehaviour.cs" t="Include" />
-            <e p="SIEnemyColliderBehaviour.cs" t="Include" />
-            <e p="SIEnemyGridBehaviour.cs" t="Include" />
-            <e p="SIEnemyMovement.cs" t="Include" />
-            <e p="SIEnemyShootBehaviour.cs" t="Include" />
-            <e p="SIEntity.cs" t="Include" />
-            <e p="SIEnums.cs" t="Include" />
-            <e p="SIEventsHandler.cs" t="Include" />
-            <e p="SIFPSDisplay.cs" t="Include" />
-            <e p="SIGameMasterBehaviour.cs" t="Include" />
-            <e p="SIGameObjectVFX.cs" t="Include" />
-            <e p="SIGenericSingleton.cs" t="Include" />
-            <e p="SIGridMovement.cs" t="Include" />
-            <e p="SIGridMovementLimiter.cs" t="Include" />
-            <e p="SIHelpers.cs" t="Include" />
-            <e p="SIInputSystem.cs" t="Include" />
-            <e p="SILifeBonus.cs" t="Include" />
-            <e p="SIMovement.cs" t="Include" />
-            <e p="SIParticleSystemVFX.cs" t="Include" />
-            <e p="SIParticleVFX.cs" t="Include" />
-            <e p="SIPlayerBehaviour.cs" t="Include" />
-            <e p="SIPlayerBonusesManager.cs" t="Include" />
-            <e p="SIPlayerColliderBehaviour.cs" t="Include" />
-            <e p="SIPlayerEntity.cs" t="Include" />
-            <e p="SIPlayerMovement.cs" t="Include" />
-            <e p="SIPlayerShootBehaviour.cs" t="Include" />
-            <e p="SIScreenAreaCalculator.cs" t="Include" />
-            <e p="SIScreenUtils.cs" t="Include" />
-            <e p="SISettings.cs" t="Include" />
-            <e p="SISettingsConsts.cs" t="Include" />
-            <e p="SIShaderModifier.cs" t="Include" />
-            <e p="SIShieldBehaviour.cs" t="Include" />
-            <e p="SIShieldBonus.cs" t="Include" />
-            <e p="SIShootBehaviour.cs" t="Include" />
-            <e p="SISpawner.cs" t="Include" />
-            <e p="SIStatistics.cs" t="Include" />
-            <e p="SIStringTags.cs" t="Include" />
-            <e p="SITargetFollower.cs" t="Include" />
-            <e p="SIUIManager.cs" t="Include" />
-            <e p="SIVFXBehaviour.cs" t="Include" />
-            <e p="SIWaitUtils.cs" t="Include" />
-            <e p="SIWeaponBehaviour.cs" t="Include" />
-            <e p="SIWeaponBonus.cs" t="Include" />
-            <e p="SIWeaponColliderBehaviour.cs" t="Include" />
-            <e p="SIWeaponEntity.cs" t="Include" />
-            <e p="SIWeaponHolder.cs" t="Include" />
-            <e p="SIWeaponHolderData.cs" t="Include" />
-            <e p="SIWeaponReloader.cs" t="Include" />
+            <e p="Asteroids" t="Include">
+              <e p="SIAsteroidBehaviour.cs" t="Include" />
+              <e p="SIAsteroidsMaster.cs" t="Include" />
+              <e p="SIAsteroidSpawner.cs" t="Include" />
+            </e>
+            <e p="Bonuses" t="Include">
+              <e p="IBonus.cs" t="Include" />
+              <e p="SIBonus.cs" t="Include" />
+              <e p="SIBonusColliderBehaviour.cs" t="Include" />
+              <e p="SIBonusSelector.cs" t="Include" />
+              <e p="SIBonusSlotBehaviour.cs" t="Include" />
+              <e p="SILifeBonus.cs" t="Include" />
+              <e p="SIShieldBonus.cs" t="Include" />
+            </e>
+            <e p="Collisions" t="Include">
+              <e p="ICanCollide.cs" t="Include" />
+            </e>
+            <e p="Entities" t="Include">
+              <e p="Enemies" t="Include">
+                <e p="SIEnemyBehaviour.cs" t="Include" />
+                <e p="SIEnemyColliderBehaviour.cs" t="Include" />
+                <e p="SIEnemyMovement.cs" t="Include" />
+                <e p="SIEnemyShootBehaviour.cs" t="Include" />
+                <e p="SIGridMovement.cs" t="Include" />
+                <e p="SIGridMovementLimiter.cs" t="Include" />
+              </e>
+              <e p="ICanMove.cs" t="Include" />
+              <e p="Player" t="Include">
+                <e p="SIPlayerBehaviour.cs" t="Include" />
+                <e p="SIPlayerBonusesManager.cs" t="Include" />
+                <e p="SIPlayerColliderBehaviour.cs" t="Include" />
+                <e p="SIPlayerEntity.cs" t="Include" />
+                <e p="SIPlayerMovement.cs" t="Include" />
+                <e p="SIPlayerShootBehaviour.cs" t="Include" />
+              </e>
+              <e p="SIEnemiesGridsMaster.cs" t="Include" />
+              <e p="SIEnemyGridBehaviour.cs" t="Include" />
+              <e p="SIEntity.cs" t="Include" />
+              <e p="SIMovement.cs" t="Include" />
+              <e p="SITargetFollower.cs" t="Include" />
+            </e>
+            <e p="Features" t="Include">
+              <e p="Background" t="Include">
+                <e p="SIBackgroundRepeater.cs" t="Include" />
+                <e p="SIBackgroundScroller.cs" t="Include" />
+              </e>
+              <e p="Shield" t="Include">
+                <e p="SIShieldBehaviour.cs" t="Include" />
+              </e>
+              <e p="SIColliderBehaviour.cs" t="Include" />
+            </e>
+            <e p="Helpers" t="Include">
+              <e p="SIConstants.cs" t="Include" />
+              <e p="SIConstantsHelpers.cs" t="Include" />
+              <e p="SIDataHelper.cs" t="Include" />
+              <e p="SIEnums.cs" t="Include" />
+              <e p="SIHelpers.cs" t="Include" />
+              <e p="SISettings.cs" t="Include" />
+              <e p="SISettingsConsts.cs" t="Include" />
+              <e p="SIStatistics.cs" t="Include" />
+              <e p="SIStringTags.cs" t="Include" />
+            </e>
+            <e p="Systems" t="Include">
+              <e p="SIEventsHandler.cs" t="Include" />
+              <e p="SIGameMasterBehaviour.cs" t="Include" />
+              <e p="SIGenericSingleton.cs" t="Include" />
+              <e p="SIInputSystem.cs" t="Include" />
+              <e p="SIScreenAreaCalculator.cs" t="Include" />
+              <e p="SIScreenUtils.cs" t="Include" />
+              <e p="SIShaderModifier.cs" t="Include" />
+              <e p="SISpawner.cs" t="Include" />
+              <e p="SIWaitUtils.cs" t="Include" />
+            </e>
+            <e p="UI" t="Include">
+              <e p="SIFPSDisplay.cs" t="Include" />
+              <e p="SIUIManager.cs" t="Include" />
+            </e>
+            <e p="VFX" t="Include">
+              <e p="SIGameObjectVFX.cs" t="Include" />
+              <e p="SIParticleSystemVFX.cs" t="Include" />
+              <e p="SIParticleVFX.cs" t="Include" />
+              <e p="SIVFXBehaviour.cs" t="Include" />
+            </e>
+            <e p="Weapons" t="Include">
+              <e p="SIShootBehaviour.cs" t="Include" />
+              <e p="SIWeaponBehaviour.cs" t="Include" />
+              <e p="SIWeaponBonus.cs" t="Include" />
+              <e p="SIWeaponColliderBehaviour.cs" t="Include" />
+              <e p="SIWeaponEntity.cs" t="Include" />
+              <e p="SIWeaponHolder.cs" t="Include" />
+              <e p="SIWeaponHolderData.cs" t="Include" />
+              <e p="SIWeaponReloader.cs" t="Include" />
+            </e>
           </e>
         </e>
       </e>
