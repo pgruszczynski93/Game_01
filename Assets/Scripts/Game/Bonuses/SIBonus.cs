@@ -6,8 +6,6 @@ namespace SpaceInvaders
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
     public abstract class SIBonus : MonoBehaviour, ICanMove
     {
-        public static event Action OnBonusEnabled;
-        
         [SerializeField] protected BonusSetup _bonusSetup;
         [SerializeField] protected Rigidbody _rigidbody;
         protected BonusSettings _bonusSettings;
@@ -71,11 +69,6 @@ namespace SpaceInvaders
             _rigidbody.velocity = SIHelpers.VectorZero;
             _thisTransform.position = _startPosition;
             gameObject.SetActive(false);
-        }
-
-        public void BroadcastOnBonusEnabled()
-        {
-            OnBonusEnabled?.Invoke();
         }
     }
 }

@@ -19,14 +19,33 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIBonus.OnBonusEnabled += EnableShield;
+            SIPlayerBonusesManager.OnBonusEnabled += HandleOnBonusEnabled;
+            SIPlayerBonusesManager.OnBonusDisabled += HandleOnBonusDisabled;
         }
 
         void RemoveEvents()
         {
-            SIBonus.OnBonusEnabled -= EnableShield;
+            SIPlayerBonusesManager.OnBonusEnabled -= HandleOnBonusEnabled;
+            SIPlayerBonusesManager.OnBonusDisabled -= HandleOnBonusDisabled;
+        }
+        
+        void HandleOnBonusEnabled(BonusType bonusType)
+        {
+            if (bonusType != BonusType.Shield)
+                return;
+            
+            EnableShield();            
         }
 
+        void HandleOnBonusDisabled(BonusType bonusType)
+        {
+            if (bonusType != BonusType.Shield)
+                return;
+
+            //todo::  REMOVE IT LATYEA
+            DisableNecessaryObjects();
+        }
+        
         void EnableShield()
         {
             EnableNecessaryObjects();
@@ -37,7 +56,6 @@ namespace SpaceInvaders
         {
             _rootObject.SetActive(true);
         }
-
         void DisableNecessaryObjects()
         {
             _rootObject.SetActive(false);

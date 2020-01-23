@@ -1,4 +1,5 @@
-using System.Net.Security;
+using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -16,5 +17,6 @@ namespace SpaceInvaders
         public int gainedScore;
         public float durationTime;
         public float releaseForceMultiplier;
+        public Coroutine runningRoutine;
     }
 }

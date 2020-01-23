@@ -30,7 +30,6 @@ namespace SpaceInvaders
             BonusSettings bonusSettings = _bonusBehaviour.GetBonusSettings();
             Debug.Log($"[SIBonusColliderBehaviour] Bonus received {bonusSettings.bonusType}");
             SIEventsHandler.BroadcastOnBonusCollected(bonusSettings);
-            _bonusBehaviour.BroadcastOnBonusEnabled();
         }
     }
 }
