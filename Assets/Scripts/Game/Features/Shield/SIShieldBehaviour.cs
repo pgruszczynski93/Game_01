@@ -19,14 +19,14 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIPlayerBonusesManager.OnBonusEnabled += HandleOnBonusEnabled;
-            SIPlayerBonusesManager.OnBonusDisabled += HandleOnBonusDisabled;
+            SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
+            SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
         }
 
         void RemoveEvents()
         {
-            SIPlayerBonusesManager.OnBonusEnabled -= HandleOnBonusEnabled;
-            SIPlayerBonusesManager.OnBonusDisabled -= HandleOnBonusDisabled;
+            SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
+            SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
         }
         
         void HandleOnBonusEnabled(BonusType bonusType)

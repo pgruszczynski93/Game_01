@@ -5,11 +5,13 @@ namespace SpaceInvaders
 {
     public static class BonusRunner
     {
-        public static IEnumerator RunBonus(float durationTime, Action onBonusStarted, Action onBonusFinished)
+        public static IEnumerator RunBonus(BonusSettings bonusSettings)
         {
-            onBonusStarted?.Invoke();
-            yield return SIWaitUtils.WaitForCachedSeconds(durationTime);
-            onBonusFinished?.Invoke();
+            bonusSettings.bonusProperties.isBonusActive = true;
+            SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings.bonusType);
+            yield return SIWaitUtils.WaitForCachedSeconds(bonusSettings.bonusProperties.durationTime);
+            SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings.bonusType);
+            bonusSettings.bonusProperties.isBonusActive = false;
         }
     }
 }

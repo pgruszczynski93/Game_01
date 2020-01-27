@@ -3,20 +3,22 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    [System.Serializable]
+    [Serializable]
     public class BonusSettings
     {
         public BonusType bonusType;
         public BonusProperties bonusProperties;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class BonusProperties
     {
+        public bool isBonusActive;
         public int gainedHealth;
         public int gainedScore;
+        public int bonusLevel;
         public float durationTime;
         public float releaseForceMultiplier;
-        public Coroutine runningRoutine;
+        public Coroutine bonusRoutine;
     }
 }

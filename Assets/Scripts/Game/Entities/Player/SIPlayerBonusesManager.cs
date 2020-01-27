@@ -7,9 +7,6 @@ namespace SpaceInvaders
 {
     public class SIPlayerBonusesManager : MonoBehaviour
     {
-        public static event Action<BonusType> OnBonusEnabled;
-        public static event Action<BonusType> OnBonusDisabled;
-        
         bool _initialised;
         Dictionary<BonusType, BonusProperties> _activeBonusesLookup;
 
@@ -54,46 +51,48 @@ namespace SpaceInvaders
 
         void ManageCollectedBonus(BonusSettings bonusSettings)
         {
-            TryToAddCollectedBonus(bonusSettings);
+            TryToRunCollectedBonus(bonusSettings);
         }
 
-        void TryToAddCollectedBonus(BonusSettings bonusSettings)
+        void TryToRunCollectedBonus(BonusSettings bonusSettings)
         {
             if (!_activeBonusesLookup.ContainsKey(bonusSettings.bonusType))
             {
                 _activeBonusesLookup.Add(bonusSettings.bonusType, bonusSettings.bonusProperties);
-                bonusSettings.bonusProperties.runningRoutine = StartCoroutine(BonusRunner.RunBonus(
-                    5f, () =>
-                    {
-                        Debug.Log("Started");
-                        BroadcastOnBonusEnabled(bonusSettings.bonusType);
-                    },
-                    () =>
-                    {
-                        Debug.Log("Finished");
-                        BroadcastOnBonusDisabled(bonusSettings.bonusType);
-                    }));
+                RunBonus(bonusSettings);
+                return;
             }
 
-            
-//            Debug_PrintActiveBonuses();
+            BonusProperties existingBonusProperties = _activeBonusesLookup[bonusSettings.bonusType];
+            BonusProperties collectedBonusProperties = bonusSettings.bonusProperties;
+
+            if (existingBonusProperties.isBonusActive && collectedBonusProperties.bonusLevel > existingBonusProperties.bonusLevel)
+            {
+                StopCoroutine(existingBonusProperties.bonusRoutine);
+                _activeBonusesLookup[bonusSettings.bonusType] = collectedBonusProperties;
+                RunBonus(bonusSettings);
+            }
+            else if (!existingBonusProperties.isBonusActive)
+            {
+                _activeBonusesLookup[bonusSettings.bonusType] = collectedBonusProperties;
+                RunBonus(bonusSettings);
+            }
+
+            Debug_PrintActiveBonuses();
         }
+
+        void RunBonus(BonusSettings bonusSettings)
+        {
+            _activeBonusesLookup[bonusSettings.bonusType].bonusRoutine =
+                StartCoroutine(BonusRunner.RunBonus(bonusSettings));
+        }
+
         void Debug_PrintActiveBonuses()
         {
             foreach (var bonus in _activeBonusesLookup)
             {
-                Debug.Log($"Bonus: {bonus.Key}");
+                Debug.Log($"Bonus: {bonus.Key} level: {bonus.Value.bonusLevel}");
             }
-        }
-
-        public static void BroadcastOnBonusEnabled(BonusType bonusType)
-        {
-            OnBonusEnabled?.Invoke(bonusType);
-        }
-
-        public static void BroadcastOnBonusDisabled(BonusType bonusType)
-        {
-            OnBonusDisabled?.Invoke(bonusType);
         }
     }
 }
