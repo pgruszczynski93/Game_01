@@ -59,32 +59,44 @@ namespace SpaceInvaders
             if (!_activeBonusesLookup.ContainsKey(bonusSettings.bonusType))
             {
                 _activeBonusesLookup.Add(bonusSettings.bonusType, bonusSettings.bonusProperties);
-                RunBonus(bonusSettings);
+                RunBonus(bonusSettings, bonusSettings.bonusProperties);
                 return;
             }
 
+            TryToUpdateOrRunExistingBonus(bonusSettings);
+        }
+
+        void TryToUpdateOrRunExistingBonus(BonusSettings bonusSettings)
+        {
             BonusProperties existingBonusProperties = _activeBonusesLookup[bonusSettings.bonusType];
             BonusProperties collectedBonusProperties = bonusSettings.bonusProperties;
 
-            if (existingBonusProperties.isBonusActive && collectedBonusProperties.bonusLevel > existingBonusProperties.bonusLevel)
+            if (existingBonusProperties.isBonusActive &&
+                collectedBonusProperties.bonusLevel > existingBonusProperties.bonusLevel)
             {
                 StopCoroutine(existingBonusProperties.bonusRoutine);
-                _activeBonusesLookup[bonusSettings.bonusType] = collectedBonusProperties;
-                RunBonus(bonusSettings);
+                RunBonus(bonusSettings, collectedBonusProperties);
             }
             else if (!existingBonusProperties.isBonusActive)
             {
-                _activeBonusesLookup[bonusSettings.bonusType] = collectedBonusProperties;
-                RunBonus(bonusSettings);
+                RunBonus(bonusSettings, collectedBonusProperties);
             }
-
-            Debug_PrintActiveBonuses();
         }
 
-        void RunBonus(BonusSettings bonusSettings)
+        void RunBonus(BonusSettings bonusSettings, BonusProperties newBonusProperties )
         {
+            _activeBonusesLookup[bonusSettings.bonusType] = newBonusProperties;
             _activeBonusesLookup[bonusSettings.bonusType].bonusRoutine =
-                StartCoroutine(BonusRunner.RunBonus(bonusSettings));
+                StartCoroutine(RunBonusRoutine(bonusSettings));
+        }
+        
+        IEnumerator RunBonusRoutine(BonusSettings bonusSettings)
+        {
+            bonusSettings.bonusProperties.isBonusActive = true;
+            SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings.bonusType);
+            yield return SIWaitUtils.WaitForCachedSeconds(bonusSettings.bonusProperties.durationTime);
+            SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings.bonusType);
+            bonusSettings.bonusProperties.isBonusActive = false;
         }
 
         void Debug_PrintActiveBonuses()
