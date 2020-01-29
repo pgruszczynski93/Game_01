@@ -10,6 +10,8 @@ namespace SpaceInvaders
         bool _initialised;
         Dictionary<BonusType, BonusProperties> _activeBonusesLookup;
 
+        int testHealth;
+        
         void Initialise()
         {
             if (_initialised)

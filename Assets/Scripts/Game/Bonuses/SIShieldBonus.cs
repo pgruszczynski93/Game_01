@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 namespace SpaceInvaders
 {
     public class SIShieldBonus : SIBonus

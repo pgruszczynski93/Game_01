@@ -6,17 +6,7 @@ namespace SpaceInvaders
     {
         public override BonusSettings GetBonusSettings()
         {
-            throw new NotImplementedException();
-        }
-
-        public void ActivateBonus()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FinishBonus()
-        {
-            throw new NotImplementedException();
+            return _bonusSettings;
         }
     }
 }
