@@ -21,7 +21,7 @@ namespace SpaceInvaders
         {
             Initialise();
         }
-
+        
         void Initialise()
         {
             if (_weaponHolders == null || _weaponHolders.Length == 0)
@@ -39,7 +39,7 @@ namespace SpaceInvaders
                 {WeaponTier.Tier_4, _weaponHolders[3]}
             };
             ResetAllWeaponHolders();
-            UpdateCurrentWeaponTier(WeaponTier.Tier_1);
+            TryToUpdateCurrentWeaponTier(WeaponTier.Tier_1);
         }
 
         void ResetAllWeaponHolders()
@@ -49,7 +49,7 @@ namespace SpaceInvaders
                 _weaponHolders[i].gameObject.SetActive(false);
             }
         }
-        void UpdateCurrentWeaponTier(WeaponTier weaponTier)
+        void TryToUpdateCurrentWeaponTier(WeaponTier weaponTier)
         {
             if (_lastWeaponTier == weaponTier)
                 return;
@@ -68,7 +68,7 @@ namespace SpaceInvaders
 
         public void Debug_UpdateWeapon(int weapon)
         {
-            UpdateCurrentWeaponTier((WeaponTier) weapon);
+            TryToUpdateCurrentWeaponTier((WeaponTier) weapon);
         }
 
         void OnEnable()
@@ -83,12 +83,32 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIEventsHandler.OnWeaponTierUpdate += UpdateCurrentWeaponTier;
+            SIEventsHandler.OnWeaponTierUpdate += TryToUpdateCurrentWeaponTier;
+            SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
+            SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
         }
 
         void RemoveEvents()
         {
-            SIEventsHandler.OnWeaponTierUpdate -= UpdateCurrentWeaponTier;
+            SIEventsHandler.OnWeaponTierUpdate -= TryToUpdateCurrentWeaponTier;
+            SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
+            SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
+        }
+        
+        void HandleOnBonusEnabled(BonusSettings bonusSettings)
+        {
+            if (bonusSettings.bonusType != BonusType.Weapon)
+                return;
+            
+            TryToUpdateCurrentWeaponTier((WeaponTier) bonusSettings.bonusProperties.bonusLevel);
+        }
+        
+        void HandleOnBonusDisabled(BonusSettings bonusSettings)
+        {
+            if (bonusSettings.bonusType != BonusType.Weapon)
+                return;
+            
+            TryToUpdateCurrentWeaponTier(WeaponTier.Tier_1);
         }
 
         public void TryToShootAndReload()

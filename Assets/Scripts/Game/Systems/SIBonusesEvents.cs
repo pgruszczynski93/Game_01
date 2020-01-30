@@ -4,17 +4,17 @@ namespace SpaceInvaders
 {
     public class SIBonusesEvents
     {
-        public static event Action<BonusType> OnBonusEnabled;
-        public static event Action<BonusType> OnBonusDisabled;
+        public static event Action<BonusSettings> OnBonusEnabled;
+        public static event Action<BonusSettings> OnBonusDisabled;
         
-        public static void BroadcastOnBonusEnabled(BonusType bonusType)
+        public static void BroadcastOnBonusEnabled(BonusSettings bonusSettings)
         {
-            OnBonusEnabled?.Invoke(bonusType);
+            OnBonusEnabled?.Invoke(bonusSettings);
         }
 
-        public static void BroadcastOnBonusDisabled(BonusType bonusType)
+        public static void BroadcastOnBonusDisabled(BonusSettings bonusSettings)
         {
-            OnBonusDisabled?.Invoke(bonusType);
+            OnBonusDisabled?.Invoke(bonusSettings);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +9,6 @@ namespace SpaceInvaders
         bool _initialised;
         Dictionary<BonusType, BonusProperties> _activeBonusesLookup;
 
-        int testHealth;
-        
         void Initialise()
         {
             if (_initialised)
@@ -46,59 +43,46 @@ namespace SpaceInvaders
             SIEventsHandler.OnBonusCollected -= HandleOnBonusCollected;
         }
 
-        void HandleOnBonusCollected(BonusSettings bonusSettings)
+        void HandleOnBonusCollected(BonusSettings collectedBonusSettings)
         {
-            ManageCollectedBonus(bonusSettings);
+            ManageCollectedBonus(collectedBonusSettings);
         }
 
-        void ManageCollectedBonus(BonusSettings bonusSettings)
+        void ManageCollectedBonus(BonusSettings collectedBonusSettings)
         {
-            TryToRunCollectedBonus(bonusSettings);
+            TryToRunCollectedBonus(collectedBonusSettings);
         }
 
-        void TryToRunCollectedBonus(BonusSettings bonusSettings)
+        void TryToRunCollectedBonus(BonusSettings collectedBonusSettings)
         {
-            if (!_activeBonusesLookup.ContainsKey(bonusSettings.bonusType))
+            if (!_activeBonusesLookup.ContainsKey(collectedBonusSettings.bonusType))
             {
-                _activeBonusesLookup.Add(bonusSettings.bonusType, bonusSettings.bonusProperties);
-                RunBonus(bonusSettings, bonusSettings.bonusProperties);
+                _activeBonusesLookup.Add(collectedBonusSettings.bonusType, collectedBonusSettings.bonusProperties);
+                RunBonus(collectedBonusSettings);
                 return;
             }
 
-            TryToUpdateOrRunExistingBonus(bonusSettings);
+            UpdateOrRunExistingBonus(collectedBonusSettings);
         }
 
-        void TryToUpdateOrRunExistingBonus(BonusSettings bonusSettings)
+        void UpdateOrRunExistingBonus(BonusSettings collectedBonusSettings)
         {
-            BonusProperties existingBonusProperties = _activeBonusesLookup[bonusSettings.bonusType];
-            BonusProperties collectedBonusProperties = bonusSettings.bonusProperties;
-
-            if (existingBonusProperties.isBonusActive &&
-                collectedBonusProperties.bonusLevel > existingBonusProperties.bonusLevel)
-            {
-                StopCoroutine(existingBonusProperties.bonusRoutine);
-                RunBonus(bonusSettings, collectedBonusProperties);
-            }
-            else if (!existingBonusProperties.isBonusActive)
-            {
-                RunBonus(bonusSettings, collectedBonusProperties);
-            }
+            StopCoroutine(_activeBonusesLookup[collectedBonusSettings.bonusType].bonusRoutine);
+            RunBonus(collectedBonusSettings);
         }
 
-        void RunBonus(BonusSettings bonusSettings, BonusProperties newBonusProperties )
+        void RunBonus(BonusSettings collectedBonusSettings)
         {
-            _activeBonusesLookup[bonusSettings.bonusType] = newBonusProperties;
-            _activeBonusesLookup[bonusSettings.bonusType].bonusRoutine =
-                StartCoroutine(RunBonusRoutine(bonusSettings));
+            BonusSettings bonusSettingsCopy = collectedBonusSettings;
+            bonusSettingsCopy.bonusProperties.bonusRoutine = StartCoroutine(RunBonusRoutine(collectedBonusSettings));
+            _activeBonusesLookup[collectedBonusSettings.bonusType] = bonusSettingsCopy.bonusProperties;
         }
         
         IEnumerator RunBonusRoutine(BonusSettings bonusSettings)
         {
-            bonusSettings.bonusProperties.isBonusActive = true;
-            SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings.bonusType);
+            SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings);
             yield return SIWaitUtils.WaitForCachedSeconds(bonusSettings.bonusProperties.durationTime);
-            SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings.bonusType);
-            bonusSettings.bonusProperties.isBonusActive = false;
+            SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings);
         }
 
         void Debug_PrintActiveBonuses()

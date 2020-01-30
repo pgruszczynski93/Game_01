@@ -29,17 +29,17 @@ namespace SpaceInvaders
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
         }
         
-        void HandleOnBonusEnabled(BonusType bonusType)
+        void HandleOnBonusEnabled(BonusSettings bonusSettings)
         {
-            if (bonusType != BonusType.Shield)
+            if (bonusSettings.bonusType != BonusType.Shield)
                 return;
             
             EnableShield();            
         }
 
-        void HandleOnBonusDisabled(BonusType bonusType)
+        void HandleOnBonusDisabled(BonusSettings bonusSettings)
         {
-            if (bonusType != BonusType.Shield)
+            if (bonusSettings.bonusType != BonusType.Shield)
                 return;
 
             //todo::  REMOVE IT LATYEA

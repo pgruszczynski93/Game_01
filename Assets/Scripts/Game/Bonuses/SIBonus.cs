@@ -55,7 +55,7 @@ namespace SpaceInvaders
             Vector3 bonusViewPortPosition =
                 SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
 
-            if (bonusViewPortPosition.IsInVerticalViewportSpace()) 
+            if (!bonusViewPortPosition.IsInVerticalViewportSpace()) 
                 StopObject();
         }
 
@@ -68,7 +68,7 @@ namespace SpaceInvaders
         {
             _rigidbody.velocity = SIHelpers.VectorZero;
             _thisTransform.position = _startPosition;
-            gameObject.SetActive(false);
+//            gameObject.SetActive(false);
         }
     }
 }

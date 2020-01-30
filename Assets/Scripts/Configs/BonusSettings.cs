@@ -4,16 +4,15 @@ using UnityEngine;
 namespace SpaceInvaders
 {
     [Serializable]
-    public class BonusSettings
+    public struct BonusSettings
     {
         public BonusType bonusType;
         public BonusProperties bonusProperties;
     }
 
     [Serializable]
-    public class BonusProperties
+    public struct BonusProperties
     {
-        public bool isBonusActive;
         public int gainedHealth;
         public int gainedScore;
         public int bonusLevel;
