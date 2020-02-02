@@ -35,12 +35,12 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIEventsHandler.OnBonusCollected += HandleOnBonusCollected;
+            SIBonusesEvents.OnBonusCollected += HandleOnBonusCollected;
         }
 
         void RemoveEvents()
         {
-            SIEventsHandler.OnBonusCollected -= HandleOnBonusCollected;
+            SIBonusesEvents.OnBonusCollected -= HandleOnBonusCollected;
         }
 
         void HandleOnBonusCollected(BonusSettings collectedBonusSettings)

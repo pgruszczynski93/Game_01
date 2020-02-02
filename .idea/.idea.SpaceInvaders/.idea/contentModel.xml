@@ -356,12 +356,15 @@
             <e p="PlayerMovementSettings.cs" t="Include" />
             <e p="PlayerMovementSetup.cs" t="Include" />
             <e p="ScriptableSettingsMaster.cs" t="Include" />
+            <e p="SIBonusSelectorSettings.cs" t="Include" />
+            <e p="SIBonusSelectorSetup.cs" t="Include" />
             <e p="SIWeaponSettings.cs" t="Include" />
             <e p="SIWeaponSetup.cs" t="Include" />
             <e p="WeaponHolderSettings.cs" t="Include" />
             <e p="WeaponHolderSetup.cs" t="Include" />
           </e>
           <e p="Editor" t="Include">
+            <e p="SIBonusSelectorEditor.cs" t="Include" />
             <e p="SILoggerExtension.cs" t="Include" />
           </e>
           <e p="Game" t="Include">
@@ -407,6 +410,10 @@
               <e p="SIMovement.cs" t="Include" />
               <e p="SITargetFollower.cs" t="Include" />
             </e>
+            <e p="EventSystems" t="Include">
+              <e p="SIBonusesEvents.cs" t="Include" />
+              <e p="SIEventsHandler.cs" t="Include" />
+            </e>
             <e p="Features" t="Include">
               <e p="Background" t="Include">
                 <e p="SIBackgroundRepeater.cs" t="Include" />
@@ -430,8 +437,6 @@
               <e p="SIStringTags.cs" t="Include" />
             </e>
             <e p="Systems" t="Include">
-              <e p="SIBonusesEvents.cs" t="Include" />
-              <e p="SIEventsHandler.cs" t="Include" />
               <e p="SIGameMasterBehaviour.cs" t="Include" />
               <e p="SIGenericSingleton.cs" t="Include" />
               <e p="SIInputSystem.cs" t="Include" />
@@ -460,6 +465,9 @@
               <e p="SIWeaponHolderData.cs" t="Include" />
               <e p="SIWeaponReloader.cs" t="Include" />
             </e>
+          </e>
+          <e p="InspectorTools" t="Include">
+            <e p="Button.cs" t="Include" />
           </e>
         </e>
       </e>

@@ -4,6 +4,7 @@ namespace SpaceInvaders
 {
     public class SIBonusesEvents
     {
+        public static event Action<BonusSettings> OnBonusCollected;
         public static event Action<BonusSettings> OnBonusEnabled;
         public static event Action<BonusSettings> OnBonusDisabled;
         
@@ -15,6 +16,11 @@ namespace SpaceInvaders
         public static void BroadcastOnBonusDisabled(BonusSettings bonusSettings)
         {
             OnBonusDisabled?.Invoke(bonusSettings);
+        }
+        
+        public static void BroadcastOnBonusCollected(BonusSettings bonusSettings)
+        {
+            OnBonusCollected?.Invoke(bonusSettings);
         }
     }
 }
