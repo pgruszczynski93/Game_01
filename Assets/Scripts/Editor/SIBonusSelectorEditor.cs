@@ -5,7 +5,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 namespace MindwalkerStudio.Tools
 {
-    [CustomEditor(typeof(SIBonusSelector))]
+    [CustomEditor(typeof(SIBonusSelectorSystem))]
     public class SIBonusSelectorEditor : Editor
     {
         public override void OnInspectorGUI()
@@ -14,8 +14,8 @@ namespace MindwalkerStudio.Tools
             if (!GUILayout.Button("Test bonus drop")) 
                 return;
             
-            SIBonusSelector bonusSelector = (SIBonusSelector) target;
-            bonusSelector.DropBonus();
+            SIBonusSelectorSystem bonusSelectorSystem = (SIBonusSelectorSystem) target;
+            bonusSelectorSystem.DropBonus();
         }
     }
 }

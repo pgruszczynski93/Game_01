@@ -2,24 +2,156 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSettings.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSetup.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSetup.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Editor/SIBonusSelectorEditor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Editor/SIBonusSelectorEditor.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusDropper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusDropper.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEnemyGridEvents.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEnemyGridEvents.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIMathUtils.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIMathUtils.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/Joystick Pack/Sprites/Art/Sprites/Explosions/Explosion_Green.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/Joystick Pack/Sprites/Art/Sprites/Explosions/Explosion_Green.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/Joystick Pack/Sprites/Art/Sprites/Explosions/Explosion_Grey.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/Joystick Pack/Sprites/Art/Sprites/Explosions/Explosion_Grey.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/Joystick Pack/Sprites/Art/Sprites/Explosions/Explosion_Orange.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/Joystick Pack/Sprites/Art/Sprites/Explosions/Explosion_Orange.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/Joystick Pack/Sprites/Art/Sprites/Explosions/Explosion_Purple.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/Joystick Pack/Sprites/Art/Sprites/Explosions/Explosion_Purple.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_0.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_0.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_1.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_10.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_10.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_11.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_11.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_12.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_12.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_13.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_13.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_14.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_14.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_15.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_15.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_16.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_16.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_17.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_17.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_18.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_18.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_19.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_19.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_2.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_20.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_20.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_21.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_21.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_22.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_22.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_23.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_23.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_24.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_24.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_25.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_25.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_26.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_26.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_27.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_27.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_28.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_28.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_29.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_29.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_3.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_3.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_30.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_30.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_31.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_31.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_32.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_32.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_33.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_33.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_34.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_34.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_35.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_35.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_36.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_36.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_37.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_37.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_38.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_38.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_39.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_39.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_4.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_40.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_40.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_41.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_41.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_42.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_42.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_43.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_43.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_44.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_44.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_45.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_45.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_46.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_46.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_47.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_47.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_48.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_48.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_49.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_49.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_5.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_5.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_50.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_50.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_51.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_51.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_52.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_52.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_53.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_53.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_54.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_54.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_55.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_55.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_56.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_56.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_57.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_57.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_58.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_58.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_59.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_59.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_6.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_6.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_60.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_60.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_61.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_61.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_62.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_62.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_63.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_63.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_7.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_7.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_8.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_9.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Resources/Bluenoise64/LDR_LLL1_9.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/LUTs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/LUTs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/LUTs/NeutralLUT_32.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/LUTs/NeutralLUT_32.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Lens Dirt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Lens Dirt.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Lens Dirt/LensDirt00.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Lens Dirt/LensDirt00.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Lens Dirt/LensDirt01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Lens Dirt/LensDirt01.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Lens Dirt/LensDirt02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Lens Dirt/LensDirt02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Lens Dirt/LensDirt03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Lens Dirt/LensDirt03.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Spectral LUTs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Spectral LUTs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Spectral LUTs/SpectralLut_BlueRed.tga.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Spectral LUTs/SpectralLut_BlueRed.tga.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Spectral LUTs/SpectralLut_GreenPurple.tga.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Spectral LUTs/SpectralLut_GreenPurple.tga.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Spectral LUTs/SpectralLut_PurpleGreen.tga.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Spectral LUTs/SpectralLut_PurpleGreen.tga.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Spectral LUTs/SpectralLut_RedBlue.tga.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/SineVFX/PostProcessing/Textures/Spectral LUTs/SpectralLut_RedBlue.tga.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiBonuses/LifeBonus 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiBonuses/LifeBonus 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiBonuses/ShieldBonus 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiBonuses/ShieldBonus 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiBonuses/Weapon Bonus 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiBonuses/Weapon Bonus 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/BonusTemplatesParent.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/BonusTemplatesParent.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/EnemiesGrid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/EnemiesGrid.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[GameManager].prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[GameManager].prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DOTweenSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/HackingBonusDropChance.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/HackingBonusDropChance.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/LifeBonusDropChance.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/LifeBonusDropChance.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/MassiveKillDropChance.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/MassiveKillDropChance.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/ShieldBonusDropChance.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/ShieldBonusDropChance.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/TeleportationBonusDropChance.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/TeleportationBonusDropChance.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/TimeSlowDownBonusDropChance.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/TimeSlowDownBonusDropChance.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/WeaponBonusDropChance.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/BonusDropChances/WeaponBonusDropChance.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Life Bonus 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Life Bonus 1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Life Bonus 2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Life Bonus 2.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Life Bonus 3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Life Bonus 3.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Shield Bonus 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Shield Bonus 1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Shield Bonus 2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Shield Bonus 2.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Shield Bonus 3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Shield Bonus 3.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Weapon Bonus 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Weapon Bonus 1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Weapon Bonus 2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Weapon Bonus 2.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Weapon Bonus 3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Weapon Bonus 3.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Grid Movement Config.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Grid Movement Config.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/GridMovementSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/GridMovementSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSettings.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSettings.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSetup.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSetup.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Editor/SIBonusSelectorEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Editor/SIBonusSelectorEditor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusColliderBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusColliderBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSelector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSelectorSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSelector.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSelectorSystem.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIBonusesEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIBonusesEvents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIBonusesEvents.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIBonusesEvents.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIEventsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEventsHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIEventsHandler.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEventsHandler.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridsMaster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridsMaster.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridSpawner.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemyGridBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemyGridBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIBonusesEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIBonusesEvents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIInputSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIInputSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponReloader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponReloader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/Packages-Update.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/Packages-Update.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +163,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIWeaponBonus.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4CD14385-55E6-4C0E-AEDA-2393D3C9CF4A/26/5d0e99b5/Behaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/509B38DE-0BB8-4FDE-A4B2-340764259EC3/25/bdc912da/ParticleSystem.cs" root0="SKIP_HIGHLIGHTING" />
@@ -46,6 +177,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/ICanMove.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyColliderBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/DBD3A770-660A-456E-8DB8-894556CF3CAD/2c/b7897fe1/ABSSequentiable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIStringTags.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Editor/SIBonusSelectorEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIDataHelper.cs" root0="FORCE_HIGHLIGHTING" />
@@ -53,21 +185,26 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Shield Bonus 1.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidSpawner.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSetup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponHolder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/PlayerMovementSetup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidsMaster.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIWaitUtils.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemyGridBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EF28F193-EAB6-4E49-B44B-3FB27EAB4F75/09/cd62623e/Array.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponReloader.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSelector.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIConstantsHelpers.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSelectorSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEntity.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusDropper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEnemyGridEvents.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSlotBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerShootBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/DBD3A770-660A-456E-8DB8-894556CF3CAD/af/a42771a4/Tween.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEventsHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIScreenUtils.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/94C5F4C3-8CDC-42D2-B006-F8BADEF04394/1e/cd235717/Random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIScreenAreaCalculator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIConstants.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIStatistics.cs" root0="FORCE_HIGHLIGHTING" />
@@ -75,6 +212,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SISettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGenericSingleton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIMathUtils.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Features/Background/SIBackgroundRepeater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Systems/SISpawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -95,8 +233,9 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SISettingsConsts.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIShootBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridsMaster.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridSpawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIGameObjectVFX.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Grid Movement Config.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldColliderBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIShieldBonus.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/GridMovementSettings.cs" root0="FORCE_HIGHLIGHTING" />
@@ -131,22 +270,11 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIBonusesEvents.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Gameplay/[GameManager].prefab" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWaitUtils.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponEntity.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIGridMovement.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemiesGridsMaster.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnemyGridBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIStatistics.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSetup.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEnums.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIDataHelper.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SITimeBonusesManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIEventsHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/SILifeBonus.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIWeaponBonus.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusParentManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/SIBonusManager.cs" />
@@ -164,28 +292,40 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/IBonus.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/BonusRunner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SILifeBonus.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIGameObjectVFX.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIShieldBonus.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIWeaponBonus.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIBonusesEvents.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponReloader.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridsMaster.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIBonusesEvents.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusColliderBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEventsHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Editor/SIBonusSelectorEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Editor/MSButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/InspectorTools/MSButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/InspectorTools/Button.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSetup.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIMathUtils.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSelector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIBonusesEvents.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SILifeBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIShieldBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIWeaponBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SIBonusSelectorSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusDropper.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponReloader.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusColliderBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusSelectorSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIInputSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/GridStarterSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/GridStarterSetup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemyGridBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEnemyGridEvents.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridSpawner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/GridMovementSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs" />
       </list>
     </option>
   </component>
@@ -204,7 +344,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="CodeLensConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.build.unityPlugin" />
     <property name="settings.editor.splitter.proportion" value="0.22902271" />
   </component>
   <component name="RunDashboard">
@@ -227,10 +367,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="7032">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="1920">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="7032" />
+      <option name="pid" value="1920" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -327,7 +467,20 @@
       <workItem from="1580245807928" duration="3709000" />
       <workItem from="1580328712171" duration="8104000" />
       <workItem from="1580412856756" duration="4124000" />
-      <workItem from="1580662160459" duration="8556000" />
+      <workItem from="1580662160459" duration="8584000" />
+      <workItem from="1582663791288" duration="1198000" />
+      <workItem from="1582748533674" duration="5755000" />
+      <workItem from="1583093701905" duration="5790000" />
+      <workItem from="1583353332716" duration="1798000" />
+      <workItem from="1583441616932" duration="600000" />
+      <workItem from="1583698713411" duration="6061000" />
+      <workItem from="1584310047525" duration="1770000" />
+      <workItem from="1584568557471" duration="1870000" />
+      <workItem from="1584900760100" duration="5233000" />
+      <workItem from="1584997049668" duration="6118000" />
+      <workItem from="1585171214877" duration="4110000" />
+      <workItem from="1585255118407" duration="5148000" />
+      <workItem from="1585336212215" duration="1363000" />
     </task>
     <servers />
   </component>
@@ -411,7 +564,7 @@
               <option value="1340" />
             </startOffsets>
             <endOffsets>
-              <option value="1412" />
+              <option value="1426" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="45" />
@@ -421,10 +574,10 @@
           <line>60</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" initialLine="61">
             <startOffsets>
-              <option value="1559" />
+              <option value="1587" />
             </startOffsets>
             <endOffsets>
-              <option value="1592" />
+              <option value="1620" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="46" />
@@ -434,10 +587,10 @@
           <line>69</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" initialLine="75">
             <startOffsets>
-              <option value="1803" />
+              <option value="1831" />
             </startOffsets>
             <endOffsets>
-              <option value="1886" />
+              <option value="1928" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="57" />
@@ -447,10 +600,10 @@
           <line>102</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponReloader.cs" initialLine="102">
             <startOffsets>
-              <option value="3248" />
+              <option value="3262" />
             </startOffsets>
             <endOffsets>
-              <option value="3332" />
+              <option value="3346" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="66" />
@@ -463,7 +616,7 @@
               <option value="3150" />
             </startOffsets>
             <endOffsets>
-              <option value="3198" />
+              <option value="3212" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="67" />
@@ -473,13 +626,52 @@
           <line>77</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" initialLine="87">
             <startOffsets>
-              <option value="2214" />
+              <option value="2256" />
             </startOffsets>
             <endOffsets>
-              <option value="2270" />
+              <option value="2326" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs</url>
+          <line>172</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs" initialLine="172">
+            <startOffsets>
+              <option value="6167" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6197" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs</url>
+          <line>171</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs" initialLine="171">
+            <startOffsets>
+              <option value="6125" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6150" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs</url>
+          <line>185</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs" initialLine="185">
+            <startOffsets>
+              <option value="6623" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6736" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

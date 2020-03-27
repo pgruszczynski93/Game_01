@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Shield Bonus 1
   m_EditorClassIdentifier: 
   bonusSettings:
-    bonusType: 1
     bonusProperties:
-      isBonusActive: 0
       gainedHealth: 0
       gainedScore: 10
       bonusLevel: 1
       durationTime: 5
       releaseForceMultiplier: 0
+    bonusDropInfo:
+      bonusType: 1
+      minDropRate: 5
+      maxDropRate: 25

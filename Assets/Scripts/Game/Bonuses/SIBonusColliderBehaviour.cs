@@ -28,7 +28,7 @@ namespace SpaceInvaders
         protected override void HandleOnCollisionDetected()
         {
             BonusSettings bonusSettings = _bonusBehaviour.GetBonusSettings();
-            Debug.Log($"[SIBonusColliderBehaviour] Bonus received {bonusSettings.bonusType}");
+            Debug.Log($"[SIBonusColliderBehaviour] Bonus received {bonusSettings.bonusDropInfo.bonusType}");
             SIBonusesEvents.BroadcastOnBonusCollected(bonusSettings);
             _bonusBehaviour.StopObject();
         }

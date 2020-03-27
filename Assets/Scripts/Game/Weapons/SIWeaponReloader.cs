@@ -97,7 +97,7 @@ namespace SpaceInvaders
         
         void HandleOnBonusEnabled(BonusSettings bonusSettings)
         {
-            if (bonusSettings.bonusType != BonusType.Weapon)
+            if (bonusSettings.bonusDropInfo.bonusType != BonusType.Weapon)
                 return;
             
             TryToUpdateCurrentWeaponTier((WeaponTier) bonusSettings.bonusProperties.bonusLevel);
@@ -105,7 +105,7 @@ namespace SpaceInvaders
         
         void HandleOnBonusDisabled(BonusSettings bonusSettings)
         {
-            if (bonusSettings.bonusType != BonusType.Weapon)
+            if (bonusSettings.bonusDropInfo.bonusType != BonusType.Weapon)
                 return;
             
             TryToUpdateCurrentWeaponTier(WeaponTier.Tier_1);

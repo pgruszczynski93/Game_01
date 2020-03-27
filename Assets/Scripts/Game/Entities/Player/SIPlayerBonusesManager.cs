@@ -55,9 +55,9 @@ namespace SpaceInvaders
 
         void TryToRunCollectedBonus(BonusSettings collectedBonusSettings)
         {
-            if (!_activeBonusesLookup.ContainsKey(collectedBonusSettings.bonusType))
+            if (!_activeBonusesLookup.ContainsKey(collectedBonusSettings.bonusDropInfo.bonusType))
             {
-                _activeBonusesLookup.Add(collectedBonusSettings.bonusType, collectedBonusSettings.bonusProperties);
+                _activeBonusesLookup.Add(collectedBonusSettings.bonusDropInfo.bonusType, collectedBonusSettings.bonusProperties);
                 RunBonus(collectedBonusSettings);
                 return;
             }
@@ -67,7 +67,7 @@ namespace SpaceInvaders
 
         void UpdateOrRunExistingBonus(BonusSettings collectedBonusSettings)
         {
-            StopCoroutine(_activeBonusesLookup[collectedBonusSettings.bonusType].bonusRoutine);
+            StopCoroutine(_activeBonusesLookup[collectedBonusSettings.bonusDropInfo.bonusType].bonusRoutine);
             RunBonus(collectedBonusSettings);
         }
 
@@ -75,7 +75,7 @@ namespace SpaceInvaders
         {
             BonusSettings bonusSettingsCopy = collectedBonusSettings;
             bonusSettingsCopy.bonusProperties.bonusRoutine = StartCoroutine(RunBonusRoutine(collectedBonusSettings));
-            _activeBonusesLookup[collectedBonusSettings.bonusType] = bonusSettingsCopy.bonusProperties;
+            _activeBonusesLookup[collectedBonusSettings.bonusDropInfo.bonusType] = bonusSettingsCopy.bonusProperties;
         }
         
         IEnumerator RunBonusRoutine(BonusSettings bonusSettings)

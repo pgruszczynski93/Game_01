@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Weapon Bonus 3
   m_EditorClassIdentifier: 
   bonusSettings:
-    bonusType: 2
     bonusProperties:
       gainedHealth: 0
       gainedScore: 10
       bonusLevel: 3
       durationTime: 10
       releaseForceMultiplier: 0
+    bonusDropInfo:
+      bonusType: 2
+      minDropRate: 5
+      maxDropRate: 15

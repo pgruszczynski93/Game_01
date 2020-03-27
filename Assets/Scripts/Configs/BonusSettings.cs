@@ -6,8 +6,8 @@ namespace SpaceInvaders
     [Serializable]
     public struct BonusSettings
     {
-        public BonusType bonusType;
         public BonusProperties bonusProperties;
+        public BonusDropInfo bonusDropInfo;
     }
 
     [Serializable]
@@ -19,5 +19,14 @@ namespace SpaceInvaders
         public float durationTime;
         public float releaseForceMultiplier;
         public Coroutine bonusRoutine;
+    }
+
+    [Serializable]
+    public struct BonusDropInfo
+    {
+        public BonusType bonusType;
+        [Tooltip("Min should be always lesser than max")]
+        [Range(0, 100)] public int minDropRate;
+        [Range(0, 100)] public int maxDropRate;
     }
 }

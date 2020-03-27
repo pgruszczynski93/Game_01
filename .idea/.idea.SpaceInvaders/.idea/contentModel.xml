@@ -153,6 +153,12 @@
               <e p="TrackMine.cs" t="Include" />
             </e>
           </e>
+          <e p="PolygonSciFiCity" t="Include">
+            <e p="shaders" t="Include">
+              <e p="Polygon_Triplanar.shader" t="Include" />
+              <e p="Polygon_UVScroll.shader" t="Include" />
+            </e>
+          </e>
           <e p="SineVFX" t="Include">
             <e p="PostProcessing" t="Include">
               <e p="Editor" t="Include">
@@ -356,8 +362,6 @@
             <e p="PlayerMovementSettings.cs" t="Include" />
             <e p="PlayerMovementSetup.cs" t="Include" />
             <e p="ScriptableSettingsMaster.cs" t="Include" />
-            <e p="SIBonusSelectorSettings.cs" t="Include" />
-            <e p="SIBonusSelectorSetup.cs" t="Include" />
             <e p="SIWeaponSettings.cs" t="Include" />
             <e p="SIWeaponSetup.cs" t="Include" />
             <e p="WeaponHolderSettings.cs" t="Include" />
@@ -377,7 +381,8 @@
               <e p="IBonus.cs" t="Include" />
               <e p="SIBonus.cs" t="Include" />
               <e p="SIBonusColliderBehaviour.cs" t="Include" />
-              <e p="SIBonusSelector.cs" t="Include" />
+              <e p="SIBonusDropper.cs" t="Include" />
+              <e p="SIBonusSelectorSystem.cs" t="Include" />
               <e p="SIBonusSlotBehaviour.cs" t="Include" />
               <e p="SILifeBonus.cs" t="Include" />
               <e p="SIShieldBonus.cs" t="Include" />
@@ -404,7 +409,7 @@
                 <e p="SIPlayerMovement.cs" t="Include" />
                 <e p="SIPlayerShootBehaviour.cs" t="Include" />
               </e>
-              <e p="SIEnemiesGridsMaster.cs" t="Include" />
+              <e p="SIEnemiesGridSpawner.cs" t="Include" />
               <e p="SIEnemyGridBehaviour.cs" t="Include" />
               <e p="SIEntity.cs" t="Include" />
               <e p="SIMovement.cs" t="Include" />
@@ -412,6 +417,7 @@
             </e>
             <e p="EventSystems" t="Include">
               <e p="SIBonusesEvents.cs" t="Include" />
+              <e p="SIEnemyGridEvents.cs" t="Include" />
               <e p="SIEventsHandler.cs" t="Include" />
             </e>
             <e p="Features" t="Include">
@@ -440,6 +446,7 @@
               <e p="SIGameMasterBehaviour.cs" t="Include" />
               <e p="SIGenericSingleton.cs" t="Include" />
               <e p="SIInputSystem.cs" t="Include" />
+              <e p="SIMathUtils.cs" t="Include" />
               <e p="SIScreenAreaCalculator.cs" t="Include" />
               <e p="SIScreenUtils.cs" t="Include" />
               <e p="SIShaderModifier.cs" t="Include" />

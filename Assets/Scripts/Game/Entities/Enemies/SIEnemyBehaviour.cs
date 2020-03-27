@@ -10,7 +10,7 @@ namespace SpaceInvaders
         [SerializeField] private MeshRenderer _meshRenderer;
         [SerializeField] private GameObject _colliderParent;
 //        [SerializeField] private SIVFXManager _destroyVFX;
-        [SerializeField] private SIBonusSelector bonusSelector;
+        [SerializeField] private SIBonusSelectorSystem bonusSelectorSystem;
         [SerializeField] private SIWeaponEntity weaponEntity;
         [SerializeField] private SIEnemyShootBehaviour _shootBehaviour;
 

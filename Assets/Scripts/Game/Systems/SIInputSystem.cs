@@ -58,8 +58,8 @@ namespace SpaceInvaders
 
         void TryToSendShootAction()
         {
-            if (!SIEnemiesGridsMaster.Instance.IsEnemyGridMovementAllowed)
-                return;
+//            if (!SIEnemiesGridManager.Instance.IsEnemyGridMovementAllowed)
+//                return;
             
             if(IsShootingKeyPressed())
                 SIEventsHandler.BroadcastOnShootInputReceived();

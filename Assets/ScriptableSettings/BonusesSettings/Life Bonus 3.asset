@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Life Bonus 3
   m_EditorClassIdentifier: 
   bonusSettings:
-    bonusType: 0
     bonusProperties:
-      isBonusActive: 0
       gainedHealth: 10
       gainedScore: 5
       bonusLevel: 3
       durationTime: 0
       releaseForceMultiplier: 0
+    bonusDropInfo:
+      bonusType: 0
+      minDropRate: 10
+      maxDropRate: 15
