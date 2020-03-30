@@ -1,4 +1,3 @@
-using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ namespace SpaceInvaders
         [SerializeField] SIGridMovementLimiter gridMovementLimiter;
 
         bool _isInHorizontalLimits;
-        bool _isMovementTweening;
+        bool _isTweeningVerticalMovement;
         bool _isInitialSequenceFinished;
         float _rightScreenEdgeOffset;
         float _leftScreenEdgeOffset;
@@ -22,7 +21,7 @@ namespace SpaceInvaders
         ScreenEdges _worldScreenEdges;
         GridMovementSettings _gridMovementSettings;
         Tweener _initialMovementTweener;
-        Tweener _movementTweener;
+        Tweener _verticalMovementTweener;
 
         protected override void Initialise()
         {
@@ -43,22 +42,22 @@ namespace SpaceInvaders
         void InitialiseTweeners()
         {
             _initialMovementTweener = _thisTransform
-                .DOLocalMove(_gridMovementSettings.worldTargetPosition, _gridMovementSettings.easeDuration)
+                .DOLocalMove(_gridMovementSettings.worldTargetPosition, _gridMovementSettings.initialMovementEaseDuration)
                 .OnPlay(() => _isInitialSequenceFinished = false)
                 .OnComplete(() => _isInitialSequenceFinished = true)
-                .SetEase(_gridMovementSettings.easeType)
+                .SetEase(_gridMovementSettings.initialMovementEaseType)
                 .SetAutoKill(false)
                 .Pause();
 
-            _movementTweener = _thisTransform
-                .DOMove(_gridMovementSettings.worldTargetPosition, 0.25f)
-                .OnPlay(() => _isMovementTweening = true)
+            _verticalMovementTweener = _thisTransform
+                .DOMove(_gridMovementSettings.worldTargetPosition, _gridMovementSettings.horizontalDownstepDuration)
+                .OnPlay(() => _isTweeningVerticalMovement = true)
                 .OnComplete(() =>
                 {
-                    _isMovementTweening = false;
+                    _isTweeningVerticalMovement = false;
                     _currentMovementSpeed = -_currentMovementSpeed;
                 })
-                .SetEase(Ease.InOutCubic)
+                .SetEase(_gridMovementSettings.horizontalDownstepEaseType)
                 .SetAutoKill(false)
                 .Pause();
         }
@@ -127,10 +126,9 @@ namespace SpaceInvaders
 
         protected override void TryToMoveObject()
         {
-            if (!_isInitialSequenceFinished /* || _canMove == false*/)
+            if (!_isInitialSequenceFinished  || _canMove == false)
                 return;
             UpdatePosition();
-//            UpdateRotation();
         }
 
         protected override void TryToStopObject()
@@ -169,11 +167,11 @@ namespace SpaceInvaders
 
         void ClampAndInverseObjectMovementToScreenBounds(Vector3 currentPosition)
         {
-            if (!_isMovementTweening)
-                MoveDownTest(currentPosition);
+            if (!_isTweeningVerticalMovement)
+                MoveObjectVertically(currentPosition);
         }
 
-        void MoveDownTest(Vector3 currentPosition)
+        void MoveObjectVertically(Vector3 currentPosition)
         {
             float clampedHorizontalPos =
                 Mathf.Clamp(currentPosition.x, _leftScreenEdgeOffset, _rightScreenEdgeOffset);
@@ -183,12 +181,11 @@ namespace SpaceInvaders
                 currentPosition.y - _gridMovementSettings.gridDownStep,
                 currentPosition.z);
 
-            _movementTweener.Pause()
+            _verticalMovementTweener.Pause()
                 .ChangeEndValue(verticalTargetPositon, true)
                 .Restart();
         }
-
-
+        
         protected override void UpdateRotation()
         {
             //Intentionally not implemented.
@@ -202,6 +199,8 @@ namespace SpaceInvaders
             _currentMovementSpeed = Mathf.Clamp(_currentMovementSpeed, _initialMovementSpeed,
                 _gridMovementSettings.maxMovementSpeed);
             _currentSpeedMultiplier = _gridMovementSettings.initialSpeedMultiplier;
+            _initialMovementTweener.Pause();
+            _verticalMovementTweener.Pause();
             UpdateMovementOffsets();
         }
     }

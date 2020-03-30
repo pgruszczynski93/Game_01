@@ -11,9 +11,12 @@ namespace SpaceInvaders
         [Range(0, 1)] public float gridDownStep;
         [Range(0, 2)] public float speedMultiplierStep;
         [Range(0, 1)] public float enemyWidthOffset;
+        public float initialMovementEaseDuration;
+        public float horizontalDownstepDuration;
+
         public Vector3 worldStartPosition;
         public Vector3 worldTargetPosition;
-        public Ease easeType;
-        public float easeDuration;
+        public Ease initialMovementEaseType;
+        public Ease horizontalDownstepEaseType;
     }
 }

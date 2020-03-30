@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7089611953591753692}
   - component: {fileID: 7089611953591753693}
-  - component: {fileID: 1631490700610587971}
   - component: {fileID: 694889456}
+  - component: {fileID: 1631490700610587971}
   - component: {fileID: 1673327023806037923}
   m_Layer: 0
   m_Name: EnemiesGrid
@@ -132,6 +132,24 @@ MonoBehaviour:
   - {fileID: 1993513839555709878}
   - {fileID: 2018268254566312079}
   - {fileID: 6094872484808395529}
+--- !u!114 &694889456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7089611953591753695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ec8da14047493eb367064272089dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initialMovementSpeed: 3
+  _currentMovementSpeed: 3
+  _gridMovementSetup: {fileID: 11400000, guid: 00352c270a79ffb458bc728c872a64d2, type: 2}
+  _currentSpeedMultiplier: 1
+  _screenEdgeOffset: 0
+  gridMovementLimiter: {fileID: 1631490700610587971}
 --- !u!114 &1631490700610587971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,34 +181,6 @@ MonoBehaviour:
   - {fileID: 267342710907194299}
   - {fileID: 296671094314477698}
   - {fileID: 5515500771458435844}
---- !u!114 &694889456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7089611953591753695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9ec8da14047493eb367064272089dbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _initialMovementSpeed: 3
-  _currentMovementSpeed: 3
-  _gridMovementSetup: {fileID: 11400000, guid: 00352c270a79ffb458bc728c872a64d2, type: 2}
-  _gridMovementSettings:
-    initialMovementSpeed: 0
-    initialSpeedMultiplier: 0
-    movementSmoothStep: 0
-    maxMovementSpeed: 0
-    maxMovementSpeedMultiplier: 0
-    newWaveInitialSpeedChange: 0
-    gridDownStep: 0
-    speedMultiplierStep: 0
-    enemyWidthOffset: 0
-  _currentSpeedMultiplier: 1
-  _screenEdgeOffset: 0
-  gridMovementLimiter: {fileID: 1631490700610587971}
 --- !u!114 &1673327023806037923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,8 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a24fa0d6a9e6a74e879d8b2c5c8f9dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _starterSetup: {fileID: 11400000, guid: c80771d5a6392ef40966da4272cfd77a, type: 2}
-  _isEnemyGridMovementAllowed: 0
 --- !u!1001 &750773717235367396
 PrefabInstance:
   m_ObjectHideFlags: 0
