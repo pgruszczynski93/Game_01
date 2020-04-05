@@ -357,6 +357,8 @@
             <e p="EntitySetup.cs" t="Include" />
             <e p="GridMovementSettings.cs" t="Include" />
             <e p="GridMovementSetup.cs" t="Include" />
+            <e p="GridShootingSettings.cs" t="Include" />
+            <e p="GridShootingSetup.cs" t="Include" />
             <e p="MovementSettings.cs" t="Include" />
             <e p="MovementSetup.cs" t="Include" />
             <e p="PlayerMovementSettings.cs" t="Include" />
@@ -410,7 +412,7 @@
                 <e p="SIPlayerShootBehaviour.cs" t="Include" />
               </e>
               <e p="SIEnemiesGridSpawner.cs" t="Include" />
-              <e p="SIEnemyGridBehaviour.cs" t="Include" />
+              <e p="SIEnemyGridShootingController.cs" t="Include" />
               <e p="SIEntity.cs" t="Include" />
               <e p="SIMovement.cs" t="Include" />
               <e p="SITargetFollower.cs" t="Include" />
@@ -464,6 +466,8 @@
               <e p="SIVFXBehaviour.cs" t="Include" />
             </e>
             <e p="Weapons" t="Include">
+              <e p="SIEnemyWeaponReloader.cs" t="Include" />
+              <e p="SIPlayerWeaponReloader.cs" t="Include" />
               <e p="SIShootBehaviour.cs" t="Include" />
               <e p="SIWeaponBehaviour.cs" t="Include" />
               <e p="SIWeaponColliderBehaviour.cs" t="Include" />

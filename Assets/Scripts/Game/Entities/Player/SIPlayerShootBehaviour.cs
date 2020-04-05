@@ -6,12 +6,17 @@ namespace SpaceInvaders
     {
         protected override void AssignEvents()
         {
-            SIEventsHandler.OnShootInputReceived += TryToShootProjectile;
+            SIEventsHandler.OnShootInputReceived += HandleOnShootInputReceived;
         }
 
         protected override void RemoveEvents()
         {
-            SIEventsHandler.OnShootInputReceived -= TryToShootProjectile;
+            SIEventsHandler.OnShootInputReceived -= HandleOnShootInputReceived;
+        }
+
+        void HandleOnShootInputReceived()
+        {
+            TryToShootProjectile();
         }
 
         protected override void TryToShootProjectile()

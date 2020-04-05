@@ -8,6 +8,7 @@ namespace SpaceInvaders
         public static event Action OnGridReset;
         public static event Action OnGridShootingStarted;
         public static event Action OnGridShootingStopped;
+        public static event Action<SIShootBehaviour> OnRequestReadyToShooting;
 
         public static void BroadcastOnGridStarted()
         {
@@ -27,6 +28,11 @@ namespace SpaceInvaders
         public static void BroadcastOnGridShootingStopped()
         {
             OnGridShootingStopped?.Invoke();
+        }
+
+        public static void BroadcastOnRequestReadyToShooting(SIShootBehaviour enemyShootBehaviour)
+        {
+            OnRequestReadyToShooting?.Invoke(enemyShootBehaviour);
         }
     }
 }

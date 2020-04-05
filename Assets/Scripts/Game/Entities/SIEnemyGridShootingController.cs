@@ -1,0 +1,255 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace SpaceInvaders
+{
+    public class SIEnemyGridShootingController : MonoBehaviour
+    {
+        [SerializeField] GridShootingSetup _gridBehaviourSetup;
+        
+        [SerializeField] SIEnemyBehaviour[] _enemies;
+        [SerializeField] List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
+        
+        bool _isShootingAvailableForWave;
+
+        int _totalEnemies;
+        int _livingEnemies;
+
+        float _lastRefreshTime;
+        float _shotAbilityRefreshTime;
+
+        GridShootingSettings _gridBehaviourSettings;
+
+        void Start()
+        {
+            Initialise();
+        }
+        
+        void Initialise()
+        {
+            _gridBehaviourSettings = _gridBehaviourSetup.shootingSettings;
+            _totalEnemies = _enemies.Length;
+            _livingEnemies = _totalEnemies;
+            _enemiesAbleToShoot = new List<SIEnemyShootBehaviour>();
+//            AssignEnemyIndexes();
+//            InitialiseRowOfShootingEnemies();
+        }
+
+        void OnEnable()
+        {
+//            AssignEvents();
+        }
+
+        void OnDisable()
+        {
+//            RemoveEvents();
+        }
+
+//        void AssignEvents()
+//        {
+//            SIEnemyGridEvents.OnRequestReadyToShooting += HandleOnRequestReadyToShooting;
+//            
+//            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
+//            SIEventsHandler.OnShootingEnemiesUpdate += HandleOnShootingEnemiesUpdate;
+//            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
+//            //todo: DONT REMOVE THIS: OnDebugInputHandling Event -> REFACTOR
+//            SIEventsHandler.OnDebugInputHandling += Debug_ResetWave;
+//        }
+
+//        SIShootBehaviour HandleOnRequestShootingEnemy(int arg)
+//        {
+//            throw new System.NotImplementedException();
+//        }
+
+//        void RemoveEvents()
+//        {
+//            SIEnemyGridEvents.OnRequestReadyToShooting -= HandleOnRequestReadyToShooting;
+//            
+//            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+//            SIEventsHandler.OnShootingEnemiesUpdate -= HandleOnShootingEnemiesUpdate;
+//            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
+//            //todo: DONT REMOVE THIS: OnDebugInputHandling Event -> REFACTOR
+//            SIEventsHandler.OnDebugInputHandling -= Debug_ResetWave;
+//        }
+
+//        void HandleOnEnemyDeath()
+//        {
+//            DecreaseEnemiesCount();
+//            UpdateCurrentSpeedMultiplier();
+//            CheckEnemyWaveEnd();
+//        }
+
+//        void HandleOnShootingEnemiesUpdate(int index)
+//        {
+//            UpdateShootingEnemies(index);
+//        }
+
+//        void HandleOnWaveEnd()
+//        {
+//            ResetGridShooting();
+//        }
+
+//        void AssignEnemyIndexes()
+//        {
+//            for (int i = 0; i < SIConstants.ENEMIES_TOTAL; i++) 
+//                _enemies[i].shootingEnemyIndex = i;
+//        }
+//
+//        void OnDestroy()
+//        {
+//            StopAllCoroutines();
+//        }
+
+        
+//        void HandleOnRequestReadyToShooting(SIShootBehaviour enemyShootBehaviour)
+//        {
+////            _enemiesAbleToShoot.Add(enemyShootBehaviour);
+//        }
+
+//        void InitialiseRowOfShootingEnemies()
+//        {
+//            _enemiesAbleToShoot.Clear();
+//            for (int i = _totalEnemies - 1; i >= _totalEnemies - _gridBehaviourSettings.maxEnemiesInRow; i--)
+//            {
+//                SIEnemyShootBehaviour enemyAbleToShoot = _enemies[i].ShootBehaviour;
+//                if (enemyAbleToShoot == null)
+//                    return;
+//
+//                _enemiesAbleToShoot.Add(enemyAbleToShoot);
+//                //todo: ZRIBIC event func<SHOTBEH> albo zrobiC IENUmerable<ShootingbEh
+//                
+//            }
+//        }
+
+//        void ResetGridShooting()
+//        {
+//            _livingEnemies = _totalEnemies;
+//            InitialiseRowOfShootingEnemies();
+//            
+//            SIEnemyGridEvents.BroadcastOnGridReset();
+//        }
+//        
+//        void DecreaseEnemiesCount()
+//        {
+//            --_livingEnemies;
+//        }
+
+//        void UpdateCurrentSpeedMultiplier()
+//        {
+//            if (_livingEnemies > SIConstants.ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP)
+//                return;
+//
+//            float newMultiplier = _livingEnemies == SIConstants.ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP
+//                ? SIConstants.ENEMYGRID_MOVEMENT_STEP_1
+//                : SIConstants.ENEMYGRID_MOVEMENT_STEP_2;
+//
+//            SIEventsHandler.BroadcastOnEnemySpeedMultiplierChanged(newMultiplier);
+//        }
+//
+//        void CheckEnemyWaveEnd()
+//        {
+//            if (_livingEnemies > 0)
+//                return;
+//
+//            StartCoroutine(SIWaitUtils.WaitAndInvoke(SIConstants.END_WAVE_DELAY,
+//                () => { SIEventsHandler.BroadcastOnWaveEnd(); }));
+//        }
+
+//        void Debug_ResetWave()
+//        {
+//            if (Input.GetKeyDown(KeyCode.G) == false)
+//                return;
+//
+//            SIEventsHandler.BroadcastOnWaveEnd();
+//        }
+
+//        void UpdateShootingEnemies(int index)
+//        {
+//            SIEnemyShootBehaviour deathEnemy = _enemies[index].ShootBehaviour;
+//            bool isDeathEnemyShootable = IsDeathEnemyShootable(deathEnemy);
+//            int killedEnemyRow = index / SIConstants.ENEMIES_IN_ROW;
+//
+//            _enemiesAbleToShoot.Remove(deathEnemy);
+//
+//            if (isDeathEnemyShootable == false || killedEnemyRow == 0) return;
+//
+//            if (IsPossibleToChangeShootingEnemy(index, killedEnemyRow, out int firstVerticalNeighbour,
+//                    out int secondVerticalNeighbour) == false)
+//                return;
+//
+//            SIEnemyShootBehaviour newShootable = GetNextShootableEnemy(firstVerticalNeighbour, secondVerticalNeighbour);
+//            _enemiesAbleToShoot.Add(newShootable);
+//        }
+
+//        bool IsPossibleToChangeShootingEnemy(int index, int killedEnemyRow, out int firstVerticalNeighbour,
+//            out int secondVerticalNeighbour)
+//        {
+//            if (killedEnemyRow == 2)
+//            {
+//                firstVerticalNeighbour = index - SIConstants.ENEMIES_IN_ROW;
+//                secondVerticalNeighbour = firstVerticalNeighbour - SIConstants.ENEMIES_IN_ROW;
+//            }
+//            else
+//            {
+//                firstVerticalNeighbour = index + SIConstants.ENEMIES_IN_ROW;
+//                secondVerticalNeighbour = index - SIConstants.ENEMIES_IN_ROW;
+//            }
+//
+//            return AreNeighboursDead(firstVerticalNeighbour, secondVerticalNeighbour) == false;
+//        }
+
+//        bool AreNeighboursDead(int indexOfFirst, int indexOfSecond)
+//        {
+//            return _enemies[indexOfFirst].IsEnemyAlive() == false && _enemies[indexOfSecond].IsEnemyAlive() == false;
+//        }
+//
+//        SIEnemyShootBehaviour GetNextShootableEnemy(int indexOfFirst, int indexOfSecond)
+//        {
+//            return _enemies[indexOfFirst].IsEnemyAlive()
+//                ? _enemies[indexOfFirst].ShootBehaviour
+//                : _enemies[indexOfSecond].ShootBehaviour;
+//        }
+
+//        bool IsDeathEnemyShootable(SIEnemyShootBehaviour shootingEnemy)
+//        {
+//            return _enemiesAbleToShoot.Contains(shootingEnemy);
+//        }
+//
+//        public void StartShooting()
+//        {
+//            StartCoroutine(EnemiesShootingRoutine());
+//        }
+//
+//        public void StopShooting()
+//        {
+//            StopCoroutine(EnemiesShootingRoutine());
+//        }
+//
+//        IEnumerator EnemiesShootingRoutine()
+//        {
+//            if (_enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0)
+//            {
+//                Debug.Log("Can't setup enemies shooting routine");
+//                yield break;
+//            }
+//
+//            bool anyEnemyIsAlive;
+//            int enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
+//            int enemySelectedToShootIndex = 0;
+//            float timeToNextShoot = 0.0f;
+//
+//            while ( /*SIEnemiesGridManager.Instance.IsEnemyGridMovementAllowed &&*/ enemiesAbleToShootCount > 0)
+//            {
+//                enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
+//                anyEnemyIsAlive = enemiesAbleToShootCount > 0;
+//                // shift rand value to be in (0, n-1) size lenght value
+//                enemySelectedToShootIndex = Random.Range(1, anyEnemyIsAlive ? enemiesAbleToShootCount + 1 : 1);
+//                timeToNextShoot = Random.Range(_gridBehaviourSettings.minShootingInterval, _gridBehaviourSettings.maxShootingInterval);
+////                if (anyEnemyIsAlive) _enemiesAbleToShoot[enemySelectedToShootIndex - 1].Shoot();
+//
+//                yield return SIWaitUtils.WaitForCachedSeconds(timeToNextShoot);
+//            }
+//        }
+    }
+}

@@ -30,6 +30,7 @@ namespace SpaceInvaders
 
         void DetectHit()
         {
+            //it should be managed by statistics- damage handling
             SIEventsHandler.BroadcastOnEnemyDeath();
         }
     }

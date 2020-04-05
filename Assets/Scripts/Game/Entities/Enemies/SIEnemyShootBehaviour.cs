@@ -4,15 +4,28 @@ namespace SpaceInvaders
 {
     public class SIEnemyShootBehaviour :  SIShootBehaviour
     {
-        protected override void TryToShootProjectile()
+        public int shootingEnemyIndex;
+
+        protected override void AssignEvents()
         {
-            weaponReloader.gameObject.SetActive(true);
-//            _projectilesController.MoveProjectile();
+//            SIEventsHandler.OnShootInputReceived += TryToShootProjectile;
         }
 
-        public void Shoot()
+        protected override void RemoveEvents()
         {
-//            InvokeShoot();
+//            SIEventsHandler.OnShootInputReceived -= TryToShootProjectile;
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                TryToShootProjectile();
+            }
+        }
+        protected override void TryToShootProjectile()
+        {
+            weaponReloader.TryToShootAndReload();
         }
     }
 

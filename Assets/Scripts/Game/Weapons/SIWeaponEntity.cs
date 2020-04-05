@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -124,6 +125,9 @@ namespace SpaceInvaders
 
         void TryToEnableParticles(bool canEnableParticles)
         {
+            if (_particles == null)
+                return;
+            
             _particles.gameObject.SetActive(canEnableParticles);
 
             if (canEnableParticles)

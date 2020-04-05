@@ -65,19 +65,19 @@ namespace SpaceInvaders
         protected override void AssignEvents()
         {
             SIEnemyGridEvents.OnGridStarted += HandleOnGridStarted;
+            SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
             SIEventsHandler.OnEnemySpeedMultiplierChanged += HandleOnEnemySpeedMultiplierChanged;
-            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
         }
 
         protected override void RemoveEvents()
         {
             SIEnemyGridEvents.OnGridStarted -= HandleOnGridStarted;
+            SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
             SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
             SIEventsHandler.OnEnemySpeedMultiplierChanged -= HandleOnEnemySpeedMultiplierChanged;
-            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
         }
 
         void HandleOnGridStarted()
@@ -100,7 +100,7 @@ namespace SpaceInvaders
             TryToUpdateCurrentGridMovementSpeed(multiplier);
         }
 
-        void HandleOnWaveEnd()
+        void HandleOnGridReset()
         {
             ResetGridMovement();
         }

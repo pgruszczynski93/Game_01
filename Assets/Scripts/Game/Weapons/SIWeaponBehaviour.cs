@@ -7,14 +7,10 @@ namespace SpaceInvaders
     {
         [SerializeField] SIWeaponEntity[] _weaponEntities;
 
-        bool _initialised;
         int _weaponEntitiesCount;
 
         void Initialise()
         {
-            if (_initialised)
-                return;
-            _initialised = true;
             _weaponEntitiesCount = _weaponEntities.Length;
         }
 

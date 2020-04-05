@@ -803,6 +803,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4414707248366142981, guid: ecf912430a1bb734ca29ecfb318a4372,
+        type: 3}
+      propertyPath: _currentWeaponHolderData.availableWeapons.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5963984687013762420, guid: ecf912430a1bb734ca29ecfb318a4372,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -905,7 +910,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df91cc3215a67d643a4594553f04fefd, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cf45cc2c7f75704c898048e35e4dc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7775442961225750799
