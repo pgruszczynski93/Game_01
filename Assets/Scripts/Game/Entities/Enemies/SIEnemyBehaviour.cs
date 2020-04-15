@@ -4,10 +4,13 @@ namespace SpaceInvaders
 {
     public class SIEnemyBehaviour : MonoBehaviour
     {
-        [SerializeField] SIStatistics _enemyStatistics;
+        [SerializeField] EntitySetup _entitySetup;
         [SerializeField] MeshRenderer _meshRenderer;
         [SerializeField] GameObject _colliderParent;
 
+        EntitySettings _entitySettings;
+        SIEnemyStatistics _enemyEntityStatistics;
+        
 //        [SerializeField] private SIVFXManager _destroyVFX;
 //        [SerializeField] SIBonusSelectorSystem bonusSelectorSystem;
 //        [SerializeField] SIWeaponEntity weaponEntity;
@@ -19,7 +22,11 @@ namespace SpaceInvaders
 
         void Initialize()
         {
-            _enemyStatistics.isAlive = true;
+            _entitySettings = _entitySetup.entitySettings;
+            _enemyEntityStatistics = new SIEnemyStatistics
+            {
+                isAlive = true, currentHealth = _entitySettings.initialStatistics.currentHealth, enemyLevel = 1
+            };
         }
 
         void OnEnable()
@@ -37,26 +44,51 @@ namespace SpaceInvaders
             SIEventsHandler.OnWaveEnd += Respawn;
             SIEventsHandler.OnDebugInputHandling += Debug_Respawn;
             SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
+            
+            SIGameplayEvents.OnDamage += HandleOnDamage;
         }
-
         void RemoveEvents()
         {
             SIEventsHandler.OnWaveEnd -= Respawn;
             SIEventsHandler.OnDebugInputHandling -= Debug_Respawn;
             SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+            
+            SIGameplayEvents.OnDamage -= HandleOnDamage;
+        }
+
+        void HandleOnDamage(DamageInfo damageInfo)
+        {
+            if (this != damageInfo.ObjectToDamage)
+                return;
+            
+            ApplyDamage(damageInfo.Damage);
+        }
+        void ApplyDamage(float damage)
+        {
+            _enemyEntityStatistics.currentHealth -= damage;
+            // todo: remove and add eventrs 
+            if (_enemyEntityStatistics.currentHealth < 0)
+            {
+            
+                EnableEnemyVisibility(false);
+                _enemyEntityStatistics.isAlive = false;
+            }
         }
         
         public bool IsEnemyAlive()
         {
-            return _enemyStatistics.isAlive;
+            return _enemyEntityStatistics.isAlive;
         }
 
-        void HandleOnEnemyDeath()
+        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviour)
         {
-//            EnableEnemyVisibility(false);
-//            _enemyStatistics.isAlive = false;
-
+            if (this != enemyBehaviour)
+                return;
+            
+            EnableEnemyVisibility(false);
+            _enemyEntityStatistics.isAlive = false;
         }
+        
         public void Death()
         {
 //            if (_enemyStatistics.isAlive == false) return;
@@ -80,7 +112,7 @@ namespace SpaceInvaders
 
         public void Respawn()
         {
-            _enemyStatistics.isAlive = true;
+            _enemyEntityStatistics.isAlive = true;
             //weaponEntity.enabled = true;
             EnableEnemyVisibility(true);
         }

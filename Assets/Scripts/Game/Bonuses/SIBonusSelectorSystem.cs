@@ -44,7 +44,7 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
-        void HandleOnEnemyDeath()
+        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviours)
         {
             TryToDropBonus();
         }
@@ -87,13 +87,13 @@ namespace SpaceInvaders
             }
 
             float randomizedBonus = Random.Range(0f, 1f);
-            for (int i = 0; i < bonusRanges.Count - 1; i++)
-            {
-                if (randomizedBonus >= bonusRanges[i] && randomizedBonus <= bonusRanges[i + 1])
-                {
-                    Debug.Log("Dropie bonus z przedzialu "+bonusRanges[i]+" "+bonusRanges[i+1]+" RB "+randomizedBonus);
-                }
-            }
+//            for (int i = 0; i < bonusRanges.Count - 1; i++)
+//            {
+//                if (randomizedBonus >= bonusRanges[i] && randomizedBonus <= bonusRanges[i + 1])
+//                {
+//                    Debug.Log("Dropie bonus z przedzialu "+bonusRanges[i]+" "+bonusRanges[i+1]+" RB "+randomizedBonus);
+//                }
+//            }
             
             //poprawić onenemydeath o info, który enemy jest zabijany
             // poprawić tak zeby ta metoda zwracala tez info o bonusie, który ma zostac upuszcony
@@ -108,8 +108,8 @@ namespace SpaceInvaders
         public void DropBonus()
         {
             Debug.Log("Sorted bonuses");
-            //TO DEBUG ONLY
-            SIEventsHandler.BroadcastOnEnemyDeath();
+//            //TO DEBUG ONLY
+//            SIEventsHandler.BroadcastOnEnemyDeath();
 
         }
     }

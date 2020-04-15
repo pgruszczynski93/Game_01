@@ -364,6 +364,8 @@
             <e p="PlayerMovementSettings.cs" t="Include" />
             <e p="PlayerMovementSetup.cs" t="Include" />
             <e p="ScriptableSettingsMaster.cs" t="Include" />
+            <e p="SIEnemyStatistics.cs" t="Include" />
+            <e p="SIPlayerStatistics.cs" t="Include" />
             <e p="SIWeaponSettings.cs" t="Include" />
             <e p="SIWeaponSetup.cs" t="Include" />
             <e p="WeaponHolderSettings.cs" t="Include" />
@@ -391,6 +393,7 @@
               <e p="SIWeaponBonus.cs" t="Include" />
             </e>
             <e p="Collisions" t="Include">
+              <e p="DamageInfo.cs" t="Include" />
               <e p="ICanCollide.cs" t="Include" />
             </e>
             <e p="Entities" t="Include">
@@ -421,6 +424,7 @@
               <e p="SIBonusesEvents.cs" t="Include" />
               <e p="SIEnemyGridEvents.cs" t="Include" />
               <e p="SIEventsHandler.cs" t="Include" />
+              <e p="SIGameplayEvents.cs" t="Include" />
             </e>
             <e p="Features" t="Include">
               <e p="Background" t="Include">
@@ -437,11 +441,11 @@
               <e p="SIConstants.cs" t="Include" />
               <e p="SIConstantsHelpers.cs" t="Include" />
               <e p="SIDataHelper.cs" t="Include" />
+              <e p="SIEntityStatistics.cs" t="Include" />
               <e p="SIEnums.cs" t="Include" />
               <e p="SIHelpers.cs" t="Include" />
               <e p="SISettings.cs" t="Include" />
               <e p="SISettingsConsts.cs" t="Include" />
-              <e p="SIStatistics.cs" t="Include" />
               <e p="SIStringTags.cs" t="Include" />
             </e>
             <e p="Systems" t="Include">

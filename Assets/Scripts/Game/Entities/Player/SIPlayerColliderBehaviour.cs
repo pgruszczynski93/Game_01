@@ -5,10 +5,11 @@ namespace SpaceInvaders
 {
     public class SIPlayerColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
-        public Action OnCollisionDetected { get; set; }
-        public CollisionTag GetCollisionTag()
+        public Action<CollisionInfo> OnCollisionDetected { get; set; }
+        public CollisionInfo GetCollisionInfo()
         {
-            return _collisionTag;
+            // todo refactpr
+            return _thisCollisionInfo;
         }
 
         protected override void AssignEvents()
@@ -23,7 +24,7 @@ namespace SpaceInvaders
             OnCollisionDetected -= HandleOnCollisionDetected;
         }
 
-        protected override void HandleOnCollisionDetected()
+        protected override void HandleOnCollisionDetected(CollisionInfo collisionInfo)
         {
             DetectPlayerHit();
         }

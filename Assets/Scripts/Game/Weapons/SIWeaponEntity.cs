@@ -22,6 +22,7 @@ namespace SpaceInvaders
         Vector3 _parentRelativeLocalPos;
         Vector3 _initialLocalAngles;
         Transform _thisTransform;
+        DamageInfo _damageInfo;
         WaitUntil _waitForProjectileReset;
 
         protected override void Initialise()
@@ -33,6 +34,7 @@ namespace SpaceInvaders
             _moveForce = _thisTransform.forward;
             _parentRelativeLocalPos = _thisTransform.localPosition;
             _initialLocalAngles = _thisTransform.localEulerAngles;
+            _damageInfo = new DamageInfo(_weaponSettings.weaponDamage);
             _waitForProjectileReset = new WaitUntil(() => _isMoving == false);
 
             ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
@@ -60,13 +62,13 @@ namespace SpaceInvaders
             SIEventsHandler.OnUpdate += CheckIsProjectileOnScreen;
             SIEventsHandler.OnWaveEnd += StopAndResetProjectile;
         }
-
+        
         void RemoveEvents()
         {
             SIEventsHandler.OnUpdate -= CheckIsProjectileOnScreen;
             SIEventsHandler.OnWaveEnd -= StopAndResetProjectile;
         }
-
+        
         public void TryToLaunchWeapon()
         {
             if (_isMoving)
@@ -78,6 +80,13 @@ namespace SpaceInvaders
             _thisTransform.parent = null;
             TryToEnableParticles(true);
             _rigidbody.AddForce(_moveForce * _weaponSettings.launchForceMultiplier, ForceMode.Impulse);
+        }
+
+        public DamageInfo GetWeaponDamageInfo(MonoBehaviour objectToDamage)
+        {
+            //todo: add IDamage interaface with this method
+            _damageInfo.ObjectToDamage = objectToDamage;
+            return _damageInfo;
         }
 
         void StopAndResetProjectile()

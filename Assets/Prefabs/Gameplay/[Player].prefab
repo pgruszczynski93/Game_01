@@ -105,8 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86356aa3e14ad7d46ac008d6f1e704c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collisionTag: 0
-  _collidesWithTags: 010000000300000004000000
+  _thisCollisionInfo:
+    collisionTag: 0
+    collisionSource: {fileID: 1246367449153128759}
+  _collidableObjects: 
 --- !u!1 &3677294487844861596
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,8 +490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86356aa3e14ad7d46ac008d6f1e704c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collisionTag: 0
-  _collidesWithTags: 010000000300000004000000
+  _thisCollisionInfo:
+    collisionTag: 0
+    collisionSource: {fileID: 1246367449153128759}
+  _collidableObjects: 010000000300000004000000
 --- !u!1001 &779636635506346215
 PrefabInstance:
   m_ObjectHideFlags: 0

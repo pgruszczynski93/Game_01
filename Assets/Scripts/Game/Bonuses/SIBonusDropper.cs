@@ -33,7 +33,7 @@ namespace SpaceInvaders
             SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
-        void HandleOnEnemyDeath()
+        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviours)
         {
             
         }

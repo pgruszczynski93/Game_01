@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SpaceInvaders
+﻿namespace SpaceInvaders
 {
     public class SIPlayerShootBehaviour : SIShootBehaviour
     {

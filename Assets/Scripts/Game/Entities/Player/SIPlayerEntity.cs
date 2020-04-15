@@ -7,7 +7,7 @@ namespace SpaceInvaders
         [SerializeField] EntitySetup _entitySetup;
         [SerializeField] EntitySettings _entitySettings;
         
-        [SerializeField] SIStatistics _statistics;
+        [SerializeField] SIEntityStatistics entityStatistics;
         protected override void Initialise()
         {
             base.Initialise();

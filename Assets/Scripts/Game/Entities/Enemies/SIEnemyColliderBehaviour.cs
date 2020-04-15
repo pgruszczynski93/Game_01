@@ -5,10 +5,12 @@ namespace SpaceInvaders
 {
     public class SIEnemyColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
-        public Action OnCollisionDetected { get; set; }
-        public CollisionTag GetCollisionTag()
+        [SerializeField] SIEnemyBehaviour _enemyBehaviour;
+        public Action<CollisionInfo> OnCollisionDetected { get; set; }
+        public CollisionInfo GetCollisionInfo()
         {
-            return _collisionTag;
+            //temp make it serializable
+            return _thisCollisionInfo;
         }
 
         protected override void AssignEvents()
@@ -22,16 +24,19 @@ namespace SpaceInvaders
             base.RemoveEvents();
             OnCollisionDetected -= HandleOnCollisionDetected;
         }
-
-        protected override void HandleOnCollisionDetected()
+        
+        protected override void HandleOnCollisionDetected(CollisionInfo collisionInfo)
         {
-            DetectHit();
-        }
-
-        void DetectHit()
-        {
-            //it should be managed by statistics- damage handling
-            SIEventsHandler.BroadcastOnEnemyDeath();
+            var tag = collisionInfo.collisionTag;
+            switch (tag)
+            {
+                case CollisionTag.Player:
+                    Debug.Log("HITTED BY PLAYER", this);
+                    break;
+                case CollisionTag.PlayerWeapon:
+                    Debug.Log("HITTED BY PlayerWeapon", this);
+                    break;
+            }
         }
     }
 }

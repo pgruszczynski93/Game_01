@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +16,9 @@ namespace SpaceInvaders
                 return;
             }
 
+//            var weaponTiers = Enum.GetValues(typeof(WeaponTier));
+// todo: przeiterować po enumie
+
             _allWeapons = new Dictionary<WeaponTier, SIWeaponHolder>
             {
                 {WeaponTier.Tier_1, _weaponHolders[0]},
@@ -26,7 +29,6 @@ namespace SpaceInvaders
         }
         public override void TryToShootAndReload()
         {
-            // for now index = 0 because enemy launches only one bullet each time.
             _currentWeaponHolderData
                 .availableWeapons[_projectileIndex]
                 .TryToLaunchWeaponEntities();

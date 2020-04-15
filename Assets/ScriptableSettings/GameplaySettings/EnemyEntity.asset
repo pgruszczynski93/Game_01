@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d61395d727e74ecea15b64fca4b5669c, type: 3}
-  m_Name: Player Weapon 1
+  m_Script: {fileID: 11500000, guid: 1f73e035ac5c4ead8bb50a505baf0223, type: 3}
+  m_Name: EnemyEntity
   m_EditorClassIdentifier: 
-  weaponSettings:
-    movementLimitOffset: 0.7
-    weaponDamage: 40
-    launchForceMultiplier: 7
+  entitySettings:
+    initialStatistics:
+      isAlive: 1
+      currentHealth: 100

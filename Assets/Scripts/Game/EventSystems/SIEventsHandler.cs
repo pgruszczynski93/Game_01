@@ -13,7 +13,7 @@ namespace SpaceInvaders
         public static event Action OnNonPlayableUpdate;
         public static event Action OnUpdate;
         public static event Action OnShadersUpdate;
-        public static event Action OnEnemyDeath;
+        public static event Action<SIEnemyBehaviour> OnEnemyDeath;
         public static event Action OnDebugInputHandling;
         public static event Action OnWaveEnd;
         public static event Action OnShootInputReceived;
@@ -87,9 +87,9 @@ namespace SpaceInvaders
             OnShadersUpdate?.Invoke();
         }
         
-        public static void BroadcastOnEnemyDeath()
+        public static void BroadcastOnEnemyDeath(SIEnemyBehaviour enemyBehaviour)
         {
-            OnEnemyDeath?.Invoke();
+            OnEnemyDeath?.Invoke(enemyBehaviour);
         }
         
         public static void BroadcastOnDebugInputHandling()

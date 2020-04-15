@@ -8,7 +8,7 @@ namespace SpaceInvaders
     {
         [SerializeField] GridShootingSetup _gridBehaviourSetup;
         
-        [SerializeField] SIEnemyBehaviour[] _enemies;
+//        [SerializeField] SIEnemyBehaviour[] _enemies;
         [SerializeField] List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
         
         bool _isShootingAvailableForWave;
@@ -21,7 +21,7 @@ namespace SpaceInvaders
 
         GridShootingSettings _gridBehaviourSettings;
 
-        void Start()
+        void Awake()
         {
             Initialise();
         }
@@ -29,7 +29,7 @@ namespace SpaceInvaders
         void Initialise()
         {
             _gridBehaviourSettings = _gridBehaviourSetup.shootingSettings;
-            _totalEnemies = _enemies.Length;
+            _totalEnemies = _gridBehaviourSettings.maxEnemiesInGrid;
             _livingEnemies = _totalEnemies;
             _enemiesAbleToShoot = new List<SIEnemyShootBehaviour>();
 //            AssignEnemyIndexes();
@@ -38,47 +38,52 @@ namespace SpaceInvaders
 
         void OnEnable()
         {
-//            AssignEvents();
+            AssignEvents();
         }
 
         void OnDisable()
         {
-//            RemoveEvents();
+            RemoveEvents();
         }
 
-//        void AssignEvents()
-//        {
-//            SIEnemyGridEvents.OnRequestReadyToShooting += HandleOnRequestReadyToShooting;
+        void AssignEvents()
+        {
+//            SIEnemyGridEvents.OnSubscribeToShooting += HandleOnSubscribeToShooting;
 //            
-//            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
+            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
 //            SIEventsHandler.OnShootingEnemiesUpdate += HandleOnShootingEnemiesUpdate;
 //            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
 //            //todo: DONT REMOVE THIS: OnDebugInputHandling Event -> REFACTOR
 //            SIEventsHandler.OnDebugInputHandling += Debug_ResetWave;
-//        }
+        }
 
-//        SIShootBehaviour HandleOnRequestShootingEnemy(int arg)
-//        {
-//            throw new System.NotImplementedException();
-//        }
-
-//        void RemoveEvents()
-//        {
-//            SIEnemyGridEvents.OnRequestReadyToShooting -= HandleOnRequestReadyToShooting;
+        void RemoveEvents()
+        {
+//            SIEnemyGridEvents.OnSubscribeToShooting -= HandleOnSubscribeToShooting;
 //            
-//            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
 //            SIEventsHandler.OnShootingEnemiesUpdate -= HandleOnShootingEnemiesUpdate;
 //            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
 //            //todo: DONT REMOVE THIS: OnDebugInputHandling Event -> REFACTOR
 //            SIEventsHandler.OnDebugInputHandling -= Debug_ResetWave;
-//        }
+        }
+        
+        void HandleOnSubscribeToShooting(SIEnemyShootBehaviour enemyShootBehaviour)
+        {
+            _enemiesAbleToShoot.Add(enemyShootBehaviour);
+        }
 
-//        void HandleOnEnemyDeath()
-//        {
-//            DecreaseEnemiesCount();
+        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviours)
+        {
+            DecreaseEnemiesCount();
 //            UpdateCurrentSpeedMultiplier();
 //            CheckEnemyWaveEnd();
-//        }
+        }
+        
+        void DecreaseEnemiesCount()
+        {
+            --_livingEnemies;
+        }
 
 //        void HandleOnShootingEnemiesUpdate(int index)
 //        {
@@ -101,27 +106,6 @@ namespace SpaceInvaders
 //            StopAllCoroutines();
 //        }
 
-        
-//        void HandleOnRequestReadyToShooting(SIShootBehaviour enemyShootBehaviour)
-//        {
-////            _enemiesAbleToShoot.Add(enemyShootBehaviour);
-//        }
-
-//        void InitialiseRowOfShootingEnemies()
-//        {
-//            _enemiesAbleToShoot.Clear();
-//            for (int i = _totalEnemies - 1; i >= _totalEnemies - _gridBehaviourSettings.maxEnemiesInRow; i--)
-//            {
-//                SIEnemyShootBehaviour enemyAbleToShoot = _enemies[i].ShootBehaviour;
-//                if (enemyAbleToShoot == null)
-//                    return;
-//
-//                _enemiesAbleToShoot.Add(enemyAbleToShoot);
-//                //todo: ZRIBIC event func<SHOTBEH> albo zrobiC IENUmerable<ShootingbEh
-//                
-//            }
-//        }
-
 //        void ResetGridShooting()
 //        {
 //            _livingEnemies = _totalEnemies;
@@ -130,10 +114,7 @@ namespace SpaceInvaders
 //            SIEnemyGridEvents.BroadcastOnGridReset();
 //        }
 //        
-//        void DecreaseEnemiesCount()
-//        {
-//            --_livingEnemies;
-//        }
+
 
 //        void UpdateCurrentSpeedMultiplier()
 //        {
@@ -156,13 +137,13 @@ namespace SpaceInvaders
 //                () => { SIEventsHandler.BroadcastOnWaveEnd(); }));
 //        }
 
-//        void Debug_ResetWave()
-//        {
-//            if (Input.GetKeyDown(KeyCode.G) == false)
-//                return;
-//
-//            SIEventsHandler.BroadcastOnWaveEnd();
-//        }
+        void Debug_ResetWave()
+        {
+            if (Input.GetKeyDown(KeyCode.G) == false)
+                return;
+
+            SIEventsHandler.BroadcastOnWaveEnd();
+        }
 
 //        void UpdateShootingEnemies(int index)
 //        {

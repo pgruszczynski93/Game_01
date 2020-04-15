@@ -90,7 +90,7 @@ namespace SpaceInvaders
             TryToMoveObject();
         }
 
-        void HandleOnEnemyDeath()
+        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviours)
         {
             UpdateMovementOffsets();
         }

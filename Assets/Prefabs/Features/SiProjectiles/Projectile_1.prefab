@@ -9659,8 +9659,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcad83df5bd94a219ec7ee76668e5a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collisionTag: 2
-  _collidesWithTags: 0100000003000000
+  _thisCollisionInfo:
+    collisionTag: 2
+    collisionSource: {fileID: 2920444157324995045}
+  _collidableObjects: 0300000001000000
   _weaponEntity: {fileID: 2920444157324995045}
   _particlesVfx: {fileID: 1022981741949943291}
 --- !u!114 &1022981741949943291

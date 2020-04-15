@@ -5,12 +5,12 @@ namespace SpaceInvaders
 {
     public class SIShieldColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
-        public Action OnCollisionDetected { get; set; }
-        public CollisionTag GetCollisionTag()
+        public Action<CollisionInfo> OnCollisionDetected { get; set; }
+        public CollisionInfo GetCollisionInfo()
         {
-            return _collisionTag;
+            return _thisCollisionInfo;
         }
-        
+
         protected override void AssignEvents()
         {
             base.AssignEvents();
@@ -23,8 +23,9 @@ namespace SpaceInvaders
             OnCollisionDetected -= HandleOnCollisionDetected;
         }
 
-        protected override void HandleOnCollisionDetected()
+        protected override void HandleOnCollisionDetected(CollisionInfo collisionInfo)
         {
+            //todo: ad damage handling to shield
             Debug.Log("[SIShieldColliderBehaviour] Shield hit!");
         }
     }

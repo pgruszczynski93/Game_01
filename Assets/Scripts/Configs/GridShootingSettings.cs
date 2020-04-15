@@ -4,6 +4,7 @@ namespace SpaceInvaders
     public class GridShootingSettings
     {
         public int maxEnemiesInRow;
+        public int maxEnemiesInGrid;
         public int gridLevel;     //to update when grid will have random models
         public float minShootingInterval;
         public float maxShootingInterval;
