@@ -9,7 +9,6 @@ namespace SpaceInvaders
         public Action<CollisionInfo> OnCollisionDetected { get; set; }
         public CollisionInfo GetCollisionInfo()
         {
-            //temp make it serializable
             return _thisCollisionInfo;
         }
 
@@ -27,8 +26,7 @@ namespace SpaceInvaders
         
         protected override void HandleOnCollisionDetected(CollisionInfo collisionInfo)
         {
-            var tag = collisionInfo.collisionTag;
-            switch (tag)
+            switch (collisionInfo.collisionTag)
             {
                 case CollisionTag.Player:
                     Debug.Log("HITTED BY PLAYER", this);

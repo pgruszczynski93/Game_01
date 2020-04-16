@@ -50,7 +50,6 @@ namespace SpaceInvaders
         {
 //            SIEnemyGridEvents.OnSubscribeToShooting += HandleOnSubscribeToShooting;
 //            
-            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
 //            SIEventsHandler.OnShootingEnemiesUpdate += HandleOnShootingEnemiesUpdate;
 //            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
 //            //todo: DONT REMOVE THIS: OnDebugInputHandling Event -> REFACTOR
@@ -61,7 +60,6 @@ namespace SpaceInvaders
         {
 //            SIEnemyGridEvents.OnSubscribeToShooting -= HandleOnSubscribeToShooting;
 //            
-            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
 //            SIEventsHandler.OnShootingEnemiesUpdate -= HandleOnShootingEnemiesUpdate;
 //            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
 //            //todo: DONT REMOVE THIS: OnDebugInputHandling Event -> REFACTOR
@@ -71,18 +69,6 @@ namespace SpaceInvaders
         void HandleOnSubscribeToShooting(SIEnemyShootBehaviour enemyShootBehaviour)
         {
             _enemiesAbleToShoot.Add(enemyShootBehaviour);
-        }
-
-        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviours)
-        {
-            DecreaseEnemiesCount();
-//            UpdateCurrentSpeedMultiplier();
-//            CheckEnemyWaveEnd();
-        }
-        
-        void DecreaseEnemiesCount()
-        {
-            --_livingEnemies;
         }
 
 //        void HandleOnShootingEnemiesUpdate(int index)
@@ -115,27 +101,6 @@ namespace SpaceInvaders
 //        }
 //        
 
-
-//        void UpdateCurrentSpeedMultiplier()
-//        {
-//            if (_livingEnemies > SIConstants.ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP)
-//                return;
-//
-//            float newMultiplier = _livingEnemies == SIConstants.ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP
-//                ? SIConstants.ENEMYGRID_MOVEMENT_STEP_1
-//                : SIConstants.ENEMYGRID_MOVEMENT_STEP_2;
-//
-//            SIEventsHandler.BroadcastOnEnemySpeedMultiplierChanged(newMultiplier);
-//        }
-//
-//        void CheckEnemyWaveEnd()
-//        {
-//            if (_livingEnemies > 0)
-//                return;
-//
-//            StartCoroutine(SIWaitUtils.WaitAndInvoke(SIConstants.END_WAVE_DELAY,
-//                () => { SIEventsHandler.BroadcastOnWaveEnd(); }));
-//        }
 
         void Debug_ResetWave()
         {

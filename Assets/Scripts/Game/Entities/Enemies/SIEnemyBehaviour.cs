@@ -41,19 +41,21 @@ namespace SpaceInvaders
         
         void AssignEvents()
         {
-            SIEventsHandler.OnWaveEnd += Respawn;
-            SIEventsHandler.OnDebugInputHandling += Debug_Respawn;
-            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
-            
+            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
             SIGameplayEvents.OnDamage += HandleOnDamage;
+            //            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
+
         }
         void RemoveEvents()
         {
-            SIEventsHandler.OnWaveEnd -= Respawn;
-            SIEventsHandler.OnDebugInputHandling -= Debug_Respawn;
-            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
-            
+            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
             SIGameplayEvents.OnDamage -= HandleOnDamage;
+            //            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+        }
+
+        void HandleOnWaveEnd()
+        {
+            SetEnemyAlive();
         }
 
         void HandleOnDamage(DamageInfo damageInfo)
@@ -62,17 +64,11 @@ namespace SpaceInvaders
                 return;
             
             ApplyDamage(damageInfo.Damage);
+            TryToBroadcastEnemyDeath();
         }
         void ApplyDamage(float damage)
         {
             _enemyEntityStatistics.currentHealth -= damage;
-            // todo: remove and add eventrs 
-            if (_enemyEntityStatistics.currentHealth < 0)
-            {
-            
-                EnableEnemyVisibility(false);
-                _enemyEntityStatistics.isAlive = false;
-            }
         }
         
         public bool IsEnemyAlive()
@@ -80,17 +76,54 @@ namespace SpaceInvaders
             return _enemyEntityStatistics.isAlive;
         }
 
-        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviour)
+        void TryToBroadcastEnemyDeath()
         {
-            if (this != enemyBehaviour)
+            if (_enemyEntityStatistics.currentHealth > 0)
                 return;
             
-            EnableEnemyVisibility(false);
-            _enemyEntityStatistics.isAlive = false;
+            SIEventsHandler.BroadcastOnEnemyDeath(this);
+            SetEnemyDead();
+        }
+
+        void SetEnemyDead()
+        {
+            SetEnemyVisibility(false);
+            SetEnemyStatistics(false);
+        }
+
+        void SetEnemyAlive()
+        {
+            SetEnemyVisibility(true);
+            SetEnemyStatistics(true);
         }
         
-        public void Death()
+        void SetEnemyVisibility(bool isEnabled)
         {
+            _colliderParent.SetActive(isEnabled);
+            _meshRenderer.enabled = isEnabled;
+        }
+
+        void SetEnemyStatistics(bool isEnabled)
+        {
+            _enemyEntityStatistics.isAlive = isEnabled;
+            // todo: edit when all data will be completed;
+            _enemyEntityStatistics.enemyLevel = 1;
+            _enemyEntityStatistics.currentHealth = 100;
+        }
+        
+        //todo: DONT REMOVE
+//        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviour)
+//        {
+//            // in case of testing make instant death option
+//            if (this != enemyBehaviour)
+//                return;
+//            
+//            EnableEnemyVisibility(false);
+//            _enemyEntityStatistics.isAlive = false;
+//        }
+        
+        //        public void Death()
+//        {
 //            if (_enemyStatistics.isAlive == false) return;
 //
 //            EnableEnemyVisibility(false);
@@ -99,30 +132,6 @@ namespace SpaceInvaders
 //            weaponEntity.HandleWaitOnProjectileReset();
 //
 //            SIEventsHandler.BroadcastOnShootingEnemiesUpdate(enemyIndex);
-        }
-
-        void EnableEnemyVisibility(bool canEnable)
-        {
-            _colliderParent.SetActive(canEnable);
-            _meshRenderer.enabled = canEnable;
-//            _destroyVFX.TryToEnableAndDetachVFX(canEnable == false);
-        }
-
-        public void Spawn() { }
-
-        public void Respawn()
-        {
-            _enemyEntityStatistics.isAlive = true;
-            //weaponEntity.enabled = true;
-            EnableEnemyVisibility(true);
-        }
-
-        void Debug_Respawn()
-        {
-            if (!Input.GetKeyDown(KeyCode.L)) return;
-
-            SIHelpers.SISimpleLogger(this, "Debug_Respawn()", SimpleLoggerTypes.Log);
-            Respawn();
-        }
+//        }
     }
 }

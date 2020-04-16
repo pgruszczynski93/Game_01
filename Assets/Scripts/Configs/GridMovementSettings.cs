@@ -18,5 +18,7 @@ namespace SpaceInvaders
         public Vector3 worldTargetPosition;
         public Ease initialMovementEaseType;
         public Ease horizontalDownstepEaseType;
+
+        public float[] gridMovementSpeedTiers;
     }
 }

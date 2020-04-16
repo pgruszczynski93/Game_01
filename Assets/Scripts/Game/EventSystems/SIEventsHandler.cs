@@ -19,7 +19,7 @@ namespace SpaceInvaders
         public static event Action OnShootInputReceived;
         public static event Action OnReloading;
         public static event Action<WeaponTier> OnWeaponTierUpdate;
-        public static event Action<float> OnEnemySpeedMultiplierChanged;
+//        public static event Action<float> OnEnemySpeedMultiplierChanged;
         public static event Action<Vector3> OnAxesInputReceived;
         public static event Action<int> OnShootingEnemiesUpdate;
         
@@ -102,9 +102,9 @@ namespace SpaceInvaders
             OnWaveEnd?.Invoke();
         }
 
-        public static void BroadcastOnEnemySpeedMultiplierChanged(float multiplier)
-        {
-            OnEnemySpeedMultiplierChanged?.Invoke(multiplier);
-        }
+//        public static void BroadcastOnEnemySpeedMultiplierChanged(float multiplier)
+//        {
+//            OnEnemySpeedMultiplierChanged?.Invoke(multiplier);
+//        }
     }
 }   

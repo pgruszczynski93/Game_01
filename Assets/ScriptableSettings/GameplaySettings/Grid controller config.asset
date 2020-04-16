@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f73e035ac5c4ead8bb50a505baf0223, type: 3}
-  m_Name: EnemyEntity
+  m_Script: {fileID: 11500000, guid: 4139847d9c4040b9a1e514433ed056e2, type: 3}
+  m_Name: Grid controller config
   m_EditorClassIdentifier: 
-  entitySettings:
-    initialStatistics:
-      isAlive: 1
-      currentHealth: 40
+  gridControllerSettings:
+    newWaveCooldown: 1
+    endWaveCooldown: 2
+    enemiesLeftToUpdateGridMovementTier: 0900000007000000040000000200000001000000

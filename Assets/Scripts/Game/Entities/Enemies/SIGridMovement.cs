@@ -14,6 +14,7 @@ namespace SpaceInvaders
         bool _isInHorizontalLimits;
         bool _isTweeningVerticalMovement;
         bool _isInitialSequenceFinished;
+        int _gridMovementSpeedTier;
         float _rightScreenEdgeOffset;
         float _leftScreenEdgeOffset;
 
@@ -28,6 +29,7 @@ namespace SpaceInvaders
             base.Initialise();
 
             _canMove = true;
+            _gridMovementSpeedTier = 0;
             _gridMovementSettings = _gridMovementSetup.gridMovementSettings;
             _worldScreenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
             _rightScreenEdgeOffset = _worldScreenEdges.rightScreenEdge - _screenEdgeOffset;
@@ -68,7 +70,7 @@ namespace SpaceInvaders
             SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
-            SIEventsHandler.OnEnemySpeedMultiplierChanged += HandleOnEnemySpeedMultiplierChanged;
+            SIEnemyGridEvents.OnUpdateGridMovementSpeedTier += HandleOnEnemySpeedMultiplierChanged;
         }
 
         protected override void RemoveEvents()
@@ -77,7 +79,7 @@ namespace SpaceInvaders
             SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
             SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
-            SIEventsHandler.OnEnemySpeedMultiplierChanged -= HandleOnEnemySpeedMultiplierChanged;
+            SIEnemyGridEvents.OnUpdateGridMovementSpeedTier -= HandleOnEnemySpeedMultiplierChanged;
         }
 
         void HandleOnGridStarted()
@@ -95,9 +97,10 @@ namespace SpaceInvaders
             UpdateMovementOffsets();
         }
 
-        void HandleOnEnemySpeedMultiplierChanged(float multiplier)
+        void HandleOnEnemySpeedMultiplierChanged(int tier)
         {
-            TryToUpdateCurrentGridMovementSpeed(multiplier);
+            //todo: refactopr
+            TryToUpdateCurrentGridMovementSpeed(_gridMovementSettings.gridMovementSpeedTiers[tier]);
         }
 
         void HandleOnGridReset()
