@@ -80,7 +80,7 @@ namespace SpaceInvaders
 
         public LocalGridMinMax CalculateGridMinMax()
         {
-            if (_initialised == false)
+            if (!_initialised)
             {
                 _initialised = true;
 

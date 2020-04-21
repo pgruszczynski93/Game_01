@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -41,19 +42,19 @@ namespace SpaceInvaders
         
         void AssignEvents()
         {
-            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
+            SIEnemyGridEvents.OnGridStarted += HandleOnGridStarted;
             SIGameplayEvents.OnDamage += HandleOnDamage;
             //            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
 
         }
         void RemoveEvents()
         {
-            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
+            SIEnemyGridEvents.OnGridStarted -= HandleOnGridStarted;
             SIGameplayEvents.OnDamage -= HandleOnDamage;
             //            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
-        void HandleOnWaveEnd()
+        void HandleOnGridStarted()
         {
             SetEnemyAlive();
         }
@@ -81,10 +82,14 @@ namespace SpaceInvaders
             if (_enemyEntityStatistics.currentHealth > 0)
                 return;
             
-            SIEventsHandler.BroadcastOnEnemyDeath(this);
             SetEnemyDead();
+            StartCoroutine(SIWaitUtils.SkipFramesAndInvoke(1, BroadcastEnemyDeath));
         }
 
+        void BroadcastEnemyDeath()
+        {
+            SIEventsHandler.BroadcastOnEnemyDeath(this);
+        }
         void SetEnemyDead()
         {
             SetEnemyVisibility(false);
@@ -108,7 +113,7 @@ namespace SpaceInvaders
             _enemyEntityStatistics.isAlive = isEnabled;
             // todo: edit when all data will be completed;
             _enemyEntityStatistics.enemyLevel = 1;
-            _enemyEntityStatistics.currentHealth = 100;
+            _enemyEntityStatistics.currentHealth = 40;
         }
         
         //todo: DONT REMOVE

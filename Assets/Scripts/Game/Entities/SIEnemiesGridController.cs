@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -8,6 +9,8 @@ namespace SpaceInvaders
 
         int _maxLivingEnemies;
         int _livingEnemies;
+        int _gridSpeedTiers;
+        int _minEnemiesToUpdateGridSpeed;
         GridControllerSettings _gridSettings;
 
         void Initialise()
@@ -16,6 +19,8 @@ namespace SpaceInvaders
             _maxLivingEnemies = 15;
             _livingEnemies = 15;
             _gridSettings = _gridSetup.gridControllerSettings;
+            _gridSpeedTiers = _gridSettings.enemiesLeftToUpdateGridMovementTier.Length;
+            _minEnemiesToUpdateGridSpeed = _gridSettings.enemiesLeftToUpdateGridMovementTier[0];
         }
 
         void Start()
@@ -36,14 +41,12 @@ namespace SpaceInvaders
         void AssignEvents()
         {
             SIEventsHandler.OnGameStarted += HandleOnGameStarted;
-            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
             SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
         void RemoveEvents()
         {
             SIEventsHandler.OnGameStarted -= HandleOnGameStarted;
-            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
             SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
@@ -51,17 +54,15 @@ namespace SpaceInvaders
         {
             --_livingEnemies;
             TryToBroadcastNewMovementSpeedTier();
-            TryToBroadcastWaveEnd();
+            TryToFinalizeWave();
         }
 
-        void TryToBroadcastWaveEnd()
+        void TryToFinalizeWave()
         {
             if (_livingEnemies > 0)
                 return;
 
-            SIEventsHandler.BroadcastOnWaveEnd();
-//            StartCoroutine(SIWaitUtils.WaitAndInvoke(SIConstants.END_WAVE_DELAY,
-//                () => { SIEventsHandler.BroadcastOnWaveEnd(); }));
+            StartCoroutine(FinalizeAndRestartWaveRoutine());
         }
 
         void HandleOnGameStarted()
@@ -71,33 +72,37 @@ namespace SpaceInvaders
 
         void TryToBroadcastNewMovementSpeedTier()
         {
-            //todo: refactor
-            if (_livingEnemies > _gridSettings.enemiesLeftToUpdateGridMovementTier[0])
+            if (_livingEnemies > _minEnemiesToUpdateGridSpeed)
                 return;
-            
-            for (int i = 0; i < _gridSettings.enemiesLeftToUpdateGridMovementTier.Length; i++)
+
+            for (int i = 0; i < _gridSpeedTiers; i++)
             {
-                if (_livingEnemies == _gridSettings.enemiesLeftToUpdateGridMovementTier[i])
-                {
-                    SIEnemyGridEvents.BroadcastOnUpdateGridMovementSpeedTier(i);
-                    return;
-                }
+                if (_livingEnemies != _gridSettings.enemiesLeftToUpdateGridMovementTier[i]) 
+                    continue;
+                
+                SIEnemyGridEvents.BroadcastOnUpdateGridMovementSpeedTier(i);
+                return;
             }
+        }
+
+        IEnumerator FinalizeAndRestartWaveRoutine()
+        {
+            SIEnemyGridEvents.BroadcastOnGridReset();
+            yield return StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.endWaveCooldown,
+                SIEventsHandler.BroadcastOnWaveEnd));
+            SetLivingEnemiesCount();
+            yield return StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.newWaveCooldown, MoveEnemiesGrid));
+        }
+
+        void SetLivingEnemiesCount()
+        {
+            //todo: temporary
+            _livingEnemies = _maxLivingEnemies;
         }
 
         void MoveEnemiesGrid()
         {
             SIEnemyGridEvents.BroadcastOnGridStarted();
-        }
-
-        void HandleOnWaveEnd()
-        {
-            MoveEnemiesGridWithDelay();
-        }
-
-        void MoveEnemiesGridWithDelay()
-        {
-            StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.newWaveCooldown, MoveEnemiesGrid));
         }
     }
 }

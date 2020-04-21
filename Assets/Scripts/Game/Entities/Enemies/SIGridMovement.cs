@@ -28,7 +28,6 @@ namespace SpaceInvaders
         {
             base.Initialise();
 
-            _canMove = true;
             _gridMovementSpeedTier = 0;
             _gridMovementSettings = _gridMovementSetup.gridMovementSettings;
             _worldScreenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
@@ -46,7 +45,11 @@ namespace SpaceInvaders
             _initialMovementTweener = _thisTransform
                 .DOLocalMove(_gridMovementSettings.worldTargetPosition, _gridMovementSettings.initialMovementEaseDuration)
                 .OnPlay(() => _isInitialSequenceFinished = false)
-                .OnComplete(() => _isInitialSequenceFinished = true)
+                .OnComplete(() =>
+                {
+                    _isInitialSequenceFinished = true;
+                    _canMove = true;
+                })
                 .SetEase(_gridMovementSettings.initialMovementEaseType)
                 .SetAutoKill(false)
                 .Pause();
@@ -84,6 +87,8 @@ namespace SpaceInvaders
 
         void HandleOnGridStarted()
         {
+            //TODO: === Don't remove ===: this method ensures that movement limits will be recalculated with each wave.
+            UpdateMovementOffsets();
             ExecuteInitialMovementSequence();
         }
 
@@ -99,8 +104,7 @@ namespace SpaceInvaders
 
         void HandleOnEnemySpeedMultiplierChanged(int tier)
         {
-            //todo: refactopr
-            TryToUpdateCurrentGridMovementSpeed(_gridMovementSettings.gridMovementSpeedTiers[tier]);
+            TryToUpdateCurrentMovementSpeed(_gridMovementSettings.gridMovementSpeedTiers[tier]);
         }
 
         void HandleOnGridReset()
@@ -113,9 +117,9 @@ namespace SpaceInvaders
             _initialMovementTweener.Restart();
         }
 
-        void TryToUpdateCurrentGridMovementSpeed(float multiplier)
+        void TryToUpdateCurrentMovementSpeed(float multiplier)
         {
-//            _currentSpeedMultiplier += multiplier;
+            _currentSpeedMultiplier = multiplier;
         }
 
         void UpdateMovementOffsets()
@@ -129,7 +133,7 @@ namespace SpaceInvaders
 
         protected override void TryToMoveObject()
         {
-            if (!_isInitialSequenceFinished  || _canMove == false)
+            if (!_isInitialSequenceFinished  || !_canMove)
                 return;
             UpdatePosition();
         }
@@ -196,15 +200,15 @@ namespace SpaceInvaders
 
         void ResetGridMovement()
         {
-            _canMove = true;
+            Debug.Log($"[SIGridMovement] ResetGrid movement()");
+            TryToStopObject();
             _currentMovementSpeed = Mathf.Abs(_currentMovementSpeed);
-            _currentMovementSpeed += _gridMovementSettings.newWaveInitialSpeedChange;
-            _currentMovementSpeed = Mathf.Clamp(_currentMovementSpeed, _initialMovementSpeed,
-                _gridMovementSettings.maxMovementSpeed);
+//            _currentMovementSpeed += _gridMovementSettings.newWaveInitialSpeedChange;
+//            _currentMovementSpeed = Mathf.Clamp(_currentMovementSpeed, _initialMovementSpeed,
+//                _gridMovementSettings.maxMovementSpeed);
             _currentSpeedMultiplier = _gridMovementSettings.initialSpeedMultiplier;
             _initialMovementTweener.Pause();
             _verticalMovementTweener.Pause();
-            UpdateMovementOffsets();
         }
     }
 }

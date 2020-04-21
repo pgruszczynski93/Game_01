@@ -13,9 +13,6 @@ namespace SpaceInvaders
         
         bool _isShootingAvailableForWave;
 
-        int _totalEnemies;
-        int _livingEnemies;
-
         float _lastRefreshTime;
         float _shotAbilityRefreshTime;
 
@@ -29,8 +26,6 @@ namespace SpaceInvaders
         void Initialise()
         {
             _gridBehaviourSettings = _gridBehaviourSetup.shootingSettings;
-            _totalEnemies = _gridBehaviourSettings.maxEnemiesInGrid;
-            _livingEnemies = _totalEnemies;
             _enemiesAbleToShoot = new List<SIEnemyShootBehaviour>();
 //            AssignEnemyIndexes();
 //            InitialiseRowOfShootingEnemies();
