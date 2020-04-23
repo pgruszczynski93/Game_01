@@ -4,9 +4,13 @@ namespace SpaceInvaders
 {
     public class SIEnemyShootBehaviour :  SIShootBehaviour
     {
-        bool canShoot;
-        [SerializeField] int _initialShootingMinIndex;
-        [SerializeField] int _shootingEnemyIndex;
+        [SerializeField] int _enemyIndex;
+
+        public int EnemyIndex
+        {
+            get => _enemyIndex;
+            set => _enemyIndex = value;
+        }
 
         void Start()
         {
@@ -21,10 +25,10 @@ namespace SpaceInvaders
         {
 //            SIEventsHandler.OnShootInputReceived -= TryToShootProjectile;
         }
-
+        
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.K) && canShoot)
+            if (Input.GetKeyDown(KeyCode.K))
             {
                 TryToShootProjectile();
             }
@@ -34,13 +38,8 @@ namespace SpaceInvaders
             weaponReloader.TryToShootAndReload();
         }
 
-        //fixnąć indesksy 
         void SubscribeForInitialShooting()
         {
-            if (_shootingEnemyIndex < _initialShootingMinIndex)
-                return;
-
-            canShoot = true;
             SIEnemyGridEvents.BroadcastOnSubscribeToShooting(this);
         }
     }

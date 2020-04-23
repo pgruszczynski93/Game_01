@@ -20,17 +20,23 @@ namespace SpaceInvaders
 
         void Awake()
         {
-            Initialise();
+            PreInitialise();
         }
         
-        void Initialise()
+        void PreInitialise()
         {
             _gridBehaviourSettings = _gridBehaviourSetup.shootingSettings;
             _enemiesAbleToShoot = new List<SIEnemyShootBehaviour>();
-//            AssignEnemyIndexes();
-//            InitialiseRowOfShootingEnemies();
         }
 
+        void Start()
+        {
+            Initialise();
+        }
+        void Initialise()
+        {
+            SelectStartShootingEnemies();
+        }
         void OnEnable()
         {
             AssignEvents();
@@ -43,7 +49,7 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-//            SIEnemyGridEvents.OnSubscribeToShooting += HandleOnSubscribeToShooting;
+            SIEnemyGridEvents.OnSubscribeToShooting += HandleOnSubscribeToShooting;
 //            
 //            SIEventsHandler.OnShootingEnemiesUpdate += HandleOnShootingEnemiesUpdate;
 //            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
@@ -53,7 +59,7 @@ namespace SpaceInvaders
 
         void RemoveEvents()
         {
-//            SIEnemyGridEvents.OnSubscribeToShooting -= HandleOnSubscribeToShooting;
+            SIEnemyGridEvents.OnSubscribeToShooting -= HandleOnSubscribeToShooting;
 //            
 //            SIEventsHandler.OnShootingEnemiesUpdate -= HandleOnShootingEnemiesUpdate;
 //            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
@@ -66,6 +72,22 @@ namespace SpaceInvaders
             _enemiesAbleToShoot.Add(enemyShootBehaviour);
         }
 
+        void SelectStartShootingEnemies()
+        {
+            List<SIEnemyShootBehaviour> initialShootBehaviours = new List<SIEnemyShootBehaviour>();
+            SIEnemyShootBehaviour currentBehaviour;
+            for (int i = 0; i < _enemiesAbleToShoot.Count; i++)
+            {
+                currentBehaviour = _enemiesAbleToShoot[i];
+                if (currentBehaviour.EnemyIndex < _gridBehaviourSettings.startShootingThresholdIndex)
+                    continue;
+
+                initialShootBehaviours.Add(currentBehaviour);
+            }
+
+            _enemiesAbleToShoot = initialShootBehaviours;
+        }
+
 //        void HandleOnShootingEnemiesUpdate(int index)
 //        {
 //            UpdateShootingEnemies(index);
@@ -76,12 +98,6 @@ namespace SpaceInvaders
 //            ResetGridShooting();
 //        }
 
-//        void AssignEnemyIndexes()
-//        {
-//            for (int i = 0; i < SIConstants.ENEMIES_TOTAL; i++) 
-//                _enemies[i].shootingEnemyIndex = i;
-//        }
-//
 //        void OnDestroy()
 //        {
 //            StopAllCoroutines();

@@ -194,6 +194,7 @@ MonoBehaviour:
   _entitySetup: {fileID: 11400000, guid: 9a0a3b794085815449dfadab05de6b56, type: 2}
   _meshRenderer: {fileID: 1881762110048184449}
   _colliderParent: {fileID: 6197922684793495672}
+  _shootBehaviour: {fileID: 8529467507697743990}
 --- !u!114 &8529467507697743990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,8 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponReloader: {fileID: 839816357791849381}
-  _initialShootingMinIndex: 0
-  _shootingEnemyIndex: 0
+  _enemyIndex: 0
 --- !u!1 &3426704194481364134
 GameObject:
   m_ObjectHideFlags: 0

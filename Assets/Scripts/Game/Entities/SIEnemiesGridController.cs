@@ -6,6 +6,7 @@ namespace SpaceInvaders
     public class SIEnemiesGridController : MonoBehaviour
     {
         [SerializeField] GridControllerSetup _gridSetup;
+        [SerializeField] SIEnemyBehaviour[] _availableEnemies;
 
         int _maxLivingEnemies;
         int _livingEnemies;
@@ -13,7 +14,23 @@ namespace SpaceInvaders
         int _minEnemiesToUpdateGridSpeed;
         GridControllerSettings _gridSettings;
 
-        void Initialise()
+
+        void Awake()
+        {
+            PreInitialise();
+        }
+
+        void PreInitialise()
+        {
+            LoadSetup();
+            AssignEnemyIndexes();
+        }
+        void AssignEnemyIndexes()
+        {
+            for (int i = 0; i < _maxLivingEnemies; i++) 
+                _availableEnemies[i].UpdateShootBehaviourIndexes(i);
+        }
+        void LoadSetup()
         {
             //todo: temporary
             _maxLivingEnemies = 15;
@@ -21,11 +38,6 @@ namespace SpaceInvaders
             _gridSettings = _gridSetup.gridControllerSettings;
             _gridSpeedTiers = _gridSettings.enemiesLeftToUpdateGridMovementTier.Length;
             _minEnemiesToUpdateGridSpeed = _gridSettings.enemiesLeftToUpdateGridMovementTier[0];
-        }
-
-        void Start()
-        {
-            Initialise();
         }
 
         void OnEnable()

@@ -8,6 +8,7 @@ namespace SpaceInvaders
         [SerializeField] EntitySetup _entitySetup;
         [SerializeField] MeshRenderer _meshRenderer;
         [SerializeField] GameObject _colliderParent;
+        [SerializeField] SIEnemyShootBehaviour _shootBehaviour;
 
         EntitySettings _entitySettings;
         SIEnemyStatistics _enemyEntityStatistics;
@@ -39,7 +40,11 @@ namespace SpaceInvaders
         {
             RemoveEvents();
         }
-        
+
+        public void UpdateShootBehaviourIndexes(int index)
+        {
+            _shootBehaviour.EnemyIndex = index;
+        }
         void AssignEvents()
         {
             SIEnemyGridEvents.OnGridStarted += HandleOnGridStarted;
