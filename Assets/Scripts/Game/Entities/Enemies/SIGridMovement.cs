@@ -37,7 +37,6 @@ namespace SpaceInvaders
             _currentMovementSpeed = _initialMovementSpeed;
 
             InitialiseTweeners();
-            UpdateMovementOffsets();
         }
 
         void InitialiseTweeners()

@@ -1,19 +1,27 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceInvaders
 {
+    [System.Serializable]
+    public class SIShootBehaviourSetup
+    {
+        public int enemyIndex;
+        public int enemyRow;
+        public List<SIShootBehaviour> neighbours;
+    }
+
     public class SIEnemiesGridController : MonoBehaviour
     {
         [SerializeField] GridControllerSetup _gridSetup;
         [SerializeField] SIEnemyBehaviour[] _availableEnemies;
 
-        int _maxLivingEnemies;
+        int _maxEnemies;
         int _livingEnemies;
         int _gridSpeedTiers;
         int _minEnemiesToUpdateGridSpeed;
         GridControllerSettings _gridSettings;
-
 
         void Awake()
         {
@@ -23,17 +31,56 @@ namespace SpaceInvaders
         void PreInitialise()
         {
             LoadSetup();
-            AssignEnemyIndexes();
+            SetupEnemies();
         }
-        void AssignEnemyIndexes()
+        void SetupEnemies()
         {
-            for (int i = 0; i < _maxLivingEnemies; i++) 
-                _availableEnemies[i].UpdateShootBehaviourIndexes(i);
+            SIEnemyBehaviour currentShootBehaviour;
+            SIShootBehaviourSetup currentSetup;
+            for (int i = 0; i < _maxEnemies; i++)
+            {
+                currentShootBehaviour = _availableEnemies[i];
+                currentSetup = new SIShootBehaviourSetup
+                {
+                    enemyIndex = i,
+                    enemyRow = i / _gridSettings.maxEnemiesInGridRow,
+                    neighbours = GetNeighbours(i)
+                };
+                currentShootBehaviour.UpdateShootBehaviourSetup(currentSetup);
+            }
         }
+
+        List<SIShootBehaviour> GetNeighbours(int enemyIndex)
+        {
+            int maxInRow = _gridSettings.maxEnemiesInGridRow;
+            int[] neightboursIndexes = new int[4];
+            List<SIShootBehaviour> neightbours = new List<SIShootBehaviour>();
+            
+            neightboursIndexes[0] = enemyIndex - maxInRow;
+            neightboursIndexes[1] = enemyIndex + maxInRow;
+            neightboursIndexes[2] = enemyIndex - 1;
+            neightboursIndexes[3] = enemyIndex + 1;
+            
+            for (int j = 0; j < 4; j++)
+            {
+                int nbIndex = neightboursIndexes[j];
+                if (!IsPotentialNeighbourInArrayRange(nbIndex))
+                    continue;
+                neightbours.Add(_availableEnemies[nbIndex].ShootBehaviour);
+            }
+
+            return neightbours;
+        }
+
+        bool IsPotentialNeighbourInArrayRange(int neightbourIndex)
+        {
+            return neightbourIndex >= 0 && neightbourIndex < _maxEnemies;
+        }
+        
         void LoadSetup()
         {
             //todo: temporary
-            _maxLivingEnemies = 15;
+            _maxEnemies = 15;
             _livingEnemies = 15;
             _gridSettings = _gridSetup.gridControllerSettings;
             _gridSpeedTiers = _gridSettings.enemiesLeftToUpdateGridMovementTier.Length;
@@ -109,7 +156,7 @@ namespace SpaceInvaders
         void SetLivingEnemiesCount()
         {
             //todo: temporary
-            _livingEnemies = _maxLivingEnemies;
+            _livingEnemies = _maxEnemies;
         }
 
         void MoveEnemiesGrid()

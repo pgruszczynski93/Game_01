@@ -17,6 +17,12 @@ namespace SpaceInvaders
 //        [SerializeField] SIBonusSelectorSystem bonusSelectorSystem;
 //        [SerializeField] SIWeaponEntity weaponEntity;
 
+        public SIEnemyShootBehaviour ShootBehaviour
+        {
+            get => _shootBehaviour;
+            set => _shootBehaviour = value;
+        }
+
         void Start()
         {
             Initialize();
@@ -41,9 +47,9 @@ namespace SpaceInvaders
             RemoveEvents();
         }
 
-        public void UpdateShootBehaviourIndexes(int index)
+        public void UpdateShootBehaviourSetup(SIShootBehaviourSetup loadedSetup)
         {
-            _shootBehaviour.EnemyIndex = index;
+            _shootBehaviour.ShootBehaviourSetup = loadedSetup;
         }
         void AssignEvents()
         {

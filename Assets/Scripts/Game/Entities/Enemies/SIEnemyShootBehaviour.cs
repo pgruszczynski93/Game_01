@@ -1,21 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIEnemyShootBehaviour :  SIShootBehaviour
+    public class SIEnemyShootBehaviour : SIShootBehaviour
     {
-        [SerializeField] int _enemyIndex;
+        [SerializeField] SIShootBehaviourSetup shootBehaviourSetup;
 
-        public int EnemyIndex
+        public SIShootBehaviourSetup ShootBehaviourSetup
         {
-            get => _enemyIndex;
-            set => _enemyIndex = value;
+            get => shootBehaviourSetup;
+            set => shootBehaviourSetup = value;
         }
 
         void Start()
         {
             SubscribeForInitialShooting();
         }
+
         protected override void AssignEvents()
         {
 //            SIEventsHandler.OnShootInputReceived += TryToShootProjectile;
@@ -25,7 +27,7 @@ namespace SpaceInvaders
         {
 //            SIEventsHandler.OnShootInputReceived -= TryToShootProjectile;
         }
-        
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.K))
@@ -33,6 +35,7 @@ namespace SpaceInvaders
                 TryToShootProjectile();
             }
         }
+
         protected override void TryToShootProjectile()
         {
             weaponReloader.TryToShootAndReload();
@@ -43,5 +46,4 @@ namespace SpaceInvaders
             SIEnemyGridEvents.BroadcastOnSubscribeToShooting(this);
         }
     }
-
 }

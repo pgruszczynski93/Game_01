@@ -50,6 +50,7 @@ namespace SpaceInvaders
         void AssignEvents()
         {
             SIEnemyGridEvents.OnSubscribeToShooting += HandleOnSubscribeToShooting;
+            
 //            
 //            SIEventsHandler.OnShootingEnemiesUpdate += HandleOnShootingEnemiesUpdate;
 //            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
@@ -79,7 +80,7 @@ namespace SpaceInvaders
             for (int i = 0; i < _enemiesAbleToShoot.Count; i++)
             {
                 currentBehaviour = _enemiesAbleToShoot[i];
-                if (currentBehaviour.EnemyIndex < _gridBehaviourSettings.startShootingThresholdIndex)
+                if (currentBehaviour.ShootBehaviourSetup.enemyIndex < _gridBehaviourSettings.startShootingThresholdIndex)
                     continue;
 
                 initialShootBehaviours.Add(currentBehaviour);
