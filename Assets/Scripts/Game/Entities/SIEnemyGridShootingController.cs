@@ -7,10 +7,10 @@ namespace SpaceInvaders
     public class SIEnemyGridShootingController : MonoBehaviour
     {
         [SerializeField] GridShootingSetup _gridBehaviourSetup;
-        
+
 //        [SerializeField] SIEnemyBehaviour[] _enemies;
         [SerializeField] List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
-        
+
         bool _isShootingAvailableForWave;
 
         float _lastRefreshTime;
@@ -22,7 +22,7 @@ namespace SpaceInvaders
         {
             PreInitialise();
         }
-        
+
         void PreInitialise()
         {
             _gridBehaviourSettings = _gridBehaviourSetup.shootingSettings;
@@ -33,10 +33,12 @@ namespace SpaceInvaders
         {
             Initialise();
         }
+
         void Initialise()
         {
             SelectStartShootingEnemies();
         }
+
         void OnEnable()
         {
             AssignEvents();
@@ -50,7 +52,7 @@ namespace SpaceInvaders
         void AssignEvents()
         {
             SIEnemyGridEvents.OnSubscribeToShooting += HandleOnSubscribeToShooting;
-            
+            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
 //            
 //            SIEventsHandler.OnShootingEnemiesUpdate += HandleOnShootingEnemiesUpdate;
 //            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
@@ -61,7 +63,8 @@ namespace SpaceInvaders
         void RemoveEvents()
         {
             SIEnemyGridEvents.OnSubscribeToShooting -= HandleOnSubscribeToShooting;
-//            
+            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+
 //            SIEventsHandler.OnShootingEnemiesUpdate -= HandleOnShootingEnemiesUpdate;
 //            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
 //            //todo: DONT REMOVE THIS: OnDebugInputHandling Event -> REFACTOR
@@ -80,13 +83,34 @@ namespace SpaceInvaders
             for (int i = 0; i < _enemiesAbleToShoot.Count; i++)
             {
                 currentBehaviour = _enemiesAbleToShoot[i];
-                if (currentBehaviour.ShootBehaviourSetup.enemyIndex < _gridBehaviourSettings.startShootingThresholdIndex)
+                if (currentBehaviour.ShootBehaviourSetup.enemyIndex <
+                    _gridBehaviourSettings.startShootingThresholdIndex)
                     continue;
 
+                currentBehaviour.CanShoot = true;
                 initialShootBehaviours.Add(currentBehaviour);
             }
 
             _enemiesAbleToShoot = initialShootBehaviours;
+        }
+
+        void HandleOnEnemyDeath(SIEnemyBehaviour deadEnemy)
+        {
+            TryToUpdateShootingEnemies(deadEnemy.ShootBehaviour);
+        }
+
+        void TryToUpdateShootingEnemies(SIEnemyShootBehaviour deadEnemyShootBehaviour)
+        {
+            if (!WasEnemyAbleToShoot(deadEnemyShootBehaviour))
+                return;
+
+            deadEnemyShootBehaviour.CanShoot = false;
+            _enemiesAbleToShoot.Remove(deadEnemyShootBehaviour);
+        }
+
+        bool WasEnemyAbleToShoot(SIEnemyShootBehaviour deadEnemyShootBehaviour)
+        {
+            return _enemiesAbleToShoot.Contains(deadEnemyShootBehaviour);
         }
 
 //        void HandleOnShootingEnemiesUpdate(int index)

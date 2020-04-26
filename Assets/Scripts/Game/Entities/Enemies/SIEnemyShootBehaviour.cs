@@ -5,12 +5,19 @@ namespace SpaceInvaders
 {
     public class SIEnemyShootBehaviour : SIShootBehaviour
     {
+        bool _canShoot;
         [SerializeField] SIShootBehaviourSetup shootBehaviourSetup;
 
         public SIShootBehaviourSetup ShootBehaviourSetup
         {
             get => shootBehaviourSetup;
             set => shootBehaviourSetup = value;
+        }
+
+        public bool CanShoot
+        {
+            get => _canShoot;
+            set => _canShoot = value;
         }
 
         void Start()
@@ -38,6 +45,8 @@ namespace SpaceInvaders
 
         protected override void TryToShootProjectile()
         {
+            if (!_canShoot)
+                return;
             weaponReloader.TryToShootAndReload();
         }
 
