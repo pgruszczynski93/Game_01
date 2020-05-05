@@ -14,6 +14,9 @@ namespace SpaceInvaders
     public struct GridControllerSettings
     {
         public int maxEnemiesInGridRow;
+        public int maxEnemiesInGridColumn;
+        public int maxEnemiesInGrid;
+        public int maxNeighboursOfEnemyCount;
         public float newWaveCooldown;
         public float endWaveCooldown;
         public int[] enemiesLeftToUpdateGridMovementTier;

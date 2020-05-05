@@ -12,7 +12,7 @@ namespace SpaceInvaders
 
         EntitySettings _entitySettings;
         SIEnemyStatistics _enemyEntityStatistics;
-        
+
 //        [SerializeField] private SIVFXManager _destroyVFX;
 //        [SerializeField] SIBonusSelectorSystem bonusSelectorSystem;
 //        [SerializeField] SIWeaponEntity weaponEntity;
@@ -51,13 +51,14 @@ namespace SpaceInvaders
         {
             _shootBehaviour.ShootBehaviourSetup = loadedSetup;
         }
+
         void AssignEvents()
         {
             SIEnemyGridEvents.OnGridStarted += HandleOnGridStarted;
             SIGameplayEvents.OnDamage += HandleOnDamage;
             //            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
-
         }
+
         void RemoveEvents()
         {
             SIEnemyGridEvents.OnGridStarted -= HandleOnGridStarted;
@@ -74,24 +75,28 @@ namespace SpaceInvaders
         {
             if (this != damageInfo.ObjectToDamage)
                 return;
-            
+
             ApplyDamage(damageInfo.Damage);
-            TryToBroadcastEnemyDeath();
+            TryToBroadcastEnemyDeathAndSelectNextShootingEnemy();
         }
+
         void ApplyDamage(float damage)
         {
             _enemyEntityStatistics.currentHealth -= damage;
         }
-        
+
         public bool IsEnemyAlive()
         {
             return _enemyEntityStatistics.isAlive;
         }
 
-        void TryToBroadcastEnemyDeath()
+        void TryToBroadcastEnemyDeathAndSelectNextShootingEnemy()
         {
             if (_enemyEntityStatistics.currentHealth > 0)
                 return;
+
+            if (_shootBehaviour.CanShoot)
+                _shootBehaviour.TryToSelectNextShootingNeighbour();
             
             SetEnemyDead();
             StartCoroutine(SIWaitUtils.SkipFramesAndInvoke(1, BroadcastEnemyDeath));
@@ -101,6 +106,7 @@ namespace SpaceInvaders
         {
             SIEventsHandler.BroadcastOnEnemyDeath(this);
         }
+
         void SetEnemyDead()
         {
             SetEnemyVisibility(false);
@@ -112,7 +118,7 @@ namespace SpaceInvaders
             SetEnemyVisibility(true);
             SetEnemyStatistics(true);
         }
-        
+
         void SetEnemyVisibility(bool isEnabled)
         {
             _colliderParent.SetActive(isEnabled);
@@ -126,7 +132,7 @@ namespace SpaceInvaders
             _enemyEntityStatistics.enemyLevel = 1;
             _enemyEntityStatistics.currentHealth = 40;
         }
-        
+
         //todo: DONT REMOVE
 //        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviour)
 //        {
@@ -137,7 +143,7 @@ namespace SpaceInvaders
 //            EnableEnemyVisibility(false);
 //            _enemyEntityStatistics.isAlive = false;
 //        }
-        
+
         //        public void Death()
 //        {
 //            if (_enemyStatistics.isAlive == false) return;

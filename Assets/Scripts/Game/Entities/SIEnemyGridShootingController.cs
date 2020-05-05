@@ -101,14 +101,13 @@ namespace SpaceInvaders
 
         void TryToUpdateShootingEnemies(SIEnemyShootBehaviour deadEnemyShootBehaviour)
         {
-            if (!WasEnemyAbleToShoot(deadEnemyShootBehaviour))
+            if (!WasKilledEnemyAbleToShoot(deadEnemyShootBehaviour))
                 return;
 
-            deadEnemyShootBehaviour.CanShoot = false;
             _enemiesAbleToShoot.Remove(deadEnemyShootBehaviour);
         }
 
-        bool WasEnemyAbleToShoot(SIEnemyShootBehaviour deadEnemyShootBehaviour)
+        bool WasKilledEnemyAbleToShoot(SIEnemyShootBehaviour deadEnemyShootBehaviour)
         {
             return _enemiesAbleToShoot.Contains(deadEnemyShootBehaviour);
         }

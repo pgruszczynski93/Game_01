@@ -54,5 +54,26 @@ namespace SpaceInvaders
         {
             SIEnemyGridEvents.BroadcastOnSubscribeToShooting(this);
         }
+
+        public void TryToSelectNextShootingNeighbour()
+        {
+            _canShoot = false;
+    ///todo: ZREFAKTOROWAC USUNAC ZBEDNE POROWNANIA, DAC SLOWNIK Z ENUMEM UPROSCIC
+
+            //indexes: 0 - back, 1 - front, 2 - left, 3 - right
+            SIEnemyBehaviour backNeighbour = shootBehaviourSetup.backNeighbour;
+            SIEnemyBehaviour frontNeighbour = shootBehaviourSetup.frontNeighbour;
+            SIEnemyShootBehaviour nextSelectedShooting = (frontNeighbour != null && frontNeighbour.IsEnemyAlive())
+                ? frontNeighbour.ShootBehaviour
+                : (backNeighbour != null && backNeighbour.IsEnemyAlive())
+                    ? backNeighbour.ShootBehaviour
+                    : null;
+
+            if (nextSelectedShooting == null)
+                return;
+
+            nextSelectedShooting.CanShoot = true;
+            SIEnemyGridEvents.BroadcastOnSubscribeToShooting(nextSelectedShooting);
+        }
     }
 }
