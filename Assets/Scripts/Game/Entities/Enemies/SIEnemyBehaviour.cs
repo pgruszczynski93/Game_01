@@ -96,7 +96,7 @@ namespace SpaceInvaders
                 return;
 
             if (_shootBehaviour.CanShoot)
-                _shootBehaviour.TryToSelectNextShootingNeighbour();
+                _shootBehaviour.TryToSelectNextShootingBehaviour();
             
             SetEnemyDead();
             StartCoroutine(SIWaitUtils.SkipFramesAndInvoke(1, BroadcastEnemyDeath));

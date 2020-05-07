@@ -4,17 +4,21 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
+    public enum Neighbour
+    {
+        Left,
+        Right, 
+        Front, 
+        Back,
+    }
+    
     [System.Serializable]
     public class SIShootBehaviourSetup
     {
         public int enemyIndex;
         public int enemyRow;
         public int enemyColumn;
-        public SIEnemyBehaviour frontNeighbour;
-        public SIEnemyBehaviour backNeighbour;
-        public SIEnemyBehaviour leftNeighbour;
-        public SIEnemyBehaviour rightNeighbour;
-        public List<SIEnemyBehaviour> neighbours;
+        public Dictionary<Neighbour, SIEnemyBehaviour> neighbours;
     }
 
     public class SIEnemiesGridController : MonoBehaviour
@@ -47,57 +51,38 @@ namespace SpaceInvaders
             SIEnemyBehaviour currentShootBehaviour;
             SIShootBehaviourSetup currentSetup;
             int currentRow, currentColumn;
-            int leftNbIndex, rightNbIndex, frontNbIndex, backNbIndex; 
             for (int i = 0; i < _maxEnemies; i++)
             {
                 currentRow = i / _gridSettings.maxEnemiesInGridRow;
                 currentColumn = i / _gridSettings.maxEnemiesInGridColumn;
                 currentShootBehaviour = _availableEnemies[i];
-                backNbIndex = i - _maxInRow;
-                frontNbIndex = i + _maxInRow;
-                leftNbIndex = i - 1;
-                rightNbIndex = i + 1;
                 currentSetup = new SIShootBehaviourSetup
                 {
                     enemyIndex = i,
                     enemyRow = currentRow,
                     enemyColumn = currentColumn,
-                    backNeighbour = IsInMinMaxRange(backNbIndex) ? _availableEnemies[backNbIndex] : null,
-                    frontNeighbour = IsInMinMaxRange(frontNbIndex) ? _availableEnemies[frontNbIndex] : null,
-                    leftNeighbour = IsInRowHorizontalRange(leftNbIndex, currentRow) ? _availableEnemies[leftNbIndex] : null,
-                    rightNeighbour = IsInRowHorizontalRange(rightNbIndex, currentRow) ? _availableEnemies[rightNbIndex] : null,
-//                    neighbours = GetNeighbours(i, currentRow)
+                    neighbours = GetNeighbours(i, currentRow),
                 };
                 currentShootBehaviour.UpdateShootBehaviourSetup(currentSetup);
             }
         }
-//
-//        List<SIEnemyBehaviour> GetNeighbours(int enemyIndex, int enemyRow)
-//        {
-//            int currentNeighbourIndex;
-//            int halfNeighbours = (int) (_maxNeighboursOfEnemyCount * 0.5f);
-//            int[] neightboursIndexes = new int[_maxNeighboursOfEnemyCount];
-//            List<SIEnemyBehaviour> neighbours = new List<SIEnemyBehaviour>();
-//
-//            neightboursIndexes[0] = enemyIndex - _maxInRow;
-//            neightboursIndexes[1] = enemyIndex + _maxInRow;
-//            neightboursIndexes[2] = enemyIndex - 1;
-//            neightboursIndexes[3] = enemyIndex + 1;
-//
-//            
-//            //NOTE: First half of neighbours are horizontal, the rest vertical.
-//            for (int i = 0; i < _maxNeighboursOfEnemyCount; i++)
-//            {
-//                currentNeighbourIndex = neightboursIndexes[i];
-//                if(IsInRowHorizontalRange(currentNeighbourIndex, enemyRow) && i >= halfNeighbours)
-//                    neighbours.Add(_availableEnemies[currentNeighbourIndex]);
-//                if(IsInMinMaxRange(currentNeighbourIndex) && i >= 0 && i < halfNeighbours)
-//                    neighbours.Add(_availableEnemies[currentNeighbourIndex]);
-//            }
-//            
-//            return neighbours;
-//        }
 
+        Dictionary<Neighbour, SIEnemyBehaviour> GetNeighbours(int enemyIndex, int enemyRow)
+        {
+            int leftNbIndex = enemyIndex - 1;
+            int rightNbIndex = enemyIndex + 1;
+            int frontNbIndex = enemyIndex + _maxInRow;
+            int backNbIndex = enemyIndex - _maxInRow;
+
+            return new Dictionary<Neighbour, SIEnemyBehaviour>
+            {
+                {Neighbour.Left, IsInRowHorizontalRange(leftNbIndex, enemyRow) ? _availableEnemies[leftNbIndex] : null},
+                {Neighbour.Right,  IsInRowHorizontalRange(rightNbIndex, enemyRow) ? _availableEnemies[rightNbIndex] : null},
+                {Neighbour.Front, IsInMinMaxRange(frontNbIndex) ? _availableEnemies[frontNbIndex] : null},
+                {Neighbour.Back, IsInMinMaxRange(backNbIndex) ? _availableEnemies[backNbIndex] : null}
+            };
+        }
+        
         bool IsInRowHorizontalRange(int currentNeighbourIndex, int enemyRow)
         {
             int minHorizontal = enemyRow * _maxInRow;

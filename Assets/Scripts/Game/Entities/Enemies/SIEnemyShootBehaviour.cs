@@ -55,25 +55,29 @@ namespace SpaceInvaders
             SIEnemyGridEvents.BroadcastOnSubscribeToShooting(this);
         }
 
-        public void TryToSelectNextShootingNeighbour()
+        public void TryToSelectNextShootingBehaviour()
         {
             _canShoot = false;
-    ///todo: ZREFAKTOROWAC USUNAC ZBEDNE POROWNANIA, DAC SLOWNIK Z ENUMEM UPROSCIC
 
-            //indexes: 0 - back, 1 - front, 2 - left, 3 - right
-            SIEnemyBehaviour backNeighbour = shootBehaviourSetup.backNeighbour;
-            SIEnemyBehaviour frontNeighbour = shootBehaviourSetup.frontNeighbour;
-            SIEnemyShootBehaviour nextSelectedShooting = (frontNeighbour != null && frontNeighbour.IsEnemyAlive())
-                ? frontNeighbour.ShootBehaviour
-                : (backNeighbour != null && backNeighbour.IsEnemyAlive())
-                    ? backNeighbour.ShootBehaviour
-                    : null;
-
-            if (nextSelectedShooting == null)
+            //todo: fix thsis
+            SIEnemyBehaviour closerRowCandidate = shootBehaviourSetup.neighbours[Neighbour.Back];
+            if (closerRowCandidate == null)
                 return;
 
-            nextSelectedShooting.CanShoot = true;
-            SIEnemyGridEvents.BroadcastOnSubscribeToShooting(nextSelectedShooting);
+            SIEnemyBehaviour furtherRowCandidate =
+                closerRowCandidate.ShootBehaviour.ShootBehaviourSetup.neighbours[Neighbour.Back];
+
+            SIEnemyShootBehaviour nextSelected = closerRowCandidate.IsEnemyAlive()
+                ? closerRowCandidate.ShootBehaviour
+                : furtherRowCandidate != null && furtherRowCandidate.IsEnemyAlive()
+                    ? furtherRowCandidate.ShootBehaviour
+                    : null;
+
+            if (nextSelected == null)
+                return;
+
+            nextSelected.CanShoot = true;
+            SIEnemyGridEvents.BroadcastOnSubscribeToShooting(nextSelected);
         }
     }
 }
