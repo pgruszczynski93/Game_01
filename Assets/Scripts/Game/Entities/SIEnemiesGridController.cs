@@ -141,12 +141,12 @@ namespace SpaceInvaders
             if (_livingEnemies > 0)
                 return;
 
-            StartCoroutine(FinalizeAndRestartWaveRoutine());
+            StartCoroutine(RestartGridRoutine());
         }
 
         void HandleOnGameStarted()
         {
-            MoveEnemiesGrid();
+            RestartEnemiesGrid();
         }
 
         void TryToBroadcastNewMovementSpeedTier()
@@ -164,13 +164,12 @@ namespace SpaceInvaders
             }
         }
 
-        IEnumerator FinalizeAndRestartWaveRoutine()
+        IEnumerator RestartGridRoutine()
         {
-            SIEnemyGridEvents.BroadcastOnGridReset();
             yield return StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.endWaveCooldown,
                 SIEventsHandler.BroadcastOnWaveEnd));
             SetLivingEnemiesCount();
-            yield return StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.newWaveCooldown, MoveEnemiesGrid));
+            yield return StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.newWaveCooldown, RestartEnemiesGrid));
         }
 
         void SetLivingEnemiesCount()
@@ -179,9 +178,9 @@ namespace SpaceInvaders
             _livingEnemies = _maxEnemies;
         }
 
-        void MoveEnemiesGrid()
+        void RestartEnemiesGrid()
         {
-            SIEnemyGridEvents.BroadcastOnGridStarted();
+            SIEnemyGridEvents.BroadcastOnGridReset();
         }
     }
 }

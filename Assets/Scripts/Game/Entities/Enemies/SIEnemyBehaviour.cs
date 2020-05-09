@@ -54,19 +54,19 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIEnemyGridEvents.OnGridStarted += HandleOnGridStarted;
+            SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
             SIGameplayEvents.OnDamage += HandleOnDamage;
             //            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
         void RemoveEvents()
         {
-            SIEnemyGridEvents.OnGridStarted -= HandleOnGridStarted;
+            SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
             SIGameplayEvents.OnDamage -= HandleOnDamage;
             //            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
-        void HandleOnGridStarted()
+        void HandleOnGridReset()
         {
             SetEnemyAlive();
         }

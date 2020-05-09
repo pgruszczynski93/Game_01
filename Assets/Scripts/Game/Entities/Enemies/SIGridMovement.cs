@@ -68,7 +68,6 @@ namespace SpaceInvaders
 
         protected override void AssignEvents()
         {
-            SIEnemyGridEvents.OnGridStarted += HandleOnGridStarted;
             SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
@@ -77,16 +76,16 @@ namespace SpaceInvaders
 
         protected override void RemoveEvents()
         {
-            SIEnemyGridEvents.OnGridStarted -= HandleOnGridStarted;
             SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
             SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
             SIEnemyGridEvents.OnUpdateGridMovementSpeedTier -= HandleOnEnemySpeedMultiplierChanged;
         }
 
-        void HandleOnGridStarted()
+        void HandleOnGridReset()
         {
             //TODO: === Don't remove ===: this method ensures that movement limits will be recalculated with each wave.
+            ResetGridMovement();
             UpdateMovementOffsets();
             ExecuteInitialMovementSequence();
         }
@@ -105,17 +104,24 @@ namespace SpaceInvaders
         {
             TryToUpdateCurrentMovementSpeed(_gridMovementSettings.gridMovementSpeedTiers[tier]);
         }
-
-        void HandleOnGridReset()
-        {
-            ResetGridMovement();
-        }
-
+        
         void ExecuteInitialMovementSequence()
         {
             _initialMovementTweener.Restart();
         }
 
+        void ResetGridMovement()
+        {
+            Debug.Log($"[SIGridMovement] ResetGrid movement()");
+            TryToStopObject();
+            _currentMovementSpeed = Mathf.Abs(_currentMovementSpeed);
+//            _currentMovementSpeed += _gridMovementSettings.newWaveInitialSpeedChange;
+//            _currentMovementSpeed = Mathf.Clamp(_currentMovementSpeed, _initialMovementSpeed,
+//                _gridMovementSettings.maxMovementSpeed);
+            _currentSpeedMultiplier = _gridMovementSettings.initialSpeedMultiplier;
+            _initialMovementTweener.Pause();
+            _verticalMovementTweener.Pause();
+        }
         void TryToUpdateCurrentMovementSpeed(float multiplier)
         {
             _currentSpeedMultiplier = multiplier;
@@ -196,18 +202,6 @@ namespace SpaceInvaders
         {
             //Intentionally not implemented.
         }
-
-        void ResetGridMovement()
-        {
-            Debug.Log($"[SIGridMovement] ResetGrid movement()");
-            TryToStopObject();
-            _currentMovementSpeed = Mathf.Abs(_currentMovementSpeed);
-//            _currentMovementSpeed += _gridMovementSettings.newWaveInitialSpeedChange;
-//            _currentMovementSpeed = Mathf.Clamp(_currentMovementSpeed, _initialMovementSpeed,
-//                _gridMovementSettings.maxMovementSpeed);
-            _currentSpeedMultiplier = _gridMovementSettings.initialSpeedMultiplier;
-            _initialMovementTweener.Pause();
-            _verticalMovementTweener.Pause();
-        }
+        
     }
 }

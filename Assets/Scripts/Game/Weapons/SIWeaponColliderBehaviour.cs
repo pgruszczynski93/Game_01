@@ -28,20 +28,20 @@ namespace SpaceInvaders
             switch (collisionInfo.collisionTag)
             {
                 case CollisionTag.Player:
-                    Debug.Log("Player hitted");
+//                    Debug.Log("Player hitted");
                     break;
                 case CollisionTag.Enemy:
-                    Debug.Log("Enemy hitted");
+//                    Debug.Log("Enemy hitted");
                     SIGameplayEvents.BroadcastOnDamage(_weaponEntity.GetWeaponDamageInfo(collisionInfo.collisionSource));
                     break;
                 case CollisionTag.PlayerWeapon:
-                    Debug.Log("PlayerWeapon hitted");
+//                    Debug.Log("PlayerWeapon hitted");
                     break;
                 case CollisionTag.EnemyWeapon:
-                    Debug.Log("EnemyWeapon hitted");
+//                    Debug.Log("EnemyWeapon hitted");
                     break;
                 case CollisionTag.Bonus:
-                    Debug.Log("Bonus hitted");
+//                    Debug.Log("Bonus hitted");
                     break;
                 default:
                     break;

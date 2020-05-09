@@ -20,19 +20,21 @@ namespace SpaceInvaders
             set => _canShoot = value;
         }
 
-        void Start()
-        {
-            SubscribeForInitialShooting();
-        }
-
         protected override void AssignEvents()
         {
+            SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
 //            SIEventsHandler.OnShootInputReceived += TryToShootProjectile;
         }
 
         protected override void RemoveEvents()
         {
+            SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
 //            SIEventsHandler.OnShootInputReceived -= TryToShootProjectile;
+        }
+
+        void HandleOnGridReset()
+        {
+            SubscribeToShooting();
         }
 
         void Update()
@@ -50,7 +52,7 @@ namespace SpaceInvaders
             weaponReloader.TryToShootAndReload();
         }
 
-        void SubscribeForInitialShooting()
+        void SubscribeToShooting()
         {
             SIEnemyGridEvents.BroadcastOnSubscribeToShooting(this);
         }
@@ -59,7 +61,6 @@ namespace SpaceInvaders
         {
             _canShoot = false;
 
-            //todo: fix thsis
             SIEnemyBehaviour closerRowCandidate = shootBehaviourSetup.neighbours[Neighbour.Back];
             if (closerRowCandidate == null)
                 return;

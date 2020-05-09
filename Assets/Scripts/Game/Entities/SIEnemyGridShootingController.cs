@@ -29,16 +29,6 @@ namespace SpaceInvaders
             _enemiesAbleToShoot = new List<SIEnemyShootBehaviour>();
         }
 
-        void Start()
-        {
-            Initialise();
-        }
-
-        void Initialise()
-        {
-            SelectStartShootingEnemies();
-        }
-
         void OnEnable()
         {
             AssignEvents();
@@ -51,6 +41,7 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
+            SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
             SIEnemyGridEvents.OnSubscribeToShooting += HandleOnSubscribeToShooting;
             SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
 //            
@@ -62,6 +53,7 @@ namespace SpaceInvaders
 
         void RemoveEvents()
         {
+            SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
             SIEnemyGridEvents.OnSubscribeToShooting -= HandleOnSubscribeToShooting;
             SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
 
@@ -70,13 +62,18 @@ namespace SpaceInvaders
 //            //todo: DONT REMOVE THIS: OnDebugInputHandling Event -> REFACTOR
 //            SIEventsHandler.OnDebugInputHandling -= Debug_ResetWave;
         }
-        
+
+        void HandleOnGridReset()
+        {
+            RestartShootingEnemies();
+        }
+
         void HandleOnSubscribeToShooting(SIEnemyShootBehaviour enemyShootBehaviour)
         {
             _enemiesAbleToShoot.Add(enemyShootBehaviour);
         }
 
-        void SelectStartShootingEnemies()
+        void RestartShootingEnemies()
         {
             List<SIEnemyShootBehaviour> initialShootBehaviours = new List<SIEnemyShootBehaviour>();
             SIEnemyShootBehaviour currentBehaviour;
@@ -112,31 +109,6 @@ namespace SpaceInvaders
             return _enemiesAbleToShoot.Contains(deadEnemyShootBehaviour);
         }
 
-//        void HandleOnShootingEnemiesUpdate(int index)
-//        {
-//            UpdateShootingEnemies(index);
-//        }
-
-//        void HandleOnWaveEnd()
-//        {
-//            ResetGridShooting();
-//        }
-
-//        void OnDestroy()
-//        {
-//            StopAllCoroutines();
-//        }
-
-//        void ResetGridShooting()
-//        {
-//            _livingEnemies = _totalEnemies;
-//            InitialiseRowOfShootingEnemies();
-//            
-//            SIEnemyGridEvents.BroadcastOnGridReset();
-//        }
-//        
-
-
         void Debug_ResetWave()
         {
             if (Input.GetKeyDown(KeyCode.G) == false)
@@ -144,69 +116,6 @@ namespace SpaceInvaders
 
             SIEventsHandler.BroadcastOnWaveEnd();
         }
-
-//        void UpdateShootingEnemies(int index)
-//        {
-//            SIEnemyShootBehaviour deathEnemy = _enemies[index].ShootBehaviour;
-//            bool isDeathEnemyShootable = IsDeathEnemyShootable(deathEnemy);
-//            int killedEnemyRow = index / SIConstants.ENEMIES_IN_ROW;
-//
-//            _enemiesAbleToShoot.Remove(deathEnemy);
-//
-//            if (isDeathEnemyShootable == false || killedEnemyRow == 0) return;
-//
-//            if (IsPossibleToChangeShootingEnemy(index, killedEnemyRow, out int firstVerticalNeighbour,
-//                    out int secondVerticalNeighbour) == false)
-//                return;
-//
-//            SIEnemyShootBehaviour newShootable = GetNextShootableEnemy(firstVerticalNeighbour, secondVerticalNeighbour);
-//            _enemiesAbleToShoot.Add(newShootable);
-//        }
-
-//        bool IsPossibleToChangeShootingEnemy(int index, int killedEnemyRow, out int firstVerticalNeighbour,
-//            out int secondVerticalNeighbour)
-//        {
-//            if (killedEnemyRow == 2)
-//            {
-//                firstVerticalNeighbour = index - SIConstants.ENEMIES_IN_ROW;
-//                secondVerticalNeighbour = firstVerticalNeighbour - SIConstants.ENEMIES_IN_ROW;
-//            }
-//            else
-//            {
-//                firstVerticalNeighbour = index + SIConstants.ENEMIES_IN_ROW;
-//                secondVerticalNeighbour = index - SIConstants.ENEMIES_IN_ROW;
-//            }
-//
-//            return AreNeighboursDead(firstVerticalNeighbour, secondVerticalNeighbour) == false;
-//        }
-
-//        bool AreNeighboursDead(int indexOfFirst, int indexOfSecond)
-//        {
-//            return _enemies[indexOfFirst].IsEnemyAlive() == false && _enemies[indexOfSecond].IsEnemyAlive() == false;
-//        }
-//
-//        SIEnemyShootBehaviour GetNextShootableEnemy(int indexOfFirst, int indexOfSecond)
-//        {
-//            return _enemies[indexOfFirst].IsEnemyAlive()
-//                ? _enemies[indexOfFirst].ShootBehaviour
-//                : _enemies[indexOfSecond].ShootBehaviour;
-//        }
-
-//        bool IsDeathEnemyShootable(SIEnemyShootBehaviour shootingEnemy)
-//        {
-//            return _enemiesAbleToShoot.Contains(shootingEnemy);
-//        }
-//
-//        public void StartShooting()
-//        {
-//            StartCoroutine(EnemiesShootingRoutine());
-//        }
-//
-//        public void StopShooting()
-//        {
-//            StopCoroutine(EnemiesShootingRoutine());
-//        }
-//
 //        IEnumerator EnemiesShootingRoutine()
 //        {
 //            if (_enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0)

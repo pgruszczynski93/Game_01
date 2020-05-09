@@ -31,7 +31,7 @@ namespace SpaceInvaders
 
         void DetectPlayerHit()
         {
-            Debug.Log("Player got hit.");
+//            Debug.Log("Player got hit.");
         }
 
 //        void OnBonusGained(MonoBehaviour collisionBehaviour = null)                
