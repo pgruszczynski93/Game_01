@@ -5,23 +5,19 @@ namespace SpaceInvaders
     public class SIEnemyGridEvents
     {
         public static event Action OnGridReset;
-        public static event Action OnGridShootingStarted;
-        public static event Action OnGridShootingStopped;
+        public static event Action OnGridShootingReset;
         public static event Action<int> OnUpdateGridMovementSpeedTier;
         public static event Action<SIEnemyShootBehaviour> OnSubscribeToShooting;
+        public static event Action<SIEnemyShootBehaviour> OnShootOrderRequested;
+        
         public static void BroadcastOnGridReset()
         {
             OnGridReset?.Invoke();
         }
         
-        public static void BroadcastOnGridShootingPossible()
+        public static void BroadcastOnGridOnGridShootingReset()
         {
-            OnGridShootingStarted?.Invoke();
-        }
-        
-        public static void BroadcastOnGridShootingStopped()
-        {
-            OnGridShootingStopped?.Invoke();
+            OnGridShootingReset?.Invoke();
         }
 
         public static void BroadcastOnUpdateGridMovementSpeedTier(int newTier)
@@ -31,6 +27,11 @@ namespace SpaceInvaders
         public static void BroadcastOnSubscribeToShooting(SIEnemyShootBehaviour enemyShootBehaviour)
         {
             OnSubscribeToShooting?.Invoke(enemyShootBehaviour);
+        }
+        
+        public static void BroadcastOnShootOrderReceived(SIEnemyShootBehaviour enemyShootBehaviour)
+        {
+            OnShootOrderRequested?.Invoke(enemyShootBehaviour);
         }
     }
 }

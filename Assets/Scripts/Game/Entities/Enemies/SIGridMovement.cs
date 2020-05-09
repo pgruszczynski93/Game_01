@@ -48,6 +48,7 @@ namespace SpaceInvaders
                 {
                     _isInitialSequenceFinished = true;
                     _canMove = true;
+                    SIEnemyGridEvents.BroadcastOnGridOnGridShootingReset();
                 })
                 .SetEase(_gridMovementSettings.initialMovementEaseType)
                 .SetAutoKill(false)

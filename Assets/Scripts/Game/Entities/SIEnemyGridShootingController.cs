@@ -1,21 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.XR.Interaction;
 
 namespace SpaceInvaders
 {
     public class SIEnemyGridShootingController : MonoBehaviour
     {
         [SerializeField] GridShootingSetup _gridBehaviourSetup;
-
-//        [SerializeField] SIEnemyBehaviour[] _enemies;
         [SerializeField] List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
 
-        bool _isShootingAvailableForWave;
-
-        float _lastRefreshTime;
-        float _shotAbilityRefreshTime;
-
+        bool _isGridShootingEnabled;
+        int _totalEnemiesAbleToShoot;
         GridShootingSettings _gridBehaviourSettings;
 
         void Awake()
@@ -42,30 +38,34 @@ namespace SpaceInvaders
         void AssignEvents()
         {
             SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
+            SIEnemyGridEvents.OnGridShootingReset += HandleOnGridShootingReset;
             SIEnemyGridEvents.OnSubscribeToShooting += HandleOnSubscribeToShooting;
             SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
-//            
-//            SIEventsHandler.OnShootingEnemiesUpdate += HandleOnShootingEnemiesUpdate;
-//            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
-//            //todo: DONT REMOVE THIS: OnDebugInputHandling Event -> REFACTOR
-//            SIEventsHandler.OnDebugInputHandling += Debug_ResetWave;
         }
 
         void RemoveEvents()
         {
             SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
+            SIEnemyGridEvents.OnGridShootingReset -= HandleOnGridShootingReset;
             SIEnemyGridEvents.OnSubscribeToShooting -= HandleOnSubscribeToShooting;
             SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+        }
 
-//            SIEventsHandler.OnShootingEnemiesUpdate -= HandleOnShootingEnemiesUpdate;
-//            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
-//            //todo: DONT REMOVE THIS: OnDebugInputHandling Event -> REFACTOR
-//            SIEventsHandler.OnDebugInputHandling -= Debug_ResetWave;
+        void EnableGridShootingPossibility(bool isGridShootingEnabled)
+        {
+            _isGridShootingEnabled = isGridShootingEnabled;
         }
 
         void HandleOnGridReset()
         {
-            RestartShootingEnemies();
+            EnableGridShootingPossibility(false);
+            ResetShootingEnemiesInstances();
+        }
+
+        void HandleOnGridShootingReset()
+        {
+            EnableGridShootingPossibility(true);
+            TryToRunGridShootingRoutine();
         }
 
         void HandleOnSubscribeToShooting(SIEnemyShootBehaviour enemyShootBehaviour)
@@ -73,7 +73,7 @@ namespace SpaceInvaders
             _enemiesAbleToShoot.Add(enemyShootBehaviour);
         }
 
-        void RestartShootingEnemies()
+        void ResetShootingEnemiesInstances()
         {
             List<SIEnemyShootBehaviour> initialShootBehaviours = new List<SIEnemyShootBehaviour>();
             SIEnemyShootBehaviour currentBehaviour;
@@ -89,6 +89,12 @@ namespace SpaceInvaders
             }
 
             _enemiesAbleToShoot = initialShootBehaviours;
+            SetEnemiesAbleToShootCount();
+        }
+
+        void SetEnemiesAbleToShootCount()
+        {
+            _totalEnemiesAbleToShoot = _enemiesAbleToShoot.Count;
         }
 
         void HandleOnEnemyDeath(SIEnemyBehaviour deadEnemy)
@@ -102,6 +108,7 @@ namespace SpaceInvaders
                 return;
 
             _enemiesAbleToShoot.Remove(deadEnemyShootBehaviour);
+            SetEnemiesAbleToShootCount();
         }
 
         bool WasKilledEnemyAbleToShoot(SIEnemyShootBehaviour deadEnemyShootBehaviour)
@@ -109,37 +116,31 @@ namespace SpaceInvaders
             return _enemiesAbleToShoot.Contains(deadEnemyShootBehaviour);
         }
 
-        void Debug_ResetWave()
+        bool ShouldStopGridShooting()
         {
-            if (Input.GetKeyDown(KeyCode.G) == false)
+            return _enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0 || !_isGridShootingEnabled;
+        }
+
+        void TryToRunGridShootingRoutine()
+        {
+            if (ShouldStopGridShooting())
                 return;
 
-            SIEventsHandler.BroadcastOnWaveEnd();
+            StartCoroutine(GridShootingRoutine());
         }
-//        IEnumerator EnemiesShootingRoutine()
-//        {
-//            if (_enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0)
-//            {
-//                Debug.Log("Can't setup enemies shooting routine");
-//                yield break;
-//            }
-//
-//            bool anyEnemyIsAlive;
-//            int enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
-//            int enemySelectedToShootIndex = 0;
-//            float timeToNextShoot = 0.0f;
-//
-//            while ( /*SIEnemiesGridManager.Instance.IsEnemyGridMovementAllowed &&*/ enemiesAbleToShootCount > 0)
-//            {
-//                enemiesAbleToShootCount = _enemiesAbleToShoot.Count;
-//                anyEnemyIsAlive = enemiesAbleToShootCount > 0;
-//                // shift rand value to be in (0, n-1) size lenght value
-//                enemySelectedToShootIndex = Random.Range(1, anyEnemyIsAlive ? enemiesAbleToShootCount + 1 : 1);
-//                timeToNextShoot = Random.Range(_gridBehaviourSettings.minShootingInterval, _gridBehaviourSettings.maxShootingInterval);
-////                if (anyEnemyIsAlive) _enemiesAbleToShoot[enemySelectedToShootIndex - 1].Shoot();
-//
-//                yield return SIWaitUtils.WaitForCachedSeconds(timeToNextShoot);
-//            }
-//        }
+
+
+        IEnumerator GridShootingRoutine()
+        {
+            int indexOfSelectedEnemy;
+            
+            while (_totalEnemiesAbleToShoot > 0)
+            {
+                indexOfSelectedEnemy = Random.Range(0, _totalEnemiesAbleToShoot);
+                SIEnemyGridEvents.BroadcastOnShootOrderReceived(_enemiesAbleToShoot[indexOfSelectedEnemy]);
+                yield return SIWaitUtils.WaitForCachedSeconds(Random.Range(
+                    _gridBehaviourSettings.minShootingInterval, _gridBehaviourSettings.maxShootingInterval));
+            }
+        }
     }
 }

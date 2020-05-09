@@ -23,12 +23,14 @@ namespace SpaceInvaders
         protected override void AssignEvents()
         {
             SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
+            SIEnemyGridEvents.OnShootOrderRequested += HandleOnShootOrderRequested;
 //            SIEventsHandler.OnShootInputReceived += TryToShootProjectile;
         }
 
         protected override void RemoveEvents()
         {
             SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
+            SIEnemyGridEvents.OnShootOrderRequested -= HandleOnShootOrderRequested;
 //            SIEventsHandler.OnShootInputReceived -= TryToShootProjectile;
         }
 
@@ -37,12 +39,20 @@ namespace SpaceInvaders
             SubscribeToShooting();
         }
 
-        void Update()
+//        void Update()
+//        {
+//            if (Input.GetKeyDown(KeyCode.K))
+//            {
+//                TryToShootProjectile();
+//            }
+//        }
+
+        void HandleOnShootOrderRequested(SIEnemyShootBehaviour requestedBehaviour)
         {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                TryToShootProjectile();
-            }
+            if (this != requestedBehaviour)
+                return;
+            
+            TryToShootProjectile();
         }
 
         protected override void TryToShootProjectile()
