@@ -23,7 +23,6 @@ namespace SpaceInvaders
         Vector3 _initialLocalAngles;
         Transform _thisTransform;
         DamageInfo _damageInfo;
-        WaitUntil _waitForProjectileReset;
 
         protected override void Initialise()
         {
@@ -35,7 +34,6 @@ namespace SpaceInvaders
             _parentRelativeLocalPos = _thisTransform.localPosition;
             _initialLocalAngles = _thisTransform.localEulerAngles;
             _damageInfo = new DamageInfo(_weaponSettings.weaponDamage);
-            _waitForProjectileReset = new WaitUntil(() => _isMoving == false);
 
             ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
             _topWorldLimit = screenWorldEdges.topScreenEdge + _weaponSettings.movementLimitOffset;
@@ -118,17 +116,6 @@ namespace SpaceInvaders
 
         public void HandleProjectileHit()
         {
-            StopAndResetProjectile();
-        }
-
-        public void HandleWaitOnProjectileReset(MonoBehaviour collisionBehaviour = null)
-        {
-            StartCoroutine(WaitForResetPossibilityRoutine());
-        }
-
-        IEnumerator WaitForResetPossibilityRoutine()
-        {
-            yield return _waitForProjectileReset;
             StopAndResetProjectile();
         }
 

@@ -22,19 +22,19 @@ namespace SpaceInvaders
 
         protected override void AssignEvents()
         {
-            SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
+            SIEnemyGridEvents.OnGridObjectsReloaded += HandleOnGridObjectsReloaded;
             SIEnemyGridEvents.OnShootOrderRequested += HandleOnShootOrderRequested;
 //            SIEventsHandler.OnShootInputReceived += TryToShootProjectile;
         }
 
         protected override void RemoveEvents()
         {
-            SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
+            SIEnemyGridEvents.OnGridObjectsReloaded -= HandleOnGridObjectsReloaded;
             SIEnemyGridEvents.OnShootOrderRequested -= HandleOnShootOrderRequested;
 //            SIEventsHandler.OnShootInputReceived -= TryToShootProjectile;
         }
 
-        void HandleOnGridReset()
+        void HandleOnGridObjectsReloaded()
         {
             SubscribeToShooting();
         }

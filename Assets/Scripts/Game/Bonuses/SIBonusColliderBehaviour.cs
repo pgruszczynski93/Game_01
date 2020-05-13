@@ -12,6 +12,7 @@ namespace SpaceInvaders
         {
             return _thisCollisionInfo;
         }
+        
         protected override void AssignEvents()
         {
             base.AssignEvents();

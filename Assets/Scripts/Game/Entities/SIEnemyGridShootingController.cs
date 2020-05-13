@@ -125,7 +125,6 @@ namespace SpaceInvaders
         {
             if (ShouldStopGridShooting())
                 return;
-
             StartCoroutine(GridShootingRoutine());
         }
 
@@ -138,6 +137,7 @@ namespace SpaceInvaders
             {
                 indexOfSelectedEnemy = Random.Range(0, _totalEnemiesAbleToShoot);
                 SIEnemyGridEvents.BroadcastOnShootOrderReceived(_enemiesAbleToShoot[indexOfSelectedEnemy]);
+                Debug.Log("INDEX " + indexOfSelectedEnemy);
                 yield return SIWaitUtils.WaitForCachedSeconds(Random.Range(
                     _gridBehaviourSettings.minShootingInterval, _gridBehaviourSettings.maxShootingInterval));
             }

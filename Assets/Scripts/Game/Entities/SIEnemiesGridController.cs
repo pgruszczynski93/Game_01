@@ -7,11 +7,11 @@ namespace SpaceInvaders
     public enum Neighbour
     {
         Left,
-        Right, 
-        Front, 
+        Right,
+        Front,
         Back,
     }
-    
+
     [System.Serializable]
     public class SIShootBehaviourSetup
     {
@@ -77,12 +77,15 @@ namespace SpaceInvaders
             return new Dictionary<Neighbour, SIEnemyBehaviour>
             {
                 {Neighbour.Left, IsInRowHorizontalRange(leftNbIndex, enemyRow) ? _availableEnemies[leftNbIndex] : null},
-                {Neighbour.Right,  IsInRowHorizontalRange(rightNbIndex, enemyRow) ? _availableEnemies[rightNbIndex] : null},
+                {
+                    Neighbour.Right,
+                    IsInRowHorizontalRange(rightNbIndex, enemyRow) ? _availableEnemies[rightNbIndex] : null
+                },
                 {Neighbour.Front, IsInMinMaxRange(frontNbIndex) ? _availableEnemies[frontNbIndex] : null},
                 {Neighbour.Back, IsInMinMaxRange(backNbIndex) ? _availableEnemies[backNbIndex] : null}
             };
         }
-        
+
         bool IsInRowHorizontalRange(int currentNeighbourIndex, int enemyRow)
         {
             int minHorizontal = enemyRow * _maxInRow;
@@ -146,7 +149,7 @@ namespace SpaceInvaders
 
         void HandleOnGameStarted()
         {
-            RestartEnemiesGrid();
+            StartCoroutine(RestartGridRoutine());
         }
 
         void TryToBroadcastNewMovementSpeedTier()
@@ -169,6 +172,8 @@ namespace SpaceInvaders
             yield return StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.endWaveCooldown,
                 SIEventsHandler.BroadcastOnWaveEnd));
             SetLivingEnemiesCount();
+            yield return StartCoroutine(SIWaitUtils.SkipFramesAndInvoke(1,
+                ReloadGridObjects));
             yield return StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.newWaveCooldown, RestartEnemiesGrid));
         }
 
@@ -176,6 +181,11 @@ namespace SpaceInvaders
         {
             //todo: temporary
             _livingEnemies = _maxEnemies;
+        }
+        
+        void ReloadGridObjects()
+        {
+            SIEnemyGridEvents.BroadcastOnGridObjectsReloaded();
         }
 
         void RestartEnemiesGrid()
