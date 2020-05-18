@@ -1,21 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MindwalkerStudio.InspectorTools;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace SpaceInvaders
 {
+    [Serializable]
+    public struct BonusRangeInfo
+    {
+        public int bonusDropChanceDiffrence;
+        public BonusType bonusType;
+    } 
     public class SIBonusSelectorSystem : MonoBehaviour
     {
-        [Range(0, 100), SerializeField] int _bonusDropThreshold;
+        [Range(0, 99), SerializeField] int _bonusDropThreshold;
         [SerializeField] BonusSetup[] _bonusesSetup;
 
         int _dropChancesCount;
+        int _globalMinDropRate;
+        int _globalMaxDropRate;
+        int _currentSelectionRange;
         BonusDropInfo[] _dropChanceRates;
+        [SerializeField] List<BonusRangeInfo> availableBonuses;
 
         void Initialise()
         {
+            _globalMaxDropRate = -1;
+            _globalMinDropRate = int.MaxValue;
+            availableBonuses = new List<BonusRangeInfo>();
             SetDropChanceRates();
         }
 
@@ -46,6 +60,7 @@ namespace SpaceInvaders
 
         void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviours)
         {
+            //debug:
             TryToDropBonus();
         }
 
@@ -55,51 +70,77 @@ namespace SpaceInvaders
             if (currentDropPossibility > _bonusDropThreshold)
                 return;
 
-            TryToGetBonusesToDrop();
+            TryToSetAvailableBonuses();
+            TryToSelectFinalBonus();
         }
 
         void SetDropChanceRates()
         {
             _dropChancesCount = _bonusesSetup.Length;
             _dropChanceRates = new BonusDropInfo[_dropChancesCount];
+
+            BonusDropInfo currentDropInfo;
             
             for (int i = 0; i < _dropChancesCount; i++)
             {
-                _dropChanceRates[i] = _bonusesSetup[i].bonusSettings.bonusDropInfo;
+                currentDropInfo = _bonusesSetup[i].bonusSettings.bonusDropInfo;
+                _dropChanceRates[i] = currentDropInfo;
+                if (currentDropInfo.minDropRate < _globalMinDropRate)
+                    _globalMinDropRate = currentDropInfo.minDropRate;
+                if (currentDropInfo.maxDropRate > _globalMaxDropRate)
+                    _globalMaxDropRate = currentDropInfo.maxDropRate;
+
             }
         }
-        void TryToGetBonusesToDrop()
+        void TryToSetAvailableBonuses()
         {
             BonusDropInfo currentDropInfo;
-            int currentDropRate = Random.Range(0, 100);
-            int bonusesSelectionRange = 0;
-            int currentBonusRangeDiffrence;
-            List<int> bonusRanges = new List<int> {0};
+            int dropScore = Random.Range(_globalMinDropRate, _globalMaxDropRate);
 
             for (int i = 0; i < _dropChancesCount; i++)
             {
                 currentDropInfo = _dropChanceRates[i];
-                if (!IsInBonusRange(currentDropRate, currentDropInfo.minDropRate, currentDropInfo.maxDropRate))
+                if (!IsDropScoreInBonusRange(dropScore, currentDropInfo.minDropRate, currentDropInfo.maxDropRate))
                     return;
-                currentBonusRangeDiffrence = currentDropInfo.maxDropRate - currentDropInfo.minDropRate;
-                bonusesSelectionRange += currentBonusRangeDiffrence;
-                bonusRanges.Add(currentBonusRangeDiffrence);
+    
+                BonusRangeInfo bonusInRange = new BonusRangeInfo
+                {
+                    bonusType = currentDropInfo.bonusType,
+                    bonusDropChanceDiffrence = currentDropInfo.maxDropRate - currentDropInfo.minDropRate
+                };
+                _currentSelectionRange += bonusInRange.bonusDropChanceDiffrence;
+                availableBonuses.Add(bonusInRange);
             }
+            availableBonuses.Sort((a, b) => b.bonusDropChanceDiffrence.CompareTo(a.bonusDropChanceDiffrence));
+        }
 
-            float randomizedBonus = Random.Range(0f, 1f);
-//            for (int i = 0; i < bonusRanges.Count - 1; i++)
-//            {
-//                if (randomizedBonus >= bonusRanges[i] && randomizedBonus <= bonusRanges[i + 1])
-//                {
-//                    Debug.Log("Dropie bonus z przedzialu "+bonusRanges[i]+" "+bonusRanges[i+1]+" RB "+randomizedBonus);
-//                }
-//            }
+        void TryToSelectFinalBonus()
+        {
+            if (availableBonuses == null || availableBonuses.Count == 0)
+                return;
+
+            int availableBonusesCount = availableBonuses.Count;
+            int rangeMin = 0;
+            int rangeMax = availableBonuses[0].bonusDropChanceDiffrence;
+            int finalBonusScore = Random.Range(0, _currentSelectionRange);
+            BonusRangeInfo finalBonus = availableBonuses[0];
+
+            for (int i = 0; i < availableBonusesCount ; i++)
+            {
+                if (finalBonusScore >= rangeMin && finalBonusScore < rangeMax)
+                {
+                    finalBonus = availableBonuses[i];
+                }
+
+                rangeMin = rangeMax;
+                if(i < availableBonusesCount - 1)
+                    rangeMax += availableBonuses[i + 1].bonusDropChanceDiffrence;
+            }
             
-            //poprawić onenemydeath o info, który enemy jest zabijany
-            // poprawić tak zeby ta metoda zwracala tez info o bonusie, który ma zostac upuszcony
+            Debug.Log("SEL BON " +finalBonusScore +" "+ finalBonus.bonusType);
         }
         
-        bool IsInBonusRange(int dropRate, int minBonusDropRate, int maxBonusDropRate)
+        bool IsDropScoreInBonusRange(int dropRate, int minBonusDropRate, int maxBonusDropRate)
         {
             return dropRate >= minBonusDropRate && dropRate <= maxBonusDropRate;
         }
@@ -107,10 +148,12 @@ namespace SpaceInvaders
         [Button("Drop Bonus")]
         public void DropBonus()
         {
-            Debug.Log("Sorted bonuses");
-//            //TO DEBUG ONLY
-//            SIEventsHandler.BroadcastOnEnemyDeath();
-
+            _globalMaxDropRate = -1;
+            _currentSelectionRange = 0;
+            _globalMinDropRate = int.MaxValue;
+            availableBonuses = new List<BonusRangeInfo>();
+            SetDropChanceRates();
+            TryToDropBonus();
         }
     }
 }

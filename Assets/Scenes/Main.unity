@@ -4952,6 +4952,69 @@ PrefabInstance:
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: _bonusesSetup.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: availableBonuses.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: _bonusesSetup.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: fa0ff032deaf6c2478339782a7a874c4,
+        type: 2}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: _bonusesSetup.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 80b619222c673b744b70bead767a8218,
+        type: 2}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: _bonusesSetup.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 52a1d9f64191d88428ec5fa048f59904,
+        type: 2}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: _bonusDropThreshold
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: availableBonuses.Array.data[0].bonusDropChanceDiffrence
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: availableBonuses.Array.data[0].bonusType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: availableBonuses.Array.data[1].bonusDropChanceDiffrence
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: availableBonuses.Array.data[2].bonusDropChanceDiffrence
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: availableBonuses.Array.data[2].bonusType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7520369025253830076, guid: 91a8466d08e25db469192c053cd1a7bf,
+        type: 3}
+      propertyPath: availableBonuses.Array.data[1].bonusType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7686111096949202862, guid: 91a8466d08e25db469192c053cd1a7bf,
         type: 3}
       propertyPath: _joystick
