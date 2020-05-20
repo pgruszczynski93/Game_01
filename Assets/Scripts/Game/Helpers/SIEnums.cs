@@ -23,6 +23,7 @@
 
     public enum BonusType
     {
+        Undefined,
         Life,
         Shield,
         Weapon,

@@ -9,6 +9,7 @@ namespace SpaceInvaders
         [SerializeField] MeshRenderer _meshRenderer;
         [SerializeField] GameObject _colliderParent;
         [SerializeField] SIEnemyShootBehaviour _shootBehaviour;
+        [SerializeField] SIBonusDropController _dropController;
 
         EntitySettings _entitySettings;
         SIEnemyStatistics _enemyEntityStatistics;
@@ -98,6 +99,7 @@ namespace SpaceInvaders
             if (_shootBehaviour.CanShoot)
                 _shootBehaviour.TryToSelectNextShootingBehaviour();
             
+            _dropController.TryToRequestBonusDrop();
             SetEnemyDead();
             StartCoroutine(SIWaitUtils.SkipFramesAndInvoke(1, BroadcastEnemyDeath));
         }
@@ -132,28 +134,5 @@ namespace SpaceInvaders
             _enemyEntityStatistics.enemyLevel = 1;
             _enemyEntityStatistics.currentHealth = 40;
         }
-
-        //todo: DONT REMOVE
-//        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviour)
-//        {
-//            // in case of testing make instant death option
-//            if (this != enemyBehaviour)
-//                return;
-//            
-//            EnableEnemyVisibility(false);
-//            _enemyEntityStatistics.isAlive = false;
-//        }
-
-        //        public void Death()
-//        {
-//            if (_enemyStatistics.isAlive == false) return;
-//
-//            EnableEnemyVisibility(false);
-//            playerBonusManager.DropBonus();
-//            _enemyStatistics.isAlive = false;
-//            weaponEntity.HandleWaitOnProjectileReset();
-//
-//            SIEventsHandler.BroadcastOnShootingEnemiesUpdate(enemyIndex);
-//        }
     }
 }

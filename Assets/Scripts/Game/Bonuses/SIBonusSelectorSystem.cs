@@ -22,14 +22,15 @@ namespace SpaceInvaders
         int _globalMinDropRate;
         int _globalMaxDropRate;
         int _currentSelectionRange;
+        SIBonusDropController _requestingBonusDropController;
         BonusDropInfo[] _dropChanceRates;
-        [SerializeField] List<BonusRangeInfo> availableBonuses;
+        List<BonusRangeInfo> _availableBonuses;
 
         void Initialise()
         {
             _globalMaxDropRate = -1;
             _globalMinDropRate = int.MaxValue;
-            availableBonuses = new List<BonusRangeInfo>();
+            _availableBonuses = new List<BonusRangeInfo>();
             SetDropChanceRates();
         }
 
@@ -50,28 +51,30 @@ namespace SpaceInvaders
         
         void AssignEvents()
         {
-            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
+            SIBonusesEvents.OnBonusDropRequested += HandleOnBonusDropRequested;
         }
 
         void RemoveEvents()
         {
-            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+            SIBonusesEvents.OnBonusDropRequested -= HandleOnBonusDropRequested;
         }
 
-        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviours)
+        void HandleOnBonusDropRequested(SIBonusDropController objSender)
         {
-            //debug:
-            TryToDropBonus();
+            _availableBonuses.Clear();
+            _currentSelectionRange = 0;
+            _requestingBonusDropController = objSender;
+            _requestingBonusDropController.SetSelectedBonusType(TryToSelectProperBonusType());
         }
 
-        void TryToDropBonus()
+        BonusType TryToSelectProperBonusType()
         {
             int currentDropPossibility = Random.Range(0, 100);
             if (currentDropPossibility > _bonusDropThreshold)
-                return;
+                return BonusType.Undefined;
 
             TryToSetAvailableBonuses();
-            TryToSelectFinalBonus();
+            return SelectFinalBonusType();
         }
 
         void SetDropChanceRates()
@@ -109,35 +112,34 @@ namespace SpaceInvaders
                     bonusDropChanceDiffrence = currentDropInfo.maxDropRate - currentDropInfo.minDropRate
                 };
                 _currentSelectionRange += bonusInRange.bonusDropChanceDiffrence;
-                availableBonuses.Add(bonusInRange);
+                _availableBonuses.Add(bonusInRange);
             }
-            availableBonuses.Sort((a, b) => b.bonusDropChanceDiffrence.CompareTo(a.bonusDropChanceDiffrence));
+            _availableBonuses.Sort((a, b) => b.bonusDropChanceDiffrence.CompareTo(a.bonusDropChanceDiffrence));
         }
 
-        void TryToSelectFinalBonus()
+        BonusType SelectFinalBonusType()
         {
-            if (availableBonuses == null || availableBonuses.Count == 0)
-                return;
+            if (_availableBonuses == null || _availableBonuses.Count == 0)
+                return BonusType.Undefined;
 
-            int availableBonusesCount = availableBonuses.Count;
+            int availableBonusesCount = _availableBonuses.Count;
             int rangeMin = 0;
-            int rangeMax = availableBonuses[0].bonusDropChanceDiffrence;
+            int rangeMax = _availableBonuses[0].bonusDropChanceDiffrence;
             int finalBonusScore = Random.Range(0, _currentSelectionRange);
-            BonusRangeInfo finalBonus = availableBonuses[0];
 
             for (int i = 0; i < availableBonusesCount ; i++)
             {
                 if (finalBonusScore >= rangeMin && finalBonusScore < rangeMax)
                 {
-                    finalBonus = availableBonuses[i];
+                    return _availableBonuses[i].bonusType;
                 }
 
                 rangeMin = rangeMax;
                 if(i < availableBonusesCount - 1)
-                    rangeMax += availableBonuses[i + 1].bonusDropChanceDiffrence;
+                    rangeMax += _availableBonuses[i + 1].bonusDropChanceDiffrence;
             }
-            
-            Debug.Log("SEL BON " +finalBonusScore +" "+ finalBonus.bonusType);
+
+            return _availableBonuses[0].bonusType;
         }
         
         bool IsDropScoreInBonusRange(int dropRate, int minBonusDropRate, int maxBonusDropRate)
@@ -151,9 +153,9 @@ namespace SpaceInvaders
             _globalMaxDropRate = -1;
             _currentSelectionRange = 0;
             _globalMinDropRate = int.MaxValue;
-            availableBonuses = new List<BonusRangeInfo>();
+            _availableBonuses = new List<BonusRangeInfo>();
             SetDropChanceRates();
-            TryToDropBonus();
+            Debug.Log(TryToSelectProperBonusType());
         }
     }
 }

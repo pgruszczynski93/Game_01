@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7378773383622159703}
   - component: {fileID: 2163489598223782857}
   m_Layer: 0
-  m_Name: BonusDropperParent
+  m_Name: BonusDropController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0029d3c80fe74b698cb85ef47b22d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bonusBehaviour: {fileID: 0}
 --- !u!1001 &7378773383159782091
 PrefabInstance:
   m_ObjectHideFlags: 0

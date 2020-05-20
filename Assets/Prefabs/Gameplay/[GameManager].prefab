@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8667478317147580685}
   - component: {fileID: 7520369025253830076}
   m_Layer: 0
-  m_Name: BonusSelector
+  m_Name: BonusSelectorSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,8 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7515c85957ffd34796c72025b02f568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bonusDropThreshold: 0
-  _bonusesSetup: []
+  _bonusDropThreshold: 25
+  _bonusesSetup:
+  - {fileID: 11400000, guid: fa0ff032deaf6c2478339782a7a874c4, type: 2}
+  - {fileID: 11400000, guid: 80b619222c673b744b70bead767a8218, type: 2}
+  - {fileID: 11400000, guid: 52a1d9f64191d88428ec5fa048f59904, type: 2}
+  availableBonuses: []
 --- !u!1 &2266650787129907775
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +104,7 @@ GameObject:
   - component: {fileID: 6211987803090467932}
   - component: {fileID: 7234290583865494630}
   m_Layer: 0
-  m_Name: ScreenAreaCalculator
+  m_Name: ScreenAreaCalculatorSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +148,7 @@ GameObject:
   - component: {fileID: 61300571735854361}
   - component: {fileID: 5346905209394571204}
   m_Layer: 0
-  m_Name: TargetFrameLimiter
+  m_Name: TargetFrameLimiterSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
