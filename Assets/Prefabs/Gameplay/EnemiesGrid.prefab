@@ -62,7 +62,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gridSetup: {fileID: 11400000, guid: 918a1ca235e85fa4ba645217dbc31a0b, type: 2}
-  _availableEnemies: []
+  _availableEnemies:
+  - {fileID: 4466068892863834215}
+  - {fileID: 9072550767528693531}
+  - {fileID: 7217618423020176799}
+  - {fileID: 5051079607730895661}
+  - {fileID: 8768335089729771836}
+  - {fileID: 4572001869957209325}
+  - {fileID: 5218662930911818683}
+  - {fileID: 6019928237451545843}
+  - {fileID: 8120033975484298260}
+  - {fileID: 5549090819057890289}
+  - {fileID: 620412541774990800}
+  - {fileID: 5810653913258085973}
+  - {fileID: 267342710907194299}
+  - {fileID: 296671094314477698}
+  - {fileID: 5515500771458435844}
 --- !u!114 &7089611953591753693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3144cfbc065766249aefd843721793d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridBehaviourSetup: {fileID: 0}
+  _gridBehaviourSetup: {fileID: 11400000, guid: d6c0b14d76b9d944ca3baa1ec80b270e,
+    type: 2}
   _enemiesAbleToShoot:
   - {fileID: 1189950215106383325}
   - {fileID: 5241132733167144536}
@@ -98,7 +114,7 @@ MonoBehaviour:
   _currentMovementSpeed: 3
   _gridMovementSetup: {fileID: 11400000, guid: 00352c270a79ffb458bc728c872a64d2, type: 2}
   _currentSpeedMultiplier: 1
-  _screenEdgeOffset: 0
+  _screenEdgeOffset: 0.25
   gridMovementLimiter: {fileID: 1631490700610587971}
 --- !u!114 &1631490700610587971
 MonoBehaviour:
@@ -138,6 +154,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -198,10 +219,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -241,6 +272,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -301,10 +337,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -344,6 +390,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -404,10 +455,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -447,6 +508,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -507,10 +573,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -550,6 +626,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -610,10 +691,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -665,6 +756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -725,10 +821,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -768,6 +874,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -828,10 +939,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -871,6 +992,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -931,10 +1057,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -974,6 +1110,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -1034,10 +1175,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -1077,6 +1228,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -1137,10 +1293,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -1192,6 +1358,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -1252,10 +1423,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -1295,6 +1476,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342410204974039246, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342410204974039246, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342410204974039246, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342410204974039246, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -1355,6 +1561,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Enabled
@@ -1393,6 +1609,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -1453,10 +1674,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -1508,6 +1739,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -1568,10 +1804,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -1623,6 +1869,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7089611953591753692}
     m_Modifications:
+    - target: {fileID: 752779991045004848, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
@@ -1683,10 +1934,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4135857491782307394, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911252283527093001, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_Name
       value: BonusDropController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529467507697743990, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}

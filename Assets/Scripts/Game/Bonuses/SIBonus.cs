@@ -8,21 +8,22 @@ namespace SpaceInvaders
     {
         [SerializeField] protected BonusSetup _bonusSetup;
         [SerializeField] protected Rigidbody _rigidbody;
+        [SerializeField] protected MeshRenderer _meshRenderer;
+        [SerializeField] protected Collider _mainCollider;
+
+        [SerializeField] Transform _parent;
+        
         protected BonusSettings _bonusSettings;
 
-        bool _initialised;
         Transform _thisTransform;
-        Vector3 _startPosition;
 
         public abstract BonusSettings GetBonusSettings();
-        protected virtual void Initialise()
+        
+        void Initialise()
         {
-            if (_initialised)
-                return;
-            _initialised = true;
             _thisTransform = transform;
-            _startPosition = _thisTransform.position;
             _bonusSettings = _bonusSetup.bonusSettings;
+            ManageBonusInteraction(false);
         }
 
         void Start()
@@ -32,25 +33,31 @@ namespace SpaceInvaders
 
         void OnEnable()
         {
-            AssignEvents();
+            SubscribeEvents();
         }
 
         void OnDisable()
         {
-            RemoveEvents();
+            UnsubscribeEvents();
         }
 
-        protected void AssignEvents()
+        protected void SubscribeEvents()
         {
             SIEventsHandler.OnUpdate += TryToResetObject;
         }
 
-        protected void RemoveEvents()
+        protected void UnsubscribeEvents()
         {
             SIEventsHandler.OnUpdate -= TryToResetObject;
         }
 
-        protected void TryToResetObject()
+        void ManageBonusInteraction(bool isEnabled)
+        {
+            _meshRenderer.enabled = isEnabled;
+            _mainCollider.enabled = isEnabled;
+        }
+
+        void TryToResetObject()
         {
             Vector3 bonusViewPortPosition =
                 SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
@@ -59,16 +66,24 @@ namespace SpaceInvaders
                 StopObject();
         }
 
+        void ReleaseObject()
+        {
+            _thisTransform.SetParent(null);
+            _rigidbody.AddForce(SIHelpers.VectorDown * _bonusSettings.bonusProperties.releaseForceMultiplier, ForceMode.Impulse);
+        }
+        
         public void MoveObject()
         {
-            _rigidbody.AddForce(SIHelpers.VectorDown * _bonusSettings.bonusProperties.releaseForceMultiplier, ForceMode.Impulse);
+            ManageBonusInteraction(true);
+            ReleaseObject();
         }
 
         public void StopObject()
         {
             _rigidbody.velocity = SIHelpers.VectorZero;
-            _thisTransform.position = _startPosition;
-//            gameObject.SetActive(false);
+            _thisTransform.SetParent(_parent);
+            _thisTransform.localPosition = SIHelpers.VectorZero;
+            ManageBonusInteraction(false);
         }
     }
 }

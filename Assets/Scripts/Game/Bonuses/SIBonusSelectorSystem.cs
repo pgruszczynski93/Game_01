@@ -64,7 +64,7 @@ namespace SpaceInvaders
             _availableBonuses.Clear();
             _currentSelectionRange = 0;
             _requestingBonusDropController = objSender;
-            _requestingBonusDropController.SetSelectedBonusType(TryToSelectProperBonusType());
+            _requestingBonusDropController.TryToDropSelectedBonusType(TryToSelectProperBonusType());
         }
 
         BonusType TryToSelectProperBonusType()

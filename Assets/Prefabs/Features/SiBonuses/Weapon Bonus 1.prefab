@@ -124,8 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1676c059643b9794e8c8a5e26dec0b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collisionTag: 4
-  _collidesWithTags: 00000000
+  _thisCollisionInfo:
+    collisionTag: 4
+    collisionSource: {fileID: 0}
+  _collidableObjects: 04000000
   _bonusBehaviour: {fileID: 0}
 --- !u!114 &3615792576289239733
 MonoBehaviour:
@@ -139,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff056b85469424ca4c048691b6cdd1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectorSettings: {fileID: 11400000, guid: da21285f8ac8760459ef4ab83ae4be0c, type: 2}
   _bonusSetup: {fileID: 11400000, guid: 52a1d9f64191d88428ec5fa048f59904, type: 2}
   _rigidbody: {fileID: 7740976203804221348}
+  _meshRenderer: {fileID: 7740976203804221354}
+  _mainCollider: {fileID: 7740976203804221349}
