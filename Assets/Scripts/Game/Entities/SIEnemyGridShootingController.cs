@@ -7,6 +7,8 @@ namespace SpaceInvaders
 {
     public class SIEnemyGridShootingController : MonoBehaviour
     {
+        [SerializeField] bool _isGridShootingLockedByDev;
+
         [SerializeField] GridShootingSetup _gridBehaviourSetup;
         [SerializeField] List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
 
@@ -123,7 +125,7 @@ namespace SpaceInvaders
 
         void TryToRunGridShootingRoutine()
         {
-            if (ShouldStopGridShooting())
+            if (ShouldStopGridShooting() || _isGridShootingLockedByDev)
                 return;
             StartCoroutine(GridShootingRoutine());
         }

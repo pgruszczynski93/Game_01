@@ -17,6 +17,7 @@ namespace SpaceInvaders
                 return;
             }
 
+            //todo: change it to enum.getTypes() or to serializabledictionary
             _allWeapons = new Dictionary<WeaponTier, SIWeaponHolder>
             {
                 {WeaponTier.Tier_1, _weaponHolders[0]},

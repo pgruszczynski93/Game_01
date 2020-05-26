@@ -4,9 +4,10 @@ namespace SpaceInvaders
 {
     public class SIGameObjectVFX : SIVFXBehaviour
     {
+        [SerializeField] protected Transform _effectTransform;
+        
         [SerializeField] GameObject _effectVFX;
 
-        protected Transform _effectTransform;
         protected override void Initialise()
         {
             _effectTransform = _effectVFX.transform;
@@ -14,7 +15,7 @@ namespace SpaceInvaders
 
         protected override void ResetVFX()
         {
-            _effectTransform.parent = _parentTransform;
+            _effectTransform.SetParent(_parentTransform);
             _effectTransform.localPosition = SIHelpers.VectorZero;
             ForceDisableVFX();
         }
@@ -49,7 +50,7 @@ namespace SpaceInvaders
         protected void TryToDetachFromParent(bool canBeDetached)
         {
             if (canBeDetached)
-                _effectTransform.parent = null;
+                _effectTransform.SetParent(null);
         }
 
         protected override void ForceEnableVFX()
