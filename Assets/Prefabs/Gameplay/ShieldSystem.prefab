@@ -74,8 +74,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01ed3f8049044ee87521d9d5ec64c46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collisionTag: 2
-  _collidesWithTags: 0100000003000000
+  _thisCollisionInfo:
+    collisionTag: 0
+    collisionSource: {fileID: 0}
+  _collidableObjects: 
 --- !u!1 &707345826056900329
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +93,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4494660089158688645
 Transform:
   m_ObjectHideFlags: 0
@@ -162,10 +164,11 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c694f612928e0fc4b89d049f2bc4d2d1, type: 2}
+  - {fileID: 2100000, guid: 61b262870355f6a44b1035acb60fbec2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -247,4 +250,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeToReset: 0
   _parentTransform: {fileID: 779636636344267331}
+  _effectTransform: {fileID: 0}
   _effectVFX: {fileID: 779636635238889484}
