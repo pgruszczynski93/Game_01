@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceInvaders
 {
-    [RequireComponent(typeof(SITargetFollower))]
     public class SIPlayerWeaponReloader : SIWeaponReloader
     {
         float _nextReloadTime;
@@ -11,24 +11,22 @@ namespace SpaceInvaders
 
         protected override void Initialise()
         {
-            if (_weaponHolders == null || _weaponHolders.Length == 0)
-            {
-                Debug.Log("No weapon holders attached.", this);
-                return;
-            }
-
-            //todo: change it to enum.getTypes() or to serializabledictionary
-            _allWeapons = new Dictionary<WeaponTier, SIWeaponHolder>
-            {
-                {WeaponTier.Tier_1, _weaponHolders[0]},
-                {WeaponTier.Tier_2, _weaponHolders[1]},
-                {WeaponTier.Tier_3, _weaponHolders[2]},
-                {WeaponTier.Tier_4, _weaponHolders[3]}
-            };
+            LoadAttachedWeaponHolders();
             ResetAllWeaponHolders();
             TryToUpdateCurrentWeaponTier(WeaponTier.Tier_1);
         }
-        
+
+        void LoadAttachedWeaponHolders()
+        {
+            // todo: Don't remove - it skips first non weapon enum value
+            WeaponTier[] weapons = (WeaponTier[]) Enum.GetValues(typeof(WeaponTier));
+            _allWeapons = new Dictionary<WeaponTier, SIWeaponHolder>();
+            for(int i = 1; i<weapons.Length; i++)
+            {
+                _allWeapons.Add(weapons[i], _weaponHolders[i-1]);
+            }
+        }
+
         void OnEnable()
         {
             AssignEvents();
