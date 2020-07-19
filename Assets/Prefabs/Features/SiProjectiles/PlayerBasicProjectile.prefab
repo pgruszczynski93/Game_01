@@ -88,6 +88,11 @@ PrefabInstance:
       propertyPath: _effectVFX
       value: 
       objectReference: {fileID: 5253134578979602235}
+    - target: {fileID: 7166377464631417653, guid: 7cf98d259fa45e640af8522055ca2cad,
+        type: 3}
+      propertyPath: _effectTransform
+      value: 
+      objectReference: {fileID: 5203489553761524204}
     - target: {fileID: 7242268266983628899, guid: 7cf98d259fa45e640af8522055ca2cad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -211,6 +216,12 @@ MonoBehaviour:
 --- !u!1 &5253134578979602235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 16232206583670561, guid: 7cf98d259fa45e640af8522055ca2cad,
+    type: 3}
+  m_PrefabInstance: {fileID: 5250995998409447450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5203489553761524204 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 65807025830363638, guid: 7cf98d259fa45e640af8522055ca2cad,
     type: 3}
   m_PrefabInstance: {fileID: 5250995998409447450}
   m_PrefabAsset: {fileID: 0}

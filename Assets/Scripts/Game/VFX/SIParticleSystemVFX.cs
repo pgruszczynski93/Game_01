@@ -17,6 +17,8 @@ namespace SpaceInvaders
             if (_particles == null)
                 return;
             
+            ///todo: fix vfxes reattachement
+            /// todo:colliders disabled from enemies
             TryToDetachFromParent(canBeDetachedFromParent);
             TryToSetEffect(canBeEnabled);
             TryToResetEffectAfterUsage(shouldBeResetAfterUsage);
