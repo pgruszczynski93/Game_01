@@ -783,12 +783,12 @@ GameObject:
   - component: {fileID: 462376421}
   - component: {fileID: 462376425}
   m_Layer: 8
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: '[TESTER] ShootingCollision'
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &462376421
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -797,7 +797,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 462376420}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -857,7 +857,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 462376420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 2.96, z: 0.02}
+  m_LocalPosition: {x: 0.01, y: -1.85, z: 0.02}
   m_LocalScale: {x: 11.792, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -872,14 +872,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 462376420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc0f435254aebd4418b6cf6d4e27e9c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 86356aa3e14ad7d46ac008d6f1e704c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _thisCollisionInfo:
-    collisionTag: 1
-    collisionSource: {fileID: 0}
-  _collidableObjects: 0000000002000000
-  _enemyBehaviour: {fileID: 0}
+    collisionTag: 0
+    collisionSource: {fileID: 462376425}
+  _collidableObjects: 0100000003000000
 --- !u!20 &519420031 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 1894922922824911811, guid: ff26e07da7d4d264ca47860c2204ada4,
@@ -6445,7 +6444,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _thisCollisionInfo.collisionSource
       value: 
-      objectReference: {fileID: 462376425}
+      objectReference: {fileID: 0}
     - target: {fileID: 5439953704355137447, guid: 643dc00ed43498e44ad70822b931f722,
         type: 3}
       propertyPath: m_StaticEditorFlags
