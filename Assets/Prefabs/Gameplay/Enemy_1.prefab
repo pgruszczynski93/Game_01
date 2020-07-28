@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entitySetup: {fileID: 11400000, guid: 9a0a3b794085815449dfadab05de6b56, type: 2}
   _meshRenderer: {fileID: 1881762110048184449}
+  _mainMaterial: {fileID: 2100000, guid: a7ccd6b74ccf04b47862ebe9c8d371d0, type: 2}
   _colliderParent: {fileID: 6197922684793495672}
   _shootBehaviour: {fileID: 8529467507697743990}
   _dropController: {fileID: 3055716252973475225}
@@ -886,6 +887,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a7ccd6b74ccf04b47862ebe9c8d371d0, type: 2}
+    - target: {fileID: 23153749357608276, guid: 805fa5d4d7f98eb43abf27378bf9a5e1,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 805fa5d4d7f98eb43abf27378bf9a5e1, type: 3}
 --- !u!23 &1881762110048184449 stripped
@@ -1230,6 +1236,11 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
+    - target: {fileID: 7044909181188065672, guid: f142162e014253b4f91ca17907366168,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 8198128618923777316, guid: f142162e014253b4f91ca17907366168,
         type: 3}
       propertyPath: _weaponSetup
@@ -1543,9 +1554,33 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 42f257b24c959a44794a35d032e9da12, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 42f257b24c959a44794a35d032e9da12, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800004, guid: 42f257b24c959a44794a35d032e9da12, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 19800006, guid: 42f257b24c959a44794a35d032e9da12, type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800006, guid: 42f257b24c959a44794a35d032e9da12, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800008, guid: 42f257b24c959a44794a35d032e9da12, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800010, guid: 42f257b24c959a44794a35d032e9da12, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42f257b24c959a44794a35d032e9da12, type: 3}
