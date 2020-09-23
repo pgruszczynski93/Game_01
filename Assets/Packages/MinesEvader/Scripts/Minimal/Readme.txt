@@ -1,3 +1,0 @@
-These scripts were only created to asset someone who is new to Unity see a minimal version of the code, most of the features of the game were removed.(No souund, explosions, waves, etc..) and so have been a lot of the protection methods such as checking for nulls and references. The scene created by these scripts is quite easy to break but also to understand.
-
-These scripts are not commented so that they are easy to look at and realize how few lines of code there are, some small things have been done differently in the minimal version or might have  used diffferent variable names as it was re-written at a later time, but the core behavoiur of the code is the same, i.e. a player has to move away from mines before they explode inside a constrained game field.
