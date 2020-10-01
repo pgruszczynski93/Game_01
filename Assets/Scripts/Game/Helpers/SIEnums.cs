@@ -1,5 +1,12 @@
 ﻿namespace SpaceInvaders
 {
+    public enum GameStates {
+        GameOpened,
+        GameInMenu, 
+        GameWaitsForStart, 
+        GameStarted,
+        GamePaused,
+    }
     public enum AsteroidState
     {
         ReadyToMove,

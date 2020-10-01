@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIEventsHandler
-    {
+    public class SIEventsHandler {
+        public static event Action<GameStates> OnGameStateChanged;
         public static event Action OnGameStarted;
         public static event Action OnGameFinished;
         public static event Action OnGameQuit;
@@ -21,6 +21,11 @@ namespace SpaceInvaders
 //        public static event Action<float> OnEnemySpeedMultiplierChanged;
         public static event Action<Vector3> OnAxesInputReceived;
         public static event Action<int> OnShootingEnemiesUpdate;
+
+        public static void BroadcastOnGameStateChanged(GameStates gameState)
+        {
+            OnGameStateChanged?.Invoke(gameState);
+        }
         
         public static void BroadcastOnWeaponTierUpdate(WeaponTier weaponTier)
         {

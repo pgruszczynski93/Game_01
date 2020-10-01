@@ -34,14 +34,14 @@ namespace SpaceInvaders
 
         void Start() => Initialise();
         void OnEnable() => SubscribeEvents();
-        void OnDisable() => UnsubscriveEvents();
+        void OnDisable() => UnsubscribeEvents();
         
         void SubscribeEvents()
         {
             SIEventsHandler.OnUpdate += CheckIsObjectVisibleOnScreen;
         }
 
-        void UnsubscriveEvents()
+        void UnsubscribeEvents()
         {
             SIEventsHandler.OnUpdate -= CheckIsObjectVisibleOnScreen;
         }
