@@ -32,30 +32,21 @@ namespace SpaceInvaders
             RotateTowardsScreen();
         }
 
-        void Start()
-        {
-            Initialise();
-        }
-
-        void OnEnable()
-        {
-            AssignEvents();
-        }
-
-        void OnDisable()
-        {
-            RemoveEvents();
-        }
-
-        void AssignEvents()
+        void Start() => Initialise();
+        void OnEnable() => SubscribeEvents();
+        void OnDisable() => UnsubscriveEvents();
+        
+        void SubscribeEvents()
         {
             SIEventsHandler.OnUpdate += CheckIsObjectVisibleOnScreen;
         }
 
-        void RemoveEvents()
+        void UnsubscriveEvents()
         {
             SIEventsHandler.OnUpdate -= CheckIsObjectVisibleOnScreen;
         }
+        
+        #if UNITY_EDITOR
 
         void OnDrawGizmos()
         {
@@ -63,7 +54,8 @@ namespace SpaceInvaders
             Bounds bounds = _renderer.bounds;
             Gizmos.DrawWireCube(bounds.center, bounds.size);
         }
-
+        #endif
+        
         public void MoveObject()
         {
             if (_isMoving)

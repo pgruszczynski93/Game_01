@@ -16,7 +16,7 @@ namespace SpaceInvaders
                 if (_mainCamera != null) 
                     return _mainCamera;
                 
-                SIHelpers.SISimpleLogger(this, "No camera assigned!", SimpleLoggerTypes.Error);
+                Debug.LogError("No camera assigned!");
                 return null;
 
             }
@@ -29,24 +29,13 @@ namespace SpaceInvaders
                 if (_player != null)
                     return _player;
 
-                SIHelpers.SISimpleLogger(this, "No player assigned to SIGameMasterBehaviour", SimpleLoggerTypes.Error);
+                Debug.LogError("No player assigned to SIGameMasterBehaviour");
                 return null;
             }
         }
 
         public SIScreenAreaCalculator ScreenAreaCalculator => _screeenAreaCalculator;
         
-
-        // Initialization in Start because, Awake is taken by signleton and some scripts may depend from it.
-        protected void Start()
-        {
-            InitializeSpawners();
-        }
-
-        void InitializeSpawners()
-        {
-            SIEventsHandler.BroadcastOnSpawnObject();
-        }
 
         void OnEnable()
         {

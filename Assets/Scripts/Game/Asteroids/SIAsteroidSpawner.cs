@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 namespace SpaceInvaders
 {
     [ExecuteInEditMode]
-    public class SIAsteroidSpawner : SISpawner
+    public class SIAsteroidSpawner : MonoBehaviour
     {
         [SerializeField] AsteroidSpawnerSetup _spawnerSetup;
         [SerializeField] AsteroidSpawnerSettings _spawnerSettings;
@@ -16,9 +16,14 @@ namespace SpaceInvaders
 
         public SIAsteroidBehaviour[] SpawnedAsteroids => _spawnedAsteroids;
 
-        protected override void LoadSetup()
+        void Start()
         {
-            base.LoadSetup();
+            Initialise();
+            TryToSpawn();
+        }
+
+        void TryToLoadSetup()
+        {
             if (_spawnerSetup == null)
             {            
                 Debug.LogError("No asteroid's spawner setup attached.", this);
@@ -26,27 +31,14 @@ namespace SpaceInvaders
             }
             _spawnerSettings = _spawnerSetup.asteroidSpawnerSettings;
         }
-        protected override void Initialise()
+        void Initialise()
         {
-            base.Initialise();
+            TryToLoadSetup();
             _asteroidsTemplateParent = transform;
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _cameraZ = _mainCamera.transform.localPosition.z;
             _spawnedAsteroids = new SIAsteroidBehaviour[_spawnerSettings.maxAsteroidsToSpawn];
         }
-
-        protected override void AssignEvents()
-        {
-            base.AssignEvents();
-            SIEventsHandler.OnSpawnObject += TryToSpawn;
-        }
-
-        protected override void RemoveEvents()
-        {
-            base.RemoveEvents();
-            SIEventsHandler.OnSpawnObject -= TryToSpawn;
-        }
-
         Vector3 CalculateOutOfViewportPosition(int parentIndex)
         {
             float xPosition;
@@ -80,10 +72,8 @@ namespace SpaceInvaders
             return viewportToWorldPosition;
         }
 
-        protected override void TryToSpawn()
+        void TryToSpawn()
         {
-            base.TryToSpawn();
-
             for (int i = 0; i < _spawnerSettings.maxAsteroidsToSpawn; i++)
             {
                 int spawnedPrefabIndex = Random.Range(0, _spawnerSettings.asteroidVariantsCount);
