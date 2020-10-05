@@ -1,41 +1,39 @@
 using UnityEngine;
 
-namespace SpaceInvaders
-{
-    public class SISettings : MonoBehaviour
-    {
+namespace SpaceInvaders {
+    public class SISettings : MonoBehaviour {
         [SerializeField] bool _isEditorLoggingDisabled;
         [SerializeField] bool _isAndroidLoggingDisabled;
 
-        private void OnEnable()
+        void OnEnable() => SubscribeEvents();
+        void OnDisable() => UnsubscribeEvents();
+        
+        void SubscribeEvents()
         {
-            AssignEvents();
+            SIEventsHandler.OnGameStateChanged += HandleOnGameStateChanged;
         }
 
-        private void AssignEvents()
+        void UnsubscribeEvents()
         {
-            SIEventsHandler.OnGameStarted += SetTargetFrameRate;
-            SIEventsHandler.OnGameStarted += TryToDisableLogging;
+            SIEventsHandler.OnGameStateChanged -= HandleOnGameStateChanged;
         }
 
-        private void OnDisable()
+        void HandleOnGameStateChanged(GameStates gameState)
         {
-            RemoveEvents();
-        }
-
-        private void RemoveEvents()
-        {
-            SIEventsHandler.OnGameStarted -= SetTargetFrameRate;
-            SIEventsHandler.OnGameStarted -= TryToDisableLogging;
+            if (gameState != GameStates.GameStarted)
+                return;
+            
+            SetTargetFrameRate();
+            TryToDisableLogging();
         }
 
 
-        private void SetTargetFrameRate()
+        void SetTargetFrameRate()
         {
             Application.targetFrameRate = SISettingsConsts.APPLICATION_TARGET_FRAMERATE;
         }
-        
-        private void TryToDisableLogging()
+
+        void TryToDisableLogging()
         {
             Debug.unityLogger.logEnabled =
 #if UNITY_ANDROID && !UNITY_EDITOR

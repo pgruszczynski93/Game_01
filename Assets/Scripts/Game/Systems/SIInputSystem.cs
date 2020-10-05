@@ -6,8 +6,6 @@ namespace SpaceInvaders
     {
         [SerializeField] Joystick _joystick;
 
-        bool _initialised;
-
         float _horizontalAxis;
         float _verticalAxis;
         float _depthAxis;
@@ -15,63 +13,52 @@ namespace SpaceInvaders
 
         void Initialise()
         {
-            if (_joystick == null)
-            {
-                Debug.LogError("No joystick assigned!");
-                return;
-            }
-
-            _initialised = true;
             _depthAxis = 0f;
         }
 
-        void Start()
+        void Start() => Initialise();
+        void OnEnable() => SubscribeEvents();
+        void OnDisable() => UnsubscribeEvents();
+
+        void SubscribeEvents()
         {
-            Initialise();
+            SIEventsHandler.OnUpdate += HandleOnUpdate;
         }
 
-        void OnEnable()
+        void UnsubscribeEvents()
         {
-            AssignEvents();
+            SIEventsHandler.OnUpdate -= HandleOnUpdate;
         }
 
-        void OnDisable()
+        void HandleOnUpdate()
         {
-            RemoveEvents();
-        }
-
-        void AssignEvents()
-        {
-            SIEventsHandler.OnUpdate += TryToGetInput;
-        }
-
-        void RemoveEvents()
-        {
-            SIEventsHandler.OnUpdate -= TryToGetInput;
-        }
-
-        void TryToGetInput()
-        {
-            GetAxes();
+            GetInputAxes();
             TryToSendShootAction();
+            TryToQuitGame();
+        }
+
+        public void TryToStartGame()
+        {
+            //Todo: change it when GUI will be implemented.
+            SIEventsHandler.BroadcastOnGameStateChanged(GameStates.GameStarted);
         }
 
         void TryToSendShootAction()
         {
-//            if (!SIEnemiesGridManager.Instance.IsEnemyGridMovementAllowed)
-//                return;
-            
-            if(IsShootingKeyPressed())
+            if(Input.GetKeyDown(KeyCode.Space))
                 SIEventsHandler.BroadcastOnShootInputReceived();
                 
         }
 
-        bool IsShootingKeyPressed()
+        void TryToQuitGame()
         {
-            return Input.GetKeyDown(KeyCode.Space);
+            if (!Input.GetKeyDown(KeyCode.Escape))
+                return;
+            
+            SIEventsHandler.BroadcastOnGameStateChanged(GameStates.GameQuit);
         }
 
-        void GetAxes()
+        void GetInputAxes()
         {
 #if UNITY_EDITOR
 

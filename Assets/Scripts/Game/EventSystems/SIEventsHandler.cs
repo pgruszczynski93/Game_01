@@ -5,9 +5,6 @@ namespace SpaceInvaders
 {
     public class SIEventsHandler {
         public static event Action<GameStates> OnGameStateChanged;
-        public static event Action OnGameStarted;
-        public static event Action OnGameFinished;
-        public static event Action OnGameQuit;
         public static event Action OnEnemiesRespawn;
         public static event Action OnNonPlayableUpdate;
         public static event Action OnUpdate;
@@ -51,24 +48,9 @@ namespace SpaceInvaders
             OnShootingEnemiesUpdate?.Invoke(index);
         }
 
-        public static void BroadcastOnGameStarted()
-        {
-            OnGameStarted?.Invoke();
-        }
-
-        public static void BroadcastOnGameFinished()
-        {
-            OnGameFinished?.Invoke();
-        }
-
         public static void BroadcastOnNonPlayableUpdate()
         {
             OnNonPlayableUpdate?.Invoke();
-        }
-
-        public static void BroadcastOnGameQuit()
-        {
-            OnGameQuit?.Invoke();
         }
 
         public static void BroadcastOnEnemiesRespawn()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace SpaceInvaders {
@@ -10,86 +11,68 @@ namespace SpaceInvaders {
         void SubscribeEvents()
         {
             SIEventsHandler.OnGameStateChanged += HandleOnGameStateChanged;
-            SIEventsHandler.OnGameStarted += HandleOnGameStarted;
-            SIEventsHandler.OnGameQuit += HandleOnQuitGame;
         }
 
         void UnsubscribeEvents()
         {
             SIEventsHandler.OnGameStateChanged -= HandleOnGameStateChanged;
-            SIEventsHandler.OnGameStarted -= HandleOnGameStarted;
-            SIEventsHandler.OnGameQuit -= HandleOnQuitGame;
         }
 
         void HandleOnGameStateChanged(GameStates gameState)
         {
             currentGameState = gameState;
+            ManageGameStates();
         }
 
-        void HandleOnGameStarted()
+        public bool IsGameRunning()
         {
-            _isGameStarted = true;
+            return currentGameState == GameStates.GameStarted;
+        }
+
+        void ManageGameStates()
+        {
+            switch(currentGameState)
+            {
+                case GameStates.GameOpened:
+                    break;
+                case GameStates.GameInMenu:
+                    break;
+                case GameStates.GameWaitsForStart:
+                    break;
+                case GameStates.GameStarted:
+                    break;
+                case GameStates.GamePaused:
+                    break;
+                case GameStates.GameQuit:
+                    QuitGame();
+                    break;
+            }
         }
 
         void Update()
         {
-            HandleOnUpdate();
+            RunGameLoop();
         }
 
-        void HandleOnUpdate()
-        {
-            OnUpdateNoPlayableObjects();
-            
-            if (_isGameStarted == false)
-                return;
-                
-            OnUpdateMovements();
-            OnShadersUpdateCallback();
-            OnDebugInputHandling();
-            OnGameQuitCallback();
-        }
-
-        void OnUpdateNoPlayableObjects()
+        void RunGameLoop()
         {
             SIEventsHandler.BroadcastOnNonPlayableUpdate();
-        }
-
-        void OnDebugInputHandling()
-        {
+            
+            if (!IsGameRunning())
+                return;
+                
+            SIEventsHandler.BroadcastOnUpdate();
             SIEventsHandler.BroadcastOnDebugInputHandling();
-        }
-
-        void OnGameQuitCallback()
-        {
-            SIEventsHandler.BroadcastOnGameQuit();
-        }
-
-        void OnShadersUpdateCallback()
-        {
             SIEventsHandler.BroadcastOnShadersUpdate();
         }
 
-        void HandleOnQuitGame()
+        void QuitGame()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
 #if UNITY_ANDROID && !UNITY_EDITOR
-                    Application.Quit();
+                Application.Quit();
 #elif UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #endif
-            }
         }
-
-        void OnUpdateMovements()
-        {
-            SIEventsHandler.BroadcastOnUpdate();
-        }
-
-        public void OnGameStarted()
-        {
-            SIEventsHandler.BroadcastOnGameStarted();
-        }
-    }
     }
 }

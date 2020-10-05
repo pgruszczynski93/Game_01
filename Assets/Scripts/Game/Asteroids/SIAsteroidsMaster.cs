@@ -10,24 +10,25 @@ namespace SpaceInvaders
 
         [SerializeField] SIAsteroidSpawner _asteroidsSpawner;
 
-        protected void OnEnable()
+        void OnEnable() => SubscribeEvents();
+        void OnDisable() => UnsubscribeEvents();
+
+        void SubscribeEvents()
         {
-            AssignEvents();
+            SIEventsHandler.OnGameStateChanged += HandleOnGameStateChanged;
         }
 
-        protected void OnDisable()
+        void UnsubscribeEvents()
         {
-            RemoveEvents();
+            SIEventsHandler.OnGameStateChanged += HandleOnGameStateChanged;
         }
-
-        void AssignEvents()
+        
+        void HandleOnGameStateChanged(GameStates gameState)
         {
-            SIEventsHandler.OnGameStarted += InvokeAsteroidsMovement;
-        }
-
-        void RemoveEvents()
-        {
-            SIEventsHandler.OnGameStarted -= InvokeAsteroidsMovement;
+            if (gameState != GameStates.GameStarted)
+                return;
+            
+            TryToInvokeAsteroidsMovement();
         }
 
         void OnDestroy()
@@ -35,7 +36,7 @@ namespace SpaceInvaders
             StopAllCoroutines();
         }
 
-        void InvokeAsteroidsMovement()
+        void TryToInvokeAsteroidsMovement()
         {
             if (_asteroidsSpawner == null)
                 return;

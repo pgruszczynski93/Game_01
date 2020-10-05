@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameMainLoop.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameMainLoop.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidsMaster.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidsMaster.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEventsHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEventsHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEnums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEnums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameMasterBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameMasterBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SISettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SISettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameMainLoop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameMainLoop.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIInputSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIInputSystem.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -175,9 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEnemyEvents.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/EntitySettings.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SIPlayerEntitySettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SIPlayerStatistics.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SIEnemyStatistics.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEntityStatistics.cs" />
@@ -198,7 +196,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEnemyGridEvents.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyShootBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusDropper.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIBonusesEvents.cs" />
@@ -222,10 +219,14 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Profiling/MobileSwitcher.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidSpawner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEventsHandler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEnums.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameMainLoop.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameMasterBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEnums.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIInputSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidsMaster.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SISettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIEventsHandler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameMainLoop.cs" />
       </list>
     </option>
   </component>
@@ -460,7 +461,8 @@
       <workItem from="1595965404265" duration="2308000" />
       <workItem from="1596051363873" duration="829000" />
       <workItem from="1600892612943" duration="608000" />
-      <workItem from="1601582925358" duration="3298000" />
+      <workItem from="1601582925358" duration="3366000" />
+      <workItem from="1601927781470" duration="4644000" />
     </task>
     <servers />
   </component>

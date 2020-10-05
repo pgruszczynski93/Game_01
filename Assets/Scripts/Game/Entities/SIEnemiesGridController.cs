@@ -35,9 +35,28 @@ namespace SpaceInvaders
         int _minEnemiesToUpdateGridSpeed;
         GridControllerSettings _gridSettings;
 
-        void Awake()
+        void Awake() => PreInitialise();
+        void OnEnable() => SubscribeEvents();
+        void OnDisable() => UnsubscribeEvents();
+        
+        void SubscribeEvents()
         {
-            PreInitialise();
+            SIEventsHandler.OnGameStateChanged += HandleOnGameStateChanged;
+            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
+        }
+
+        void UnsubscribeEvents()
+        {
+            SIEventsHandler.OnGameStateChanged -= HandleOnGameStateChanged;
+            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+        }
+
+        void HandleOnGameStateChanged(GameStates gameState)
+        {
+            if (gameState != GameStates.GameStarted)
+                return;
+            
+            StartCoroutine(RestartGridRoutine());
         }
 
         void PreInitialise()
@@ -109,28 +128,7 @@ namespace SpaceInvaders
             _gridSpeedTiers = _gridSettings.enemiesLeftToUpdateGridMovementTier.Length;
             _minEnemiesToUpdateGridSpeed = _gridSettings.enemiesLeftToUpdateGridMovementTier[0];
         }
-
-        void OnEnable()
-        {
-            AssignEvents();
-        }
-
-        void OnDisable()
-        {
-            RemoveEvents();
-        }
-
-        void AssignEvents()
-        {
-            SIEventsHandler.OnGameStarted += HandleOnGameStarted;
-            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
-        }
-
-        void RemoveEvents()
-        {
-            SIEventsHandler.OnGameStarted -= HandleOnGameStarted;
-            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
-        }
+        
 
         void HandleOnEnemyDeath(MonoBehaviour deadEnemy)
         {
@@ -146,11 +144,7 @@ namespace SpaceInvaders
 
             StartCoroutine(RestartGridRoutine());
         }
-
-        void HandleOnGameStarted()
-        {
-            StartCoroutine(RestartGridRoutine());
-        }
+        
 
         void TryToBroadcastNewMovementSpeedTier()
         {

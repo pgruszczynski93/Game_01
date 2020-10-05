@@ -6,6 +6,7 @@
         GameWaitsForStart, 
         GameStarted,
         GamePaused,
+        GameQuit
     }
     public enum AsteroidState
     {
