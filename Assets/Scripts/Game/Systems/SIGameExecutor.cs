@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public class SIGameMainLoop : MonoBehaviour {
+    public class SIGameExecutor : MonoBehaviour {
         
         [SerializeField] GameStates currentGameState;
         void OnEnable() => SubscribeEvents();
@@ -62,8 +61,6 @@ namespace SpaceInvaders {
                 return;
                 
             SIEventsHandler.BroadcastOnUpdate();
-            SIEventsHandler.BroadcastOnDebugInputHandling();
-            SIEventsHandler.BroadcastOnShadersUpdate();
         }
 
         void QuitGame()

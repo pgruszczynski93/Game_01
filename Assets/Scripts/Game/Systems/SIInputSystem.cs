@@ -46,7 +46,7 @@ namespace SpaceInvaders
         void TryToSendShootAction()
         {
             if(Input.GetKeyDown(KeyCode.Space))
-                SIEventsHandler.BroadcastOnShootInputReceived();
+                SIEventsHandler.BroadcastOnPlayerShoot();
                 
         }
 

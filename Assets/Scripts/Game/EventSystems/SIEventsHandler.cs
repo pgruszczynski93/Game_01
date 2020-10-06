@@ -5,19 +5,14 @@ namespace SpaceInvaders
 {
     public class SIEventsHandler {
         public static event Action<GameStates> OnGameStateChanged;
-        public static event Action OnEnemiesRespawn;
         public static event Action OnNonPlayableUpdate;
         public static event Action OnUpdate;
-        public static event Action OnShadersUpdate;
         public static event Action<SIEnemyBehaviour> OnEnemyDeath;
-        public static event Action OnDebugInputHandling;
         public static event Action OnWaveEnd;
-        public static event Action OnShootInputReceived;
-        public static event Action OnReloading;
+        public static event Action OnPlayerShoot;
         public static event Action<WeaponTier> OnWeaponTierUpdate;
 //        public static event Action<float> OnEnemySpeedMultiplierChanged;
         public static event Action<Vector3> OnAxesInputReceived;
-        public static event Action<int> OnShootingEnemiesUpdate;
 
         public static void BroadcastOnGameStateChanged(GameStates gameState)
         {
@@ -28,14 +23,10 @@ namespace SpaceInvaders
         {
             OnWeaponTierUpdate?.Invoke(weaponTier);
         }
-        public static void BroadcastOnReloading()
-        {
-            OnReloading?.Invoke();
-        }
         
-        public static void BroadcastOnShootInputReceived()
+        public static void BroadcastOnPlayerShoot()
         {
-            OnShootInputReceived?.Invoke();
+            OnPlayerShoot?.Invoke();
         }
 
         public static void BroadcastOnAxesInputReceived(Vector3 inputVector)
@@ -43,39 +34,19 @@ namespace SpaceInvaders
             OnAxesInputReceived?.Invoke(inputVector);
         }
 
-        public static void BroadcastOnShootingEnemiesUpdate(int index)
-        {
-            OnShootingEnemiesUpdate?.Invoke(index);
-        }
-
         public static void BroadcastOnNonPlayableUpdate()
         {
             OnNonPlayableUpdate?.Invoke();
         }
 
-        public static void BroadcastOnEnemiesRespawn()
-        {
-            OnEnemiesRespawn?.Invoke();
-        }
-        
         public static void BroadcastOnUpdate()
         {
             OnUpdate?.Invoke();
         }
         
-        public static void BroadcastOnShadersUpdate()
-        {
-            OnShadersUpdate?.Invoke();
-        }
-        
         public static void BroadcastOnEnemyDeath(SIEnemyBehaviour enemyBehaviour)
         {
             OnEnemyDeath?.Invoke(enemyBehaviour);
-        }
-        
-        public static void BroadcastOnDebugInputHandling()
-        {
-            OnDebugInputHandling?.Invoke();
         }
         
         public static void BroadcastOnWaveEnd()

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8667478317147580685
 Transform:
   m_ObjectHideFlags: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7515c85957ffd34796c72025b02f568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bonusDropThreshold: 25
+  _bonusDropThreshold: 99
   _bonusesSetup:
   - {fileID: 11400000, guid: fa0ff032deaf6c2478339782a7a874c4, type: 2}
   - {fileID: 11400000, guid: 80b619222c673b744b70bead767a8218, type: 2}
@@ -109,7 +109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2731769320945106522
 Transform:
   m_ObjectHideFlags: 0
@@ -248,6 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7025270549699991142}
   - component: {fileID: 7025270549699991145}
+  - component: {fileID: 2051487026}
   m_Layer: 0
   m_Name: '[GameManager]'
   m_TagString: Untagged
@@ -286,7 +287,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb64a4c5269a71740b64268329a4baaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isGameStarted: 0
   _mainCamera: {fileID: 0}
   _player: {fileID: 0}
   _screeenAreaCalculator: {fileID: 7234290583865494630}
+--- !u!114 &2051487026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025270549699991144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dbb9287806f4745a0ce4de35fe9ae12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentGameState: 0

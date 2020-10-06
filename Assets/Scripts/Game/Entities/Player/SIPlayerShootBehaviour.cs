@@ -4,15 +4,15 @@
     {
         protected override void AssignEvents()
         {
-            SIEventsHandler.OnShootInputReceived += HandleOnShootInputReceived;
+            SIEventsHandler.OnPlayerShoot += HandleOnPlayerShoot;
         }
 
         protected override void RemoveEvents()
         {
-            SIEventsHandler.OnShootInputReceived -= HandleOnShootInputReceived;
+            SIEventsHandler.OnPlayerShoot -= HandleOnPlayerShoot;
         }
 
-        void HandleOnShootInputReceived()
+        void HandleOnPlayerShoot()
         {
             TryToShootProjectile();
         }
