@@ -5,7 +5,7 @@ namespace SpaceInvaders
 {
     public class SIEventsHandler {
         public static event Action<GameStates> OnGameStateChanged;
-        public static event Action OnNonPlayableUpdate;
+        public static event Action OnIndependentUpdate;
         public static event Action OnUpdate;
         public static event Action<SIEnemyBehaviour> OnEnemyDeath;
         public static event Action OnWaveEnd;
@@ -34,9 +34,9 @@ namespace SpaceInvaders
             OnAxesInputReceived?.Invoke(inputVector);
         }
 
-        public static void BroadcastOnNonPlayableUpdate()
+        public static void BroadcastOnIndependentUpdate()
         {
-            OnNonPlayableUpdate?.Invoke();
+            OnIndependentUpdate?.Invoke();
         }
 
         public static void BroadcastOnUpdate()

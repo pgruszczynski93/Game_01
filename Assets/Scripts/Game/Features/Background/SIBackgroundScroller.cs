@@ -47,13 +47,13 @@ namespace SpaceInvaders
 
         private void AssignEvents()
         {
-            SIEventsHandler.OnNonPlayableUpdate += MoveObject;
+            SIEventsHandler.OnIndependentUpdate += MoveObject;
             SIEventsHandler.OnAxesInputReceived += HandleAxesInputReceived;
         }
 
         private void RemoveEvents()
         {
-            SIEventsHandler.OnNonPlayableUpdate -= MoveObject;
+            SIEventsHandler.OnIndependentUpdate -= MoveObject;
             SIEventsHandler.OnAxesInputReceived -= HandleAxesInputReceived;
         }
 

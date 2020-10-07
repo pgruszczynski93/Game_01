@@ -39,6 +39,7 @@ namespace SpaceInvaders
                     break;
                 case CollisionTag.EnemyWeapon:
 //                    Debug.Log("EnemyWeapon hitted");
+                    SIGameplayEvents.BroadcastOnEnemyWeaponHit();
                     break;
                 case CollisionTag.Bonus:
 //                    Debug.Log("Bonus hitted");

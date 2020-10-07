@@ -55,7 +55,7 @@ namespace SpaceInvaders {
 
         void RunGameLoop()
         {
-            SIEventsHandler.BroadcastOnNonPlayableUpdate();
+            SIEventsHandler.BroadcastOnIndependentUpdate();
             
             if (!IsGameRunning())
                 return;
