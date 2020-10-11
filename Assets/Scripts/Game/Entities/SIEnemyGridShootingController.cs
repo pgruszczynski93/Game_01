@@ -42,7 +42,7 @@ namespace SpaceInvaders
             SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
             SIEnemyGridEvents.OnGridShootingReset += HandleOnGridShootingReset;
             SIEnemyGridEvents.OnSubscribeToShooting += HandleOnSubscribeToShooting;
-            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
+            SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
         void RemoveEvents()
@@ -50,7 +50,7 @@ namespace SpaceInvaders
             SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
             SIEnemyGridEvents.OnGridShootingReset -= HandleOnGridShootingReset;
             SIEnemyGridEvents.OnSubscribeToShooting -= HandleOnSubscribeToShooting;
-            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+            SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
         void EnableGridShootingPossibility(bool isGridShootingEnabled)

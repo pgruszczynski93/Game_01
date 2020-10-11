@@ -4,12 +4,12 @@
     {
         protected override void AssignEvents()
         {
-            SIEventsHandler.OnPlayerShoot += HandleOnPlayerShoot;
+            SIGameplayEvents.OnPlayerShoot += HandleOnPlayerShoot;
         }
 
         protected override void RemoveEvents()
         {
-            SIEventsHandler.OnPlayerShoot -= HandleOnPlayerShoot;
+            SIGameplayEvents.OnPlayerShoot -= HandleOnPlayerShoot;
         }
 
         void HandleOnPlayerShoot()

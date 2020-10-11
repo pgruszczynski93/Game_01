@@ -58,13 +58,13 @@ namespace SpaceInvaders
         void AssignEvents()
         {
             SIEventsHandler.OnUpdate += CheckIsProjectileOnScreen;
-            SIEventsHandler.OnWaveEnd += StopAndResetProjectile;
+            SIGameplayEvents.OnWaveEnd += StopAndResetProjectile;
         }
         
         void RemoveEvents()
         {
             SIEventsHandler.OnUpdate -= CheckIsProjectileOnScreen;
-            SIEventsHandler.OnWaveEnd -= StopAndResetProjectile;
+            SIGameplayEvents.OnWaveEnd -= StopAndResetProjectile;
         }
         
         public void TryToLaunchWeapon()

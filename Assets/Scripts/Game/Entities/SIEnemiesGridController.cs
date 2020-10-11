@@ -42,13 +42,13 @@ namespace SpaceInvaders
         void SubscribeEvents()
         {
             SIEventsHandler.OnGameStateChanged += HandleOnGameStateChanged;
-            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
+            SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
         void UnsubscribeEvents()
         {
             SIEventsHandler.OnGameStateChanged -= HandleOnGameStateChanged;
-            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+            SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
         void HandleOnGameStateChanged(GameStates gameState)
@@ -164,7 +164,7 @@ namespace SpaceInvaders
         IEnumerator RestartGridRoutine()
         {
             yield return StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.endWaveCooldown,
-                SIEventsHandler.BroadcastOnWaveEnd));
+                SIGameplayEvents.BroadcastOnWaveEnd));
             SetLivingEnemiesCount();
             yield return StartCoroutine(SIWaitUtils.SkipFramesAndInvoke(1,
                 ReloadGridObjects));

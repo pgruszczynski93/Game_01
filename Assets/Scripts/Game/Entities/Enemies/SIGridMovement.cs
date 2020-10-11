@@ -72,7 +72,7 @@ namespace SpaceInvaders
         {
             SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
             SIEventsHandler.OnUpdate += HandleOnUpdate;
-            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
+            SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
             SIEnemyGridEvents.OnUpdateGridMovementSpeedTier += HandleOnEnemySpeedMultiplierChanged;
         }
 
@@ -80,7 +80,7 @@ namespace SpaceInvaders
         {
             SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
-            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
+            SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
             SIEnemyGridEvents.OnUpdateGridMovementSpeedTier -= HandleOnEnemySpeedMultiplierChanged;
         }
 

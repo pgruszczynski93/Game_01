@@ -106,7 +106,7 @@ namespace SpaceInvaders
 
         void BroadcastEnemyDeath()
         {
-            SIEventsHandler.BroadcastOnEnemyDeath(this);
+            SIGameplayEvents.BroadcastOnEnemyDeath(this);
         }
 
         void SetEnemyDead()

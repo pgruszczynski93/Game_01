@@ -29,12 +29,12 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIEventsHandler.OnWaveEnd += InitialReset;
+            SIGameplayEvents.OnWaveEnd += InitialReset;
         }
 
         void RemoveEvents()
         {
-            SIEventsHandler.OnWaveEnd -= InitialReset;
+            SIGameplayEvents.OnWaveEnd -= InitialReset;
         }
 
         void TryToUpdateGridDimensions()

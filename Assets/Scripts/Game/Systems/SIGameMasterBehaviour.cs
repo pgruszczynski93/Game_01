@@ -48,8 +48,8 @@ namespace SpaceInvaders
         void SubscribeEvents()
         {
             // add 
-            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
-            SIEventsHandler.OnWaveEnd += HandleOnWaveEnd;
+            SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
             SIBonusesEvents.OnBonusCollected += HandleOnBonusCollected;
             SIGameplayEvents.OnEnemyWeaponHit += HandleOnEnemyWeaponHit;
             //update score here
@@ -57,8 +57,8 @@ namespace SpaceInvaders
 
         void UnsubscribeEvents()
         {
-            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
-            SIEventsHandler.OnWaveEnd -= HandleOnWaveEnd;
+            SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
+            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
             SIBonusesEvents.OnBonusCollected -= HandleOnBonusCollected;
             SIGameplayEvents.OnEnemyWeaponHit -= HandleOnEnemyWeaponHit;
         }
