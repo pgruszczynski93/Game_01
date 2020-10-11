@@ -3,7 +3,6 @@ using Random = UnityEngine.Random;
 
 namespace SpaceInvaders
 {
-    [ExecuteInEditMode]
     public class SIAsteroidSpawner : MonoBehaviour
     {
         [SerializeField] AsteroidSpawnerSetup _spawnerSetup;
@@ -18,6 +17,7 @@ namespace SpaceInvaders
 
         void Start()
         {
+            TryToLoadSetup();
             Initialise();
             TryToSpawn();
         }
@@ -33,7 +33,6 @@ namespace SpaceInvaders
         }
         void Initialise()
         {
-            TryToLoadSetup();
             _asteroidsTemplateParent = transform;
             _mainCamera = SIGameMasterBehaviour.Instance.MainCamera;
             _cameraZ = _mainCamera.transform.localPosition.z;
