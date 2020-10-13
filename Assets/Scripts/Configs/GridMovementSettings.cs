@@ -11,6 +11,7 @@ namespace SpaceInvaders
         [Range(0, 1)] public float gridDownStep;
         [Range(0, 2)] public float speedMultiplierStep;
         [Range(0, 1)] public float enemyWidthOffset;
+        [Range(0, 2)] public float speedMultiplierUpdateTime;
         public float initialMovementEaseDuration;
         public float horizontalDownstepDuration;
 

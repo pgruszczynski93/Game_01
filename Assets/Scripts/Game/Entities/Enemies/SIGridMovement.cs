@@ -126,7 +126,10 @@ namespace SpaceInvaders
         }
         void TryToUpdateCurrentMovementSpeed(float multiplier)
         {
-            _currentSpeedMultiplier = multiplier;
+            DOTween.To(() => _currentSpeedMultiplier, 
+                newMultiplier => _currentSpeedMultiplier = newMultiplier,
+                multiplier,
+                _gridMovementSettings.speedMultiplierUpdateTime);
         }
 
         void UpdateMovementOffsets()
