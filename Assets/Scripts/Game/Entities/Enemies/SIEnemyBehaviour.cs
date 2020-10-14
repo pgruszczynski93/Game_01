@@ -57,14 +57,12 @@ namespace SpaceInvaders
         {
             SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
             SIGameplayEvents.OnDamage += HandleOnDamage;
-            //            SIEventsHandler.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
         void RemoveEvents()
         {
             SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
             SIGameplayEvents.OnDamage -= HandleOnDamage;
-            //            SIEventsHandler.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
         void HandleOnGridReset()
