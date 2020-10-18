@@ -1,17 +1,14 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace SpaceInvaders
-{
-    public class SIGridMovement : SIMovement
-    {
+namespace SpaceInvaders {
+    public class SIGridMovement : SIMovement {
         [SerializeField] GridMovementSetup _gridMovementSetup;
-
         [SerializeField] float _currentSpeedMultiplier;
         [Range(0f, 3f), SerializeField] protected float _screenEdgeOffset;
         [SerializeField] SIGridMovementLimiter gridMovementLimiter;
 
-        bool _isInHorizontalLimits;
+        bool _isNextStepPossible;
         bool _isTweeningVerticalMovement;
         bool _isInitialSequenceFinished;
         int _gridMovementSpeedTier;
@@ -42,7 +39,8 @@ namespace SpaceInvaders
         void InitialiseTweeners()
         {
             _initialMovementTweener = _thisTransform
-                .DOLocalMove(_gridMovementSettings.worldTargetPosition, _gridMovementSettings.initialMovementEaseDuration)
+                .DOLocalMove(_gridMovementSettings.worldTargetPosition,
+                    _gridMovementSettings.initialMovementEaseDuration)
                 .OnPlay(() => _isInitialSequenceFinished = false)
                 .OnComplete(() =>
                 {
@@ -67,7 +65,7 @@ namespace SpaceInvaders
                 .Pause();
         }
 
-        protected override void AssignEvents()
+        protected override void SubscribeEvents()
         {
             SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
             SIEventsHandler.OnUpdate += HandleOnUpdate;
@@ -75,7 +73,7 @@ namespace SpaceInvaders
             SIEnemyGridEvents.OnUpdateGridMovementSpeedTier += HandleOnEnemySpeedMultiplierChanged;
         }
 
-        protected override void RemoveEvents()
+        protected override void UnsubscribeEvents()
         {
             SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
@@ -105,7 +103,7 @@ namespace SpaceInvaders
         {
             TryToUpdateCurrentMovementSpeed(_gridMovementSettings.gridMovementSpeedTiers[tier]);
         }
-        
+
         void ExecuteInitialMovementSequence()
         {
             _initialMovementTweener.Restart();
@@ -123,9 +121,10 @@ namespace SpaceInvaders
             _initialMovementTweener.Pause();
             _verticalMovementTweener.Pause();
         }
+
         void TryToUpdateCurrentMovementSpeed(float multiplier)
         {
-            DOTween.To(() => _currentSpeedMultiplier, 
+            DOTween.To(() => _currentSpeedMultiplier,
                 newMultiplier => _currentSpeedMultiplier = newMultiplier,
                 multiplier,
                 _gridMovementSettings.speedMultiplierUpdateTime);
@@ -142,7 +141,7 @@ namespace SpaceInvaders
 
         protected override void TryToMoveObject()
         {
-            if (!_isInitialSequenceFinished  || !_canMove)
+            if (!_isInitialSequenceFinished || !_canMove)
                 return;
             UpdatePosition();
         }
@@ -150,6 +149,7 @@ namespace SpaceInvaders
         protected override void TryToStopObject()
         {
             _canMove = false;
+            _isTweeningVerticalMovement = false;
         }
 
         protected override void UpdatePosition()
@@ -157,55 +157,49 @@ namespace SpaceInvaders
             _dt = Time.deltaTime;
 
             Vector3 currentPosition = _thisTransform.position;
-            float horizontalMovementDelta = _dt * _currentSpeedMultiplier * _currentMovementSpeed;
-            _isInHorizontalLimits =
-                SIScreenUtils.IsInHorizontalWorldScreenLimit(currentPosition, _leftScreenEdgeOffset,
-                    _rightScreenEdgeOffset);
+            float posDelta = _dt * _currentSpeedMultiplier * _currentMovementSpeed;
+            Vector3 nextPosition =
+                new Vector3(currentPosition.x + posDelta, currentPosition.y, currentPosition.z);
 
-            if (_isInHorizontalLimits)
-            {
-                MoveObjectHorizontally(currentPosition, horizontalMovementDelta);
-            }
+            _isNextStepPossible = SIScreenUtils.IsInHorizontalWorldScreenLimit(nextPosition,
+                _leftScreenEdgeOffset,
+                _rightScreenEdgeOffset);
+
+            if (_isTweeningVerticalMovement)
+                return;
+
+            if (_isNextStepPossible)
+                MoveObjectHorizontally(currentPosition, nextPosition);
             else
-            {
-                ClampAndInverseObjectMovementToScreenBounds(currentPosition);
-            }
+                MoveObjectVertically(nextPosition);
         }
 
-        void MoveObjectHorizontally(Vector3 currentPosition, float horizontalMovementDelta)
+        void MoveObjectHorizontally(Vector3 currentPosition, Vector3 targetPosition)
         {
-            Vector3 newPosition = new Vector3(currentPosition.x + horizontalMovementDelta,
-                currentPosition.y, 0f);
             Vector3 smoothedPosition =
-                Vector3.Lerp(currentPosition, newPosition, _gridMovementSettings.movementSmoothStep);
+                Vector3.Lerp(currentPosition, targetPosition, _gridMovementSettings.movementSmoothStep);
             _thisTransform.position = smoothedPosition;
         }
 
-        void ClampAndInverseObjectMovementToScreenBounds(Vector3 currentPosition)
+        void MoveObjectVertically(Vector3 newPosition)
         {
-            if (!_isTweeningVerticalMovement)
-                MoveObjectVertically(currentPosition);
-        }
+            Vector3 startPos = new Vector3(
+                Mathf.Clamp(newPosition.x, _leftScreenEdgeOffset, _rightScreenEdgeOffset),
+                newPosition.y, newPosition.z);
 
-        void MoveObjectVertically(Vector3 currentPosition)
-        {
-            float clampedHorizontalPos =
-                Mathf.Clamp(currentPosition.x, _leftScreenEdgeOffset, _rightScreenEdgeOffset);
-
-            Vector3 verticalTargetPositon = new Vector3(
-                clampedHorizontalPos,
-                currentPosition.y - _gridMovementSettings.gridDownStep,
-                currentPosition.z);
+            Vector3 targetPos = new Vector3(startPos.x,
+                startPos.y - _gridMovementSettings.gridDownStep,
+                startPos.z);
 
             _verticalMovementTweener.Pause()
-                .ChangeEndValue(verticalTargetPositon, true)
+                .ChangeStartValue(startPos)
+                .ChangeEndValue(targetPos, true)
                 .Restart();
         }
-        
+
         protected override void UpdateRotation()
         {
             //Intentionally not implemented.
         }
-        
     }
 }

@@ -42,17 +42,17 @@ namespace SpaceInvaders
 
         protected virtual void OnEnable()
         {
-            AssignEvents();
+            SubscribeEvents();
         }
 
         protected virtual void OnDisable()
         {
-            RemoveEvents();
+            UnsubscribeEvents();
         }
 
-        protected virtual void AssignEvents() { }
+        protected virtual void SubscribeEvents() { }
 
-        protected virtual void RemoveEvents() { }
+        protected virtual void UnsubscribeEvents() { }
 
         protected virtual void ResetMovement() { }
 

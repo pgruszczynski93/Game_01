@@ -29,12 +29,12 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIGameplayEvents.OnWaveEnd += InitialReset;
+            SIGameplayEvents.OnWaveEnd += SetStartLimits;
         }
 
         void RemoveEvents()
         {
-            SIGameplayEvents.OnWaveEnd -= InitialReset;
+            SIGameplayEvents.OnWaveEnd -= SetStartLimits;
         }
 
         void TryToUpdateGridDimensions()
@@ -46,17 +46,17 @@ namespace SpaceInvaders
             for (int i = 0; i < _enemies.Length; i++)
             {
                 enemy = _enemies[i];
-                if (enemy.IsEnemyAlive() == false)
+                if (!enemy.IsEnemyAlive())
                     continue;
 
 
                 enemyTransform = enemy.transform;
                 xLocalPos = enemyTransform.localPosition.x;
-                FindNewGridDimensions(xLocalPos);
+                FindNewGridLocalMinMax(xLocalPos);
             }
         }
 
-        void InitialReset()
+        void SetStartLimits()
         {
             minMaxPair.localGridHorizontalMax = SIConstants.GRID_RIGHT_EDGE;
             minMaxPair.localGridHorizontalMin = SIConstants.GRID_LEFT_EDGE;
@@ -69,7 +69,7 @@ namespace SpaceInvaders
             minMaxPair.localGridHorizontalMin = SIConstants.GRID_RIGHT_EDGE;
         }
 
-        void FindNewGridDimensions(float xLocalPos)
+        void FindNewGridLocalMinMax(float xLocalPos)
         {
             if (xLocalPos < minMaxPair.localGridHorizontalMin)
                 minMaxPair.localGridHorizontalMin = xLocalPos;

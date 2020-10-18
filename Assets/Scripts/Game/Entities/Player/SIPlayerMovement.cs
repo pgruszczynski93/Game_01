@@ -30,13 +30,13 @@ namespace SpaceInvaders
             _currentMovementSpeed = _initialMovementSpeed;
         }
 
-        protected override void AssignEvents()
+        protected override void SubscribeEvents()
         {
             SIEventsHandler.OnUpdate += TryToMoveObject;
             SIEventsHandler.OnAxesInputReceived += HandleAxesInputReceived;
         }
 
-        protected override void RemoveEvents()
+        protected override void UnsubscribeEvents()
         {
             SIEventsHandler.OnUpdate -= TryToMoveObject;
             SIEventsHandler.OnAxesInputReceived += HandleAxesInputReceived;

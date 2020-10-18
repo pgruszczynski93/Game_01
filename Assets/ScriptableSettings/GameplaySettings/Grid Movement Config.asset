@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Grid Movement Config
   m_EditorClassIdentifier: 
   gridMovementSettings:
-    initialMovementSpeed: 3
+    initialMovementSpeed: 8
     initialSpeedMultiplier: 1
     movementSmoothStep: 0.4
     maxMovementSpeed: 30
@@ -30,8 +30,9 @@ MonoBehaviour:
     initialMovementEaseType: 5
     horizontalDownstepEaseType: 7
     gridMovementSpeedTiers:
-    - 1.5
-    - 2
     - 2.5
     - 3
-    - 3.5
+    - 4.5
+    - 5
+    - 5.5
+    - 6
