@@ -54,12 +54,12 @@ namespace SpaceInvaders
                 _effectTransform.SetParent(null);
         }
 
-        protected override void ForceEnableVFX()
+        protected virtual void ForceEnableVFX()
         {
             _effectVFX.SetActive(true);
         }
 
-        protected override void ForceDisableVFX()
+        protected virtual void ForceDisableVFX()
         {
             _effectVFX.SetActive(false);
         }

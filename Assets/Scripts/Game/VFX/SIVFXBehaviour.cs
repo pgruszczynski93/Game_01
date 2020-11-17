@@ -12,10 +12,6 @@ namespace SpaceInvaders
         {
             Initialise();
         }
-        protected virtual void OnEnable() { }
-        protected virtual void OnDisable() { }
-        protected virtual void ForceEnableVFX() { }
-        protected virtual void ForceDisableVFX() { }
         protected virtual void ResetVFX() { }
     }
 }

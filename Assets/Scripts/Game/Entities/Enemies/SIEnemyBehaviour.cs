@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -10,6 +9,7 @@ namespace SpaceInvaders
         [SerializeField] GameObject _colliderParent;
         [SerializeField] SIEnemyShootBehaviour _shootBehaviour;
         [SerializeField] SIBonusDropController _dropController;
+        [SerializeField] SIDamageVFX _damageVFX;
 
         EntitySettings _entitySettings;
         SIEnemyStatistics _enemyEntityStatistics;
@@ -130,7 +130,7 @@ namespace SpaceInvaders
             _enemyEntityStatistics.isAlive = isEnabled;
             // todo: edit when all data will be completed;
             _enemyEntityStatistics.enemyLevel = 1;
-            _enemyEntityStatistics.currentHealth = 40;
+            _enemyEntityStatistics.currentHealth = _entitySettings.initialStatistics.currentHealth;
         }
     }
 }
