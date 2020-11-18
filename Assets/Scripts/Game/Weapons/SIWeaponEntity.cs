@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIWeaponEntity : SIEntity
+    public class SIWeaponEntity : MonoBehaviour
     {
         [SerializeField] SIWeaponSetup _weaponSetup;
         [SerializeField] SIWeaponSettings _weaponSettings;
@@ -24,7 +24,11 @@ namespace SpaceInvaders
         Transform _thisTransform;
         DamageInfo _damageInfo;
 
-        protected override void Initialise()
+        void Start() => Initialise();
+        void OnEnable() => SubscribeEvents();
+        void OnDisable() => UnsubscribeEvents();
+
+        void Initialise()
         {
             _weaponSettings = _weaponSetup.weaponSettings;
             _isMoving = false;
@@ -40,28 +44,13 @@ namespace SpaceInvaders
             _bottomWorldLimit = screenWorldEdges.bottomScreenEdge - _weaponSettings.movementLimitOffset;
         }
 
-        void Start()
-        {
-            Initialise();
-        }
-
-        void OnEnable()
-        {
-            AssignEvents();
-        }
-
-        void OnDisable()
-        {
-            RemoveEvents();
-        }
-
-        void AssignEvents()
+        void SubscribeEvents()
         {
             SIEventsHandler.OnUpdate += CheckIsProjectileOnScreen;
             SIGameplayEvents.OnWaveEnd += StopAndResetProjectile;
         }
         
-        void RemoveEvents()
+        void UnsubscribeEvents()
         {
             SIEventsHandler.OnUpdate -= CheckIsProjectileOnScreen;
             SIGameplayEvents.OnWaveEnd -= StopAndResetProjectile;

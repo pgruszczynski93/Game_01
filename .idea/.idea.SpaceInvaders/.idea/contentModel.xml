@@ -318,7 +318,6 @@
             <e p="AsteroidSpawnerSetup.cs" t="Include" />
             <e p="BonusSettings.cs" t="Include" />
             <e p="BonusSetup.cs" t="Include" />
-            <e p="EntitySettings.cs" t="Include" />
             <e p="EntitySetup.cs" t="Include" />
             <e p="GridControllerSetup.cs" t="Include" />
             <e p="GridMovementSettings.cs" t="Include" />
@@ -330,7 +329,6 @@
             <e p="PlayerMovementSettings.cs" t="Include" />
             <e p="PlayerMovementSetup.cs" t="Include" />
             <e p="ScriptableSettingsMaster.cs" t="Include" />
-            <e p="SIEnemyStatistics.cs" t="Include" />
             <e p="SIPlayerStatistics.cs" t="Include" />
             <e p="SIWeaponSettings.cs" t="Include" />
             <e p="SIWeaponSetup.cs" t="Include" />
@@ -368,6 +366,7 @@
               <e p="Enemies" t="Include">
                 <e p="SIEnemyBehaviour.cs" t="Include" />
                 <e p="SIEnemyColliderBehaviour.cs" t="Include" />
+                <e p="SIEnemyHealth.cs" t="Include" />
                 <e p="SIEnemyMovement.cs" t="Include" />
                 <e p="SIEnemyShootBehaviour.cs" t="Include" />
                 <e p="SIGridMovement.cs" t="Include" />
@@ -378,13 +377,13 @@
                 <e p="SIPlayerBehaviour.cs" t="Include" />
                 <e p="SIPlayerBonusesManager.cs" t="Include" />
                 <e p="SIPlayerColliderBehaviour.cs" t="Include" />
-                <e p="SIPlayerEntity.cs" t="Include" />
+                <e p="SIPlayerHealth.cs" t="Include" />
                 <e p="SIPlayerMovement.cs" t="Include" />
                 <e p="SIPlayerShootBehaviour.cs" t="Include" />
               </e>
               <e p="SIEnemiesGridController.cs" t="Include" />
               <e p="SIEnemyGridShootingController.cs" t="Include" />
-              <e p="SIEntity.cs" t="Include" />
+              <e p="SIHealth.cs" t="Include" />
               <e p="SIMovement.cs" t="Include" />
               <e p="SITargetFollower.cs" t="Include" />
             </e>
@@ -410,7 +409,6 @@
               <e p="SIConstants.cs" t="Include" />
               <e p="SIConstantsHelpers.cs" t="Include" />
               <e p="SIDataHelper.cs" t="Include" />
-              <e p="SIEntityStatistics.cs" t="Include" />
               <e p="SIEnums.cs" t="Include" />
               <e p="SIGameStatistics.cs" t="Include" />
               <e p="SIHelpers.cs" t="Include" />

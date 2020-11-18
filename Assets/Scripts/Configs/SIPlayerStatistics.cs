@@ -1,10 +1,13 @@
 namespace SpaceInvaders
 {
-    public class SIPlayerStatistics : SIEntityStatistics
-    {
-        public int wavesSurvived;
+    [System.Serializable]
+    public class SIPlayerStatistics {
+        public int playerLevel;
+        public int playerKills;
+        public int currentWave;
         public int enemiesKilled;
         public int bonusesCollected;
-        public float currentScore;
+        public int bulletsDestroyed;
+        public float score;
     }
 }

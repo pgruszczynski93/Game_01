@@ -1,31 +1,36 @@
+using UnityEngine.Rendering.HighDefinition;
+
 namespace SpaceInvaders {
     [System.Serializable]
     public class SIGameStatistics {
         int playerKills;
 //        public int playerDeaths;
-        int enemyBulletsDestroyed;
-        int currentWave;
-        int playerCollectedBonuses;
-        float playerScore;
+
+        SIPlayerStatistics _playerStats;
+
+        public SIGameStatistics()
+        {
+            _playerStats = new SIPlayerStatistics();
+        }
 
         public void UpdatePlayerKillsCounter()
         {
-            ++playerKills;
+            ++_playerStats.playerKills;
         }
 
         public void UpdateEnemyBulletsDestroyedCounter()
         {
-            ++enemyBulletsDestroyed;
+            ++_playerStats.bulletsDestroyed;
         }
 
         public void UpdateCurrentWaveCounter()
         {
-            ++currentWave;
+            ++_playerStats.currentWave;
         }
 
         public void UpdatePlayerCollectedBonusesCounter()
         {
-            ++playerCollectedBonuses;
+            ++_playerStats.bonusesCollected;
         }
         
         
