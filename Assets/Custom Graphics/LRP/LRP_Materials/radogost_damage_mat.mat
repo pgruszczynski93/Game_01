@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: radogost_tinted_mat
+  m_Name: radogost_damage_mat
   m_Shader: {fileID: -6465566751694194690, guid: 9ddfd408d0c35ee46b2219aad7cae1c1,
     type: 3}
   m_ShaderKeywords: 
@@ -94,16 +94,16 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 0
-    - _EdgeWidth: 0.04
+    - _EdgeWidth: 0
     - _EnvironmentReflections: 1
     - _FresnelPower: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _IsColorTintActive: 1
+    - _IsColorTintActive: 0
     - _Metallic: 0
     - _NoiseScale: 150
-    - _NoiseTreshold: 0.27
+    - _NoiseTreshold: 0
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
