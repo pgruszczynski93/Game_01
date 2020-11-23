@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 namespace SpaceInvaders {
     public class SIDamageVFX : MonoBehaviour {
@@ -24,21 +25,39 @@ namespace SpaceInvaders {
         [SerializeField] Renderer _renderer;
 
         bool _isColorTintActive;
+        float _prevNoiseTresholdVal;
+        float _currNoiseTresholdVal;
+        float _prevEdgeWidthVal;
+        float _currEdgeWidthVal;
         Material _material;
 
         public void Initialise()
         {
             _material = _renderer.material;
+            _prevNoiseTresholdVal = 0;
+            _prevEdgeWidthVal = 0;
         }
 
         public void SetDamageVFX(float damagePercent)
         {
             if (!_isColorTintActive)
                 _isColorTintActive = true;
-            
+
+            _currNoiseTresholdVal = SIMathUtils.Remap(damagePercent, 0f, 1f, _minNoiseTreshold, _maxNoiseTreshold);
+            _currEdgeWidthVal = SIMathUtils.Remap(damagePercent, 0f, 1f, _minEdgeWidth, _maxEdgeWidth);
             _material.SetInt(isColorTintActivePropId, 1);
-            _material.SetFloat(noiseTresholdPropId, SIMathUtils.Remap(damagePercent, 0f, 1f, _minNoiseTreshold, _maxNoiseTreshold));
-            _material.SetFloat(edgeWidthPropId, SIMathUtils.Remap(damagePercent,0f, 1f, _minEdgeWidth, _maxEdgeWidth));
+            DOTween.To(()=>_prevNoiseTresholdVal, (newVal) => _prevNoiseTresholdVal = newVal, _currNoiseTresholdVal, 1.5f).OnUpdate(() =>
+            {
+                _material.SetFloat(noiseTresholdPropId, _prevNoiseTresholdVal);
+            })
+                .SetLoops(-1, LoopType.Yoyo);
+            DOTween.To(()=>_prevEdgeWidthVal, (newVal) => _prevEdgeWidthVal = newVal, _currEdgeWidthVal, 1.5f).OnUpdate(() =>
+                {
+                    _material.SetFloat(edgeWidthPropId, _prevEdgeWidthVal);
+                })
+                .SetLoops(-1, LoopType.Yoyo);
+            _prevNoiseTresholdVal = _currNoiseTresholdVal;
+            _prevEdgeWidthVal = _currEdgeWidthVal;
         }
 
         public void ResetDamageVFX()
