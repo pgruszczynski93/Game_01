@@ -46,23 +46,34 @@ namespace SpaceInvaders {
             _currNoiseTresholdVal = SIMathUtils.Remap(damagePercent, 0f, 1f, _minNoiseTreshold, _maxNoiseTreshold);
             _currEdgeWidthVal = SIMathUtils.Remap(damagePercent, 0f, 1f, _minEdgeWidth, _maxEdgeWidth);
             _material.SetInt(isColorTintActivePropId, 1);
-            DOTween.To(()=>_prevNoiseTresholdVal, (newVal) => _prevNoiseTresholdVal = newVal, _currNoiseTresholdVal, 1.5f).OnUpdate(() =>
+            // _material.SetFloat(noiseTresholdPropId, _currNoiseTresholdVal);
+            // _material.SetFloat(edgeWidthPropId, _currEdgeWidthVal);
+            DOTween.To(() => _prevNoiseTresholdVal, (newVal) => _prevNoiseTresholdVal = newVal, _currNoiseTresholdVal,
+                1.5f).OnUpdate(() =>
             {
                 _material.SetFloat(noiseTresholdPropId, _prevNoiseTresholdVal);
-            })
-                .SetLoops(-1, LoopType.Yoyo);
-            DOTween.To(()=>_prevEdgeWidthVal, (newVal) => _prevEdgeWidthVal = newVal, _currEdgeWidthVal, 1.5f).OnUpdate(() =>
+            }).OnComplete(() =>
+            {
+                _prevNoiseTresholdVal = _currNoiseTresholdVal;
+            });
+            //     .SetLoops(-1, LoopType.Yoyo);
+            DOTween.To(() => _prevEdgeWidthVal, (newVal) => _prevEdgeWidthVal = newVal, _currEdgeWidthVal, 1.5f)
+                .OnUpdate(() =>
                 {
                     _material.SetFloat(edgeWidthPropId, _prevEdgeWidthVal);
-                })
-                .SetLoops(-1, LoopType.Yoyo);
-            _prevNoiseTresholdVal = _currNoiseTresholdVal;
-            _prevEdgeWidthVal = _currEdgeWidthVal;
+                }).OnComplete(() =>
+                {
+                    _prevEdgeWidthVal = _currEdgeWidthVal;
+
+                });
+            //     .SetLoops(-1, LoopType.Yoyo);
         }
 
         public void ResetDamageVFX()
         {
             _isColorTintActive = false;
+            _prevNoiseTresholdVal = 0;
+            _prevEdgeWidthVal = 0;
             _material.SetInt(isColorTintActivePropId, 0);
             _material.SetFloat(noiseTresholdPropId, 0f);
             _material.SetFloat(edgeWidthPropId, 0f);
