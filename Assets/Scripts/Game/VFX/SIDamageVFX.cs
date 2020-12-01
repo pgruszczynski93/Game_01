@@ -44,16 +44,34 @@ namespace SpaceInvaders {
             _noiseChangeTween = DOTween.To(() => _prevNoiseTresholdVal,
                 newVal => _prevNoiseTresholdVal = newVal,
                 _currNoiseTresholdVal,
-                _noiseChangeDuration).SetAutoKill(false).Pause();
+                _noiseChangeDuration).SetAutoKill(false).
+                OnUpdate(() =>
+                {
+                    _material.SetFloat(noiseTresholdPropId, _prevNoiseTresholdVal);
+                }).
+                OnComplete(() =>
+                {
+                    _prevNoiseTresholdVal = _currNoiseTresholdVal;
+                }).
+                Pause();
             _edgeChangeTween = DOTween.To(() => _prevEdgeWidthVal,
                 newVal => _prevEdgeWidthVal = newVal,
-                _currEdgeWidthVal, _edgeChangeDuration).SetAutoKill(false).Pause();
-            //
+                _currEdgeWidthVal, _edgeChangeDuration).SetAutoKill(false).OnUpdate(() =>
+                {
+                    _material.SetFloat(edgeWidthPropId, _prevEdgeWidthVal);
+                }).
+                OnComplete(() =>
+                {
+                    _prevEdgeWidthVal = _currEdgeWidthVal;
+                    TryToEnableColorTint();
+                }).
+                Pause();
+            
             // _damageSequence = DOTween.Sequence();
             // _damageSequence.Append(_noiseChangeTween).Append(_edgeChangeTween)
             //     .OnUpdate(() =>
             //     {
-            //         _material.SetFloat(noiseTresholdPropId, _prevNoiseTresholdVal);
+            // _material.SetFloat(noiseTresholdPropId, _prevNoiseTresholdVal);
             //         _material.SetFloat(edgeWidthPropId, _prevEdgeWidthVal);
             //     }).OnComplete(() =>
             //     {
@@ -83,8 +101,8 @@ namespace SpaceInvaders {
             _currNoiseTresholdVal = SIMathUtils.Remap(damagePercent, 0f, 1f, _minNoiseTreshold, _maxNoiseTreshold);
             _currEdgeWidthVal = SIMathUtils.Remap(damagePercent, 0f, 1f, _minEdgeWidth, _maxEdgeWidth);
             _noiseChangeTween.ChangeEndValue(_currNoiseTresholdVal, true).Restart();
-            _edgeChangeTween.ChangeEndValue(_edgeChangeTween, true).Restart();
-            _damageSequence.Restart();
+            _edgeChangeTween.ChangeEndValue(_currEdgeWidthVal, true).Restart();
+            // _damageSequence.Restart();
             // _material.SetInt(isColorTintActivePropId, 1);
             // _material.SetFloat(noiseTresholdPropId, _currNoiseTresholdVal);
             // _material.SetFloat(edgeWidthPropId, _currEdgeWidthVal);

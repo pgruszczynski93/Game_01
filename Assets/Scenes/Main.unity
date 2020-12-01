@@ -2544,7 +2544,7 @@ PrefabInstance:
     - target: {fileID: 2676229917223812512, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3796128085518428701, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
@@ -2624,12 +2624,27 @@ PrefabInstance:
     - target: {fileID: 5544996131927073471, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: _noiseChangeDuration
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5544996131927073471, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}
       propertyPath: _edgeChangeDuration
-      value: 1
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544996131927073471, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: _maxNoiseTreshold
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544996131927073471, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: _minEdgeWidth
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544996131927073471, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
+        type: 3}
+      propertyPath: _maxEdgeWidth
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8460836828826116113, guid: 10c6e7f8c39c2ac4cb9722ba6293c1a2,
         type: 3}

@@ -297,9 +297,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minNoiseTreshold: 0.1
-  _maxNoiseTreshold: 0.5
-  _minEdgeWidth: 0.03
-  _maxEdgeWidth: 0.15
+  _maxNoiseTreshold: 0.4
+  _minEdgeWidth: 0.02
+  _maxEdgeWidth: 0.08
+  _noiseChangeDuration: 0.75
+  _edgeChangeDuration: 0.5
   _renderer: {fileID: 1881762110048184449}
 --- !u!1 &3426704194481364134
 GameObject:
