@@ -87,6 +87,7 @@ Material:
     - Vector1_588EC0B5: 0.01
     - Vector1_5FFA8B86: 100
     - Vector1_694C3C1A: 0
+    - Vector1_846794BA: 0.5
     - Vector1_F229247A: 0.7
     - _AlphaClip: 0
     - _Blend: 0
@@ -94,17 +95,18 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 0
-    - _EdgeWidth: 0.04
+    - _EdgeWidth: 0
     - _EnvironmentReflections: 1
     - _FresnelPower: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _GradientNoiseScale: 20
     - _IsColorTintActive: 0
     - _Metallic: 0
-    - _NoiseScale: 150.7
+    - _NoiseScale: 20
     - _NoiseScrollSpeed: -0.05
-    - _NoiseTreshold: 0.29
+    - _NoiseTreshold: 0
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -123,8 +125,10 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EdgeColor: {r: 4.1764092, g: 0.2077816, b: 0, a: 0}
+    - _EdgeInColor: {r: 3.6221788, g: 0.33117065, b: 0, a: 0}
+    - _EdgeOutColor: {r: 0.7075472, g: 0.1368369, b: 0.1368369, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 1.4980391, g: 0.2730637, b: 0, a: 0}
+    - _FresnelColor: {r: 1.4980392, g: 0.39215687, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
 --- !u!114 &5069514704184666157
 MonoBehaviour:
