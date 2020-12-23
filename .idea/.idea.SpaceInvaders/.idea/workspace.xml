@@ -59,10 +59,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/LRP/LRP_Materials/radogost_damage_mat.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Custom Graphics/LRP/LRP_Materials/radogost_damage_mat.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Shaders/DamageTint.shadergraph" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Shaders/DamageTint.shadergraph.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIDamageVFX.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIDamageVFX.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Shaders/DamageShader.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Shaders/DamageShader.shadergraph" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +96,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/MovementSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/AsteroidSpawnerSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EE47BE73-F7EF-409C-A5E5-CE4B121745B7/f2/816b4da9/Material.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Shield Bonus 1.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScriptableSettings/BonusesSettings/Weapon Bonus 1.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/SIWeaponSetup.cs" root0="FORCE_HIGHLIGHTING" />
@@ -107,6 +106,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Packages/JMO Assets/WarFX/Scripts/CFX_AutoDestructShuriken.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/GridShootingSetup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/DBD3A770-660A-456E-8DB8-894556CF3CAD/5c/792b0f57/ShortcutExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Grid controller config.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Packages/JMO Assets/WarFX/Scripts/CFX_LightIntensityFade.cs" root0="FORCE_HIGHLIGHTING" />
@@ -220,8 +220,10 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIParticleSystemVFX.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Editor/SILoggerExtension.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidsMaster.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/DBD3A770-660A-456E-8DB8-894556CF3CAD/52/4c10d9f3/Sequence.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/MovementSetup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Editor/SIBonusSelectorEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/DBD3A770-660A-456E-8DB8-894556CF3CAD/93/081c776f/TweenSettingsExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIGameStatistics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Editor/DictionaryDrawer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -543,6 +545,7 @@
       <workItem from="1606945798856" duration="1791000" />
       <workItem from="1607126274191" duration="442000" />
       <workItem from="1608589487933" duration="1061000" />
+      <workItem from="1608673347230" duration="8922000" />
     </task>
     <servers />
   </component>
@@ -639,10 +642,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="203" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606430728874" />
-    <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog" timestamp="1606862704581">
+    <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog" timestamp="1608679266783">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606862704581" />
+    <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608679266783" />
     <state x="1920" y="34" width="1684" height="1027" key="dock-window-1" timestamp="1608591267948">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -659,10 +663,11 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2536" y="240" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606428388006" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1606862399391">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1608673426957">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606862399391" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1608673426957" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -675,42 +680,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIDamageVFX.cs</url>
-          <line>78</line>
+          <line>41</line>
           <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\VFX\SIDamageVFX.cs" initialLine="60">
             <startOffsets>
-              <option value="3348" />
+              <option value="3034" />
             </startOffsets>
             <endOffsets>
-              <option value="3386" />
+              <option value="3072" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIDamageVFX.cs</url>
-          <line>74</line>
-          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\VFX\SIDamageVFX.cs" initialLine="56">
-            <startOffsets>
-              <option value="3139" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3194" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIDamageVFX.cs</url>
-          <line>104</line>
-          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\VFX\SIDamageVFX.cs" initialLine="86">
-            <startOffsets>
-              <option value="4314" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4340" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
