@@ -46,16 +46,6 @@ namespace SpaceInvaders
             SIEventsHandler.OnUpdate -= CheckIsObjectVisibleOnScreen;
         }
         
-        #if UNITY_EDITOR
-
-        void OnDrawGizmos()
-        {
-            Gizmos.color = Color.cyan;
-            Bounds bounds = _renderer.bounds;
-            Gizmos.DrawWireCube(bounds.center, bounds.size);
-        }
-        #endif
-        
         public void MoveObject()
         {
             if (_isMoving)
