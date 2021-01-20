@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7025270549699991142}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7520369025253830076
 MonoBehaviour:
@@ -48,6 +48,49 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fa0ff032deaf6c2478339782a7a874c4, type: 2}
   - {fileID: 11400000, guid: 80b619222c673b744b70bead767a8218, type: 2}
   - {fileID: 11400000, guid: 52a1d9f64191d88428ec5fa048f59904, type: 2}
+--- !u!1 &1763789109745568725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6600019003710313739}
+  - component: {fileID: 805692955999723306}
+  m_Layer: 0
+  m_Name: MaterialsCache
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6600019003710313739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763789109745568725}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7025270549699991142}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &805692955999723306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763789109745568725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a625e6651d5072c45bf7bde3c74982a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2266650787129907775
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +165,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7025270549699991142}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &655551624323167291
 MonoBehaviour:
@@ -270,6 +313,7 @@ Transform:
   - {fileID: 61300571735854361}
   - {fileID: 7149862662230536650}
   - {fileID: 6211987803090467932}
+  - {fileID: 6600019003710313739}
   - {fileID: 8667478317147580685}
   - {fileID: 2731769320945106522}
   m_Father: {fileID: 0}
@@ -290,6 +334,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 0}
   _player: {fileID: 0}
   _screeenAreaCalculator: {fileID: 7234290583865494630}
+  _materialCache: {fileID: 805692955999723306}
 --- !u!114 &2051487026
 MonoBehaviour:
   m_ObjectHideFlags: 0

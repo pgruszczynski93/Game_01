@@ -7,33 +7,12 @@ namespace SpaceInvaders
         [SerializeField] Camera _mainCamera;
         [SerializeField] SIPlayerBehaviour _player;
         [SerializeField] SIScreenAreaCalculator _screeenAreaCalculator;
+        [SerializeField] SIMaterialCache _materialCache;
 
-        public Camera MainCamera
-        {
-            get
-            {
-                if (_mainCamera != null)
-                    return _mainCamera;
-
-                Debug.LogError("No camera assigned!");
-                return null;
-
-            }
-        }
-
-        public SIPlayerBehaviour Player
-        {
-            get
-            {
-                if (_player != null)
-                    return _player;
-
-                Debug.LogError("No player assigned to SIGameMasterBehaviour");
-                return null;
-            }
-        }
-
+        public Camera MainCamera => _mainCamera;
+        public SIPlayerBehaviour Player => _player;
         public SIScreenAreaCalculator ScreenAreaCalculator => _screeenAreaCalculator;
+        public SIMaterialCache MaterialCache => _materialCache;
 
         void Start() => Initialise();
 

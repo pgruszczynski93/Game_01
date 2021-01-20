@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using SpaceInvaders;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ public class SIHealth : MonoBehaviour
     protected float _healthLossPercent;
 
     protected void Start() => Initialise();
-    
+
     void Initialise()
     {
         _damageVFX.Initialise();

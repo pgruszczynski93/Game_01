@@ -21,22 +21,16 @@ namespace SpaceInvaders {
         bool _isColorTintActive;
         float _currNoiseTresholdVal;
         float _currEdgeWidthVal;
+        float _nextNoiseTresholdVal;
+        float _nextEdgeWidthVal;
         Material _material;
-        Tweener _noiseTweener;
-        Tweener _edgeTweener;
+        MaterialPropertyBlock _matPropBlock;
 
         public void Initialise()
         {
-            _material = _renderer.material;
-            _noiseTweener = _material.DOFloat(0, noiseTresholdPropId, _noiseChangeDuration)
-                .SetAutoKill(false)
-                .Pause();
-            _edgeTweener = _material.DOFloat(0, edgeWidthPropId, _edgeChangeDuration)
-                .OnComplete(TryToEnableColorTint)
-                .SetAutoKill(false)
-                .Pause();
+            _material = _renderer.sharedMaterial;
+            _matPropBlock = new MaterialPropertyBlock();
         }
-
         void TryToEnableColorTint()
         {
             if (_isColorTintActive)
@@ -48,20 +42,31 @@ namespace SpaceInvaders {
 
         public void SetDamageVFX(float damagePercent)
         {
-            _currNoiseTresholdVal = SIMathUtils.Remap(damagePercent, 0f, 1f, _minNoiseTreshold, _maxNoiseTreshold);
-            _currEdgeWidthVal = SIMathUtils.Remap(damagePercent, 0f, 1f, _minEdgeWidth, _maxEdgeWidth);
-            _noiseTweener.ChangeEndValue(_currNoiseTresholdVal, true).Restart();
-            _edgeTweener.ChangeEndValue(_currEdgeWidthVal, true).Restart();
+            _nextNoiseTresholdVal = SIMathUtils.Remap(damagePercent, 0f, 1f, _minNoiseTreshold, _maxNoiseTreshold);
+            _nextEdgeWidthVal = SIMathUtils.Remap(damagePercent, 0f, 1f, _minEdgeWidth, _maxEdgeWidth);
+            
+            DOTween.To(() => _currNoiseTresholdVal, newVal => _currNoiseTresholdVal = newVal, _nextNoiseTresholdVal, _noiseChangeDuration)
+                .OnUpdate(() => UpdateSelectedFloatMaterialProperty(noiseTresholdPropId, _currNoiseTresholdVal));
+
+            DOTween.To(() => _currEdgeWidthVal, newVal => _currEdgeWidthVal = newVal, _nextEdgeWidthVal, _edgeChangeDuration)
+                .OnUpdate(() => UpdateSelectedFloatMaterialProperty(edgeWidthPropId, _currEdgeWidthVal))
+                .OnComplete(TryToEnableColorTint);
         }
 
+        void UpdateSelectedFloatMaterialProperty(int propertyId, float newValue) {
+            _renderer.GetPropertyBlock(_matPropBlock);
+            _matPropBlock.SetFloat(propertyId, newValue);
+            _renderer.SetPropertyBlock(_matPropBlock);
+        }
+        
         public void ResetDamageVFX()
         {
             _isColorTintActive = false;
             _currEdgeWidthVal = 0;
             _currNoiseTresholdVal = 0;
-            _material.SetInt(isColorTintActivePropId, 0);
-            _material.SetFloat(noiseTresholdPropId, 0f);
-            _material.SetFloat(edgeWidthPropId, 0f);
+            UpdateSelectedFloatMaterialProperty(isColorTintActivePropId, 0);
+            UpdateSelectedFloatMaterialProperty(noiseTresholdPropId, 0);
+            UpdateSelectedFloatMaterialProperty(edgeWidthPropId, 0);
         }
     }
 }
