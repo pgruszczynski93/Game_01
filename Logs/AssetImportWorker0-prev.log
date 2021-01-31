@@ -15,11 +15,11 @@ D:/Unity Projects/SpaceInvaders
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-53237
+55456
 Successfully changed project path to: D:/Unity Projects/SpaceInvaders
 D:/Unity Projects/SpaceInvaders
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 297.38 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 128.27 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.2.0f1 (3721df5a8b28)
 [Subsystems] Discovering subsystems at path C:/Windows/Unity/2020.2.0f1/Editor/Data/Resources/UnitySubsystems
@@ -38,708 +38,822 @@ Initialize mono
 Mono path[0] = 'C:/Windows/Unity/2020.2.0f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Windows/Unity/2020.2.0f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Windows/Unity/2020.2.0f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56092
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56456
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Windows/Unity/2020.2.0f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.003064 seconds.
+Registered in 0.001662 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 306.92 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 120.75 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.163 seconds
+- Completed reload, in  1.574 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.007580 seconds.
+Registered in 0.003705 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 335.18 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 136.58 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.673 seconds
+- Completed reload, in  1.141 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
 Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
 Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 5.05 ms, found 0 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 1.26 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4502 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 231.2 MB.
-System memory in use after: 230.9 MB.
+Unloading 4501 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 230.9 MB.
+System memory in use after: 230.6 MB.
 
-Unloading 41 unused Assets to reduce memory usage. Loaded Objects now: 4941.
-Total: 8.619100 ms (FindLiveObjects: 1.166900 ms CreateObjectMapping: 0.830300 ms MarkObjects: 5.914400 ms  DeleteObjects: 0.704000 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Scripts/Shaders/New Shader Graph.shadergraph
-  artifactKey: Guid(1464de297856d914cb4e8222e56af5cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Shaders/New Shader Graph.shadergraph using Guid(1464de297856d914cb4e8222e56af5cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2eb7ac04fa0fd66ad88b70d34bfa944') in 0.063319 seconds
-  Import took 0.080991 seconds .
+Unloading 41 unused Assets to reduce memory usage. Loaded Objects now: 4940.
+Total: 2.620800 ms (FindLiveObjects: 0.355000 ms CreateObjectMapping: 0.157900 ms MarkObjects: 1.798800 ms  DeleteObjects: 0.307900 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 297.413654 seconds.
-  path: Assets/Scripts/Shaders/HighlightShader.shadergraph
-  artifactKey: Guid(68239825ca4462041b21a50cb7028b63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Shaders/HighlightShader.shadergraph using Guid(68239825ca4462041b21a50cb7028b63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0227e7f094847e8ce12b29ce31bd0260') in 0.003061 seconds
-  Import took 0.021083 seconds .
+  path: Assets/Packages/PolygonSciFiSpace/Shaders/POLYGON_Triplanar_URP.shadergraph
+  artifactKey: Guid(03c7ebfaa1be8614bbe61b62f71a253b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Shaders/POLYGON_Triplanar_URP.shadergraph using Guid(03c7ebfaa1be8614bbe61b62f71a253b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55ac9f6d62247b633df17fe34ba2a332') in 0.028636 seconds
+  Import took 0.035059 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1.363930 seconds.
-  path: Assets/Scripts/Shaders/HighlightShader.shadergraph
-  artifactKey: Guid(68239825ca4462041b21a50cb7028b63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Shaders/HighlightShader.shadergraph using Guid(68239825ca4462041b21a50cb7028b63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0227e7f094847e8ce12b29ce31bd0260') in 0.002354 seconds
-  Import took 0.019263 seconds .
+  Time since last request: 6.452081 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Shaders/SyntyStudios_Planet_Simple_URP.shadergraph
+  artifactKey: Guid(27ef9ca2ab5d3dd41b2a27523eaac981) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Shaders/SyntyStudios_Planet_Simple_URP.shadergraph using Guid(27ef9ca2ab5d3dd41b2a27523eaac981) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52db8126a7fe0cc5a1fe3fb9d5f2370b') in 0.001503 seconds
+  Import took 0.007806 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 356.095333 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_03_D.mat
-  artifactKey: Guid(68d178ccb7d4c854ab101a41cbd5f649) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_03_D.mat using Guid(68d178ccb7d4c854ab101a41cbd5f649) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec9dbd6c79f8e3faa72a26f29147a681') in 0.701986 seconds
-  Import took 0.721599 seconds .
+  Time since last request: 0.008969 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Shaders/SyntyStudios_Planet_Simple_URP.shadergraph
+  artifactKey: Guid(27ef9ca2ab5d3dd41b2a27523eaac981) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Shaders/SyntyStudios_Planet_Simple_URP.shadergraph using Guid(27ef9ca2ab5d3dd41b2a27523eaac981) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52db8126a7fe0cc5a1fe3fb9d5f2370b') in 0.001491 seconds
+  Import took 0.007559 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000357 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_E.mat
-  artifactKey: Guid(dfa6de1631e5e0946bb53a3e7510cf41) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_E.mat using Guid(dfa6de1631e5e0946bb53a3e7510cf41) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '639867508a083461425739f4d2f8f6c1') in 0.107111 seconds
-  Import took 0.124878 seconds .
+  Time since last request: 21.337621 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Shaders/POLYGON_SpaceShip_Rim_URP.shadergraph
+  artifactKey: Guid(7d4a664f9d109d947b00b1922d55d1bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Shaders/POLYGON_SpaceShip_Rim_URP.shadergraph using Guid(7d4a664f9d109d947b00b1922d55d1bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27f8196e7cac4b3b3b08f23de30a2513') in 0.001576 seconds
+  Import took 0.008198 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000300 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_03_F.mat
-  artifactKey: Guid(f250cd59ae5057a459a2ee38ecf11b51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_03_F.mat using Guid(f250cd59ae5057a459a2ee38ecf11b51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e504ef5dedb25da1b3eb7e5b6e52c6eb') in 0.098901 seconds
-  Import took 0.117793 seconds .
+  Time since last request: 0.003759 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Shaders/POLYGON_SpaceShip_Rim_URP.shadergraph
+  artifactKey: Guid(7d4a664f9d109d947b00b1922d55d1bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Shaders/POLYGON_SpaceShip_Rim_URP.shadergraph using Guid(7d4a664f9d109d947b00b1922d55d1bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27f8196e7cac4b3b3b08f23de30a2513') in 0.001714 seconds
+  Import took 0.008345 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000432 seconds.
-  path: Assets/Packages/PolygonSciFiCity/Materials/Misc/Road.mat
-  artifactKey: Guid(e2a89766ae5b4a74fbe5769d9eb6d77a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiCity/Materials/Misc/Road.mat using Guid(e2a89766ae5b4a74fbe5769d9eb6d77a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '104dfb2c283651aef82ec71134e6e824') in 0.518939 seconds
-  Import took 0.537234 seconds .
+  Time since last request: 578.597659 seconds.
+  path: Assets/Scripts/Shaders/HighlighShaderSubgraph.shadersubgraph
+  artifactKey: Guid(c6af28c3166f8eb429ab7b7ce147ee0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Shaders/HighlighShaderSubgraph.shadersubgraph using Guid(c6af28c3166f8eb429ab7b7ce147ee0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c139a82c80394be30b3510f5c51ea61a') in 0.005455 seconds
+  Import took 0.013730 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000373 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_E.mat
-  artifactKey: Guid(f49294da54f38ec4d842929801c5838b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_E.mat using Guid(f49294da54f38ec4d842929801c5838b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71360f8514185ae2dd6c1e31f60e2410') in 0.110445 seconds
-  Import took 0.126467 seconds .
+  Time since last request: 806.496265 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Models/SM_Ship_Bomber_02.fbx
+  artifactKey: Guid(dba382466f606a74087ed6ac1c02271d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Models/SM_Ship_Bomber_02.fbx using Guid(dba382466f606a74087ed6ac1c02271d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3821141568beac63195b56c281490f29') in 0.242142 seconds
+  Import took 0.250265 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003698 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.36 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.309 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.32 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4225 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 213.9 MB.
+System memory in use after: 213.5 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5074.
+Total: 2.750000 ms (FindLiveObjects: 0.376800 ms CreateObjectMapping: 0.217000 ms MarkObjects: 1.886200 ms  DeleteObjects: 0.269100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003798 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.32 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.085 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.31 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 214.0 MB.
+System memory in use after: 213.7 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5076.
+Total: 3.090100 ms (FindLiveObjects: 0.450000 ms CreateObjectMapping: 0.191900 ms MarkObjects: 2.133500 ms  DeleteObjects: 0.313200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003553 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.31 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.060 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.32 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 213.7 MB.
+System memory in use after: 213.4 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5078.
+Total: 3.391900 ms (FindLiveObjects: 0.428500 ms CreateObjectMapping: 0.280400 ms MarkObjects: 2.366000 ms  DeleteObjects: 0.316100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003817 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.79 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.571 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.47 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 214.6 MB.
+System memory in use after: 214.3 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5080.
+Total: 3.940500 ms (FindLiveObjects: 0.845300 ms CreateObjectMapping: 0.293200 ms MarkObjects: 2.412500 ms  DeleteObjects: 0.387900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003531 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.045 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.30 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4225 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 213.9 MB.
+System memory in use after: 213.6 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5082.
+Total: 2.804200 ms (FindLiveObjects: 0.349200 ms CreateObjectMapping: 0.187300 ms MarkObjects: 1.947000 ms  DeleteObjects: 0.319600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003542 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.069 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.32 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 214.3 MB.
+System memory in use after: 214.0 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5084.
+Total: 3.675200 ms (FindLiveObjects: 0.503800 ms CreateObjectMapping: 0.533200 ms MarkObjects: 2.302700 ms  DeleteObjects: 0.334600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005002 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.34 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.069 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.36 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 214.6 MB.
+System memory in use after: 214.3 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5086.
+Total: 3.053400 ms (FindLiveObjects: 0.385500 ms CreateObjectMapping: 0.213800 ms MarkObjects: 2.105500 ms  DeleteObjects: 0.347700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003710 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.74 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.337 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.91 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 214.1 MB.
+System memory in use after: 213.8 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5088.
+Total: 4.033400 ms (FindLiveObjects: 0.524600 ms CreateObjectMapping: 0.456000 ms MarkObjects: 2.676000 ms  DeleteObjects: 0.374700 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000470 seconds.
-  path: Assets/Custom Graphics/LRP/LRP_Materials/stribog_mat_lrp.mat
-  artifactKey: Guid(84e10ea08b49e9a4fb4cc4283650eb32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Custom Graphics/LRP/LRP_Materials/stribog_mat_lrp.mat using Guid(84e10ea08b49e9a4fb4cc4283650eb32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e33f6c1a64731ab2c2cd81f1a958fb4f') in 0.136915 seconds
-  Import took 0.155688 seconds .
+  Time since last request: 5162.017391 seconds.
+  path: Assets/Scripts/Shaders/DamageShader.shadergraph
+  artifactKey: Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Shaders/DamageShader.shadergraph using Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9bdb56f9500f5da9392f813d5dea558b') in 0.010911 seconds
+  Import took 0.017601 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000391 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_C.mat
-  artifactKey: Guid(00d50f978d01d914e8ef8179fd6eb64a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_C.mat using Guid(00d50f978d01d914e8ef8179fd6eb64a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d430a22a26674138aa433f0582a85ec') in 0.106658 seconds
-  Import took 0.124984 seconds .
+  Time since last request: 0.175211 seconds.
+  path: Assets/Scripts/Shaders/DamageShader.shadergraph
+  artifactKey: Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Shaders/DamageShader.shadergraph using Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9bdb56f9500f5da9392f813d5dea558b') in 0.001782 seconds
+  Import took 0.009075 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000358 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_B.mat
-  artifactKey: Guid(75b88a7ae0f30754ca4709a6f380d872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_B.mat using Guid(75b88a7ae0f30754ca4709a6f380d872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa7d2e6fce8b4b4376aee8fad83eb3e9') in 0.105376 seconds
-  Import took 0.120252 seconds .
+  Time since last request: 11.136357 seconds.
+  path: Assets/Scripts/Shaders/DamageShader.shadergraph
+  artifactKey: Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Shaders/DamageShader.shadergraph using Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a562baa0859f5c6e0a623142b400199') in 0.001704 seconds
+  Import took 0.011173 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000453 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_F.mat
-  artifactKey: Guid(25cae7cd49ecd234d97d823685fb8aa0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_F.mat using Guid(25cae7cd49ecd234d97d823685fb8aa0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4227b81228d77b4ae1fbcf426b68368') in 0.118004 seconds
-  Import took 0.136012 seconds .
+  Time since last request: 0.017349 seconds.
+  path: Assets/Scripts/Shaders/DamageShader.shadergraph
+  artifactKey: Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Shaders/DamageShader.shadergraph using Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a562baa0859f5c6e0a623142b400199') in 0.001555 seconds
+  Import took 0.010566 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000346 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_C.mat
-  artifactKey: Guid(cf8172e935d39294aa17e9348aa50127) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_C.mat using Guid(cf8172e935d39294aa17e9348aa50127) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c234551829e02636fac17a3fe6170f0') in 0.108388 seconds
-  Import took 0.127002 seconds .
+  Time since last request: 10.860289 seconds.
+  path: Assets/Scripts/Shaders/DamageShader.shadergraph
+  artifactKey: Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Shaders/DamageShader.shadergraph using Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8e6657a92a0b13075861e488e2123c0') in 0.001708 seconds
+  Import took 0.008876 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000339 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Meshes/Materials/TranslucentCrystal.mat
-  artifactKey: Guid(98b9485a3da80d64598ed3d04774afdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Meshes/Materials/TranslucentCrystal.mat using Guid(98b9485a3da80d64598ed3d04774afdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27dd78759908b70c3e08f9df6fba5dba') in 1.198419 seconds
-  Import took 1.217703 seconds .
+  Time since last request: 0.016792 seconds.
+  path: Assets/Scripts/Shaders/DamageShader.shadergraph
+  artifactKey: Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Shaders/DamageShader.shadergraph using Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8e6657a92a0b13075861e488e2123c0') in 0.001582 seconds
+  Import took 0.008712 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000408 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv04.mat
-  artifactKey: Guid(244b27ac404eb314b925fa45909d0f54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv04.mat using Guid(244b27ac404eb314b925fa45909d0f54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c9dec4034d3fcfa34ba1b32d7ad09d5') in 2.258230 seconds
-  Import took 2.278551 seconds .
+  Time since last request: 12.566444 seconds.
+  path: Assets/Scripts/Shaders/DamageShader.shadergraph
+  artifactKey: Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Shaders/DamageShader.shadergraph using Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b8c82ba4b7ae1c2a528ba7c8e35a4c8') in 0.001958 seconds
+  Import took 0.009235 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000434 seconds.
-  path: Assets/Packages/Joystick Pack/Sprites/Art/Materials/Particles/Smoke.mat
-  artifactKey: Guid(a60e316ca749c6e45b8a63e99fd2e36d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Joystick Pack/Sprites/Art/Materials/Particles/Smoke.mat using Guid(a60e316ca749c6e45b8a63e99fd2e36d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94ac51a429f634bf025bd1bea8234228') in 0.027512 seconds
-  Import took 0.045924 seconds .
+  Time since last request: 0.014297 seconds.
+  path: Assets/Scripts/Shaders/DamageShader.shadergraph
+  artifactKey: Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Shaders/DamageShader.shadergraph using Guid(9ddfd408d0c35ee46b2219aad7cae1c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b8c82ba4b7ae1c2a528ba7c8e35a4c8') in 0.001727 seconds
+  Import took 0.009609 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000423 seconds.
-  path: Assets/Packages/Joystick Pack/Sprites/Art/Materials/Particles/Star.mat
-  artifactKey: Guid(ae8aaaf775cee3f438c468de8016b57f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Joystick Pack/Sprites/Art/Materials/Particles/Star.mat using Guid(ae8aaaf775cee3f438c468de8016b57f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd31857834c5615f0e25950f70df8850') in 0.016684 seconds
-  Import took 0.035413 seconds .
+  Time since last request: 81.565219 seconds.
+  path: Assets/Prefabs/Gameplay/Enemy_1.prefab
+  artifactKey: Guid(10c6e7f8c39c2ac4cb9722ba6293c1a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Gameplay/Enemy_1.prefab using Guid(10c6e7f8c39c2ac4cb9722ba6293c1a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f423d7dc7288e5763c8b3dfe3d9618c0') in 1.873479 seconds
+  Import took 1.885577 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000506 seconds.
-  path: Assets/Packages/StarGods - 3D_Models_Of_Spaceships/Materials/SG_stribog.mat
-  artifactKey: Guid(bf83df874a4e71144980a255d6479da3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/StarGods - 3D_Models_Of_Spaceships/Materials/SG_stribog.mat using Guid(bf83df874a4e71144980a255d6479da3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cee9824adc061d830337dfcde93d0fd6') in 0.304098 seconds
-  Import took 0.321575 seconds .
+  Time since last request: 122.743622 seconds.
+  path: Assets/Packages/PolygonSciFiCity/Materials/Alternates/PolygonScifi_02_C.mat
+  artifactKey: Guid(316dc25e2b60cf84e84e83a0a0995b59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiCity/Materials/Alternates/PolygonScifi_02_C.mat using Guid(316dc25e2b60cf84e84e83a0a0995b59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '341255aae2573717e84fea80e4c4bb94') in 1.026402 seconds
+  Import took 1.034282 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000408 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_F.mat
-  artifactKey: Guid(843219c1de3a00c43ae1a19123f5890e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_F.mat using Guid(843219c1de3a00c43ae1a19123f5890e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17c427af2e5f9fb2ffbd0c52149c7fab') in 0.112595 seconds
-  Import took 0.131337 seconds .
+  Time since last request: 0.000278 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_03_F.mat
+  artifactKey: Guid(852e08e8e7224cb4b8935e20924d01d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_03_F.mat using Guid(852e08e8e7224cb4b8935e20924d01d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '414f69a9ea091ec9d6d0cc7dbf5f3af0') in 0.389580 seconds
+  Import took 0.395442 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000367 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_A.mat
-  artifactKey: Guid(4321dd3b53da5eb41a38585710f15c97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_A.mat using Guid(4321dd3b53da5eb41a38585710f15c97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93d8f63aeae62604f2dcd2fdad01992e') in 0.102350 seconds
-  Import took 0.121498 seconds .
+  Time since last request: 0.000268 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Sign_01_D.mat
+  artifactKey: Guid(f3ed1cfe4f132644ea3ab6952075de93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Sign_01_D.mat using Guid(f3ed1cfe4f132644ea3ab6952075de93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '87b99fae6bac80aa847dfd47a5d4070b') in 0.069295 seconds
+  Import took 0.075578 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000461 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Meshes/Materials/TranslucentCrystal01.mat
-  artifactKey: Guid(a599ee448b7e6134585787897293aba1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Meshes/Materials/TranslucentCrystal01.mat using Guid(a599ee448b7e6134585787897293aba1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1894b2e1288a5d5c581600fc1bbdb021') in 0.013189 seconds
-  Import took 0.033185 seconds .
+  Time since last request: 0.000366 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_04_E.mat
+  artifactKey: Guid(471818ee249267849bd3a01cfefe564a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_04_E.mat using Guid(471818ee249267849bd3a01cfefe564a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd41cca0689fd1e5941ba0a49c1f4a439') in 0.372794 seconds
+  Import took 0.378513 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000423 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv01Gamma.mat
-  artifactKey: Guid(fa69f72f41417854cab1c22d84581efd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv01Gamma.mat using Guid(fa69f72f41417854cab1c22d84581efd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b6b92f9814482b2a7600b5fc1817de71') in 2.261601 seconds
-  Import took 2.284280 seconds .
+  Time since last request: 0.000302 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_04_F.mat
+  artifactKey: Guid(27935e4f4ec5bd848acb1c16b91ff694) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_04_F.mat using Guid(27935e4f4ec5bd848acb1c16b91ff694) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e92d41c4b870ba2b675068acf26ae9d8') in 0.386127 seconds
+  Import took 0.392343 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000326 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_A.mat
-  artifactKey: Guid(59ddaf0b08137c746bf06ef7ee5f184a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_A.mat using Guid(59ddaf0b08137c746bf06ef7ee5f184a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2fcd6a8f08fd85167b43ec800fb707fc') in 0.103581 seconds
-  Import took 0.121154 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000654 seconds.
-  path: Assets/Materials/SimpleColor.mat
-  artifactKey: Guid(c5913c4b891296045b04c8005227e9c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/SimpleColor.mat using Guid(c5913c4b891296045b04c8005227e9c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71a292f5b80af1417f06fafae53fbbad') in 0.013598 seconds
-  Import took 0.033008 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000332 seconds.
-  path: Assets/Packages/Missiles/Materials/StarSparrow Black.mat
-  artifactKey: Guid(020568ce6bb9b3245a24630d5282ca24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Missiles/Materials/StarSparrow Black.mat using Guid(020568ce6bb9b3245a24630d5282ca24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e847342c9e5005a739d541f5039657d6') in 0.388456 seconds
-  Import took 0.406714 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000400 seconds.
-  path: Assets/Packages/PolygonSciFiCity/Materials/Sign.mat
-  artifactKey: Guid(e2f0168603ace24468a4624111e25c50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiCity/Materials/Sign.mat using Guid(e2f0168603ace24468a4624111e25c50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf654ae34ebb8f0d1442ec47b4a23b3d') in 0.504373 seconds
-  Import took 0.528261 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000387 seconds.
-  path: Assets/Packages/Almgp_particle_vol_1/materials/sky.mat
-  artifactKey: Guid(25be524c0c3253b4ab4a046b75dad45e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Almgp_particle_vol_1/materials/sky.mat using Guid(25be524c0c3253b4ab4a046b75dad45e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0863a02d43c923f711cf53a176057abc') in 0.016790 seconds
-  Import took 0.035633 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000331 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv05Gamma.mat
-  artifactKey: Guid(1f3530bb86258a24eb67ed886f93dbed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv05Gamma.mat using Guid(1f3530bb86258a24eb67ed886f93dbed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce51554d75d128df80a8e61248f2ae6e') in 2.248535 seconds
-  Import took 2.268125 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000456 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_B.mat
-  artifactKey: Guid(dc057b31df0f97245ba2e522a1898bed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_B.mat using Guid(dc057b31df0f97245ba2e522a1898bed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c815aa1838872fe2dd06a9fa542c241') in 0.097061 seconds
-  Import took 0.116456 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000358 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/SG_Polygon_Player_Material.mat
-  artifactKey: Guid(178bf96f88f23f84aaff05163edbc504) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/SG_Polygon_Player_Material.mat using Guid(178bf96f88f23f84aaff05163edbc504) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f46d3ca5cc1daa6fbbf4e1310a8fc896') in 1.150297 seconds
-  Import took 1.169460 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000388 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv03.mat
-  artifactKey: Guid(39ccf0ab7d0ea904783d9a3f199ee241) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv03.mat using Guid(39ccf0ab7d0ea904783d9a3f199ee241) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69fb354f114de1c5cd88df21fb51b147') in 2.251860 seconds
-  Import took 2.271086 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000419 seconds.
-  path: Assets/Custom Graphics/LRP/LRP_Materials/radogost_mat_lrp.mat
-  artifactKey: Guid(a7ccd6b74ccf04b47862ebe9c8d371d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Custom Graphics/LRP/LRP_Materials/radogost_mat_lrp.mat using Guid(a7ccd6b74ccf04b47862ebe9c8d371d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ed9ffb664f6585f54060a934d8fb744') in 0.117679 seconds
-  Import took 0.135908 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000389 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv06.mat
-  artifactKey: Guid(944e2786b388ae64bb652b63f50a6023) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv06.mat using Guid(944e2786b388ae64bb652b63f50a6023) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e06c3a31b046770a8c5aa58789a1dc53') in 2.263856 seconds
-  Import took 2.283672 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000347 seconds.
-  path: Assets/Packages/PolygonSciFiCity/Materials/Misc/Steam_Mat.mat
-  artifactKey: Guid(47e542428617fb845a4b882c2b0a699a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiCity/Materials/Misc/Steam_Mat.mat using Guid(47e542428617fb845a4b882c2b0a699a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7d28d983bd63b19d5e535c5793c3d2e') in 0.018322 seconds
-  Import took 0.037389 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000331 seconds.
-  path: Assets/Packages/Missiles/Materials/StarSparrow Green.mat
-  artifactKey: Guid(6a0ff067fa651004b8447b29a0092251) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Missiles/Materials/StarSparrow Green.mat using Guid(6a0ff067fa651004b8447b29a0092251) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '872ee6d7b67009cda5ffd7911e91cae8') in 0.369125 seconds
-  Import took 0.387436 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000514 seconds.
-  path: Assets/Packages/Joystick Pack/Sprites/Art/Materials/SpaceInsect/SpaceInsect.mat
-  artifactKey: Guid(aa4f1fc7131982d428f97e003d82c953) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Joystick Pack/Sprites/Art/Materials/SpaceInsect/SpaceInsect.mat using Guid(aa4f1fc7131982d428f97e003d82c953) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88b7ebb1e5a8dd752b702e3e3bd6615b') in 0.397755 seconds
-  Import took 0.416146 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000485 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_B.mat
-  artifactKey: Guid(c79143b0d6739c9448e7836ffbf796ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_B.mat using Guid(c79143b0d6739c9448e7836ffbf796ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c5b29e740f793506baff27bb1dbe4ce7') in 0.098914 seconds
-  Import took 0.118040 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000430 seconds.
-  path: Assets/Packages/Missiles/Materials/StarSparrow Blue.mat
-  artifactKey: Guid(ca28c97d23f98024fb31e22662eb58e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Missiles/Materials/StarSparrow Blue.mat using Guid(ca28c97d23f98024fb31e22662eb58e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '07ee2a39466cb269fb77f2c9b5ffcf92') in 0.366996 seconds
-  Import took 0.385515 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000342 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_03_E.mat
-  artifactKey: Guid(a2f9e360438836e4680a2bb3c005161c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_03_E.mat using Guid(a2f9e360438836e4680a2bb3c005161c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd173d68cdb1b0147fe6e175c968a4393') in 0.101781 seconds
-  Import took 0.119611 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000434 seconds.
-  path: Assets/Packages/UnitySamples/Materials/prop_asteroid_01_mat.mat
-  artifactKey: Guid(583ff7026dac91849b7c7b2468ba456b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/UnitySamples/Materials/prop_asteroid_01_mat.mat using Guid(583ff7026dac91849b7c7b2468ba456b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1824707f025416f18db34ef5efdfc795') in 0.042682 seconds
-  Import took 0.059928 seconds .
+  Time since last request: 0.000375 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Models/Materials/PolygonSciFiSpace_Texture_03_A.mat
+  artifactKey: Guid(b0b0e6f101d08574887522f398ad5db1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Models/Materials/PolygonSciFiSpace_Texture_03_A.mat using Guid(b0b0e6f101d08574887522f398ad5db1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e8be5943e5c4d40aa4026325ef00c04') in 0.240740 seconds
+  Import took 0.247594 seconds .
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000311 seconds.
-  path: Assets/Packages/PolygonSciFiCity/Materials/Misc/SimpleSky.mat
-  artifactKey: Guid(e68f77e240a7f8643b5cc4253dc37516) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiCity/Materials/Misc/SimpleSky.mat using Guid(e68f77e240a7f8643b5cc4253dc37516) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a81adf18ce3c21d87f3edad4a04fbe0') in 0.026280 seconds
-  Import took 0.044984 seconds .
+  path: Assets/Packages/PolygonSciFiCity/Materials/Alternates/PolygonScifi_04_B.mat
+  artifactKey: Guid(51cf3e7710a033d46b4a1f0514895eec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiCity/Materials/Alternates/PolygonScifi_04_B.mat using Guid(51cf3e7710a033d46b4a1f0514895eec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14364cf804f44c349d3edf285f655eed') in 0.520521 seconds
+  Import took 0.531901 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000411 seconds.
-  path: Assets/Packages/Missiles/Materials/StarSparrow Purple.mat
-  artifactKey: Guid(b172b3eb38b7df64eb5c8a08420eea34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Missiles/Materials/StarSparrow Purple.mat using Guid(b172b3eb38b7df64eb5c8a08420eea34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26fb20783e267d5910f1087df9825a3d') in 0.378670 seconds
-  Import took 0.397037 seconds .
+  Time since last request: 0.000467 seconds.
+  path: Assets/Packages/PolygonSciFiCity/Materials/Misc/PolygonScifi_NeonSigns.mat
+  artifactKey: Guid(a7ac39c706d8eae4db78e4eda89d5ab3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiCity/Materials/Misc/PolygonScifi_NeonSigns.mat using Guid(a7ac39c706d8eae4db78e4eda89d5ab3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8df3a43599427e04c022c6c48a8e0801') in 0.611790 seconds
+  Import took 0.620259 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000371 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv04Gamma.mat
-  artifactKey: Guid(241fff3b9eb49d642a36366425f45d20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv04Gamma.mat using Guid(241fff3b9eb49d642a36366425f45d20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51f5e961f693d43c884194e4f4f16dae') in 2.357132 seconds
-  Import took 2.374626 seconds .
+  Time since last request: 0.000244 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/PolygonScifiSpace_Material_01_A.mat
+  artifactKey: Guid(4cee7a5983b187943adc589b9cb1f084) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/PolygonScifiSpace_Material_01_A.mat using Guid(4cee7a5983b187943adc589b9cb1f084) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8338ba76ead7823a4edf45cb63dc112') in 0.346500 seconds
+  Import took 0.352284 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000375 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv05.mat
-  artifactKey: Guid(9080663e19e6c1746956add261632240) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv05.mat using Guid(9080663e19e6c1746956add261632240) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a20d8bd83ccb73c2627befa82bce290') in 2.276491 seconds
-  Import took 2.296464 seconds .
+  Time since last request: 0.000258 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_01_E.mat
+  artifactKey: Guid(c5fe62ddf4bb7644aaaf993ed8f9aae5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_01_E.mat using Guid(c5fe62ddf4bb7644aaaf993ed8f9aae5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c1307274c6e36681dc53eedd21fd56b') in 0.232960 seconds
+  Import took 0.238864 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000322 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv02.mat
-  artifactKey: Guid(d6e4b99a74234c647aecaf9717d11c1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv02.mat using Guid(d6e4b99a74234c647aecaf9717d11c1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e34c70de41f99e0a9775314777f08ea') in 2.241465 seconds
-  Import took 2.260859 seconds .
+  Time since last request: 0.000254 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_01_B.mat
+  artifactKey: Guid(d8dfda64987cff5419b3497636a384d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_01_B.mat using Guid(d8dfda64987cff5419b3497636a384d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e0205f7afd9faedfb85b523a0bf8c71') in 0.366769 seconds
+  Import took 0.372910 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000448 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_A.mat
-  artifactKey: Guid(4826d451338cccd49befb672cb9c1933) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_A.mat using Guid(4826d451338cccd49befb672cb9c1933) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a98411ce2246aadcc3791f578a8159b7') in 0.106374 seconds
-  Import took 0.130141 seconds .
+  Time since last request: 0.000299 seconds.
+  path: Assets/Packages/PolygonSciFiCity/Materials/Alternates/PolygonScifi_04_E.mat
+  artifactKey: Guid(f48d74d319b42e046888964c0831d020) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiCity/Materials/Alternates/PolygonScifi_04_E.mat using Guid(f48d74d319b42e046888964c0831d020) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd20a9ddbff4825174ab3cc3617136d70') in 0.548541 seconds
+  Import took 0.555480 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000374 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/SG_Polygon_TEST_MAT.mat
-  artifactKey: Guid(4b0bddee2b4d9af4d8ee31e1b00873d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/SG_Polygon_TEST_MAT.mat using Guid(4b0bddee2b4d9af4d8ee31e1b00873d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8443ce9aa067d89c53f348bb64150330') in 0.811528 seconds
-  Import took 0.830824 seconds .
+  Time since last request: 0.000320 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/PolygonScifiSpace_SpaceStation_01.mat
+  artifactKey: Guid(32325f89619e00e4a8b9d25be264cfdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/PolygonScifiSpace_SpaceStation_01.mat using Guid(32325f89619e00e4a8b9d25be264cfdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6874218598ddab3b9a6479e2a415e70e') in 1.208912 seconds
+  Import took 1.220273 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000393 seconds.
-  path: Assets/Packages/UnitySamples/Materials/prop_asteroid_03_mat.mat
-  artifactKey: Guid(4c3865b2ac420cd46a9cde6ab468d016) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/UnitySamples/Materials/prop_asteroid_03_mat.mat using Guid(4c3865b2ac420cd46a9cde6ab468d016) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb8d71300771ea2049455a9202617161') in 0.038424 seconds
-  Import took 0.056495 seconds .
+  Time since last request: 0.000589 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_Dirt_01.mat
+  artifactKey: Guid(138e0aae3526bd54687107ed3fc9877c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_Dirt_01.mat using Guid(138e0aae3526bd54687107ed3fc9877c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ef63a7814c3c06cc1d8f487807fd859') in 1.020965 seconds
+  Import took 1.029754 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000353 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv02Gamma.mat
-  artifactKey: Guid(c6e18e7c3a9e23d428e61bfad6ba7d3a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv02Gamma.mat using Guid(c6e18e7c3a9e23d428e61bfad6ba7d3a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a59fc69c6d9a466ddcb873a1951b2f27') in 2.259678 seconds
-  Import took 2.277452 seconds .
+  Time since last request: 0.000324 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonScifi_PlanteRings_01.mat
+  artifactKey: Guid(7f23118735164934f94c1334b0d6fbac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonScifi_PlanteRings_01.mat using Guid(7f23118735164934f94c1334b0d6fbac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ce5237dc8a82c69d4c8f994f993c6b8') in 0.107748 seconds
+  Import took 0.113897 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000416 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_F.mat
-  artifactKey: Guid(b15f4c9eaf1428140a5c7c0cb1fad686) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_F.mat using Guid(b15f4c9eaf1428140a5c7c0cb1fad686) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dccd0774634c63397aa2bac3a7cba7a5') in 0.102143 seconds
-  Import took 0.119848 seconds .
+  Time since last request: 0.000278 seconds.
+  path: Assets/Packages/PolygonSciFiCity/Materials/Alternates/PolygonScifi_03_D.mat
+  artifactKey: Guid(08ba515e3c063a64bbec69a2c933acd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiCity/Materials/Alternates/PolygonScifi_03_D.mat using Guid(08ba515e3c063a64bbec69a2c933acd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be31ffc8fb178e975b5ca629044608d8') in 0.527597 seconds
+  Import took 0.539406 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000328 seconds.
-  path: Assets/Packages/StarGods - 3D_Models_Of_Spaceships/Materials/SG_velez.mat
-  artifactKey: Guid(8c112281db09f8846a24a7a24496e772) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/StarGods - 3D_Models_Of_Spaceships/Materials/SG_velez.mat using Guid(8c112281db09f8846a24a7a24496e772) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9532b2d45b369468eaf880002b49e47') in 0.542509 seconds
-  Import took 0.562837 seconds .
+  Time since last request: 0.000278 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Models/Materials/PolygonSciFiCity_Texture_01_A.mat
+  artifactKey: Guid(2e317f156e288ef4595ccb08d14367fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Models/Materials/PolygonSciFiCity_Texture_01_A.mat using Guid(2e317f156e288ef4595ccb08d14367fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c18e8d9f7d4481976c9daa8da9002ebe') in 0.006421 seconds
+  Import took 0.014440 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000372 seconds.
-  path: Assets/Packages/SF_Fighter/Materials/SciFi_Fighters-Fleet.mat
-  artifactKey: Guid(943c097650bb8b1489b8c07750068312) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SF_Fighter/Materials/SciFi_Fighters-Fleet.mat using Guid(943c097650bb8b1489b8c07750068312) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c14a6e6e49ae58a185ceb2c3d4ff03f8') in 1.813140 seconds
-  Import took 1.831847 seconds .
+  Time since last request: 0.000239 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_01_E.mat
+  artifactKey: Guid(475a38ac09e45e34190d59c017dadc53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/Alts/PolygonScifiSpace_Material_01_E.mat using Guid(475a38ac09e45e34190d59c017dadc53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20b2f032a37869e30b4f51400ef06f63') in 0.359275 seconds
+  Import took 0.366053 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000375 seconds.
-  path: Assets/Packages/PolygonSciFiCity/Materials/Misc/Shield_Bubble.mat
-  artifactKey: Guid(b2ce98f3fac40fe4ba6320203ed6fae4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiCity/Materials/Misc/Shield_Bubble.mat using Guid(b2ce98f3fac40fe4ba6320203ed6fae4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df4ff8275cf88a56f81c22e8c4892419') in 0.020759 seconds
-  Import took 0.038730 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000359 seconds.
-  path: Assets/Packages/Almgp_particle_vol_1/materials/trail_r.mat
-  artifactKey: Guid(493cb3854239fba47af45d61e7e97c98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Almgp_particle_vol_1/materials/trail_r.mat using Guid(493cb3854239fba47af45d61e7e97c98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84f1ccc99520e3a6829e62918ba9ba32') in 0.621106 seconds
-  Import took 0.640222 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000348 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_C.mat
-  artifactKey: Guid(07dbc31265bdd59498403bb57aff3705) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_C.mat using Guid(07dbc31265bdd59498403bb57aff3705) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6947eb13d16ffb3333b1a3dac0f4571') in 0.104713 seconds
-  Import took 0.122606 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000335 seconds.
-  path: Assets/Materials/stairs_mat.mat
-  artifactKey: Guid(d9e3ada53442ffc4fae54c7931657067) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/stairs_mat.mat using Guid(d9e3ada53442ffc4fae54c7931657067) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '78df5cfde25b7ba0923836b76b4e286f') in 0.069832 seconds
-  Import took 0.086347 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000371 seconds.
-  path: Assets/Packages/Missiles/Materials/StarSparrow Yellow.mat
-  artifactKey: Guid(5953a6e817e87be4195c31da8fdce334) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Missiles/Materials/StarSparrow Yellow.mat using Guid(5953a6e817e87be4195c31da8fdce334) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f71839f8b06d7d2c65c465f124e9fc8') in 0.503162 seconds
-  Import took 0.522580 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000334 seconds.
-  path: Assets/Packages/Missiles/Materials/StarSparrow Orange.mat
-  artifactKey: Guid(8b52c4a2cbd2a8248b7c6e782e73497e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Missiles/Materials/StarSparrow Orange.mat using Guid(8b52c4a2cbd2a8248b7c6e782e73497e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd6fe329e85f4f47a82c269493f06acd') in 0.373516 seconds
-  Import took 0.392677 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000416 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_D.mat
-  artifactKey: Guid(c297a32c3099e07479cfabab9f30732a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_03_D.mat using Guid(c297a32c3099e07479cfabab9f30732a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99224a5709505dc83a134f374e10cfcd') in 0.106909 seconds
-  Import took 0.121909 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000431 seconds.
-  path: Assets/Packages/SF_Fighter/Meshes/Materials/SciFi_Fighters-Fleet.mat
-  artifactKey: Guid(eaa762a03a4b5c8418e459439181a274) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SF_Fighter/Meshes/Materials/SciFi_Fighters-Fleet.mat using Guid(eaa762a03a4b5c8418e459439181a274) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f2224401034ff3a1bbfce99a34160be') in 1.768151 seconds
-  Import took 1.786124 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000345 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_D.mat
-  artifactKey: Guid(956699b20f8d66f4da211171e027e938) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_D.mat using Guid(956699b20f8d66f4da211171e027e938) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'de11154ac98c2e0d33afcaf8f02852f6') in 0.098877 seconds
-  Import took 0.119592 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000373 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv01.mat
-  artifactKey: Guid(416d15cd169c5a0468b8346abad16527) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv01.mat using Guid(416d15cd169c5a0468b8346abad16527) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83f3080b6e581279f78fdacbb5a91066') in 2.379207 seconds
-  Import took 2.399161 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000493 seconds.
-  path: Assets/Packages/UnitySamples/Materials/prop_asteroid_02_mat.mat
-  artifactKey: Guid(578af1667322bab45b652b79a40bb4fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/UnitySamples/Materials/prop_asteroid_02_mat.mat using Guid(578af1667322bab45b652b79a40bb4fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '85cf7dd3162bd4e6ac55786e0f3ab4c6') in 0.044969 seconds
-  Import took 0.063723 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000423 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_D.mat
-  artifactKey: Guid(20e4cf057c600f04eb0257bcbc7cfe25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_D.mat using Guid(20e4cf057c600f04eb0257bcbc7cfe25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32383a238b1457d2019d5d12afe879e8') in 0.101165 seconds
-  Import took 0.121500 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000478 seconds.
-  path: Assets/Packages/Missiles/Materials/StarSparrow Cyan.mat
-  artifactKey: Guid(d58bf68b17f9a4240aaeb5c200c9a12c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Missiles/Materials/StarSparrow Cyan.mat using Guid(d58bf68b17f9a4240aaeb5c200c9a12c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6fad09f19d0056e2b898c7471aea749b') in 0.375411 seconds
-  Import took 0.392417 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000355 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_E.mat
-  artifactKey: Guid(0d5676d48fb87f14f953e5151571f879) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_02_E.mat using Guid(0d5676d48fb87f14f953e5151571f879) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5c34b7cbc62068e2a8361447d1d26beb') in 0.105848 seconds
-  Import took 0.127724 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000851 seconds.
-  path: Assets/Packages/SpaceAssets/Materials/ShootingStarTrail.mat
-  artifactKey: Guid(c26bddf84a8994580a7295f6060da0d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SpaceAssets/Materials/ShootingStarTrail.mat using Guid(c26bddf84a8994580a7295f6060da0d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5b06365f6af8425f3817d712c6d6fea') in 0.013437 seconds
-  Import took 0.032588 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000365 seconds.
-  path: Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Sun.mat
-  artifactKey: Guid(20420331768a35e4db54bac675c22269) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Sun.mat using Guid(20420331768a35e4db54bac675c22269) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f7cd395692d568c36ddf365bf109820') in 0.013844 seconds
-  Import took 0.032670 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000638 seconds.
-  path: Assets/Packages/Missiles/Materials/StarSparrow Red.mat
-  artifactKey: Guid(3574d5733ac60b941b175932e0a1aa2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/Missiles/Materials/StarSparrow Red.mat using Guid(3574d5733ac60b941b175932e0a1aa2e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dbc289db9f385e4f1d7fc8d4ebe0a06e') in 0.376919 seconds
-  Import took 0.398688 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000403 seconds.
-  path: Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv03Gamma.mat
-  artifactKey: Guid(fe6fed4c1eab68741bbde3083c3fa986) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/SineVFX/TranslucentCrystals/Resources/Materials/TranslucentCrystalv03Gamma.mat using Guid(fe6fed4c1eab68741bbde3083c3fa986) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '613b947ca4c1f5937c407de5fabf6e48') in 2.301178 seconds
-  Import took 2.320953 seconds .
+  Time since last request: 0.000274 seconds.
+  path: Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01.mat
+  artifactKey: Guid(142397bd25cf70c4a9fe0c954934f343) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01.mat using Guid(142397bd25cf70c4a9fe0c954934f343) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec262be2a80b1cb188e1337d02bd09a9') in 0.310053 seconds
+  Import took 0.316020 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.009435 seconds.
+Registered in 0.003886 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 4.83 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 1.29 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.473 seconds
+- Completed reload, in  1.235 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
 Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
 Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
-Refreshing native plugins compatible for Editor in 4.55 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 1.30 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4225 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 237.0 MB.
-System memory in use after: 237.3 MB.
-
-Unloading 31 unused Assets to reduce memory usage. Loaded Objects now: 5108.
-Total: 8.999200 ms (FindLiveObjects: 1.267400 ms CreateObjectMapping: 0.803300 ms MarkObjects: 6.858600 ms  DeleteObjects: 0.066300 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.008544 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 4.63 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.343 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
-Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
-Refreshing native plugins compatible for Editor in 4.12 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4225 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 236.5 MB.
-System memory in use after: 236.8 MB.
-
-Unloading 31 unused Assets to reduce memory usage. Loaded Objects now: 5110.
-Total: 7.988200 ms (FindLiveObjects: 1.217300 ms CreateObjectMapping: 0.787400 ms MarkObjects: 5.905800 ms  DeleteObjects: 0.074100 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.008723 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 3.21 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.303 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
-Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
-Refreshing native plugins compatible for Editor in 4.18 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4225 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 237.0 MB.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.5 MB.
 System memory in use after: 237.2 MB.
 
-Unloading 31 unused Assets to reduce memory usage. Loaded Objects now: 5112.
-Total: 8.165100 ms (FindLiveObjects: 1.401000 ms CreateObjectMapping: 0.853500 ms MarkObjects: 5.846000 ms  DeleteObjects: 0.062700 ms)
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5244.
+Total: 2.943400 ms (FindLiveObjects: 0.389800 ms CreateObjectMapping: 0.218500 ms MarkObjects: 2.003800 ms  DeleteObjects: 0.330100 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 288.844764 seconds.
+  path: Assets/Prefabs/Gameplay/Enemy_1.prefab
+  artifactKey: Guid(10c6e7f8c39c2ac4cb9722ba6293c1a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Gameplay/Enemy_1.prefab using Guid(10c6e7f8c39c2ac4cb9722ba6293c1a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f5e4337fcd544455c06dcb180330fb3') in 0.433465 seconds
+  Import took 0.445921 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.008571 seconds.
+Registered in 0.003713 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.41 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 1.30 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.300 seconds
+- Completed reload, in  1.144 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
 Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
 Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
-Refreshing native plugins compatible for Editor in 4.32 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 1.30 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4225 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 236.6 MB.
-System memory in use after: 236.8 MB.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.7 MB.
+System memory in use after: 237.3 MB.
 
-Unloading 31 unused Assets to reduce memory usage. Loaded Objects now: 5114.
-Total: 7.694800 ms (FindLiveObjects: 1.180200 ms CreateObjectMapping: 0.747600 ms MarkObjects: 5.698600 ms  DeleteObjects: 0.065100 ms)
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5366.
+Total: 3.618400 ms (FindLiveObjects: 0.654200 ms CreateObjectMapping: 0.316000 ms MarkObjects: 2.294700 ms  DeleteObjects: 0.352400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003895 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.69 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.221 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.28 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.4 MB.
+System memory in use after: 237.1 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5368.
+Total: 3.616900 ms (FindLiveObjects: 0.436700 ms CreateObjectMapping: 0.258500 ms MarkObjects: 2.572400 ms  DeleteObjects: 0.348300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003965 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.31 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.206 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.86 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.7 MB.
+System memory in use after: 237.4 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5370.
+Total: 3.398600 ms (FindLiveObjects: 0.440700 ms CreateObjectMapping: 0.211200 ms MarkObjects: 2.404800 ms  DeleteObjects: 0.341000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003788 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.31 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.110 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.31 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.7 MB.
+System memory in use after: 237.4 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5372.
+Total: 3.505000 ms (FindLiveObjects: 0.437400 ms CreateObjectMapping: 0.257100 ms MarkObjects: 2.451900 ms  DeleteObjects: 0.357500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003615 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.31 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.109 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.33 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.7 MB.
+System memory in use after: 237.4 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5374.
+Total: 3.237800 ms (FindLiveObjects: 0.401300 ms CreateObjectMapping: 0.217900 ms MarkObjects: 2.271000 ms  DeleteObjects: 0.346600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003998 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.29 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.198 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.28 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.7 MB.
+System memory in use after: 237.4 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5376.
+Total: 4.174200 ms (FindLiveObjects: 0.559400 ms CreateObjectMapping: 0.280200 ms MarkObjects: 2.980000 ms  DeleteObjects: 0.352900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003798 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.31 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.142 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.30 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.7 MB.
+System memory in use after: 237.4 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5378.
+Total: 3.629800 ms (FindLiveObjects: 0.398300 ms CreateObjectMapping: 0.216500 ms MarkObjects: 2.686800 ms  DeleteObjects: 0.327400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003688 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.31 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.123 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.7 MB.
+System memory in use after: 237.4 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5380.
+Total: 3.708200 ms (FindLiveObjects: 0.585900 ms CreateObjectMapping: 0.278200 ms MarkObjects: 2.442500 ms  DeleteObjects: 0.400000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003631 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.52 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.393 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 1.48 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4226 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.7 MB.
+System memory in use after: 237.4 MB.
+
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 5382.
+Total: 5.035800 ms (FindLiveObjects: 1.020200 ms CreateObjectMapping: 0.453800 ms MarkObjects: 3.076300 ms  DeleteObjects: 0.483600 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 3183.537381 seconds.
+  path: Assets/Prefabs/Gameplay/Enemy_1.prefab
+  artifactKey: Guid(10c6e7f8c39c2ac4cb9722ba6293c1a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Gameplay/Enemy_1.prefab using Guid(10c6e7f8c39c2ac4cb9722ba6293c1a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b62af929779462489bbc002581689d3') in 0.496410 seconds
+  Import took 0.514740 seconds .
+
+========================================================================
+Received Prepare
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
+Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
+Refreshing native plugins compatible for Editor in 5.12 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 34 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 163.0 MB.
+System memory in use after: 162.8 MB.
+
+Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 5529.
+Total: 4.763700 ms (FindLiveObjects: 0.498900 ms CreateObjectMapping: 0.433000 ms MarkObjects: 3.442500 ms  DeleteObjects: 0.388400 ms)
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

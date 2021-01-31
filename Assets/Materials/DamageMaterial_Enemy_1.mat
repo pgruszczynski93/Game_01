@@ -124,7 +124,7 @@ Material:
     - Vector1_588EC0B5: 0.01
     - Vector1_5FFA8B86: 100
     - Vector1_694C3C1A: 0
-    - Vector1_846794BA: 0.5
+    - Vector1_846794BA: 0.25
     - Vector1_F229247A: 0.7
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
@@ -136,6 +136,7 @@ Material:
     - _Blend: 0
     - _BlendMode: 0
     - _BumpScale: 1
+    - _CanClipAlpha: 1
     - _Cull: 2
     - _CullMode: 0
     - _CullModeForward: 0
@@ -144,7 +145,7 @@ Material:
     - _DoubleSidedEnable: 1
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _EdgeWidth: 0
+    - _EdgeWidth: 0.03
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _EnvironmentReflections: 1
@@ -155,9 +156,9 @@ Material:
     - _GradientNoiseScale: 20
     - _IsColorTintActive: 1
     - _Metallic: 0
-    - _NoiseScale: 20
+    - _NoiseScale: 1
     - _NoiseScrollSpeed: -0.05
-    - _NoiseTreshold: 0.01
+    - _NoiseTreshold: 0
     - _OcclusionStrength: 1
     - _OpaqueCullMode: 2
     - _QueueOffset: 0
@@ -207,7 +208,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EdgeColor: {r: 4.1764092, g: 0.2077816, b: 0, a: 0}
-    - _EdgeInColor: {r: 3.6221788, g: 0.33117065, b: 0, a: 0}
+    - _EdgeInColor: {r: 1.0327965, g: 0.050021086, b: 0, a: 0}
+    - _EdgeInColor_1: {r: 1.741101, g: 0.25994915, b: 0, a: 0.9137255}
     - _EdgeOutColor: {r: 0.7075472, g: 0.1368369, b: 0.1368369, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 1.4980392, g: 0.39215687, b: 0, a: 0}
