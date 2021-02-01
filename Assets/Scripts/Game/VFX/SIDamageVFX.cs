@@ -3,9 +3,6 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     public class SIDamageVFX : MonoBehaviour {
-        static readonly int fresnelColorPropId = Shader.PropertyToID("_FresnelColor");
-        static readonly int fresnelPowerPropId = Shader.PropertyToID("_FresnelPower");
-        static readonly int noiseScalePropId = Shader.PropertyToID("_NoiseScale");
         static readonly int noiseTresholdPropId = Shader.PropertyToID("_NoiseTreshold");
         static readonly int edgeWidthPropId = Shader.PropertyToID("_EdgeWidth");
         static readonly int isColorTintActivePropId = Shader.PropertyToID("_IsColorTintActive");
@@ -23,12 +20,10 @@ namespace SpaceInvaders {
         float _currEdgeWidthVal;
         float _nextNoiseTresholdVal;
         float _nextEdgeWidthVal;
-        Material _material;
         MaterialPropertyBlock _matPropBlock;
 
         public void Initialise()
         {
-            _material = _renderer.sharedMaterial;
             _matPropBlock = new MaterialPropertyBlock();
         }
         void TryToEnableColorTint()
@@ -37,7 +32,7 @@ namespace SpaceInvaders {
                 return;
 
             _isColorTintActive = true;
-            _material.SetInt(isColorTintActivePropId, 1);
+            UpdateSelectedFloatMaterialProperty(isColorTintActivePropId, 1);
         }
 
         public void SetDamageVFX(float damagePercent)
