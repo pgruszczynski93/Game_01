@@ -149,13 +149,14 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _EnvironmentReflections: 1
-    - _FresnelPower: 0.31
+    - _FresnelPower: 0.65
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GradientNoiseScale: 20
     - _IsColorTintActive: 1
     - _Metallic: 0
+    - _MetallicValue: 0.5
     - _NoiseScale: 1
     - _NoiseScrollSpeed: -0.05
     - _NoiseTreshold: 0.07
@@ -171,6 +172,7 @@ Material:
     - _RequireSplitLighting: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
+    - _SmoothnessValue: 0.3
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StencilRef: 0
@@ -209,10 +211,11 @@ Material:
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EdgeColor: {r: 4.1764092, g: 0.2077816, b: 0, a: 0}
     - _EdgeInColor: {r: 0.7973318, g: 0.036037598, b: 0, a: 0}
-    - _EdgeInColor_1: {r: 3.482202, g: 0.06616404, b: 0, a: 0.9137255}
+    - _EdgeInColor_1: {r: 3.482202, g: 0.06616404, b: 0, a: 0}
     - _EdgeOutColor: {r: 0.7075472, g: 0.1368369, b: 0.1368369, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FresnelColor: {r: 1.4980392, g: 0.39215687, b: 0, a: 0}
+    - _FresnelColor: {r: 1, g: 0.030630242, b: 0, a: 0}
+    - _FresnelColor_1: {r: 3.547101, g: 0.3771929, b: 0.05019474, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1055382049243818048
