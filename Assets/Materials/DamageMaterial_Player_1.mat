@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DamageMaterial_Enemy_1
+  m_Name: DamageMaterial_Player_1
   m_Shader: {fileID: -6465566751694194690, guid: 9ddfd408d0c35ee46b2219aad7cae1c1,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _DISABLE_DECALS _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON
@@ -124,7 +124,7 @@ Material:
     - Vector1_588EC0B5: 0.01
     - Vector1_5FFA8B86: 100
     - Vector1_694C3C1A: 0
-    - Vector1_846794BA: 0.1
+    - Vector1_846794BA: 0
     - Vector1_F229247A: 0.7
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
@@ -145,21 +145,21 @@ Material:
     - _DoubleSidedEnable: 1
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _EdgeWidth: 0.05
+    - _EdgeWidth: 0
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _EnvironmentReflections: 1
-    - _FresnelPower: 0.55
+    - _FresnelPower: 0.65
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _GradientNoiseScale: 20
+    - _GradientNoiseScale: 0
     - _IsColorTintActive: 0
     - _Metallic: 0
-    - _MetallicValue: 0.5
+    - _MetallicValue: 0.15
     - _NoiseScale: 1
     - _NoiseScrollSpeed: -0.05
-    - _NoiseTreshold: 0.07
+    - _NoiseTreshold: 0
     - _OcclusionStrength: 1
     - _OpaqueCullMode: 2
     - _QueueOffset: 0
@@ -172,7 +172,7 @@ Material:
     - _RequireSplitLighting: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SmoothnessValue: 0.3
+    - _SmoothnessValue: 0.25
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StencilRef: 0
