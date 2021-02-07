@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5267786916662769496
+--- !u!114 &-6415673488809872325
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HighlightMat
-  m_Shader: {fileID: -6465566751694194690, guid: 68239825ca4462041b21a50cb7028b63,
+  m_Name: EdgeNoiseMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 878658229b19e1f408bf905f377544bd,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _DISABLE_DECALS _DISABLE_SSR_TRANSPARENT
   m_LightmapFlags: 4
@@ -29,8 +29,10 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2450
   stringTagMap:
+    MotionVector: User
     RenderType: TransparentCutout
   disabledShaderPasses:
+  - MOTIONVECTORS
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
@@ -38,24 +40,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_51F72B9:
-        m_Texture: {fileID: 2800000, guid: f71dd3fa0c7dcf14db2dfc9b92357225, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_56694361:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_6EAC44CA:
-        m_Texture: {fileID: 2800000, guid: cf2d17e95b55a7642b43ca1d5a32269a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_93B5D217:
-        m_Texture: {fileID: 2800000, guid: ed417e723db96ab41a2a41cb00d4646b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_E96ECF2D:
-        m_Texture: {fileID: 0}
+    - Texture2D_F9EECD4D:
+        m_Texture: {fileID: 2800000, guid: 95839c14f97a3a34991a444b79760ac6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -99,7 +85,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_4FDD69C7: 2.94
+    - Boolean_39E2A63F: 1
+    - Vector1_69C5E445: 0.03
+    - Vector1_9B617ED5: 0.2
+    - Vector1_AAD4A42C: 1
+    - Vector1_EBB75FD9: 0.3
+    - Vector1_F17192D3: 0.5
+    - Vector1_F52CD020: 0.1
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaCutoffEnable: 1
@@ -166,15 +158,20 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_4E07D584: {r: 0, g: 1, b: 0.16816235, a: 0}
-    - Color_4FCF00D3: {r: 0.2783019, g: 1, b: 0.33720413, a: 0}
+    - Color_964CE177: {r: 1, g: 0.14707932, b: 0, a: 0}
+    - Color_C1572A40: {r: 1, g: 1, b: 1, a: 0}
+    - Color_FD8EA6D0: {r: 0.11850936, g: 0.5424082, b: 1.0757003, a: 0}
+    - Vector2_4C79870A: {r: 0.2, g: 0.6, b: 0, a: 0}
+    - Vector2_9256B27F: {r: 0.5, g: 0.8, b: 0, a: 0}
+    - Vector2_E5346ED1: {r: 1.2, g: 1.8, b: 0, a: 0}
+    - Vector2_EE903229: {r: 0.4, g: 0.19, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &7572165366624113633
+--- !u!114 &8340251598390214931
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
