@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BonusInnerMaterial
+  m_Name: BonusDissolveMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 87229edcc866a78468a9bf25cce2d58d,
     type: 3}
   m_ShaderKeywords: 
@@ -21,11 +21,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 408befe882e4f814590fe3c95f010627, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CloudTexture:
+        m_Texture: {fileID: 2800000, guid: d66e6db68a2222746844f3cdec4879ff, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,12 +44,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DistortionTexture:
+        m_Texture: {fileID: 2800000, guid: 2a4ea6d3add3bee4e8f2baa4895ea15d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 408befe882e4f814590fe3c95f010627, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -58,6 +66,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2513464f6e9c4098b962a2900a3b9a6f_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 408befe882e4f814590fe3c95f010627, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_54a1172a049f4fc6b719f90bb3ac3d02_Texture_1:
@@ -85,7 +97,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_253cdf5dd0a84a6485b7f3a143d34b74: 5.66
+    - DistortionTiling: -0.39
+    - Vector1_253cdf5dd0a84a6485b7f3a143d34b74: 0.69
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -95,8 +108,12 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DissolveAmount: 1.08
+    - _DistortionSpeed: 0.08
     - _DstBlend: 0
+    - _EdgeWidth: 0.075
     - _EnvironmentReflections: 1
+    - _FresnelPower: 2.02
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -106,18 +123,34 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RimPower: 2
+    - _ScrollSpeed: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _TimeMultiplier: 0.4
+    - _VerticalMultiplier: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_85117ddf315d4f59b9d9c6e4b35e7365: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_13e3ea4253214763907e81155d61d98a: {r: -0.5, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _CloudBrightness: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - _CloudDirection: {r: 1, g: 1, b: 1, a: 0}
+    - _CloudTiling: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DistortionDirection: {r: -0.06, g: -0.12, b: 0, a: 0}
+    - _EdgeInColor: {r: 0, g: 18.265495, b: 89.45409, a: 0}
+    - _EdgeOutColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MainColor: {r: 0.06763971, g: 0.754717, b: 0.17141706, a: 1}
+    - _MinMaxY: {r: -1, g: 1, b: 0, a: 0}
+    - _RimColor: {r: 0.6627451, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7363228463952937741
 MonoBehaviour:
