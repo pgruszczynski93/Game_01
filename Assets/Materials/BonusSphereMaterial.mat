@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BonusSpereMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 87229edcc866a78468a9bf25cce2d58d,
+  m_Name: BonusSphereMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2a29f8e6751c1434395344c4468c3d08,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -95,7 +95,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DissolveAmount: 0.5
+    - _DissolveAmount: -0.23
     - _DstBlend: 0
     - _EdgeWidth: 0.05
     - _EnvironmentReflections: 1
@@ -106,12 +106,15 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _Power: 0.65
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _ScrollSpeed: 0.15
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _StripePositionMult: 80
     - _Surface: 0
     - _TimeMultiplier: 0.4
     - _VerticalMultiplier: -1
@@ -121,10 +124,11 @@ Material:
     - Color_85117ddf315d4f59b9d9c6e4b35e7365: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_13e3ea4253214763907e81155d61d98a: {r: -0.06, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.4324511, g: 28.253471, b: 36.03759, a: 1}
     - _EdgeInColor: {r: 0.4080075, g: 2.040037, b: 25.97647, a: 0}
     - _EdgeOutColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MinMaxY: {r: -0.06, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7363228463952937741
