@@ -8,8 +8,7 @@ namespace SpaceInvaders
     {
         [SerializeField] protected BonusSetup _bonusSetup;
         [SerializeField] protected Rigidbody _rigidbody;
-        [SerializeField] protected MeshRenderer _meshRenderer;
-        [SerializeField] protected Collider _mainCollider;
+        [SerializeField] protected GameObject _bonusRoot;
 
         [SerializeField] Transform _parent;
         
@@ -53,8 +52,7 @@ namespace SpaceInvaders
 
         void ManageBonusInteraction(bool isEnabled)
         {
-            _meshRenderer.enabled = isEnabled;
-            _mainCollider.enabled = isEnabled;
+            _bonusRoot.SetActive(isEnabled);
         }
 
         void TryToResetObject()
