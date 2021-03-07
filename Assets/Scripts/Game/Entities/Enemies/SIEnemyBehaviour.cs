@@ -7,7 +7,6 @@ namespace SpaceInvaders
         [SerializeField] MeshRenderer _meshRenderer;
         [SerializeField] GameObject _colliderParent;
         [SerializeField] SIEnemyShootBehaviour _shootBehaviour;
-        [SerializeField] SIBonusDropController _dropController;
         [SerializeField] SIEnemyHealth _enemyHealth;
 
         public SIEnemyShootBehaviour ShootBehaviour
@@ -64,7 +63,7 @@ namespace SpaceInvaders
             if (_shootBehaviour.CanShoot)
                 _shootBehaviour.TryToSelectNextShootingBehaviour();
             
-            _dropController.TryToRequestBonusDrop();
+            // _dropController.TryToRequestBonusDrop();
             SetEnemyVisibility(false);
             StartCoroutine(SIWaitUtils.SkipFramesAndInvoke(1, BroadcastEnemyDeath));
         }

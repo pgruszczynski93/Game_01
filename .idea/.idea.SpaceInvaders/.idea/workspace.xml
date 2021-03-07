@@ -58,18 +58,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/Animations/Bonuses/BonusRotate.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ArtAssets/Animations/Bonuses/BonusRotate.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/Animations/Bonuses/BonusHide.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ArtAssets/Animations/Bonuses/BonusHide.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/Animations/Bonuses/BonusShow.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ArtAssets/Animations/Bonuses/BonusShow.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/Animations/Bonuses/BonusesAnimController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ArtAssets/Animations/Bonuses/BonusesAnimController.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/BonusDissolveMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BonusDissolveMaterial.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/PolygonScifiSpace_Sign_01_A.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/PolygonScifiSpace_Sign_01_A.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiBonuses/ShieldBonus 1.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiBonuses/ShieldBonus 1.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Shaders/InGameShaders/BonusDissolve.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Shaders/InGameShaders/BonusDissolve.shadergraph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -238,8 +237,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Editor/SIDroppedBonusesDrawer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusDropController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponReloader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIGameObjectVFX.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIParticleSystemVFX.cs" />
@@ -277,7 +274,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/EntitySetup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SIPlayerStatistics.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyHealth.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyShootBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Asteroids/SIAsteroidBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameMasterBehaviour.cs" />
@@ -289,6 +285,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/VFX/SISkyboxScroller.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIShieldBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIBonusesEvents.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusDropController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" />
       </list>
     </option>
   </component>
@@ -571,6 +570,8 @@
       <workItem from="1612820575110" duration="881000" />
       <workItem from="1614806432350" duration="1491000" />
       <workItem from="1614893155738" duration="1367000" />
+      <workItem from="1615028396902" duration="595000" />
+      <workItem from="1615155521767" duration="343000" />
     </task>
     <servers />
   </component>
@@ -595,10 +596,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="481" height="464" key="DebuggerActiveHint" timestamp="1606430693780">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="481" height="464" key="DebuggerActiveHint/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606430693780" />
     <state width="1877" height="203" key="GridCell.Tab.0.bottom" timestamp="1612218406329">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -668,10 +665,10 @@
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1606862704581" />
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608679266783" />
-    <state x="1920" y="0" width="1671" height="1027" maximized="true" key="dock-window-1" timestamp="1614811641937">
+    <state x="1920" y="100" width="1646" height="1027" maximized="true" key="dock-window-1" timestamp="1615156108497">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="1920" y="0" width="1671" height="1027" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614811641937" />
+    <state x="1920" y="100" width="1646" height="1027" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1615156108497" />
     <state x="1920" y="100" width="1074" height="1027" key="dock-window-2" timestamp="1610924142684">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -684,10 +681,10 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2536" y="240" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1612700842080" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1614811612564">
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1615155645011">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614811612564" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1615155645011" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1608673426957" />
   </component>
   <component name="XDebuggerManager">
