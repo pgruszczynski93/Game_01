@@ -1,22 +1,25 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
-    public abstract class SIBonus : MonoBehaviour, ICanMove
+    public class SIBonus : MonoBehaviour, ICanMove
     {
         [SerializeField] protected BonusSetup _bonusSetup;
         [SerializeField] protected Rigidbody _rigidbody;
         [SerializeField] protected GameObject _bonusRoot;
 
         [SerializeField] Transform _parent;
+        // przerobić to na slownik <typ, bonuscoś{assety . mesh}>
+        [SerializeField] MeshRenderer[] _availableMeshes;
         
         protected BonusSettings _bonusSettings;
 
         Transform _thisTransform;
 
-        public abstract BonusSettings GetBonusSettings();
+        public BonusSettings GetBonusSettings() {
+            return _bonusSettings;
+        }
         
         void Initialise()
         {
@@ -25,27 +28,16 @@ namespace SpaceInvaders
             ManageBonusInteraction(false);
         }
 
-        void Start()
-        {
-            Initialise();
-        }
+        void Start() => Initialise();
+        void OnEnable() => SubscribeEvents();
+        void OnDisable() => UnsubscribeEvents();
 
-        void OnEnable()
-        {
-            SubscribeEvents();
-        }
-
-        void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-
-        protected void SubscribeEvents()
+        void SubscribeEvents()
         {
             SIEventsHandler.OnUpdate += TryToResetObject;
         }
 
-        protected void UnsubscribeEvents()
+        void UnsubscribeEvents()
         {
             SIEventsHandler.OnUpdate -= TryToResetObject;
         }
