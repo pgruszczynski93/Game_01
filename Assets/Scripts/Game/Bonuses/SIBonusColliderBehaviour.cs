@@ -19,7 +19,7 @@ namespace SpaceInvaders
             OnCollisionDetected += HandleOnCollisionDetected;
         }
 
-        protected override void RemoveEvents()
+        protected override void RemoveEvents() 
         {
             base.RemoveEvents();
             OnCollisionDetected -= HandleOnCollisionDetected;
@@ -29,9 +29,9 @@ namespace SpaceInvaders
         {
             // todo: consider adding bonuses to enemies: 
             // todo======================================
-            BonusSettings bonusSettings = _bonusBehaviour.GetBonusSettings();
-            Debug.Log($"[SIBonusColliderBehaviour] Bonus received {bonusSettings.bonusDropInfo.bonusType}");
-            SIBonusesEvents.BroadcastOnBonusCollected(bonusSettings);
+            // BonusSettings bonusSettings = _bonusBehaviour.GetBonusSettings();
+            // Debug.Log($"[SIBonusColliderBehaviour] Bonus received {bonusSettings.bonusDropInfo.bonusType}");
+            // SIBonusesEvents.BroadcastOnBonusCollected(bonusSettings);
             _bonusBehaviour.StopObject();
         }
     }

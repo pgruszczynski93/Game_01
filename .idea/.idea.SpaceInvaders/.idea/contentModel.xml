@@ -322,12 +322,34 @@
             </e>
           </e>
         </e>
+        <e p="Plugins" t="Include">
+          <e p="Sirenix" t="Include">
+            <e p="Odin Inspector" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Editor" t="Include">
+                  <e p="AssemblyImportSettingsAutomation.cs" t="Include" />
+                  <e p="BuildAOTAutomation.cs" t="Include" />
+                  <e p="EnsureOdinInspectorDefine.cs" t="Include" />
+                  <e p="FixBrokenUnityObjectWrapperDrawer.cs" t="Include" />
+                  <e p="Sirenix.OdinInspector.CompatibilityLayer.Editor.asmdef" t="Include" />
+                  <e p="SyncListDrawer.cs" t="Include" />
+                  <e p="SyncVarAttributeDrawer.cs" t="Include" />
+                  <e p="Vector2IntMinMaxAttributeDrawer.cs" t="Include" />
+                  <e p="VectorIntDrawers.cs" t="Include" />
+                  <e p="VectorIntPropertyResolvers.cs" t="Include" />
+                </e>
+                <e p="SerializedNetworkBehaviour.cs" t="Include" />
+                <e p="Sirenix.OdinInspector.CompatibilityLayer.asmdef" t="Include" />
+                <e p="VectorIntFormatters.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
         <e p="Scripts" t="Include">
           <e p="Configs" t="Include">
             <e p="AsteroidSpawnerSettings.cs" t="Include" />
             <e p="AsteroidSpawnerSetup.cs" t="Include" />
             <e p="BonusSettings.cs" t="Include" />
-            <e p="BonusSetup.cs" t="Include" />
             <e p="EntitySetup.cs" t="Include" />
             <e p="GridControllerSetup.cs" t="Include" />
             <e p="GridMovementSettings.cs" t="Include" />
@@ -338,6 +360,7 @@
             <e p="MovementSetup.cs" t="Include" />
             <e p="PlayerMovementSettings.cs" t="Include" />
             <e p="PlayerMovementSetup.cs" t="Include" />
+            <e p="ScriptableBonus.cs" t="Include" />
             <e p="ScriptableSettingsMaster.cs" t="Include" />
             <e p="SIPlayerStatistics.cs" t="Include" />
             <e p="SIWeaponSettings.cs" t="Include" />
@@ -358,6 +381,8 @@
             <e p="Bonuses" t="Include">
               <e p="SIBonus.cs" t="Include" />
               <e p="SIBonusColliderBehaviour.cs" t="Include" />
+              <e p="SIBonusData.cs" t="Include" />
+              <e p="SIBonusDictionary.cs" t="Include" />
               <e p="SIBonusManager.cs" t="Include" />
               <e p="SIBonusSlotBehaviour.cs" t="Include" />
             </e>
@@ -471,6 +496,8 @@
       <e p="DOTween.Modules.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
+      <e p="Sirenix.OdinInspector.CompatibilityLayer.csproj" t="IncludeRecursive" />
+      <e p="Sirenix.OdinInspector.CompatibilityLayer.Editor.csproj" t="IncludeRecursive" />
       <e p="SpaceInvaders.sln" t="IncludeFlat" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>

@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SpaceInvaders
 {
     public class SIBonusManager : MonoBehaviour {
 
-        [SerializeField] Queue<SIBonus> _availableBonuses;
+        [SerializeField] List<SIBonus> _bonusesPool;
 
         void Start() => Initialise();
         void Initialise() {
@@ -27,6 +29,13 @@ namespace SpaceInvaders
         void HandleOnEnemyDeath(SIEnemyBehaviour enemy) {
             var enemyWorldPos = enemy.transform.position;
             
+        }
+
+        [Button]
+        void TestBonusDrop() {
+            var x = _bonusesPool[0];
+            x.SetBonus(BonusType.Shield);
+            Debug.Log(x.GetBonusSettings().bonusDropInfo);
         }
     }
     

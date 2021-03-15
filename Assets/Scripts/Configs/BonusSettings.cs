@@ -25,7 +25,6 @@ namespace SpaceInvaders
     public struct BonusDropInfo
     {
         public BonusType bonusType;
-        [Tooltip("Min should be always lesser than max")]
         [Range(0, 100)] public int minDropRate;
         [Range(0, 100)] public int maxDropRate;
     }
