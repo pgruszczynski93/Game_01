@@ -1,44 +1,55 @@
 ﻿using System.Collections.Generic;
-using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace SpaceInvaders
-{
+namespace SpaceInvaders {
     public class SIBonusManager : MonoBehaviour {
+        [SerializeField] int _maxBonusesToSpawn;
+        [SerializeField] SIBonus _bonusPrefab;
 
         [SerializeField] List<SIBonus> _bonusesPool;
 
-        void Start() => Initialise();
-        void Initialise() {
-            
+        void Start() {
+            Initialise();
         }
-        
-        void OnEnable() => SubscribeEvents(); 
-        void OnDisable() => UnsubscribeEvents();
-        
+
+        void Initialise() { }
+
+        void OnEnable() {
+            SubscribeEvents();
+        }
+
+        void OnDisable() {
+            UnsubscribeEvents();
+        }
+
         void SubscribeEvents() {
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
         }
-        
-        void UnsubscribeEvents()
-        {
+
+        void UnsubscribeEvents() {
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
         void HandleOnEnemyDeath(SIEnemyBehaviour enemy) {
-            var enemyWorldPos = enemy.transform.position;
-            
+            Vector3 enemyWorldPos = enemy.transform.position;
         }
 
+
+#if UNITY_EDITOR
         [Button]
-        void TestBonusDrop() {
-            var x = _bonusesPool[0];
-            x.SetBonus(BonusType.Shield);
-            Debug.Log(x.GetBonusSettings().bonusDropInfo);
+        void AssignBonuses() {
+            _bonusesPool = new List<SIBonus>();
+            SIBonus bonusInstance;
+            for (var i = 0; i < _maxBonusesToSpawn; i++) {
+                bonusInstance = Instantiate(_bonusPrefab, transform);
+                bonusInstance.SetBonus(BonusType.Undefined);
+                _bonusesPool.Add(bonusInstance);
+            }
         }
+#endif
     }
-    
+
 
     // [Serializable]
     // public struct BonusRangeInfo

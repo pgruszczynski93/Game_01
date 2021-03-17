@@ -1,5 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
@@ -11,7 +10,8 @@ namespace SpaceInvaders {
         [SerializeField] SIBonusDictionary _bonusesVariants;
 
         BonusType _bonusType;
-        BonusSettings _bonusSettings;
+        BonusSettings _currentSettings;
+        MeshRenderer _currentRenderer;
         Transform _thisTransform;
 
         void OnEnable() {
@@ -31,23 +31,36 @@ namespace SpaceInvaders {
         }
 
         void EnableBonus(bool isEnabled) {
-            _bonusesVariants[_bonusType].bonusRenderer.enabled = true;
+            _currentRenderer = _bonusesVariants[_bonusType].bonusRenderer;
+            if(_currentRenderer != null)
+                _currentRenderer.enabled = isEnabled;
             _bonusRoot.SetActive(isEnabled);
         }
 
         public void SetBonus(BonusType bonusType) {
+            // if (bonusType == BonusType.Undefined)
+            //     return;
+            
             if (_thisTransform == null) 
                 _thisTransform = transform;
 
             _bonusType = bonusType;
-            _bonusSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
+            
+            if(!_bonusesVariants.TryGetValue(_bonusType, out SIBonusData data))
+                _bonusesVariants.Add(_bonusType, data);
+            
+            _currentSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
             EnableBonus(false);
         }
 
         public BonusSettings GetBonusSettings() {
-            return _bonusSettings;
+            return _currentSettings;
         }
 
+        public MeshRenderer GetBonusRenderer() {
+            return _currentRenderer;
+        }
+        
         public void MoveObject() {
             EnableBonus(true);
             ReleaseObject();
@@ -64,12 +77,13 @@ namespace SpaceInvaders {
             Vector3 bonusViewPortPosition =
                 SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
 
-            if (!bonusViewPortPosition.IsInVerticalViewportSpace()) StopObject();
+            if (!bonusViewPortPosition.IsInVerticalViewportSpace()) 
+                StopObject();
         }
 
         void ReleaseObject() {
             _thisTransform.SetParent(null);
-            _rigidbody.AddForce(SIHelpers.VectorDown * _bonusSettings.bonusProperties.releaseForceMultiplier,
+            _rigidbody.AddForce(SIHelpers.VectorDown * _currentSettings.bonusProperties.releaseForceMultiplier,
                 ForceMode.Impulse);
         }
     }

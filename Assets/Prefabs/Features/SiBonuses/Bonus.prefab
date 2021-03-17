@@ -725,11 +725,14 @@ MonoBehaviour:
   _bonusRoot: {fileID: 8628503840286667519}
   _parent: {fileID: 6375572910197037336}
   _bonusesVariants:
-    _keys: 02000000
+    _keys: 0200000000000000
     _values:
     - scriptableBonus: {fileID: 11400000, guid: 80b619222c673b744b70bead767a8218,
         type: 2}
       bonusRenderer: {fileID: 774676110857534785}
+    - scriptableBonus: {fileID: 11400000, guid: cf6e1b1d2b1ac8c448126e6d8c0d9165,
+        type: 2}
+      bonusRenderer: {fileID: 0}
 --- !u!114 &6375572910197037335
 MonoBehaviour:
   m_ObjectHideFlags: 0
