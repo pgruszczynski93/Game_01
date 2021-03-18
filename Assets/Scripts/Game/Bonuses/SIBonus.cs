@@ -14,14 +14,10 @@ namespace SpaceInvaders {
         MeshRenderer _currentRenderer;
         Transform _thisTransform;
 
-        void OnEnable() {
-            SubscribeEvents();
-        }
-
-        void OnDisable() {
-            UnsubscribeEvents();
-        }
-
+        void OnEnable() => SubscribeEvents();
+        
+        void OnDisable() => UnsubscribeEvents();
+        
         void SubscribeEvents() {
             SIEventsHandler.OnUpdate += TryToResetObject;
         }
@@ -49,8 +45,8 @@ namespace SpaceInvaders {
             if(!_bonusesVariants.TryGetValue(_bonusType, out SIBonusData data))
                 _bonusesVariants.Add(_bonusType, data);
             
-            _currentSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
-            EnableBonus(false);
+            // _currentSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
+            // EnableBonus(false);
         }
 
         public BonusSettings GetBonusSettings() {
@@ -83,7 +79,7 @@ namespace SpaceInvaders {
 
         void ReleaseObject() {
             _thisTransform.SetParent(null);
-            _rigidbody.AddForce(SIHelpers.VectorDown * _currentSettings.bonusProperties.releaseForceMultiplier,
+            _rigidbody.AddForce(SIHelpers.VectorDown * _currentSettings.releaseForceMultiplier,
                 ForceMode.Impulse);
         }
     }

@@ -31,7 +31,7 @@ namespace SpaceInvaders
         
         void HandleOnBonusEnabled(BonusSettings bonusSettings)
         {
-            if (bonusSettings.bonusDropInfo.bonusType != BonusType.Shield)
+            if (bonusSettings.bonusType != BonusType.Shield)
                 return;
             
             EnableShield();            
@@ -39,7 +39,7 @@ namespace SpaceInvaders
 
         void HandleOnBonusDisabled(BonusSettings bonusSettings)
         {
-            if (bonusSettings.bonusDropInfo.bonusType != BonusType.Shield)
+            if (bonusSettings.bonusType != BonusType.Shield)
                 return;
 
             //todo::  REMOVE IT LATYEA

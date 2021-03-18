@@ -13,13 +13,9 @@ MonoBehaviour:
   m_Name: Shield Bonus 3
   m_EditorClassIdentifier: 
   bonusSettings:
-    bonusProperties:
-      gainedHealth: 0
-      gainedScore: 10
-      bonusLevel: 3
-      durationTime: 9
-      releaseForceMultiplier: 0
-    bonusDropInfo:
-      bonusType: 2
-      minDropRate: 10
-      maxDropRate: 15
+    bonusType: 2
+    gainedHealth: 0
+    gainedScore: 20
+    bonusLevel: 3
+    durationTime: 10
+    releaseForceMultiplier: 5

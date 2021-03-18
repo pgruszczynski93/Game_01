@@ -519,9 +519,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7515c85957ffd34796c72025b02f568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bonusDropThreshold: 0
   _maxBonusesToSpawn: 10
   _bonusPrefab: {fileID: 5637279107446737233, guid: 0f519c44a3d3fc04c9da3e936ff057d7,
     type: 3}
+  _dropRatesLookup:
+    _keys: 0000000001000000020000000300000004000000050000000600000007000000
+    _values:
+    - minDropRate: 0
+      maxDropRate: 0
+    - minDropRate: 0
+      maxDropRate: 0
+    - minDropRate: 10
+      maxDropRate: 20
+    - minDropRate: 0
+      maxDropRate: 0
+    - minDropRate: 0
+      maxDropRate: 0
+    - minDropRate: 0
+      maxDropRate: 0
+    - minDropRate: 0
+      maxDropRate: 0
+    - minDropRate: 0
+      maxDropRate: 0
   _bonusesPool:
   - {fileID: 6632367251706952982}
   - {fileID: 3150580034969255039}

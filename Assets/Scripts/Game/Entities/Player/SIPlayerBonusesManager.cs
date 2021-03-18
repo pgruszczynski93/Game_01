@@ -7,7 +7,7 @@ namespace SpaceInvaders
     public class SIPlayerBonusesManager : MonoBehaviour
     {
         bool _initialised;
-        Dictionary<BonusType, BonusProperties> _activeBonusesLookup;
+        Dictionary<BonusType, BonusSettings> _activeBonusesLookup;
 
         void Initialise()
         {
@@ -15,7 +15,7 @@ namespace SpaceInvaders
                 return;
 
             _initialised = true;
-            _activeBonusesLookup = new Dictionary<BonusType, BonusProperties>();
+            _activeBonusesLookup = new Dictionary<BonusType, BonusSettings>();
         }
 
         void Start()
@@ -55,9 +55,9 @@ namespace SpaceInvaders
 
         void TryToRunCollectedBonus(BonusSettings collectedBonusSettings)
         {
-            if (!_activeBonusesLookup.ContainsKey(collectedBonusSettings.bonusDropInfo.bonusType))
+            if (!_activeBonusesLookup.ContainsKey(collectedBonusSettings.bonusType))
             {
-                _activeBonusesLookup.Add(collectedBonusSettings.bonusDropInfo.bonusType, collectedBonusSettings.bonusProperties);
+                _activeBonusesLookup.Add(collectedBonusSettings.bonusType, collectedBonusSettings);
                 RunBonus(collectedBonusSettings);
                 return;
             }
@@ -67,30 +67,22 @@ namespace SpaceInvaders
 
         void UpdateOrRunExistingBonus(BonusSettings collectedBonusSettings)
         {
-            StopCoroutine(_activeBonusesLookup[collectedBonusSettings.bonusDropInfo.bonusType].bonusRoutine);
+            StopCoroutine(_activeBonusesLookup[collectedBonusSettings.bonusType].bonusRoutine);
             RunBonus(collectedBonusSettings);
         }
 
         void RunBonus(BonusSettings collectedBonusSettings)
         {
             BonusSettings bonusSettingsCopy = collectedBonusSettings;
-            bonusSettingsCopy.bonusProperties.bonusRoutine = StartCoroutine(RunBonusRoutine(collectedBonusSettings));
-            _activeBonusesLookup[collectedBonusSettings.bonusDropInfo.bonusType] = bonusSettingsCopy.bonusProperties;
+            bonusSettingsCopy.bonusRoutine = StartCoroutine(RunBonusRoutine(collectedBonusSettings));
+            _activeBonusesLookup[collectedBonusSettings.bonusType] = bonusSettingsCopy;
         }
         
         IEnumerator RunBonusRoutine(BonusSettings bonusSettings)
         {
             SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings);
-            yield return SIWaitUtils.WaitForCachedSeconds(bonusSettings.bonusProperties.durationTime);
+            yield return SIWaitUtils.WaitForCachedSeconds(bonusSettings.durationTime);
             SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings);
-        }
-
-        void Debug_PrintActiveBonuses()
-        {
-            foreach (var bonus in _activeBonusesLookup)
-            {
-                Debug.Log($"Bonus: {bonus.Key} level: {bonus.Value.bonusLevel}");
-            }
         }
     }
 }

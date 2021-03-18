@@ -35,10 +35,10 @@
         Life,
         Shield,
         Weapon,
-        Teleportation,
-        TimeSlowDown, 
-        Hacking,
-        MassiveKill, 
+        // Teleportation,
+        // TimeSlowDown, 
+        // Hacking,
+        // MassiveKill, 
     }
 
     public enum WeaponTier
