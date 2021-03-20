@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     public class SIBonusManager : MonoBehaviour {
-
+        [SerializeField] int _poolIndex;
         [SerializeField] int _maxBonusToSpawn;
         [Range(0, 99), SerializeField] int _bonusDropThreshold;
-
         [SerializeField] ScriptableBonusDropLookup _scriptableLookup;
         [SerializeField] SIBonus _bonusPrefab;
         [SerializeField] List<SIBonus> _bonusesPool;
-                
+
         int _bonusTypesCount;
+        Vector3 _currentDropPosition;
         SIBonusDropRatesLookup _loadedLookup;
 
         void Start() => Initialise();
@@ -39,7 +39,8 @@ namespace SpaceInvaders {
         }
 
         void HandleOnEnemyDeath(SIEnemyBehaviour enemy) {
-            Vector3 enemyWorldPos = enemy.transform.position;
+            _currentDropPosition = enemy.transform.position;
+            TryToDropBonus();
         }
 
         void TryToDropBonus() {
@@ -53,7 +54,17 @@ namespace SpaceInvaders {
             if (!IsInDropProbability(probability, dropInfo)) 
                 return;
             
-            _bonusesPool[(int) selectedBonus].SetBonusVariant(selectedBonus);
+            ManageBonusesPool(selectedBonus);
+        }
+
+        void ManageBonusesPool(BonusType bonusType) {
+            if (_poolIndex < _maxBonusToSpawn) {
+                _bonusesPool[_poolIndex].SetAndReleaseBonusVariant(_currentDropPosition, bonusType);
+                ++_poolIndex;
+            }
+            else {
+                _poolIndex = 0;
+            }
         }
 
         bool CanTrySelectBonusToDrop(float probability) {
@@ -68,24 +79,19 @@ namespace SpaceInvaders {
         [Button]
         void AssignBonuses() {
             for (var i = 0; i < _bonusesPool.Count; i++) {
-                DestroyImmediate(_bonusesPool[i].gameObject);
+                DestroyImmediate(_bonusesPool[i]?.gameObject);
             }
-            
+
             _bonusesPool = new List<SIBonus>();
             SIBonus bonusInstance;
             UnityEditor.Undo.RegisterFullObjectHierarchyUndo(gameObject, "Bonus hierarchy changed");
             for (var i = 0; i < _maxBonusToSpawn; i++) {
                 bonusInstance = Instantiate(_bonusPrefab, transform);
+                bonusInstance.transform.localPosition = SIScreenUtils.HiddenObjectPosition;
                 UnityEditor.Undo.RegisterCreatedObjectUndo(bonusInstance.gameObject, "Bonus Instantiaton");
-                bonusInstance.SetBonusVariant();
+                // bonusInstance.Initalise();
                 _bonusesPool.Add(bonusInstance);
             }
-        }
-
-        [Button]
-        void TestBonusDrop() {
-            Initialise();
-            TryToDropBonus();
         }
 #endif
     }
