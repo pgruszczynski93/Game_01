@@ -2,84 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SpaceInvaders
-{
-    public class SIPlayerBonusesManager : MonoBehaviour
-    {
-        bool _initialised;
-        Dictionary<BonusType, BonusSettings> _activeBonusesLookup;
+namespace SpaceInvaders {
+    public class SIPlayerBonusesManager : MonoBehaviour {
+        Dictionary<BonusType, RuntimeBonus> _activeBonuses;
 
-        void Initialise()
-        {
-            if (_initialised)
-                return;
-
-            _initialised = true;
-            _activeBonusesLookup = new Dictionary<BonusType, BonusSettings>();
-        }
-
-        void Start()
-        {
+        void Start() {
             Initialise();
         }
 
-        void OnEnable()
-        {
-            AssignEvents();
+        void OnEnable() {
+            SubscribeEvents();
         }
 
-        void OnDisable()
-        {
-            RemoveEvents();
+        void OnDisable() {
+            UnsubscribeEvents();
         }
 
-        void AssignEvents()
-        {
+        void Initialise() {
+            _activeBonuses = new Dictionary<BonusType, RuntimeBonus>();
+        }
+
+        void SubscribeEvents() {
             SIBonusesEvents.OnBonusCollected += HandleOnBonusCollected;
         }
 
-        void RemoveEvents()
-        {
+        void UnsubscribeEvents() {
             SIBonusesEvents.OnBonusCollected -= HandleOnBonusCollected;
         }
 
-        void HandleOnBonusCollected(BonusSettings collectedBonusSettings)
-        {
+        void HandleOnBonusCollected(BonusSettings collectedBonusSettings) {
             ManageCollectedBonus(collectedBonusSettings);
         }
-
-        void ManageCollectedBonus(BonusSettings collectedBonusSettings)
-        {
-            TryToRunCollectedBonus(collectedBonusSettings);
-        }
-
-        void TryToRunCollectedBonus(BonusSettings collectedBonusSettings)
-        {
-            if (!_activeBonusesLookup.ContainsKey(collectedBonusSettings.bonusType))
-            {
-                _activeBonusesLookup.Add(collectedBonusSettings.bonusType, collectedBonusSettings);
-                RunBonus(collectedBonusSettings);
-                return;
-            }
-
-            UpdateOrRunExistingBonus(collectedBonusSettings);
-        }
-
-        void UpdateOrRunExistingBonus(BonusSettings collectedBonusSettings)
-        {
-            StopCoroutine(_activeBonusesLookup[collectedBonusSettings.bonusType].bonusRoutine);
-            RunBonus(collectedBonusSettings);
-        }
-
-        void RunBonus(BonusSettings collectedBonusSettings)
-        {
-            BonusSettings bonusSettingsCopy = collectedBonusSettings;
-            bonusSettingsCopy.bonusRoutine = StartCoroutine(RunBonusRoutine(collectedBonusSettings));
-            _activeBonusesLookup[collectedBonusSettings.bonusType] = bonusSettingsCopy;
-        }
         
-        IEnumerator RunBonusRoutine(BonusSettings bonusSettings)
-        {
+        void ManageCollectedBonus(BonusSettings collectedBonusSettings) {
+            BonusType bonusType = collectedBonusSettings.bonusType;
+
+            if (!IsBonusActive(bonusType)) {
+                _activeBonuses.Add(bonusType, new RuntimeBonus(collectedBonusSettings));
+            }
+            else {
+                StopCoroutine(_activeBonuses[collectedBonusSettings.bonusType].bonusRoutine);
+            }
+            
+            _activeBonuses[collectedBonusSettings.bonusType].bonusRoutine = StartCoroutine(RunBonusRoutine(collectedBonusSettings));
+        }
+
+        bool IsBonusActive(BonusType bonusType) {
+            return _activeBonuses.ContainsKey(bonusType);
+        }
+
+        IEnumerator RunBonusRoutine(BonusSettings bonusSettings) {
             SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings);
             yield return SIWaitUtils.WaitForCachedSeconds(bonusSettings.durationTime);
             SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings);

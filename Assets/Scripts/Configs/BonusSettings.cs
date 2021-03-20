@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SpaceInvaders
 {
     [Serializable]
-    public struct BonusSettings
+    public class BonusSettings
     {
         public BonusType bonusType;
         public int gainedHealth;
@@ -12,7 +12,23 @@ namespace SpaceInvaders
         public int bonusLevel;
         public float durationTime;
         public float releaseForceMultiplier;
+
+        public BonusSettings() { }
+
+        public BonusSettings(BonusSettings settings) {
+            bonusType = settings.bonusType;
+            gainedHealth = settings.gainedHealth;
+            gainedScore = settings.gainedScore;
+            bonusLevel = settings.bonusLevel;
+            durationTime = settings.durationTime;
+            releaseForceMultiplier = settings.releaseForceMultiplier;
+        }
+    }
+
+    [Serializable]
+    public class RuntimeBonus : BonusSettings {
         public Coroutine bonusRoutine;
+        public RuntimeBonus(BonusSettings settings) : base(settings) {}
     }
 
     [Serializable]
