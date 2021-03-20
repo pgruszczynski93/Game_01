@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using Sirenix.OdinInspector;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SpaceInvaders {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
@@ -12,10 +15,14 @@ namespace SpaceInvaders {
         BonusType _bonusType;
         BonusSettings _currentSettings;
         MeshRenderer _currentRenderer;
+        MeshRenderer _lastRenderer;
         Transform _thisTransform;
+        
+        public BonusSettings BonusSettings => _currentSettings;
+        public MeshRenderer BonusRenderer => _currentRenderer;
 
         void OnEnable() => SubscribeEvents();
-        
+
         void OnDisable() => UnsubscribeEvents();
         
         void SubscribeEvents() {
@@ -25,18 +32,8 @@ namespace SpaceInvaders {
         void UnsubscribeEvents() {
             SIEventsHandler.OnUpdate -= TryToResetObject;
         }
-
-        void EnableBonus(bool isEnabled) {
-            _currentRenderer = _bonusesVariants[_bonusType].bonusRenderer;
-            if(_currentRenderer != null)
-                _currentRenderer.enabled = isEnabled;
-            _bonusRoot.SetActive(isEnabled);
-        }
-
-        public void SetBonus(BonusType bonusType) {
-            // if (bonusType == BonusType.Undefined)
-            //     return;
-            
+        
+        public void SetBonusVariant(BonusType bonusType = BonusType.Life) {
             if (_thisTransform == null) 
                 _thisTransform = transform;
 
@@ -45,18 +42,10 @@ namespace SpaceInvaders {
             if(!_bonusesVariants.TryGetValue(_bonusType, out SIBonusData data))
                 _bonusesVariants.Add(_bonusType, data);
             
-            // _currentSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
-            // EnableBonus(false);
+            _currentSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
+            _currentRenderer = _bonusesVariants[_bonusType].bonusRenderer;
         }
 
-        public BonusSettings GetBonusSettings() {
-            return _currentSettings;
-        }
-
-        public MeshRenderer GetBonusRenderer() {
-            return _currentRenderer;
-        }
-        
         public void MoveObject() {
             EnableBonus(true);
             ReleaseObject();
@@ -67,6 +56,16 @@ namespace SpaceInvaders {
             _thisTransform.SetParent(_parent);
             _thisTransform.localPosition = SIHelpers.VectorZero;
             EnableBonus(false);
+        }
+
+        void EnableBonus(bool isEnabled) {
+            
+            if (_lastRenderer != null && _currentRenderer != _lastRenderer)
+                _lastRenderer.enabled = !isEnabled;
+
+            _currentRenderer.enabled = isEnabled;
+            _bonusRoot.SetActive(isEnabled);
+            _lastRenderer = _currentRenderer;
         }
 
         void TryToResetObject() {
@@ -82,5 +81,15 @@ namespace SpaceInvaders {
             _rigidbody.AddForce(SIHelpers.VectorDown * _currentSettings.releaseForceMultiplier,
                 ForceMode.Impulse);
         }
+        
+        #if UNITY_EDITOR
+        [Button]
+        void BonusSelectionTest(){
+            var totalBonuses = Enum.GetValues(typeof(BonusType)).Length;
+            var selected = Random.Range(0, totalBonuses);
+            SetBonusVariant((BonusType)selected);
+            EnableBonus(true);
+        }
+        #endif
     }
 }

@@ -31,10 +31,9 @@
 
     public enum BonusType
     {
-        Undefined,
         Life,
-        Shield,
         Weapon,
+        Shield,
         // Teleportation,
         // TimeSlowDown, 
         // Hacking,

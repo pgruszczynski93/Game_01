@@ -1,25 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace SpaceInvaders {
     public class SIBonusManager : MonoBehaviour {
+
+        [SerializeField] int _maxBonusToSpawn;
         [Range(0, 99), SerializeField] int _bonusDropThreshold;
-        [SerializeField] int _bonusTypesCount;
-        [SerializeField] int _bonusesInPoolCount;
 
+        [SerializeField] ScriptableBonusDropLookup _scriptableLookup;
         [SerializeField] SIBonus _bonusPrefab;
-        [SerializeField] SIBonusDropRatesLookup _dropRatesLookup;
         [SerializeField] List<SIBonus> _bonusesPool;
+                
+        int _bonusTypesCount;
+        SIBonusDropRatesLookup _loadedLookup;
 
+        void Start() => Initialise();
 
-        void Start() {
-            Initialise();
+        void Initialise() {
+            _loadedLookup = _scriptableLookup.dropRatesLookup;
+            _bonusTypesCount = _loadedLookup.Count;
         }
-
-        void Initialise() { }
 
         void OnEnable() {
             SubscribeEvents();
@@ -41,46 +42,50 @@ namespace SpaceInvaders {
             Vector3 enemyWorldPos = enemy.transform.position;
         }
 
-        [Button]
         void TryToDropBonus() {
             float probability = Random.Range(0, 100);
-            if (probability > _bonusDropThreshold)
+            if (CanTrySelectBonusToDrop(probability))
                 return;
 
             BonusType selectedBonus = (BonusType) Random.Range(0, _bonusTypesCount);
-            BonusDropInfo dropInfo = _dropRatesLookup[selectedBonus];
+            BonusDropInfo dropInfo = _loadedLookup[selectedBonus];
             probability = Random.Range(0, 100);
-            if (probability > dropInfo.minDropRate && probability < dropInfo.maxDropRate) {
-                _bonusesPool[(int) selectedBonus].SetBonus(selectedBonus);
-                Debug.Log(selectedBonus.ToString());
-            }
+            if (!IsInDropProbability(probability, dropInfo)) 
+                return;
+            
+            _bonusesPool[(int) selectedBonus].SetBonusVariant(selectedBonus);
+        }
 
+        bool CanTrySelectBonusToDrop(float probability) {
+            return _loadedLookup == null || probability > _bonusDropThreshold;
+        }
 
+        static bool IsInDropProbability(float probability, BonusDropInfo dropInfo) {
+            return probability > dropInfo.minDropRate && probability < dropInfo.maxDropRate;
         }
 
 #if UNITY_EDITOR
         [Button]
         void AssignBonuses() {
+            for (var i = 0; i < _bonusesPool.Count; i++) {
+                DestroyImmediate(_bonusesPool[i].gameObject);
+            }
+            
             _bonusesPool = new List<SIBonus>();
             SIBonus bonusInstance;
-            for (var i = 0; i < _bonusesInPoolCount; i++) {
+            UnityEditor.Undo.RegisterFullObjectHierarchyUndo(gameObject, "Bonus hierarchy changed");
+            for (var i = 0; i < _maxBonusToSpawn; i++) {
                 bonusInstance = Instantiate(_bonusPrefab, transform);
-                bonusInstance.SetBonus(BonusType.Undefined);
+                UnityEditor.Undo.RegisterCreatedObjectUndo(bonusInstance.gameObject, "Bonus Instantiaton");
+                bonusInstance.SetBonusVariant();
                 _bonusesPool.Add(bonusInstance);
             }
         }
 
         [Button]
-        void CreateLookupTable() {
-            _dropRatesLookup = new SIBonusDropRatesLookup();
-            var bonusTypes = Enum.GetValues(typeof(BonusType));
-            _bonusTypesCount = bonusTypes.Length;
-            foreach (var bonus in bonusTypes) {
-                if(_dropRatesLookup.ContainsKey((BonusType)bonus))
-                    continue;
-                
-                _dropRatesLookup.Add((BonusType)bonus, new BonusDropInfo());
-            }
+        void TestBonusDrop() {
+            Initialise();
+            TryToDropBonus();
         }
 #endif
     }
