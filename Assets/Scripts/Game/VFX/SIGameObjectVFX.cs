@@ -45,7 +45,7 @@ namespace SpaceInvaders
         protected void TryToResetEffectAfterUsage(bool shouldBeResetAfterUsage)
         {
             if (shouldBeResetAfterUsage)
-                StartCoroutine(SIWaitUtils.WaitAndInvoke(_timeToReset, ResetVFX));
+                StartCoroutine(WaitUtils.WaitAndInvoke(_timeToReset, ResetVFX));
         }
 
         protected void TryToDetachFromParent(bool canBeDetached)

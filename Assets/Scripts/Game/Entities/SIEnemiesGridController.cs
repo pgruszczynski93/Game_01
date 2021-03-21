@@ -163,12 +163,12 @@ namespace SpaceInvaders
 
         IEnumerator RestartGridRoutine()
         {
-            yield return StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.endWaveCooldown,
+            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_gridSettings.endWaveCooldown,
                 SIGameplayEvents.BroadcastOnWaveEnd));
             SetLivingEnemiesCount();
-            yield return StartCoroutine(SIWaitUtils.SkipFramesAndInvoke(1,
+            yield return StartCoroutine(WaitUtils.SkipFramesAndInvoke(1,
                 ReloadGridObjects));
-            yield return StartCoroutine(SIWaitUtils.WaitAndInvoke(_gridSettings.newWaveCooldown, RestartEnemiesGrid));
+            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_gridSettings.newWaveCooldown, RestartEnemiesGrid));
         }
 
         void SetLivingEnemiesCount()

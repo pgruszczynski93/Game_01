@@ -55,11 +55,11 @@ namespace SpaceInvaders
                 {
                     SIAsteroidBehaviour asteroid = asteroids[i];
                     asteroid.MoveObject();
-                    yield return SIWaitUtils.WaitForCachedSeconds(Random.Range(minAsteroidMoveDelay,
+                    yield return WaitUtils.WaitForCachedSeconds(Random.Range(minAsteroidMoveDelay,
                         maxAsteroidMoveDelay));
                 }
 
-                yield return SIWaitUtils.WaitForCachedSeconds(SIConstants.ASTEROIDS_RESPAWN_DELAY);
+                yield return WaitUtils.WaitForCachedSeconds(SIConstants.ASTEROIDS_RESPAWN_DELAY);
             }
         }
     }

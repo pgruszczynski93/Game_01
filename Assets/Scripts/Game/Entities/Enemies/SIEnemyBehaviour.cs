@@ -65,7 +65,7 @@ namespace SpaceInvaders
             
             // _dropController.TryToRequestBonusDrop();
             SetEnemyVisibility(false);
-            StartCoroutine(SIWaitUtils.SkipFramesAndInvoke(1, BroadcastEnemyDeath));
+            StartCoroutine(WaitUtils.SkipFramesAndInvoke(1, BroadcastEnemyDeath));
         }
 
         void BroadcastEnemyDeath()

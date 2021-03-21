@@ -37,13 +37,11 @@ namespace SpaceInvaders {
         void ManageCollectedBonus(BonusSettings collectedBonusSettings) {
             BonusType bonusType = collectedBonusSettings.bonusType;
 
-            if (!IsBonusActive(bonusType)) {
+            if (!IsBonusActive(bonusType))
                 _activeBonuses.Add(bonusType, new RuntimeBonus(collectedBonusSettings));
-            }
-            else {
+            else
                 StopCoroutine(_activeBonuses[collectedBonusSettings.bonusType].bonusRoutine);
-            }
-            
+
             _activeBonuses[collectedBonusSettings.bonusType].bonusRoutine = StartCoroutine(RunBonusRoutine(collectedBonusSettings));
         }
 
@@ -52,9 +50,10 @@ namespace SpaceInvaders {
         }
 
         IEnumerator RunBonusRoutine(BonusSettings bonusSettings) {
-            SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings);
-            yield return SIWaitUtils.WaitForCachedSeconds(bonusSettings.durationTime);
-            SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings);
+            yield return WaitUtils.WaitSecondsAndRunSequence(
+                ()=> SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings),
+                () => SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings),
+                bonusSettings.durationTime);
         }
     }
 }

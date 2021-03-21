@@ -43,20 +43,20 @@ namespace SpaceInvaders
                 return;
 
             //todo::  REMOVE IT LATYEA
-            DisableNecessaryObjects();
+            DisableBonus();
         }
         
         void EnableShield()
         {
-            EnableNecessaryObjects();
+            EnableBonus();
             _shieldVfx.TryToManageVFX(true, false, false);
         }
 
-        void EnableNecessaryObjects()
+        void EnableBonus()
         {
             _rootObject.SetActive(true);
         }
-        void DisableNecessaryObjects()
+        void DisableBonus()
         {
             _rootObject.SetActive(false);
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
@@ -8,20 +7,20 @@ namespace SpaceInvaders {
         [SerializeField] protected GameObject _bonusRoot;
 
         [SerializeField] Transform _parent;
+        [SerializeField] SIBonusAnimatorController _animatorController;
         [SerializeField] SIBonusDictionary _bonusesVariants;
 
         BonusType _bonusType;
         Vector3 _currentDropPos;
         
-        BonusSettings _currentSettings;
-        MeshRenderer _currentRenderer;
+        BonusSettings _currentVariantSettings;
+        MeshRenderer _currentBonusVariantRenderer;
         MeshRenderer _lastRenderer;
         Transform _thisTransform;
         
-        public BonusSettings BonusSettings => _currentSettings;
-        public MeshRenderer BonusRenderer => _currentRenderer;
+        public BonusSettings BonusVariantSettings => _currentVariantSettings;
+        public MeshRenderer BonusVariantRenderer => _currentBonusVariantRenderer;
 
-        void Start() => Initialise();
         void OnEnable() => SubscribeEvents();
 
         void OnDisable() => UnsubscribeEvents();
@@ -33,16 +32,17 @@ namespace SpaceInvaders {
         void UnsubscribeEvents() {
             SIEventsHandler.OnUpdate -= TryToResetObject;
         }
-        
-        void Initialise() {
-            _thisTransform = transform;
-        }
 
         public void SetAndReleaseBonusVariant(Vector3 releasePos, BonusType bonusType) {
+            if (_thisTransform == null)
+                _thisTransform = transform;
+            
             _currentDropPos = releasePos;
             _bonusType = bonusType;
-            _currentSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
-            _currentRenderer = _bonusesVariants[_bonusType].bonusRenderer;
+            _currentVariantSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
+            _currentBonusVariantRenderer = _bonusesVariants[_bonusType].bonusRenderer;
+            
+            _animatorController.SetRendererToAnimate(_currentBonusVariantRenderer);
             MoveObject();
         }
 
@@ -54,19 +54,19 @@ namespace SpaceInvaders {
         public void StopObject() {
             _rigidbody.velocity = SIHelpers.VectorZero;
             _thisTransform.SetParent(_parent);
-            _thisTransform.localPosition = SIScreenUtils.HiddenObjectPosition;;
+            _thisTransform.localPosition = SIScreenUtils.HiddenObjectPosition;
             EnableBonus(false);
         }
 
         void EnableBonus(bool isEnabled) {
 
-            if (_lastRenderer != null && _currentRenderer != _lastRenderer) {
+            if (_lastRenderer != null && _currentBonusVariantRenderer != _lastRenderer) {
                 _lastRenderer.enabled = !isEnabled;
             }
 
-            _currentRenderer.enabled = isEnabled;
+            _currentBonusVariantRenderer.enabled = isEnabled;
             _bonusRoot.SetActive(isEnabled);
-            _lastRenderer = _currentRenderer;
+            _lastRenderer = _currentBonusVariantRenderer;
         }
 
         void TryToResetObject() {
@@ -80,7 +80,7 @@ namespace SpaceInvaders {
         void ReleaseObject() {
             _thisTransform.SetParent(null);
             _thisTransform.position = _currentDropPos;
-            _rigidbody.AddForce(SIHelpers.VectorDown * _currentSettings.releaseForceMultiplier,
+            _rigidbody.AddForce(SIHelpers.VectorDown * _currentVariantSettings.releaseForceMultiplier,
                 ForceMode.Impulse);
         }
     }

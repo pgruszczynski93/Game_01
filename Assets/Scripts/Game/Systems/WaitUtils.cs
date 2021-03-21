@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public static class SIWaitUtils
+    public static class WaitUtils
     {
         static readonly Dictionary<float, WaitForSeconds> WaitForSecondsCache = new Dictionary<float, WaitForSeconds>();
 
@@ -42,6 +42,18 @@ namespace SpaceInvaders
         {
             yield return SkipFrames(frames);
             onWaitFinished?.Invoke();
+        }
+
+        public static IEnumerator SkipFramesAndRunSequence(Action onStart, Action onFinish, int frames) {
+            onStart?.Invoke();
+            yield return SkipFrames(frames);
+            onFinish?.Invoke();
+        }
+
+        public static IEnumerator WaitSecondsAndRunSequence(Action onStart, Action onFinish, float seconds) {
+            onStart?.Invoke();
+            yield return WaitForCachedSeconds(seconds);
+            onFinish?.Invoke();
         }
         
     }

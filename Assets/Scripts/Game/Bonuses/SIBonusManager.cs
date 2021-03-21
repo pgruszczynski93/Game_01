@@ -90,7 +90,6 @@ namespace SpaceInvaders {
                 bonusInstance = Instantiate(_bonusPrefab, transform);
                 bonusInstance.transform.localPosition = SIScreenUtils.HiddenObjectPosition;
                 UnityEditor.Undo.RegisterCreatedObjectUndo(bonusInstance.gameObject, "Bonus Instantiaton");
-                // bonusInstance.Initalise();
                 _bonusesPool.Add(bonusInstance);
             }
         }

@@ -139,7 +139,7 @@ namespace SpaceInvaders
             {
                 indexOfSelectedEnemy = Random.Range(0, _totalEnemiesAbleToShoot);
                 SIEnemyGridEvents.BroadcastOnShootOrderReceived(_enemiesAbleToShoot[indexOfSelectedEnemy]);
-                yield return SIWaitUtils.WaitForCachedSeconds(Random.Range(
+                yield return WaitUtils.WaitForCachedSeconds(Random.Range(
                     _gridBehaviourSettings.minShootingInterval, _gridBehaviourSettings.maxShootingInterval));
             }
         }
