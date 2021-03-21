@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     public class SIBonusManager : MonoBehaviour {
-        [SerializeField] int _poolIndex;
         [SerializeField] int _maxBonusToSpawn;
-        [Range(0, 99), SerializeField] int _bonusDropThreshold;
+        [Range(0, 99), SerializeField] int _bonusDropPropability;
+        
         [SerializeField] ScriptableBonusDropLookup _scriptableLookup;
         [SerializeField] SIBonus _bonusPrefab;
         [SerializeField] List<SIBonus> _bonusesPool;
-
+        
+        int _poolIndex;
         int _bonusTypesCount;
         Vector3 _currentDropPosition;
         SIBonusDropRatesLookup _loadedLookup;
@@ -68,7 +69,7 @@ namespace SpaceInvaders {
         }
 
         bool CanTrySelectBonusToDrop(float probability) {
-            return _loadedLookup == null || probability > _bonusDropThreshold;
+            return _loadedLookup == null || probability > _bonusDropPropability;
         }
 
         static bool IsInDropProbability(float probability, BonusDropInfo dropInfo) {
