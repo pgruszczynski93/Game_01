@@ -59,13 +59,10 @@ namespace SpaceInvaders {
         }
 
         void ManageBonusesPool(BonusType bonusType) {
-            if (_poolIndex < _maxBonusToSpawn) {
-                _bonusesPool[_poolIndex].SetAndReleaseBonusVariant(_currentDropPosition, bonusType);
-                ++_poolIndex;
-            }
-            else {
+            _bonusesPool[_poolIndex].SetAndReleaseBonusVariant(_currentDropPosition, bonusType);
+            ++_poolIndex;
+            if (_poolIndex > _maxBonusToSpawn - 1)
                 _poolIndex = 0;
-            }
         }
 
         bool CanTrySelectBonusToDrop(float probability) {
