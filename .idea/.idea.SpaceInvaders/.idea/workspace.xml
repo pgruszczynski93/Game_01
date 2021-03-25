@@ -62,7 +62,9 @@
       <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiBonuses/Bonus.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiBonuses/Bonus.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusAnimatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusAnimatorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -272,9 +274,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusAnimator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIWaitUtils.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusAnimatorController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusAnimatorController.cs" />
       </list>
     </option>
   </component>
@@ -317,10 +319,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="15516">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="15516" />
+      <option name="pid" />
       <option name="selectedOptions">
         <set />
       </option>
@@ -573,6 +575,8 @@
       <workItem from="1616363436851" duration="4298000" />
       <workItem from="1616447971907" duration="2562000" />
       <workItem from="1616538352781" duration="984000" />
+      <workItem from="1616622383252" duration="662000" />
+      <workItem from="1616707822196" duration="2640000" />
     </task>
     <servers />
   </component>
@@ -700,10 +704,10 @@
     </state>
     <state x="2440" y="100" width="929" height="1027" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616363888155" />
     <state x="221" y="136" width="1591" height="1027" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1616241178056" />
-    <state x="1920" y="100" width="1794" height="1027" key="dock-window-2" timestamp="1616539345099">
+    <state x="1920" y="100" width="1794" height="1027" maximized="true" key="dock-window-2" timestamp="1616710482961">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="1920" y="100" width="1794" height="1027" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616539345099" />
+    <state x="1920" y="100" width="1794" height="1027" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616710482961" />
     <state x="627" y="119" width="786" height="801" key="find.popup" timestamp="1616349411848">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

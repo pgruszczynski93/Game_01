@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SpaceInvaders {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
@@ -21,7 +22,15 @@ namespace SpaceInvaders {
         public BonusSettings BonusVariantSettings => _currentVariantSettings;
         public MeshRenderer BonusVariantRenderer => _currentBonusVariantRenderer;
 
-        void OnEnable() => SubscribeEvents();
+        void Initialise() {
+            if(_thisTransform == null)
+                _thisTransform = transform;
+        }
+
+        void OnEnable() {
+            Initialise();
+            SubscribeEvents();
+        }
 
         void OnDisable() => UnsubscribeEvents();
         
@@ -34,9 +43,6 @@ namespace SpaceInvaders {
         }
 
         public void SetAndReleaseBonusVariant(Vector3 releasePos, BonusType bonusType) {
-            if (_thisTransform == null)
-                _thisTransform = transform;
-            
             _currentDropPos = releasePos;
             _bonusType = bonusType;
             _currentVariantSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
@@ -70,7 +76,7 @@ namespace SpaceInvaders {
         }
 
         void TryToResetObject() {
-            Vector3 bonusViewPortPosition =
+             Vector3 bonusViewPortPosition =
                 SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
 
             if (!bonusViewPortPosition.IsInVerticalViewportSpace()) 
