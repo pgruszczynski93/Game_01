@@ -672,7 +672,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6375572910197037329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1682405191334550313}
@@ -731,17 +731,17 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _animatorController: {fileID: 346440941738690385}
   _bonusesVariants:
-    _keys: 020000000000000001000000
+    _keys: 000000000100000002000000
     _values:
-    - scriptableBonus: {fileID: 11400000, guid: 80b619222c673b744b70bead767a8218,
-        type: 2}
-      bonusRenderer: {fileID: 774676110857534785}
     - scriptableBonus: {fileID: 11400000, guid: fa0ff032deaf6c2478339782a7a874c4,
         type: 2}
       bonusRenderer: {fileID: 8654999617763603144}
     - scriptableBonus: {fileID: 11400000, guid: 52a1d9f64191d88428ec5fa048f59904,
         type: 2}
       bonusRenderer: {fileID: 979481691423972112}
+    - scriptableBonus: {fileID: 11400000, guid: 80b619222c673b744b70bead767a8218,
+        type: 2}
+      bonusRenderer: {fileID: 774676110857534785}
 --- !u!114 &6375572910197037335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _variantAnimationTime: 0.5
   _animator: {fileID: 99659936837328652}
+  _bonusVariantRenderer: {fileID: 0}
 --- !u!1 &7607926838262202215
 GameObject:
   m_ObjectHideFlags: 0

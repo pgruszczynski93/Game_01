@@ -5,7 +5,7 @@ using UnityEngine;
 namespace SpaceInvaders {
     public class SIBonusManager : MonoBehaviour {
         [SerializeField] int _maxBonusToSpawn;
-        [Range(0, 99), SerializeField] int _bonusDropPropability;
+        [Range(0, 100), SerializeField] int _bonusDropPropability;
         
         [SerializeField] ScriptableBonusDropLookup _scriptableLookup;
         [SerializeField] SIBonus _bonusPrefab;
@@ -43,7 +43,6 @@ namespace SpaceInvaders {
             _currentDropPosition = enemy.transform.position;
             TryToDropBonus();
         }
-
         void TryToDropBonus() {
             float probability = Random.Range(0, 100);
             if (CanTrySelectBonusToDrop(probability))
@@ -85,8 +84,9 @@ namespace SpaceInvaders {
             UnityEditor.Undo.RegisterFullObjectHierarchyUndo(gameObject, "Bonus hierarchy changed");
             for (var i = 0; i < _maxBonusToSpawn; i++) {
                 bonusInstance = Instantiate(_bonusPrefab, transform);
-                bonusInstance.transform.localPosition = SIScreenUtils.HiddenObjectPosition;
                 UnityEditor.Undo.RegisterCreatedObjectUndo(bonusInstance.gameObject, "Bonus Instantiaton");
+                bonusInstance.Parent = transform;
+                bonusInstance.transform.localPosition = SIScreenUtils.HiddenObjectPosition;
                 _bonusesPool.Add(bonusInstance);
             }
         }

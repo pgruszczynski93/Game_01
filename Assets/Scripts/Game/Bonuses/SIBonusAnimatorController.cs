@@ -1,12 +1,13 @@
 using System;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SpaceInvaders {
     public class SIBonusAnimatorController : MonoBehaviour {
 
-        const float MIN_DISSOLVE = 0f;
-        const float MAX_DISSOLVE = 1f;
+        const float NOT_DISSOLVED = 0f;
+        const float FULLY_DISSOLVED = 1f;
         
         static readonly int DissolveAmountID = Shader.PropertyToID("_DissolveAmount");
         static readonly int BonusSpawnedID = Animator.StringToHash("BonusSpawned");
@@ -18,11 +19,10 @@ namespace SpaceInvaders {
         bool _isVariantRendererVisible; 
         float _dissolveAmountValue;
         
-        Ease _ease;
-        MeshRenderer _bonusVariantRenderer;
+        [SerializeField] Renderer _bonusVariantRenderer;
         MaterialPropertyBlock _propertyBlock;
         Coroutine _animationRoutine;
-        Tweener _animationTweener;
+        Tweener _dissolveTweener;
         
         Action onAnimationStarted;
         Action onAnimationFinished;
@@ -32,34 +32,51 @@ namespace SpaceInvaders {
         void Initialise() {
             _isVariantRendererVisible = false;
             _propertyBlock = new MaterialPropertyBlock();
-            _dissolveAmountValue = MAX_DISSOLVE;
-            _animationTweener = DOTween.To(() => _dissolveAmountValue, newVal => _dissolveAmountValue = newVal,
-                    MIN_DISSOLVE, _variantAnimationTime)
-                .OnUpdate(UpdateMaterialPropertyBlock)
-                .SetEase(Ease.OutCubic)
-                .SetAutoKill(false)
-                .Pause();
+            _dissolveTweener =
+                DOTween.To(() => _dissolveAmountValue, newVal => _dissolveAmountValue = newVal,
+                        NOT_DISSOLVED, _variantAnimationTime)
+                    .OnUpdate(() => {
+                        UpdateSelectedFloatMaterialProperty(DissolveAmountID, _dissolveAmountValue);
+                    })
+                    .SetAutoKill(false)
+                    .Pause();
+            
+            _dissolveAmountValue = FULLY_DISSOLVED;
         }
 
+        
+        //Note: This code runs as Animation Event
         public void AnimateBonusVariantRenderer() {
-            if (_isVariantRendererVisible)
+            if (_isVariantRendererVisible )
                 return;
-
+            
             _isVariantRendererVisible = true;
-            _animationTweener?.Restart();
+            _dissolveAmountValue = FULLY_DISSOLVED;
+            _dissolveTweener.Restart();
         }
-
-        public void SetRendererToAnimate(MeshRenderer mRenderer) {
-            _bonusVariantRenderer = mRenderer;
+        
+        public void RunAnimation(Renderer variantRenderer) {
+            _dissolveAmountValue = FULLY_DISSOLVED;
             _isVariantRendererVisible = false;
+            _bonusVariantRenderer = variantRenderer;
         }
 
-        void UpdateMaterialPropertyBlock() {
-            if (_propertyBlock == null)
+        public void ResetAnimation() {
+            _dissolveTweener.Pause();
+            UpdateSelectedFloatMaterialProperty(DissolveAmountID, FULLY_DISSOLVED);
+            RemovePropertyBlockFromRenderer();
+        }
+
+        void RemovePropertyBlockFromRenderer() {
+            _bonusVariantRenderer.SetPropertyBlock(null);
+        }
+        
+        void UpdateSelectedFloatMaterialProperty(int propId, float newValue) {
+            if (_bonusVariantRenderer == null)
                 return;
             
             _bonusVariantRenderer.GetPropertyBlock(_propertyBlock);
-            _propertyBlock.SetFloat(DissolveAmountID, _dissolveAmountValue);
+            _propertyBlock.SetFloat(propId, newValue);
             _bonusVariantRenderer.SetPropertyBlock(_propertyBlock);
         }
     }
