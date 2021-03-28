@@ -55,19 +55,21 @@ namespace SpaceInvaders {
             _dissolveTweener.Restart();
         }
         
-        public void RunAnimation(Renderer variantRenderer) {
+        public void RunAnimation(Renderer variantRenderer) {;
+
             _dissolveAmountValue = FULLY_DISSOLVED;
             _isVariantRendererVisible = false;
             _bonusVariantRenderer = variantRenderer;
+            ResetRendererPropertyBlock();
         }
 
         public void ResetAnimation() {
             _dissolveTweener.Pause();
-            UpdateSelectedFloatMaterialProperty(DissolveAmountID, FULLY_DISSOLVED);
-            RemovePropertyBlockFromRenderer();
+            ResetRendererPropertyBlock();
         }
 
-        void RemovePropertyBlockFromRenderer() {
+        void ResetRendererPropertyBlock() {
+            //EDGE WIDTH + minmaxy do poprawki
             _bonusVariantRenderer.SetPropertyBlock(null);
         }
         
