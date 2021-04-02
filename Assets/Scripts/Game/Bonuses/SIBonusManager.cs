@@ -43,15 +43,17 @@ namespace SpaceInvaders {
             _currentDropPosition = enemy.transform.position;
             TryToDropBonus();
         }
+        
+        [Button]
         void TryToDropBonus() {
             float probability = Random.Range(0, 100);
-            if (CanTrySelectBonusToDrop(probability))
+            if (CanSelectBonusToDrop(probability))
                 return;
 
             BonusType selectedBonus = (BonusType) Random.Range(0, _bonusTypesCount);
             BonusDropInfo dropInfo = _loadedLookup[selectedBonus];
             probability = Random.Range(0, 100);
-            if (!IsInDropProbability(probability, dropInfo)) 
+            if (!CanBeDropped(probability, dropInfo)) 
                 return;
             
             ManageBonusesPool(selectedBonus);
@@ -64,11 +66,11 @@ namespace SpaceInvaders {
                 _poolIndex = 0;
         }
 
-        bool CanTrySelectBonusToDrop(float probability) {
+        bool CanSelectBonusToDrop(float probability) {
             return _loadedLookup == null || probability > _bonusDropPropability;
         }
 
-        static bool IsInDropProbability(float probability, BonusDropInfo dropInfo) {
+        static bool CanBeDropped(float probability, BonusDropInfo dropInfo) {
             return probability > dropInfo.minDropRate && probability < dropInfo.maxDropRate;
         }
 

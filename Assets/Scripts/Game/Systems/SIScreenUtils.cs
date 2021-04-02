@@ -4,6 +4,7 @@ namespace SpaceInvaders
 {
     public static class SIScreenUtils {
         public static Vector3 HiddenObjectPosition = new Vector3(0, 0, -100);
+        // public static Vector3 HiddenObjectPosition = new Vector3(0, 0, 0);
         public static bool IsInCameraFrustum(Renderer renderer, Camera cam)
         {
             Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);

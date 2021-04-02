@@ -742,6 +742,8 @@ MonoBehaviour:
     - scriptableBonus: {fileID: 11400000, guid: 80b619222c673b744b70bead767a8218,
         type: 2}
       bonusRenderer: {fileID: 774676110857534785}
+  _thisTransform: {fileID: 6375572910197037336}
+  _currentBonusVariantRenderer: {fileID: 0}
 --- !u!114 &6375572910197037335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,9 +773,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4855e92ee34b49ba9fdc72b0b4b9f8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _variantAnimationTime: 0.5
+  _showAnimationTime: 0.35
+  _hideAnimationTime: 0.2
   _animator: {fileID: 99659936837328652}
-  _bonusVariantRenderer: {fileID: 0}
 --- !u!1 &7607926838262202215
 GameObject:
   m_ObjectHideFlags: 0
