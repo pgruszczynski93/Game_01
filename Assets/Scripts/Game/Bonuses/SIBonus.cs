@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace SpaceInvaders {
@@ -11,12 +12,14 @@ namespace SpaceInvaders {
         [SerializeField] SIBonusAnimatorController _animatorController;
         [SerializeField] SIBonusDictionary _bonusesVariants;
         [SerializeField] Transform _thisTransform;
-        
+
+        bool _isInStopRoutine;
         BonusType _bonusType;
         Vector3 _currentDropPos;
-        
+
+        Coroutine _stopCoroutine;
         BonusSettings _currentVariantSettings;
-        [SerializeField] Renderer _currentBonusVariantRenderer;
+        Renderer _currentBonusVariantRenderer;
         Renderer _lastRenderer;
         
         public BonusSettings BonusVariantSettings => _currentVariantSettings;
@@ -43,6 +46,9 @@ namespace SpaceInvaders {
             //Note: This line resets the bonus before release.
             StopObject();
             
+            if(_stopCoroutine != null)
+                StopCoroutine(_stopCoroutine);
+            
             _currentDropPos = releasePos;
             _bonusType = bonusType;
             _currentVariantSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
@@ -52,13 +58,30 @@ namespace SpaceInvaders {
         }
 
         public void MoveObject() {
-            TryEnableBonus(true);
+            TryEnableBonusAndSelectedVariant(true);
             SetMotion();
         }
 
         public void StopObject() {
+            TryEnableBonusAndSelectedVariant(false);
             ResetMotion();
-            TryEnableBonus(false);
+        }
+
+        public void TryRunBonusCollectedRoutine() {
+            if (_isInStopRoutine)
+                return;
+            
+            _stopCoroutine = StartCoroutine(RunStopRoutine());
+        }
+
+        IEnumerator RunStopRoutine() {
+            _isInStopRoutine = true;
+            _animatorController.SetHideAnimation();
+            while (_animatorController.IsVariantAnimationTriggered)
+                yield return WaitUtils.SkipFrames(1);
+
+            _isInStopRoutine = false;
+            StopObject();
         }
         
         void SetMotion() {
@@ -75,7 +98,7 @@ namespace SpaceInvaders {
             _thisTransform.localPosition = SIScreenUtils.HiddenObjectPosition;
         }
 
-        void TryEnableBonus(bool isEnabled) {
+        void TryEnableBonusAndSelectedVariant(bool isEnabled) {
             
             if (_currentBonusVariantRenderer == null)
                 return;
@@ -86,8 +109,10 @@ namespace SpaceInvaders {
             
             _bonusRoot.SetActive(isEnabled);
             _currentBonusVariantRenderer.enabled = isEnabled;
-            _animatorController.ReloadAnimation(_currentBonusVariantRenderer);
             _lastRenderer = _currentBonusVariantRenderer;
+            
+            if(isEnabled)
+                _animatorController.SetShowAnimation(_currentBonusVariantRenderer);
         }
 
         void CheckIsInVerticalRange() {
@@ -98,4 +123,4 @@ namespace SpaceInvaders {
                 StopObject();
         }
     }
-}
+}    

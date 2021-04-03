@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     public class SIBonusAnimatorController : MonoBehaviour {
-        enum AnimationState {
+        enum BonusAnimationType {
             Show,
             Hide
         }
@@ -22,10 +22,10 @@ namespace SpaceInvaders {
         [SerializeField] float _hideAnimationTime;
         [SerializeField] Animator _animator;
 
+        bool _isVariantAnimationTriggered;
         bool _initialised;
-        bool _isVariantRendererVisible; 
         float _dissolveValue;
-        
+
         Renderer _bonusVariantRenderer;
         MaterialPropertyBlock _propertyBlock;
         Coroutine _animationRoutine;
@@ -33,39 +33,57 @@ namespace SpaceInvaders {
         Action onAnimationStarted;
         Action onAnimationFinished;
 
+        public bool IsVariantAnimationTriggered => _isVariantAnimationTriggered;
+
         void TryInitialise() {
             if (_initialised)
                 return;
             
+            _isVariantAnimationTriggered = false;
             _initialised = true;
-            _isVariantRendererVisible = false;
             _propertyBlock = new MaterialPropertyBlock();
             _dissolveValue = FULLY_DISSOLVED;
         }
         
-        
-        //Note: This code runs as Animation Event
-        public void RunShowAnimation() {
-            if (_isVariantRendererVisible )
-                return;
-
-            _isVariantRendererVisible = true;
-            _animationRoutine = StartCoroutine(AnimationRoutine(AnimationState.Show));
+        //Note: This code should runs once at Animation Event
+        public void ShowBonusVariantAnimation() {
+            _animationRoutine = StartCoroutine(AnimationRoutine(BonusAnimationType.Show));
         }
         
+        //Note: This code should runs once at Animation Event
+        public void HideBonusVariantAnimation() {
+            _animationRoutine = StartCoroutine(AnimationRoutine(BonusAnimationType.Hide));
+        }
         
-        public void ReloadAnimation(Renderer variantRenderer) {
+        public void SetShowAnimation(Renderer variantRenderer) {
             TryInitialise();
-             if (_animationRoutine != null)
-                StopCoroutine(_animationRoutine);
-             
-            _isVariantRendererVisible = false;
+            TryStopCurrentVariantAnimation();
+            
+            _isVariantAnimationTriggered = true;
             _bonusVariantRenderer = variantRenderer;
+            // _animator.ResetTrigger(BonusCollectedID);
+            _animator.SetTrigger(BonusSpawnedID);
             ResetRendererPropertyBlock();
+        }
+
+        public void SetHideAnimation() {
+            TryStopCurrentVariantAnimation();
+            
+            _isVariantAnimationTriggered = true;
+            // _animator.ResetTrigger(BonusSpawnedID);
+            _animator.SetTrigger(BonusCollectedID);
         }
 
         void ResetRendererPropertyBlock() {
             _bonusVariantRenderer.SetPropertyBlock(null);
+        }
+
+        void TryStopCurrentVariantAnimation() {
+            if (_animationRoutine == null)
+                return;
+
+            _isVariantAnimationTriggered = false;
+            StopCoroutine(_animationRoutine);
         }
         
         void UpdateSelectedFloatMaterialProperty(int propId, float newValue) {
@@ -81,9 +99,11 @@ namespace SpaceInvaders {
         // Tried to fix that bug, but any of the solutions didn't work.
         // ---====--- Instead I used coroutine.
 
-        IEnumerator AnimationRoutine(AnimationState state) {
-            if (_bonusVariantRenderer == null)
+        IEnumerator AnimationRoutine(BonusAnimationType type) {
+            if (_bonusVariantRenderer == null) {
+                _isVariantAnimationTriggered = false;
                 yield break;
+            }
 
             int sign;
             float currentTime = 0;
@@ -91,7 +111,7 @@ namespace SpaceInvaders {
             float duration;
             float dissolveStartValue;
             
-            if (state == AnimationState.Show) {
+            if (type == BonusAnimationType.Show) {
                 duration = _showAnimationTime;
                 dissolveStartValue = FULLY_DISSOLVED;
                 sign = -1;
@@ -109,6 +129,8 @@ namespace SpaceInvaders {
                 currentTime += Time.deltaTime;
                 yield return WaitUtils.SkipFrames(1);
             }
+
+            _isVariantAnimationTriggered = false;
         }
     }
 }
