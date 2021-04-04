@@ -11,6 +11,7 @@ namespace SpaceInvaders {
             Hide
         }
         
+        // Note: Values aren't in <0,1> range to make sure that effect will be completed.
         const float NOT_DISSOLVED = 0f;    
         const float FULLY_DISSOLVED = 1f;
         
@@ -61,7 +62,7 @@ namespace SpaceInvaders {
             
             _isVariantAnimationTriggered = true;
             _bonusVariantRenderer = variantRenderer;
-            // _animator.ResetTrigger(BonusCollectedID);
+            _animator.ResetTrigger(BonusCollectedID);
             _animator.SetTrigger(BonusSpawnedID);
             ResetRendererPropertyBlock();
         }
@@ -70,7 +71,7 @@ namespace SpaceInvaders {
             TryStopCurrentVariantAnimation();
             
             _isVariantAnimationTriggered = true;
-            // _animator.ResetTrigger(BonusSpawnedID);
+            _animator.ResetTrigger(BonusSpawnedID);
             _animator.SetTrigger(BonusCollectedID);
         }
 
