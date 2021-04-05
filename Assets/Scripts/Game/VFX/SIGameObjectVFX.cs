@@ -25,7 +25,6 @@ namespace SpaceInvaders
             if (_effectVFX == null)
                 return;
             
-
             TryToDetachFromParent(canBeDetachedFromParent);
             TryToSetEffect(canBeEnabled);
             TryToResetEffectAfterUsage(shouldBeResetAfterUsage);

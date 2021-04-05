@@ -16,7 +16,6 @@ namespace SpaceInvaders {
         const float FULLY_DISSOLVED = 1f;
         
         static readonly int DissolveAmountID = Shader.PropertyToID("_DissolveAmount");
-        static readonly int BonusSpawnedID = Animator.StringToHash("BonusSpawned");
         static readonly int BonusCollectedID = Animator.StringToHash("BonusCollected");
 
         [SerializeField] float _showAnimationTime;
@@ -63,7 +62,6 @@ namespace SpaceInvaders {
             _isVariantAnimationTriggered = true;
             _bonusVariantRenderer = variantRenderer;
             _animator.ResetTrigger(BonusCollectedID);
-            _animator.SetTrigger(BonusSpawnedID);
             ResetRendererPropertyBlock();
         }
 
@@ -71,7 +69,6 @@ namespace SpaceInvaders {
             TryStopCurrentVariantAnimation();
             
             _isVariantAnimationTriggered = true;
-            _animator.ResetTrigger(BonusSpawnedID);
             _animator.SetTrigger(BonusCollectedID);
         }
 

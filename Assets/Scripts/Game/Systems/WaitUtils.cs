@@ -35,7 +35,8 @@ namespace SpaceInvaders
         public static IEnumerator SkipFrames(int totalFrames)
         {
             int framesToSkip = totalFrames;
-            while (framesToSkip-- > 0) yield return null;
+            while (framesToSkip-- > 0) 
+                yield return null;
         }
 
         public static IEnumerator SkipFramesAndInvoke(int frames, Action onWaitFinished)

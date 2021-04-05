@@ -1,64 +1,67 @@
+using System.Collections;
+using SpaceInvaders;
 using UnityEngine;
 
-namespace SpaceInvaders
-{
-    public class SIShieldBehaviour : MonoBehaviour
-    {
-        [SerializeField] GameObject  _rootObject;
+namespace Game.Features.Shield {
+    public class SIShieldBehaviour : MonoBehaviour {
+
+        [SerializeField] GameObject _rootObject;
         [SerializeField] SIGameObjectVFX _shieldVfx;
+        [SerializeField] SIShieldAnimatorController _animatorController;
+        
+        Coroutine _shieldAnimationRoutine;
+        
+        void OnEnable() => SubscribeEvents();
 
-        void OnEnable()
-        {    
-            AssignEvents();
-        }
+        void OnDisable() {
+            if(_shieldAnimationRoutine != null)
+                StopCoroutine(DisableRoutine());
+            
+            UnsubscribeEvents();
+        } 
 
-        void OnDisable()
-        {
-            RemoveEvents();
-        }
-
-        void AssignEvents()
-        {
+        void SubscribeEvents() {
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
         }
 
-        void RemoveEvents()
-        {
+        void UnsubscribeEvents() {
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
         }
-        
-        void HandleOnBonusEnabled(BonusSettings bonusSettings)
-        {
-            if (bonusSettings.bonusType != BonusType.Shield)
-                return;
-            
-            EnableShield();            
-        }
 
-        void HandleOnBonusDisabled(BonusSettings bonusSettings)
-        {
+        void HandleOnBonusEnabled(BonusSettings bonusSettings) {
             if (bonusSettings.bonusType != BonusType.Shield)
                 return;
 
-            //todo::  REMOVE IT LATYEA
-            DisableBonus();
+            EnableShield();
         }
-        
-        void EnableShield()
-        {
+
+        void HandleOnBonusDisabled(BonusSettings bonusSettings) {
+            if (bonusSettings.bonusType != BonusType.Shield)
+                return;
+
+            _shieldAnimationRoutine = StartCoroutine(DisableRoutine());
+        }
+
+        void EnableShield() {
             EnableBonus();
             _shieldVfx.TryToManageVFX(true, false, false);
+            _animatorController.SetShowAnimation();
         }
 
-        void EnableBonus()
-        {
+        void EnableBonus() {
             _rootObject.SetActive(true);
         }
-        void DisableBonus()
-        {
+
+        void DisableBonus() {
             _rootObject.SetActive(false);
+        }
+
+        IEnumerator DisableRoutine() {
+            yield return WaitUtils.WaitSecondsAndRunSequence(
+                _animatorController.SetHideAnimation,     
+                DisableBonus, 0.5f);
         }
     }
 }
