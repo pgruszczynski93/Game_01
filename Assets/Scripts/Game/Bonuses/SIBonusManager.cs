@@ -1,18 +1,15 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using SpaceInvaders.ObjectsPool;
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public class SIBonusManager : MonoBehaviour {
-        [SerializeField] int _maxBonusToSpawn;
+    public class SIBonusManager : SIObjectPool<SIBonus> {
         [Range(0, 100), SerializeField] int _bonusDropPropability;
-        
         [SerializeField] ScriptableBonusDropLookup _scriptableLookup;
-        [SerializeField] SIBonus _bonusPrefab;
-        [SerializeField] List<SIBonus> _bonusesPool;
-        
-        int _poolIndex;
-        int _bonusTypesCount;
+
+        int _bonusVariantsCount;
+        BonusType _currentBonusType;
         Vector3 _currentDropPosition;
         SIBonusDropRatesLookup _loadedLookup;
 
@@ -20,16 +17,11 @@ namespace SpaceInvaders {
 
         void Initialise() {
             _loadedLookup = _scriptableLookup.dropRatesLookup;
-            _bonusTypesCount = _loadedLookup.Count;
+            _bonusVariantsCount = _loadedLookup.Count;
         }
 
-        void OnEnable() {
-            SubscribeEvents();
-        }
-
-        void OnDisable() {
-            UnsubscribeEvents();
-        }
+        void OnEnable() => SubscribeEvents();
+        void OnDisable() => UnsubscribeEvents();
 
         void SubscribeEvents() {
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
@@ -44,26 +36,25 @@ namespace SpaceInvaders {
             TryToDropBonus();
         }
         
-        [Button]
         void TryToDropBonus() {
             float probability = Random.Range(0, 100);
             if (CanSelectBonusToDrop(probability))
                 return;
 
-            BonusType selectedBonus = (BonusType) Random.Range(0, _bonusTypesCount);
-            BonusDropInfo dropInfo = _loadedLookup[selectedBonus];
+            _currentBonusType = (BonusType) Random.Range(0, _bonusVariantsCount);
+            BonusDropInfo dropInfo = _loadedLookup[_currentBonusType];
             probability = Random.Range(0, 100);
             if (!CanBeDropped(probability, dropInfo)) 
                 return;
             
-            ManageBonusesPool(selectedBonus);
+            UpdatePool();
         }
-
-        void ManageBonusesPool(BonusType bonusType) {
-            _bonusesPool[_poolIndex].SetAndReleaseBonusVariant(_currentDropPosition, bonusType);
-            ++_poolIndex;
-            if (_poolIndex > _maxBonusToSpawn - 1)
-                _poolIndex = 0;
+        
+        //to refactor:
+        protected override void ManagePooledObject() {
+            _objectsPool[_poolIndex].SetSpawnPosition(_currentDropPosition);
+            _objectsPool[_poolIndex].SetBonusVariant(_currentBonusType);
+            _objectsPool[_poolIndex].UseObjectFromPool();
         }
 
         bool CanSelectBonusToDrop(float probability) {
@@ -77,19 +68,19 @@ namespace SpaceInvaders {
 #if UNITY_EDITOR
         [Button]
         void AssignBonuses() {
-            for (var i = 0; i < _bonusesPool.Count; i++) {
-                DestroyImmediate(_bonusesPool[i]?.gameObject);
+            for (var i = 0; i < _objectsPool.Count; i++) {
+                DestroyImmediate(_objectsPool[i]?.gameObject);
             }
 
-            _bonusesPool = new List<SIBonus>();
+            _objectsPool = new List<SIBonus>();
             SIBonus bonusInstance;
             UnityEditor.Undo.RegisterFullObjectHierarchyUndo(gameObject, "Bonus hierarchy changed");
-            for (var i = 0; i < _maxBonusToSpawn; i++) {
-                bonusInstance = Instantiate(_bonusPrefab, transform);
+            for (var i = 0; i < _poolCapacity; i++) {
+                bonusInstance = Instantiate(_prefabToSpawn, transform);
                 UnityEditor.Undo.RegisterCreatedObjectUndo(bonusInstance.gameObject, "Bonus Instantiaton");
                 bonusInstance.Parent = transform;
                 bonusInstance.transform.localPosition = SIScreenUtils.HiddenObjectPosition;
-                _bonusesPool.Add(bonusInstance);
+                _objectsPool.Add(bonusInstance);
             }
         }
 #endif

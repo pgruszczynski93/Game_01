@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
+using SpaceInvaders.ObjectsPool;
 using UnityEngine;
 
 namespace SpaceInvaders {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
-    public class SIBonus : MonoBehaviour, ICanMove {
+    public class SIBonus : MonoBehaviour, ICanMove, IPoolable {
         [SerializeField] protected Rigidbody _rigidbody;
         [SerializeField] protected GameObject _bonusRoot;
 
@@ -42,17 +43,22 @@ namespace SpaceInvaders {
             SIEventsHandler.OnUpdate -= CheckIsInVerticalRange;
         }
 
-        public void SetAndReleaseBonusVariant(Vector3 releasePos, BonusType bonusType) {
+        public void SetSpawnPosition(Vector3 spawnPos) {
+            _currentDropPos = spawnPos;
+        }
+
+        public void SetBonusVariant(BonusType bonusType) {
+            _bonusType = bonusType;
+            _currentVariantSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
+            _currentBonusVariantRenderer = _bonusesVariants[_bonusType].bonusRenderer;
+        }
+        
+        public void UseObjectFromPool() {
             //Note: This line resets the bonus before release.
             StopObject();
             
             if(_stopCoroutine != null)
                 StopCoroutine(_stopCoroutine);
-            
-            _currentDropPos = releasePos;
-            _bonusType = bonusType;
-            _currentVariantSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
-            _currentBonusVariantRenderer = _bonusesVariants[_bonusType].bonusRenderer;
             
             MoveObject();
         }

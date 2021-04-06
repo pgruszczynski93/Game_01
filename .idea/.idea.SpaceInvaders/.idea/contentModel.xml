@@ -392,6 +392,11 @@
               <e p="DamageInfo.cs" t="Include" />
               <e p="ICanCollide.cs" t="Include" />
             </e>
+            <e p="DOTS" t="Include">
+              <e p="TestCode" t="Include">
+                <e p="TestEntity.cs" t="Include" />
+              </e>
+            </e>
             <e p="Entities" t="Include">
               <e p="Enemies" t="Include">
                 <e p="SIEnemyBehaviour.cs" t="Include" />
@@ -424,6 +429,10 @@
               <e p="SIGameplayEvents.cs" t="Include" />
             </e>
             <e p="Features" t="Include">
+              <e p="ObjectsPool" t="Include">
+                <e p="IPoolable.cs" t="Include" />
+                <e p="SIObjectPool.cs" t="Include" />
+              </e>
               <e p="Shield" t="Include">
                 <e p="SIShieldAnimatorController.cs" t="Include" />
                 <e p="SIShieldBehaviour.cs" t="Include" />
