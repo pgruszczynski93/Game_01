@@ -5,6 +5,8 @@ using UnityEngine;
 namespace Game.Features.Shield {
     public class SIShieldBehaviour : MonoBehaviour {
 
+        const float WAIT_TO_DISABLE = 0.5f;
+        
         [SerializeField] GameObject _rootObject;
         [SerializeField] SIGameObjectVFX _shieldVfx;
         [SerializeField] SIShieldAnimatorController _animatorController;
@@ -61,7 +63,7 @@ namespace Game.Features.Shield {
         IEnumerator DisableRoutine() {
             yield return WaitUtils.WaitSecondsAndRunSequence(
                 _animatorController.SetHideAnimation,     
-                DisableBonus, 0.5f);
+                DisableBonus, WAIT_TO_DISABLE);
         }
     }
 }
