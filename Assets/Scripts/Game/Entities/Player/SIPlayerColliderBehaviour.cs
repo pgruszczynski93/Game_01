@@ -27,22 +27,13 @@ namespace SpaceInvaders
         protected override void HandleOnCollisionDetected(CollisionInfo collisionInfo)
         {
             DetectPlayerHit();
+            TryDetectExplosiveHit(collisionInfo.collisionTag);
+
         }
 
         void DetectPlayerHit()
         {
 //            Debug.Log("Player got hit.");
         }
-
-//        void OnBonusGained(MonoBehaviour collisionBehaviour = null)                
-//        void OnBonusGained(MonoBehaviour collisionBehaviour = null)                
-//        {
-//            SIBonus bonus = collisionBehaviour as SIBonus;
-//
-//            if (bonus == null)
-//                return;
-//
-//            SIEventsHandler.BroadcastOnBonusCollision(bonus.BonusInfo);
-//        }
     }
 }

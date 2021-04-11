@@ -35,6 +35,8 @@ namespace SpaceInvaders
 //                    Debug.Log("HITTED BY PlayerWeapon", this);
                     break;
             }
+            
+            TryDetectExplosiveHit(collisionInfo.collisionTag);
         }
     }
 }

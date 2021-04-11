@@ -8,7 +8,6 @@ namespace Game.Features.Shield {
         const float WAIT_TO_DISABLE = 0.5f;
         
         [SerializeField] GameObject _rootObject;
-        [SerializeField] SIGameObjectVFX _shieldVfx;
         [SerializeField] SIShieldAnimatorController _animatorController;
         
         Coroutine _shieldAnimationRoutine;
@@ -48,7 +47,6 @@ namespace Game.Features.Shield {
 
         void EnableShield() {
             EnableBonus();
-            _shieldVfx.TryToManageVFX(true, false, false);
             _animatorController.SetShowAnimation();
         }
 

@@ -27,6 +27,7 @@ namespace SpaceInvaders
         {
             //todo: ad damage handling to shield
             Debug.Log("[SIShieldColliderBehaviour] Shield hit!");
+            TryDetectExplosiveHit(collisionInfo.collisionTag);
         }
     }
 }

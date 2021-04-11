@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
-using SpaceInvaders.ObjectsPool;
+﻿using SpaceInvaders.ObjectsPool;
 using UnityEngine;
 
 namespace SpaceInvaders {
@@ -11,6 +9,7 @@ namespace SpaceInvaders {
         int _bonusVariantsCount;
         BonusType _currentBonusType;
         Vector3 _currentDropPosition;
+        
         SIBonusDropRatesLookup _loadedLookup;
 
         void Start() => Initialise();
@@ -50,11 +49,10 @@ namespace SpaceInvaders {
             UpdatePool();
         }
         
-        //to refactor:
         protected override void ManagePooledObject() {
-            _objectsPool[_poolIndex].SetSpawnPosition(_currentDropPosition);
-            _objectsPool[_poolIndex].SetBonusVariant(_currentBonusType);
-            _objectsPool[_poolIndex].UseObjectFromPool();
+            _currentObjectFromPool.SetSpawnPosition(_currentDropPosition);
+            _currentObjectFromPool.SetBonusVariant(_currentBonusType);
+            _currentObjectFromPool.UseObjectFromPool();
         }
 
         bool CanSelectBonusToDrop(float probability) {
@@ -64,25 +62,5 @@ namespace SpaceInvaders {
         static bool CanBeDropped(float probability, BonusDropInfo dropInfo) {
             return probability > dropInfo.minDropRate && probability < dropInfo.maxDropRate;
         }
-
-#if UNITY_EDITOR
-        [Button]
-        void AssignBonuses() {
-            for (var i = 0; i < _objectsPool.Count; i++) {
-                DestroyImmediate(_objectsPool[i]?.gameObject);
-            }
-
-            _objectsPool = new List<SIBonus>();
-            SIBonus bonusInstance;
-            UnityEditor.Undo.RegisterFullObjectHierarchyUndo(gameObject, "Bonus hierarchy changed");
-            for (var i = 0; i < _poolCapacity; i++) {
-                bonusInstance = Instantiate(_prefabToSpawn, transform);
-                UnityEditor.Undo.RegisterCreatedObjectUndo(bonusInstance.gameObject, "Bonus Instantiaton");
-                bonusInstance.Parent = transform;
-                bonusInstance.transform.localPosition = SIScreenUtils.HiddenObjectPosition;
-                _objectsPool.Add(bonusInstance);
-            }
-        }
-#endif
     }
 }

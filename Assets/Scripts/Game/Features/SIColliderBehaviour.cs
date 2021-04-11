@@ -44,16 +44,18 @@ namespace SpaceInvaders
         {
             _triggeringBehaviour = triggerCol.GetComponent<ICanCollide>();
             _triggeredCollisionInfo = _triggeringBehaviour.GetCollisionInfo();
+            CollisionTag collisionTag = _triggeredCollisionInfo.collisionTag;
             
             if (_triggeringBehaviour == null)
                 return;
-
-            bool isCollisionDetected = IsCollisionDetected(_triggeredCollisionInfo.collisionTag);
+                
+            bool isCollisionDetected = IsCollisionDetected(collisionTag);
 
             if (!isCollisionDetected)
                 return;
             
-            _triggeringBehaviour.OnCollisionDetected?.Invoke(_thisCollisionInfo);
+            _triggeringBehaviour.
+                OnCollisionDetected?.Invoke(_thisCollisionInfo);
         }
 
         bool IsCollisionDetected(CollisionTag collisionTag)
@@ -65,6 +67,13 @@ namespace SpaceInvaders
             }
 
             return false;
+        }
+
+        protected void TryDetectExplosiveHit(CollisionTag collisionTag) {
+            if (collisionTag == CollisionTag.Bonus)
+                return;
+            
+            SIGameplayEvents.BroadcastOnExplosiveObjectHit(transform.position);
         }
     }
 }

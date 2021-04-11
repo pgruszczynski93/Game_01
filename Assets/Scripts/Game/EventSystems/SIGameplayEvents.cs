@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -6,6 +7,7 @@ namespace SpaceInvaders
         public static event Action OnEnemyWeaponHit;
         public static event Action OnWaveEnd;
         public static event Action OnPlayerShoot;
+        public static event Action<Vector3> OnExplosiveObjectHit;
         public static event Action<DamageInfo> OnDamage;
         public static event Action<SIEnemyBehaviour> OnEnemyDeath;
         public static event Action<WeaponTier> OnWeaponTierUpdate;
@@ -38,6 +40,10 @@ namespace SpaceInvaders
         public static void BroadcastOnWaveEnd()
         {
             OnWaveEnd?.Invoke();
+        }
+
+        public static void BroadcastOnExplosiveObjectHit(Vector3 collisionPos) {
+            OnExplosiveObjectHit?.Invoke(collisionPos);
         }
 
         

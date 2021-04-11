@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 779636636344267331}
   - component: {fileID: 7689585324934520163}
-  - component: {fileID: 6034507516090906618}
   - component: {fileID: 7567135167175206329}
   m_Layer: 0
   m_Name: ShieldSystem
@@ -47,24 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rootObject: {fileID: 5697564859672760117}
-  _shieldVfx: {fileID: 6034507516090906618}
   _animatorController: {fileID: 7567135167175206329}
---- !u!114 &6034507516090906618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779636636344267332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c401a244e848473586350ca588445c82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timeToReset: 0
-  _parentTransform: {fileID: 779636636344267331}
-  _effectTransform: {fileID: 0}
-  _effectVFX: {fileID: 8810404868398930878}
 --- !u!114 &7567135167175206329
 MonoBehaviour:
   m_ObjectHideFlags: 0

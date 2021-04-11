@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using SpaceInvaders.ObjectsPool;
 using UnityEngine;
 
@@ -18,36 +17,38 @@ namespace SpaceInvaders {
         BonusType _bonusType;
         Vector3 _currentDropPos;
 
-        Coroutine _stopCoroutine;
         BonusSettings _currentVariantSettings;
         Renderer _currentBonusVariantRenderer;
         Renderer _lastRenderer;
+        Coroutine _stopCoroutine;
         
         public BonusSettings BonusVariantSettings => _currentVariantSettings;
         public Renderer BonusVariantRenderer => _currentBonusVariantRenderer;
-
-        public Transform Parent {
-            set => _parent = value;
-            get => _parent;
-        }
 
         void OnEnable() => SubscribeEvents();
 
         void OnDisable() => UnsubscribeEvents();
         
         void SubscribeEvents() {
-            SIEventsHandler.OnUpdate += CheckIsInVerticalRange;
+            SIEventsHandler.OnUpdate += HandleOnUpdate;
         }
 
         void UnsubscribeEvents() {
-            SIEventsHandler.OnUpdate -= CheckIsInVerticalRange;
+            SIEventsHandler.OnUpdate -= HandleOnUpdate;
         }
-
+        
+        void HandleOnUpdate() {
+            CheckIsInVerticalViewportSpace();
+        }
+        
         public void SetSpawnPosition(Vector3 spawnPos) {
             _currentDropPos = spawnPos;
         }
 
         public void SetBonusVariant(BonusType bonusType) {
+            if (_parent == null) {
+                _parent = transform.parent;
+            }
             _bonusType = bonusType;
             _currentVariantSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
             _currentBonusVariantRenderer = _bonusesVariants[_bonusType].bonusRenderer;
@@ -120,12 +121,13 @@ namespace SpaceInvaders {
             if(isEnabled)
                 _animatorController.SetShowAnimation(_currentBonusVariantRenderer);
         }
+        
 
-        void CheckIsInVerticalRange() {
-             Vector3 bonusViewPortPosition =
+        void CheckIsInVerticalViewportSpace() {
+            Vector3 bonusViewPortPosition =
                 SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
 
-            if (!bonusViewPortPosition.IsInVerticalViewportSpace()) 
+            if (!bonusViewPortPosition.IsInVerticalViewportSpace())
                 StopObject();
         }
     }
