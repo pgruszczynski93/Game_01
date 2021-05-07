@@ -31,6 +31,9 @@ public class SIHealth : MonoBehaviour
         _healthPercent = _currentHealth / _entitySetup.entityMaxHealth;
         _healthLossPercent = 1 - _healthPercent;
         _damageVFX.SetDamageVFX(_healthLossPercent);
+        if (IsAlive())
+            return;
+        _damageVFX.ResetDamageVFX();
     }
 
     public bool IsAlive()
