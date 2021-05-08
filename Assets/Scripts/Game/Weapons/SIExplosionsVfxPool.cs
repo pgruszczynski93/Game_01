@@ -11,17 +11,10 @@ namespace SpaceInvaders {
 
         void SubscribeEvents() {
             SIGameplayEvents.OnExplosiveObjectHit += HandleOnExplosiveObjectHit;
-            SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
         void UnsubscribeEvents() {
             SIGameplayEvents.OnExplosiveObjectHit -= HandleOnExplosiveObjectHit;
-            SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
-            //todo: dodatkowo obsłuzyć przypadki innych "wikeszych" wybuchow
-        }
-        
-        void HandleOnEnemyDeath(SIEnemyBehaviour enemy) {
-            _currentObjectFromPool.SetEffectSize(true);
         }
         
         void HandleOnExplosiveObjectHit(Vector3 collisionPos) {

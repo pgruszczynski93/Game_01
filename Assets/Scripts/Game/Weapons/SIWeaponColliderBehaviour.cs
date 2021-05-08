@@ -6,6 +6,7 @@ namespace SpaceInvaders
     public class SIWeaponColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
         [SerializeField] SIWeaponEntity _weaponEntity;
+        public bool IsCollisionTriggered { get; set; }
         public Action<CollisionInfo> OnCollisionDetected { get; set; }
         public CollisionInfo GetCollisionInfo()
         {
@@ -47,9 +48,14 @@ namespace SpaceInvaders
                     break;
             }
 
-            TryDetectExplosiveHit(collisionInfo.collisionTag);
+            ManageExplosionOnlyForEnemyWeapon(collisionInfo);
 
             _weaponEntity.HandleProjectileHit();
+        }
+
+        void ManageExplosionOnlyForEnemyWeapon(CollisionInfo collisionInfo) {
+            if (_thisCollisionInfo.collisionTag == CollisionTag.EnemyWeapon)
+                TryDetectExplosiveHit(collisionInfo.collisionTag);
         }
     }
 }

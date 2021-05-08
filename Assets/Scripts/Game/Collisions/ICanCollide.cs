@@ -11,6 +11,7 @@ namespace SpaceInvaders
     }
     public interface ICanCollide
     {
+        bool IsCollisionTriggered { get; set; }
         Action<CollisionInfo> OnCollisionDetected { get; }
         CollisionInfo GetCollisionInfo();
     }

@@ -120,6 +120,7 @@ namespace SpaceInvaders {
         public void ResetDamageVFX() {
             _canClipAlpha = false;
             _isColorTintActive = false;
+            _particlesEnabled = false;
             _currEdgeWidthVal = 0;
             _currNoiseTresholdVal = 0;
             _fireParticlesMainModule.maxParticles = 0;

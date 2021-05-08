@@ -7,8 +7,6 @@ namespace SpaceInvaders
 {
     public class SIVFXBehaviour : MonoBehaviour, IPoolable {
         
-        readonly Vector3 HALF_SIZE = new Vector3(0.5f, 0.5f, 0.5f);
-        
         [SerializeField] bool _hasParticles;
         [SerializeField] Transform _thisTransform;
         [SerializeField] Transform _parent;
@@ -37,9 +35,6 @@ namespace SpaceInvaders
         public void UseObjectFromPool() {
             TryPlayParticles();
         }
-        public void SetEffectSize(bool isBiggerEffectNeeded = false) {
-            _thisTransform.localScale = isBiggerEffectNeeded ? Vector3.one : HALF_SIZE;
-        }
         
         void TryPlayParticles() {
             if (!CanPlayParticles())
@@ -66,7 +61,6 @@ namespace SpaceInvaders
             _thisTransform.SetParent(_parent);
             _thisTransform.localPosition = SIScreenUtils.HiddenObjectPosition;
             TryStopParticles();
-            SetEffectSize();
         }
 
         IEnumerator TryResetParticlesRoutine() {

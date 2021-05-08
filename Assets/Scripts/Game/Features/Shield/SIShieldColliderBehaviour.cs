@@ -5,6 +5,7 @@ namespace SpaceInvaders
 {
     public class SIShieldColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
+        public bool IsCollisionTriggered { get; set; }
         public Action<CollisionInfo> OnCollisionDetected { get; set; }
         public CollisionInfo GetCollisionInfo()
         {
@@ -27,7 +28,6 @@ namespace SpaceInvaders
         {
             //todo: ad damage handling to shield
             Debug.Log("[SIShieldColliderBehaviour] Shield hit!");
-            TryDetectExplosiveHit(collisionInfo.collisionTag);
         }
     }
 }

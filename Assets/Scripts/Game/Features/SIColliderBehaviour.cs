@@ -46,12 +46,7 @@ namespace SpaceInvaders
             _triggeredCollisionInfo = _triggeringBehaviour.GetCollisionInfo();
             CollisionTag collisionTag = _triggeredCollisionInfo.collisionTag;
             
-            if (_triggeringBehaviour == null)
-                return;
-                
-            bool isCollisionDetected = IsCollisionDetected(collisionTag);
-
-            if (!isCollisionDetected)
+            if (_triggeringBehaviour == null || !IsCollisionDetected(collisionTag))
                 return;
             
             _triggeringBehaviour.
@@ -70,6 +65,7 @@ namespace SpaceInvaders
         }
 
         protected void TryDetectExplosiveHit(CollisionTag collisionTag) {
+            //Don't remove: Only Enemy & EnemyWeapon are explosive so that they will spawn explosion at some position. 
             if (collisionTag == CollisionTag.Bonus)
                 return;
             

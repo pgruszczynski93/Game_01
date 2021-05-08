@@ -5,6 +5,7 @@ namespace SpaceInvaders
 {
     public class SIPlayerColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
+        public bool IsCollisionTriggered { get; set; }
         public Action<CollisionInfo> OnCollisionDetected { get; set; }
         public CollisionInfo GetCollisionInfo()
         {
@@ -27,8 +28,7 @@ namespace SpaceInvaders
         protected override void HandleOnCollisionDetected(CollisionInfo collisionInfo)
         {
             DetectPlayerHit();
-            TryDetectExplosiveHit(collisionInfo.collisionTag);
-
+            // TryDetectExplosiveHit(collisionInfo.collisionTag);
         }
 
         void DetectPlayerHit()

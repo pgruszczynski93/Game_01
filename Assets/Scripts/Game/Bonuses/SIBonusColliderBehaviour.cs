@@ -6,6 +6,7 @@ namespace SpaceInvaders
     public class SIBonusColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
         [SerializeField] SIBonus _bonusBehaviour;
+        public bool IsCollisionTriggered { get; set; }
         public Action<CollisionInfo> OnCollisionDetected { get; set; }
 
         public CollisionInfo GetCollisionInfo()
