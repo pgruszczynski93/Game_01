@@ -328,8 +328,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3426704194481364134}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07, y: -10.54, z: 0}
-  m_LocalScale: {x: 21.90096, y: 11.4031, z: 1}
+  m_LocalPosition: {x: 0, y: -10.54, z: 0}
+  m_LocalScale: {x: 22, y: 11.5, z: 25}
   m_Children: []
   m_Father: {fileID: 3187074275270867311}
   m_RootOrder: 0
@@ -9787,8 +9787,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6171958699512689287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07, y: 5.43, z: 0}
-  m_LocalScale: {x: 29.035818, y: 20.496527, z: 1}
+  m_LocalPosition: {x: 0, y: 5.43, z: 0}
+  m_LocalScale: {x: 29, y: 20, z: 25}
   m_Children: []
   m_Father: {fileID: 3187074275270867311}
   m_RootOrder: 1
@@ -9864,7 +9864,7 @@ Transform:
   m_GameObject: {fileID: 6197922684793495672}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5494016422397372282}
   - {fileID: 6693041613717612531}
@@ -10113,22 +10113,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180.00002
       objectReference: {fileID: 0}
-    - target: {fileID: 6948176693457471732, guid: f142162e014253b4f91ca17907366168,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 7044909181188065672, guid: f142162e014253b4f91ca17907366168,
-        type: 3}
-      propertyPath: InitialModule.maxNumParticles
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 8198128618923777316, guid: f142162e014253b4f91ca17907366168,
-        type: 3}
-      propertyPath: _weaponSetup
-      value: 
-      objectReference: {fileID: 11400000, guid: d9ce7a6a18df8b3429e0e3aa018e61be,
-        type: 2}
     - target: {fileID: 8198128618923777316, guid: f142162e014253b4f91ca17907366168,
         type: 3}
       propertyPath: _parentTransform
