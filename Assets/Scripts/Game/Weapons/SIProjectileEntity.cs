@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIWeaponEntity : MonoBehaviour
+    public class SIProjectileEntity : MonoBehaviour
     {
         [SerializeField] SIWeaponSetup _weaponSetup;
         [SerializeField] SIWeaponSettings _weaponSettings;
@@ -71,7 +69,6 @@ namespace SpaceInvaders
 
         public DamageInfo GetWeaponDamageInfo(MonoBehaviour objectToDamage)
         {
-            //todo: add IDamage interaface with this method
             _damageInfo.ObjectToDamage = objectToDamage;
             return _damageInfo;
         }

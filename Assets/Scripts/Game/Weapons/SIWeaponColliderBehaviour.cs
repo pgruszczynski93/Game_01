@@ -5,7 +5,7 @@ namespace SpaceInvaders
 {
     public class SIWeaponColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
-        [SerializeField] SIWeaponEntity _weaponEntity;
+        [SerializeField] SIProjectileEntity projectileEntity;
         public bool IsCollisionTriggered { get; set; }
         public Action<CollisionInfo> OnCollisionDetected { get; set; }
         public CollisionInfo GetCollisionInfo()
@@ -32,7 +32,7 @@ namespace SpaceInvaders
                     break;
                 case CollisionTag.Enemy:
 //                    Debug.Log("Enemy hitted");
-                    SIGameplayEvents.BroadcastOnDamage(_weaponEntity.GetWeaponDamageInfo(collisionInfo.collisionSource));
+                    SIGameplayEvents.BroadcastOnDamage(projectileEntity.GetWeaponDamageInfo(collisionInfo.collisionSource));
                     break;
                 case CollisionTag.PlayerWeapon:
 //                    Debug.Log("PlayerWeapon hitted");
@@ -50,7 +50,7 @@ namespace SpaceInvaders
 
             ManageExplosionOnlyForEnemyWeapon(collisionInfo);
 
-            _weaponEntity.HandleProjectileHit();
+            projectileEntity.HandleProjectileHit();
         }
 
         void ManageExplosionOnlyForEnemyWeapon(CollisionInfo collisionInfo) {

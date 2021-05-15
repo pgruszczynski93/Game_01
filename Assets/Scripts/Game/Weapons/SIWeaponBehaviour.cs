@@ -4,7 +4,7 @@ namespace SpaceInvaders
 {
     public class SIWeaponBehaviour : MonoBehaviour
     {
-        [SerializeField] SIWeaponEntity[] _weaponEntities;
+        [SerializeField] SIProjectileEntity[] _weaponEntities;
 
         int _weaponEntitiesCount;
 
