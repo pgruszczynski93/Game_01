@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    [RequireComponent(typeof(SITargetFollower))]
-
     public class SIEnemyWeaponReloader : SIWeaponReloader
     {
         protected override void Initialise()
