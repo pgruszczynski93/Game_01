@@ -37,15 +37,15 @@ namespace SpaceInvaders
         }
 
         [Button]
-        public void SetupProjectile(SIProjectileSetup projectileSetup = null) {
-            SIProjectileSettings projectileSettings =
-                projectileSetup == null ? 
-                    _projectileSetup.projectileSettings :
-                    projectileSetup.projectileSettings;
+        void SetupProjectileFromPrefabMode() {
+            SetupProjectile(_projectileSetup);
+        }
             
+        public void SetupProjectile(SIProjectileSetup setup) {
+            SIProjectileSettings projectileSettings = setup.projectileSettings;
             _weaponGraphicsObj = Instantiate(projectileSettings.projectileObject, _graphicsObjParent);
             Transform graphicsObjTransform = _weaponGraphicsObj.transform;
-            graphicsObjTransform.localPosition = _projectileSettings.parentRelativePos;
+            graphicsObjTransform.localPosition = projectileSettings.parentRelativePos;
             graphicsObjTransform.localRotation = Quaternion.Euler(projectileSettings.rotationLocalAngle);
             graphicsObjTransform.localScale = projectileSettings.scaleValues;
         }
