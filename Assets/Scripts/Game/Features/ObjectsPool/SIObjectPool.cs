@@ -24,7 +24,7 @@ namespace SpaceInvaders.ObjectsPool {
         
 #if UNITY_EDITOR
         [Button]
-        void AssignPoolableObjects() {
+        protected virtual void AssignPoolableObjects() {
             if (_objectsPool == null || _objectsPool.Count == 0) {
                 Debug.Log("[SIObjectPool] No objects in pool - reload.");
                 _objectsPool = new List<T>();

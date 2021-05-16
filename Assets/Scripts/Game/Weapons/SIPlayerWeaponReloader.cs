@@ -38,18 +38,18 @@ namespace SpaceInvaders
         }
         void AssignEvents()
         {
-            SIGameplayEvents.OnWeaponTierUpdate += HandleOnWeaponTierUpdate;
+            SIGameplayEvents.OnPlayerWeaponTierUpdate += HandleOnPlayerWeaponTierUpdate;
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
         }
         void RemoveEvents()
         {
-            SIGameplayEvents.OnWeaponTierUpdate -= HandleOnWeaponTierUpdate;
+            SIGameplayEvents.OnPlayerWeaponTierUpdate -= HandleOnPlayerWeaponTierUpdate;
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
         }
 
-        void HandleOnWeaponTierUpdate(WeaponTier weaponTier)
+        void HandleOnPlayerWeaponTierUpdate(WeaponTier weaponTier)
         {
             TryToUpdateCurrentWeaponTier(weaponTier);
         }

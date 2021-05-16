@@ -40,7 +40,8 @@
         // MassiveKill, 
     }
 
-    public enum WeaponTier
+    public enum 
+        WeaponTier
     {
         Tier_0,
         Tier_1,

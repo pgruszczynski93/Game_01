@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 103736320019732027}
   - component: {fileID: 2421656408270883205}
   m_Layer: 0
-  m_Name: EnemyBulletsPool
+  m_Name: EnemyProjectilesPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,8 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolCapacity: 0
-  _prefabToSpawn: {fileID: 0}
+  _prefabToSpawn: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
+    type: 3}
   _objectsPool: []
+  _projectilesTier: 0
+  _availableProjectiles: []
 --- !u!1 &281653411865471080
 GameObject:
   m_ObjectHideFlags: 0

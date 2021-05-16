@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MissileCapsule Red
+  m_Name: MissileCapsule Red Old
   m_Shader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
   m_ShaderKeywords: _EMISSION _NORMALMAP _RECEIVE_SHADOWS_OFF
   m_LightmapFlags: 2
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 720aaf0b939230042af2f2ab7ae7b761, type: 3}
+        m_Texture: {fileID: 2800000, guid: c189f18f9413fb24c8d218632e0c3843, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -41,11 +41,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 2a81f42f3a499c74fbcbb3dbd62b9fdc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 856e3dbd110c55142b85ebbcb324a56e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 720aaf0b939230042af2f2ab7ae7b761, type: 3}
+        m_Texture: {fileID: 2800000, guid: c189f18f9413fb24c8d218632e0c3843, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -107,9 +107,9 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0, g: 0.99215686, b: 0.928737, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 29.897612, g: 0, b: 0.0098463595, a: 1}
+    - _EmissionColor: {r: 0, g: 1.6859645, b: 2.1185474, a: 1}
     - _SpecColor: {r: 1, g: 0.24105753, b: 0.13679248, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &16201187833855892

@@ -1,16 +1,18 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SpaceInvaders
 {
     public class SIProjectileEntity : MonoBehaviour
     {
-        [SerializeField] SIWeaponSetup _weaponSetup;
-        [SerializeField] SIWeaponSettings _weaponSettings;
+        [SerializeField] SIProjectileSetup _projectileSetup;
+        [SerializeField] SIProjectileSettings _projectileSettings;
         [SerializeField] Rigidbody _rigidbody;
         [SerializeField] Transform _parentTransform;
         [SerializeField] ParticleSystem _particles;
         [SerializeField] BoxCollider _weaponCollider;
-        [SerializeField] MeshRenderer _meshRenderer;
+        [SerializeField] GameObject _weaponGraphicsObj;
+        [SerializeField] Transform _graphicsObjParent;
 
         bool _isMoving;
 
@@ -22,24 +24,45 @@ namespace SpaceInvaders
         Transform _thisTransform;
         DamageInfo _damageInfo;
 
-        void Start() => Initialise();
-        void OnEnable() => SubscribeEvents();
-        void OnDisable() => UnsubscribeEvents();
+        void Start() {
+            Initialise();
+        }
 
+        void OnEnable() {
+            SubscribeEvents();
+        }
+
+        void OnDisable() {
+            UnsubscribeEvents();
+        }
+
+        [Button]
+        public void SetupProjectile(SIProjectileSetup projectileSetup = null) {
+            SIProjectileSettings projectileSettings =
+                projectileSetup == null ? 
+                    _projectileSetup.projectileSettings :
+                    projectileSetup.projectileSettings;
+            
+            _weaponGraphicsObj = Instantiate(projectileSettings.projectileObject, _graphicsObjParent);
+            Transform graphicsObjTransform = _weaponGraphicsObj.transform;
+            graphicsObjTransform.localPosition = _projectileSettings.parentRelativePos;
+            graphicsObjTransform.localRotation = Quaternion.Euler(projectileSettings.rotationLocalAngle);
+            graphicsObjTransform.localScale = projectileSettings.scaleValues;
+        }
         void Initialise()
         {
-            _weaponSettings = _weaponSetup.weaponSettings;
+            _projectileSettings = _projectileSetup.projectileSettings;
             _isMoving = false;
-            _meshRenderer.enabled = false;
+            _weaponGraphicsObj.SetActive(false);
             _thisTransform = transform;
             _moveForce = _thisTransform.forward;
             _parentRelativeLocalPos = _thisTransform.localPosition;
             _initialLocalAngles = _thisTransform.localEulerAngles;
-            _damageInfo = new DamageInfo(_weaponSettings.weaponDamage);
+            _damageInfo = new DamageInfo(_projectileSettings.projectileDamage);
 
             ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
-            _topWorldLimit = screenWorldEdges.topScreenEdge + _weaponSettings.movementLimitOffset;
-            _bottomWorldLimit = screenWorldEdges.bottomScreenEdge - _weaponSettings.movementLimitOffset;
+            _topWorldLimit = screenWorldEdges.topScreenEdge + _projectileSettings.movementLimitOffset;
+            _bottomWorldLimit = screenWorldEdges.bottomScreenEdge - _projectileSettings.movementLimitOffset;
         }
 
         void SubscribeEvents()
@@ -60,11 +83,11 @@ namespace SpaceInvaders
                 return;
 
             _isMoving = true;
-            _meshRenderer.enabled = true;
+            _weaponGraphicsObj.SetActive(true);
             _weaponCollider.enabled = true;
             _thisTransform.parent = null;
             TryToEnableParticles(true);
-            _rigidbody.AddForce(_moveForce * _weaponSettings.launchForceMultiplier, ForceMode.Impulse);
+            _rigidbody.AddForce(_moveForce * _projectileSettings.launchForceMultiplier, ForceMode.Impulse);
         }
 
         public DamageInfo GetWeaponDamageInfo(MonoBehaviour objectToDamage)
@@ -77,7 +100,7 @@ namespace SpaceInvaders
         {
             TryToEnableParticles(false);
             _isMoving = false;
-            _meshRenderer.enabled = false;
+            _weaponGraphicsObj.SetActive(false);
             _weaponCollider.enabled = false;
 
             _thisTransform.parent = _parentTransform;
