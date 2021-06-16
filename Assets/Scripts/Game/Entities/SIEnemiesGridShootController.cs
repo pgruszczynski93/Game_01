@@ -1,56 +1,67 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.XR.Interaction;
+using Random = UnityEngine.Random;
 
 namespace SpaceInvaders
 {
-    public class SIEnemyGridShootingController : MonoBehaviour
+    public class SIEnemiesGridShootController : MonoBehaviour
     {
         [SerializeField] bool _isGridShootingLockedByDev;
 
         [SerializeField] GridShootingSetup _gridBehaviourSetup;
-        [SerializeField] List<SIEnemyShootBehaviour> _enemiesAbleToShoot;
+        [SerializeField] List<SIEnemyShootController> _enemiesAbleToShoot;
 
+        bool _initialised;
         bool _isGridShootingEnabled;
         int _totalEnemiesAbleToShoot;
+        Coroutine _shootingRoutine;
         GridShootingSettings _gridBehaviourSettings;
 
-        void Awake()
-        {
-            PreInitialise();
+        void TryInitialise() {
+            if (_initialised)
+                return;
+            
+            _initialised = true;
+            _gridBehaviourSettings = _gridBehaviourSetup.shootingSettings;
+            _enemiesAbleToShoot = new List<SIEnemyShootController>();
         }
 
-        void PreInitialise()
-        {
-            _gridBehaviourSettings = _gridBehaviourSetup.shootingSettings;
-            _enemiesAbleToShoot = new List<SIEnemyShootBehaviour>();
+        void OnDestroy() {
+            if(_shootingRoutine != null)
+                StopCoroutine(_shootingRoutine);
         }
 
         void OnEnable()
         {
-            AssignEvents();
+            SubscribeEvents();
         }
 
         void OnDisable()
         {
-            RemoveEvents();
+            UnsubscribeEvents();
         }
 
-        void AssignEvents()
+        void SubscribeEvents()
         {
             SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
             SIEnemyGridEvents.OnGridShootingReset += HandleOnGridShootingReset;
-            SIEnemyGridEvents.OnSubscribeToShooting += HandleOnSubscribeToShooting;
+            SIEnemyGridEvents.OnReadyToShoot += HandleOnReadyToShoot;
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
-        void RemoveEvents()
+        void UnsubscribeEvents()
         {
             SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
             SIEnemyGridEvents.OnGridShootingReset -= HandleOnGridShootingReset;
-            SIEnemyGridEvents.OnSubscribeToShooting -= HandleOnSubscribeToShooting;
+            SIEnemyGridEvents.OnReadyToShoot -= HandleOnReadyToShoot;
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
+        }
+        
+        void HandleOnReadyToShoot(SIEnemyShootController enemyShootController) {
+            TryInitialise();
+            _enemiesAbleToShoot.Add(enemyShootController);
         }
 
         void EnableGridShootingPossibility(bool isGridShootingEnabled)
@@ -70,24 +81,19 @@ namespace SpaceInvaders
             TryToRunGridShootingRoutine();
         }
 
-        void HandleOnSubscribeToShooting(SIEnemyShootBehaviour enemyShootBehaviour)
-        {
-            _enemiesAbleToShoot.Add(enemyShootBehaviour);
-        }
-
         void ResetShootingEnemiesInstances()
         {
-            List<SIEnemyShootBehaviour> initialShootBehaviours = new List<SIEnemyShootBehaviour>();
-            SIEnemyShootBehaviour currentBehaviour;
+            List<SIEnemyShootController> initialShootBehaviours = new List<SIEnemyShootController>();
+            SIEnemyShootController currentController;
             for (int i = 0; i < _enemiesAbleToShoot.Count; i++)
             {
-                currentBehaviour = _enemiesAbleToShoot[i];
-                if (currentBehaviour.ShootBehaviourSetup.enemyIndex <
+                currentController = _enemiesAbleToShoot[i];
+                if (currentController.ShootBehaviourSetup.enemyIndex <
                     _gridBehaviourSettings.startShootingThresholdIndex)
                     continue;
 
-                currentBehaviour.CanShoot = true;
-                initialShootBehaviours.Add(currentBehaviour);
+                currentController.CanShoot = true;
+                initialShootBehaviours.Add(currentController);
             }
 
             _enemiesAbleToShoot = initialShootBehaviours;
@@ -101,21 +107,21 @@ namespace SpaceInvaders
 
         void HandleOnEnemyDeath(SIEnemyBehaviour deadEnemy)
         {
-            TryToUpdateShootingEnemies(deadEnemy.ShootBehaviour);
+            TryToUpdateShootingEnemies(deadEnemy.EnemyShootController);
         }
 
-        void TryToUpdateShootingEnemies(SIEnemyShootBehaviour deadEnemyShootBehaviour)
+        void TryToUpdateShootingEnemies(SIEnemyShootController deadEnemyShootController)
         {
-            if (!WasKilledEnemyAbleToShoot(deadEnemyShootBehaviour))
+            if (!WasKilledEnemyAbleToShoot(deadEnemyShootController))
                 return;
 
-            _enemiesAbleToShoot.Remove(deadEnemyShootBehaviour);
+            _enemiesAbleToShoot.Remove(deadEnemyShootController);
             SetEnemiesAbleToShootCount();
         }
 
-        bool WasKilledEnemyAbleToShoot(SIEnemyShootBehaviour deadEnemyShootBehaviour)
+        bool WasKilledEnemyAbleToShoot(SIEnemyShootController deadEnemyShootController)
         {
-            return _enemiesAbleToShoot.Contains(deadEnemyShootBehaviour);
+            return _enemiesAbleToShoot.Contains(deadEnemyShootController);
         }
 
         bool ShouldStopGridShooting()
@@ -127,7 +133,7 @@ namespace SpaceInvaders
         {
             if (ShouldStopGridShooting() || _isGridShootingLockedByDev)
                 return;
-            StartCoroutine(GridShootingRoutine());
+            _shootingRoutine = StartCoroutine(GridShootingRoutine());
         }
 
 
@@ -138,7 +144,7 @@ namespace SpaceInvaders
             while (_totalEnemiesAbleToShoot > 0)
             {
                 indexOfSelectedEnemy = Random.Range(0, _totalEnemiesAbleToShoot);
-                SIEnemyGridEvents.BroadcastOnShootOrderReceived(_enemiesAbleToShoot[indexOfSelectedEnemy]);
+                SIEnemyGridEvents.BroadcastOnShotInvoked(_enemiesAbleToShoot[indexOfSelectedEnemy]);
                 yield return WaitUtils.WaitForCachedSeconds(Random.Range(
                     _gridBehaviourSettings.minShootingInterval, _gridBehaviourSettings.maxShootingInterval));
             }

@@ -1,13 +1,13 @@
 ﻿namespace SpaceInvaders
 {
-    public class SIPlayerShootBehaviour : SIShootBehaviour
+    public class SiPlayerShootController : SIShootController
     {
-        protected override void AssignEvents()
+        protected override void SubscribeEvents()
         {
             SIGameplayEvents.OnPlayerShoot += HandleOnPlayerShoot;
         }
 
-        protected override void RemoveEvents()
+        protected override void UnsubscribeEvents()
         {
             SIGameplayEvents.OnPlayerShoot -= HandleOnPlayerShoot;
         }

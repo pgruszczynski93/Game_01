@@ -6,13 +6,13 @@ namespace SpaceInvaders
     {
         [SerializeField] MeshRenderer _meshRenderer;
         [SerializeField] GameObject _colliderParent;
-        [SerializeField] SIEnemyShootBehaviour _shootBehaviour;
+        [SerializeField] SIEnemyShootController _shootController;
         [SerializeField] SIEnemyHealth _enemyHealth;
 
-        public SIEnemyShootBehaviour ShootBehaviour
+        public SIEnemyShootController EnemyShootController
         {
-            get => _shootBehaviour;
-            set => _shootBehaviour = value;
+            get => _shootController;
+            set => _shootController = value;
         }
 
         void OnEnable() => SubscribeEvents();
@@ -20,7 +20,7 @@ namespace SpaceInvaders
 
         public void UpdateShootBehaviourSetup(SIShootBehaviourSetup loadedSetup)
         {
-            _shootBehaviour.ShootBehaviourSetup = loadedSetup;
+            _shootController.ShootBehaviourSetup = loadedSetup;
         }
 
         public bool IsEnemyAlive()
@@ -60,10 +60,9 @@ namespace SpaceInvaders
             if (IsEnemyAlive())
                 return;
 
-            if (_shootBehaviour.CanShoot)
-                _shootBehaviour.TryToSelectNextShootingBehaviour();
+            if (_shootController.CanShoot)
+                _shootController.TryToSelectNextShootingBehaviour();
             
-            // _dropController.TryToRequestBonusDrop();
             SetEnemyVisibility(false);
             StartCoroutine(WaitUtils.SkipFramesAndInvoke(1, BroadcastEnemyDeath));
         }

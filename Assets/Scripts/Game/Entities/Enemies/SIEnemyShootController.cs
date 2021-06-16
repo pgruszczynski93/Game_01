@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIEnemyShootBehaviour : SIShootBehaviour
+    public class SIEnemyShootController : SIShootController
     {
         bool _canShoot;
         [SerializeField] SIShootBehaviourSetup shootBehaviourSetup;
@@ -20,18 +19,16 @@ namespace SpaceInvaders
             set => _canShoot = value;
         }
 
-        protected override void AssignEvents()
+        protected override void SubscribeEvents()
         {
             SIEnemyGridEvents.OnGridObjectsReloaded += HandleOnGridObjectsReloaded;
-            SIEnemyGridEvents.OnShootOrderRequested += HandleOnShootOrderRequested;
-//            SIEventsHandler.OnShootInputReceived += TryToShootProjectile;
+            SIEnemyGridEvents.OnShotInvoked += HandleOnShotInvoked;
         }
 
-        protected override void RemoveEvents()
+        protected override void UnsubscribeEvents()
         {
             SIEnemyGridEvents.OnGridObjectsReloaded -= HandleOnGridObjectsReloaded;
-            SIEnemyGridEvents.OnShootOrderRequested -= HandleOnShootOrderRequested;
-//            SIEventsHandler.OnShootInputReceived -= TryToShootProjectile;
+            SIEnemyGridEvents.OnShotInvoked -= HandleOnShotInvoked;
         }
 
         void HandleOnGridObjectsReloaded()
@@ -39,17 +36,9 @@ namespace SpaceInvaders
             SubscribeToShooting();
         }
 
-//        void Update()
-//        {
-//            if (Input.GetKeyDown(KeyCode.K))
-//            {
-//                TryToShootProjectile();
-//            }
-//        }
-
-        void HandleOnShootOrderRequested(SIEnemyShootBehaviour requestedBehaviour)
+        void HandleOnShotInvoked(SIEnemyShootController requestedController)
         {
-            if (this != requestedBehaviour)
+            if (this != requestedController)
                 return;
             
             TryToShootProjectile();
@@ -64,7 +53,7 @@ namespace SpaceInvaders
 
         void SubscribeToShooting()
         {
-            SIEnemyGridEvents.BroadcastOnSubscribeToShooting(this);
+            SIEnemyGridEvents.BroadcastOnReadyToShoot(this);
         }
 
         public void TryToSelectNextShootingBehaviour()
@@ -76,19 +65,19 @@ namespace SpaceInvaders
                 return;
 
             SIEnemyBehaviour furtherRowCandidate =
-                closerRowCandidate.ShootBehaviour.ShootBehaviourSetup.neighbours[Neighbour.Back];
+                closerRowCandidate.EnemyShootController.ShootBehaviourSetup.neighbours[Neighbour.Back];
 
-            SIEnemyShootBehaviour nextSelected = closerRowCandidate.IsEnemyAlive()
-                ? closerRowCandidate.ShootBehaviour
+            SIEnemyShootController nextSelected = closerRowCandidate.IsEnemyAlive()
+                ? closerRowCandidate.EnemyShootController
                 : furtherRowCandidate != null && furtherRowCandidate.IsEnemyAlive()
-                    ? furtherRowCandidate.ShootBehaviour
+                    ? furtherRowCandidate.EnemyShootController
                     : null;
 
             if (nextSelected == null)
                 return;
 
             nextSelected.CanShoot = true;
-            SIEnemyGridEvents.BroadcastOnSubscribeToShooting(nextSelected);
+            SIEnemyGridEvents.BroadcastOnReadyToShoot(nextSelected);
         }
     }
 }

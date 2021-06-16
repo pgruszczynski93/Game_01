@@ -24,7 +24,7 @@ public class SIEnemyProjectilesPool : SIObjectPool<SIProjectileEntity> {
     protected override void ManagePooledObject() {
     }
     
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     protected override void AssignPoolableObjects() {
         base.AssignPoolableObjects();
 
