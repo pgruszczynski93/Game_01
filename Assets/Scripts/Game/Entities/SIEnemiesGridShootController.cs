@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -112,14 +111,14 @@ namespace SpaceInvaders
 
         void TryToUpdateShootingEnemies(SIEnemyShootController deadEnemyShootController)
         {
-            if (!WasKilledEnemyAbleToShoot(deadEnemyShootController))
+            if (!EnemyAbleToShootKilled(deadEnemyShootController))
                 return;
 
             _enemiesAbleToShoot.Remove(deadEnemyShootController);
             SetEnemiesAbleToShootCount();
         }
 
-        bool WasKilledEnemyAbleToShoot(SIEnemyShootController deadEnemyShootController)
+        bool EnemyAbleToShootKilled(SIEnemyShootController deadEnemyShootController)
         {
             return _enemiesAbleToShoot.Contains(deadEnemyShootController);
         }

@@ -6,7 +6,6 @@ namespace SpaceInvaders
     {
         bool _canShoot;
         [SerializeField] SIShootBehaviourSetup shootBehaviourSetup;
-
         public SIShootBehaviourSetup ShootBehaviourSetup
         {
             get => shootBehaviourSetup;
@@ -22,13 +21,13 @@ namespace SpaceInvaders
         protected override void SubscribeEvents()
         {
             SIEnemyGridEvents.OnGridObjectsReloaded += HandleOnGridObjectsReloaded;
-            SIEnemyGridEvents.OnShotInvoked += HandleOnShotInvoked;
+            // SIEnemyGridEvents.OnShotInvoked += HandleOnShotInvoked;
         }
 
         protected override void UnsubscribeEvents()
         {
             SIEnemyGridEvents.OnGridObjectsReloaded -= HandleOnGridObjectsReloaded;
-            SIEnemyGridEvents.OnShotInvoked -= HandleOnShotInvoked;
+            // SIEnemyGridEvents.OnShotInvoked -= HandleOnShotInvoked;
         }
 
         void HandleOnGridObjectsReloaded()
@@ -36,19 +35,20 @@ namespace SpaceInvaders
             SubscribeToShooting();
         }
 
-        void HandleOnShotInvoked(SIEnemyShootController requestedController)
-        {
-            if (this != requestedController)
-                return;
-            
-            TryToShootProjectile();
-        }
+        // void HandleOnShotInvoked(SIEnemyShootController requestedController)
+        // {
+        //     if (this != requestedController)
+        //         return;
+        //     
+        //     TryToShootProjectile();
+        // }
 
         protected override void TryToShootProjectile()
         {
-            if (!_canShoot)
-                return;
-            weaponReloader.TryToShootAndReload();
+            // todo : remove this comment later
+            // if (!_canShoot)
+            //     return;
+            // weaponReloader.TryToShootAndReload();
         }
 
         void SubscribeToShooting()

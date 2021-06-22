@@ -1,9 +1,10 @@
 using Sirenix.OdinInspector;
+using SpaceInvaders.ObjectsPool;
 using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIProjectileEntity : MonoBehaviour
+    public class SIProjectileEntity : MonoBehaviour, IPoolable
     {
         [SerializeField] SIProjectileSetup _projectileSetup;
         [SerializeField] SIProjectileSettings _projectileSettings;
@@ -139,6 +140,14 @@ namespace SpaceInvaders
                 _particles.Play();
             else
                 _particles.Stop();
+        }
+
+        public void UseObjectFromPool() {
+            TryToLaunchWeapon();
+        }
+
+        public void SetSpawnPosition(Vector3 spawnPos) {
+            _thisTransform.position = spawnPos;
         }
     }
 }
