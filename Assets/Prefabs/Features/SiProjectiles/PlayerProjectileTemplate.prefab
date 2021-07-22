@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 2920444157324995045}
   - component: {fileID: 1351232411865626480}
   m_Layer: 8
-  m_Name: PlayerProjectileTenplate
+  m_Name: PlayerProjectileTemplate
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c35adb5e3f4a29b8e7d96cb227606b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileSetup: {fileID: 0}
+  _projectileSetup: {fileID: 11400000, guid: d98b470685c95974ca917a28ee90b6dd, type: 2}
   _projectileSettings:
     movementLimitOffset: 0
     projectileDamage: 0

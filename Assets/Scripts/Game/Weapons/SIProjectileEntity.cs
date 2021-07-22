@@ -15,6 +15,7 @@ namespace SpaceInvaders
         [SerializeField] GameObject _weaponGraphicsObj;
         [SerializeField] Transform _graphicsObjParent;
 
+        bool _initialised;
         bool _isMoving;
 
         float _topWorldLimit;
@@ -25,11 +26,9 @@ namespace SpaceInvaders
         Transform _thisTransform;
         DamageInfo _damageInfo;
 
-        void Start() {
-            Initialise();
-        }
 
         void OnEnable() {
+            Initialise();
             SubscribeEvents();
         }
 
@@ -52,11 +51,15 @@ namespace SpaceInvaders
         }
         void Initialise()
         {
+            if(_initialised)
+                return;
+
+            _initialised = true;
             _projectileSettings = _projectileSetup.projectileSettings;
             _isMoving = false;
             _weaponGraphicsObj.SetActive(false);
             _thisTransform = transform;
-            _moveForce = _thisTransform.forward;
+            _moveForce = Vector3.down;
             _parentRelativeLocalPos = _thisTransform.localPosition;
             _initialLocalAngles = _thisTransform.localEulerAngles;
             _damageInfo = new DamageInfo(_projectileSettings.projectileDamage);
@@ -86,7 +89,11 @@ namespace SpaceInvaders
             _isMoving = true;
             _weaponGraphicsObj.SetActive(true);
             _weaponCollider.enabled = true;
-            _thisTransform.parent = null;
+            // todo: add this parent later, when will be assigned - pool parnet gameobject
+            // ustawić wyswietlanie odpowiednich gameobjectow = sprawic by dzialalo a pozniej rozwinac o sloty na bronies
+            transform.parent = null;
+            // _thisTransform.parent = null;
+            
             TryToEnableParticles(true);
             _rigidbody.AddForce(_moveForce * _projectileSettings.launchForceMultiplier, ForceMode.Impulse);
         }
@@ -147,7 +154,8 @@ namespace SpaceInvaders
         }
 
         public void SetSpawnPosition(Vector3 spawnPos) {
-            _thisTransform.position = spawnPos;
+            //update it later when code will be cleaned
+            transform.position = spawnPos;
         }
     }
 }

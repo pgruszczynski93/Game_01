@@ -29,6 +29,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7459854992712108990}
+  - {fileID: 4614576667922167707}
+  - {fileID: 1462467821417198849}
   m_Father: {fileID: 3796128085518428701}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: -90}
@@ -44,8 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c24ea857284a15888dde2e7afc5e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSlotPositionsPositions:
-  - {fileID: 0}
+  projectileSlotTransforms:
+  - {fileID: 7459854992712108990}
+  - {fileID: 4614576667922167707}
+  - {fileID: 1462467821417198849}
 --- !u!1 &2346510117114954060
 GameObject:
   m_ObjectHideFlags: 0
@@ -9402,6 +9406,36 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &4396179587761773214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4614576667922167707}
+  m_Layer: 8
+  m_Name: WeaponSlot_TEST_ (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4614576667922167707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396179587761773214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.944, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2917994095603184244}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4862847524759844928
 GameObject:
   m_ObjectHideFlags: 0
@@ -9625,6 +9659,36 @@ Transform:
   - {fileID: 6693041613717612531}
   m_Father: {fileID: 8514665218814094789}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7463479015290692889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1462467821417198849}
+  m_Layer: 8
+  m_Name: WeaponSlot_TEST_ (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1462467821417198849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7463479015290692889}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.918, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2917994095603184244}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8223484635872604663
 GameObject:

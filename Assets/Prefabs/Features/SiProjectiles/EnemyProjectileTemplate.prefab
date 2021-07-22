@@ -54,13 +54,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4534513998573655496}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7242268266983628899}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &5571437973483345893
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,9 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _thisCollisionInfo:
-    collisionTag: 2
+    collisionTag: 3
     collisionSource: {fileID: 2920444157324995045}
-  _collidableObjects: 0300000001000000
+  _collidableObjects: 0000000002000000
   projectileEntity: {fileID: 2920444157324995045}
 --- !u!1 &7713570671736775761
 GameObject:
@@ -195,13 +195,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7713570671736775761}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0, y: -0, z: 0.82}
+  m_LocalRotation: {x: 0.00001974094, y: -0.7071068, z: -0.7071068, w: -0.00001974094}
+  m_LocalPosition: {x: 0, y: -0, z: 3.48}
   m_LocalScale: {x: 0.184, y: 0.28059998, z: 0.184}
   m_Children: []
   m_Father: {fileID: 1711767522542175282}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 270, y: 0, z: 179.997}
 --- !u!198 &7623116159751173375
 ParticleSystem:
   m_ObjectHideFlags: 0

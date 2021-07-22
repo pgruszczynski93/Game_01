@@ -8,7 +8,9 @@ public class SIEnemyProjectilesPool : SIObjectPool<SIProjectileEntity> {
     [SerializeField] SIProjectileSetup[] _availableProjectiles;
 
 
-    Transform[] testSlots;
+    bool _isPoolReleasingProjectiles;
+    int _currentSlotIndex;
+    Transform[] _currentSlotSet;
     void OnEnable() {
         SubscribeEvents();
         //add here code which handles enemy weapon tier update;
@@ -28,12 +30,18 @@ public class SIEnemyProjectilesPool : SIObjectPool<SIProjectileEntity> {
     }
 
     void HandleOnShotInvoked(SIEnemyShootController shootController) {
-        if (!shootController.CanShoot)
+        if (!shootController.CanShoot || _isPoolReleasingProjectiles)
             return;
-        
-        var projectilesRoot = shootController.ProjectilesRootController;
-        var projectilesSlots = projectilesRoot.ProjectilesSlotsPositions;
-        testSlots = projectilesSlots;
+
+        _isPoolReleasingProjectiles = true;
+        _currentSlotSet =  shootController.ProjectilesRootController.ProjectilesSlotsTransforms;
+        _currentSlotIndex = 0;
+        for (var i = 0; i < _currentSlotSet.Length; i++) {
+            UpdatePool();
+            _currentSlotIndex++;
+        }
+
+        _isPoolReleasingProjectiles = false;
         //get child based on tier index eg: this transform contains childs which referes to bullet's positon and rotation
         // i should iterate through this transform and launch each projectile
     }
@@ -43,7 +51,8 @@ public class SIEnemyProjectilesPool : SIObjectPool<SIProjectileEntity> {
         //into spawned projectile
     }
     protected override void ManagePooledObject() {
-        _currentObjectFromPool.SetSpawnPosition(testSlots[0].position);
+        _currentObjectFromPool.gameObject.SetActive(true); // testing line
+        _currentObjectFromPool.SetSpawnPosition(_currentSlotSet[_currentSlotIndex].position);
         _currentObjectFromPool.UseObjectFromPool();
     }
     
