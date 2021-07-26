@@ -26,7 +26,6 @@ namespace SpaceInvaders
         Transform _thisTransform;
         DamageInfo _damageInfo;
 
-
         void OnEnable() {
             Initialise();
             SubscribeEvents();
@@ -46,6 +45,8 @@ namespace SpaceInvaders
             _weaponGraphicsObj = Instantiate(projectileSettings.projectileObject, _graphicsObjParent);
             Transform graphicsObjTransform = _weaponGraphicsObj.transform;
             graphicsObjTransform.localPosition = projectileSettings.parentRelativePos;
+                //ogarnać kwestie rotacji obiektow
+            // zmienic te nazwę na taką, ktora reprezentuje obrót obieku bedacego graficzna reprezentacja
             graphicsObjTransform.localRotation = Quaternion.Euler(projectileSettings.rotationLocalAngle);
             graphicsObjTransform.localScale = projectileSettings.scaleValues;
         }
@@ -155,7 +156,11 @@ namespace SpaceInvaders
 
         public void SetSpawnPosition(Vector3 spawnPos) {
             //update it later when code will be cleaned
-            transform.position = spawnPos;
+            _thisTransform.position = spawnPos;
+        }
+
+        public void SetSpawnRotation(Vector3 anglesVector) {
+            _thisTransform.localEulerAngles = anglesVector;
         }
     }
 }

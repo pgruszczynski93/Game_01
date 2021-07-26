@@ -45,6 +45,10 @@ namespace SpaceInvaders {
             _currentDropPos = spawnPos;
         }
 
+        public void SetSpawnRotation(Vector3 anglesVector) {
+            //intentionally unimplemented
+        }
+
         public void SetBonusVariant(BonusType bonusType) {
             if (_parent == null) {
                 _parent = transform.parent;

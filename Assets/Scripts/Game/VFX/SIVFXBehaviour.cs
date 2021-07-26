@@ -32,6 +32,10 @@ namespace SpaceInvaders
             SetVfx();
         }
 
+        public void SetSpawnRotation(Vector3 anglesVector) {
+            //intentionally unimplemented
+        }
+
         public void UseObjectFromPool() {
             TryPlayParticles();
         }
