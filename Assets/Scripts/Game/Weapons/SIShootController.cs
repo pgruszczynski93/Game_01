@@ -5,9 +5,11 @@ namespace SpaceInvaders
     public abstract class SIShootController : MonoBehaviour
     {
         [SerializeField] protected SIWeaponReloader weaponReloader;
-        [SerializeField] protected SIProjectileRootController _projectileRootController;
+        // TO DO: przerobic to na tablice, tak zeby przy zmianie poziomu broni wroga, mozna było ustawić nowe sloty
+        // niech shoot controller slucha na event ktory kaze zmienic aktualny tier pociskow
+        [SerializeField] protected SIProjectileTierParentController projectileTierParentController;
         
-        public SIProjectileRootController ProjectilesRootController => _projectileRootController;
+        public SIProjectileTierParentController projectilesTierParentController => projectileTierParentController;
 
         protected abstract void TryToShootProjectile();
 

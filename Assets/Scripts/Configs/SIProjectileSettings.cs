@@ -9,7 +9,7 @@ namespace SpaceInvaders
         public float projectileDamage;
         public float launchForceMultiplier;
         public Vector3 parentRelativePos;
-        public Vector3 rotationLocalAngle;
+        public Vector3 parentRelativeRotation;
         public Vector3 scaleValues;
         public GameObject projectileObject;
     }

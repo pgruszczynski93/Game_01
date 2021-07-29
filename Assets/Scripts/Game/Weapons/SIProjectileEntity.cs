@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using SpaceInvaders.ObjectsPool;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace SpaceInvaders
@@ -20,7 +21,7 @@ namespace SpaceInvaders
 
         float _topWorldLimit;
         float _bottomWorldLimit;
-        Vector3 _moveForce;
+        Vector3 _moveDirection;
         Vector3 _parentRelativeLocalPos;
         Vector3 _initialLocalAngles;
         Transform _thisTransform;
@@ -44,10 +45,9 @@ namespace SpaceInvaders
             SIProjectileSettings projectileSettings = setup.projectileSettings;
             _weaponGraphicsObj = Instantiate(projectileSettings.projectileObject, _graphicsObjParent);
             Transform graphicsObjTransform = _weaponGraphicsObj.transform;
+            // Parameters of object in template (transform relative to parent)
             graphicsObjTransform.localPosition = projectileSettings.parentRelativePos;
-                //ogarnać kwestie rotacji obiektow
-            // zmienic te nazwę na taką, ktora reprezentuje obrót obieku bedacego graficzna reprezentacja
-            graphicsObjTransform.localRotation = Quaternion.Euler(projectileSettings.rotationLocalAngle);
+            graphicsObjTransform.localRotation = Quaternion.Euler(projectileSettings.parentRelativeRotation);
             graphicsObjTransform.localScale = projectileSettings.scaleValues;
         }
         void Initialise()
@@ -60,7 +60,6 @@ namespace SpaceInvaders
             _isMoving = false;
             _weaponGraphicsObj.SetActive(false);
             _thisTransform = transform;
-            _moveForce = Vector3.down;
             _parentRelativeLocalPos = _thisTransform.localPosition;
             _initialLocalAngles = _thisTransform.localEulerAngles;
             _damageInfo = new DamageInfo(_projectileSettings.projectileDamage);
@@ -96,7 +95,7 @@ namespace SpaceInvaders
             // _thisTransform.parent = null;
             
             TryToEnableParticles(true);
-            _rigidbody.AddForce(_moveForce * _projectileSettings.launchForceMultiplier, ForceMode.Impulse);
+            _rigidbody.AddForce(_moveDirection * _projectileSettings.launchForceMultiplier, ForceMode.Impulse);
         }
 
         public DamageInfo GetWeaponDamageInfo(MonoBehaviour objectToDamage)
@@ -114,7 +113,7 @@ namespace SpaceInvaders
 
             _thisTransform.parent = _parentTransform;
             _thisTransform.localPosition = _parentRelativeLocalPos;
-            _thisTransform.localRotation = Quaternion.Euler(_initialLocalAngles);
+            // _thisTransform.localRotation = Quaternion.Euler(_initialLocalAngles);
 ;
             _rigidbody.velocity = SIHelpers.VectorZero;
             _rigidbody.angularVelocity = SIHelpers.VectorZero;
@@ -159,8 +158,9 @@ namespace SpaceInvaders
             _thisTransform.position = spawnPos;
         }
 
-        public void SetSpawnRotation(Vector3 anglesVector) {
-            _thisTransform.localEulerAngles = anglesVector;
+        public void SetLookDirection(Vector3 lookVector) {
+            _thisTransform.rotation = Quaternion.LookRotation(lookVector, Vector3.forward);
+            _moveDirection = lookVector;
         }
     }
 }

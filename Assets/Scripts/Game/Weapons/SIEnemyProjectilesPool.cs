@@ -34,7 +34,7 @@ public class SIEnemyProjectilesPool : SIObjectPool<SIProjectileEntity> {
             return;
 
         _isPoolReleasingProjectiles = true;
-        _currentSlotSet =  shootController.ProjectilesRootController.ProjectilesSlotsTransforms;
+        _currentSlotSet =  shootController.projectilesTierParentController.ProjectilesSlotsTransforms;
         _currentSlotIndex = 0;
         for (int i = 0; i < _currentSlotSet.Length; i++) {
             UpdatePool();
@@ -54,7 +54,7 @@ public class SIEnemyProjectilesPool : SIObjectPool<SIProjectileEntity> {
         Transform slotIndex = _currentSlotSet[_currentSlotIndex];
         _currentObjectFromPool.gameObject.SetActive(true); // testing line
         _currentObjectFromPool.SetSpawnPosition(slotIndex.position);
-        _currentObjectFromPool.SetSpawnRotation(slotIndex.localEulerAngles);
+        _currentObjectFromPool.SetLookDirection(slotIndex.forward);
         _currentObjectFromPool.UseObjectFromPool();
     }
     

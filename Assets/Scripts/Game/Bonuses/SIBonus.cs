@@ -45,7 +45,7 @@ namespace SpaceInvaders {
             _currentDropPos = spawnPos;
         }
 
-        public void SetSpawnRotation(Vector3 anglesVector) {
+        public void SetLookDirection(Vector3 lookVector) {
             //intentionally unimplemented
         }
 
