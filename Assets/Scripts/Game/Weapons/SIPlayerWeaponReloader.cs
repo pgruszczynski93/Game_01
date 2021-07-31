@@ -20,7 +20,7 @@ namespace SpaceInvaders
         {
             // todo: Don't remove - it skips first non weapon enum value
             WeaponTier[] weapons = (WeaponTier[]) Enum.GetValues(typeof(WeaponTier));
-            _allWeapons = new Dictionary<WeaponTier, SIProjectileTierParentController>();
+            _allWeapons = new Dictionary<WeaponTier, SIProjectileSlotsParentController>();
             for(int i = 1; i<weapons.Length; i++)
             {
                 _allWeapons.Add(weapons[i], _weaponHolders[i-1]);

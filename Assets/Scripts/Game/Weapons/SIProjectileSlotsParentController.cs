@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public class SIProjectileTierParentController : MonoBehaviour {
+    public class SIProjectileSlotsParentController : MonoBehaviour {
         [SerializeField] Transform[] projectileSlotTransforms;
         public Transform[] ProjectilesSlotsTransforms => projectileSlotTransforms;
 

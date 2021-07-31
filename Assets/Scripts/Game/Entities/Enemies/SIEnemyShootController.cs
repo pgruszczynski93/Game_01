@@ -5,6 +5,7 @@ namespace SpaceInvaders
     public class SIEnemyShootController : SIShootController
     {
         bool _canShoot;
+
         [SerializeField] SIShootBehaviourSetup shootBehaviourSetup;
         public SIShootBehaviourSetup ShootBehaviourSetup
         {
@@ -21,13 +22,13 @@ namespace SpaceInvaders
         protected override void SubscribeEvents()
         {
             SIEnemyGridEvents.OnGridObjectsReloaded += HandleOnGridObjectsReloaded;
-            // SIEnemyGridEvents.OnShotInvoked += HandleOnShotInvoked;
+            SIGameplayEvents.OnEnemyWeaponTierUpdate += HandleOnEnemyWeaponTierUpdate;
         }
 
         protected override void UnsubscribeEvents()
         {
             SIEnemyGridEvents.OnGridObjectsReloaded -= HandleOnGridObjectsReloaded;
-            // SIEnemyGridEvents.OnShotInvoked -= HandleOnShotInvoked;
+            SIGameplayEvents.OnEnemyWeaponTierUpdate -= HandleOnEnemyWeaponTierUpdate;
         }
 
         void HandleOnGridObjectsReloaded()
@@ -35,13 +36,10 @@ namespace SpaceInvaders
             SubscribeToShooting();
         }
 
-        // void HandleOnShotInvoked(SIEnemyShootController requestedController)
-        // {
-        //     if (this != requestedController)
-        //         return;
-        //     
-        //     TryToShootProjectile();
-        // }
+        void HandleOnEnemyWeaponTierUpdate(WeaponTier weaponTier) {
+            _projectilesTier = (int) weaponTier;
+        }
+        
 
         protected override void TryToShootProjectile()
         {

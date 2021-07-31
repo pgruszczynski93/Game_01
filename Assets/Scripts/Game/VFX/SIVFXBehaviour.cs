@@ -32,7 +32,7 @@ namespace SpaceInvaders
             SetVfx();
         }
 
-        public void SetLookDirection(Vector3 lookVector) {
+        public void SetSpawnRotation(Vector3 spawnRot) {
             //intentionally unimplemented
         }
 

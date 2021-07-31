@@ -6,13 +6,13 @@ namespace SpaceInvaders
     public abstract class SIWeaponReloader : MonoBehaviour
     {
         [SerializeField] protected SIWeaponHolderData _currentWeaponHolderData;
-        [SerializeField] protected SIProjectileTierParentController[] _weaponHolders;
+        [SerializeField] protected SIProjectileSlotsParentController[] _weaponHolders;
         
         protected int _projectileIndex;
         protected int _availableWeaponsCount;
         protected WeaponTier _lastWeaponTier;
-        protected SIProjectileTierParentController currentProjectileTierParentController;
-        protected Dictionary<WeaponTier, SIProjectileTierParentController> _allWeapons;
+        protected SIProjectileSlotsParentController currentProjectileSlotsParentController;
+        protected Dictionary<WeaponTier, SIProjectileSlotsParentController> _allWeapons;
 
         public abstract void TryToShootAndReload();
         
@@ -39,8 +39,8 @@ namespace SpaceInvaders
             if (_lastWeaponTier == weaponTier)
                 return;
             
-            currentProjectileTierParentController = _allWeapons[weaponTier];
-            currentProjectileTierParentController.gameObject.SetActive(true);
+            currentProjectileSlotsParentController = _allWeapons[weaponTier];
+            currentProjectileSlotsParentController.gameObject.SetActive(true);
             _projectileIndex = 0;
             // _currentWeaponHolderData = currentProjectileRootController.GetWeaponHolderData();
             _availableWeaponsCount = _currentWeaponHolderData.availableWeapons.Length;

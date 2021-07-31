@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using SpaceInvaders.ObjectsPool;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace SpaceInvaders
@@ -50,6 +49,11 @@ namespace SpaceInvaders
             graphicsObjTransform.localRotation = Quaternion.Euler(projectileSettings.parentRelativeRotation);
             graphicsObjTransform.localScale = projectileSettings.scaleValues;
         }
+
+        public void SetParent(Transform parent) {
+            _parentTransform = parent;
+        }
+        
         void Initialise()
         {
             if(_initialised)
@@ -89,10 +93,7 @@ namespace SpaceInvaders
             _isMoving = true;
             _weaponGraphicsObj.SetActive(true);
             _weaponCollider.enabled = true;
-            // todo: add this parent later, when will be assigned - pool parnet gameobject
-            // ustawić wyswietlanie odpowiednich gameobjectow = sprawic by dzialalo a pozniej rozwinac o sloty na bronies
-            transform.parent = null;
-            // _thisTransform.parent = null;
+            _thisTransform.parent = null;
             
             TryToEnableParticles(true);
             _rigidbody.AddForce(_moveDirection * _projectileSettings.launchForceMultiplier, ForceMode.Impulse);
@@ -113,7 +114,6 @@ namespace SpaceInvaders
 
             _thisTransform.parent = _parentTransform;
             _thisTransform.localPosition = _parentRelativeLocalPos;
-            // _thisTransform.localRotation = Quaternion.Euler(_initialLocalAngles);
 ;
             _rigidbody.velocity = SIHelpers.VectorZero;
             _rigidbody.angularVelocity = SIHelpers.VectorZero;
@@ -128,6 +128,7 @@ namespace SpaceInvaders
                 SIScreenUtils.IsInVerticalWorldScreenLimit(_thisTransform.position, _bottomWorldLimit, _topWorldLimit);
             if (isInVerticalSpace)
                 return;
+            
             StopAndResetProjectile();
         }
 
@@ -158,9 +159,9 @@ namespace SpaceInvaders
             _thisTransform.position = spawnPos;
         }
 
-        public void SetLookDirection(Vector3 lookVector) {
-            _thisTransform.rotation = Quaternion.LookRotation(lookVector, Vector3.forward);
-            _moveDirection = lookVector;
+        public void SetSpawnRotation(Vector3 spawnRot) {
+            _thisTransform.rotation = Quaternion.LookRotation(spawnRot, Vector3.forward);
+            _moveDirection = spawnRot;
         }
     }
 }
