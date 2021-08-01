@@ -14,17 +14,11 @@
 
         void HandleOnPlayerShoot()
         {
-            TryToShootProjectile();
-        }
-
-        protected override void TryToShootProjectile()
-        {
-            weaponReloader.TryToShootAndReload();
+            
         }
 
         public void Debug_Shot()
         {
-            TryToShootProjectile();
         }
     }
 }

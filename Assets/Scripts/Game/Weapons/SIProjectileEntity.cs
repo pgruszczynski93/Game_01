@@ -22,7 +22,6 @@ namespace SpaceInvaders
         float _bottomWorldLimit;
         Vector3 _moveDirection;
         Vector3 _parentRelativeLocalPos;
-        Vector3 _initialLocalAngles;
         Transform _thisTransform;
         DamageInfo _damageInfo;
 
@@ -65,7 +64,6 @@ namespace SpaceInvaders
             _weaponGraphicsObj.SetActive(false);
             _thisTransform = transform;
             _parentRelativeLocalPos = _thisTransform.localPosition;
-            _initialLocalAngles = _thisTransform.localEulerAngles;
             _damageInfo = new DamageInfo(_projectileSettings.projectileDamage);
 
             ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;

@@ -4,9 +4,10 @@ namespace SpaceInvaders
 {
     public class SIEnemyShootController : SIShootController
     {
-        bool _canShoot;
-
         [SerializeField] SIShootBehaviourSetup shootBehaviourSetup;
+
+        bool _canShoot;
+        
         public SIShootBehaviourSetup ShootBehaviourSetup
         {
             get => shootBehaviourSetup;
@@ -38,15 +39,6 @@ namespace SpaceInvaders
 
         void HandleOnEnemyWeaponTierUpdate(WeaponTier weaponTier) {
             _projectilesTier = (int) weaponTier;
-        }
-        
-
-        protected override void TryToShootProjectile()
-        {
-            // todo : remove this comment later
-            // if (!_canShoot)
-            //     return;
-            // weaponReloader.TryToShootAndReload();
         }
 
         void SubscribeToShooting()

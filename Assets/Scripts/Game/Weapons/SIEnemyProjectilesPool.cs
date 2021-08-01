@@ -1,3 +1,4 @@
+using System.Collections;
 using Sirenix.OdinInspector;
 using SpaceInvaders;
 using SpaceInvaders.ObjectsPool;
@@ -11,30 +12,24 @@ public class SIEnemyProjectilesPool : SIObjectPool<SIProjectileEntity> {
     int _currentSlotIndex;
     int _projectilesTier;
     Transform[] _currentSlotSet;
+    
     void OnEnable() {
         SubscribeEvents();
+        StartCoroutine(TierTester());
     }
 
     void OnDisable() {
         UnsubscribeEvents();
     }
 
-    //TEST
-    [Button]
-    void Tier1() {
-        SIGameplayEvents.BroadcastOnEnemyWeaponTierUpdate(WeaponTier.Tier_0);
+    //remove it later
+    IEnumerator TierTester() {
+        while (true) {
+            yield return WaitUtils.WaitForCachedSeconds(3f);
+            TestWeaponTierUpdate((WeaponTier) Random.Range(0, 3));
+        }
     }
-    [Button]
-    void Tier2() {
-        SIGameplayEvents.BroadcastOnEnemyWeaponTierUpdate(WeaponTier.Tier_1);
-    }
-    [Button]
-
-    void Tier3() {
-        SIGameplayEvents.BroadcastOnEnemyWeaponTierUpdate(WeaponTier.Tier_2);
-    }
-    //
-    
+    ///
     void SubscribeEvents() {
         SIEnemyGridEvents.OnShotInvoked += HandleOnShotInvoked;
         SIGameplayEvents.OnEnemyWeaponTierUpdate += HandleOnEnemyWeaponTierUpdate;
@@ -68,7 +63,7 @@ public class SIEnemyProjectilesPool : SIObjectPool<SIProjectileEntity> {
         Transform slotIndex = _currentSlotSet[_currentSlotIndex];
         _currentObjectFromPool.gameObject.SetActive(true); // testing line
         _currentObjectFromPool.SetSpawnPosition(slotIndex.position);
-        _currentObjectFromPool.SetSpawnRotation(slotIndex.forward);
+        _currentObjectFromPool.SetSpawnRotation(slotIndex.up);
         _currentObjectFromPool.UseObjectFromPool();
     }
     
@@ -86,5 +81,12 @@ public class SIEnemyProjectilesPool : SIObjectPool<SIProjectileEntity> {
             currProjectile.SetParent(thisTransform);
         }
     }
+    
+    //TESTING METHODS
+    [Button]
+    void TestWeaponTierUpdate(WeaponTier tier) {
+        SIGameplayEvents.BroadcastOnEnemyWeaponTierUpdate(tier);
+    }
+    //
 #endif
 }

@@ -47,7 +47,6 @@ MonoBehaviour:
   _prefabToSpawn: {fileID: 2920444157324995045, guid: c4e70544422978e42802e21c15f314df,
     type: 3}
   _objectsPool: []
-  _projectilesTier: 0
   _availableProjectiles: []
 --- !u!1 &281653411865471080
 GameObject:
@@ -332,6 +331,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraOffsetZ: 0
+--- !u!1 &3559683913626640834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5902723086459106329}
+  m_Layer: 0
+  m_Name: PlayerProjectilesPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5902723086459106329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559683913626640834}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9098509917768213392}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6845724982431583985
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +547,7 @@ Transform:
   - {fileID: 8667478317147580685}
   - {fileID: 4462568391462783693}
   - {fileID: 103736320019732027}
+  - {fileID: 5902723086459106329}
   m_Father: {fileID: 7025270549699991142}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
