@@ -14,6 +14,8 @@ namespace SpaceInvaders
         void Initialise()
         {
             _depthAxis = 0f;
+            //TODO: remove it later - only for testing
+            TryToStartGame();
         }
 
         void Start() => Initialise();
