@@ -6,6 +6,9 @@ namespace SpaceInvaders
     {
         [SerializeField] Joystick _joystick;
 
+        //toodo: usunac to i SMIECI Z GRACZA
+        [SerializeField] SiPlayerShootController removeMe;
+        
         float _horizontalAxis;
         float _verticalAxis;
         float _depthAxis;
@@ -48,7 +51,7 @@ namespace SpaceInvaders
         void TryToSendShootAction()
         {
             if(Input.GetKeyDown(KeyCode.Space))
-                SIGameplayEvents.BroadcastOnPlayerShoot();
+                SIGameplayEvents.BroadcastOnPlayerShoot(removeMe);
                 
         }
 

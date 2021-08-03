@@ -6,7 +6,7 @@ namespace SpaceInvaders
     public static class SIGameplayEvents {
         public static event Action OnEnemyWeaponHit;
         public static event Action OnWaveEnd;
-        public static event Action OnPlayerShoot;
+        public static event Action<SiPlayerShootController> OnPlayerShoot;
         public static event Action<Vector3> OnExplosiveObjectHit;
         public static event Action<DamageInfo> OnDamage;
         public static event Action<SIEnemyBehaviour> OnEnemyDeath;
@@ -38,9 +38,9 @@ namespace SpaceInvaders
             OnEnemyWeaponTierUpdate?.Invoke(weaponTier);
         }
         
-        public static void BroadcastOnPlayerShoot()
+        public static void BroadcastOnPlayerShoot(SiPlayerShootController playerShootController)
         {
-            OnPlayerShoot?.Invoke();
+            OnPlayerShoot?.Invoke(playerShootController);
         }
         
         public static void BroadcastOnWaveEnd()

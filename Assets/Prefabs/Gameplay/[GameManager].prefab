@@ -340,6 +340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5902723086459106329}
+  - component: {fileID: 3682472297226636877}
   m_Layer: 0
   m_Name: PlayerProjectilesPool
   m_TagString: Untagged
@@ -361,6 +362,23 @@ Transform:
   m_Father: {fileID: 9098509917768213392}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3682472297226636877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559683913626640834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beecc42b050243e48288225594a7a7dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolCapacity: 0
+  _prefabToSpawn: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
+    type: 3}
+  _objectsPool: []
+  _availableProjectiles: []
 --- !u!1 &6845724982431583985
 GameObject:
   m_ObjectHideFlags: 0

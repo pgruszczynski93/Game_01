@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 2862149866117216036}
   - component: {fileID: 6844543533459637343}
   - component: {fileID: 1246367449153128759}
+  - component: {fileID: 8287426258683044830}
   m_Layer: 0
   m_Name: PlayerManagers
   m_TagString: Untagged
@@ -491,6 +492,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbed8f33d46f7cd4bb3884ae6ca1337b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8287426258683044830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5470797281098442275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a57356ac738104ebffba44c7e668d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSlotsParents:
+  - {fileID: 4748417915417607997}
+  - {fileID: 4617128284090879388}
+  - {fileID: 4840093742512527991}
 --- !u!1 &5638743975471061940
 GameObject:
   m_ObjectHideFlags: 0
