@@ -55,6 +55,10 @@ namespace SpaceInvaders
                 
         }
 
+        public void TestShoot() {
+            SIGameplayEvents.BroadcastOnPlayerShoot(removeMe);
+        }
+
         void TryToQuitGame()
         {
             if (!Input.GetKeyDown(KeyCode.Escape))

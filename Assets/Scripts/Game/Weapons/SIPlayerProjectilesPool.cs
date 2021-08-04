@@ -19,7 +19,7 @@ namespace SpaceInvaders {
         //TESTING METHODS
         [Button]
         void TestWeaponTierUpdate(WeaponTier tier) {
-            SIGameplayEvents.BroadcastOnEnemyWeaponTierUpdate(tier);
+            SIGameplayEvents.BroadcastOnPlayerWeaponTierUpdate(tier);
         }
         //remove it later
         IEnumerator TierTester() {
@@ -53,13 +53,13 @@ namespace SpaceInvaders {
             }
         }
         
+        // polaczyc metody z obu puli
         void HandleOnPlayerWeaponTierUpdate(WeaponTier weaponTier) {
-            
+            _projectilesTier = (int) weaponTier;
         }
 
         protected override void ManagePooledObject() {
             base.ManagePooledObject();
-            Debug.Log("dupa");
         }
     }
 }

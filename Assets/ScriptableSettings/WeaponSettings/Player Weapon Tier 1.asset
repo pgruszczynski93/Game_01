@@ -10,9 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d61395d727e74ecea15b64fca4b5669c, type: 3}
-  m_Name: Player Weapon 4
+  m_Name: Player Weapon Tier 1
   m_EditorClassIdentifier: 
-  weaponSettings:
-    movementLimitOffset: 0.7
-    weaponDamage: 100
-    launchForceMultiplier: 10
+  projectileSettings:
+    movementLimitOffset: 0
+    projectileDamage: 100
+    launchForceMultiplier: 7
+    parentRelativePos: {x: 0, y: 0, z: 2.5}
+    parentRelativeRotation: {x: 0, y: 0, z: 0}
+    scaleValues: {x: 1, y: 1, z: 1}
+    projectileObject: {fileID: 1273679559769204, guid: ff96c31f3b7e9e3418c7de97600b9219,
+      type: 3}
