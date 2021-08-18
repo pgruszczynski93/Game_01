@@ -10,6 +10,10 @@ namespace SpaceInvaders {
         protected int _currentSlotIndex;
         protected Transform[] _currentSlotSet;
 
+        protected void HandleOnWeaponTierUpdate(WeaponTier weaponTier) {
+            _projectilesTier = (int) weaponTier;
+        }
+
         protected override void ManagePooledObject() {
             Transform slotIndex = _currentSlotSet[_currentSlotIndex];
             //Note 1: Always enable element from pool.

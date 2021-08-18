@@ -32,12 +32,12 @@ public class SIEnemyProjectilesPool : SIProjectilesPool {
 
     void SubscribeEvents() {
         SIEnemyGridEvents.OnShotInvoked += HandleOnShotInvoked;
-        SIGameplayEvents.OnEnemyWeaponTierUpdate += HandleOnEnemyWeaponTierUpdate;
+        SIGameplayEvents.OnEnemyWeaponTierUpdate += HandleOnWeaponTierUpdate;
     }
 
     void UnsubscribeEvents() {
         SIEnemyGridEvents.OnShotInvoked -= HandleOnShotInvoked;
-        SIGameplayEvents.OnEnemyWeaponTierUpdate -= HandleOnEnemyWeaponTierUpdate;
+        SIGameplayEvents.OnEnemyWeaponTierUpdate -= HandleOnWeaponTierUpdate;
     }
 
     void HandleOnShotInvoked(SIEnemyShootController shootController) {
@@ -53,9 +53,5 @@ public class SIEnemyProjectilesPool : SIProjectilesPool {
         }
 
         _isPoolReleasingProjectiles = false;
-    }
-    
-    void HandleOnEnemyWeaponTierUpdate(WeaponTier weaponTier) {
-        _projectilesTier = (int) weaponTier;
     }
 }

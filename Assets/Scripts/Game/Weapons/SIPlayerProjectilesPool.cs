@@ -1,50 +1,30 @@
-using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace SpaceInvaders {
     public class SIPlayerProjectilesPool: SIProjectilesPool {
 
-        SiPlayerShootController _playerShootController;
+        [SerializeField] SIPlayerShootController _playerShootController;
+        
         void OnEnable() {
             SubscribeEvents();
-            StartCoroutine(TierTester());
         }
 
         void OnDisable() {
             UnsubscribeEvents();
         }
 
-        //TESTING METHODS
-        [Button]
-        void TestWeaponTierUpdate(WeaponTier tier) {
-            SIGameplayEvents.BroadcastOnPlayerWeaponTierUpdate(tier);
-        }
-        //remove it later
-        IEnumerator TierTester() {
-            while (true) {
-                yield return WaitUtils.WaitForCachedSeconds(3f);
-                TestWeaponTierUpdate((WeaponTier) Random.Range(0, 3));
-            }
-        }
-        //
-
-        
         void SubscribeEvents() {
             SIGameplayEvents.OnPlayerShoot += HandleOnPlayerShoot;
-            SIGameplayEvents.OnPlayerWeaponTierUpdate += HandleOnPlayerWeaponTierUpdate;
+            SIGameplayEvents.OnPlayerWeaponTierUpdate += HandleOnWeaponTierUpdate;
         }
 
         void UnsubscribeEvents() {
             SIGameplayEvents.OnPlayerShoot -= HandleOnPlayerShoot;
-            SIGameplayEvents.OnPlayerWeaponTierUpdate -= HandleOnPlayerWeaponTierUpdate;
+            SIGameplayEvents.OnPlayerWeaponTierUpdate -= HandleOnWeaponTierUpdate;
         }
 
-        void HandleOnPlayerShoot(SiPlayerShootController playerShootController) {
-            if (_playerShootController == null)
-                _playerShootController = playerShootController;
-
+        void HandleOnPlayerShoot() {
             _currentSlotSet = _playerShootController.GetProjectileSlotsParent();
             _currentSlotIndex = 0;
             for (int i = 0; i < _currentSlotSet.Length; i++) {
@@ -53,13 +33,9 @@ namespace SpaceInvaders {
             }
         }
         
-        // polaczyc metody z obu puli
-        void HandleOnPlayerWeaponTierUpdate(WeaponTier weaponTier) {
-            _projectilesTier = (int) weaponTier;
-        }
-
-        protected override void ManagePooledObject() {
-            base.ManagePooledObject();
+        [Button]
+        void TestWeaponTierUpdate(WeaponTier tier) {
+            SIGameplayEvents.BroadcastOnPlayerWeaponTierUpdate(tier);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace SpaceInvaders
 {
-    public class SiPlayerShootController : SIShootController {
-        //wyczyscic!!!
+    public class SIPlayerShootController : SIShootController {
         protected override void SubscribeEvents() {
             SIGameplayEvents.OnPlayerWeaponTierUpdate += HandleOnPlayerWeaponTierUpdate;
         }

@@ -1,6 +1,11 @@
+using System;
+using System.Numerics;
 using Sirenix.OdinInspector;
 using SpaceInvaders.ObjectsPool;
 using UnityEngine;
+using Matrix4x4 = UnityEngine.Matrix4x4;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace SpaceInvaders
 {
@@ -34,6 +39,23 @@ namespace SpaceInvaders
             UnsubscribeEvents();
         }
 
+        #if UNITY_EDITOR
+        void OnDrawGizmos() {
+            Gizmos.color = Color.green;
+            var myTransform = transform;
+            var myLocalScale = myTransform.localScale;
+            var colliderSize = _weaponCollider.size;
+            var colliderCenter = _weaponCollider.center;
+            //Note: Y and Z axis are swapped intentionally to avoid redundant rotation matrix.
+            //This gizmo is only to setup projectile fbx correctly and values are experimental.
+            Gizmos.DrawWireCube(
+                myTransform.position + new Vector3(colliderCenter.x, 0.35f, colliderCenter.y), 
+                new Vector3(colliderSize.x * myLocalScale.x, 
+                    colliderSize.z * myLocalScale.z, 
+                    colliderSize.y * myLocalScale.y));
+        }
+        #endif
+
         [Button]
         void SetupProjectileFromPrefabMode() {
             SetupProjectile(_projectileSetup);
@@ -43,7 +65,7 @@ namespace SpaceInvaders
             SIProjectileSettings projectileSettings = setup.projectileSettings;
             _weaponGraphicsObj = Instantiate(projectileSettings.projectileObject, _graphicsObjParent);
             Transform graphicsObjTransform = _weaponGraphicsObj.transform;
-            // Parameters of object in template (transform relative to parent)
+            // Note: Parameters of object in template (transform relative to parent)
             graphicsObjTransform.localPosition = projectileSettings.parentRelativePos;
             graphicsObjTransform.localRotation = Quaternion.Euler(projectileSettings.parentRelativeRotation);
             graphicsObjTransform.localScale = projectileSettings.scaleValues;
@@ -153,7 +175,6 @@ namespace SpaceInvaders
         }
 
         public void SetSpawnPosition(Vector3 spawnPos) {
-            //update it later when code will be cleaned
             _thisTransform.position = spawnPos;
         }
 
