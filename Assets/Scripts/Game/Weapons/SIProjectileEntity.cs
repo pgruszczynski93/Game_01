@@ -1,9 +1,6 @@
-using System;
-using System.Numerics;
 using Sirenix.OdinInspector;
 using SpaceInvaders.ObjectsPool;
 using UnityEngine;
-using Matrix4x4 = UnityEngine.Matrix4x4;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -39,22 +36,23 @@ namespace SpaceInvaders
             UnsubscribeEvents();
         }
 
-        #if UNITY_EDITOR
-        void OnDrawGizmos() {
-            Gizmos.color = Color.green;
-            var myTransform = transform;
-            var myLocalScale = myTransform.localScale;
-            var colliderSize = _weaponCollider.size;
-            var colliderCenter = _weaponCollider.center;
-            //Note: Y and Z axis are swapped intentionally to avoid redundant rotation matrix.
-            //This gizmo is only to setup projectile fbx correctly and values are experimental.
-            Gizmos.DrawWireCube(
-                myTransform.position + new Vector3(colliderCenter.x, 0.35f, colliderCenter.y), 
-                new Vector3(colliderSize.x * myLocalScale.x, 
-                    colliderSize.z * myLocalScale.z, 
-                    colliderSize.y * myLocalScale.y));
-        }
-        #endif
+        //TODO: Draw projectile gizmo correctly or make a tool for bullets
+        // #if UNITY_EDITOR
+        // void OnDrawGizmos() {
+        //     Gizmos.color = Color.green;
+        //     var myTransform = transform;
+        //     var myLocalScale = myTransform.localScale;
+        //     var colliderSize = _weaponCollider.size;
+        //     var colliderCenter = _weaponCollider.center;
+        //     //Note: Y and Z axis are swapped intentionally to avoid redundant rotation matrix.
+        //     //This gizmo is only to setup projectile fbx correctly and values are experimental.
+        //     Gizmos.DrawWireCube(
+        //         myTransform.position + new Vector3(colliderCenter.x, 0.35f, colliderCenter.y), 
+        //         new Vector3(colliderSize.x * myLocalScale.x, 
+        //             colliderSize.z * myLocalScale.z, 
+        //             colliderSize.y * myLocalScale.y));
+        // }
+        // #endif
 
         [Button]
         void SetupProjectileFromPrefabMode() {

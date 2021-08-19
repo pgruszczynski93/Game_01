@@ -15,12 +15,12 @@ namespace SpaceInvaders {
         }
 
         protected override void ManagePooledObject() {
-            Transform slotIndex = _currentSlotSet[_currentSlotIndex];
+            Transform slotIndexTransform = _currentSlotSet[_currentSlotIndex];
             //Note 1: Always enable element from pool.
             _currentObjectFromPool.gameObject.SetActive(true); 
-            _currentObjectFromPool.SetSpawnPosition(slotIndex.position);
+            _currentObjectFromPool.SetSpawnPosition(slotIndexTransform.position);
             //Note 2: Check projectiles parent upwards rotation.
-            _currentObjectFromPool.SetSpawnRotation(slotIndex.up);
+            _currentObjectFromPool.SetSpawnRotation(slotIndexTransform.up);
             _currentObjectFromPool.UseObjectFromPool();
         }
         

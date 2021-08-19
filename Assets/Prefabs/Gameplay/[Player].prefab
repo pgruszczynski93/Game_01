@@ -258,6 +258,7 @@ Transform:
   m_Children:
   - {fileID: 2862149866117216036}
   - {fileID: 998630233605939790}
+  - {fileID: 2055464398}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -333,6 +334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2055464398}
+  - component: {fileID: 2338919433063416824}
   m_Layer: 0
   m_Name: PlayerProjectilesContainer
   m_TagString: Untagged
@@ -348,15 +350,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4855172558241129738}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5550058988693084148}
   - {fileID: 3044929836334190067}
   - {fileID: 6382922825931940617}
-  m_Father: {fileID: 998630233605939790}
-  m_RootOrder: 3
+  m_Father: {fileID: 3677294487844861586}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2338919433063416824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4855172558241129738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3b0217a66c45478c2c8b4d2020d872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offsetFromTarget: {x: 0, y: 0, z: 0.2}
+  _target: {fileID: 998630233605939790}
 --- !u!1 &5273722799553496186
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +587,6 @@ Transform:
   - {fileID: 86705097805634715}
   - {fileID: 1271120372552864498}
   - {fileID: 1913830052}
-  - {fileID: 2055464398}
   m_Father: {fileID: 3677294487844861586}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

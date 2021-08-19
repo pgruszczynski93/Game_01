@@ -1,3 +1,4 @@
+using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace SpaceInvaders {
         
         void OnEnable() {
             SubscribeEvents();
+            StartCoroutine(TierTester());
         }
 
         void OnDisable() {
@@ -33,9 +35,18 @@ namespace SpaceInvaders {
             }
         }
         
+        //TESTING METHODS
         [Button]
         void TestWeaponTierUpdate(WeaponTier tier) {
             SIGameplayEvents.BroadcastOnPlayerWeaponTierUpdate(tier);
         }
+        //remove it later
+        IEnumerator TierTester() {
+            while (true) {
+                yield return WaitUtils.WaitForCachedSeconds(3f);
+                TestWeaponTierUpdate((WeaponTier) Random.Range(0, 3));
+            }
+        }
+        //
     }
 }
