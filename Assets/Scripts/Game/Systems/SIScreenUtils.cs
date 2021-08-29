@@ -3,6 +3,9 @@ using UnityEngine;
 namespace SpaceInvaders
 {
     public static class SIScreenUtils {
+        public const float VIEWPORT_SPAWN_MIN = -0.25f;
+        public const float VIEWPORT_SPAWN_MAX = 1.25f;
+        
         public static Vector3 HiddenObjectPosition = new Vector3(0, 0, -100);
         // public static Vector3 HiddenObjectPosition = new Vector3(0, 0, 0);
         public static bool IsInCameraFrustum(Renderer renderer, Camera cam)

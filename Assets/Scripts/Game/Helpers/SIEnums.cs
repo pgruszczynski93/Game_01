@@ -22,18 +22,11 @@
         EnemyWeapon,
         Bonus,
     }
-    public enum SimpleLoggerTypes
-    {
-        Log, 
-        Warning,
-        Error
-    }
-
     public enum BonusType
     {
         Life,
         Weapon,
-        Shield,
+        ShieldSystem,
         // Teleportation,
         // TimeSlowDown, 
         // Hacking,
@@ -42,10 +35,9 @@
 
     public enum WeaponTier
     {
-        Tier_0,
-        Tier_1,
-        Tier_2, 
-        Tier_3, 
-        Tier_4, 
+        Projectile_1 = 0, 
+        Projectile_2 = 1,
+        Projectile_3 = 2,
+        LaserBeam_1 = 3, 
     }
 }

@@ -49,20 +49,20 @@ namespace SpaceInvaders
             switch (parentIndex)
             {
                 case 0:
-                    xPosition = SIHelpers.VIEWPORT_SPAWN_MIN;
+                    xPosition = SIScreenUtils.VIEWPORT_SPAWN_MIN;
                     yPosition = randomizedCoord;
                     break;
                 case 1:
-                    xPosition = SIHelpers.VIEWPORT_SPAWN_MAX;
+                    xPosition = SIScreenUtils.VIEWPORT_SPAWN_MAX;
                     yPosition = randomizedCoord;
                     break;
                 case 2:
                     xPosition = randomizedCoord;
-                    yPosition = SIHelpers.VIEWPORT_SPAWN_MIN;
+                    yPosition = SIScreenUtils.VIEWPORT_SPAWN_MIN;
                     break;
                 default:
                     xPosition = randomizedCoord;
-                    yPosition = SIHelpers.VIEWPORT_SPAWN_MAX;
+                    yPosition = SIScreenUtils.VIEWPORT_SPAWN_MAX;
                     break;
             }
 

@@ -3,45 +3,25 @@ using SpaceInvaders;
 using UnityEngine;
 
 namespace Game.Features.Shield {
-    public class SIShieldBehaviour : MonoBehaviour {
+    public class SIShieldBehaviour : SIBonusDrivenBehaviour{
 
         const float WAIT_TO_DISABLE = 0.5f;
         
-        [SerializeField] GameObject _rootObject;
         [SerializeField] SIShieldAnimatorController _animatorController;
         
         Coroutine _shieldAnimationRoutine;
         
-        void OnEnable() => SubscribeEvents();
-
-        void OnDisable() {
+        protected override void OnDisable() {
+            base.OnDisable();
             if(_shieldAnimationRoutine != null)
                 StopCoroutine(DisableRoutine());
-            
-            UnsubscribeEvents();
-        } 
-
-        void SubscribeEvents() {
-            SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
-            SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
         }
 
-        void UnsubscribeEvents() {
-            SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
-            SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
-        }
-
-        void HandleOnBonusEnabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType != BonusType.Shield)
-                return;
-
+        protected override void ManageEnabledBonus() {
             EnableShield();
         }
 
-        void HandleOnBonusDisabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType != BonusType.Shield)
-                return;
-
+        protected override void ManageDisabledBonus() {
             _shieldAnimationRoutine = StartCoroutine(DisableRoutine());
         }
 
