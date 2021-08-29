@@ -15,7 +15,7 @@ namespace Game.Features.LaserBeam {
         }
 
         void DisableLaserBeam() {
-            DisableLaserBeam();
+            DisableRootObject();
         }
     }
 }
