@@ -17,6 +17,8 @@ namespace SpaceInvaders {
         void OnDisable() {
             UnsubscribeEvents();
         }
+        
+        //todo: dorobić usuwanie korutyn w OnDestroy dla slownika _activeBonuses
 
         void Initialise() {
             _activeBonuses = new Dictionary<BonusType, RuntimeBonus>();

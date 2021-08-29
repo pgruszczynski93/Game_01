@@ -27,6 +27,7 @@
         Life,
         Weapon,
         ShieldSystem,
+        LaserBeam,
         // Teleportation,
         // TimeSlowDown, 
         // Hacking,
@@ -35,9 +36,9 @@
 
     public enum WeaponTier
     {
-        Projectile_1 = 0, 
-        Projectile_2 = 1,
-        Projectile_3 = 2,
-        LaserBeam_1 = 3, 
+        Projectile_1,
+        Projectile_2,
+        Projectile_3,
+        LaserBeam_1
     }
 }

@@ -32,8 +32,15 @@ namespace SpaceInvaders {
         void HandleOnBonusDisabled(BonusSettings bonusSettings) {
             if (bonusSettings.bonusType != _assignedBonusType)
                 return;
-
             ManageDisabledBonus();
+        }
+        
+        protected void EnableRootObject() {
+            _rootObject.SetActive(true);
+        }
+
+        protected void DisableRootObject() {
+            _rootObject.SetActive(false);
         }
     }
 }

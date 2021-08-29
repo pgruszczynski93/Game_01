@@ -26,22 +26,14 @@ namespace Game.Features.Shield {
         }
 
         void EnableShield() {
-            EnableBonus();
+            EnableRootObject();
             _animatorController.SetShowAnimation();
         }
-
-        void EnableBonus() {
-            _rootObject.SetActive(true);
-        }
-
-        void DisableBonus() {
-            _rootObject.SetActive(false);
-        }
-
+        
         IEnumerator DisableRoutine() {
             yield return WaitUtils.WaitSecondsAndRunSequence(
                 _animatorController.SetHideAnimation,     
-                DisableBonus, WAIT_TO_DISABLE);
+                DisableRootObject, WAIT_TO_DISABLE);
         }
     }
 }
