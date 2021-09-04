@@ -1,7 +1,7 @@
 namespace SpaceInvaders
 {
-    public class SIConstants
-    {
+    public class SIConstants {
+        public const string COLLISION_LAYER_NAME = "Collisions";
         public const int ENEMIES_LEFT_TO_INCREASE_GRID_MOVEMENT_STEP = 2;
         public const int ENEMIES_IN_ROW = 5;
         public const int ENEMIES_IN_COLUMN = 3;

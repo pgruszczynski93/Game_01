@@ -95,12 +95,14 @@ namespace SpaceInvaders
         {
             SIEventsHandler.OnUpdate += CheckIsProjectileOnScreen;
             SIGameplayEvents.OnWaveEnd += StopAndResetProjectile;
+            SIGameplayEvents.OnDamage += HandleOnDamage;
         }
-        
+
         void UnsubscribeEvents()
         {
             SIEventsHandler.OnUpdate -= CheckIsProjectileOnScreen;
             SIGameplayEvents.OnWaveEnd -= StopAndResetProjectile;
+            SIGameplayEvents.OnDamage -= HandleOnDamage;
         }
         
         public void TryToLaunchWeapon()
@@ -147,6 +149,17 @@ namespace SpaceInvaders
             if (isInVerticalSpace)
                 return;
             
+            StopAndResetProjectile();
+        }
+        
+        void HandleOnDamage(DamageInfo damageInfo) {
+            //Note:
+            //This method is added to handle damage given by laser beam.
+            //Usually explosion pool manages spawning explosion particles when 2 colliders colliding.
+            if (damageInfo.ObjectToDamage != this)
+                return;
+            
+            SIGameplayEvents.BroadcastOnExplosiveObjectHit(transform.position);
             StopAndResetProjectile();
         }
 

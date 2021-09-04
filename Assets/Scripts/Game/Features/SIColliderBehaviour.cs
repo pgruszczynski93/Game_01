@@ -11,6 +11,7 @@ namespace SpaceInvaders
 
         bool _initialised;
         int _collidesWithCount;
+        int _collisionLayer;
         CollisionInfo _triggeredCollisionInfo;
         
         protected virtual void Initialise()
@@ -19,6 +20,7 @@ namespace SpaceInvaders
                 return;
 
             _initialised = true;
+            _collisionLayer = LayerMask.NameToLayer(SIConstants.COLLISION_LAYER_NAME);
             _collidesWithCount = _collidableObjects.Length;
         }
 
@@ -40,8 +42,10 @@ namespace SpaceInvaders
             RemoveEvents();
         }
 
-        protected virtual void OnTriggerEnter(Collider triggerCol)
-        {
+        protected virtual void OnTriggerEnter(Collider triggerCol) {
+            if (triggerCol.gameObject.layer != _collisionLayer)
+                return;
+            
             _triggeringBehaviour = triggerCol.GetComponent<ICanCollide>();
             _triggeredCollisionInfo = _triggeringBehaviour.GetCollisionInfo();
             CollisionTag collisionTag = _triggeredCollisionInfo.collisionTag;
@@ -65,7 +69,7 @@ namespace SpaceInvaders
         }
 
         protected void TryDetectExplosiveHit(CollisionTag collisionTag) {
-            //Don't remove: Only Enemy & EnemyWeapon are explosive so that they will spawn explosion at some position. 
+            //Note: Only Enemy & EnemyWeapon are explosive so that they will spawn explosion at some position. 
             if (collisionTag == CollisionTag.Bonus)
                 return;
             
