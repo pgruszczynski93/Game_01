@@ -73,7 +73,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: -4.2, z: 0.07}
-  - {x: 0, y: 7.5, z: 0}
+  - {x: 0, y: 6.7, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.4
@@ -184,7 +184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _assignedBonusType: 3
   _rootObject: {fileID: 7476511409917836081}
-  _laserBeamDamage: {fileID: 6359343168010437402}
 --- !u!1 &4549244275733232280
 GameObject:
   m_ObjectHideFlags: 0
@@ -4979,6 +4978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8604063070871379335}
   - component: {fileID: 6359343168010437402}
+  - component: {fileID: 7757819212876674764}
   m_Layer: 0
   m_Name: LaserBeam
   m_TagString: Untagged
@@ -5014,12 +5014,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c6bd742ad3416a9f1bb953b0c9203c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thisCollisionInfo:
-    collisionTag: 2
-    collisionSource: {fileID: 0}
-  _tagsOfObjectsToApplyDamage: 0100000003000000
   _collisionCheckDistance: 10
+  _damage: 0
   _offsetFromPlayerCollider: {x: 0, y: 1, z: 0}
   _collisionLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  _tagsOfObjectsToApplyDamage: 0100000003000000
+  _laserLenghtController: {fileID: 7757819212876674764}
+--- !u!114 &7757819212876674764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7476511409917836081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859cf7bca86b416e8d5821491f3bc57a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lineImpactOffset: 1
+  _lineRenderer: {fileID: 2567273741064120493}

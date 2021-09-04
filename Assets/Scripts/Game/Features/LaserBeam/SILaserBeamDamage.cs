@@ -10,6 +10,7 @@ namespace Game.Features.LaserBeam {
         [SerializeField] Vector3 _offsetFromPlayerCollider;
         [SerializeField] LayerMask _collisionLayerMask;
         [SerializeField] CollisionTag[] _tagsOfObjectsToApplyDamage;
+        [SerializeField] SILaserBeamLenghtController _laserLenghtController;
 
         DamageInfo _currentDamageInfo;
         RaycastHit _currentHit;
@@ -45,12 +46,14 @@ namespace Game.Features.LaserBeam {
 
         void DetectLaserHit() {
             if (!Physics.Raycast(_thisTransform.position + _offsetFromPlayerCollider, _thisTransform.up,
-                out _currentHit, _collisionCheckDistance,_collisionLayerMask))
+                out _currentHit, _collisionCheckDistance, _collisionLayerMask)) 
                 return;
 
             // Debug.DrawRay(_thisTransform.position + _offsetFromPlayerCollider , _thisTransform.up * _collisionCheckDistance, Color.green);
             
             _lastHitCollider = _currentHit.collider;
+            _laserLenghtController.SetLineRendererEndPosY(_currentHit.point.y);
+            
             if (!_collisionCache.ContainsKey(_lastHitCollider)) {
                 CacheLaserHit();
             }
@@ -64,8 +67,10 @@ namespace Game.Features.LaserBeam {
         
         void TryToApplyDamage() {
             _lastHitObjectInfo = _collisionCache[_lastHitCollider];
-            if (!IsCollisionDetected(_lastHitObjectInfo.collisionTag))
+            if (!IsCollisionDetected(_lastHitObjectInfo.collisionTag)) {
+                _laserLenghtController.SetDefaultLineRendererEndPosY();
                 return;
+            }
             
             _currentDamageInfo.ObjectToDamage = _lastHitObjectInfo.collisionSource;
             SIGameplayEvents.BroadcastOnDamage(_currentDamageInfo);
