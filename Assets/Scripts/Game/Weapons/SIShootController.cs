@@ -8,7 +8,13 @@ namespace SpaceInvaders
 
         protected bool _isShootingEnabled;
         protected int _projectilesTier;
-        public bool IsShootingEnabled => _isShootingEnabled; 
+        public bool IsShootingEnabled => _isShootingEnabled;
+
+        void Start() => Initialise();
+
+        void Initialise() {
+            _isShootingEnabled = true;
+        }
 
         protected void OnEnable() => SubscribeEvents();
         protected void OnDisable() => UnsubscribeEvents();
