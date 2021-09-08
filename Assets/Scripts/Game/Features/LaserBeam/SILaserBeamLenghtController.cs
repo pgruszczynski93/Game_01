@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Game.Features.LaserBeam {
     public class SILaserBeamLenghtController : MonoBehaviour {
 
-        [SerializeField] float _lineImpactOffset;
+        [SerializeField] float _offsetFromPlayerCollider;
         [SerializeField] LineRenderer _lineRenderer;
 
         Vector3 _lineEndPos;
@@ -17,7 +17,7 @@ namespace Game.Features.LaserBeam {
         }
 
         public void SetLineRendererEndPosY(float endPointY) {
-            _lineEndPos.y = endPointY + _lineImpactOffset;
+            _lineEndPos.y = endPointY + _offsetFromPlayerCollider;
             _lineRenderer.SetPosition(1, _lineEndPos);
         }
 

@@ -46,8 +46,10 @@ namespace Game.Features.LaserBeam {
 
         void DetectLaserHit() {
             if (!Physics.Raycast(_thisTransform.position + _offsetFromPlayerCollider, _thisTransform.up,
-                out _currentHit, _collisionCheckDistance, _collisionLayerMask)) 
+                out _currentHit, _collisionCheckDistance, _collisionLayerMask)) {
+                _laserLenghtController.SetDefaultLineRendererEndPosY();
                 return;
+            }
 
             // Debug.DrawRay(_thisTransform.position + _offsetFromPlayerCollider , _thisTransform.up * _collisionCheckDistance, Color.green);
             
