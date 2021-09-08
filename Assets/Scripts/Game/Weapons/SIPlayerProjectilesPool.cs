@@ -27,6 +27,9 @@ namespace SpaceInvaders {
         }
 
         void HandleOnPlayerShoot() {
+            if (!_playerShootController.IsShootingEnabled)
+                return;
+            
             _currentSlotSet = _playerShootController.GetProjectileSlotsParent();
             _currentSlotIndex = 0;
             for (int i = 0; i < _currentSlotSet.Length; i++) {
