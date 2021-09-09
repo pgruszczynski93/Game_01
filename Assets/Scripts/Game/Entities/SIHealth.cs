@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SIHealth : MonoBehaviour
 {
+    [SerializeField] protected bool _isImmortal;
     [SerializeField] protected EntitySetup _entitySetup;
     [SerializeField] protected SIDamageVFX _damageVFX;
-
     protected float _currentHealth;
     protected float _healthPercent;
     protected float _healthLossPercent;
@@ -25,8 +25,10 @@ public class SIHealth : MonoBehaviour
         _damageVFX.ResetDamageVFX();
     }
 
-    public void ApplyDamage(float damage)
-    {
+    public void TryApplyDamage(float damage) {
+        if (_isImmortal)
+            return;
+        
         _currentHealth -= damage;
         _healthPercent = _currentHealth / _entitySetup.entityMaxHealth;
         _healthLossPercent = 1 - _healthPercent;

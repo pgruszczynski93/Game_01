@@ -58,14 +58,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/DamageVfxSettings.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/DamageVfxSettings.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/SIProjectileSettings.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/SIProjectileSettings.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/SIProjectileSetup.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/SIProjectileSetup.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerShootController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerShootController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIShootController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIShootController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/WeaponSettings/Enemy Weapon Tier 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/WeaponSettings/Enemy Weapon Tier 1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEnums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEnums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameExecutor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameExecutor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponColliderBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponColliderBehaviour.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -223,10 +226,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusColliderBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldColliderBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIExplosionsVfxPool.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIEnemyWeaponReloader.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponEntity.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SISWeaponPool.cs" />
@@ -261,11 +260,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/SIBonusDrivenBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEnums.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIConstants.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIGameplayEvents.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIProjectileEntity.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/SIColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamBehaviour.cs" />
@@ -274,6 +271,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIPlayerProjectilesPool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIShootController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerShootController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerHealth.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIHealth.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIWeaponColliderBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEnums.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameExecutor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBehaviour.cs" />
       </list>
     </option>
   </component>
@@ -626,6 +629,7 @@
       <workItem from="1630767516440" duration="6161000" />
       <workItem from="1631135356703" duration="1727000" />
       <workItem from="1631138493394" duration="157000" />
+      <workItem from="1631220375232" duration="3026000" />
     </task>
     <servers />
   </component>
@@ -753,10 +757,10 @@
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1629322102336" />
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1627728184019" />
-    <state x="2067" y="44" width="1622" height="1027" maximized="true" key="dock-window-1" timestamp="1631137884026">
+    <state x="1936" y="100" width="1610" height="1027" key="dock-window-1" timestamp="1631224223003">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2067" y="44" width="1622" height="1027" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1631137884026" />
+    <state x="1936" y="100" width="1610" height="1027" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1631224223003" />
     <state x="699" y="211" width="1003" height="1027" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1630750212205" />
     <state x="1920" y="67" width="1540" height="798" maximized="true" key="dock-window-2" timestamp="1627336046600">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -772,10 +776,10 @@
     </state>
     <state x="2536" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1630245349810" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1630759439658" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1631137475597">
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1631223956678">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1631137475597" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1631223956678" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1630772845633" />
   </component>
   <component name="XDebuggerManager">

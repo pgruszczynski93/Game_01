@@ -51,7 +51,7 @@ namespace SpaceInvaders
             if (this != damageInfo.ObjectToDamage)
                 return;
 
-            _enemyHealth.ApplyDamage(damageInfo.Damage);
+            _enemyHealth.TryApplyDamage(damageInfo.Damage);
             TryToBroadcastEnemyDeathAndSelectNextShootingEnemy();
         }
         
