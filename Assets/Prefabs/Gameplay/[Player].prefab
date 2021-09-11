@@ -661,7 +661,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.1
+      scalar: 0.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5084,8 +5084,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbed8f33d46f7cd4bb3884ae6ca1337b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderer: {fileID: 7367295250823492878}
   _playerHealth: {fileID: 8555940025052712156}
+  _playerContent:
+  - {fileID: 5810387989721604609}
+  - {fileID: 4855172558241129738}
 --- !u!114 &6844543533459637343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10774,7 +10776,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.3
+      scalar: 0.3
       minScalar: 0
       maxCurve:
         serializedVersion: 2

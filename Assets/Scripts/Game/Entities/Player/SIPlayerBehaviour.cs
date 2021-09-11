@@ -4,8 +4,8 @@ namespace SpaceInvaders
 {
     public class SIPlayerBehaviour : SIGenericSingleton<SIPlayerBehaviour>
     {
-        [SerializeField] GameObject _playerContent;
         [SerializeField] SIPlayerHealth _playerHealth;
+        [SerializeField] GameObject[] _playerContent;
 
         void OnEnable() => SubscribeEvents();
         void OnDisable() => UnsubscribeEvents();
@@ -36,14 +36,21 @@ namespace SpaceInvaders
             if (IsPlayerAlive())
                 return;
 
-            ManagePlayerContent(false);
+            //todo: temprary test code - remove it laters
+            // ManagePlayerContent(false);
             //todo: dodać event na restart i reset;
             // SIEventsHandler.BroadcastOnGameStateChanged(GameStates.GameFinished);
+            SIGameplayEvents.BroadcastOnWaveEnd();
+            _playerHealth.SetMaxHealth();
         }
         
         void ManagePlayerContent(bool isEnabled)
         {
-            _playerContent.SetActive(isEnabled);
+            for (int i = 0; i < _playerContent.Length; i++) {
+                _playerContent[i].SetActive(isEnabled);
+            }
         }
+        
+        // void Reset
     }
 }
