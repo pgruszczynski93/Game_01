@@ -5,7 +5,6 @@ namespace SpaceInvaders
 {
     public class SIEnemyColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
-        [SerializeField] SIEnemyBehaviour _enemyBehaviour;
         public bool IsCollisionTriggered { get; set; }
         public Action<CollisionInfo> OnCollisionDetected { get; set; }
         public CollisionInfo GetCollisionInfo()
