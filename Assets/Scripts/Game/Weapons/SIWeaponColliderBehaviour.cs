@@ -29,6 +29,7 @@ namespace SpaceInvaders
             {
                 case CollisionTag.Player:
 //                    Debug.Log("Player hitted");
+                    SIGameplayEvents.BroadcastOnDamage(projectileEntity.GetWeaponDamageInfo(collisionInfo.collisionSource));
                     break;
                 case CollisionTag.Enemy:
 //                    Debug.Log("Enemy hitted");

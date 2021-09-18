@@ -15,6 +15,9 @@ namespace SpaceInvaders
         protected Transform _thisTransform;
         protected Tweener _tweener;
 
+        public Transform MovementTransform => _thisTransform;
+        public Vector3 MovementWorldPosition => _thisTransform.position;
+        
         protected abstract void UpdatePosition();
         protected abstract void UpdateRotation();
         protected virtual void TryToMoveObject() { }

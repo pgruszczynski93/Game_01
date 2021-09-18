@@ -2,10 +2,9 @@
 {
     public enum GameStates {
         GameOpened,
-        GameInMenu, 
-        GameWaitsForStart, 
         GameStarted,
         GamePaused,
+        GameFinished,
         GameQuit
     }
     public enum AsteroidState

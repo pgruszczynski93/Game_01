@@ -5,7 +5,6 @@ namespace SpaceInvaders
 {
     public class SIEnemyColliderBehaviour : SIColliderBehaviour, ICanCollide
     {
-        [SerializeField] SIEnemyBehaviour _enemyBehaviour;
         public bool IsCollisionTriggered { get; set; }
         public Action<CollisionInfo> OnCollisionDetected { get; set; }
         public CollisionInfo GetCollisionInfo()
@@ -31,13 +30,12 @@ namespace SpaceInvaders
             {
                 case CollisionTag.Player:
                     //ToDo: Touching player doesn't take damage right now
-//                    Debug.Log("HITTED BY PLAYER", this);
+                    // Debug.Log("HITTED BY PLAYER", this);
                     break;
                 case CollisionTag.PlayerWeapon:
-//                    Debug.Log("HITTED BY PlayerWeapon", this);
+                    // Debug.Log("HITTED BY PlayerWeapon", this);
                     break;
             }
-            
             TryDetectExplosiveHit(collisionInfo.collisionTag);
         }
     }

@@ -34,13 +34,11 @@ namespace SpaceInvaders {
             {
                 case GameStates.GameOpened:
                     break;
-                case GameStates.GameInMenu:
-                    break;
-                case GameStates.GameWaitsForStart:
-                    break;
                 case GameStates.GameStarted:
                     break;
                 case GameStates.GamePaused:
+                    break;
+                case GameStates.GameFinished:
                     break;
                 case GameStates.GameQuit:
                     QuitGame();

@@ -15,11 +15,15 @@
         }
 
         void HandleOnBonusDisabled(BonusSettings bonusSettings) {
-            SetShootingStatus(bonusSettings.bonusType != BonusType.LaserBeam);
+            if (bonusSettings.bonusType != BonusType.LaserBeam)
+                return;
+            EnableShooting(true);
         }
 
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
-            SetShootingStatus(bonusSettings.bonusType == BonusType.LaserBeam);
+            if (bonusSettings.bonusType != BonusType.LaserBeam)
+                return;
+            EnableShooting(false);
         }
 
         void HandleOnPlayerWeaponTierUpdate(WeaponTier weaponTier) {

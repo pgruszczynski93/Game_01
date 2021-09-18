@@ -1,5 +1,7 @@
 namespace SpaceInvaders {
-    public class SIPlayerHealth {
-        
+    public class SIPlayerHealth : SIHealth {
+        public void ToggleImmortality() {
+            _isImmortal = !_isImmortal;
+        }
     }
 }

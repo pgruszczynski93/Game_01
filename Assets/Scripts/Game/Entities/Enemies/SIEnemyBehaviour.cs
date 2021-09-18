@@ -51,7 +51,7 @@ namespace SpaceInvaders
             if (this != damageInfo.ObjectToDamage)
                 return;
 
-            _enemyHealth.ApplyDamage(damageInfo.Damage);
+            _enemyHealth.TryApplyDamage(damageInfo.Damage);
             TryToBroadcastEnemyDeathAndSelectNextShootingEnemy();
         }
         
@@ -69,6 +69,8 @@ namespace SpaceInvaders
 
         void BroadcastEnemyDeath()
         {
+            //Note: This lines ensures explosion when enemy is killed.
+            SIGameplayEvents.BroadcastOnExplosiveObjectHit(transform.position);
             SIGameplayEvents.BroadcastOnEnemyDeath(this);
         }
         

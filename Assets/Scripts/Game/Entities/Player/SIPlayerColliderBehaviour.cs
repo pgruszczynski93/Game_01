@@ -9,7 +9,6 @@ namespace SpaceInvaders
         public Action<CollisionInfo> OnCollisionDetected { get; set; }
         public CollisionInfo GetCollisionInfo()
         {
-            // todo refactpr
             return _thisCollisionInfo;
         }
 

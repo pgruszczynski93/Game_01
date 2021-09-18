@@ -26,7 +26,7 @@ namespace SpaceInvaders
             return projectileSlotsParents[_projectilesTier].ProjectilesSlotsTransforms;
         }
         
-        protected void SetShootingStatus(bool isEnabled) {
+        protected void EnableShooting(bool isEnabled) {
             _isShootingEnabled = isEnabled;
         }
     }
