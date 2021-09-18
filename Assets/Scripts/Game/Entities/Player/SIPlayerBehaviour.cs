@@ -5,6 +5,7 @@ namespace SpaceInvaders
     public class SIPlayerBehaviour : SIGenericSingleton<SIPlayerBehaviour>
     {
         [SerializeField] SIPlayerHealth _playerHealth;
+        [SerializeField] SIPlayerMovement _playerMovement;
         [SerializeField] GameObject[] _playerContent;
 
         void OnEnable() => SubscribeEvents();
@@ -36,10 +37,10 @@ namespace SpaceInvaders
             if (IsPlayerAlive())
                 return;
 
-            //todo: temprary test code - remove it laters
             // ManagePlayerContent(false);
             //todo: dodać event na restart i reset;
             // SIEventsHandler.BroadcastOnGameStateChanged(GameStates.GameFinished);
+            SIGameplayEvents.BroadcastOnExplosiveObjectHit(_playerMovement.MovementWorldPosition);
             SIGameplayEvents.BroadcastOnWaveEnd();
             _playerHealth.SetMaxHealth();
         }
@@ -50,7 +51,5 @@ namespace SpaceInvaders
                 _playerContent[i].SetActive(isEnabled);
             }
         }
-        
-        // void Reset
     }
 }

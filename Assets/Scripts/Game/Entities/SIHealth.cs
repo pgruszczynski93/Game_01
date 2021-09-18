@@ -1,5 +1,4 @@
-﻿using System;
-using SpaceInvaders;
+﻿using SpaceInvaders;
 using UnityEngine;
 
 public class SIHealth : MonoBehaviour
