@@ -69,6 +69,8 @@ namespace SpaceInvaders
 
         void BroadcastEnemyDeath()
         {
+            //Note: This lines ensures explosion when enemy is killed.
+            SIGameplayEvents.BroadcastOnExplosiveObjectHit(transform.position);
             SIGameplayEvents.BroadcastOnEnemyDeath(this);
         }
         

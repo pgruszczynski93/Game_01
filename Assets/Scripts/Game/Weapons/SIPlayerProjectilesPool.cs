@@ -9,7 +9,7 @@ namespace SpaceInvaders {
         
         void OnEnable() {
             SubscribeEvents();
-            StartCoroutine(TierTester());
+            // StartCoroutine(TierTester());
         }
 
         void OnDisable() {
