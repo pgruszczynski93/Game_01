@@ -27,6 +27,7 @@
         Weapon,
         ShieldSystem,
         LaserBeam,
+        RapidFire,
         // Teleportation,
         // TimeSlowDown, 
         // Hacking,

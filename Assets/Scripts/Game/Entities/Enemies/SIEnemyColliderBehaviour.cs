@@ -30,7 +30,7 @@ namespace SpaceInvaders
             {
                 case CollisionTag.Player:
                     //ToDo: Touching player doesn't take damage right now
-                    // Debug.Log("HITTED BY PLAYER", this);
+                    // Debug.Log("HITTED BY PLAYER", this);s
                     break;
                 case CollisionTag.PlayerWeapon:
                     // Debug.Log("HITTED BY PlayerWeapon", this);

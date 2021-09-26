@@ -5097,7 +5097,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6159560142940903028}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1266339569993030090
 MeshFilter:
@@ -5178,7 +5178,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6159560142940903028}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2021972881441668246
 MeshFilter:
@@ -5255,11 +5255,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2637616641139936864}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6159560142940903028}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2660612049389113172
 MeshFilter:
@@ -5485,9 +5485,6 @@ MonoBehaviour:
     collisionTag: 4
     collisionSource: {fileID: 0}
   _collidableObjects: 00000000
-  _collisionLayer:
-    serializedVersion: 2
-    m_Bits: 256
   _bonusBehaviour: {fileID: 5637279107446737233}
 --- !u!1 &4057346957993663924
 GameObject:
@@ -5722,7 +5719,7 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _animatorController: {fileID: 346440941738690385}
   _bonusesVariants:
-    _keys: 00000000010000000200000003000000
+    _keys: 0000000001000000020000000300000004000000
     _values:
     - scriptableBonus: {fileID: 11400000, guid: fa0ff032deaf6c2478339782a7a874c4,
         type: 2}
@@ -5736,6 +5733,9 @@ MonoBehaviour:
     - scriptableBonus: {fileID: 11400000, guid: cc67eb48a8fa3174c8325d178d7f0cb1,
         type: 2}
       bonusRenderer: {fileID: 2651823240091987030}
+    - scriptableBonus: {fileID: 11400000, guid: 24f13bb8b0d0f0b44bf415abc792b1ef,
+        type: 2}
+      bonusRenderer: {fileID: 1276422678062164274}
   _thisTransform: {fileID: 6375572910197037336}
 --- !u!114 &6375572910197037335
 MonoBehaviour:
@@ -5753,9 +5753,6 @@ MonoBehaviour:
     collisionTag: 4
     collisionSource: {fileID: 5637279107446737233}
   _collidableObjects: 00000000
-  _collisionLayer:
-    serializedVersion: 2
-    m_Bits: 0
   _bonusBehaviour: {fileID: 5637279107446737233}
 --- !u!114 &346440941738690385
 MonoBehaviour:
@@ -5802,9 +5799,9 @@ Transform:
   - {fileID: 8667018977110812772}
   - {fileID: 996388883722756026}
   - {fileID: 764354466750655847}
+  - {fileID: 2636395945404284500}
   - {fileID: 2047088477997739680}
   - {fileID: 1290491865528091056}
-  - {fileID: 2636395945404284500}
   m_Father: {fileID: 5009398888003525847}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

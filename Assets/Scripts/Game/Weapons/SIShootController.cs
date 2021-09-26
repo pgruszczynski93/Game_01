@@ -10,9 +10,9 @@ namespace SpaceInvaders
         protected int _projectilesTier;
         public bool IsShootingEnabled => _isShootingEnabled;
 
-        void Start() => Initialise();
+        protected void Start() => Initialise();
 
-        void Initialise() {
+        protected virtual void Initialise() {
             _isShootingEnabled = true;
         }
 

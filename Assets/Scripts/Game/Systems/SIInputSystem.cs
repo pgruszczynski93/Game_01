@@ -35,7 +35,7 @@ namespace SpaceInvaders
         void HandleOnUpdate()
         {
             GetInputAxes();
-            TryToSendShootAction();
+            // TryToSendShootAction();
             TryToQuitGame();
         }
 
@@ -45,11 +45,11 @@ namespace SpaceInvaders
             SIEventsHandler.BroadcastOnGameStateChanged(GameStates.GameStarted);
         }
 
-        void TryToSendShootAction()
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
-                SIGameplayEvents.BroadcastOnPlayerShoot();
-        }
+        // void TryToSendShootAction()
+        // {
+        //     if(Input.GetKeyDown(KeyCode.Space))
+        //         SIGameplayEvents.BroadcastOnPlayerShoot();
+        // }
         
         void TryToQuitGame()
         {

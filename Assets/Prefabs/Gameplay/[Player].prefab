@@ -5117,6 +5117,11 @@ MonoBehaviour:
   - {fileID: 4748417915417607997}
   - {fileID: 4617128284090879388}
   - {fileID: 4840093742512527991}
+  _canAutoShoot: 1
+  _basicShootInterval: 1
+  _rapidShootInterval: 0.1
+  _currentShootInterval: 0
+  _countdown: 0
 --- !u!114 &8555940025052712156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5260,6 +5265,11 @@ MonoBehaviour:
   - {fileID: 4748417915417607997}
   - {fileID: 4617128284090879388}
   - {fileID: 4840093742512527991}
+  _canAutoShoot: 1
+  _basicShootInterval: 0
+  _rapidShootInterval: 0
+  _currentShootInterval: 0
+  _countdown: 0
 --- !u!54 &8392640021929104535
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15076,6 +15086,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaserSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359343168010437402, guid: 6dc17704a697b9242a7fdc7e25891af0,
+        type: 3}
+      propertyPath: _damage
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dc17704a697b9242a7fdc7e25891af0, type: 3}
