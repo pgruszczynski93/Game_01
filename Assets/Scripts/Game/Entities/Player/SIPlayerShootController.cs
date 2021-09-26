@@ -66,9 +66,9 @@ namespace SpaceInvaders
                 return;
 
             _nextShootCountdown -= Time.deltaTime;
-            // if (_countdown > 0)
-            //     return;
-            //
+            if (_nextShootCountdown > 0)
+                return;
+            
             _nextShootCountdown = _currentShootInterval;
             // SIGameplayEvents.BroadcastOnPlayerShoot();
         }
