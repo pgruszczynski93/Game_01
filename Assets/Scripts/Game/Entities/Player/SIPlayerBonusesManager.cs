@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,10 @@ namespace SpaceInvaders {
             Initialise();
         }
 
+        void OnDestroy() {
+            ClearCoroutines();
+        }
+
         void OnEnable() {
             SubscribeEvents();
         }
@@ -18,8 +23,6 @@ namespace SpaceInvaders {
             UnsubscribeEvents();
         }
         
-        //todo: dorobić usuwanie korutyn w OnDestroy dla slownika _activeBonuses
-
         void Initialise() {
             _activeBonuses = new Dictionary<BonusType, RuntimeBonus>();
         }
@@ -45,6 +48,15 @@ namespace SpaceInvaders {
                 StopCoroutine(_activeBonuses[collectedBonusSettings.bonusType].bonusRoutine);
 
             _activeBonuses[collectedBonusSettings.bonusType].bonusRoutine = StartCoroutine(RunBonusRoutine(collectedBonusSettings));
+        }
+
+        void ClearCoroutines() {
+            Coroutine currentRoutine;
+            foreach (KeyValuePair<BonusType, RuntimeBonus> kvp in _activeBonuses) {
+                currentRoutine = kvp.Value.bonusRoutine;
+                if(currentRoutine != null)
+                    StopCoroutine(currentRoutine);
+            }
         }
 
         bool IsBonusActive(BonusType bonusType) {

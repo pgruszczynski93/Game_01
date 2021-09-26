@@ -5118,9 +5118,8 @@ MonoBehaviour:
   - {fileID: 4617128284090879388}
   - {fileID: 4840093742512527991}
   _canAutoShoot: 1
-  _basicShootInterval: 1
-  _rapidShootInterval: 0.1
-  _currentShootInterval: 0
+  _basicShootInterval: 0.25
+  _rapidShootInterval: 0.125
 --- !u!114 &8555940025052712156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5194,7 +5193,6 @@ GameObject:
   m_Component:
   - component: {fileID: 998630233605939790}
   - component: {fileID: 4752110383092248088}
-  - component: {fileID: 6480722828697612928}
   - component: {fileID: 8392640021929104535}
   m_Layer: 0
   m_Name: PlayerContent
@@ -5248,26 +5246,6 @@ MonoBehaviour:
     easeTime: 0
     maxRotationAngle: 0
   _screenEdgeOffset: 0
---- !u!114 &6480722828697612928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5810387989721604609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79a57356ac738104ebffba44c7e668d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileSlotsParents:
-  - {fileID: 4748417915417607997}
-  - {fileID: 4617128284090879388}
-  - {fileID: 4840093742512527991}
-  _canAutoShoot: 1
-  _basicShootInterval: 0
-  _rapidShootInterval: 0
-  _currentShootInterval: 0
 --- !u!54 &8392640021929104535
 Rigidbody:
   m_ObjectHideFlags: 0

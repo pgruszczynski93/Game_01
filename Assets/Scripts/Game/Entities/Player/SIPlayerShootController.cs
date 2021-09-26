@@ -7,9 +7,9 @@ namespace SpaceInvaders
         [SerializeField] bool _canAutoShoot;
         [SerializeField] float _basicShootInterval;
         [SerializeField] float _rapidShootInterval;
-        [SerializeField] float _currentShootInterval;
         
         float _nextShootCountdown;
+        float _currentShootInterval;
 
         protected override void Initialise() {
             base.Initialise();
@@ -31,21 +31,21 @@ namespace SpaceInvaders
             SIGameplayEvents.OnPlayerWeaponTierUpdate -= HandleOnPlayerWeaponTierUpdate;
         }
 
-        void HandleOnBonusDisabled(BonusSettings bonusSettings) {
+        void HandleOnBonusEnabled(BonusSettings bonusSettings) {
             switch (bonusSettings.bonusType) {
                 case BonusType.LaserBeam:
-                    EnableShooting(true);
+                    EnableShooting(false);
                     break;
                 case BonusType.RapidFire:
                     EnableRapidFire();
                     break;
             }
         }
-
-        void HandleOnBonusEnabled(BonusSettings bonusSettings) {
+        
+        void HandleOnBonusDisabled(BonusSettings bonusSettings) {
             switch (bonusSettings.bonusType) {
                 case BonusType.LaserBeam:
-                    EnableShooting(false);
+                    EnableShooting(true);
                     break;
                 case BonusType.RapidFire:
                     DisableRapidFire();
@@ -70,7 +70,7 @@ namespace SpaceInvaders
                 return;
             
             _nextShootCountdown = _currentShootInterval;
-            // SIGameplayEvents.BroadcastOnPlayerShoot();
+            SIGameplayEvents.BroadcastOnPlayerShoot();
         }
 
         bool CanAutoShoot() {
