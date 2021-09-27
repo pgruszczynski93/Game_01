@@ -10,11 +10,25 @@ namespace Game.Features.Shield {
         [SerializeField] SIShieldAnimatorController _animatorController;
         
         Coroutine _shieldAnimationRoutine;
+
+        protected override void SubscribeEvents() {
+            base.SubscribeEvents();
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
+        }
         
+        protected override void UnsubscribeEvents() {
+            base.UnsubscribeEvents();
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
+        }
+
         protected override void OnDisable() {
             base.OnDisable();
             if(_shieldAnimationRoutine != null)
                 StopCoroutine(DisableRoutine());
+        }
+        
+        void HandleOnWaveEnd() {
+            ManageDisabledBonus();
         }
 
         protected override void ManageEnabledBonus() {
