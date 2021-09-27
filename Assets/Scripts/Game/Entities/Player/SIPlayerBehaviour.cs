@@ -41,7 +41,6 @@ namespace SpaceInvaders
             //todo: dodać event na restart i reset;
             // SIEventsHandler.BroadcastOnGameStateChanged(GameStates.GameFinished);
             SIGameplayEvents.BroadcastOnExplosiveObjectHit(_playerMovement.MovementWorldPosition);
-            SIGameplayEvents.BroadcastOnWaveEnd();
             _playerHealth.SetMaxHealth();
         }
         

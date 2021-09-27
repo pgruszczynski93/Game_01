@@ -21,7 +21,10 @@ namespace SpaceInvaders
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
+            SIEnemyGridEvents.OnGridShootingReset += HandleOnGridShootingReset;
             SIGameplayEvents.OnPlayerWeaponTierUpdate += HandleOnPlayerWeaponTierUpdate;
+            SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
         }
 
         protected override void UnsubscribeEvents() {
@@ -29,8 +32,10 @@ namespace SpaceInvaders
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
             SIGameplayEvents.OnPlayerWeaponTierUpdate -= HandleOnPlayerWeaponTierUpdate;
+            SIGameplayEvents.OnWaveStart -= HandleOnWaveStart;
+            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
         }
-
+        
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
             switch (bonusSettings.bonusType) {
                 case BonusType.LaserBeam:
@@ -60,6 +65,16 @@ namespace SpaceInvaders
         void HandleOnUpdate() {
             ExecuteAutoShooting();
         }
+        void HandleOnGridShootingReset() {
+            _isShootingEnabled = true;
+        }
+        
+        void HandleOnWaveStart() {
+            SetAutoShooting(true);
+        }
+        void HandleOnWaveEnd() {
+            SetAutoShooting(false);
+        }
 
         void ExecuteAutoShooting() {
             if (!CanAutoShoot())
@@ -83,6 +98,10 @@ namespace SpaceInvaders
 
         void DisableRapidFire() {
             _currentShootInterval = _basicShootInterval;
+        }
+
+        void SetAutoShooting(bool isEnabled) {
+            _canAutoShoot = isEnabled;
         }
         
     }

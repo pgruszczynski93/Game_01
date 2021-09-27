@@ -7,7 +7,7 @@ namespace SpaceInvaders
         public static event Action OnGridObjectsReloaded;
         public static event Action OnGridReset;
         public static event Action OnGridShootingReset;
-        public static event Action<int> OnUpdateGridMovementSpeedTier;
+        public static event Action OnUpdateGridMovementSpeedTier;
         public static event Action<SIEnemyShootController> OnReadyToShoot;
         public static event Action<SIEnemyShootController> OnShotInvoked;
         
@@ -26,9 +26,9 @@ namespace SpaceInvaders
             OnGridShootingReset?.Invoke();
         }
 
-        public static void BroadcastOnUpdateGridMovementSpeedTier(int newTier)
+        public static void BroadcastOnUpdateGridMovementSpeedTier()
         {
-            OnUpdateGridMovementSpeedTier?.Invoke(newTier);
+            OnUpdateGridMovementSpeedTier?.Invoke();
         }
         public static void BroadcastOnReadyToShoot(SIEnemyShootController enemyShootController)
         {

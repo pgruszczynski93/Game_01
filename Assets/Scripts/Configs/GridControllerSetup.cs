@@ -19,7 +19,5 @@ namespace SpaceInvaders
         public int maxNeighboursOfEnemyCount;
         public float newWaveCooldown;
         public float endWaveCooldown;
-        public int[] enemiesLeftToUpdateGridMovementTier;
-
     }
 }

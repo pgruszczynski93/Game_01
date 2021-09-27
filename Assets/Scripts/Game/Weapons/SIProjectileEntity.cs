@@ -94,14 +94,12 @@ namespace SpaceInvaders
         void SubscribeEvents()
         {
             SIEventsHandler.OnUpdate += CheckIsProjectileOnScreen;
-            SIGameplayEvents.OnWaveEnd += StopAndResetProjectile;
             SIGameplayEvents.OnDamage += HandleOnDamage;
         }
 
         void UnsubscribeEvents()
         {
             SIEventsHandler.OnUpdate -= CheckIsProjectileOnScreen;
-            SIGameplayEvents.OnWaveEnd -= StopAndResetProjectile;
             SIGameplayEvents.OnDamage -= HandleOnDamage;
         }
         

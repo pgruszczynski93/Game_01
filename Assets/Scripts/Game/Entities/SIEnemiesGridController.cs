@@ -31,8 +31,6 @@ namespace SpaceInvaders
         int _maxInColumn;
         int _maxNeighboursOfEnemyCount;
         int _livingEnemies;
-        int _gridSpeedTiers;
-        int _minEnemiesToUpdateGridSpeed;
         GridControllerSettings _gridSettings;
 
         void Awake() => PreInitialise();
@@ -125,15 +123,13 @@ namespace SpaceInvaders
             _maxNeighboursOfEnemyCount = _gridSettings.maxNeighboursOfEnemyCount;
             _maxInColumn = _gridSettings.maxEnemiesInGridColumn;
             _maxInRow = _gridSettings.maxEnemiesInGridRow;
-            _gridSpeedTiers = _gridSettings.enemiesLeftToUpdateGridMovementTier.Length;
-            _minEnemiesToUpdateGridSpeed = _gridSettings.enemiesLeftToUpdateGridMovementTier[0];
         }
         
 
         void HandleOnEnemyDeath(MonoBehaviour deadEnemy)
         {
             --_livingEnemies;
-            TryToBroadcastNewMovementSpeedTier();
+            SIEnemyGridEvents.BroadcastOnUpdateGridMovementSpeedTier();
             TryToFinalizeWave();
         }
 
@@ -145,22 +141,6 @@ namespace SpaceInvaders
             StartCoroutine(RestartGridRoutine());
         }
         
-
-        void TryToBroadcastNewMovementSpeedTier()
-        {
-            if (_livingEnemies > _minEnemiesToUpdateGridSpeed)
-                return;
-
-            for (int i = 0; i < _gridSpeedTiers; i++)
-            {
-                if (_livingEnemies != _gridSettings.enemiesLeftToUpdateGridMovementTier[i])
-                    continue;
-
-                SIEnemyGridEvents.BroadcastOnUpdateGridMovementSpeedTier(i);
-                return;
-            }
-        }
-
         IEnumerator RestartGridRoutine()
         {
             yield return StartCoroutine(WaitUtils.WaitAndInvoke(_gridSettings.endWaveCooldown,

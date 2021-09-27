@@ -14,6 +14,7 @@ namespace SpaceInvaders {
         int _gridMovementSpeedTier;
         float _rightScreenEdgeOffset;
         float _leftScreenEdgeOffset;
+        float _nextSpeedMultiplier;
 
         LocalGridMinMax _gridMinMax;
         ScreenEdges _worldScreenEdges;
@@ -25,7 +26,6 @@ namespace SpaceInvaders {
         {
             base.Initialise();
 
-            _gridMovementSpeedTier = 0;
             _gridMovementSettings = _gridMovementSetup.gridMovementSettings;
             _worldScreenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
             _rightScreenEdgeOffset = _worldScreenEdges.rightScreenEdge - _screenEdgeOffset;
@@ -47,6 +47,7 @@ namespace SpaceInvaders {
                     _isInitialSequenceFinished = true;
                     _canMove = true;
                     SIEnemyGridEvents.BroadcastOnGridOnGridShootingReset();
+                    SIGameplayEvents.BroadcastOnWaveStart();
                 })
                 .SetEase(_gridMovementSettings.initialMovementEaseType)
                 .SetAutoKill(false)
@@ -99,9 +100,9 @@ namespace SpaceInvaders {
             UpdateMovementOffsets();
         }
 
-        void HandleOnEnemySpeedMultiplierChanged(int tier)
+        void HandleOnEnemySpeedMultiplierChanged()
         {
-            TryToUpdateCurrentMovementSpeed(_gridMovementSettings.gridMovementSpeedTiers[tier]);
+            TryToUpdateCurrentMovementSpeed();
         }
 
         void ExecuteInitialMovementSequence()
@@ -122,12 +123,9 @@ namespace SpaceInvaders {
             _verticalMovementTweener.Pause();
         }
 
-        void TryToUpdateCurrentMovementSpeed(float multiplier)
-        {
-            DOTween.To(() => _currentSpeedMultiplier,
-                newMultiplier => _currentSpeedMultiplier = newMultiplier,
-                multiplier,
-                _gridMovementSettings.speedMultiplierUpdateTime);
+        void TryToUpdateCurrentMovementSpeed() {
+            _nextSpeedMultiplier = _currentSpeedMultiplier + _gridMovementSettings.gridMovementSpeedUpStep;
+            _currentSpeedMultiplier = _nextSpeedMultiplier;
         }
 
         void UpdateMovementOffsets()

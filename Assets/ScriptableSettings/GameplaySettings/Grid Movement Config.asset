@@ -23,16 +23,10 @@ MonoBehaviour:
     speedMultiplierStep: 0.2
     enemyWidthOffset: 0.25
     speedMultiplierUpdateTime: 0.5
+    gridMovementSpeedUpStep: 0.25
     initialMovementEaseDuration: 3
     horizontalDownstepDuration: 0.25
     worldStartPosition: {x: 0, y: 12, z: 0}
     worldTargetPosition: {x: 0, y: 3, z: 0}
     initialMovementEaseType: 5
     horizontalDownstepEaseType: 7
-    gridMovementSpeedTiers:
-    - 2.5
-    - 3
-    - 4.5
-    - 5
-    - 5.5
-    - 6
