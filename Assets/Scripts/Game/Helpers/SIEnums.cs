@@ -23,7 +23,7 @@
     }
     public enum BonusType
     {
-        Life,
+        Health,
         Weapon,
         ShieldSystem,
         LaserBeam,

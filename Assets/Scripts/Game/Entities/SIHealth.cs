@@ -1,4 +1,5 @@
-﻿using SpaceInvaders;
+﻿using System;
+using SpaceInvaders;
 using UnityEngine;
 
 public class SIHealth : MonoBehaviour
@@ -6,6 +7,7 @@ public class SIHealth : MonoBehaviour
     [SerializeField] protected bool _isImmortal;
     [SerializeField] protected EntitySetup _entitySetup;
     [SerializeField] protected SIDamageVFX _damageVFX;
+    
     protected float _currentHealth;
     protected float _healthPercent;
     protected float _healthLossPercent;
@@ -25,20 +27,37 @@ public class SIHealth : MonoBehaviour
     }
 
     public void TryApplyDamage(float damage) {
-        if (_isImmortal)
-            return;
+        ModifyHealth(-damage);
         
-        _currentHealth -= damage;
-        _healthPercent = _currentHealth / _entitySetup.entityMaxHealth;
-        _healthLossPercent = 1 - _healthPercent;
-        _damageVFX.SetDamageVFX(_healthLossPercent);
         if (IsAlive())
             return;
         _damageVFX.ResetDamageVFX();
     }
 
+    public void TryRestoreHealth(float newHealth) {
+        ModifyHealth(newHealth);
+        
+        if(HasFullHealth())
+            _damageVFX.ResetDamageVFX();
+    }
+
+    void ModifyHealth(float newValue) {
+        if (_isImmortal)
+            return;
+        
+        _currentHealth += newValue;
+        _currentHealth = Mathf.Clamp(_currentHealth,0, _entitySetup.entityMaxHealth);
+        _healthPercent = _currentHealth / _entitySetup.entityMaxHealth;
+        _healthLossPercent = 1 - _healthPercent;
+        _damageVFX.SetDamageVFX(_healthLossPercent);
+    }
+
     public bool IsAlive()
     {
         return _currentHealth > 0;
+    }
+
+    public bool HasFullHealth() {
+        return _currentHealth >= _entitySetup.entityMaxHealth;
     }
 }
