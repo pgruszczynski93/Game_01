@@ -30,17 +30,17 @@ namespace SpaceInvaders
 
         void SubscribeEvents()
         {
-            SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
             SIGameplayEvents.OnDamage += HandleOnDamage;
         }
 
         void UnsubscribeEvents()
         {
-            SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
+            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
             SIGameplayEvents.OnDamage -= HandleOnDamage;
         }
 
-        void HandleOnGridReset()
+        void HandleOnWaveEnd()
         {
             SetEnemyVisibility(true);
             _enemyHealth.SetMaxHealth();

@@ -21,7 +21,6 @@ namespace SpaceInvaders
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
-            SIEnemyGridEvents.OnGridShootingReset += HandleOnGridShootingReset;
             SIGameplayEvents.OnPlayerWeaponTierUpdate += HandleOnPlayerWeaponTierUpdate;
             SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
             SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
@@ -65,14 +64,14 @@ namespace SpaceInvaders
         void HandleOnUpdate() {
             ExecuteAutoShooting();
         }
-        void HandleOnGridShootingReset() {
-            _isShootingEnabled = true;
-        }
-        
+
+        //Both types of shooting are enabled / disabled intentionally, in case I'd like to disable autoshooting option
         void HandleOnWaveStart() {
+            EnableShooting(true);
             SetAutoShooting(true);
         }
         void HandleOnWaveEnd() {
+            EnableShooting(false);
             SetAutoShooting(false);
         }
 

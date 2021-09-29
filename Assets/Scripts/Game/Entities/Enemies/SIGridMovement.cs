@@ -46,7 +46,6 @@ namespace SpaceInvaders {
                 {
                     _isInitialSequenceFinished = true;
                     _canMove = true;
-                    SIEnemyGridEvents.BroadcastOnGridOnGridShootingReset();
                     SIGameplayEvents.BroadcastOnWaveStart();
                 })
                 .SetEase(_gridMovementSettings.initialMovementEaseType)
@@ -68,7 +67,7 @@ namespace SpaceInvaders {
 
         protected override void SubscribeEvents()
         {
-            SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
             SIEnemyGridEvents.OnUpdateGridMovementSpeedTier += HandleOnEnemySpeedMultiplierChanged;
@@ -76,13 +75,13 @@ namespace SpaceInvaders {
 
         protected override void UnsubscribeEvents()
         {
-            SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
+            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
             SIEnemyGridEvents.OnUpdateGridMovementSpeedTier -= HandleOnEnemySpeedMultiplierChanged;
         }
 
-        void HandleOnGridReset()
+        void HandleOnWaveEnd()
         {
             //TODO: === Don't remove ===: this method ensures that movement limits will be recalculated with each wave.
             ResetGridMovement();

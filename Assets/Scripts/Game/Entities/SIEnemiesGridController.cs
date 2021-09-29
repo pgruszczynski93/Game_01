@@ -141,14 +141,11 @@ namespace SpaceInvaders
             StartCoroutine(RestartGridRoutine());
         }
         
-        IEnumerator RestartGridRoutine()
-        {
-            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_gridSettings.endWaveCooldown,
-                SIGameplayEvents.BroadcastOnWaveEnd));
+        IEnumerator RestartGridRoutine() {
+            yield return StartCoroutine(WaitUtils.WaitForCachedSeconds(_gridSettings.endWaveCooldown));
             SetLivingEnemiesCount();
-            yield return StartCoroutine(WaitUtils.SkipFramesAndInvoke(1,
-                ReloadGridObjects));
-            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_gridSettings.newWaveCooldown, RestartEnemiesGrid));
+            yield return StartCoroutine(WaitUtils.SkipFramesAndInvoke(1, ReloadGridObjects));
+            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_gridSettings.newWaveCooldown, SIGameplayEvents.BroadcastOnWaveEnd));
         }
 
         void SetLivingEnemiesCount()
@@ -160,11 +157,6 @@ namespace SpaceInvaders
         void ReloadGridObjects()
         {
             SIEnemyGridEvents.BroadcastOnGridObjectsReloaded();
-        }
-
-        void RestartEnemiesGrid()
-        {
-            SIEnemyGridEvents.BroadcastOnGridReset();
         }
     }
 }

@@ -87,7 +87,7 @@ namespace SpaceInvaders {
             if (!_hasParticles)
                 return;
 
-            var particlesSetup = _damageEffectSettings.particleSetup;
+            DamageVfxParticleSetup particlesSetup = _damageEffectSettings.particleSetup;
             _fireParticlesMainModule.maxParticles = (int) SIMathUtils.Remap(damagePercent, 0f, 1f, particlesSetup.minParticlesCount, particlesSetup.maxParticlesCount);
             _nextParticlesShapeAxisScaleValue = SIMathUtils.Remap(damagePercent, 0f, 1f, particlesSetup.minScaleAxisValue, particlesSetup.maxScaleAxisValue);
             

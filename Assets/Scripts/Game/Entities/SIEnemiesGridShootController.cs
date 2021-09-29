@@ -44,16 +44,16 @@ namespace SpaceInvaders
 
         void SubscribeEvents()
         {
-            SIEnemyGridEvents.OnGridReset += HandleOnGridReset;
-            SIEnemyGridEvents.OnGridShootingReset += HandleOnGridShootingReset;
+            SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
             SIEnemyGridEvents.OnReadyToShoot += HandleOnReadyToShoot;
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
         void UnsubscribeEvents()
         {
-            SIEnemyGridEvents.OnGridReset -= HandleOnGridReset;
-            SIEnemyGridEvents.OnGridShootingReset -= HandleOnGridShootingReset;
+            SIGameplayEvents.OnWaveStart -= HandleOnWaveStart;
+            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
             SIEnemyGridEvents.OnReadyToShoot -= HandleOnReadyToShoot;
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
         }
@@ -68,13 +68,13 @@ namespace SpaceInvaders
             _isGridShootingEnabled = isGridShootingEnabled;
         }
 
-        void HandleOnGridReset()
+        void HandleOnWaveEnd()
         {
             EnableGridShootingPossibility(false);
             ResetShootingEnemiesInstances();
         }
 
-        void HandleOnGridShootingReset()
+        void HandleOnWaveStart()
         {
             EnableGridShootingPossibility(true);
             TryToRunGridShootingRoutine();
