@@ -26,6 +26,7 @@ namespace SpaceInvaders
         Vector3 _parentRelativeLocalPos;
         Transform _thisTransform;
         DamageInfo _damageInfo;
+        ProjectileOwnerTag _ownerTag;
 
         void OnEnable() {
             Initialise();
@@ -62,6 +63,7 @@ namespace SpaceInvaders
         public void SetupProjectile(SIProjectileSetup setup) {
             SIProjectileSettings projectileSettings = setup.projectileSettings;
             _weaponGraphicsObj = Instantiate(projectileSettings.projectileObject, _graphicsObjParent);
+            _ownerTag = projectileSettings.ownerTag;
             Transform graphicsObjTransform = _weaponGraphicsObj.transform;
             // Note: Parameters of object in template (transform relative to parent)
             graphicsObjTransform.localPosition = projectileSettings.parentRelativePos;

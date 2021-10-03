@@ -21,6 +21,12 @@
         EnemyWeapon,
         Bonus,
     }
+
+    public enum ProjectileOwnerTag {
+        Player, 
+        Enemy
+    }
+    
     public enum BonusType
     {
         Health,
@@ -28,8 +34,8 @@
         ShieldSystem,
         LaserBeam,
         RapidFire,
+        TimeSlowDown, 
         // Teleportation,
-        // TimeSlowDown, 
         // Hacking,
         // MassiveKill, 
     }

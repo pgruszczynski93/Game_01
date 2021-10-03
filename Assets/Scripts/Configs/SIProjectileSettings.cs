@@ -11,6 +11,7 @@ namespace SpaceInvaders
         public Vector3 parentRelativePos;
         public Vector3 parentRelativeRotation;
         public Vector3 scaleValues;
+        public ProjectileOwnerTag ownerTag;
         public GameObject projectileObject;
     }
 }

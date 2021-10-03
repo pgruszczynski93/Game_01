@@ -8,6 +8,9 @@ namespace SpaceInvaders
         public static event Action OnWaveStart;
         public static event Action OnWaveEnd;
         public static event Action OnPlayerShoot;
+        
+        //This event runs only in Start method of object which speed can be modified with special manager.
+        public static event Action<IModifySpeed> OnSpeedModificationRequested;
         public static event Action<Vector3> OnExplosiveObjectHit;
         public static event Action<DamageInfo> OnDamage;
         public static event Action<SIEnemyBehaviour> OnEnemyDeath;
@@ -18,6 +21,10 @@ namespace SpaceInvaders
         public static void BroadcastOnEnemyWeaponHit()
         {
             OnEnemyWeaponHit?.Invoke();
+        }
+
+        public static void BroadcastOnSpeedModificationRequested(IModifySpeed behaviourToModifySpeed) {
+            OnSpeedModificationRequested?.Invoke(behaviourToModifySpeed);
         }
         public static void BroadcastOnDamage(DamageInfo damageInfo)
         {

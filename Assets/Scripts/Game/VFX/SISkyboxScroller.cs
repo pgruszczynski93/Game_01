@@ -2,34 +2,47 @@ using SpaceInvaders;
 using UnityEngine;
 
 namespace Game.VFX {
-    public class SISkyboxScroller : MonoBehaviour {
+    public class SISkyboxScroller : MonoBehaviour, IModifySpeed {
         
         static readonly int rotationId = Shader.PropertyToID("_Rotation");
         static readonly int rotationAxisId = Shader.PropertyToID("_RotationAxis");
 
+        [SerializeField] float _initialSpeedModifier;
         [SerializeField] float _scrollSpeed;
 
+        float _currentScrollSpeedMultiplier;
         float _currentAngle;
+
+        void Start() => Initialise();
+
+        void Initialise() {
+            SetSpeedModifier(_initialSpeedModifier);
+            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
+        }
         
         void OnEnable() => SubscribeEvents();
 
         void OnDisable() => UnsubscribeEvents();
 
         void SubscribeEvents() {
-            SIEventsHandler.OnIndependentUpdate += HandleOnIndependentUpdate;  
+            SIEventsHandler.OnIndependentUpdate += HandleOnIndependentUpdate;
         }
 
         void UnsubscribeEvents() {
             SIEventsHandler.OnIndependentUpdate -= HandleOnIndependentUpdate;  
-        } 
+        }
 
         void HandleOnIndependentUpdate() {
             RenderSettings.skybox.SetFloat(rotationId, GetClampedAngle());
         }
 
         float GetClampedAngle() {
-            _currentAngle += Time.deltaTime * _scrollSpeed;
+            _currentAngle += Time.deltaTime * _scrollSpeed * _currentScrollSpeedMultiplier;
             return _currentAngle % SIMathUtils.FULL_EULER_ANGLE ;
+        }
+
+        public void SetSpeedModifier(float modifier) {
+            _currentScrollSpeedMultiplier = modifier;
         }
     }
 }

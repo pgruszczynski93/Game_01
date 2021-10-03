@@ -1,7 +1,11 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SpaceInvaders {
     public class SIGameExecutor : MonoBehaviour {
+
+        public float defFdt;
+        public float scale;
         
         [SerializeField] GameStates currentGameState;
         void OnEnable() => SubscribeEvents();
@@ -26,6 +30,12 @@ namespace SpaceInvaders {
         public bool IsGameRunning()
         {
             return currentGameState == GameStates.GameStarted;
+        }
+
+        [Button]
+        void TimeScaleTest() {
+            Time.timeScale = scale;
+            Time.fixedDeltaTime = defFdt * Time.timeScale;
         }
 
         void ManageGameStates()

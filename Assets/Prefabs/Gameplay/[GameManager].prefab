@@ -379,6 +379,53 @@ MonoBehaviour:
     type: 3}
   _objectsPool: []
   _availableProjectiles: []
+  _playerShootController: {fileID: 0}
+--- !u!1 &5943772042652215456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5944902529089563000}
+  - component: {fileID: 8707640014959758375}
+  m_Layer: 0
+  m_Name: SpeedModificationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5944902529089563000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943772042652215456}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7025270549699991142}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8707640014959758375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943772042652215456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7200c42224d41608fd4a386b7c18612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slowDownMultiplier: 0.7
+  _speedUpMultiplier: 1
+  _defaultSpeedMultiplier: 1
 --- !u!1 &6845724982431583985
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +550,7 @@ Transform:
   - {fileID: 6600019003710313739}
   - {fileID: 2731769320945106522}
   - {fileID: 4903938798721457944}
+  - {fileID: 5944902529089563000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -534,6 +582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbb9287806f4745a0ce4de35fe9ae12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defFdt: 0
+  scale: 0
   currentGameState: 0
 --- !u!1 &8428483786973574583
 GameObject:
