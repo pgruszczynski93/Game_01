@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     public class SISpeedModificationManager : MonoBehaviour {
-        [SerializeField] float _slowDownMultiplier;
+        [SerializeField, Range(0,1)] float _slowDownMultiplier;
         [SerializeField] float _speedUpMultiplier;
         [SerializeField] float _defaultSpeedMultiplier;
         
@@ -28,8 +28,11 @@ namespace SpaceInvaders {
             if(_objectsToModifySpeed == null)
                 _objectsToModifySpeed = new HashSet<IModifySpeed>();
 
-            if (!_objectsToModifySpeed.Contains(objToModify))
-                _objectsToModifySpeed.Add(objToModify);
+            if (_objectsToModifySpeed.Contains(objToModify))
+                return;
+            
+            _objectsToModifySpeed.Add(objToModify);
+            objToModify.SetSpeedModifier(_defaultSpeedMultiplier);
         }
         
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {

@@ -6,7 +6,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace SpaceInvaders
 {
-    public class SIProjectileEntity : MonoBehaviour, IPoolable
+    public class SIProjectileEntity : MonoBehaviour, IPoolable, IModifySpeed
     {
         [SerializeField] SIProjectileSetup _projectileSetup;
         [SerializeField] SIProjectileSettings _projectileSettings;
@@ -91,6 +91,7 @@ namespace SpaceInvaders
             ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
             _topWorldLimit = screenWorldEdges.topScreenEdge + _projectileSettings.movementLimitOffset;
             _bottomWorldLimit = screenWorldEdges.bottomScreenEdge - _projectileSettings.movementLimitOffset;
+            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
         }
 
         void SubscribeEvents()
@@ -192,6 +193,11 @@ namespace SpaceInvaders
         public void SetSpawnRotation(Vector3 spawnRot) {
             _thisTransform.rotation = Quaternion.LookRotation(spawnRot, Vector3.forward);
             _moveDirection = spawnRot;
+        }
+
+        public void SetSpeedModifier(float modifier) {
+            Vector3 currVelocity = _rigidbody.velocity;
+            _rigidbody.velocity = Vector3.zero;
         }
     }
 }

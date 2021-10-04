@@ -32,7 +32,7 @@ namespace SpaceInvaders {
             _leftScreenEdgeOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _gridMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
-
+            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
             InitialiseTweeners();
         }
 
@@ -80,7 +80,7 @@ namespace SpaceInvaders {
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
             SIEnemyGridEvents.OnUpdateGridMovementSpeedTier -= HandleOnEnemySpeedMultiplierChanged;
         }
-
+        
         void HandleOnWaveEnd()
         {
             //TODO: === Don't remove ===: this method ensures that movement limits will be recalculated with each wave.
@@ -154,7 +154,7 @@ namespace SpaceInvaders {
             _dt = Time.deltaTime;
 
             Vector3 currentPosition = _thisTransform.position;
-            float posDelta = _dt * _currentSpeedMultiplier * _currentMovementSpeed;
+            float posDelta = _dt * _currentSpeedMultiplier * _currentMovementSpeed * _speedModificator;
             Vector3 nextPosition =
                 new Vector3(currentPosition.x + posDelta, currentPosition.y, currentPosition.z);
 

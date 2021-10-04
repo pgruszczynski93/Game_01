@@ -7,7 +7,6 @@ namespace Game.VFX {
         static readonly int rotationId = Shader.PropertyToID("_Rotation");
         static readonly int rotationAxisId = Shader.PropertyToID("_RotationAxis");
 
-        [SerializeField] float _initialSpeedModifier;
         [SerializeField] float _scrollSpeed;
 
         float _currentScrollSpeedMultiplier;
@@ -16,7 +15,6 @@ namespace Game.VFX {
         void Start() => Initialise();
 
         void Initialise() {
-            SetSpeedModifier(_initialSpeedModifier);
             SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
         }
         

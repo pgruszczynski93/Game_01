@@ -28,18 +28,35 @@ namespace SpaceInvaders
             _leftScreenOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _playerMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
+            SetSpeedModifier(_playerMovementSettings.defaultSpeedModificator);
         }
 
         protected override void SubscribeEvents()
         {
             SIEventsHandler.OnUpdate += TryToMoveObject;
             SIEventsHandler.OnAxesInputReceived += HandleAxesInputReceived;
+            SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
+            SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
         }
 
         protected override void UnsubscribeEvents()
         {
             SIEventsHandler.OnUpdate -= TryToMoveObject;
             SIEventsHandler.OnAxesInputReceived += HandleAxesInputReceived;
+            SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
+            SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
+        }
+
+        void HandleOnBonusEnabled(BonusSettings bonusSettings) {
+            if (bonusSettings.bonusType == BonusType.TimeSlowDown) {
+                SetSpeedModifier(_playerMovementSettings.slowDownBonusSpeedModificator);
+            }
+        }
+        
+        void HandleOnBonusDisabled(BonusSettings bonusSettings) {
+            if (bonusSettings.bonusType == BonusType.TimeSlowDown) {
+                SetSpeedModifier(_playerMovementSettings.defaultSpeedModificator);
+            }
         }
 
         void HandleAxesInputReceived(Vector3 inputVector)
@@ -65,12 +82,12 @@ namespace SpaceInvaders
 
             _canMove = false;
         }
-
+        
         protected override void UpdatePosition()
         {
             _dt = Time.deltaTime;
-            float horizontalMovementDelta = _dt * _inputValue.x * _currentMovementSpeed;
-            float verticalMovementDelta = _dt * _inputValue.y * _currentMovementSpeed;
+            float horizontalMovementDelta = _dt * _inputValue.x * _currentMovementSpeed * _speedModificator;
+            float verticalMovementDelta = _dt * _inputValue.y * _currentMovementSpeed * _speedModificator;
 
             Vector3 currentPosition = _thisTransform.position;
             Vector3 newPosition = new Vector3(currentPosition.x + horizontalMovementDelta,
