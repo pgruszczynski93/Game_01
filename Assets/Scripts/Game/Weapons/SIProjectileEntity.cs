@@ -14,20 +14,23 @@ namespace SpaceInvaders
         [SerializeField] Transform _parentTransform;
         [SerializeField] ParticleSystem _particles;
         [SerializeField] BoxCollider _weaponCollider;
-        [SerializeField] GameObject _weaponGraphicsObj;
         [SerializeField] Transform _graphicsObjParent;
+        [SerializeField] ProjectileOwnerTag _ownerTag; 
+        [SerializeField] GameObject _projectileContent;
 
-        bool _initialised;
         bool _isMoving;
 
         float _topWorldLimit;
         float _bottomWorldLimit;
+        float _currentVelocityModifier;
         Vector3 _moveDirection;
         Vector3 _parentRelativeLocalPos;
         Transform _thisTransform;
         DamageInfo _damageInfo;
-        ProjectileOwnerTag _ownerTag;
+        GameObject _weaponGraphicsObj;
 
+        void Start() => Initialise();
+        
         void OnEnable() {
             Initialise();
             SubscribeEvents();
@@ -77,13 +80,8 @@ namespace SpaceInvaders
         
         void Initialise()
         {
-            if(_initialised)
-                return;
-
-            _initialised = true;
             _projectileSettings = _projectileSetup.projectileSettings;
             _isMoving = false;
-            _weaponGraphicsObj.SetActive(false);
             _thisTransform = transform;
             _parentRelativeLocalPos = _thisTransform.localPosition;
             _damageInfo = new DamageInfo(_projectileSettings.projectileDamage);
@@ -112,12 +110,19 @@ namespace SpaceInvaders
                 return;
 
             _isMoving = true;
-            _weaponGraphicsObj.SetActive(true);
+            _projectileContent.SetActive(true);
             _weaponCollider.enabled = true;
             _thisTransform.parent = null;
             
             TryToEnableParticles(true);
-            _rigidbody.AddForce(_moveDirection * _projectileSettings.launchForceMultiplier, ForceMode.Impulse);
+
+            float forceModifier = _projectileSettings.launchForceMultiplier * _currentVelocityModifier;
+            _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
+        }
+
+        Vector3 GetReleaseForce() {
+            float forceModifier = _projectileSettings.launchForceMultiplier * _currentVelocityModifier;
+            return _moveDirection * forceModifier;
         }
 
         public DamageInfo GetWeaponDamageInfo(MonoBehaviour objectToDamage)
@@ -130,7 +135,7 @@ namespace SpaceInvaders
         {
             TryToEnableParticles(false);
             _isMoving = false;
-            _weaponGraphicsObj.SetActive(false);
+            _projectileContent.SetActive(false);
             _weaponCollider.enabled = false;
 
             _thisTransform.parent = _parentTransform;
@@ -196,8 +201,11 @@ namespace SpaceInvaders
         }
 
         public void SetSpeedModifier(float modifier) {
-            Vector3 currVelocity = _rigidbody.velocity;
-            _rigidbody.velocity = Vector3.zero;
+            _currentVelocityModifier = modifier;
+            _rigidbody.velocity = GetReleaseForce();
+            //Todo: 1 przerobić prefaby pociskow tak, zeby content i rigidbody bylo osobno 
+            //2 sprawdzić czy czasempocisk nie koliduje z greaczem / wrogiem
+            //3. dorobić wave scheduler który wysyla wave start / end zamiast grida
         }
     }
 }
