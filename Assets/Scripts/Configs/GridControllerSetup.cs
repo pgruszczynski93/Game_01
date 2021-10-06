@@ -17,7 +17,5 @@ namespace SpaceInvaders
         public int maxEnemiesInGridColumn;
         public int maxEnemiesInGrid;
         public int maxNeighboursOfEnemyCount;
-        public float newWaveCooldown;
-        public float endWaveCooldown;
     }
 }

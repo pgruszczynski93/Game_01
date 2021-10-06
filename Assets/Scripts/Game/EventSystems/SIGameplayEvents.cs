@@ -16,7 +16,6 @@ namespace SpaceInvaders
         public static event Action<SIEnemyBehaviour> OnEnemyDeath;
         public static event Action<WeaponTier> OnEnemyWeaponTierUpdate;
         public static event Action<WeaponTier> OnPlayerWeaponTierUpdate;
-//        public static event Action<float> OnEnemySpeedMultiplierChanged;
 
         public static void BroadcastOnEnemyWeaponHit()
         {
@@ -63,11 +62,5 @@ namespace SpaceInvaders
         public static void BroadcastOnExplosiveObjectHit(Vector3 collisionPos) {
             OnExplosiveObjectHit?.Invoke(collisionPos);
         }
-
-        
-        //        public static void BroadcastOnEnemySpeedMultiplierChanged(float multiplier)
-//        {
-//            OnEnemySpeedMultiplierChanged?.Invoke(multiplier);
-//        }
     }
 }

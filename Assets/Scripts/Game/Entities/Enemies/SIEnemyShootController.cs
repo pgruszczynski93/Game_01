@@ -22,17 +22,17 @@ namespace SpaceInvaders
 
         protected override void SubscribeEvents()
         {
-            SIEnemyGridEvents.OnGridObjectsReloaded += HandleOnGridObjectsReloaded;
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
             SIGameplayEvents.OnEnemyWeaponTierUpdate += HandleOnEnemyWeaponTierUpdate;
         }
 
         protected override void UnsubscribeEvents()
         {
-            SIEnemyGridEvents.OnGridObjectsReloaded -= HandleOnGridObjectsReloaded;
+            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
             SIGameplayEvents.OnEnemyWeaponTierUpdate -= HandleOnEnemyWeaponTierUpdate;
         }
 
-        void HandleOnGridObjectsReloaded()
+        void HandleOnWaveEnd()
         {
             SubscribeToShooting();
         }

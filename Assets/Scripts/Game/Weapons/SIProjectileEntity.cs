@@ -85,7 +85,8 @@ namespace SpaceInvaders
             _thisTransform = transform;
             _parentRelativeLocalPos = _thisTransform.localPosition;
             _damageInfo = new DamageInfo(_projectileSettings.projectileDamage);
-
+            _currentVelocityModifier = 1f;
+            
             ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
             _topWorldLimit = screenWorldEdges.topScreenEdge + _projectileSettings.movementLimitOffset;
             _bottomWorldLimit = screenWorldEdges.bottomScreenEdge - _projectileSettings.movementLimitOffset;
@@ -116,7 +117,6 @@ namespace SpaceInvaders
             
             TryToEnableParticles(true);
 
-            float forceModifier = _projectileSettings.launchForceMultiplier * _currentVelocityModifier;
             _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
         }
 
@@ -201,11 +201,8 @@ namespace SpaceInvaders
         }
 
         public void SetSpeedModifier(float modifier) {
-            _currentVelocityModifier = modifier;
+            _currentVelocityModifier = _ownerTag == ProjectileOwnerTag.Enemy ? modifier : _currentVelocityModifier;
             _rigidbody.velocity = GetReleaseForce();
-            //Todo: 1 przerobić prefaby pociskow tak, zeby content i rigidbody bylo osobno 
-            //2 sprawdzić czy czasempocisk nie koliduje z greaczem / wrogiem
-            //3. dorobić wave scheduler który wysyla wave start / end zamiast grida
         }
     }
 }

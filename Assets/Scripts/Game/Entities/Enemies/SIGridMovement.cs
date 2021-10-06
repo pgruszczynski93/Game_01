@@ -46,7 +46,6 @@ namespace SpaceInvaders {
                 {
                     _isInitialSequenceFinished = true;
                     _canMove = true;
-                    SIGameplayEvents.BroadcastOnWaveStart();
                 })
                 .SetEase(_gridMovementSettings.initialMovementEaseType)
                 .SetAutoKill(false)
@@ -70,7 +69,6 @@ namespace SpaceInvaders {
             SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
-            SIEnemyGridEvents.OnUpdateGridMovementSpeedTier += HandleOnEnemySpeedMultiplierChanged;
         }
 
         protected override void UnsubscribeEvents()
@@ -78,7 +76,6 @@ namespace SpaceInvaders {
             SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
-            SIEnemyGridEvents.OnUpdateGridMovementSpeedTier -= HandleOnEnemySpeedMultiplierChanged;
         }
         
         void HandleOnWaveEnd()
@@ -99,11 +96,6 @@ namespace SpaceInvaders {
             UpdateMovementOffsets();
         }
 
-        void HandleOnEnemySpeedMultiplierChanged()
-        {
-            TryToUpdateCurrentMovementSpeed();
-        }
-
         void ExecuteInitialMovementSequence()
         {
             _initialMovementTweener.Restart();
@@ -122,7 +114,7 @@ namespace SpaceInvaders {
             _verticalMovementTweener.Pause();
         }
 
-        void TryToUpdateCurrentMovementSpeed() {
+        public void UpdateCurrentMovementSpeed() {
             _nextSpeedMultiplier = _currentSpeedMultiplier + _gridMovementSettings.gridMovementSpeedUpStep;
             _currentSpeedMultiplier = _nextSpeedMultiplier;
         }

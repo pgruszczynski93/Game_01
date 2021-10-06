@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace SpaceInvaders
-{
-    public enum Neighbour
-    {
+namespace SpaceInvaders {
+    public enum Neighbour {
         Left,
         Right,
         Front,
@@ -13,18 +10,17 @@ namespace SpaceInvaders
     }
 
     [System.Serializable]
-    public class SIShootBehaviourSetup
-    {
+    public class SIShootBehaviourSetup {
         public int enemyIndex;
         public int enemyRow;
         public int enemyColumn;
         public Dictionary<Neighbour, SIEnemyBehaviour> neighbours;
     }
 
-    public class SIEnemiesGridController : MonoBehaviour
-    {
+    public class SIEnemiesGridController : MonoBehaviour {
         [SerializeField] GridControllerSetup _gridSetup;
         [SerializeField] SIEnemyBehaviour[] _availableEnemies;
+        [SerializeField] SIGridMovement _gridMovement;
 
         int _maxEnemies;
         int _maxInRow;
@@ -36,45 +32,29 @@ namespace SpaceInvaders
         void Awake() => PreInitialise();
         void OnEnable() => SubscribeEvents();
         void OnDisable() => UnsubscribeEvents();
-        
-        void SubscribeEvents()
-        {
-            SIEventsHandler.OnGameStateChanged += HandleOnGameStateChanged;
+
+        void SubscribeEvents() {
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
-        void UnsubscribeEvents()
-        {
-            SIEventsHandler.OnGameStateChanged -= HandleOnGameStateChanged;
+        void UnsubscribeEvents() {
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
-        void HandleOnGameStateChanged(GameStates gameState)
-        {
-            if (gameState != GameStates.GameStarted)
-                return;
-            
-            StartCoroutine(RestartGridRoutine());
-        }
-
-        void PreInitialise()
-        {
+        void PreInitialise() {
             LoadSetup();
             SetupEnemies();
         }
 
-        void SetupEnemies()
-        {
+        void SetupEnemies() {
             SIEnemyBehaviour currentShootBehaviour;
             SIShootBehaviourSetup currentSetup;
             int currentRow, currentColumn;
-            for (int i = 0; i < _maxEnemies; i++)
-            {
+            for (int i = 0; i < _maxEnemies; i++) {
                 currentRow = i / _gridSettings.maxEnemiesInGridRow;
                 currentColumn = i / _gridSettings.maxEnemiesInGridColumn;
                 currentShootBehaviour = _availableEnemies[i];
-                currentSetup = new SIShootBehaviourSetup
-                {
+                currentSetup = new SIShootBehaviourSetup {
                     enemyIndex = i,
                     enemyRow = currentRow,
                     enemyColumn = currentColumn,
@@ -84,17 +64,14 @@ namespace SpaceInvaders
             }
         }
 
-        Dictionary<Neighbour, SIEnemyBehaviour> GetNeighbours(int enemyIndex, int enemyRow)
-        {
+        Dictionary<Neighbour, SIEnemyBehaviour> GetNeighbours(int enemyIndex, int enemyRow) {
             int leftNbIndex = enemyIndex - 1;
             int rightNbIndex = enemyIndex + 1;
             int frontNbIndex = enemyIndex + _maxInRow;
             int backNbIndex = enemyIndex - _maxInRow;
 
-            return new Dictionary<Neighbour, SIEnemyBehaviour>
-            {
-                {Neighbour.Left, IsInRowHorizontalRange(leftNbIndex, enemyRow) ? _availableEnemies[leftNbIndex] : null},
-                {
+            return new Dictionary<Neighbour, SIEnemyBehaviour> {
+                {Neighbour.Left, IsInRowHorizontalRange(leftNbIndex, enemyRow) ? _availableEnemies[leftNbIndex] : null}, {
                     Neighbour.Right,
                     IsInRowHorizontalRange(rightNbIndex, enemyRow) ? _availableEnemies[rightNbIndex] : null
                 },
@@ -103,20 +80,17 @@ namespace SpaceInvaders
             };
         }
 
-        bool IsInRowHorizontalRange(int currentNeighbourIndex, int enemyRow)
-        {
+        bool IsInRowHorizontalRange(int currentNeighbourIndex, int enemyRow) {
             int minHorizontal = enemyRow * _maxInRow;
             int maxHorizontal = minHorizontal + _maxInRow;
             return currentNeighbourIndex >= minHorizontal && currentNeighbourIndex < maxHorizontal;
         }
 
-        bool IsInMinMaxRange(int currentNeighbourIndex)
-        {
+        bool IsInMinMaxRange(int currentNeighbourIndex) {
             return currentNeighbourIndex >= 0 && currentNeighbourIndex < _maxEnemies;
         }
 
-        void LoadSetup()
-        {
+        void LoadSetup() {
             _gridSettings = _gridSetup.gridControllerSettings;
             _maxEnemies = _gridSettings.maxEnemiesInGrid;
             _livingEnemies = _maxEnemies;
@@ -124,39 +98,19 @@ namespace SpaceInvaders
             _maxInColumn = _gridSettings.maxEnemiesInGridColumn;
             _maxInRow = _gridSettings.maxEnemiesInGridRow;
         }
-        
 
-        void HandleOnEnemyDeath(MonoBehaviour deadEnemy)
-        {
+
+        void HandleOnEnemyDeath(MonoBehaviour deadEnemy) {
             --_livingEnemies;
-            SIEnemyGridEvents.BroadcastOnUpdateGridMovementSpeedTier();
-            TryToFinalizeWave();
+            _gridMovement.UpdateCurrentMovementSpeed();
+            TryResetGridController();
         }
 
-        void TryToFinalizeWave()
-        {
+        void TryResetGridController() {
             if (_livingEnemies > 0)
                 return;
 
-            StartCoroutine(RestartGridRoutine());
-        }
-        
-        IEnumerator RestartGridRoutine() {
-            yield return StartCoroutine(WaitUtils.WaitForCachedSeconds(_gridSettings.endWaveCooldown));
-            SetLivingEnemiesCount();
-            yield return StartCoroutine(WaitUtils.SkipFramesAndInvoke(1, ReloadGridObjects));
-            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_gridSettings.newWaveCooldown, SIGameplayEvents.BroadcastOnWaveEnd));
-        }
-
-        void SetLivingEnemiesCount()
-        {
-            //todo: temporary
             _livingEnemies = _maxEnemies;
-        }
-        
-        void ReloadGridObjects()
-        {
-            SIEnemyGridEvents.BroadcastOnGridObjectsReloaded();
         }
     }
 }
