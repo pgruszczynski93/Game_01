@@ -9,7 +9,6 @@ namespace SpaceInvaders {
         [SerializeField] WaveSettings[] _waveSettings;
         
         int _waveCounter;
-        int _maxEnemiesInWave;
         int _livingEnemies;
         
         WaveSettings _currentWaveSettings;
@@ -29,8 +28,13 @@ namespace SpaceInvaders {
             }
 
             _currentWaveSettings = _waveSettings[0];
+            ResetWaveProperties();
+        }
+
+        void ResetWaveProperties() {
             _livingEnemies = _currentWaveSettings.enemiesInWave;
         }
+
         void OnEnable() => SubscribeEvents();
         void OnDisable() => UnsubscribeEvents();
 
@@ -62,6 +66,7 @@ namespace SpaceInvaders {
                 return;
 
             _waveRestartRoutine = StartCoroutine(StartNewWaveRoutine());
+            ResetWaveProperties();
         }
         
         IEnumerator StartNewWaveRoutine() {

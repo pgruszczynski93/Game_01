@@ -66,6 +66,7 @@ namespace SpaceInvaders {
 
         protected override void SubscribeEvents()
         {
+            SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
             SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
@@ -73,19 +74,22 @@ namespace SpaceInvaders {
 
         protected override void UnsubscribeEvents()
         {
+            SIGameplayEvents.OnWaveStart -= HandleOnWaveStart;
             SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
         }
         
-        void HandleOnWaveEnd()
-        {
-            //TODO: === Don't remove ===: this method ensures that movement limits will be recalculated with each wave.
-            ResetGridMovement();
-            UpdateMovementOffsets();
+        void HandleOnWaveStart() {
             ExecuteInitialMovementSequence();
         }
 
+        void HandleOnWaveEnd() {
+            //TODO: === Don't remove ===: this method ensures that movement limits will be recalculated with each wave.
+            ResetGridMovement();
+            UpdateMovementOffsets();
+        }
+        
         void HandleOnUpdate()
         {
             TryToMoveObject();

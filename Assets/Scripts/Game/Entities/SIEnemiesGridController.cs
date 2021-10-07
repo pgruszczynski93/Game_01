@@ -35,15 +35,27 @@ namespace SpaceInvaders {
 
         void SubscribeEvents() {
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
         }
 
         void UnsubscribeEvents() {
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
+            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
         }
 
         void PreInitialise() {
             LoadSetup();
             SetupEnemies();
+        }
+        
+        void HandleOnEnemyDeath(MonoBehaviour deadEnemy) {
+            --_livingEnemies;
+            _gridMovement.UpdateCurrentMovementSpeed();
+        }
+        
+        
+        void HandleOnWaveEnd() {
+            TryResetGridController();
         }
 
         void SetupEnemies() {
@@ -99,13 +111,7 @@ namespace SpaceInvaders {
             _maxInRow = _gridSettings.maxEnemiesInGridRow;
         }
 
-
-        void HandleOnEnemyDeath(MonoBehaviour deadEnemy) {
-            --_livingEnemies;
-            _gridMovement.UpdateCurrentMovementSpeed();
-            TryResetGridController();
-        }
-
+        
         void TryResetGridController() {
             if (_livingEnemies > 0)
                 return;
