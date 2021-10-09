@@ -46,6 +46,7 @@ namespace SpaceInvaders {
                 {
                     _isInitialSequenceFinished = true;
                     _canMove = true;
+                    SIEnemyGridEvents.BroadcastOnGridOnGridVisibilityChanged(true);
                 })
                 .SetEase(_gridMovementSettings.initialMovementEaseType)
                 .SetAutoKill(false)
@@ -116,6 +117,9 @@ namespace SpaceInvaders {
             _currentSpeedMultiplier = _gridMovementSettings.initialSpeedMultiplier;
             _initialMovementTweener.Pause();
             _verticalMovementTweener.Pause();
+            
+            _thisTransform.position = _gridMovementSettings.worldStartPosition;
+            SIEnemyGridEvents.BroadcastOnGridOnGridVisibilityChanged(false);
         }
 
         public void UpdateCurrentMovementSpeed() {

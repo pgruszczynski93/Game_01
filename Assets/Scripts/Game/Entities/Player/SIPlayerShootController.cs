@@ -22,8 +22,7 @@ namespace SpaceInvaders
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
             SIGameplayEvents.OnPlayerWeaponTierUpdate += HandleOnPlayerWeaponTierUpdate;
-            SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
-            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
+            SIEnemyGridEvents.OnGridOnGridVisibilityChanged += HandleOnGridOnGridVisibilityChanged;
         }
 
         protected override void UnsubscribeEvents() {
@@ -31,8 +30,7 @@ namespace SpaceInvaders
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
             SIGameplayEvents.OnPlayerWeaponTierUpdate -= HandleOnPlayerWeaponTierUpdate;
-            SIGameplayEvents.OnWaveStart -= HandleOnWaveStart;
-            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
+            SIEnemyGridEvents.OnGridOnGridVisibilityChanged -= HandleOnGridOnGridVisibilityChanged;
         }
         
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
@@ -64,16 +62,22 @@ namespace SpaceInvaders
         void HandleOnUpdate() {
             ExecuteAutoShooting();
         }
+        
+        void HandleOnGridOnGridVisibilityChanged(bool isGridVisible) {
+            EnableShooting(isGridVisible);
+            SetAutoShooting(isGridVisible);
+        }
 
         //Both types of shooting are enabled / disabled intentionally, in case I'd like to disable autoshooting option
-        void HandleOnWaveStart() {
-            EnableShooting(true);
-            SetAutoShooting(true);
-        }
-        void HandleOnWaveEnd() {
-            EnableShooting(false);
-            SetAutoShooting(false);
-        }
+        //
+        // void HandleOnWaveStart() {
+        //     EnableShooting(true);
+        //     SetAutoShooting(true);
+        // }
+        // void HandleOnWaveEnd() {
+        //     EnableShooting(false);
+        //     SetAutoShooting(false);
+        // }
 
         void ExecuteAutoShooting() {
             if (!CanAutoShoot())
