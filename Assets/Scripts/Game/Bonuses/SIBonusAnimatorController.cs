@@ -23,7 +23,6 @@ namespace SpaceInvaders {
         bool _isVariantAnimationTriggered;
         bool _initialised;
         float _dissolveValue;
-        float _dissolveAnimationSpeedModifier;
 
         Renderer _bonusVariantRenderer;
         MaterialPropertyBlock _propertyBlock;
@@ -120,10 +119,10 @@ namespace SpaceInvaders {
             }
             
             while (currentTime <= duration) {
-                progress = dissolveStartValue + sign * (currentTime/duration) * _dissolveAnimationSpeedModifier;
+                progress = dissolveStartValue + sign * (currentTime/duration);
                 
                 UpdateSelectedFloatMaterialProperty(DissolveAmountID, progress);
-                currentTime += Time.deltaTime * _dissolveAnimationSpeedModifier;
+                currentTime += Time.deltaTime;
                 yield return WaitUtils.SkipFrames(1);
             }
 
@@ -131,7 +130,6 @@ namespace SpaceInvaders {
         }
 
         public void SetSpeedModifier(float modifier) {
-            _dissolveAnimationSpeedModifier = modifier;
             //Note: I use as base animation speed value of 1.
             _animator.speed = modifier;
         }
