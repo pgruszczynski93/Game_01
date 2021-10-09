@@ -11,6 +11,7 @@ namespace SpaceInvaders {
         bool _isNextStepPossible;
         bool _isTweeningVerticalMovement;
         bool _isInitialSequenceFinished;
+        bool _gridBecameVisible;
         int _gridMovementSpeedTier;
         float _rightScreenEdgeOffset;
         float _leftScreenEdgeOffset;
@@ -46,7 +47,6 @@ namespace SpaceInvaders {
                 {
                     _isInitialSequenceFinished = true;
                     _canMove = true;
-                    SIEnemyGridEvents.BroadcastOnGridOnGridVisibilityChanged(true);
                 })
                 .SetEase(_gridMovementSettings.initialMovementEaseType)
                 .SetAutoKill(false)
@@ -64,7 +64,7 @@ namespace SpaceInvaders {
                 .SetAutoKill(false)
                 .Pause();
         }
-
+        
         protected override void SubscribeEvents()
         {
             SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
@@ -91,8 +91,8 @@ namespace SpaceInvaders {
             UpdateMovementOffsets();
         }
         
-        void HandleOnUpdate()
-        {
+        void HandleOnUpdate() {
+            CheckInitialVisibility();
             TryToMoveObject();
         }
 
@@ -104,6 +104,15 @@ namespace SpaceInvaders {
         void ExecuteInitialMovementSequence()
         {
             _initialMovementTweener.Restart();
+        }
+        
+        void CheckInitialVisibility() {
+            Vector3 bonusViewPortPosition =
+                SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
+            if (!bonusViewPortPosition.IsInVerticalViewportSpace() || _gridBecameVisible)
+                return;
+            _gridBecameVisible = true;
+            SIEnemyGridEvents.BroadcastOnGridOnGridVisibilityChanged(true);
         }
 
         void ResetGridMovement()
@@ -117,7 +126,8 @@ namespace SpaceInvaders {
             _currentSpeedMultiplier = _gridMovementSettings.initialSpeedMultiplier;
             _initialMovementTweener.Pause();
             _verticalMovementTweener.Pause();
-            
+
+            _gridBecameVisible = false;
             _thisTransform.position = _gridMovementSettings.worldStartPosition;
             SIEnemyGridEvents.BroadcastOnGridOnGridVisibilityChanged(false);
         }

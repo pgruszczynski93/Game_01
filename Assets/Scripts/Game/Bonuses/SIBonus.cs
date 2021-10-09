@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
-    public class SIBonus : MonoBehaviour, ICanMove, IPoolable {
+    public class SIBonus : MonoBehaviour, ICanMove, IPoolable, IModifySpeed {
         [SerializeField] protected Rigidbody _rigidbody;
         [SerializeField] protected GameObject _bonusRoot;
 
@@ -14,6 +14,7 @@ namespace SpaceInvaders {
         [SerializeField] Transform _thisTransform;
 
         bool _isInStopRoutine;
+        float _currentReleaseForceModifier;
         BonusType _bonusType;
         Vector3 _currentDropPos;
 
@@ -24,6 +25,12 @@ namespace SpaceInvaders {
         
         public BonusSettings BonusVariantSettings => _currentVariantSettings;
         public Renderer BonusVariantRenderer => _currentBonusVariantRenderer;
+
+        void Start() => Initialise();
+
+        void Initialise() {
+            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
+        }
 
         void OnEnable() => SubscribeEvents();
 
@@ -99,8 +106,11 @@ namespace SpaceInvaders {
             _rigidbody.velocity = SIHelpers.VectorZero;
             _thisTransform.SetParent(null);
             _thisTransform.position = _currentDropPos;
-            _rigidbody.AddForce(SIHelpers.VectorDown * _currentVariantSettings.releaseForceMultiplier,
-                ForceMode.Impulse);
+            _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
+        }
+
+        Vector3 GetReleaseForce() {
+            return SIHelpers.VectorDown * (_currentVariantSettings.releaseForceMultiplier * _currentReleaseForceModifier);
         }
 
         void ResetMotion() {
@@ -133,6 +143,12 @@ namespace SpaceInvaders {
 
             if (!bonusViewPortPosition.IsInVerticalViewportSpace())
                 StopObject();
+        }
+
+        public void SetSpeedModifier(float modifier) {
+            _currentReleaseForceModifier = modifier;
+            _rigidbody.velocity = GetReleaseForce();
+            _animatorController.SetSpeedModifier(modifier);    
         }
     }
 }    

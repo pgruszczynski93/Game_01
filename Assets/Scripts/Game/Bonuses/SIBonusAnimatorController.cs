@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
-using DG.Tweening;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public class SIBonusAnimatorController : MonoBehaviour {
+    public class SIBonusAnimatorController : MonoBehaviour{
         enum BonusAnimationType {
             Show,
             Hide
@@ -25,6 +23,7 @@ namespace SpaceInvaders {
         bool _isVariantAnimationTriggered;
         bool _initialised;
         float _dissolveValue;
+        float _dissolveAnimationSpeedModifier;
 
         Renderer _bonusVariantRenderer;
         MaterialPropertyBlock _propertyBlock;
@@ -120,15 +119,21 @@ namespace SpaceInvaders {
                 sign = 1;
             }
             
-            while (currentTime < duration) {
-                progress = dissolveStartValue + sign * (currentTime/duration);
+            while (currentTime <= duration) {
+                progress = dissolveStartValue + sign * (currentTime/duration) * _dissolveAnimationSpeedModifier;
                 
                 UpdateSelectedFloatMaterialProperty(DissolveAmountID, progress);
-                currentTime += Time.deltaTime;
+                currentTime += Time.deltaTime * _dissolveAnimationSpeedModifier;
                 yield return WaitUtils.SkipFrames(1);
             }
 
             _isVariantAnimationTriggered = false;
+        }
+
+        public void SetSpeedModifier(float modifier) {
+            _dissolveAnimationSpeedModifier = modifier;
+            //Note: I use as base animation speed value of 1.
+            _animator.speed = modifier;
         }
     }
 }
