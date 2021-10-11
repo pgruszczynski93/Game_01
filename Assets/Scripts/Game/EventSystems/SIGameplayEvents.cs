@@ -7,6 +7,7 @@ namespace SpaceInvaders
         public static event Action OnEnemyWeaponHit;
         public static event Action OnWaveStart;
         public static event Action OnWaveEnd;
+        public static event Action OnWaveCoolDown;
         public static event Action OnPlayerShoot;
         
         //This event runs only in Start method of object which speed can be modified with special manager.
@@ -57,6 +58,10 @@ namespace SpaceInvaders
         public static void BroadcastOnWaveEnd()
         {
             OnWaveEnd?.Invoke();
+        }
+
+        public static void BroadcastOnWaveCoolDown() {
+            OnWaveCoolDown?.Invoke();
         }
 
         public static void BroadcastOnExplosiveObjectHit(Vector3 collisionPos) {

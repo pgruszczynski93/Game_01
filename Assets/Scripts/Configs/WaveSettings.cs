@@ -5,8 +5,9 @@ namespace Configs {
     public class WaveSettings : ScriptableObject {
         public WaveType waveType;
         public int enemiesInWave;
-        public float newWaveCooldown;
-        public float endWaveCooldown;
+        public float waveStartCooldown;
+        public float waveEndCoolDown;
+        public float waveCoolDown;
     }
 
     public enum WaveType {

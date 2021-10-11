@@ -11,11 +11,8 @@ namespace SpaceInvaders
         float _depthAxis;
         Vector3 _inputVector;
 
-        void Initialise()
-        {
+        void Initialise() {
             _depthAxis = 0f;
-            //TODO: remove it later - only for testing
-            TryToStartGame();
         }
 
         void Start() => Initialise();

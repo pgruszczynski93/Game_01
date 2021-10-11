@@ -34,16 +34,11 @@ namespace SpaceInvaders
 
         void HandleOnWaveEnd()
         {
-            SubscribeToShooting();
+            SIEnemyGridEvents.BroadcastOnReadyToShoot(this);
         }
 
         void HandleOnEnemyWeaponTierUpdate(WeaponTier weaponTier) {
             _projectilesTier = (int) weaponTier;
-        }
-
-        void SubscribeToShooting()
-        {
-            SIEnemyGridEvents.BroadcastOnReadyToShoot(this);
         }
 
         public void TryToSelectNextShootingBehaviour()

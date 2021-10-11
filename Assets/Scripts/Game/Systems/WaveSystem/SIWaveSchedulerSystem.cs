@@ -71,8 +71,9 @@ namespace SpaceInvaders {
         
         IEnumerator StartNewWaveRoutine() {
             //Note: End wave is always before start wave, to ensure that every gameobject which uses this event handled necessary operations.
-            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_currentWaveSettings.endWaveCooldown, SIGameplayEvents.BroadcastOnWaveEnd));
-            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_currentWaveSettings.newWaveCooldown, SIGameplayEvents.BroadcastOnWaveStart));
+            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_currentWaveSettings.waveEndCoolDown, SIGameplayEvents.BroadcastOnWaveEnd));
+            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_currentWaveSettings.waveCoolDown, SIGameplayEvents.BroadcastOnWaveCoolDown));
+            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_currentWaveSettings.waveStartCooldown, SIGameplayEvents.BroadcastOnWaveStart));
         }
     }
 }
