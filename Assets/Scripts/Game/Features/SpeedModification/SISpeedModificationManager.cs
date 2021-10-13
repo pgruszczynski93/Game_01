@@ -1,24 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Configs;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SpaceInvaders {
     public class SISpeedModificationManager : MonoBehaviour {
-        [SerializeField, Range(0, 3)] float _speedModificationDuration;
-        [SerializeField, Range(0,1)] float _speedDownMultiplier;
-        [SerializeField] float _speedUpMultiplier;
-        [SerializeField] float _defaultSpeedMultiplier;
 
+        [SerializeField] SpeedModificationManagerSettings _settings;
+        
         bool isModifyingSpeed; 
         float _currentSpeedModifier;
         Coroutine _speedModificationRoutine;
         HashSet<IModifySpeed> _objectsToModifySpeed;
 
         void Start() => Initialise();
-        
+
+        void OnDestroy() {
+            if (_speedModificationRoutine != null) 
+                StopCoroutine(_speedModificationRoutine);
+        }
+
         void Initialise() {
-            _currentSpeedModifier = _defaultSpeedMultiplier;
+            _currentSpeedModifier = _settings.defaultSpeedMultiplier;       
         }
         
         void OnEnable() => SubscribeEvents();
@@ -28,14 +32,14 @@ namespace SpaceInvaders {
             SIGameplayEvents.OnSpeedModificationRequested += HandleOnSpeedModificationRequested;
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
-            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
+            SIGameplayEvents.OnWaveCoolDown += HandleOnWaveCoolDown;
         }
         
         void UnsubscribeEvents() {
             SIGameplayEvents.OnSpeedModificationRequested -= HandleOnSpeedModificationRequested;
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
-            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
+            SIGameplayEvents.OnWaveCoolDown -= HandleOnWaveCoolDown;
         }
 
         void HandleOnSpeedModificationRequested(IModifySpeed objToModify) {
@@ -46,7 +50,7 @@ namespace SpaceInvaders {
                 return;
             
             _objectsToModifySpeed.Add(objToModify);
-            objToModify.SetSpeedModifier(_defaultSpeedMultiplier);
+            objToModify.SetSpeedModifier(_settings.defaultSpeedMultiplier);
         }
         
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
@@ -61,22 +65,22 @@ namespace SpaceInvaders {
             }
         }
         
-        void HandleOnWaveEnd() {
+        void HandleOnWaveCoolDown() {
             SetDefaultSpeedMultiplier();
         }
 
-        IEnumerator SpeedModificationRoutine(float targetSpeedModifier) {
+        IEnumerator SpeedModificationRoutine(float targetSpeedModifier, AnimationCurve curve) {
             if (isModifyingSpeed)
                 yield break;
 
             isModifyingSpeed = true;
             float time = 0.0f;
-            float modifierValue = _defaultSpeedMultiplier;
-            while (time < _speedModificationDuration) {
+            float modifierValue = _settings.defaultSpeedMultiplier;
+            while (time < _settings.speedModificationDuration) {
                 time += Time.deltaTime;
                 modifierValue = Mathf.Lerp(_currentSpeedModifier, targetSpeedModifier,
-                    time / _speedModificationDuration);
-                modifierValue = Mathf.Clamp(modifierValue, _speedDownMultiplier, _speedUpMultiplier);
+                    curve.Evaluate(time /_settings.speedModificationDuration));
+                modifierValue = Mathf.Clamp(modifierValue, _settings.slowDownMultiplier, _settings.speedUpMultiplier);
                 ManageObjectToModifySpeed(modifierValue);
                 yield return WaitUtils.SkipFrames(1);
             }
@@ -85,35 +89,42 @@ namespace SpaceInvaders {
             isModifyingSpeed = false;
         }
 
-        [Button]
-        void Up() {
-            StartCoroutine(SpeedModificationRoutine(1));
-        }
-
-        [Button]
-        void Down() {
-            StartCoroutine(SpeedModificationRoutine(0.3f));
-        }
-
-        void ApplySlowDownMultiplier() {
-            _currentSpeedModifier = _speedDownMultiplier;
-            ManageObjectToModifySpeed(_speedDownMultiplier);
-        }
-
         void ApplySpeedUpMultiplier() {
             //For now intentionally uniplemented.
             // ManageObjectToModifySpeed(_speedUpMultiplier);
         }
+        
+        void ApplySlowDownMultiplier() {
+            ApplySpeedModification(_settings.slowDownMultiplier, _settings.slowDownCurve);
+        }
 
         void SetDefaultSpeedMultiplier() {
-            _currentSpeedModifier = _defaultSpeedMultiplier;
-            ManageObjectToModifySpeed(_defaultSpeedMultiplier);
+            ApplySpeedModification(_settings.defaultSpeedMultiplier, _settings.speedUpCurve);
+        }
+        
+        void ApplySpeedModification(float multiplier, AnimationCurve curve) {
+            if (_settings.useIncrementalSpeedModification && !isModifyingSpeed)
+                _speedModificationRoutine = StartCoroutine(SpeedModificationRoutine(multiplier, curve));
+            else
+                ManageObjectToModifySpeed(multiplier);
         }
 
         void ManageObjectToModifySpeed(float speedMultiplier) {
+            _currentSpeedModifier = _settings.slowDownMultiplier;
             foreach (IModifySpeed objToModify in _objectsToModifySpeed) {
                 objToModify.SetSpeedModifier(speedMultiplier);
             }
+        }
+        
+        //Buttons to test coroutines
+        [Button]
+        void SpeedUp() {
+            StartCoroutine(SpeedModificationRoutine(_settings.defaultSpeedMultiplier, _settings.speedUpCurve));
+        }
+
+        [Button]
+        void SlowDown() {
+            StartCoroutine(SpeedModificationRoutine(_settings.slowDownMultiplier, _settings.slowDownCurve));
         }
     }
 }
