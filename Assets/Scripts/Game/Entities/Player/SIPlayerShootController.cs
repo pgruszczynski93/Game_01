@@ -21,7 +21,7 @@ namespace SpaceInvaders
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
-            SIGameplayEvents.OnPlayerWeaponTierUpdate += HandleOnPlayerWeaponTierUpdate;
+            SIGameplayEvents.OnPlayerProjectilesCountChanged += HandleOnPlayerProjectilesCountChanged;
             SIEnemyGridEvents.OnGridOnGridVisibilityChanged += HandleOnGridOnGridVisibilityChanged;
         }
 
@@ -29,7 +29,7 @@ namespace SpaceInvaders
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
-            SIGameplayEvents.OnPlayerWeaponTierUpdate -= HandleOnPlayerWeaponTierUpdate;
+            SIGameplayEvents.OnPlayerProjectilesCountChanged -= HandleOnPlayerProjectilesCountChanged;
             SIEnemyGridEvents.OnGridOnGridVisibilityChanged -= HandleOnGridOnGridVisibilityChanged;
         }
         
@@ -40,6 +40,9 @@ namespace SpaceInvaders
                     break;
                 case BonusType.RapidFire:
                     EnableRapidFire();
+                    break;
+                case BonusType.Projectile:
+                    UpdateAvailableProjectilesCount();
                     break;
             }
         }
@@ -52,11 +55,14 @@ namespace SpaceInvaders
                 case BonusType.RapidFire:
                     DisableRapidFire();
                     break;
+                case BonusType.Projectile:
+                    //Intentionally I don't want to disable this bonus.
+                    break;
             }
         }
 
-        void HandleOnPlayerWeaponTierUpdate(WeaponTier weaponTier) {
-            _projectilesTier = (int) weaponTier;
+        void HandleOnPlayerProjectilesCountChanged(int projectilesCount) {
+            _availableProjectilesCount = projectilesCount;
         }
         
         void HandleOnUpdate() {
@@ -106,6 +112,5 @@ namespace SpaceInvaders
         void SetAutoShooting(bool isEnabled) {
             _canAutoShoot = isEnabled;
         }
-        
     }
 }

@@ -6,12 +6,12 @@ namespace SpaceInvaders {
         
         [SerializeField] protected SIProjectileSetup[] _availableProjectiles;
 
-        protected int _projectilesTier;
+        protected int _availableProjectilesCount;
         protected int _currentSlotIndex;
         protected Transform[] _currentSlotSet;
 
-        protected void HandleOnWeaponTierUpdate(WeaponTier weaponTier) {
-            _projectilesTier = (int) weaponTier;
+        protected void HandleOnProjectilesCountChanged(int _availableProjectiles) {
+            _availableProjectilesCount = _availableProjectiles;
         }
 
         protected override void ManagePooledObject() {
@@ -33,7 +33,7 @@ namespace SpaceInvaders {
             Transform thisTransform = transform;
             for (var i = 0; i < _poolCapacity; i++) {
                 currProjectile = _objectsPool[i];
-                currProjectile.SetupProjectile(_availableProjectiles[_projectilesTier]);
+                currProjectile.SetupProjectile(_availableProjectiles[_availableProjectilesCount]);
                 currProjectile.SetParent(thisTransform);
             }
         }

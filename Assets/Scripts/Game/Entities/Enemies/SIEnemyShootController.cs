@@ -23,13 +23,13 @@ namespace SpaceInvaders
         protected override void SubscribeEvents()
         {
             SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
-            SIGameplayEvents.OnEnemyWeaponTierUpdate += HandleOnEnemyWeaponTierUpdate;
+            SIGameplayEvents.OnEnemyProjectilesCountChanged += HandleOnEnemyProjectilesCountChanged;
         }
 
         protected override void UnsubscribeEvents()
         {
             SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
-            SIGameplayEvents.OnEnemyWeaponTierUpdate -= HandleOnEnemyWeaponTierUpdate;
+            SIGameplayEvents.OnEnemyProjectilesCountChanged -= HandleOnEnemyProjectilesCountChanged;
         }
 
         void HandleOnWaveEnd()
@@ -37,8 +37,8 @@ namespace SpaceInvaders
             SIEnemyGridEvents.BroadcastOnReadyToShoot(this);
         }
 
-        void HandleOnEnemyWeaponTierUpdate(WeaponTier weaponTier) {
-            _projectilesTier = (int) weaponTier;
+        void HandleOnEnemyProjectilesCountChanged(int availableProjectiles) {
+            _availableProjectilesCount = availableProjectiles;
         }
 
         public void TryToSelectNextShootingBehaviour()

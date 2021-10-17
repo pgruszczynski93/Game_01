@@ -1,4 +1,3 @@
-using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,23 +6,17 @@ namespace SpaceInvaders {
 
         [SerializeField] SIPlayerShootController _playerShootController;
         
-        void OnEnable() {
-            SubscribeEvents();
-            StartCoroutine(TierTester());
-        }
-
-        void OnDisable() {
-            UnsubscribeEvents();
-        }
+        void OnEnable() => SubscribeEvents();
+        void OnDisable() => UnsubscribeEvents();
 
         void SubscribeEvents() {
             SIGameplayEvents.OnPlayerShoot += HandleOnPlayerShoot;
-            SIGameplayEvents.OnPlayerWeaponTierUpdate += HandleOnWeaponTierUpdate;
+            SIGameplayEvents.OnPlayerProjectilesCountChanged += HandleOnProjectilesCountChanged;
         }
 
         void UnsubscribeEvents() {
             SIGameplayEvents.OnPlayerShoot -= HandleOnPlayerShoot;
-            SIGameplayEvents.OnPlayerWeaponTierUpdate -= HandleOnWeaponTierUpdate;
+            SIGameplayEvents.OnPlayerProjectilesCountChanged -= HandleOnProjectilesCountChanged;
         }
 
         void HandleOnPlayerShoot() {
@@ -40,16 +33,8 @@ namespace SpaceInvaders {
         
         //TESTING METHODS
         [Button]
-        void TestWeaponTierUpdate(WeaponTier tier) {
-            SIGameplayEvents.BroadcastOnPlayerWeaponTierUpdate(tier);
+        void TestWeaponTierUpdate(int availableProjectiles) {
+            SIGameplayEvents.BroadcastOnPlayerProjectilesCountChanged(availableProjectiles);
         }
-        //remove it later
-        IEnumerator TierTester() {
-            while (true) {
-                yield return WaitUtils.WaitForCachedSeconds(3f);
-                TestWeaponTierUpdate((WeaponTier) Random.Range(0, 3));
-            }
-        }
-        //
     }
 }

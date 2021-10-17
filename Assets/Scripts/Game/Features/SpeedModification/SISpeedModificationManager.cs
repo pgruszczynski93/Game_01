@@ -9,8 +9,8 @@ namespace SpaceInvaders {
 
         [SerializeField] SpeedModificationManagerSettings _settings;
         
-        bool isModifyingSpeed; 
-        float _currentSpeedModifier;
+        [ShowInInspector] bool isModifyingSpeed; 
+        [ShowInInspector] float _currentSpeedModifier;
         Coroutine _speedModificationRoutine;
         HashSet<IModifySpeed> _objectsToModifySpeed;
 
@@ -70,8 +70,6 @@ namespace SpaceInvaders {
         }
 
         IEnumerator SpeedModificationRoutine(float targetSpeedModifier, AnimationCurve curve) {
-            if (isModifyingSpeed)
-                yield break;
 
             isModifyingSpeed = true;
             float time = 0.0f;
@@ -110,7 +108,6 @@ namespace SpaceInvaders {
         }
 
         void ManageObjectToModifySpeed(float speedMultiplier) {
-            _currentSpeedModifier = _settings.slowDownMultiplier;
             foreach (IModifySpeed objToModify in _objectsToModifySpeed) {
                 objToModify.SetSpeedModifier(speedMultiplier);
             }
@@ -119,12 +116,12 @@ namespace SpaceInvaders {
         //Buttons to test coroutines
         [Button]
         void SpeedUp() {
-            StartCoroutine(SpeedModificationRoutine(_settings.defaultSpeedMultiplier, _settings.speedUpCurve));
+            SetDefaultSpeedMultiplier();
         }
 
         [Button]
         void SlowDown() {
-            StartCoroutine(SpeedModificationRoutine(_settings.slowDownMultiplier, _settings.slowDownCurve));
+            ApplySlowDownMultiplier();
         }
     }
 }

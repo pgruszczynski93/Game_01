@@ -15,29 +15,15 @@ public class SIEnemyProjectilesPool : SIProjectilesPool {
     void OnDisable() {
         UnsubscribeEvents();
     }
-
-    //TESTING METHODS
-    [Button]
-    void TestWeaponTierUpdate(WeaponTier tier) {
-        SIGameplayEvents.BroadcastOnEnemyWeaponTierUpdate(tier);
-    }
-    //remove it later
-    IEnumerator TierTester() {
-        while (true) {
-            yield return WaitUtils.WaitForCachedSeconds(3f);
-            TestWeaponTierUpdate((WeaponTier) Random.Range(0, 3));
-        }
-    }
-    //
-
+    
     void SubscribeEvents() {
         SIEnemyGridEvents.OnShotInvoked += HandleOnShotInvoked;
-        SIGameplayEvents.OnEnemyWeaponTierUpdate += HandleOnWeaponTierUpdate;
+        SIGameplayEvents.OnEnemyProjectilesCountChanged += HandleOnProjectilesCountChanged;
     }
 
     void UnsubscribeEvents() {
         SIEnemyGridEvents.OnShotInvoked -= HandleOnShotInvoked;
-        SIGameplayEvents.OnEnemyWeaponTierUpdate -= HandleOnWeaponTierUpdate;
+        SIGameplayEvents.OnEnemyProjectilesCountChanged -= HandleOnProjectilesCountChanged;
     }
 
     void HandleOnShotInvoked(SIEnemyShootController shootController) {
@@ -54,4 +40,19 @@ public class SIEnemyProjectilesPool : SIProjectilesPool {
 
         _isPoolReleasingProjectiles = false;
     }
+    
+    //TESTING METHODS
+    [Button]
+    void TestWeaponTierUpdate(int availableProjectiles) {
+        SIGameplayEvents.BroadcastOnEnemyProjectilesCountChanged(availableProjectiles);
+    }
+    //remove it later
+    IEnumerator TierTester() {
+        while (true) {
+            yield return WaitUtils.WaitForCachedSeconds(3f);
+            //Note: 1-4 because of array indexing => 0-3
+            TestWeaponTierUpdate(Random.Range(1, 4));
+        }
+    }
+    //
 }

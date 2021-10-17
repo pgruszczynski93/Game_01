@@ -284,6 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5aaf8d2c79ac5149b81bef25f605cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minAvailableProjectiles: 0
+  _maxAvailableProjectiles: 3
   projectileSlotsParents:
   - {fileID: 1764932005429911042}
   - {fileID: 3769275821698959736}
@@ -304,6 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45fb91161c047339beb5207848323e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isImmortal: 0
   _entitySetup: {fileID: 11400000, guid: 9a0a3b794085815449dfadab05de6b56, type: 2}
   _damageVFX: {fileID: 5544996131927073471}
 --- !u!114 &5544996131927073471
@@ -448,10 +451,6 @@ MonoBehaviour:
     collisionTag: 1
     collisionSource: {fileID: 7944746669716650107}
   _collidableObjects: 0000000002000000
-  _collisionLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  _enemyBehaviour: {fileID: 7944746669716650107}
 --- !u!1 &3492001056238152443
 GameObject:
   m_ObjectHideFlags: 0
@@ -9846,10 +9845,6 @@ MonoBehaviour:
     collisionTag: 1
     collisionSource: {fileID: 7944746669716650107}
   _collidableObjects: 0000000002000000
-  _collisionLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  _enemyBehaviour: {fileID: 7944746669716650107}
 --- !u!1 &6197922684793495672
 GameObject:
   m_ObjectHideFlags: 0

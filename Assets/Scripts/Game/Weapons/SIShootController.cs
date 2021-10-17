@@ -1,19 +1,23 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
     public abstract class SIShootController : MonoBehaviour
     {
         [SerializeField] protected SIProjectileSlotsParentController[] projectileSlotsParents;
-
+        
         protected bool _isShootingEnabled;
-        protected int _projectilesTier;
+        protected int _minAvailableProjectiles;
+        protected int _maxAvailableProjectiles;
+        protected int _availableProjectilesCount;
         public bool IsShootingEnabled => _isShootingEnabled;
 
         protected void Start() => Initialise();
 
         protected virtual void Initialise() {
             _isShootingEnabled = true;
+            SetAvailableProjectilesRangeCount();
         }
 
         protected void OnEnable() => SubscribeEvents();
@@ -23,11 +27,28 @@ namespace SpaceInvaders
         protected virtual void UnsubscribeEvents() { }
 
         public Transform[] GetProjectileSlotsParent() {
-            return projectileSlotsParents[_projectilesTier].ProjectilesSlotsTransforms;
+            return projectileSlotsParents[_availableProjectilesCount-1].ProjectilesSlotsTransforms;
         }
         
         protected void EnableShooting(bool isEnabled) {
             _isShootingEnabled = isEnabled;
+        }
+        
+        protected void UpdateAvailableProjectilesCount() {
+            ++_availableProjectilesCount;
+            _availableProjectilesCount = Mathf.Clamp(_availableProjectilesCount, _minAvailableProjectiles,
+                _maxAvailableProjectiles);
+        }
+
+        protected void ResetAvailableProjectilesCount() {
+            _availableProjectilesCount = 0;
+        }
+
+        [Button]
+        protected void SetAvailableProjectilesRangeCount() {
+            _minAvailableProjectiles = 1;
+            _maxAvailableProjectiles = projectileSlotsParents.Length;
+            _availableProjectilesCount = _minAvailableProjectiles;
         }
     }
 }

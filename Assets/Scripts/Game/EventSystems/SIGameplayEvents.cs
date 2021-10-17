@@ -15,8 +15,8 @@ namespace SpaceInvaders
         public static event Action<Vector3> OnExplosiveObjectHit;
         public static event Action<DamageInfo> OnDamage;
         public static event Action<SIEnemyBehaviour> OnEnemyDeath;
-        public static event Action<WeaponTier> OnEnemyWeaponTierUpdate;
-        public static event Action<WeaponTier> OnPlayerWeaponTierUpdate;
+        public static event Action<int> OnEnemyProjectilesCountChanged;
+        public static event Action<int> OnPlayerProjectilesCountChanged;
 
         public static void BroadcastOnEnemyWeaponHit()
         {
@@ -36,14 +36,14 @@ namespace SpaceInvaders
             OnEnemyDeath?.Invoke(enemyBehaviour);
         }
 
-        public static void BroadcastOnPlayerWeaponTierUpdate(WeaponTier weaponTier)
+        public static void BroadcastOnPlayerProjectilesCountChanged(int projectilesCount)
         {
-            OnPlayerWeaponTierUpdate?.Invoke(weaponTier);
+            OnPlayerProjectilesCountChanged?.Invoke(projectilesCount);
         }
         
-        public static void BroadcastOnEnemyWeaponTierUpdate(WeaponTier weaponTier)
+        public static void BroadcastOnEnemyProjectilesCountChanged(int projectilesCount)
         {
-            OnEnemyWeaponTierUpdate?.Invoke(weaponTier);
+            OnEnemyProjectilesCountChanged?.Invoke(projectilesCount);
         }
         
         public static void BroadcastOnPlayerShoot()

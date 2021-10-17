@@ -30,7 +30,7 @@
     public enum BonusType
     {
         Health,
-        Weapon,
+        Projectile,
         ShieldSystem,
         LaserBeam,
         RapidFire,
@@ -38,13 +38,5 @@
         // Teleportation,
         // Hacking,
         // MassiveKill, 
-    }
-
-    public enum WeaponTier
-    {
-        Projectile_1,
-        Projectile_2,
-        Projectile_3,
-        LaserBeam_1
     }
 }
