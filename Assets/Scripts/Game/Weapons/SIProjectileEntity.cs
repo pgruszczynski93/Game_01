@@ -6,7 +6,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace SpaceInvaders
 {
-    public class SIProjectileEntity : MonoBehaviour, IPoolable, IModifySpeed
+    public class SIProjectileEntity : MonoBehaviour, IPoolable, IModifyTimeSpeedMultiplier
     {
         [SerializeField] SIProjectileSetup _projectileSetup;
         [SerializeField] SIProjectileSettings _projectileSettings;
@@ -200,7 +200,7 @@ namespace SpaceInvaders
             _moveDirection = spawnRot;
         }
 
-        public void SetSpeedModifier(float modifier) {
+        public void SetTimeSpeedModifier(float modifier) {
             _currentVelocityModifier = _ownerTag == ProjectileOwnerTag.Enemy ? modifier : _currentVelocityModifier;
             _rigidbody.velocity = GetReleaseForce();
         }

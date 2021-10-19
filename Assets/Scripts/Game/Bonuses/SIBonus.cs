@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
-    public class SIBonus : MonoBehaviour, ICanMove, IPoolable, IModifySpeed {
+    public class SIBonus : MonoBehaviour, ICanMove, IPoolable, IModifyTimeSpeedMultiplier {
         [SerializeField] protected Rigidbody _rigidbody;
         [SerializeField] protected GameObject _bonusRoot;
 
@@ -145,7 +145,7 @@ namespace SpaceInvaders {
                 StopObject();
         }
 
-        public void SetSpeedModifier(float modifier) {
+        public void SetTimeSpeedModifier(float modifier) {
             _currentReleaseForceModifier = modifier;
             _rigidbody.velocity = GetReleaseForce();
             _animatorController.SetSpeedModifier(modifier);    

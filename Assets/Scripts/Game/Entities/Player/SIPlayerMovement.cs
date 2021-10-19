@@ -28,7 +28,7 @@ namespace SpaceInvaders
             _leftScreenOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _playerMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
-            SetSpeedModifier(_playerMovementSettings.defaultSpeedModificator);
+            SetTimeSpeedModifier(_playerMovementSettings.defaultSpeedModificator);
         }
 
         protected override void SubscribeEvents()
@@ -49,13 +49,13 @@ namespace SpaceInvaders
 
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
             if (bonusSettings.bonusType == BonusType.TimeSlowDown) {
-                SetSpeedModifier(_playerMovementSettings.slowDownBonusSpeedModificator);
+                SetTimeSpeedModifier(_playerMovementSettings.slowDownBonusSpeedModificator);
             }
         }
         
         void HandleOnBonusDisabled(BonusSettings bonusSettings) {
             if (bonusSettings.bonusType == BonusType.TimeSlowDown) {
-                SetSpeedModifier(_playerMovementSettings.defaultSpeedModificator);
+                SetTimeSpeedModifier(_playerMovementSettings.defaultSpeedModificator);
             }
         }
 

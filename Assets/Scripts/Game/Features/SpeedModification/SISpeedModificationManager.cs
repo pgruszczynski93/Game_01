@@ -12,7 +12,7 @@ namespace SpaceInvaders {
         [ShowInInspector] bool isModifyingSpeed; 
         [ShowInInspector] float _currentSpeedModifier;
         Coroutine _speedModificationRoutine;
-        HashSet<IModifySpeed> _objectsToModifySpeed;
+        HashSet<IModifyTimeSpeedMultiplier> _objectsToModifySpeed;
 
         void Start() => Initialise();
 
@@ -42,15 +42,15 @@ namespace SpaceInvaders {
             SIGameplayEvents.OnWaveCoolDown -= HandleOnWaveCoolDown;
         }
 
-        void HandleOnSpeedModificationRequested(IModifySpeed objToModify) {
+        void HandleOnSpeedModificationRequested(IModifyTimeSpeedMultiplier objToModifyTime) {
             if(_objectsToModifySpeed == null)
-                _objectsToModifySpeed = new HashSet<IModifySpeed>();
+                _objectsToModifySpeed = new HashSet<IModifyTimeSpeedMultiplier>();
 
-            if (_objectsToModifySpeed.Contains(objToModify))
+            if (_objectsToModifySpeed.Contains(objToModifyTime))
                 return;
             
-            _objectsToModifySpeed.Add(objToModify);
-            objToModify.SetSpeedModifier(_settings.defaultSpeedMultiplier);
+            _objectsToModifySpeed.Add(objToModifyTime);
+            objToModifyTime.SetTimeSpeedModifier(_settings.defaultSpeedMultiplier);
         }
         
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
@@ -108,8 +108,8 @@ namespace SpaceInvaders {
         }
 
         void ManageObjectToModifySpeed(float speedMultiplier) {
-            foreach (IModifySpeed objToModify in _objectsToModifySpeed) {
-                objToModify.SetSpeedModifier(speedMultiplier);
+            foreach (IModifyTimeSpeedMultiplier objToModify in _objectsToModifySpeed) {
+                objToModify.SetTimeSpeedModifier(speedMultiplier);
             }
         }
         

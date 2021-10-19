@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public abstract class SIMovement : MonoBehaviour, IModifySpeed {
+    public abstract class SIMovement : MonoBehaviour, IModifyTimeSpeedMultiplier {
         protected bool _canMove;
         protected bool _initialised;
 
@@ -38,7 +38,7 @@ namespace SpaceInvaders {
         protected virtual void UnsubscribeEvents() { }
         protected virtual void ResetMovement() { }
 
-        public void SetSpeedModifier(float modifier) {
+        public void SetTimeSpeedModifier(float modifier) {
             _speedModificator = modifier;
         }
     }
