@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Configs {
     [CreateAssetMenu(fileName = "Speed Modification Manager Config",
-        menuName = "Mindwalker Studio/Speed Modification Manager Config")]
+        menuName = "Project/Speed Modification Manager Config")]
     public class SpeedModificationManagerSettings : ScriptableObject {
         public bool useIncrementalSpeedModification;
         [Range(0, 3)] public float speedModificationDuration;

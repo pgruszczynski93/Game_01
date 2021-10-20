@@ -1,3 +1,4 @@
+using Configs;
 using SpaceInvaders;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -5,6 +6,8 @@ using UnityEngine.Rendering.Universal;
 
 namespace Project.Systems {
     public class SIPostProcessController : MonoBehaviour, IModifyTimeSpeedMultiplier {
+        [SerializeField] PostProcessConfig _baseConfig;
+        [SerializeField] PostProcessConfig _speedModificationConfig;
         [SerializeField] Volume _postProcessVolume;
          
         float _effectChangeDuration;
