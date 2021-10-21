@@ -58,10 +58,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/PostProcessConfig.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/PostProcessConfig.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/SpeedModificationManagerSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/SpeedModificationManagerSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Post Process Configs/Speed Modification Post Process config.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Post Process Configs/Speed Modification Post Process config.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Post Process Configs/Speed Modification Post Process config.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Post Process Configs/Speed Modification Post Process config.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIPostProcessController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIPostProcessController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,6 +190,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/AC4201DE-60E7-4078-89B3-8CA75EA7DC7E/1c/cbd46b3c/ParticleSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10564ED1-54D6-47E1-94BE-F4AEF8878649/77/8ab5b075/LayerMask.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIGameplayEvents.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@10.4.0/Runtime/Volume/VolumeParameter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Collisions/DamageInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Configs/MovementSetup.cs" root0="FORCE_HIGHLIGHTING" />
@@ -268,9 +271,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIShootController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIEnemyProjectilesPool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/IModifyTimeSpeedMultiplier.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIPostProcessController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SpeedModificationManagerSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/PostProcessConfig.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIPostProcessController.cs" />
       </list>
     </option>
   </component>
@@ -643,7 +646,8 @@
       <workItem from="1633979310894" duration="5544000" />
       <workItem from="1634157930308" duration="1436000" />
       <workItem from="1634677841533" duration="1460000" />
-      <workItem from="1634763599455" duration="1888000" />
+      <workItem from="1634763599455" duration="2530000" />
+      <workItem from="1634849052726" duration="2208000" />
     </task>
     <servers />
   </component>
@@ -775,10 +779,10 @@
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1633556049225" />
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633783164277" />
-    <state x="2141" y="41" width="1379" height="1027" maximized="true" key="dock-window-1" timestamp="1634491416465">
+    <state x="2265" y="0" width="1591" height="1027" key="dock-window-1" timestamp="1634851717465">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2141" y="41" width="1379" height="1027" maximized="true" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634491416465" />
+    <state x="2265" y="0" width="1591" height="1027" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634851717465" />
     <state x="699" y="211" width="1003" height="1027" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1630750212205" />
     <state x="1920" y="67" width="1540" height="798" maximized="true" key="dock-window-2" timestamp="1627336046600">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -794,10 +798,10 @@
     </state>
     <state x="2536" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1633989891612" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1633782703151" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1634766132174">
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1634850864753">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634766132174" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634850864753" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1633782123165" />
   </component>
   <component name="XDebuggerManager">
