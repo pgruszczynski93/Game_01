@@ -38,7 +38,7 @@ namespace SpaceInvaders {
         protected virtual void UnsubscribeEvents() { }
         protected virtual void ResetMovement() { }
 
-        public void SetTimeSpeedModifier(float modifier) {
+        public void SetTimeSpeedModifier(float modifier, float progress = 1f) {
             _speedModificator = modifier;
         }
     }

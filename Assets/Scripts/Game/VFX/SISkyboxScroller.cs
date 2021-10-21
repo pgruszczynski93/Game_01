@@ -39,7 +39,7 @@ namespace Game.VFX {
             return _currentAngle % SIMathUtils.FULL_EULER_ANGLE ;
         }
 
-        public void SetTimeSpeedModifier(float modifier) {
+        public void SetTimeSpeedModifier(float modifier, float progress) {
             _currentScrollSpeedMultiplier = modifier;
         }
     }

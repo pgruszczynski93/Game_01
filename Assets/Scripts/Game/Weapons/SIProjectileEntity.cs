@@ -200,7 +200,7 @@ namespace SpaceInvaders
             _moveDirection = spawnRot;
         }
 
-        public void SetTimeSpeedModifier(float modifier) {
+        public void SetTimeSpeedModifier(float modifier, float progress) {
             _currentVelocityModifier = _ownerTag == ProjectileOwnerTag.Enemy ? modifier : _currentVelocityModifier;
             _rigidbody.velocity = GetReleaseForce();
         }

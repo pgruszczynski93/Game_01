@@ -11,6 +11,7 @@ namespace SpaceInvaders {
         
         [ShowInInspector] bool isModifyingSpeed; 
         [ShowInInspector] float _currentSpeedModifier;
+        [ShowInInspector] float _timeSpeedModificationProgress;
         Coroutine _speedModificationRoutine;
         HashSet<IModifyTimeSpeedMultiplier> _objectsToModifySpeed;
 
@@ -72,12 +73,13 @@ namespace SpaceInvaders {
         IEnumerator SpeedModificationRoutine(float targetSpeedModifier, AnimationCurve curve) {
 
             isModifyingSpeed = true;
+            _timeSpeedModificationProgress = 0.0f;
             float time = 0.0f;
             float modifierValue = _settings.defaultSpeedMultiplier;
             while (time < _settings.speedModificationDuration) {
                 time += Time.deltaTime;
-                modifierValue = Mathf.Lerp(_currentSpeedModifier, targetSpeedModifier,
-                    curve.Evaluate(time /_settings.speedModificationDuration));
+                _timeSpeedModificationProgress = time / _settings.speedModificationDuration;
+                modifierValue = Mathf.Lerp(_currentSpeedModifier, targetSpeedModifier, curve.Evaluate(_timeSpeedModificationProgress));
                 modifierValue = Mathf.Clamp(modifierValue, _settings.slowDownMultiplier, _settings.speedUpMultiplier);
                 ManageObjectToModifySpeed(modifierValue);
                 yield return WaitUtils.SkipFrames(1);
@@ -108,8 +110,9 @@ namespace SpaceInvaders {
         }
 
         void ManageObjectToModifySpeed(float speedMultiplier) {
+            float progressToUse = _settings.useIncrementalSpeedModification ? _timeSpeedModificationProgress : 1f;
             foreach (IModifyTimeSpeedMultiplier objToModify in _objectsToModifySpeed) {
-                objToModify.SetTimeSpeedModifier(speedMultiplier);
+                objToModify.SetTimeSpeedModifier(speedMultiplier, progressToUse);
             }
         }
         

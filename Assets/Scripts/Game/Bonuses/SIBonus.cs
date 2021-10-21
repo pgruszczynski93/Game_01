@@ -145,7 +145,7 @@ namespace SpaceInvaders {
                 StopObject();
         }
 
-        public void SetTimeSpeedModifier(float modifier) {
+        public void SetTimeSpeedModifier(float modifier, float progress) {
             _currentReleaseForceModifier = modifier;
             _rigidbody.velocity = GetReleaseForce();
             _animatorController.SetSpeedModifier(modifier);    
