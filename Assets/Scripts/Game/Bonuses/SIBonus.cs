@@ -29,7 +29,7 @@ namespace SpaceInvaders {
         void Start() => Initialise();
 
         void Initialise() {
-            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
+            RequestTimeSpeedModification();
         }
 
         void OnEnable() => SubscribeEvents();
@@ -149,6 +149,10 @@ namespace SpaceInvaders {
             _currentReleaseForceModifier = modifier;
             _rigidbody.velocity = GetReleaseForce();
             _animatorController.SetSpeedModifier(modifier);    
+        }
+        
+        public void RequestTimeSpeedModification() {
+            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
         }
     }
 }    

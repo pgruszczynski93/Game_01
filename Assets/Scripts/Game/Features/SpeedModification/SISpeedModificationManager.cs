@@ -80,7 +80,7 @@ namespace SpaceInvaders {
                 time += Time.deltaTime;
                 _timeSpeedModificationProgress = time / _settings.speedModificationDuration;
                 modifierValue = Mathf.Lerp(_currentSpeedModifier, targetSpeedModifier, curve.Evaluate(_timeSpeedModificationProgress));
-                modifierValue = Mathf.Clamp(modifierValue, _settings.slowDownMultiplier, _settings.speedUpMultiplier);
+                // modifierValue = Mathf.Clamp(modifierValue, _settings.slowDownMultiplier, _settings.speedUpMultiplier);
                 ManageObjectToModifySpeed(modifierValue);
                 yield return WaitUtils.SkipFrames(1);
             }

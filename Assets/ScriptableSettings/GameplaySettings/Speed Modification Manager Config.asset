@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Speed Modification Manager Config
   m_EditorClassIdentifier: 
   useIncrementalSpeedModification: 1
-  speedModificationDuration: 1
+  speedModificationDuration: 0.3
   slowDownMultiplier: 0.3
   speedUpMultiplier: 1
   defaultSpeedMultiplier: 1
@@ -30,10 +30,10 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.5
-      value: 0.2
-      inSlope: 0.9777142
-      outSlope: 0.9777142
+      time: 0.7
+      value: 0.3
+      inSlope: 1.1334479
+      outSlope: 1.1334479
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
@@ -63,10 +63,10 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.5
-      value: 0.8
-      inSlope: 0.9961972
-      outSlope: 0.9961972
+      time: 0.3
+      value: 0.7
+      inSlope: 1.1211983
+      outSlope: 1.1211983
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334

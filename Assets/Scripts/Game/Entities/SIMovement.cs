@@ -41,5 +41,9 @@ namespace SpaceInvaders {
         public void SetTimeSpeedModifier(float modifier, float progress = 1f) {
             _speedModificator = modifier;
         }
+        
+        public void RequestTimeSpeedModification() {
+            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
+        }
     }
 }

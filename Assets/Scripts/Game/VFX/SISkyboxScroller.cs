@@ -15,7 +15,7 @@ namespace Game.VFX {
         void Start() => Initialise();
 
         void Initialise() {
-            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
+            RequestTimeSpeedModification();
         }
         
         void OnEnable() => SubscribeEvents();
@@ -41,6 +41,10 @@ namespace Game.VFX {
 
         public void SetTimeSpeedModifier(float modifier, float progress) {
             _currentScrollSpeedMultiplier = modifier;
+        }
+        
+        public void RequestTimeSpeedModification() {
+            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
         }
     }
 }

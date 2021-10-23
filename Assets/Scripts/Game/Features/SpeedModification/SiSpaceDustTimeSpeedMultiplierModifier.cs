@@ -14,6 +14,10 @@ namespace SpaceInvaders {
         void Initialise() {
             _particlesMainModule = _particles.main;
             _initialSimulationSpeed = _particlesMainModule.simulationSpeed;
+            RequestTimeSpeedModification();
+        }
+
+        public void RequestTimeSpeedModification() {
             SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
         }
 
