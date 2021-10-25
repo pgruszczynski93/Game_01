@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Configs;
@@ -70,22 +71,24 @@ namespace SpaceInvaders {
             SetDefaultSpeedMultiplier();
         }
 
-        IEnumerator SpeedModificationRoutine(float targetSpeedModifier, AnimationCurve curve) {
+        IEnumerator TimeSpeedModificationRoutine(float targetSpeedModifier, AnimationCurve curve) {
 
             isModifyingSpeed = true;
             _timeSpeedModificationProgress = 0.0f;
             float time = 0.0f;
             float modifierValue = _settings.defaultSpeedMultiplier;
             while (time < _settings.speedModificationDuration) {
-                time += Time.deltaTime;
                 _timeSpeedModificationProgress = time / _settings.speedModificationDuration;
                 modifierValue = Mathf.Lerp(_currentSpeedModifier, targetSpeedModifier, curve.Evaluate(_timeSpeedModificationProgress));
                 modifierValue = Mathf.Clamp(modifierValue, _settings.slowDownMultiplier, _settings.speedUpMultiplier);
                 ManageObjectToModifySpeed(modifierValue);
+                time += Time.deltaTime;
                 yield return WaitUtils.SkipFrames(1);
             }
 
-            _currentSpeedModifier = modifierValue;
+            _timeSpeedModificationProgress = 1f;
+            ManageObjectToModifySpeed(targetSpeedModifier);
+            _currentSpeedModifier = targetSpeedModifier;
             isModifyingSpeed = false;
         }
 
@@ -103,10 +106,15 @@ namespace SpaceInvaders {
         }
         
         void ApplySpeedModification(float multiplier, AnimationCurve curve) {
-            if (_settings.useIncrementalSpeedModification && !isModifyingSpeed)
-                _speedModificationRoutine = StartCoroutine(SpeedModificationRoutine(multiplier, curve));
-            else
+            if (CanRestartTimeSpeedModificationRoutine(multiplier)) 
+                _speedModificationRoutine = StartCoroutine(TimeSpeedModificationRoutine(multiplier, curve));
+            else if(!_settings.useIncrementalSpeedModification)
                 ManageObjectToModifySpeed(multiplier);
+        }
+
+        bool CanRestartTimeSpeedModificationRoutine(float multiplier) {
+            return _settings.useIncrementalSpeedModification && !isModifyingSpeed &&
+                   Math.Abs(multiplier - _currentSpeedModifier) > 1e-05f;
         }
 
         void ManageObjectToModifySpeed(float speedMultiplier) {

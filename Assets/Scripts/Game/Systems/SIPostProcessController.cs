@@ -1,3 +1,4 @@
+using System;
 using Configs;
 using Sirenix.OdinInspector;
 using SpaceInvaders;
@@ -11,6 +12,8 @@ namespace Project.Systems {
         [SerializeField] PostProcessConfig _speedModificationConfig;
         [SerializeField] Volume _postProcessVolume;
 
+        bool _isModifyingPosprocesses;
+        bool _isPostprocessModificationLocked;
         float _currentModifierValue;
         Bloom _bloom;
         Vignette _vignette;
@@ -18,22 +21,55 @@ namespace Project.Systems {
         void Start() => Initialise();
 
         void Initialise() {
+            _isModifyingPosprocesses = false;
             _currentModifierValue = 1f;
             _postProcessVolume.profile.TryGet(out _bloom);
             _postProcessVolume.profile.TryGet(out _vignette);
             RequestTimeSpeedModification();
         }
         
+        void OnEnable() => SubscribeEvents();
+        void OnDisable() => UnsubscribeEvents();
+        
+        void SubscribeEvents() {
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
+            SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
+        }
+
+        void UnsubscribeEvents() {
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
+            SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
+        }
+
+        void HandleOnWaveStart() {
+            SetPostprocessModificationLock(false);
+        }
+
+        void HandleOnWaveEnd() {
+            SetPostprocessModificationLock(true);
+        }
+
         public void RequestTimeSpeedModification() {
             SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
         }
 
         //Note: This time this method will be used to interpolate between values during TimeSpeed changes (SiSpeedModificationManager coroutine works).
         public void SetTimeSpeedModifier(float modifier, float progress) {
-            LerpPostprocessValues(modifier, progress);
+            _isModifyingPosprocesses = Math.Abs(_currentModifierValue - modifier) > 1e-05f && progress < 1f;
+            TryToLerpPostprocessValues(modifier, progress);
         }
 
-        void LerpPostprocessValues(float modifier, float progress) {
+        void SetPostprocessModificationLock(bool isEnabled) {
+            _isPostprocessModificationLocked = isEnabled;
+        }
+
+        void TryToLerpPostprocessValues(float modifier, float progress) {
+
+            if (_isPostprocessModificationLocked || !_isModifyingPosprocesses) {
+                _currentModifierValue = modifier;
+                return;
+            }
+            
             if (_currentModifierValue > modifier) {
                 _bloom.threshold.value = Mathf.Lerp(_baseConfig.bloomThreshold, _speedModificationConfig.bloomThreshold, progress);
                 _bloom.intensity.value = Mathf.Lerp(_baseConfig.bloomIntensity, _speedModificationConfig.bloomIntensity, progress);
@@ -50,6 +86,7 @@ namespace Project.Systems {
                 _vignette.intensity.value = Mathf.Lerp(_speedModificationConfig.vignetteIntensity, _baseConfig.vignetteIntensity, progress);
                 _vignette.smoothness.value = Mathf.Lerp(_speedModificationConfig.vignetteSmoothness, _baseConfig.vignetteSmoothness, progress);
             }
+            
             _currentModifierValue = modifier;
         }
    

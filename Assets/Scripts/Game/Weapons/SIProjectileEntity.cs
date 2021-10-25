@@ -206,7 +206,9 @@ namespace SpaceInvaders
 
         public void SetTimeSpeedModifier(float modifier, float progress) {
             _currentVelocityModifier = _ownerTag == ProjectileOwnerTag.Enemy ? modifier : _currentVelocityModifier;
-            _rigidbody.velocity = GetReleaseForce();
+            var releaseForce = GetReleaseForce();
+            // Debug.Log(releaseForce, this);
+            _rigidbody.velocity = releaseForce;
         }
     }
 }

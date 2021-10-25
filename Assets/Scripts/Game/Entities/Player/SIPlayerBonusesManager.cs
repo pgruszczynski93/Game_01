@@ -12,7 +12,7 @@ namespace SpaceInvaders {
         }
 
         void OnDestroy() {
-            ClearCoroutines();
+            TryClearCoroutines();
         }
 
         void OnEnable() {
@@ -50,7 +50,9 @@ namespace SpaceInvaders {
             _activeBonuses[collectedBonusSettings.bonusType].bonusRoutine = StartCoroutine(RunBonusRoutine(collectedBonusSettings));
         }
 
-        void ClearCoroutines() {
+        void TryClearCoroutines() {
+            if (_activeBonuses == null)
+                return;
             Coroutine currentRoutine;
             foreach (KeyValuePair<BonusType, RuntimeBonus> kvp in _activeBonuses) {
                 currentRoutine = kvp.Value.bonusRoutine;
