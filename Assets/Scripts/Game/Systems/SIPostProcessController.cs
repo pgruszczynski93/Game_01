@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Configs;
 using Sirenix.OdinInspector;
 using SpaceInvaders;
@@ -37,8 +38,8 @@ namespace Project.Systems {
         }
 
         void UnsubscribeEvents() {
-            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
-            SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
+            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
+            SIGameplayEvents.OnWaveStart -= HandleOnWaveStart;
         }
 
         void HandleOnWaveStart() {
@@ -88,6 +89,12 @@ namespace Project.Systems {
             }
             
             _currentModifierValue = modifier;
+        }
+
+        IEnumerator PostProcessesLockRoutine() {
+            // while()
+            yield return null;
+            //dorobić kod, który ogarnie dokonczenie postprocesu 
         }
    
         [Button]
