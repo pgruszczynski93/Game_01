@@ -9,17 +9,27 @@ using UnityEngine.Rendering.Universal;
 
 namespace Project.Systems {
     public class SIPostProcessController : MonoBehaviour, IModifyTimeSpeedMultiplier {
+        const float MODIFIER_TOLERANCE = 1e-05f;
+        
+        [SerializeField] float _defaultSpeedMultiplier; 
         [SerializeField] PostProcessConfig _baseConfig;
         [SerializeField] PostProcessConfig _speedModificationConfig;
         [SerializeField] Volume _postProcessVolume;
 
+        
         bool _isModifyingPosprocesses;
         bool _isPostprocessModificationLocked;
         float _currentModifierValue;
         Bloom _bloom;
         Vignette _vignette;
+        Coroutine _waitForPostprocessLockRoutine;
         
         void Start() => Initialise();
+
+        void OnDestroy() {
+            if(_waitForPostprocessLockRoutine != null)
+                StopCoroutine(_waitForPostprocessLockRoutine);
+        }
 
         void Initialise() {
             _isModifyingPosprocesses = false;
@@ -33,12 +43,12 @@ namespace Project.Systems {
         void OnDisable() => UnsubscribeEvents();
         
         void SubscribeEvents() {
-            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
+            SIGameplayEvents.OnWaveCoolDown += HandleOnWaveCooldown;
             SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
         }
 
         void UnsubscribeEvents() {
-            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
+            SIGameplayEvents.OnWaveCoolDown -= HandleOnWaveCooldown;
             SIGameplayEvents.OnWaveStart -= HandleOnWaveStart;
         }
 
@@ -46,8 +56,8 @@ namespace Project.Systems {
             SetPostprocessModificationLock(false);
         }
 
-        void HandleOnWaveEnd() {
-            SetPostprocessModificationLock(true);
+        void HandleOnWaveCooldown() {
+            _waitForPostprocessLockRoutine = StartCoroutine(PostProcessesLockRoutine());
         }
 
         public void RequestTimeSpeedModification() {
@@ -92,9 +102,10 @@ namespace Project.Systems {
         }
 
         IEnumerator PostProcessesLockRoutine() {
-            // while()
-            yield return null;
-            //dorobić kod, który ogarnie dokonczenie postprocesu 
+            while (Math.Abs(_currentModifierValue - _defaultSpeedMultiplier) > MODIFIER_TOLERANCE) {
+                yield return WaitUtils.SkipFrames(1);
+            }
+            SetPostprocessModificationLock(true);
         }
    
         [Button]
