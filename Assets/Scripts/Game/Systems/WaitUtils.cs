@@ -9,6 +9,8 @@ namespace SpaceInvaders
     {
         static readonly Dictionary<float, WaitForSeconds> WaitForSecondsCache = new Dictionary<float, WaitForSeconds>();
 
+        static readonly WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+        
         static void TryToAddToCoroutineWaitCache(float waitTime)
         {
             WaitForSeconds wfs;
@@ -37,6 +39,12 @@ namespace SpaceInvaders
             int framesToSkip = totalFrames;
             while (framesToSkip-- > 0) 
                 yield return null;
+        }
+
+        public static IEnumerator SkipFixedFrames(int totalFrames) {
+            int fixedFramesToSkip = totalFrames;
+            while(fixedFramesToSkip-- > 0)
+                yield return waitForFixedUpdate;
         }
 
         public static IEnumerator SkipFramesAndInvoke(int frames, Action onWaitFinished)

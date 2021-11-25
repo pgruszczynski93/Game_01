@@ -19,8 +19,8 @@ namespace SpaceInvaders {
             //Note 1: Always enable element from pool.
             _currentObjectFromPool.gameObject.SetActive(true); 
             _currentObjectFromPool.SetSpawnPosition(slotIndexTransform.position);
-            //Note 2: Check projectiles parent upwards rotation.
-            _currentObjectFromPool.SetSpawnRotation(slotIndexTransform.up);
+            //Note 2: Check projectiles parent upwards normalized rotation (direction of release force).
+            _currentObjectFromPool.SetSpawnRotation(slotIndexTransform.up.normalized);
             _currentObjectFromPool.UseObjectFromPool();
         }
         

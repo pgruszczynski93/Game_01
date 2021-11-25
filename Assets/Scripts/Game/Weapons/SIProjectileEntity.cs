@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using SpaceInvaders.ObjectsPool;
+using Unity.Mathematics;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -25,6 +26,7 @@ namespace SpaceInvaders
         float _currentVelocityModifier;
         Vector3 _moveDirection;
         Vector3 _parentRelativeLocalPos;
+        // Vector3 _parentRelativeLocalRot
         Transform _thisTransform;
         DamageInfo _damageInfo;
         GameObject _weaponGraphicsObj;
@@ -84,6 +86,7 @@ namespace SpaceInvaders
             _isMoving = false;
             _thisTransform = transform;
             _parentRelativeLocalPos = _thisTransform.localPosition;
+            // _parentRelativeLocalRot = _thisTransform.localEulerAngles;
             _damageInfo = new DamageInfo(_projectileSettings.projectileDamage);
             _currentVelocityModifier = 1f;
             
@@ -117,12 +120,17 @@ namespace SpaceInvaders
             
             TryToEnableParticles(true);
 
-            _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
+            //Note: This if secures rigidbody from applying additional force when actually has velocity.
+            //Objects are affected by timeSpeedModification so even if they're in pool their velocity is being modified.
+            //This line would add extra force to their velocity.
+            if(_rigidbody.velocity.sqrMagnitude == 0)
+                _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
         }
 
         Vector3 GetReleaseForce() {
             float forceModifier = _projectileSettings.launchForceMultiplier * _currentVelocityModifier;
-            return _moveDirection * forceModifier;
+            var releaseForce = _moveDirection * forceModifier;
+            return releaseForce;
         }
 
         public DamageInfo GetWeaponDamageInfo(MonoBehaviour objectToDamage)
@@ -140,6 +148,7 @@ namespace SpaceInvaders
 
             _thisTransform.parent = _parentTransform;
             _thisTransform.localPosition = _parentRelativeLocalPos;
+            // _thisTransform.localRotation = Quaternion.Euler(_parentRelativeLocalRot);
 ;
             _rigidbody.velocity = SIHelpers.VectorZero;
             _rigidbody.angularVelocity = SIHelpers.VectorZero;
@@ -159,8 +168,7 @@ namespace SpaceInvaders
         }
         
         void HandleOnDamage(DamageInfo damageInfo) {
-            //Note:
-            //This method is added to handle damage given by laser beam.
+            //Note: This method is added to handle damage given by laser beam.
             //Usually explosion pool manages spawning explosion particles when 2 colliders colliding.
             if (damageInfo.ObjectToDamage != this)
                 return;
@@ -207,7 +215,6 @@ namespace SpaceInvaders
         public void SetTimeSpeedModifier(float modifier, float progress) {
             _currentVelocityModifier = _ownerTag == ProjectileOwnerTag.Enemy ? modifier : _currentVelocityModifier;
             var releaseForce = GetReleaseForce();
-            // Debug.Log(releaseForce, this);
             _rigidbody.velocity = releaseForce;
         }
     }
