@@ -24,9 +24,8 @@ namespace SpaceInvaders
         float _topWorldLimit;
         float _bottomWorldLimit;
         float _currentVelocityModifier;
-        Vector3 _moveDirection;
+        public Vector3 _moveDirection;
         Vector3 _parentRelativeLocalPos;
-        // Vector3 _parentRelativeLocalRot
         Transform _thisTransform;
         DamageInfo _damageInfo;
         GameObject _weaponGraphicsObj;
@@ -86,7 +85,6 @@ namespace SpaceInvaders
             _isMoving = false;
             _thisTransform = transform;
             _parentRelativeLocalPos = _thisTransform.localPosition;
-            // _parentRelativeLocalRot = _thisTransform.localEulerAngles;
             _damageInfo = new DamageInfo(_projectileSettings.projectileDamage);
             _currentVelocityModifier = 1f;
             
@@ -123,8 +121,10 @@ namespace SpaceInvaders
             //Note: This if secures rigidbody from applying additional force when actually has velocity.
             //Objects are affected by timeSpeedModification so even if they're in pool their velocity is being modified.
             //This line would add extra force to their velocity.
-            if(_rigidbody.velocity.sqrMagnitude == 0)
+            if (_rigidbody.velocity.sqrMagnitude == 0)
                 _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
+            else
+                _rigidbody.velocity = GetReleaseForce();
         }
 
         Vector3 GetReleaseForce() {
