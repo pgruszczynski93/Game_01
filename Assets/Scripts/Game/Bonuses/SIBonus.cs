@@ -106,7 +106,10 @@ namespace SpaceInvaders {
             _rigidbody.velocity = SIHelpers.VectorZero;
             _thisTransform.SetParent(null);
             _thisTransform.position = _currentDropPos;
-            _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
+            if (_rigidbody.velocity.sqrMagnitude == 0)
+                _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
+            else
+                _rigidbody.velocity = GetReleaseForce();
         }
 
         Vector3 GetReleaseForce() {

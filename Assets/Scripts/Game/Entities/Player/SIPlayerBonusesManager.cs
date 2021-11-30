@@ -46,7 +46,7 @@ namespace SpaceInvaders {
                 _activeBonuses.Add(bonusType, new RuntimeBonus(collectedBonusSettings));
             else
                 StopCoroutine(_activeBonuses[collectedBonusSettings.bonusType].bonusRoutine);
-
+            
             _activeBonuses[collectedBonusSettings.bonusType].bonusRoutine = StartCoroutine(RunBonusRoutine(collectedBonusSettings));
         }
 

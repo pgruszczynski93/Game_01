@@ -20,6 +20,7 @@
         PlayerWeapon,
         EnemyWeapon,
         Bonus,
+        PlayerBonusCollider
     }
 
     public enum ProjectileOwnerTag {

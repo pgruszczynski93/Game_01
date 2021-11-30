@@ -5,7 +5,7 @@ namespace SpaceInvaders
     public class SIBonusesEvents
     {
         public static event Action<BonusSettings> OnBonusCollected;
-        public static event Action<BonusSettings> OnBonusEnabled;
+        public static event Action<BonusSettings> OnBonusEnabled; 
         public static event Action<BonusSettings> OnBonusDisabled;
         
         

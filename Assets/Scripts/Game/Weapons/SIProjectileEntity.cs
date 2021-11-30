@@ -120,7 +120,7 @@ namespace SpaceInvaders
 
             //Note: This if secures rigidbody from applying additional force when actually has velocity.
             //Objects are affected by timeSpeedModification so even if they're in pool their velocity is being modified.
-            //This line would add extra force to their velocity.
+            //This line would add extra force to their velocity. Same solution in Bonus class
             if (_rigidbody.velocity.sqrMagnitude == 0)
                 _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
             else

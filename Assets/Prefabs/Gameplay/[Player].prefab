@@ -4989,6 +4989,7 @@ Transform:
   m_Children:
   - {fileID: 7947932327291914463}
   - {fileID: 4588476074549325596}
+  - {fileID: 847178182228301}
   m_Father: {fileID: 998630233605939790}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10251,6 +10252,67 @@ MonoBehaviour:
     collisionTag: 0
     collisionSource: {fileID: 1246367449153128759}
   _collidableObjects: 0100000003000000
+--- !u!1 &7106338073645735073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 847178182228301}
+  - component: {fileID: 2184369640188821026}
+  - component: {fileID: 494525323885065945}
+  m_Layer: 8
+  m_Name: BonusCollider
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &847178182228301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106338073645735073}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.04, y: -1.14, z: 0}
+  m_LocalScale: {x: 22.8, y: 19.19709, z: 12}
+  m_Children: []
+  m_Father: {fileID: 1271120372552864498}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2184369640188821026
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106338073645735073}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &494525323885065945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106338073645735073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139dfc6aff0a4c44a6892c13736eca20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thisCollisionInfo:
+    collisionTag: 5
+    collisionSource: {fileID: 1246367449153128759}
+  _collidableObjects: 04000000
 --- !u!1 &7380594601384447252
 GameObject:
   m_ObjectHideFlags: 0
