@@ -1,17 +1,19 @@
+using System;
 using System.Collections.Generic;
+using Configs;
 using SpaceInvaders;
 using UnityEngine;
 
 namespace Game.Features.LaserBeam {
     public class SILaserBeamDamage : MonoBehaviour {
 
-        [SerializeField] int _collisionCheckDistance;
-        [SerializeField] float _damage;     // to do - read it from serializefield
+        [SerializeField] LaserBeamDamageSettings _damageSettings;
         [SerializeField] Vector3 _offsetFromPlayerCollider;
         [SerializeField] LayerMask _collisionLayerMask;
         [SerializeField] CollisionTag[] _tagsOfObjectsToApplyDamage;
-        [SerializeField] SILaserBeamLenghtController _laserLenghtController;
+        [SerializeField] SILaserBeamVfxController laserVfxController;
 
+        float _currentDamage;
         DamageInfo _currentDamageInfo;
         RaycastHit _currentHit;
         Transform _thisTransform;
@@ -25,7 +27,8 @@ namespace Game.Features.LaserBeam {
 
         void Initialise() {
             _thisTransform = transform;
-            _currentDamageInfo = new DamageInfo(_damage);
+            _currentDamage = _damageSettings.basicDamage;
+            _currentDamageInfo = new DamageInfo(_currentDamage);
             _collisionCache = new Dictionary<Collider, CollisionInfo>();
         }
         void OnEnable() => SubscribeEvents();
@@ -34,27 +37,76 @@ namespace Game.Features.LaserBeam {
         
         void SubscribeEvents() {
             SIEventsHandler.OnUpdate += HandleOnUpdate;
+            SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
+            SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
         }
 
         void UnsubscribeEvents() {
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
+            SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
+            SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
         }
 
         void HandleOnUpdate() {
             DetectLaserHit();
         }
+        
+        void HandleOnBonusEnabled(BonusSettings bonusSettings) {
+            switch(bonusSettings.bonusType) {
+                case BonusType.Health:
+                    break;
+                case BonusType.Projectile:
+                    break;
+                case BonusType.ShieldSystem:
+                    break;
+                case BonusType.LaserBeam:
+                    break;
+                case BonusType.ExtraEnergy:
+                    SetNewDamage(_damageSettings.extraDamage);
+                    break;
+                case BonusType.TimeSlowDown:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        void HandleOnBonusDisabled(BonusSettings bonusSettings) {
+            switch(bonusSettings.bonusType) {
+                case BonusType.Health:
+                    break;
+                case BonusType.Projectile:
+                    break;
+                case BonusType.ShieldSystem:
+                    break;
+                case BonusType.LaserBeam:
+                    break;
+                case BonusType.ExtraEnergy:
+                    SetNewDamage(_damageSettings.basicDamage);
+                    break;
+                case BonusType.TimeSlowDown:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        void SetNewDamage(float newDamage) {
+            _currentDamage = newDamage;
+            _currentDamageInfo.SetDamage(_currentDamage);
+        }
 
         void DetectLaserHit() {
             if (!Physics.Raycast(_thisTransform.position + _offsetFromPlayerCollider, _thisTransform.up,
-                out _currentHit, _collisionCheckDistance, _collisionLayerMask)) {
-                _laserLenghtController.SetDefaultLineRendererEndPosY();
+                out _currentHit, _damageSettings.collisionCheckDistance, _collisionLayerMask)) {
+                laserVfxController.SetDefaultLineRendererEndPosY();
                 return;
             }
 
             // Debug.DrawRay(_thisTransform.position + _offsetFromPlayerCollider , _thisTransform.up * _collisionCheckDistance, Color.green);
             
             _lastHitCollider = _currentHit.collider;
-            _laserLenghtController.SetLineRendererEndPosY(_currentHit.point.y);
+            laserVfxController.SetLineRendererEndPosY(_currentHit.point.y);
             
             if (!_collisionCache.ContainsKey(_lastHitCollider)) {
                 CacheLaserHit();
@@ -70,7 +122,7 @@ namespace Game.Features.LaserBeam {
         void TryToApplyDamage() {
             _lastHitObjectInfo = _collisionCache[_lastHitCollider];
             if (!IsCollisionDetected(_lastHitObjectInfo.collisionTag)) {
-                _laserLenghtController.SetDefaultLineRendererEndPosY();
+                laserVfxController.SetDefaultLineRendererEndPosY();
                 return;
             }
             

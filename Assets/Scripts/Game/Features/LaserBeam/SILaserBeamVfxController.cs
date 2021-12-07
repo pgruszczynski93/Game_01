@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Game.Features.LaserBeam {
-    public class SILaserBeamLenghtController : MonoBehaviour {
+    public class SILaserBeamVfxController : MonoBehaviour {
 
         [SerializeField] float _offsetFromPlayerCollider;
         [SerializeField] LineRenderer _lineRenderer;

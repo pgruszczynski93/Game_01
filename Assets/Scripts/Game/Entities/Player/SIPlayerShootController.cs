@@ -38,7 +38,7 @@ namespace SpaceInvaders
                 case BonusType.LaserBeam:
                     EnableShooting(false);
                     break;
-                case BonusType.RapidFire:
+                case BonusType.ExtraEnergy:
                     EnableRapidFire();
                     break;
                 case BonusType.Projectile:
@@ -52,7 +52,7 @@ namespace SpaceInvaders
                 case BonusType.LaserBeam:
                     EnableShooting(true);
                     break;
-                case BonusType.RapidFire:
+                case BonusType.ExtraEnergy:
                     DisableRapidFire();
                     break;
                 case BonusType.Projectile:

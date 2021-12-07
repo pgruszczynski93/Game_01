@@ -371,6 +371,7 @@
             <e p="GridMovementSetup.cs" t="Include" />
             <e p="GridShootingSettings.cs" t="Include" />
             <e p="GridShootingSetup.cs" t="Include" />
+            <e p="LaserBeamDamageSettings.cs" t="Include" />
             <e p="MovementSettings.cs" t="Include" />
             <e p="MovementSetup.cs" t="Include" />
             <e p="PlayerMovementSettings.cs" t="Include" />
@@ -419,6 +420,7 @@
               <e p="ICanMove.cs" t="Include" />
               <e p="Player" t="Include">
                 <e p="SIPlayerBehaviour.cs" t="Include" />
+                <e p="SIPlayerBonusColliderBehaviour.cs" t="Include" />
                 <e p="SIPlayerBonusesManager.cs" t="Include" />
                 <e p="SIPlayerColliderBehaviour.cs" t="Include" />
                 <e p="SIPlayerHealth.cs" t="Include" />
@@ -442,7 +444,7 @@
               <e p="LaserBeam" t="Include">
                 <e p="SILaserBeamBehaviour.cs" t="Include" />
                 <e p="SILaserBeamDamage.cs" t="Include" />
-                <e p="SILaserBeamLenghtController.cs" t="Include" />
+                <e p="SILaserBeamVfxController.cs" t="Include" />
               </e>
               <e p="ObjectsPool" t="Include">
                 <e p="IPoolable.cs" t="Include" />

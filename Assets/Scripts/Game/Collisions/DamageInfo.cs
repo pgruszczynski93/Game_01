@@ -32,5 +32,9 @@ namespace SpaceInvaders
             _objectToDamage = objectToDamage;
         }
 
+        public void SetDamage(float newDamage) {
+            _damage = newDamage;
+        }
+
     }
 }

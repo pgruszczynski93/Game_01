@@ -5014,14 +5014,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c6bd742ad3416a9f1bb953b0c9203c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collisionCheckDistance: 10
-  _damage: 0
+  _damageSettings: {fileID: 11400000, guid: a6024320e9e948f48b8730496707265b, type: 2}
   _offsetFromPlayerCollider: {x: 0, y: 1, z: 0}
   _collisionLayerMask:
     serializedVersion: 2
     m_Bits: 256
   _tagsOfObjectsToApplyDamage: 0100000003000000
-  _laserLenghtController: {fileID: 7757819212876674764}
+  laserVfxController: {fileID: 7757819212876674764}
 --- !u!114 &7757819212876674764
 MonoBehaviour:
   m_ObjectHideFlags: 0
