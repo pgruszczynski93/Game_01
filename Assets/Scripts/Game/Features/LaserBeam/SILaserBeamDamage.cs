@@ -11,7 +11,7 @@ namespace Game.Features.LaserBeam {
         [SerializeField] Vector3 _offsetFromPlayerCollider;
         [SerializeField] LayerMask _collisionLayerMask;
         [SerializeField] CollisionTag[] _tagsOfObjectsToApplyDamage;
-        [SerializeField] SILaserBeamVfxController laserVfxController;
+        [SerializeField] SILaserBeamVfxController _laserVfxController;
 
         float _currentDamage;
         DamageInfo _currentDamageInfo;
@@ -52,7 +52,6 @@ namespace Game.Features.LaserBeam {
         }
         
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
-            //todo : wlaczyc GO przed bonusem
             switch(bonusSettings.bonusType) {
                 case BonusType.Health:
                     break;
@@ -64,6 +63,7 @@ namespace Game.Features.LaserBeam {
                     break;
                 case BonusType.ExtraEnergy:
                     SetNewDamage(_damageSettings.extraDamage);
+                    _laserVfxController.EnableExtraEnergyVfx(true);
                     break;
                 case BonusType.TimeSlowDown:
                     break;
@@ -84,6 +84,7 @@ namespace Game.Features.LaserBeam {
                     break;
                 case BonusType.ExtraEnergy:
                     SetNewDamage(_damageSettings.basicDamage);
+                    _laserVfxController.EnableExtraEnergyVfx(false);
                     break;
                 case BonusType.TimeSlowDown:
                     break;
@@ -98,16 +99,19 @@ namespace Game.Features.LaserBeam {
         }
 
         void DetectLaserHit() {
+            if (!_laserVfxController.LaserMainVfx.activeInHierarchy)
+                return;
+            
             if (!Physics.Raycast(_thisTransform.position + _offsetFromPlayerCollider, _thisTransform.up,
                 out _currentHit, _damageSettings.collisionCheckDistance, _collisionLayerMask)) {
-                laserVfxController.SetDefaultLineRendererEndPosY();
+                _laserVfxController.SetDefaultLineRendererEndPosY();
                 return;
             }
 
             // Debug.DrawRay(_thisTransform.position + _offsetFromPlayerCollider , _thisTransform.up * _collisionCheckDistance, Color.green);
             
             _lastHitCollider = _currentHit.collider;
-            laserVfxController.SetLineRendererEndPosY(_currentHit.point.y);
+            _laserVfxController.SetLineRendererEndPosY(_currentHit.point.y);
             
             if (!_collisionCache.ContainsKey(_lastHitCollider)) {
                 CacheLaserHit();
@@ -123,7 +127,7 @@ namespace Game.Features.LaserBeam {
         void TryToApplyDamage() {
             _lastHitObjectInfo = _collisionCache[_lastHitCollider];
             if (!IsCollisionDetected(_lastHitObjectInfo.collisionTag)) {
-                laserVfxController.SetDefaultLineRendererEndPosY();
+                _laserVfxController.SetDefaultLineRendererEndPosY();
                 return;
             }
             

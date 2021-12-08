@@ -5,9 +5,13 @@ namespace Game.Features.LaserBeam {
 
         [SerializeField] float _offsetFromPlayerCollider;
         [SerializeField] LineRenderer _lineRenderer;
+        [SerializeField] GameObject _laserMainVfx;
+        [SerializeField] GameObject _laserExtraEnergyVfx;
 
         Vector3 _lineEndPos;
         Vector3[] _lineStartPositions;
+
+        public GameObject LaserMainVfx => _laserMainVfx;
 
         void Start() => Initialise();
 
@@ -23,6 +27,10 @@ namespace Game.Features.LaserBeam {
 
         public void SetDefaultLineRendererEndPosY() {
             _lineRenderer.SetPosition(1, _lineStartPositions[1]);
+        }
+
+        public void EnableExtraEnergyVfx(bool isEnabled) {
+            _laserExtraEnergyVfx.SetActive(isEnabled);
         }
     }
 }
