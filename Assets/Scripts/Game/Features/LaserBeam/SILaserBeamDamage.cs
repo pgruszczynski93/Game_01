@@ -52,6 +52,7 @@ namespace Game.Features.LaserBeam {
         }
         
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
+            //todo : wlaczyc GO przed bonusem
             switch(bonusSettings.bonusType) {
                 case BonusType.Health:
                     break;
