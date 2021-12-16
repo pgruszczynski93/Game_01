@@ -27,6 +27,7 @@ namespace SpaceInvaders
 
     [Serializable]
     public class RuntimeBonus : BonusSettings {
+        public bool isCoroutineActive;
         public Coroutine bonusRoutine;
         public RuntimeBonus(BonusSettings settings) : base(settings) {}
     }

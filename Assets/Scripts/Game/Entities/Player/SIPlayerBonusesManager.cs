@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     public class SIPlayerBonusesManager : MonoBehaviour {
-        Dictionary<BonusType, RuntimeBonus> _activeBonuses;
+        static Dictionary<BonusType, RuntimeBonus> _activeBonuses;
 
         void Start() {
             Initialise();
@@ -38,11 +38,15 @@ namespace SpaceInvaders {
         void HandleOnBonusCollected(BonusSettings collectedBonusSettings) {
             ManageCollectedBonus(collectedBonusSettings);
         }
+
+        public static bool IsBonusActive(BonusType type) {
+            return IsBonusTypeAdded(type) && _activeBonuses[type].isCoroutineActive;
+        }
         
         void ManageCollectedBonus(BonusSettings collectedBonusSettings) {
             BonusType bonusType = collectedBonusSettings.bonusType;
 
-            if (!IsBonusActive(bonusType))
+            if (!IsBonusTypeAdded(bonusType))
                 _activeBonuses.Add(bonusType, new RuntimeBonus(collectedBonusSettings));
             else
                 StopCoroutine(_activeBonuses[collectedBonusSettings.bonusType].bonusRoutine);
@@ -61,14 +65,20 @@ namespace SpaceInvaders {
             }
         }
 
-        bool IsBonusActive(BonusType bonusType) {
+        static bool IsBonusTypeAdded(BonusType bonusType) {
             return _activeBonuses.ContainsKey(bonusType);
         }
 
         IEnumerator RunBonusRoutine(BonusSettings bonusSettings) {
             yield return WaitUtils.WaitSecondsAndRunSequence(
-                ()=> SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings),
-                () => SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings),
+                ()=> {
+                    SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings);
+                    _activeBonuses[bonusSettings.bonusType].isCoroutineActive = true;
+                },
+                () => {
+                    SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings);
+                    _activeBonuses[bonusSettings.bonusType].isCoroutineActive = false;
+                },
                 bonusSettings.durationTime);
         }
     }

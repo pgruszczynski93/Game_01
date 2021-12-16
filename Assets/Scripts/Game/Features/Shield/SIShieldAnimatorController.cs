@@ -3,14 +3,23 @@ using UnityEngine;
 namespace Game.Features.Shield {
     public class SIShieldAnimatorController : MonoBehaviour {
         static readonly int HiddenAnimationID = Animator.StringToHash("ShieldHidden");
+        static readonly int ExtraEnergyAnimationID = Animator.StringToHash("ExtraEnergyEnabled");
+        
         [SerializeField] Animator _shieldAnimator;
 
         public void SetShowAnimation() {
-            _shieldAnimator.ResetTrigger(HiddenAnimationID);
+            if(_shieldAnimator.isActiveAndEnabled)
+                _shieldAnimator.ResetTrigger(HiddenAnimationID);
         }
         
         public void SetHideAnimation() {
-            _shieldAnimator.SetTrigger(HiddenAnimationID);
+            if(_shieldAnimator.isActiveAndEnabled)
+                _shieldAnimator.SetTrigger(HiddenAnimationID);
+        }
+
+        public void EnableExtraEnergyAnimation(bool isEnabled) {
+            if(_shieldAnimator.isActiveAndEnabled)
+                _shieldAnimator.SetBool(ExtraEnergyAnimationID, isEnabled);
         }
     }
 }

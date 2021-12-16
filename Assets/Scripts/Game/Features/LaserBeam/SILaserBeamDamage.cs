@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Configs;
 using SpaceInvaders;
@@ -67,8 +66,6 @@ namespace Game.Features.LaserBeam {
                     break;
                 case BonusType.TimeSlowDown:
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -88,8 +85,6 @@ namespace Game.Features.LaserBeam {
                     break;
                 case BonusType.TimeSlowDown:
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 

@@ -58,12 +58,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/ShieldSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/ShieldSettings.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/FX_Materials/FX_WindTunnel.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/FX_Materials/FX_WindTunnel.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/VFXes/LaserSystem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/VFXes/LaserSystem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/ShieldSystem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/ShieldSystem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamDamage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamDamage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamVfxController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamVfxController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldAnimatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldAnimatorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,10 +228,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIHealth.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIDamageVFX.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerHealth.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIGameExecutor.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SIProjectileSettings.cs" />
@@ -263,7 +266,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIBonusesEvents.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEnums.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusColliderBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/SIColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIProjectileEntity.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusColliderBehaviour.cs" />
@@ -272,6 +274,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Collisions/DamageInfo.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamVfxController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamDamage.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/ShieldSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldAnimatorController.cs" />
       </list>
     </option>
   </component>
@@ -660,7 +667,9 @@
       <workItem from="1638268541940" duration="4375000" />
       <workItem from="1638914983897" duration="2233000" />
       <workItem from="1638999687831" duration="122000" />
-      <workItem from="1638999938130" duration="3287000" />
+      <workItem from="1638999938130" duration="3961000" />
+      <workItem from="1639605729960" duration="641000" />
+      <workItem from="1639689589185" duration="4716000" />
     </task>
     <servers />
   </component>
@@ -697,12 +706,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="224" key="#xdebugger.evaluate/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1637796178674" />
-    <state x="715" y="224" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1630773324010" />
     <state width="879" height="464" key="DebuggerActiveHint" timestamp="1638270241688">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="879" height="464" key="DebuggerActiveHint/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638270241688" />
-    <state width="879" height="464" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1630773314007" />
     <state width="1877" height="231" key="GridCell.Tab.0.bottom" timestamp="1638280157193">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -796,11 +803,15 @@
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638026450684" />
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633783164277" />
-    <state x="1920" y="14" width="1605" height="1027" key="dock-window-1" timestamp="1639004002057">
+    <state x="1920" y="0" width="1593" height="1027" key="dock-window-1" timestamp="1639690275994">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="1920" y="14" width="1605" height="1027" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1639004002057" />
+    <state x="1920" y="0" width="1593" height="1027" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1639690275994" />
     <state x="699" y="211" width="1003" height="1027" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1634939771423" />
+    <state x="2073" y="0" width="1593" height="1027" maximized="true" key="dock-window-2" timestamp="1639694342924">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2073" y="0" width="1593" height="1027" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1639694342924" />
     <state x="2547" y="119" width="786" height="801" key="find.popup" timestamp="1634488879165">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -810,10 +821,10 @@
     </state>
     <state x="2536" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1635198731679" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634940134213" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1638917322613">
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1639692875254">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638917322613" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1639692875254" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1634940713365" />
   </component>
   <component name="XDebuggerManager">
@@ -883,6 +894,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs</url>
+          <line>75</line>
+          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\Entities\Player\SIPlayerBonusesManager.cs" initialLine="75">
+            <startOffsets>
+              <option value="2499" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2564" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs</url>
+          <line>79</line>
+          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\Entities\Player\SIPlayerBonusesManager.cs" initialLine="79">
+            <startOffsets>
+              <option value="2705" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2771" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

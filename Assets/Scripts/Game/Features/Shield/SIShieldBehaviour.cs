@@ -1,12 +1,12 @@
 using System.Collections;
+using Configs;
 using SpaceInvaders;
 using UnityEngine;
 
 namespace Game.Features.Shield {
     public class SIShieldBehaviour : SIBonusDrivenBehaviour{
 
-        const float WAIT_TO_DISABLE = 0.5f;
-        
+        [SerializeField] ShieldSettings _shieldSettings;
         [SerializeField] SIShieldAnimatorController _animatorController;
         
         Coroutine _shieldAnimationRoutine;
@@ -14,11 +14,15 @@ namespace Game.Features.Shield {
         protected override void SubscribeEvents() {
             base.SubscribeEvents();
             SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
+            SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
+            SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
         }
         
         protected override void UnsubscribeEvents() {
             base.UnsubscribeEvents();
-            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
+            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
+            SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
+            SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
         }
 
         protected override void OnDisable() {
@@ -29,6 +33,42 @@ namespace Game.Features.Shield {
         
         void HandleOnWaveEnd() {
             ManageDisabledBonus();
+        }
+
+        void HandleOnBonusEnabled(BonusSettings bonusSettings) {
+            switch(bonusSettings.bonusType) {
+                case BonusType.Health:
+                    break;
+                case BonusType.Projectile:
+                    break;
+                case BonusType.ShieldSystem:
+                    break;
+                case BonusType.LaserBeam:
+                    break;
+                case BonusType.ExtraEnergy:
+                    _animatorController.EnableExtraEnergyAnimation(true);
+                    break;
+                case BonusType.TimeSlowDown:
+                    break;
+            }
+        }
+
+        void HandleOnBonusDisabled(BonusSettings bonusSettings) {
+            switch(bonusSettings.bonusType) {
+                case BonusType.Health:
+                    break;
+                case BonusType.Projectile:
+                    break;
+                case BonusType.ShieldSystem:
+                    break;
+                case BonusType.LaserBeam:
+                    break;
+                case BonusType.ExtraEnergy:
+                    _animatorController.EnableExtraEnergyAnimation(false);
+                    break;
+                case BonusType.TimeSlowDown:
+                    break;
+            }
         }
 
         protected override void ManageEnabledBonus() {
@@ -47,7 +87,7 @@ namespace Game.Features.Shield {
         IEnumerator DisableRoutine() {
             yield return WaitUtils.WaitSecondsAndRunSequence(
                 _animatorController.SetHideAnimation,     
-                DisableRootObject, WAIT_TO_DISABLE);
+                DisableRootObject, _shieldSettings.waitForDisableTime);
         }
     }
 }
