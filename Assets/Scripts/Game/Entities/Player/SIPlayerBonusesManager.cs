@@ -70,16 +70,14 @@ namespace SpaceInvaders {
         }
 
         IEnumerator RunBonusRoutine(BonusSettings bonusSettings) {
+            _activeBonuses[bonusSettings.bonusType].isCoroutineActive = true;
+
             yield return WaitUtils.WaitSecondsAndRunSequence(
-                ()=> {
-                    SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings);
-                    _activeBonuses[bonusSettings.bonusType].isCoroutineActive = true;
-                },
-                () => {
-                    SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings);
-                    _activeBonuses[bonusSettings.bonusType].isCoroutineActive = false;
-                },
+                () => SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings), 
+                () => SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings),
                 bonusSettings.durationTime);
+            
+            _activeBonuses[bonusSettings.bonusType].isCoroutineActive = false;
         }
     }
 }

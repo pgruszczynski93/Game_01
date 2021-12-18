@@ -34,7 +34,7 @@
         Projectile,
         ShieldSystem,
         LaserBeam,
-        ExtraEnergy,
+        EnergyBoost,
         TimeSlowDown, 
         // Teleportation,
         // Hacking,

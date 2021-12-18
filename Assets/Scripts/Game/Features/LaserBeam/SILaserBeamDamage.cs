@@ -60,7 +60,7 @@ namespace Game.Features.LaserBeam {
                     break;
                 case BonusType.LaserBeam:
                     break;
-                case BonusType.ExtraEnergy:
+                case BonusType.EnergyBoost:
                     SetNewDamage(_damageSettings.extraDamage);
                     _laserVfxController.EnableExtraEnergyVfx(true);
                     break;
@@ -79,7 +79,7 @@ namespace Game.Features.LaserBeam {
                     break;
                 case BonusType.LaserBeam:
                     break;
-                case BonusType.ExtraEnergy:
+                case BonusType.EnergyBoost:
                     SetNewDamage(_damageSettings.basicDamage);
                     _laserVfxController.EnableExtraEnergyVfx(false);
                     break;
