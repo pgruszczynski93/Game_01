@@ -11,26 +11,12 @@ namespace Game.Features.Shield {
 
         Coroutine _shieldAnimationRoutine;
 
-        protected override void SubscribeEvents() {
-            base.SubscribeEvents();
-            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
-        }
-        
-        protected override void UnsubscribeEvents() {
-            base.UnsubscribeEvents();
-            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
-        }
-        
         protected override void OnDisable() {
             base.OnDisable();
             if(_shieldAnimationRoutine != null)
                 StopCoroutine(DisableRoutine());
         }
         
-        void HandleOnWaveEnd() {
-            ManageDisabledBonus();
-        }
-
         protected override void ManageEnergyBoostBonus(bool isEnabled) {
             base.ManageEnergyBoostBonus(isEnabled);
             _animatorController.EnableExtraEnergyAnimation(isEnabled);
@@ -41,14 +27,18 @@ namespace Game.Features.Shield {
         }
 
         protected override void ManageDisabledBonus() {
-            _shieldAnimationRoutine = StartCoroutine(DisableRoutine());
+            DisableShield();
         }
 
         void EnableShield() {
             EnableRootObject();
             _animatorController.SetShowAnimation();
         }
-        
+
+        void DisableShield() {
+            _shieldAnimationRoutine = StartCoroutine(DisableRoutine());
+        }
+
         IEnumerator DisableRoutine() {
             yield return WaitUtils.WaitSecondsAndRunSequence(
                 _animatorController.SetHideAnimation,     

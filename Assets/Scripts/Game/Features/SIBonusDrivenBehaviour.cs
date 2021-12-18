@@ -11,7 +11,6 @@ namespace SpaceInvaders {
         protected abstract void ManageEnabledBonus();
         protected abstract void ManageDisabledBonus();
         protected virtual void OnEnable() => SubscribeEvents();
-
         protected virtual void OnDisable() => UnsubscribeEvents();
         protected virtual void ManageEnergyBoostBonus(bool isEnabled) {
             _energyBoostActive = isEnabled;
@@ -21,16 +20,34 @@ namespace SpaceInvaders {
             SIEventsHandler.OnUpdate += HandleOnUpdate;
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
+            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
         }
 
         protected virtual void UnsubscribeEvents() {
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
+            SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
         }
 
-        void HandleOnUpdate() {
+        protected virtual void HandleOnBonusEnabled(BonusSettings bonusSettings) {
+            if (bonusSettings.bonusType == _assignedBonusType)
+                ManageEnabledBonus();
+        }
+
+        protected virtual void HandleOnBonusDisabled(BonusSettings bonusSettings) {
+            if (bonusSettings.bonusType == _assignedBonusType)
+                ManageDisabledBonus();
+            if (bonusSettings.bonusType == BonusType.EnergyBoost)
+                ManageEnergyBoostBonus(false);
+        }
+
+        protected virtual void HandleOnUpdate() {
             CheckForEnergyBoostBonus();
+        }
+        
+        protected virtual void HandleOnWaveEnd() {
+            ManageDisabledBonus();
         }
 
         void CheckForEnergyBoostBonus() {
@@ -43,19 +60,6 @@ namespace SpaceInvaders {
 
         bool CanRunExtraBoostBonus() {
             return _rootObject.activeInHierarchy && !_energyBoostActive && SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost);
-        }
-        
-        protected virtual void HandleOnBonusEnabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType == _assignedBonusType)
-                ManageEnabledBonus();
-        }
-
-        protected virtual void HandleOnBonusDisabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType == _assignedBonusType)
-                ManageDisabledBonus();
-            if (bonusSettings.bonusType == BonusType.EnergyBoost)
-                ManageEnergyBoostBonus(false);
-
         }
         
         protected void EnableRootObject() {

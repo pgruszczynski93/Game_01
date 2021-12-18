@@ -7,6 +7,12 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     public class SISpeedModificationManager : MonoBehaviour {
+        
+        //Note: It's not BonusDrivenBehaviour because in future it can affect
+        //some collectible object's without bonus activation. Maybe some objects
+        //will be able to use this class to perform time modification actions.
+        // but maybe it's worth to consider make some "fake bonuses" which work like bonuses but 
+        // without bonus representing objects.
 
         [SerializeField] SpeedModificationManagerSettings _settings;
         

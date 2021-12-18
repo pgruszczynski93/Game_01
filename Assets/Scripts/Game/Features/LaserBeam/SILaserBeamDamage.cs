@@ -30,70 +30,18 @@ namespace Game.Features.LaserBeam {
             _currentDamageInfo = new DamageInfo(_currentDamage);
             _collisionCache = new Dictionary<Collider, CollisionInfo>();
         }
-        void OnEnable() => SubscribeEvents();
 
-        void OnDisable() => UnsubscribeEvents(); 
-        
-        void SubscribeEvents() {
-            SIEventsHandler.OnUpdate += HandleOnUpdate;
-            SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
-            SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
+        public void EnableEnergyBoost() {
+            SetNewDamage(_damageSettings.extraDamage);
+            _laserVfxController.EnableExtraEnergyVfx(true);
         }
 
-        void UnsubscribeEvents() {
-            SIEventsHandler.OnUpdate -= HandleOnUpdate;
-            SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
-            SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
+        public void DisableEnergyBoost() {
+            SetNewDamage(_damageSettings.basicDamage);
+            _laserVfxController.EnableExtraEnergyVfx(false);
         }
 
-        void HandleOnUpdate() {
-            DetectLaserHit();
-        }
-        
-        void HandleOnBonusEnabled(BonusSettings bonusSettings) {
-            switch(bonusSettings.bonusType) {
-                case BonusType.Health:
-                    break;
-                case BonusType.Projectile:
-                    break;
-                case BonusType.ShieldSystem:
-                    break;
-                case BonusType.LaserBeam:
-                    break;
-                case BonusType.EnergyBoost:
-                    SetNewDamage(_damageSettings.extraDamage);
-                    _laserVfxController.EnableExtraEnergyVfx(true);
-                    break;
-                case BonusType.TimeSlowDown:
-                    break;
-            }
-        }
-
-        void HandleOnBonusDisabled(BonusSettings bonusSettings) {
-            switch(bonusSettings.bonusType) {
-                case BonusType.Health:
-                    break;
-                case BonusType.Projectile:
-                    break;
-                case BonusType.ShieldSystem:
-                    break;
-                case BonusType.LaserBeam:
-                    break;
-                case BonusType.EnergyBoost:
-                    SetNewDamage(_damageSettings.basicDamage);
-                    _laserVfxController.EnableExtraEnergyVfx(false);
-                    break;
-                case BonusType.TimeSlowDown:
-                    break;
-            }
-        }
-
-        void SetNewDamage(float newDamage) {
-            _currentDamage = newDamage;
-            _currentDamageInfo.SetDamage(_currentDamage);
-        }
-
-        void DetectLaserHit() {
+        public void DetectLaserHit() {
             if (!_laserVfxController.LaserMainVfx.activeInHierarchy)
                 return;
             
@@ -103,8 +51,6 @@ namespace Game.Features.LaserBeam {
                 return;
             }
 
-            // Debug.DrawRay(_thisTransform.position + _offsetFromPlayerCollider , _thisTransform.up * _collisionCheckDistance, Color.green);
-            
             _lastHitCollider = _currentHit.collider;
             _laserVfxController.SetLineRendererEndPosY(_currentHit.point.y);
             
@@ -112,6 +58,11 @@ namespace Game.Features.LaserBeam {
                 CacheLaserHit();
             }
             TryToApplyDamage();
+        }
+        
+        void SetNewDamage(float newDamage) {
+            _currentDamage = newDamage;
+            _currentDamageInfo.SetDamage(_currentDamage);
         }
 
         void CacheLaserHit() {

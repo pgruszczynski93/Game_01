@@ -1,18 +1,11 @@
 using SpaceInvaders;
+using UnityEngine;
 
 namespace Game.Features.LaserBeam {
     public class SILaserBeamBehaviour : SIBonusDrivenBehaviour {
-        
-        protected override void SubscribeEvents() {
-            base.SubscribeEvents();
-            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
-        }
-        
-        protected override void UnsubscribeEvents() {
-            base.UnsubscribeEvents();
-            SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
-        }
 
+        [SerializeField] SILaserBeamDamage _laserDamage;
+        
         protected override void ManageEnabledBonus() {
             EnableLaserBeam();
         }
@@ -28,9 +21,18 @@ namespace Game.Features.LaserBeam {
         void DisableLaserBeam() {
             DisableRootObject();
         }
-        
-        void HandleOnWaveEnd() {
-            ManageDisabledBonus();
+
+        protected override void ManageEnergyBoostBonus(bool isEnabled) {
+            base.ManageEnergyBoostBonus(isEnabled);
+            if(isEnabled)
+                _laserDamage.EnableEnergyBoost();
+            else 
+                _laserDamage.DisableEnergyBoost();
+        }
+
+        protected override void HandleOnUpdate() {
+            base.HandleOnUpdate();
+            _laserDamage.DetectLaserHit();
         }
     }
 }
