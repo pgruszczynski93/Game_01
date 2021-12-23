@@ -9,6 +9,7 @@ namespace Configs {
         public float slowDownMultiplier;
         public float speedUpMultiplier;
         public float defaultSpeedMultiplier;
+        public float energyBoostSlowDownMultiplier;
         public AnimationCurve speedUpCurve;
         public AnimationCurve slowDownCurve;
     }

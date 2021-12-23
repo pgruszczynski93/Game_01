@@ -48,13 +48,13 @@ namespace SpaceInvaders
         }
 
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType == BonusType.TimeSlowDown) {
+            if (bonusSettings.bonusType == BonusType.TimeModification) {
                 SetTimeSpeedModifier(_playerMovementSettings.slowDownBonusSpeedModificator);
             }
         }
         
         void HandleOnBonusDisabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType == BonusType.TimeSlowDown) {
+            if (bonusSettings.bonusType == BonusType.TimeModification) {
                 SetTimeSpeedModifier(_playerMovementSettings.defaultSpeedModificator);
             }
         }

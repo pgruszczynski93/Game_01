@@ -54,19 +54,31 @@ namespace SpaceInvaders {
             if (!CanRunExtraBoostBonus()) 
                 return;
 
-            Debug.Log($"{nameof(GetType)} _ EXTRA");
+            Debug.Log($"{_assignedBonusType.ToString()} - energyboost");
             ManageEnergyBoostBonus(true);
         }
 
         bool CanRunExtraBoostBonus() {
-            return _rootObject.activeInHierarchy && !_energyBoostActive && SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost);
+            if (_assignedBonusType == BonusType.TimeModification)
+                return true;
+            
+            return _rootObject != null && 
+                   _rootObject.activeInHierarchy && 
+                   !_energyBoostActive && 
+                   SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost);
         }
         
         protected void EnableRootObject() {
+            if (_rootObject == null) {
+                Debug.Log($"{_assignedBonusType.ToString()} - no root object");
+                return;
+            }
             _rootObject.SetActive(true);
         }
 
         protected void DisableRootObject() {
+            if (_rootObject == null)
+                return;
             _rootObject.SetActive(false);
         }
     }

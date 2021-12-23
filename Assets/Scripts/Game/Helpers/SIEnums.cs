@@ -35,7 +35,7 @@
         ShieldSystem,
         LaserBeam,
         EnergyBoost,
-        TimeSlowDown, 
+        TimeModification, 
         // Teleportation,
         // Hacking,
         // MassiveKill, 

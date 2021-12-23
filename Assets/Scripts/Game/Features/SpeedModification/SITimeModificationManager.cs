@@ -6,14 +6,8 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public class SISpeedModificationManager : MonoBehaviour {
+    public class SITimeModificationManager : SIBonusDrivenBehaviour {
         
-        //Note: It's not BonusDrivenBehaviour because in future it can affect
-        //some collectible object's without bonus activation. Maybe some objects
-        //will be able to use this class to perform time modification actions.
-        // but maybe it's worth to consider make some "fake bonuses" which work like bonuses but 
-        // without bonus representing objects.
-
         [SerializeField] SpeedModificationManagerSettings _settings;
         
         [ShowInInspector] bool isModifyingSpeed; 
@@ -32,21 +26,24 @@ namespace SpaceInvaders {
         void Initialise() {
             _currentSpeedModifier = _settings.defaultSpeedMultiplier;       
         }
-        
-        void OnEnable() => SubscribeEvents();
-        void OnDisable() => UnsubscribeEvents();
-        
-        void SubscribeEvents() {
+
+        protected override void ManageEnabledBonus() {
+            ApplySlowDownMultiplier();
+        }
+
+        protected override void ManageDisabledBonus() {
+            SetDefaultSpeedMultiplier();
+        }
+
+        protected override void SubscribeEvents() {
+            base.SubscribeEvents();
             SIGameplayEvents.OnSpeedModificationRequested += HandleOnSpeedModificationRequested;
-            SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
-            SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
             SIGameplayEvents.OnWaveCoolDown += HandleOnWaveCoolDown;
         }
         
-        void UnsubscribeEvents() {
+        protected override void UnsubscribeEvents() {
+            base.UnsubscribeEvents();
             SIGameplayEvents.OnSpeedModificationRequested -= HandleOnSpeedModificationRequested;
-            SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
-            SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
             SIGameplayEvents.OnWaveCoolDown -= HandleOnWaveCoolDown;
         }
 
@@ -59,18 +56,6 @@ namespace SpaceInvaders {
             
             _objectsToModifySpeed.Add(objToModifyTime);
             objToModifyTime.SetTimeSpeedModifier(_settings.defaultSpeedMultiplier);
-        }
-        
-        void HandleOnBonusEnabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType == BonusType.TimeSlowDown) {
-                ApplySlowDownMultiplier();
-            }
-        }
-        
-        void HandleOnBonusDisabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType == BonusType.TimeSlowDown) {
-                SetDefaultSpeedMultiplier();
-            }
         }
         
         void HandleOnWaveCoolDown() {
