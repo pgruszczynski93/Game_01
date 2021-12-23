@@ -59,7 +59,7 @@ namespace SpaceInvaders {
         }
 
         bool CanRunExtraBoostBonus() {
-            if (_assignedBonusType == BonusType.TimeModification)
+            if (IsTimeModificationActive())
                 return true;
             
             return _rootObject != null && 
@@ -67,7 +67,13 @@ namespace SpaceInvaders {
                    !_energyBoostActive && 
                    SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost);
         }
-        
+
+        bool IsTimeModificationActive() {
+            return !_energyBoostActive && 
+                   SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification) && 
+                   _assignedBonusType == BonusType.TimeModification;
+        }
+
         protected void EnableRootObject() {
             if (_rootObject == null) {
                 Debug.Log($"{_assignedBonusType.ToString()} - no root object");

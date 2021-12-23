@@ -8,11 +8,15 @@ using UnityEngine;
 namespace SpaceInvaders {
     public class SITimeModificationManager : SIBonusDrivenBehaviour {
         
-        [SerializeField] SpeedModificationManagerSettings _settings;
-        
         [ShowInInspector] bool isModifyingSpeed; 
         [ShowInInspector] float _currentSpeedModifier;
         [ShowInInspector] float _timeSpeedModificationProgress;
+        
+        [SerializeField] TimeModificationManagerSettings _settings;
+
+        TimeSpeedModificationParam _basicSlowDownParam;
+        TimeSpeedModificationParam _energyBoostSlowDownParam;
+        
         Coroutine _speedModificationRoutine;
         HashSet<IModifyTimeSpeedMultiplier> _objectsToModifySpeed;
 
@@ -24,7 +28,21 @@ namespace SpaceInvaders {
         }
 
         void Initialise() {
-            _currentSpeedModifier = _settings.defaultSpeedMultiplier;       
+            _basicSlowDownParam = new TimeSpeedModificationParam {
+                duration = _settings.basicTimeMultiplierParam.duration,
+                // fromTimeMul = _settings.basicTimeMultiplierParam.slowDownMultiplier,
+                // toTimeMul = _settings.defaultTimeSpeedMultiplier,
+                minTimeMulVal = _settings.basicTimeMultiplierParam.minMultiplier,
+                maxTimeMulVal = _settings.basicTimeMultiplierParam.maxMultiplier
+            };
+            
+            _energyBoostSlowDownParam = new TimeSpeedModificationParam {
+                duration = _settings.energyBoostTimeMultiplierParam.duration,
+                // fromTimeMul = _settings.energyBoostTimeMultiplierParam.slowDownMultiplier,
+                // toTimeMul = _settings.defaultTimeSpeedMultiplier,
+                minTimeMulVal = _settings.energyBoostTimeMultiplierParam.minMultiplier,
+                maxTimeMulVal = _settings.energyBoostTimeMultiplierParam.maxMultiplier
+            };
         }
 
         protected override void ManageEnabledBonus() {
@@ -55,31 +73,31 @@ namespace SpaceInvaders {
                 return;
             
             _objectsToModifySpeed.Add(objToModifyTime);
-            objToModifyTime.SetTimeSpeedModifier(_settings.defaultSpeedMultiplier);
+            objToModifyTime.SetTimeSpeedModifier(_settings.defaultTimeSpeedMultiplier);
         }
         
         void HandleOnWaveCoolDown() {
             SetDefaultSpeedMultiplier();
         }
 
-        IEnumerator TimeSpeedModificationRoutine(float targetSpeedModifier, AnimationCurve curve) {
+        IEnumerator TimeSpeedModificationRoutine(TimeSpeedModificationParam modParam, AnimationCurve curve) {
 
             isModifyingSpeed = true;
             _timeSpeedModificationProgress = 0.0f;
             float time = 0.0f;
-            float modifierValue = _settings.defaultSpeedMultiplier;
-            while (time < _settings.speedModificationDuration) {
-                _timeSpeedModificationProgress = time / _settings.speedModificationDuration;
-                modifierValue = Mathf.Lerp(_currentSpeedModifier, targetSpeedModifier, curve.Evaluate(_timeSpeedModificationProgress));
-                modifierValue = Mathf.Clamp(modifierValue, _settings.slowDownMultiplier, _settings.speedUpMultiplier);
+            float modifierValue = _settings.defaultTimeSpeedMultiplier;
+            while (time < modParam.duration) {
+                _timeSpeedModificationProgress = time / modParam.duration;
+                modifierValue = Mathf.Lerp(modParam.fromTimeMul, modParam.toTimeMul, curve.Evaluate(_timeSpeedModificationProgress));
+                modifierValue = Mathf.Clamp(modifierValue, modParam.minTimeMulVal, modParam.maxTimeMulVal);
                 ManageObjectToModifySpeed(modifierValue);
                 time += Time.fixedDeltaTime;
                 yield return WaitUtils.SkipFixedFrames(1);
             }
 
             _timeSpeedModificationProgress = 1f;
-            ManageObjectToModifySpeed(targetSpeedModifier);
-            _currentSpeedModifier = targetSpeedModifier;
+            ManageObjectToModifySpeed(modParam.toTimeMul);
+            _currentSpeedModifier = modParam.toTimeMul;
             isModifyingSpeed = false;
         }
 
@@ -89,27 +107,53 @@ namespace SpaceInvaders {
         }
         
         void ApplySlowDownMultiplier() {
-            ApplySpeedModification(_settings.slowDownMultiplier, _settings.slowDownCurve);
-        }
-
-        void SetDefaultSpeedMultiplier() {
-            ApplySpeedModification(_settings.defaultSpeedMultiplier, _settings.speedUpCurve);
+            _basicSlowDownParam.fromTimeMul = _currentSpeedModifier;
+            _basicSlowDownParam.toTimeMul = _settings.basicTimeMultiplierParam.slowDownMultiplier;
+            ApplySpeedModification(_basicSlowDownParam, _settings.slowDownCurve);
         }
         
-        void ApplySpeedModification(float multiplier, AnimationCurve curve) {
-            if (CanRestartTimeSpeedModificationRoutine(multiplier)) 
-                _speedModificationRoutine = StartCoroutine(TimeSpeedModificationRoutine(multiplier, curve));
+        void SetDefaultSpeedMultiplier() {
+            _basicSlowDownParam.fromTimeMul = _currentSpeedModifier;
+            _basicSlowDownParam.toTimeMul = _settings.defaultTimeSpeedMultiplier;
+            ApplySpeedModification(_energyBoostSlowDownParam, _settings.speedUpCurve);
+        }
+        
+        [Button]
+        void SetEnergyBoostSpeedModifierStartVal() {
+            //todo opakować klase TimeSpeedMultiplierParameter w metody!!!
+           // i dodać obsluge postprocesow 
+            
+            _energyBoostSlowDownParam.fromTimeMul = _currentSpeedModifier;
+            _energyBoostSlowDownParam.toTimeMul = _currentSpeedModifier * _settings.energyBoostTimeMultiplierParam.slowDownMultiplier;
+            ApplySpeedModification(_energyBoostSlowDownParam, _settings.slowDownCurve);
+        }
+        
+        [Button]
+        void SetEnergyBoostMultiplierEndVal() {
+            float toModifier = SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification)
+                ? _settings.basicTimeMultiplierParam.slowDownMultiplier
+                : _settings.defaultTimeSpeedMultiplier;
+
+            _energyBoostSlowDownParam.fromTimeMul = _currentSpeedModifier;
+            _energyBoostSlowDownParam.toTimeMul = toModifier;
+            ApplySpeedModification(_energyBoostSlowDownParam, _settings.speedUpCurve);
+        }
+        
+        void ApplySpeedModification(TimeSpeedModificationParam modParam, AnimationCurve curve) {
+            if (CanRestartTimeSpeedModificationRoutine(modParam.toTimeMul)) 
+                _speedModificationRoutine = StartCoroutine(TimeSpeedModificationRoutine(modParam, curve));
             else if(!_settings.useIncrementalSpeedModification)
-                ManageObjectToModifySpeed(multiplier);
+                ManageObjectToModifySpeed(modParam.toTimeMul);
         }
 
         bool CanRestartTimeSpeedModificationRoutine(float multiplier) {
-            return _settings.useIncrementalSpeedModification && !isModifyingSpeed &&
+            return _settings.useIncrementalSpeedModification && !isModifyingSpeed && 
                    Math.Abs(multiplier - _currentSpeedModifier) > 1e-05f;
         }
 
         void ManageObjectToModifySpeed(float speedMultiplier) {
-            float progressToUse = _settings.useIncrementalSpeedModification ? _timeSpeedModificationProgress : 1f;
+            float progressToUse = _settings.useIncrementalSpeedModification && isModifyingSpeed
+                ? _timeSpeedModificationProgress : 1f;
             foreach (IModifyTimeSpeedMultiplier objToModify in _objectsToModifySpeed) {
                 objToModify.SetTimeSpeedModifier(speedMultiplier, progressToUse);
             }
