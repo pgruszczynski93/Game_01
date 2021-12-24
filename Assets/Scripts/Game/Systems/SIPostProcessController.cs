@@ -11,7 +11,8 @@ namespace Project.Systems {
     public class SIPostProcessController : MonoBehaviour, IModifyTimeSpeedMultiplier {
         const float MODIFIER_TOLERANCE = 1e-05f;
         
-        [SerializeField] float _defaultSpeedMultiplier; 
+        [SerializeField] float _defaultSpeedMultiplier;
+        [SerializeField] float _timeSpeedModificationEffectApplyTreshold;
         [SerializeField] PostProcessConfig _baseConfig;
         [SerializeField] PostProcessConfig _timeSpeedModificationConfig;
         [SerializeField] Volume _postProcessVolume;
@@ -19,6 +20,7 @@ namespace Project.Systems {
         bool _isModifyingPosprocesses;
         bool _isPostprocessModificationLocked;
         float _currentModifierValue;
+        float _timeSpeedModificationProgress;
         Bloom _bloom;
         Vignette _vignette;
         Coroutine _waitForPostprocessLockRoutine;
@@ -69,9 +71,17 @@ namespace Project.Systems {
             TryMakeTimeModificationEffect(modifier, progress);
         }
 
-        bool IsTimeModificationWithBoostActive() {
-            // return SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification) &&
-                   return SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost);
+        bool CanUseTimeModificationEffect() {
+            return SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification);
+            // && _timeSpeedModificationProgress < 
+            
+            //todo: obsluzyc przypadek uzycia efektu do zmiany szybkosci symulacji czasu 
+            // kiedy mam aktywny energyboost i timespeed
+        }
+
+        bool CanRestoreNormalTimeEffect() {
+            return SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification);
+            // &&
         }
 
         void SetPostprocessModificationLock(bool isEnabled) {
@@ -91,14 +101,16 @@ namespace Project.Systems {
                 _bloom.tint.Interp(_baseConfig.bloomTintColor, _timeSpeedModificationConfig.bloomTintColor, progress);
                 _vignette.intensity.value = Mathf.Lerp(_baseConfig.vignetteIntensity, _timeSpeedModificationConfig.vignetteIntensity, progress);
                 _vignette.smoothness.value = Mathf.Lerp(_baseConfig.vignetteSmoothness, _timeSpeedModificationConfig.vignetteSmoothness, progress);
+                _timeSpeedModificationProgress = 1 - progress;
             }
-            else { 
+            else if (_currentModifierValue < modifier){ 
                 _bloom.threshold.value = Mathf.Lerp(_timeSpeedModificationConfig.bloomThreshold, _baseConfig.bloomThreshold, progress);
                 _bloom.intensity.value = Mathf.Lerp(_timeSpeedModificationConfig.bloomIntensity, _baseConfig.bloomIntensity, progress);
                 _bloom.scatter.value = Mathf.Lerp(_timeSpeedModificationConfig.bloomScatter, _baseConfig.bloomScatter, progress);
                 _bloom.tint.Interp(_timeSpeedModificationConfig.bloomTintColor, _baseConfig.bloomTintColor, progress);
                 _vignette.intensity.value = Mathf.Lerp(_timeSpeedModificationConfig.vignetteIntensity, _baseConfig.vignetteIntensity, progress);
                 _vignette.smoothness.value = Mathf.Lerp(_timeSpeedModificationConfig.vignetteSmoothness, _baseConfig.vignetteSmoothness, progress);
+                _timeSpeedModificationProgress = progress;
             }
             
             _currentModifierValue = modifier;
