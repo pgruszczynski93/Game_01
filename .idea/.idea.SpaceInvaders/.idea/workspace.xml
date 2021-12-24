@@ -58,15 +58,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[GameManager].prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Gameplay/[GameManager].prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Speed Modification Manager Config.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Speed Modification Manager Config.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/TimeModificationManagerSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/TimeModificationManagerSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Features/SIBonusDrivenBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Features/SIBonusDrivenBehaviour.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Features/SpeedModification/SITimeModificationManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Features/SpeedModification/SITimeModificationManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Features/SpeedModification/TimeSpeedModificationParam.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Features/SpeedModification/TimeSpeedModificationParam.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIPostProcessController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIPostProcessController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
     </list>
@@ -93,6 +92,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Grid controller config.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Grid Movement Config.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Gameplay/[Player].prefab" root0="FORCE_HIGHLIGHTING" />
@@ -139,6 +139,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/SITargetFollower.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIConstantsHelpers.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SISettingsConsts.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4CD14385-55E6-4C0E-AEDA-2393D3C9CF4A/49/2a50d501/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIGameStatistics.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10564ED1-54D6-47E1-94BE-F4AEF8878649/59/397821a6/Time.cs" root0="SKIP_HIGHLIGHTING" />
@@ -182,6 +183,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10564ED1-54D6-47E1-94BE-F4AEF8878649/24/a6da843d/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@10.7.0/Runtime/Debugging/DebugUpdater.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyShootController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovementLimiter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -258,27 +260,27 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/SIColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIProjectileEntity.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusColliderBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/LaserBeamDamageSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Collisions/DamageInfo.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamVfxController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/ShieldSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldAnimatorController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamDamage.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/SpeedModification/SISpeedModificationManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Helpers/SIEnums.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/SIBonusDrivenBehaviour.cs" />
         <option value="$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.4.8/Editor/Utilities/ClipModifier.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/SpeedModificationManagerSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/SpeedModification/TimeSpeedModificationParameter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/TimeModificationManagerSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/SpeedModification/TimeSpeedModificationParam.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIPostProcessController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/SIBonusDrivenBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/SpeedModification/SITimeModificationManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerBonusesManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIPostProcessController.cs" />
       </list>
     </option>
   </component>
@@ -304,7 +306,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="XThreadsFramesViewSplitterKey" value="0.27915195" />
+    <property name="XThreadsFramesViewSplitterKey" value="0.42328042" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -322,10 +324,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="13060">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="3976">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="13060" />
+      <option name="pid" value="3976" />
       <option name="selectedOptions">
         <set />
       </option>
@@ -673,7 +675,9 @@
       <workItem from="1639829806319" duration="5612000" />
       <workItem from="1640253543905" duration="2191000" />
       <workItem from="1640262398642" duration="9972000" />
-      <workItem from="1640344091261" duration="3963000" />
+      <workItem from="1640344091261" duration="4204000" />
+      <workItem from="1640357078052" duration="7871000" />
+      <workItem from="1640378457815" duration="2475000" />
     </task>
     <servers />
   </component>
@@ -706,95 +710,96 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638999773052" />
-    <state x="715" y="224" width="842" height="592" key="#xdebugger.evaluate" timestamp="1637796178674">
+    <state x="715" y="224" width="842" height="592" key="#xdebugger.evaluate" timestamp="1640380685589">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="224" key="#xdebugger.evaluate/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1637796178674" />
-    <state width="879" height="464" key="DebuggerActiveHint" timestamp="1640345388200">
+    <state x="715" y="224" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1640380685589" />
+    <state width="879" height="464" key="DebuggerActiveHint" timestamp="1640379464272">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="879" height="464" key="DebuggerActiveHint/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638270241688" />
-    <state width="879" height="464" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1640345388200" />
-    <state width="938" height="231" key="GridCell.Tab.0.bottom" timestamp="1640345160734">
+    <state width="879" height="464" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1640379464272" />
+    <state width="938" height="231" key="GridCell.Tab.0.bottom" timestamp="1640380634775">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157193" />
-    <state width="938" height="231" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160734" />
-    <state width="938" height="231" key="GridCell.Tab.0.center" timestamp="1640345160734">
+    <state width="938" height="231" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634775" />
+    <state width="938" height="231" key="GridCell.Tab.0.center" timestamp="1640380634774">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157193" />
-    <state width="938" height="231" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160734" />
-    <state width="938" height="231" key="GridCell.Tab.0.left" timestamp="1640345160734">
+    <state width="938" height="231" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634774" />
+    <state width="938" height="231" key="GridCell.Tab.0.left" timestamp="1640380634774">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157193" />
-    <state width="938" height="231" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160734" />
-    <state width="938" height="231" key="GridCell.Tab.0.right" timestamp="1640345160734">
+    <state width="938" height="231" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634774" />
+    <state width="938" height="231" key="GridCell.Tab.0.right" timestamp="1640380634774">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157193" />
-    <state width="938" height="231" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160734" />
-    <state width="938" height="231" key="GridCell.Tab.1.bottom" timestamp="1640345177201">
+    <state width="938" height="231" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634774" />
+    <state width="938" height="231" key="GridCell.Tab.1.bottom" timestamp="1640380650815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1640345177201" />
-    <state width="938" height="231" key="GridCell.Tab.1.center" timestamp="1640345177201">
+    <state width="938" height="231" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1640380650815" />
+    <state width="938" height="231" key="GridCell.Tab.1.center" timestamp="1640380650815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1640345177201" />
-    <state width="938" height="231" key="GridCell.Tab.1.left" timestamp="1640345177201">
+    <state width="938" height="231" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1640380650815" />
+    <state width="938" height="231" key="GridCell.Tab.1.left" timestamp="1640380650815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1640345177201" />
-    <state width="938" height="231" key="GridCell.Tab.1.right" timestamp="1640345177201">
+    <state width="938" height="231" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1640380650815" />
+    <state width="938" height="231" key="GridCell.Tab.1.right" timestamp="1640380650815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1640345177201" />
-    <state width="938" height="231" key="GridCell.Tab.2.bottom" timestamp="1640345160441">
+    <state width="938" height="231" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1640380650815" />
+    <state width="938" height="231" key="GridCell.Tab.2.bottom" timestamp="1640380634631">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160441" />
-    <state width="938" height="231" key="GridCell.Tab.2.center" timestamp="1640345160441">
+    <state width="938" height="231" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634631" />
+    <state width="938" height="231" key="GridCell.Tab.2.center" timestamp="1640380634631">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160441" />
-    <state width="938" height="231" key="GridCell.Tab.2.left" timestamp="1640345160441">
+    <state width="938" height="231" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634631" />
+    <state width="938" height="231" key="GridCell.Tab.2.left" timestamp="1640380634631">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160441" />
-    <state width="938" height="231" key="GridCell.Tab.2.right" timestamp="1640345160441">
+    <state width="938" height="231" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634631" />
+    <state width="938" height="231" key="GridCell.Tab.2.right" timestamp="1640380634631">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160441" />
-    <state width="938" height="231" key="GridCell.Tab.3.bottom" timestamp="1640345160442">
+    <state width="938" height="231" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634631" />
+    <state width="938" height="231" key="GridCell.Tab.3.bottom" timestamp="1640380634631">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160442" />
-    <state width="938" height="231" key="GridCell.Tab.3.center" timestamp="1640345160441">
+    <state width="938" height="231" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634631" />
+    <state width="938" height="231" key="GridCell.Tab.3.center" timestamp="1640380634631">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160441" />
-    <state width="938" height="231" key="GridCell.Tab.3.left" timestamp="1640345160441">
+    <state width="938" height="231" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634631" />
+    <state width="938" height="231" key="GridCell.Tab.3.left" timestamp="1640380634631">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160441" />
-    <state width="938" height="231" key="GridCell.Tab.3.right" timestamp="1640345160442">
+    <state width="938" height="231" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634631" />
+    <state width="938" height="231" key="GridCell.Tab.3.right" timestamp="1640380634631">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="231" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638280157194" />
-    <state width="938" height="231" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1640345160442" />
+    <state width="938" height="231" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1640380634631" />
     <state x="783" y="221" key="RiderGenerateDialog" timestamp="1640346286122">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -850,43 +855,30 @@
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIShootController.cs</url>
-          <line>38</line>
-          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\Weapons\SIShootController.cs" initialLine="38">
-            <startOffsets>
-              <option value="1330" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1467" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/Entities/Player/SIPlayerShootController.cs</url>
-          <line>44</line>
-          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\Entities\Player\SIPlayerShootController.cs" initialLine="44">
-            <startOffsets>
-              <option value="1871" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1905" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Game/Features/SpeedModification/SITimeModificationManager.cs</url>
-          <line>85</line>
-          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\Features\SpeedModification\SITimeModificationManager.cs" initialLine="87">
+          <line>128</line>
+          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\Features\SpeedModification\SITimeModificationManager.cs" initialLine="128">
             <startOffsets>
-              <option value="3290" />
+              <option value="5541" />
             </startOffsets>
             <endOffsets>
-              <option value="3349" />
+              <option value="5616" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="32" />
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/Features/SIBonusDrivenBehaviour.cs</url>
+          <line>41</line>
+          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\Features\SIBonusDrivenBehaviour.cs" initialLine="41">
+            <startOffsets>
+              <option value="1753" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1783" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

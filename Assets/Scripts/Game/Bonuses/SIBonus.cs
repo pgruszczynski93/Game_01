@@ -81,6 +81,7 @@ namespace SpaceInvaders {
         }
 
         public void StopObject() {
+            _isInStopRoutine = false;
             TryEnableBonusAndSelectedVariant(false);
             ResetMotion();
         }

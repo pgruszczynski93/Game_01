@@ -13,7 +13,7 @@ namespace Project.Systems {
         
         [SerializeField] float _defaultSpeedMultiplier; 
         [SerializeField] PostProcessConfig _baseConfig;
-        [SerializeField] PostProcessConfig _speedModificationConfig;
+        [SerializeField] PostProcessConfig _timeSpeedModificationConfig;
         [SerializeField] Volume _postProcessVolume;
         
         bool _isModifyingPosprocesses;
@@ -66,35 +66,39 @@ namespace Project.Systems {
         //Note: This time this method will be used to interpolate between values during TimeSpeed changes (SiSpeedModificationManager coroutine works).
         public void SetTimeSpeedModifier(float modifier, float progress) {
             _isModifyingPosprocesses = Math.Abs(_currentModifierValue - modifier) > 1e-05f && progress < 1f;
-            TryToLerpPostprocessValues(modifier, progress);
+            TryMakeTimeModificationEffect(modifier, progress);
+        }
+
+        bool IsTimeModificationWithBoostActive() {
+            // return SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification) &&
+                   return SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost);
         }
 
         void SetPostprocessModificationLock(bool isEnabled) {
             _isPostprocessModificationLocked = isEnabled;
         }
 
-        void TryToLerpPostprocessValues(float modifier, float progress) {
-
+        void TryMakeTimeModificationEffect(float modifier, float progress) {
             if (_isPostprocessModificationLocked || !_isModifyingPosprocesses) {
                 _currentModifierValue = modifier;
                 return;
             }
             
             if (_currentModifierValue > modifier) {
-                _bloom.threshold.value = Mathf.Lerp(_baseConfig.bloomThreshold, _speedModificationConfig.bloomThreshold, progress);
-                _bloom.intensity.value = Mathf.Lerp(_baseConfig.bloomIntensity, _speedModificationConfig.bloomIntensity, progress);
-                _bloom.scatter.value = Mathf.Lerp(_baseConfig.bloomScatter, _speedModificationConfig.bloomScatter, progress);
-                _bloom.tint.Interp(_baseConfig.bloomTintColor, _speedModificationConfig.bloomTintColor, progress);
-                _vignette.intensity.value = Mathf.Lerp(_baseConfig.vignetteIntensity, _speedModificationConfig.vignetteIntensity, progress);
-                _vignette.smoothness.value = Mathf.Lerp(_baseConfig.vignetteSmoothness, _speedModificationConfig.vignetteSmoothness, progress);
+                _bloom.threshold.value = Mathf.Lerp(_baseConfig.bloomThreshold, _timeSpeedModificationConfig.bloomThreshold, progress);
+                _bloom.intensity.value = Mathf.Lerp(_baseConfig.bloomIntensity, _timeSpeedModificationConfig.bloomIntensity, progress);
+                _bloom.scatter.value = Mathf.Lerp(_baseConfig.bloomScatter, _timeSpeedModificationConfig.bloomScatter, progress);
+                _bloom.tint.Interp(_baseConfig.bloomTintColor, _timeSpeedModificationConfig.bloomTintColor, progress);
+                _vignette.intensity.value = Mathf.Lerp(_baseConfig.vignetteIntensity, _timeSpeedModificationConfig.vignetteIntensity, progress);
+                _vignette.smoothness.value = Mathf.Lerp(_baseConfig.vignetteSmoothness, _timeSpeedModificationConfig.vignetteSmoothness, progress);
             }
             else { 
-                _bloom.threshold.value = Mathf.Lerp(_speedModificationConfig.bloomThreshold, _baseConfig.bloomThreshold, progress);
-                _bloom.intensity.value = Mathf.Lerp(_speedModificationConfig.bloomIntensity, _baseConfig.bloomIntensity, progress);
-                _bloom.scatter.value = Mathf.Lerp(_speedModificationConfig.bloomScatter, _baseConfig.bloomScatter, progress);
-                _bloom.tint.Interp(_speedModificationConfig.bloomTintColor, _baseConfig.bloomTintColor, progress);
-                _vignette.intensity.value = Mathf.Lerp(_speedModificationConfig.vignetteIntensity, _baseConfig.vignetteIntensity, progress);
-                _vignette.smoothness.value = Mathf.Lerp(_speedModificationConfig.vignetteSmoothness, _baseConfig.vignetteSmoothness, progress);
+                _bloom.threshold.value = Mathf.Lerp(_timeSpeedModificationConfig.bloomThreshold, _baseConfig.bloomThreshold, progress);
+                _bloom.intensity.value = Mathf.Lerp(_timeSpeedModificationConfig.bloomIntensity, _baseConfig.bloomIntensity, progress);
+                _bloom.scatter.value = Mathf.Lerp(_timeSpeedModificationConfig.bloomScatter, _baseConfig.bloomScatter, progress);
+                _bloom.tint.Interp(_timeSpeedModificationConfig.bloomTintColor, _baseConfig.bloomTintColor, progress);
+                _vignette.intensity.value = Mathf.Lerp(_timeSpeedModificationConfig.vignetteIntensity, _baseConfig.vignetteIntensity, progress);
+                _vignette.smoothness.value = Mathf.Lerp(_timeSpeedModificationConfig.vignetteSmoothness, _baseConfig.vignetteSmoothness, progress);
             }
             
             _currentModifierValue = modifier;
@@ -121,14 +125,14 @@ namespace Project.Systems {
 
         [Button]
         void SetSpeedModificationPostprocessConfig() {
-            _bloom.threshold.value = _speedModificationConfig.bloomThreshold;
-            _bloom.intensity.value = _speedModificationConfig.bloomIntensity;
-            _bloom.scatter.value = _speedModificationConfig.bloomScatter;
+            _bloom.threshold.value = _timeSpeedModificationConfig.bloomThreshold;
+            _bloom.intensity.value = _timeSpeedModificationConfig.bloomIntensity;
+            _bloom.scatter.value = _timeSpeedModificationConfig.bloomScatter;
             _bloom.tint.overrideState = true;
-            _bloom.tint.value = _speedModificationConfig.bloomTintColor;
+            _bloom.tint.value = _timeSpeedModificationConfig.bloomTintColor;
 
-            _vignette.intensity.value = _speedModificationConfig.vignetteIntensity;
-            _vignette.smoothness.value = _speedModificationConfig.vignetteSmoothness;
+            _vignette.intensity.value = _timeSpeedModificationConfig.vignetteIntensity;
+            _vignette.smoothness.value = _timeSpeedModificationConfig.vignetteSmoothness;
         }
         
         // void OnEnable() => SubscribeEvents();

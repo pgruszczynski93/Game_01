@@ -66,7 +66,7 @@ namespace SpaceInvaders {
         }
 
         static bool IsBonusTypeAdded(BonusType bonusType) {
-            return _activeBonuses.ContainsKey(bonusType);
+            return _activeBonuses != null && _activeBonuses.ContainsKey(bonusType);
         }
 
         IEnumerator RunBonusRoutine(BonusSettings bonusSettings) {
