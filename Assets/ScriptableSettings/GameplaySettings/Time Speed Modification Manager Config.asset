@@ -10,13 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f3e7f7699ef4feab4d5defb3d8db8f0, type: 3}
-  m_Name: Speed Modification Manager Config
+  m_Name: Time Speed Modification Manager Config
   m_EditorClassIdentifier: 
   useIncrementalSpeedModification: 1
-  speedModificationDuration: 0.3
-  slowDownMultiplier: 0.3
-  speedUpMultiplier: 1
-  defaultSpeedMultiplier: 1
+  defaultTimeSpeedMultiplier: 1
+  basicTimeMultiplierParam:
+    duration: 0.3
+    slowDownMultiplier: 0.3
+    speedUpMultiplier: 1
+    minMultiplier: 0.3
+    maxMultiplier: 1
+  energyBoostTimeMultiplierParam:
+    duration: 0.15
+    slowDownMultiplier: 0.25
+    speedUpMultiplier: 1
+    minMultiplier: 0.25
+    maxMultiplier: 1
   speedUpCurve:
     serializedVersion: 2
     m_Curve:

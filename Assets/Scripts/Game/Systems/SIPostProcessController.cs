@@ -15,7 +15,6 @@ namespace Project.Systems {
         [SerializeField] PostProcessConfig _baseConfig;
         [SerializeField] PostProcessConfig _speedModificationConfig;
         [SerializeField] Volume _postProcessVolume;
-
         
         bool _isModifyingPosprocesses;
         bool _isPostprocessModificationLocked;

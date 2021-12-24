@@ -28,18 +28,16 @@ namespace SpaceInvaders {
         }
 
         void Initialise() {
+            _currentSpeedModifier = _settings.defaultTimeSpeedMultiplier;
+            
             _basicSlowDownParam = new TimeSpeedModificationParam {
                 duration = _settings.basicTimeMultiplierParam.duration,
-                // fromTimeMul = _settings.basicTimeMultiplierParam.slowDownMultiplier,
-                // toTimeMul = _settings.defaultTimeSpeedMultiplier,
                 minTimeMulVal = _settings.basicTimeMultiplierParam.minMultiplier,
                 maxTimeMulVal = _settings.basicTimeMultiplierParam.maxMultiplier
             };
             
             _energyBoostSlowDownParam = new TimeSpeedModificationParam {
                 duration = _settings.energyBoostTimeMultiplierParam.duration,
-                // fromTimeMul = _settings.energyBoostTimeMultiplierParam.slowDownMultiplier,
-                // toTimeMul = _settings.defaultTimeSpeedMultiplier,
                 minTimeMulVal = _settings.energyBoostTimeMultiplierParam.minMultiplier,
                 maxTimeMulVal = _settings.energyBoostTimeMultiplierParam.maxMultiplier
             };
@@ -115,14 +113,11 @@ namespace SpaceInvaders {
         void SetDefaultSpeedMultiplier() {
             _basicSlowDownParam.fromTimeMul = _currentSpeedModifier;
             _basicSlowDownParam.toTimeMul = _settings.defaultTimeSpeedMultiplier;
-            ApplySpeedModification(_energyBoostSlowDownParam, _settings.speedUpCurve);
+            ApplySpeedModification(_basicSlowDownParam, _settings.speedUpCurve);
         }
         
         [Button]
         void SetEnergyBoostSpeedModifierStartVal() {
-            //todo opakować klase TimeSpeedMultiplierParameter w metody!!!
-           // i dodać obsluge postprocesow 
-            
             _energyBoostSlowDownParam.fromTimeMul = _currentSpeedModifier;
             _energyBoostSlowDownParam.toTimeMul = _currentSpeedModifier * _settings.energyBoostTimeMultiplierParam.slowDownMultiplier;
             ApplySpeedModification(_energyBoostSlowDownParam, _settings.slowDownCurve);
@@ -138,7 +133,17 @@ namespace SpaceInvaders {
             _energyBoostSlowDownParam.toTimeMul = toModifier;
             ApplySpeedModification(_energyBoostSlowDownParam, _settings.speedUpCurve);
         }
-        
+
+        protected override void ManageEnergyBoostBonus(bool isEnabled) {
+            base.ManageEnergyBoostBonus(isEnabled);
+            if (isEnabled) {
+                SetEnergyBoostSpeedModifierStartVal();
+            }
+            else {
+                SetEnergyBoostMultiplierEndVal();
+            }
+        }
+
         void ApplySpeedModification(TimeSpeedModificationParam modParam, AnimationCurve curve) {
             if (CanRestartTimeSpeedModificationRoutine(modParam.toTimeMul)) 
                 _speedModificationRoutine = StartCoroutine(TimeSpeedModificationRoutine(modParam, curve));

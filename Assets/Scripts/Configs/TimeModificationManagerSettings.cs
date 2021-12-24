@@ -2,26 +2,23 @@ using System;
 using UnityEngine;
 
 namespace Configs {
-    [CreateAssetMenu(fileName = "Speed Modification Manager Config",
-        menuName = "Project/Speed Modification Manager Config")]
-    public class SpeedModificationManagerSettings : ScriptableObject {
+    [CreateAssetMenu(fileName = "Time Modification Manager Config",
+        menuName = "Project/Time Modification Manager Config")]
+    public class TimeModificationManagerSettings : ScriptableObject {
         public bool useIncrementalSpeedModification;
-        [Range(0, 3)] public float speedModificationDuration;
-        [Range(0, 3)] public float energyBoostSpeedModificationDuration;
-        public float slowDownMultiplier;
-        public float speedUpMultiplier;
-        public float defaultSpeedMultiplier;
-        public float defaultTimeModificationValue;
-        public float energyBoostTimeModificationValue;
+        public float defaultTimeSpeedMultiplier;
+        public TimeSpeedMultiplierParameter basicTimeMultiplierParam;
+        public TimeSpeedMultiplierParameter energyBoostTimeMultiplierParam;
         public AnimationCurve speedUpCurve;
         public AnimationCurve slowDownCurve;
     }
 
     [Serializable]
-    public class SpeedModificationParameter {
+    public class TimeSpeedMultiplierParameter {
         [Range(0, 3)] public float duration;
         public float slowDownMultiplier;
         public float speedUpMultiplier;
-        
+        public float minMultiplier;
+        public float maxMultiplier;
     }
 }

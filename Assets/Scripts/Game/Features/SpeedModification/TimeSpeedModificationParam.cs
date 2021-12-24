@@ -1,5 +1,5 @@
 namespace SpaceInvaders {
-    public struct TimeSpeedModificationParam {
+    public class TimeSpeedModificationParam {
         public float fromTimeMul;
         public float toTimeMul;
         public float minTimeMulVal;
