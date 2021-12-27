@@ -8,7 +8,8 @@ using UnityEngine;
 namespace SpaceInvaders {
     public class SITimeModificationManager : SIBonusDrivenBehaviour {
         
-        [ShowInInspector] bool _isModifyingSpeed;
+        public static bool IsModifyingSpeed;
+        
         [ShowInInspector] float _currentSpeedModifier;
         [ShowInInspector] float _timeSpeedModificationProgress;
         
@@ -34,7 +35,7 @@ namespace SpaceInvaders {
 
         void Initialise() {
             _currentSpeedModifier = _settings.defaultTimeSpeedMultiplier;
-            _waitForTimeModificationFinished = new WaitUntil(() => !_isModifyingSpeed && _energyBoostActive);
+            _waitForTimeModificationFinished = new WaitUntil(() => !IsModifyingSpeed && _energyBoostActive);
             
             _basicSlowDownParam = new TimeSpeedModificationParam {
                 duration = _settings.basicTimeMultiplierParam.duration,
@@ -85,11 +86,10 @@ namespace SpaceInvaders {
         }
 
         IEnumerator TimeSpeedModificationRoutine(TimeSpeedModificationParam modParam, AnimationCurve curve) {
-
-            _isModifyingSpeed = true;
             _timeSpeedModificationProgress = 0.0f;
             float time = 0.0f;
             float modifierValue = _settings.defaultTimeSpeedMultiplier;
+            IsModifyingSpeed = true;
             while (time < modParam.duration) {
                 _timeSpeedModificationProgress = time / modParam.duration;
                 modifierValue = Mathf.Lerp(modParam.fromTimeMul, modParam.toTimeMul, curve.Evaluate(_timeSpeedModificationProgress));
@@ -98,11 +98,10 @@ namespace SpaceInvaders {
                 time += Time.fixedDeltaTime;
                 yield return WaitUtils.SkipFixedFrames(1);
             }
-
+            IsModifyingSpeed = false;
             _timeSpeedModificationProgress = 1f;
-            ManageObjectToModifySpeed(modParam.toTimeMul);
             _currentSpeedModifier = modParam.toTimeMul;
-            _isModifyingSpeed = false;
+            ManageObjectToModifySpeed(modParam.toTimeMul);
         }
 
         void ApplySpeedUpMultiplier() {
@@ -146,7 +145,8 @@ namespace SpaceInvaders {
         }
 
         IEnumerator WaitEnergyBoostTimeModification(bool isEnergyBoostEnabled) {
-            yield return _waitForTimeModificationFinished;
+            yield return StartCoroutine(_waitForTimeModificationFinished);
+            Debug.Log("WAIT FINISHD");
             if (isEnergyBoostEnabled) {
                 SetEnergyBoostSpeedModifierStartVal();
             }
@@ -163,12 +163,12 @@ namespace SpaceInvaders {
         }
 
         bool CanRestartTimeSpeedModificationRoutine(float multiplier) {
-            return _settings.useIncrementalSpeedModification && !_isModifyingSpeed && 
+            return _settings.useIncrementalSpeedModification && !IsModifyingSpeed && 
                    Math.Abs(multiplier - _currentSpeedModifier) > 1e-05f;
         }
 
         void ManageObjectToModifySpeed(float speedMultiplier) {
-            float progressToUse = _settings.useIncrementalSpeedModification && _isModifyingSpeed
+            float progressToUse = _settings.useIncrementalSpeedModification && IsModifyingSpeed
                 ? _timeSpeedModificationProgress : 1f;
             foreach (IModifyTimeSpeedMultiplier objToModify in _objectsToModifySpeed) {
                 objToModify.SetTimeSpeedModifier(speedMultiplier, progressToUse);

@@ -21,8 +21,8 @@ namespace SpaceInvaders {
             SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
         }
 
-        public void SetTimeSpeedModifier(float modifier, float progress) {
-            _particlesMainModule.simulationSpeed = _initialSimulationSpeed * modifier;
+        public void SetTimeSpeedModifier(float timeSpeedModifier, float progress) {
+            _particlesMainModule.simulationSpeed = _initialSimulationSpeed * timeSpeedModifier;
         }
     }
 }

@@ -59,7 +59,7 @@ namespace SpaceInvaders {
         }
 
         bool CanRunEnergyBoostBonus() {
-            if (IsTimeModificationToggled())
+            if (IsTimeModificationWithBoostToggled())
                 return true;
             
             return _rootObject != null && 
@@ -68,7 +68,7 @@ namespace SpaceInvaders {
                    SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost);
         }
 
-        bool IsTimeModificationToggled() {
+        bool IsTimeModificationWithBoostToggled() {
             return !_energyBoostActive &&
                    SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost) &&
                    SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification);

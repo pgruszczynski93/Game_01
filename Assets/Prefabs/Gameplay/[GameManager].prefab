@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460bd5cf7364fc8438096924b7a4d5c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultSpeedMultiplier: 1
   _baseConfig: {fileID: 11400000, guid: b202f9f83acbd05409de297bca17a950, type: 2}
   _timeSpeedModificationConfig: {fileID: 11400000, guid: 7d96e8d1760302b46a7024b9259139d8,
     type: 2}
@@ -484,7 +483,7 @@ GameObject:
   - component: {fileID: 5944902529089563000}
   - component: {fileID: 8707640014959758375}
   m_Layer: 0
-  m_Name: SpeedModificationManager
+  m_Name: TimeSpeedModificationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
