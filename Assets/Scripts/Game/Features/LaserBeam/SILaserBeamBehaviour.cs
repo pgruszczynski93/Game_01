@@ -22,8 +22,8 @@ namespace Game.Features.LaserBeam {
             DisableRootObject();
         }
 
-        protected override void ManageEnergyBoostBonus(bool isEnabled) {
-            base.ManageEnergyBoostBonus(isEnabled);
+        protected override void EnableEnergyBoostForBonus(bool isEnabled) {
+            base.EnableEnergyBoostForBonus(isEnabled);
             if(isEnabled)
                 _laserDamage.EnableEnergyBoost();
             else 

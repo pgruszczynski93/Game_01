@@ -6,25 +6,26 @@ namespace SpaceInvaders {
         [SerializeField] protected BonusType _assignedBonusType;
         [SerializeField] protected GameObject _rootObject;
 
-        protected bool _energyBoostActive;
+        protected bool _energyBoostEnabled;
 
         protected abstract void ManageEnabledBonus();
         protected abstract void ManageDisabledBonus();
         protected virtual void OnEnable() => SubscribeEvents();
         protected virtual void OnDisable() => UnsubscribeEvents();
-        protected virtual void ManageEnergyBoostBonus(bool isEnabled) {
-            _energyBoostActive = isEnabled;
+        protected virtual void EnableEnergyBoostForBonus(bool isEnabled) {
+            _energyBoostEnabled = isEnabled;
         }
         
         protected virtual void SubscribeEvents() {
-            SIEventsHandler.OnUpdate += HandleOnUpdate;
+            //OnIndependentUpdate is used to not press start every time
+            SIEventsHandler.OnIndependentUpdate += HandleOnUpdate;
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
             SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
         }
 
         protected virtual void UnsubscribeEvents() {
-            SIEventsHandler.OnUpdate -= HandleOnUpdate;
+            SIEventsHandler.OnIndependentUpdate -= HandleOnUpdate;
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
             SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
@@ -39,7 +40,7 @@ namespace SpaceInvaders {
             if (bonusSettings.bonusType == _assignedBonusType)
                 ManageDisabledBonus();
             if (bonusSettings.bonusType == BonusType.EnergyBoost)
-                ManageEnergyBoostBonus(false);
+                EnableEnergyBoostForBonus(false);
         }
 
         protected virtual void HandleOnUpdate() {
@@ -55,23 +56,25 @@ namespace SpaceInvaders {
                 return;
 
             Debug.Log($"{_assignedBonusType.ToString()} - energyboost");
-            ManageEnergyBoostBonus(true);
+            EnableEnergyBoostForBonus(true);
         }
 
         bool CanRunEnergyBoostBonus() {
             if (IsTimeModificationWithBoostToggled())
-                return true;
+                return SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification);;
             
             return _rootObject != null && 
                    _rootObject.activeInHierarchy && 
-                   !_energyBoostActive && 
+                   !_energyBoostEnabled && 
                    SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost);
         }
 
         bool IsTimeModificationWithBoostToggled() {
-            return !_energyBoostActive &&
-                   SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost) &&
-                   SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification);
+            //Note: For TimeModification rootObject is null because it doesn't enable/disable any GO
+            return _rootObject == null &&
+                   !_energyBoostEnabled &&
+                   _assignedBonusType == BonusType.TimeModification &&
+                   SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost);
         }
 
         protected void EnableRootObject() {

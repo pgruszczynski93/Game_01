@@ -19,7 +19,6 @@ namespace SpaceInvaders {
         TimeSpeedModificationParam _energyBoostSlowDownParam;
         
         Coroutine _timeSpeedModificationRoutine;
-        Coroutine _energyBoostTimeModificationRoutine;
         WaitUntil _waitForTimeModificationFinished;
         
         HashSet<IModifyTimeSpeedMultiplier> _objectsToModifySpeed;
@@ -29,13 +28,11 @@ namespace SpaceInvaders {
         void OnDestroy() {
             if (_timeSpeedModificationRoutine != null) 
                 StopCoroutine(_timeSpeedModificationRoutine);
-            if (_energyBoostTimeModificationRoutine != null) 
-                StopCoroutine(_energyBoostTimeModificationRoutine);
         }
 
         void Initialise() {
             _currentSpeedModifier = _settings.defaultTimeSpeedMultiplier;
-            _waitForTimeModificationFinished = new WaitUntil(() => !IsModifyingSpeed && _energyBoostActive);
+            _waitForTimeModificationFinished = new WaitUntil(() => !IsModifyingSpeed && _energyBoostEnabled);
             
             _basicSlowDownParam = new TimeSpeedModificationParam {
                 duration = _settings.basicTimeMultiplierParam.duration,
@@ -51,6 +48,10 @@ namespace SpaceInvaders {
         }
 
         protected override void ManageEnabledBonus() {
+            //This check ensures that: WaitEnergyBoostTimeModification will complete correctly.
+            if (SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost))
+                return;
+            
             ApplySlowDownMultiplier();
         }
 
@@ -139,14 +140,13 @@ namespace SpaceInvaders {
             ApplySpeedModification(_energyBoostSlowDownParam, _settings.speedUpCurve);
         }
 
-        protected override void ManageEnergyBoostBonus(bool isEnabled) {
-            base.ManageEnergyBoostBonus(isEnabled);
-            _energyBoostTimeModificationRoutine = StartCoroutine(WaitEnergyBoostTimeModification(isEnabled));
+        protected override void EnableEnergyBoostForBonus(bool isEnabled) {
+            base.EnableEnergyBoostForBonus(isEnabled);
+            _timeSpeedModificationRoutine = StartCoroutine(WaitEnergyBoostTimeModification(isEnabled));
         }
 
         IEnumerator WaitEnergyBoostTimeModification(bool isEnergyBoostEnabled) {
             yield return StartCoroutine(_waitForTimeModificationFinished);
-            Debug.Log("WAIT FINISHD");
             if (isEnergyBoostEnabled) {
                 SetEnergyBoostSpeedModifierStartVal();
             }

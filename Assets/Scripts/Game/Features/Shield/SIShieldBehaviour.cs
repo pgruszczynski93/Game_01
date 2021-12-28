@@ -17,8 +17,8 @@ namespace Game.Features.Shield {
                 StopCoroutine(DisableRoutine());
         }
         
-        protected override void ManageEnergyBoostBonus(bool isEnabled) {
-            base.ManageEnergyBoostBonus(isEnabled);
+        protected override void EnableEnergyBoostForBonus(bool isEnabled) {
+            base.EnableEnergyBoostForBonus(isEnabled);
             _animatorController.EnableExtraEnergyAnimation(isEnabled);
         }
 
