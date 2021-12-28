@@ -317,8 +317,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460bd5cf7364fc8438096924b7a4d5c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeModificationInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7
+      value: 0.3
+      inSlope: 1.1334479
+      outSlope: 1.1334479
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  timeModificationOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3
+      value: 0.7
+      inSlope: 1.1211983
+      outSlope: 1.1211983
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _baseConfig: {fileID: 11400000, guid: b202f9f83acbd05409de297bca17a950, type: 2}
-  _timeSpeedModificationConfig: {fileID: 11400000, guid: 7d96e8d1760302b46a7024b9259139d8,
+  _timeSpeedModificationConfig: {fileID: 11400000, guid: 72d714f5b7f178d4d9763e5c4490dfd7,
+    type: 2}
+  _energyBoostWithTimeModificationConfig: {fileID: 11400000, guid: 7d96e8d1760302b46a7024b9259139d8,
     type: 2}
   _postProcessVolume: {fileID: 0}
 --- !u!1 &2899697678007792943

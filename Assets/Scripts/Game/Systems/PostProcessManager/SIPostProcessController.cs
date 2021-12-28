@@ -10,11 +10,15 @@ using UnityEngine.Rendering.Universal;
 
 namespace Project.Systems {
     public class SIPostProcessController : MonoBehaviour {
+        [SerializeField] AnimationCurve timeModificationInCurve;
+        [SerializeField] AnimationCurve timeModificationOutCurve;
         [SerializeField] PostProcessConfig _baseConfig;
         [SerializeField] PostProcessConfig _timeSpeedModificationConfig;
+        [SerializeField] PostProcessConfig _energyBoostWithTimeModificationConfig;
         [SerializeField] Volume _postProcessVolume;
 
         bool _isModifyingPosprocesses;
+        bool _isEnergyBoostActive;
         PostProcessControllerState _postProcessState;
         Bloom _bloom;
         Vignette _vignette;
@@ -36,15 +40,22 @@ namespace Project.Systems {
         void OnDisable() => UnsubscribeEvents();
 
         void SubscribeEvents() {
+            SIEventsHandler.OnIndependentUpdate += HandleOnIndependentUpdate;
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
             SIGameplayEvents.OnWaveCoolDown += HandleOnWaveCooldown;
         }
 
         void UnsubscribeEvents() {
+            SIEventsHandler.OnIndependentUpdate -= HandleOnIndependentUpdate;
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
             SIGameplayEvents.OnWaveCoolDown -= HandleOnWaveCooldown;
+        }
+
+        void HandleOnIndependentUpdate() {
+            //TODO: REMOVE INDEPENDENT UPDATE & FIX TINT
+            TryToggleTimeModificationWithEnergyBoostPostprocess();
         }
 
         void HandleOnBonusEnabled(BonusSettings settings) {
@@ -54,8 +65,13 @@ namespace Project.Systems {
         }
 
         void HandleOnBonusDisabled(BonusSettings settings) {
-            if (settings.bonusType == BonusType.TimeModification) {
-                TrySetBasePostprocessEffect();
+            switch (settings.bonusType) {
+                case BonusType.TimeModification:
+                    TrySetBasePostprocessEffect();
+                    break;
+                case BonusType.EnergyBoost:
+                    EnableEnergyBoostAndManagePostprocess(false);
+                    break;
             }
         }
 
@@ -65,6 +81,26 @@ namespace Project.Systems {
             TrySetBasePostprocessEffect();
         }
 
+        void TryToggleTimeModificationWithEnergyBoostPostprocess() {
+            if (_isEnergyBoostActive || !SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost)) 
+                return;
+            if (!SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification))
+                return;
+            
+            _isEnergyBoostActive = true;
+            EnableEnergyBoostAndManagePostprocess(true);
+        }
+
+        void EnableEnergyBoostAndManagePostprocess(bool isEnabled) {
+            _isEnergyBoostActive = isEnabled;
+            if (_isEnergyBoostActive) {
+                SetBloomForTimeModificationWithBoost();
+            }
+            else {
+                TryToRestoreBaseBloomTint();
+            }
+        }
+        
         IEnumerator ApplyPostprocessCoroutine(float duration, 
             AnimationCurve curve, 
             Action<float> onPostprocessChange, PostProcessControllerState newState) {
@@ -118,47 +154,35 @@ namespace Project.Systems {
         }
 
         [Button]
-        void TrySetTimeModificationPostprocessEffect() {
-            _applyPostprocessCoroutine = StartCoroutine(
-                ApplyPostprocessCoroutine(_timeSpeedModificationConfig.effectApplyDuration,
-                    _timeSpeedModificationConfig.curve,
-                    BaseToTimeModificationPostProcess,
-                    PostProcessControllerState.TimeModificationPostprocess
-                ));
-        }
-        
-        [Button]
         void TrySetBasePostprocessEffect() {
             _applyPostprocessCoroutine = StartCoroutine(
                 ApplyPostprocessCoroutine(_baseConfig.effectApplyDuration,
-                    _baseConfig.curve,
+                    timeModificationOutCurve,
                     TimeModificationToBasePostprocess,
                     PostProcessControllerState.BasicPostprocess
                 ));
         }
         
         [Button]
-        void SetBasePostProcessConfig() {
-            _bloom.threshold.value = _baseConfig.bloomThreshold;
-            _bloom.intensity.value = _baseConfig.bloomIntensity;
-            _bloom.scatter.value = _baseConfig.bloomScatter;
-            _bloom.tint.overrideState = false;
-            _bloom.tint.value = _baseConfig.bloomTintColor;
-
-            _vignette.intensity.value = _baseConfig.vignetteIntensity;
-            _vignette.smoothness.value = _baseConfig.vignetteSmoothness;
+        void TrySetTimeModificationPostprocessEffect() {
+            _applyPostprocessCoroutine = StartCoroutine(
+                ApplyPostprocessCoroutine(_timeSpeedModificationConfig.effectApplyDuration,
+                    timeModificationInCurve,
+                    BaseToTimeModificationPostProcess,
+                    PostProcessControllerState.TimeModificationPostprocess
+                ));
         }
 
         [Button]
-        void SetSpeedModificationPostprocessConfig() {
-            _bloom.threshold.value = _timeSpeedModificationConfig.bloomThreshold;
-            _bloom.intensity.value = _timeSpeedModificationConfig.bloomIntensity;
-            _bloom.scatter.value = _timeSpeedModificationConfig.bloomScatter;
-            _bloom.tint.overrideState = true;
-            _bloom.tint.value = _timeSpeedModificationConfig.bloomTintColor;
+        void SetBloomForTimeModificationWithBoost() {
+            _bloom.tint.Override(_energyBoostWithTimeModificationConfig.bloomTintColor);
+        }
 
-            _vignette.intensity.value = _timeSpeedModificationConfig.vignetteIntensity;
-            _vignette.smoothness.value = _timeSpeedModificationConfig.vignetteSmoothness;
+        [Button]
+        void TryToRestoreBaseBloomTint() {
+            _bloom.tint.Override(!SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification)
+                ? _timeSpeedModificationConfig.bloomTintColor
+                : _baseConfig.bloomTintColor);
         }
     }
 }
