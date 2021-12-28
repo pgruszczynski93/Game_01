@@ -180,7 +180,7 @@ namespace Project.Systems {
 
         [Button]
         void TryToRestoreBaseBloomTint() {
-            _bloom.tint.Override(!SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification)
+            _bloom.tint.Override(SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification)
                 ? _timeSpeedModificationConfig.bloomTintColor
                 : _baseConfig.bloomTintColor);
         }
