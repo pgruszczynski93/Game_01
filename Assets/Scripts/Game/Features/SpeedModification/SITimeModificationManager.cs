@@ -124,8 +124,9 @@ namespace SpaceInvaders {
         
         [Button]
         void SetEnergyBoostSpeedModifierStartVal() {
-            _energyBoostSlowDownParam.fromTimeMul = _currentSpeedModifier;
-            _energyBoostSlowDownParam.toTimeMul = _currentSpeedModifier * _settings.energyBoostTimeMultiplierParam.slowDownMultiplier;
+            float slowDownMultiplier = _settings.basicTimeMultiplierParam.slowDownMultiplier;
+            _energyBoostSlowDownParam.fromTimeMul = slowDownMultiplier;
+            _energyBoostSlowDownParam.toTimeMul = slowDownMultiplier * _settings.energyBoostTimeMultiplierParam.slowDownMultiplier;
             ApplySpeedModification(_energyBoostSlowDownParam, _settings.slowDownCurve);
         }
         

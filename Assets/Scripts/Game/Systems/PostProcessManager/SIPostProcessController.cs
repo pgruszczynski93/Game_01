@@ -14,11 +14,9 @@ namespace Project.Systems {
         [SerializeField] AnimationCurve timeModificationOutCurve;
         [SerializeField] PostProcessConfig _baseConfig;
         [SerializeField] PostProcessConfig _timeSpeedModificationConfig;
-        [SerializeField] PostProcessConfig _energyBoostWithTimeModificationConfig;
         [SerializeField] Volume _postProcessVolume;
 
         bool _isModifyingPosprocesses;
-        bool _isEnergyBoostActive;
         PostProcessControllerState _postProcessState;
         Bloom _bloom;
         Vignette _vignette;
@@ -40,22 +38,15 @@ namespace Project.Systems {
         void OnDisable() => UnsubscribeEvents();
 
         void SubscribeEvents() {
-            SIEventsHandler.OnIndependentUpdate += HandleOnIndependentUpdate;
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
             SIGameplayEvents.OnWaveCoolDown += HandleOnWaveCooldown;
         }
 
         void UnsubscribeEvents() {
-            SIEventsHandler.OnIndependentUpdate -= HandleOnIndependentUpdate;
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
             SIGameplayEvents.OnWaveCoolDown -= HandleOnWaveCooldown;
-        }
-
-        void HandleOnIndependentUpdate() {
-            //TODO: REMOVE INDEPENDENT UPDATE & FIX TINT
-            TryToggleTimeModificationWithEnergyBoostPostprocess();
         }
 
         void HandleOnBonusEnabled(BonusSettings settings) {
@@ -65,13 +56,8 @@ namespace Project.Systems {
         }
 
         void HandleOnBonusDisabled(BonusSettings settings) {
-            switch (settings.bonusType) {
-                case BonusType.TimeModification:
-                    TrySetBasePostprocessEffect();
-                    break;
-                case BonusType.EnergyBoost:
-                    EnableEnergyBoostAndManagePostprocess(false);
-                    break;
+            if (settings.bonusType == BonusType.TimeModification) {
+                TrySetBasePostprocessEffect();
             }
         }
 
@@ -81,26 +67,6 @@ namespace Project.Systems {
             TrySetBasePostprocessEffect();
         }
 
-        void TryToggleTimeModificationWithEnergyBoostPostprocess() {
-            if (_isEnergyBoostActive || !SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost)) 
-                return;
-            if (!SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification))
-                return;
-            
-            _isEnergyBoostActive = true;
-            EnableEnergyBoostAndManagePostprocess(true);
-        }
-
-        void EnableEnergyBoostAndManagePostprocess(bool isEnabled) {
-            _isEnergyBoostActive = isEnabled;
-            if (_isEnergyBoostActive) {
-                SetBloomForTimeModificationWithBoost();
-            }
-            else {
-                TryToRestoreBaseBloomTint();
-            }
-        }
-        
         IEnumerator ApplyPostprocessCoroutine(float duration, 
             AnimationCurve curve, 
             Action<float> onPostprocessChange, PostProcessControllerState newState) {
@@ -171,18 +137,6 @@ namespace Project.Systems {
                     BaseToTimeModificationPostProcess,
                     PostProcessControllerState.TimeModificationPostprocess
                 ));
-        }
-
-        [Button]
-        void SetBloomForTimeModificationWithBoost() {
-            _bloom.tint.Override(_energyBoostWithTimeModificationConfig.bloomTintColor);
-        }
-
-        [Button]
-        void TryToRestoreBaseBloomTint() {
-            _bloom.tint.Override(SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification)
-                ? _timeSpeedModificationConfig.bloomTintColor
-                : _baseConfig.bloomTintColor);
         }
     }
 }
