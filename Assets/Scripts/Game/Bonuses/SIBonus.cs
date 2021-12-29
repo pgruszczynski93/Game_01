@@ -81,7 +81,6 @@ namespace SpaceInvaders {
         }
 
         public void StopObject() {
-            _isInStopRoutine = false;
             TryEnableBonusAndSelectedVariant(false);
             ResetMotion();
         }
@@ -105,7 +104,7 @@ namespace SpaceInvaders {
         
         void SetMotion() {
             _rigidbody.velocity = SIHelpers.VectorZero;
-            _thisTransform.SetParent(null);
+            _thisTransform.parent = null;
             _thisTransform.position = _currentDropPos;
             if (_rigidbody.velocity.sqrMagnitude == 0)
                 _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
@@ -114,7 +113,8 @@ namespace SpaceInvaders {
         }
 
         Vector3 GetReleaseForce() {
-            return SIHelpers.VectorDown * (_currentVariantSettings.releaseForceMultiplier * _currentReleaseForceModifier);
+            return SIHelpers.VectorDown * 
+                   (_currentVariantSettings.releaseForceMultiplier * _currentReleaseForceModifier);
         }
 
         void ResetMotion() {
@@ -150,6 +150,8 @@ namespace SpaceInvaders {
         }
 
         public void SetTimeSpeedModifier(float timeSpeedModifier, float progress) {
+            
+            //todo: sprawdzic ten mnoznik dla bonusow
             _currentReleaseForceModifier = timeSpeedModifier;
             _rigidbody.velocity = GetReleaseForce();
             _animatorController.SetSpeedModifier(timeSpeedModifier);    
