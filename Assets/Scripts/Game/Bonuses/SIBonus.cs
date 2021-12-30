@@ -29,6 +29,7 @@ namespace SpaceInvaders {
         void Start() => Initialise();
 
         void Initialise() {
+            _currentReleaseForceModifier = 1;
             RequestTimeSpeedModification();
         }
 
@@ -103,7 +104,6 @@ namespace SpaceInvaders {
         }
         
         void SetMotion() {
-            _rigidbody.velocity = SIHelpers.VectorZero;
             _thisTransform.parent = null;
             _thisTransform.position = _currentDropPos;
             if (_rigidbody.velocity.sqrMagnitude == 0)
@@ -150,8 +150,6 @@ namespace SpaceInvaders {
         }
 
         public void SetTimeSpeedModifier(float timeSpeedModifier, float progress) {
-            
-            //todo: sprawdzic ten mnoznik dla bonusow
             _currentReleaseForceModifier = timeSpeedModifier;
             _rigidbody.velocity = GetReleaseForce();
             _animatorController.SetSpeedModifier(timeSpeedModifier);    

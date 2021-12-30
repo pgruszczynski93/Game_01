@@ -23,7 +23,8 @@ namespace SpaceInvaders {
         
         HashSet<IModifyTimeSpeedMultiplier> _objectsToModifySpeed;
 
-        void Start() => Initialise();
+        //Here I use Awake instead of Start to ensure that every value will be assigned before modifications.
+        void Awake() => Initialise();
 
         void OnDestroy() {
             if (_timeSpeedModificationRoutine != null) 
@@ -79,7 +80,7 @@ namespace SpaceInvaders {
                 return;
             
             _objectsToModifySpeed.Add(objToModifyTime);
-            objToModifyTime.SetTimeSpeedModifier(_settings.defaultTimeSpeedMultiplier);
+            objToModifyTime.SetTimeSpeedModifier(_currentSpeedModifier);
         }
         
         void HandleOnWaveCoolDown() {

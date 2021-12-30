@@ -24,7 +24,7 @@ namespace SpaceInvaders
         float _topWorldLimit;
         float _bottomWorldLimit;
         float _currentVelocityModifier;
-        public Vector3 _moveDirection;
+        Vector3 _moveDirection;
         Vector3 _parentRelativeLocalPos;
         Transform _thisTransform;
         DamageInfo _damageInfo;
@@ -214,7 +214,7 @@ namespace SpaceInvaders
 
         public void SetTimeSpeedModifier(float timeSpeedModifier, float progress) {
             _currentVelocityModifier = _ownerTag == ProjectileOwnerTag.Enemy ? timeSpeedModifier : _currentVelocityModifier;
-            var releaseForce = GetReleaseForce();
+            Vector3 releaseForce = GetReleaseForce();
             _rigidbody.velocity = releaseForce;
         }
     }
