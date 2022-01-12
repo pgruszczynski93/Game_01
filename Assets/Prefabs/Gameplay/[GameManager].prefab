@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38879ec8f914dcb46afb00e7f2a4cf56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolCapacity: 0
+  _poolCapacity: 50
   _prefabToSpawn: {fileID: 2920444157324995045, guid: c4e70544422978e42802e21c15f314df,
     type: 3}
   _objectsPool: []
@@ -136,8 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f17237eb3b4d9faeff0743608d8441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolCapacity: 20
-  _prefabToSpawn: {fileID: 0}
+  _poolCapacity: 40
+  _prefabToSpawn: {fileID: 268798118429034910, guid: a009579ee024981418481debe96fea39,
+    type: 3}
   _objectsPool: []
 --- !u!1 &439378546341964129
 GameObject:
@@ -182,8 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7515c85957ffd34796c72025b02f568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolCapacity: 0
-  _prefabToSpawn: {fileID: 0}
+  _poolCapacity: 30
+  _prefabToSpawn: {fileID: 5637279107446737233, guid: 0f519c44a3d3fc04c9da3e936ff057d7,
+    type: 3}
   _objectsPool: []
   _bonusDropPropability: 30
   _scriptableLookup: {fileID: 11400000, guid: 113e818cc9022bd4bb0ec08922b96f6d, type: 2}
@@ -274,6 +276,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _joystick: {fileID: 0}
+--- !u!1 &2506081219831437877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1921457986462624398}
+  - component: {fileID: 2608496213949193981}
+  m_Layer: 0
+  m_Name: PlanetsPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1921457986462624398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2506081219831437877}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9098509917768213392}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2608496213949193981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2506081219831437877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601a2c8ff4b54c5dbbbdd88ab24f8506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolCapacity: 20
+  _prefabToSpawn: {fileID: 287452984305217692, guid: bac1b8d5d46f15043a732af700e0b67e,
+    type: 3}
+  _objectsPool: []
 --- !u!1 &2767264272409469551
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,8 +416,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   _baseConfig: {fileID: 11400000, guid: b202f9f83acbd05409de297bca17a950, type: 2}
   _timeSpeedModificationConfig: {fileID: 11400000, guid: 72d714f5b7f178d4d9763e5c4490dfd7,
-    type: 2}
-  _energyBoostWithTimeModificationConfig: {fileID: 11400000, guid: 7d96e8d1760302b46a7024b9259139d8,
     type: 2}
   _postProcessVolume: {fileID: 0}
 --- !u!1 &2899697678007792943
@@ -516,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beecc42b050243e48288225594a7a7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolCapacity: 0
+  _poolCapacity: 40
   _prefabToSpawn: {fileID: 2920444157324995045, guid: 7cf98d259fa45e640af8522055ca2cad,
     type: 3}
   _objectsPool: []
@@ -760,6 +807,7 @@ Transform:
   - {fileID: 4462568391462783693}
   - {fileID: 103736320019732027}
   - {fileID: 5902723086459106329}
+  - {fileID: 1921457986462624398}
   m_Father: {fileID: 7025270549699991142}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
