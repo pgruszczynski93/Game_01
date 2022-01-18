@@ -6,5 +6,6 @@ namespace SpaceInvaders.PlanetSystem {
         [Range(0, 1)] public float hasRingsTreshold;
         public GameObject[] planetsGameObjects;
         public GameObject[] ringsGameObjects;
+        public Texture2D[] availableTextures;
     }
 }
