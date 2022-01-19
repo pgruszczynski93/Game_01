@@ -15,6 +15,7 @@ namespace SpaceInvaders.PlanetSystem {
         [SerializeField] Transform _planetSlot;
         [SerializeField] Renderer _planetRenderer;
         [SerializeField] GameObject _planetGameObject;
+        [SerializeField] GameObject _ringsGameObject;
         MaterialPropertyBlock _matPropBlock;
         
 
@@ -27,7 +28,7 @@ namespace SpaceInvaders.PlanetSystem {
         public void RandomizePlanet() {
             GameObject[] planetVariants = _planetSettings.planetsGameObjects;
             GameObject[] rings = _planetSettings.ringsGameObjects;
-            bool hasRings = Random.Range(0, 1) < _planetSettings.hasRingsTreshold;
+            bool areRingsEnabled = Random.Range(0, 2) == 1;
             int maxPlanetsCount = planetVariants.Length;
             int maxRingsCount = rings.Length;
             int maxTextures = _planetSettings.availableTextures.Length;
@@ -47,10 +48,12 @@ namespace SpaceInvaders.PlanetSystem {
             _matPropBlock.SetColor(BaseColor, planetColor);
             _matPropBlock.SetFloat(BaseColorOpacity, colorOpacity);
             _planetRenderer.SetPropertyBlock(_matPropBlock);
-            if (hasRings) {
-                GameObject newRigns = Instantiate(rings[Random.Range(0, maxRingsCount - 1)], _planetSlot);
-                newRigns.name = "Rings";
+            if (_ringsGameObject == null) {
+                _ringsGameObject = Instantiate(rings[Random.Range(0, maxRingsCount - 1)], _planetSlot);
+                _ringsGameObject.name = RINGS_NAME;
+                _ringsGameObject.transform.localScale = _planetSettings.ringsScale;
             }
+            _ringsGameObject.SetActive(areRingsEnabled);
         }
     }
 }
