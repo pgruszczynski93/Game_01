@@ -10,50 +10,64 @@ namespace SpaceInvaders.PlanetSystem {
         static readonly int RimColor = Shader.PropertyToID("_RimColor");
         static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
         static readonly int BaseColorOpacity = Shader.PropertyToID("_BaseColorOpacity");
+        static readonly int RingsTintColor = Shader.PropertyToID("_TintColor");
 
         [SerializeField] PlanetSettings _planetSettings;
         [SerializeField] Transform _planetSlot;
         [SerializeField] Renderer _planetRenderer;
+        [SerializeField] Renderer _ringsRenderer;
         [SerializeField] GameObject _planetGameObject;
         [SerializeField] GameObject _ringsGameObject;
-        MaterialPropertyBlock _matPropBlock;
         
+        MaterialPropertyBlock _planetMatPropBlock;
+        MaterialPropertyBlock _ringsMatPropBlock;
 
         void Start() => Initialise();
         void Initialise() {
-            _matPropBlock = new MaterialPropertyBlock();
+            _planetMatPropBlock = new MaterialPropertyBlock();
+            _ringsMatPropBlock = new MaterialPropertyBlock();
         }
         
         [Button]
         public void RandomizePlanet() {
             GameObject[] planetVariants = _planetSettings.planetsGameObjects;
-            GameObject[] rings = _planetSettings.ringsGameObjects;
-            bool areRingsEnabled = Random.Range(0, 2) == 1;
             int maxPlanetsCount = planetVariants.Length;
-            int maxRingsCount = rings.Length;
             int maxTextures = _planetSettings.availableTextures.Length;
             if (_planetGameObject == null) {
                 _planetGameObject = Instantiate(planetVariants[Random.Range(0, maxPlanetsCount - 1)], _planetSlot);
                 _planetGameObject.name = PLANET_NAME;                
             }
             int selectedPlanetTextureIndex = Random.Range(0, maxTextures - 1);
-            float colorOpacity = Random.Range(0f, 1f);
-            Color rimColor =  new Color(Random.Range(0f,1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-            Color planetColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
             _planetRenderer = _planetGameObject.GetComponent<Renderer>();
-            _matPropBlock = new MaterialPropertyBlock();
-            _planetRenderer.GetPropertyBlock(_matPropBlock);
-            _matPropBlock.SetTexture(MainTex, _planetSettings.availableTextures[selectedPlanetTextureIndex]);
-            _matPropBlock.SetColor(RimColor, rimColor);
-            _matPropBlock.SetColor(BaseColor, planetColor);
-            _matPropBlock.SetFloat(BaseColorOpacity, colorOpacity);
-            _planetRenderer.SetPropertyBlock(_matPropBlock);
+            _planetMatPropBlock = new MaterialPropertyBlock();
+            _planetRenderer.GetPropertyBlock(_planetMatPropBlock);
+            _planetMatPropBlock.SetTexture(MainTex, _planetSettings.availableTextures[selectedPlanetTextureIndex]);
+            _planetMatPropBlock.SetColor(RimColor, SIMathUtils.GetRandomColorRGB());
+            _planetMatPropBlock.SetColor(BaseColor,  SIMathUtils.GetRandomColorRGB());
+            _planetMatPropBlock.SetFloat(BaseColorOpacity, Random.Range(0f, 1f));
+            _planetRenderer.SetPropertyBlock(_planetMatPropBlock);
+            RandomizeRings();
+        }
+
+        [Button]
+        void RandomizeRings() {
+            GameObject[] rings = _planetSettings.ringsGameObjects;
+            int maxRingsCount = rings.Length;
+
             if (_ringsGameObject == null) {
                 _ringsGameObject = Instantiate(rings[Random.Range(0, maxRingsCount - 1)], _planetSlot);
                 _ringsGameObject.name = RINGS_NAME;
-                _ringsGameObject.transform.localScale = _planetSettings.ringsScale;
             }
+            
+            bool areRingsEnabled = Random.Range(0, 2) == 1;
+            float scaleFactor = Random.Range(_planetSettings.minRingsScale, _planetSettings.maxRingsScale);
+            _ringsGameObject.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
             _ringsGameObject.SetActive(areRingsEnabled);
+            _ringsMatPropBlock = new MaterialPropertyBlock();
+            _ringsRenderer = _ringsGameObject.GetComponent<Renderer>();
+            _ringsRenderer.GetPropertyBlock(_ringsMatPropBlock);
+            _ringsMatPropBlock.SetColor(RingsTintColor, SIMathUtils.GetRandomColorRGBA(true, 0.1f));
+            _ringsRenderer.SetPropertyBlock(_ringsMatPropBlock);
         }
     }
 }

@@ -60,13 +60,13 @@
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Misc/PolygonScifiSpace_Skybox_01_Custom.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_A.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonSpace_Planet_Lines_01_A.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonScifi_PlanteRings_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/PolygonSciFiSpace/Materials/Planet_Materials/PolygonScifi_PlanteRings_01.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Planet Settings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableSettings/GameplaySettings/Planet Settings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/Planet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/Planet.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIMathUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIMathUtils.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +214,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/SIEnemiesGridShootController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/EventSystems/SIGameplayEvents.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIPlayerProjectilesPool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIEnemyShootController.cs" />
@@ -263,6 +262,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetsCollection.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetGenerator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetsPool.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIMathUtils.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/Planet.cs" />
       </list>
@@ -674,6 +674,7 @@
       <workItem from="1642370698465" duration="611000" />
       <workItem from="1642541098015" duration="3713000" />
       <workItem from="1642628020680" duration="3115000" />
+      <workItem from="1643475531730" duration="3159000" />
     </task>
     <servers />
   </component>
@@ -811,19 +812,15 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1640434412702" />
-    <state x="1920" y="0" width="1593" height="1027" key="dock-window-1" timestamp="1642629989666">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="586" y="144" width="1003" height="1027" key="dock-window-1" timestamp="1643475833166">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1920" y="0" width="1593" height="1027" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1642629989666" />
-    <state x="699" y="211" width="1003" height="1027" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1640253843895" />
+    <state x="586" y="144" width="1003" height="1027" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1643475833166" />
     <state x="2073" y="0" width="1593" height="1027" maximized="true" key="dock-window-2" timestamp="1639694959299">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2073" y="0" width="1593" height="1027" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1639694959299" />
-    <state x="2547" y="119" width="786" height="801" key="find.popup" timestamp="1634488879165">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2547" y="119" width="786" height="801" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634488879165" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1640271943617">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -26,5 +26,14 @@ namespace SpaceInvaders
         {
             return (oldValue - oldMin) / (oldMax - oldMin);
         }
+
+        public static Color GetRandomColorRGB() {
+            return new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        }
+        
+        public static Color GetRandomColorRGBA(bool useAlpha, float alpha = 0f) {
+            Color rgbCol = GetRandomColorRGB();
+            return new Color(rgbCol.r, rgbCol.g, rgbCol.b, !useAlpha ? 0 : alpha);
+        }
     }
 }
