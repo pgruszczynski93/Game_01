@@ -1,8 +1,9 @@
 using Sirenix.OdinInspector;
+using SpaceInvaders.ObjectsPool;
 using UnityEngine;
 
 namespace SpaceInvaders.PlanetSystem {
-    public class Planet : MonoBehaviour {
+    public class Planet : MonoBehaviour, IPoolable {
         const string PLANET_NAME = "Planet";
         const string RINGS_NAME = "Rings";
         
@@ -68,6 +69,18 @@ namespace SpaceInvaders.PlanetSystem {
             _ringsRenderer.GetPropertyBlock(_ringsMatPropBlock);
             _ringsMatPropBlock.SetColor(RingsTintColor, SIMathUtils.GetRandomColorRGBA(true, 0.1f));
             _ringsRenderer.SetPropertyBlock(_ringsMatPropBlock);
+        }
+
+        public void UseObjectFromPool() {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetSpawnPosition(Vector3 spawnPos) {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetSpawnRotation(Vector3 spawnRot) {
+            throw new System.NotImplementedException();
         }
     }
 }
