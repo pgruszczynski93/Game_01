@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public class SIBonusAnimatorController : MonoBehaviour{
+    public class SIBonusAnimatorController : MonoBehaviour, IModifyTimeSpeedMultiplier{
         enum BonusAnimationType {
             Show,
             Hide
@@ -51,6 +51,14 @@ namespace SpaceInvaders {
         //Note: This code should runs once at Animation Event
         public void HideBonusVariantAnimation() {
             _animationRoutine = StartCoroutine(AnimationRoutine(BonusAnimationType.Hide));
+        }
+        
+        public void RequestTimeSpeedModification() {
+            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
+        }
+
+        public void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1) {
+            SetSpeedModifier(timeSpeedModifier);
         }
         
         public void SetShowAnimation(Renderer variantRenderer) {

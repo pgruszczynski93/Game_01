@@ -82,5 +82,9 @@ namespace SpaceInvaders.PlanetSystem {
         public void SetSpawnRotation(Vector3 spawnRot) {
             throw new System.NotImplementedException();
         }
+
+        public void ManageScreenVisibility() {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -36,6 +36,11 @@ namespace SpaceInvaders
             //intentionally unimplemented
         }
 
+        public void ManageScreenVisibility() {
+            //TO DO: 
+
+        }
+
         public void UseObjectFromPool() {
             TryPlayParticles();
         }

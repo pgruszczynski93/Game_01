@@ -12,6 +12,24 @@ namespace SpaceInvaders.ObjectsPool {
         protected int _poolIndex;
         protected T _currentObjectFromPool;
 
+        // void OnEnable() => SubscribeEvents();
+        // void OnDisable() => UnsubscribeEvents();
+        //
+        // void SubscribeEvents() {
+        //     SIEventsHandler.OnUpdate += HandleOnUpdate;
+        // }
+        //
+        // void UnsubscribeEvents() {
+        //     SIEventsHandler.OnUpdate -= HandleOnUpdate;
+        // }
+        //
+        // void HandleOnUpdate() {
+        //     ManageObjectsVisibility();
+        // }
+        //
+        // void ManageObjectsVisibility() {
+        // }
+
         protected abstract void ManagePooledObject();
         
         protected void UpdatePool() {

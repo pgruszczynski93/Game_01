@@ -5,5 +5,6 @@ namespace SpaceInvaders.ObjectsPool {
         void UseObjectFromPool();
         void SetSpawnPosition(Vector3 spawnPos);
         void SetSpawnRotation(Vector3 spawnRot);
+        void ManageScreenVisibility();
     }
 }

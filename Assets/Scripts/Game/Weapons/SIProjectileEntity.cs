@@ -208,6 +208,10 @@ namespace SpaceInvaders
             _moveDirection = spawnRot;
         }
 
+        public void ManageScreenVisibility() {
+            //TO DO: 
+        }
+
         public void RequestTimeSpeedModification() {
             SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
         }

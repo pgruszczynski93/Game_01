@@ -11,7 +11,6 @@ namespace SpaceInvaders
         public int gainedScore;
         public int bonusLevel;
         public float durationTime;
-        public float releaseForceMultiplier;
 
         public BonusSettings() { }
 
@@ -21,7 +20,6 @@ namespace SpaceInvaders
             gainedScore = settings.gainedScore;
             bonusLevel = settings.bonusLevel;
             durationTime = settings.durationTime;
-            releaseForceMultiplier = settings.releaseForceMultiplier;
         }
     }
 

@@ -4,19 +4,15 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
-    public class SIBonus : MonoBehaviour, ICanMove, IPoolable, IModifyTimeSpeedMultiplier {
-        [SerializeField] protected Rigidbody _rigidbody;
-        [SerializeField] protected GameObject _bonusRoot;
-
-        [SerializeField] Transform _parent;
+    public class SIBonus : MonoBehaviour, IPoolable {
+        [SerializeField] GameObject _bonusRoot;
         [SerializeField] SIBonusAnimatorController _animatorController;
         [SerializeField] SIBonusDictionary _bonusesVariants;
-        [SerializeField] Transform _thisTransform;
-
+        [SerializeField] SIBonusMovement _bonusMovement;
+        [SerializeField] SIBonusVariantSelector _variantSelector;
+        
         bool _isInStopRoutine;
-        float _currentReleaseForceModifier;
         BonusType _bonusType;
-        Vector3 _currentDropPos;
 
         BonusSettings _currentVariantSettings;
         Renderer _currentBonusVariantRenderer;
@@ -26,64 +22,34 @@ namespace SpaceInvaders {
         public BonusSettings BonusVariantSettings => _currentVariantSettings;
         public Renderer BonusVariantRenderer => _currentBonusVariantRenderer;
 
-        void Start() => Initialise();
-
-        void Initialise() {
-            _currentReleaseForceModifier = 1;
-            RequestTimeSpeedModification();
-        }
-
-        void OnEnable() => SubscribeEvents();
-
-        void OnDisable() => UnsubscribeEvents();
-        
-        void SubscribeEvents() {
-            SIEventsHandler.OnUpdate += HandleOnUpdate;
-        }
-
-        void UnsubscribeEvents() {
-            SIEventsHandler.OnUpdate -= HandleOnUpdate;
-        }
-        
-        void HandleOnUpdate() {
-            CheckIsInVerticalViewportSpace();
+        public void SetBonusVariant(BonusType bonusType) {
+            _bonusType = bonusType;
+            _currentVariantSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
+            _currentBonusVariantRenderer = _bonusesVariants[_bonusType].bonusRenderer;
         }
         
         public void SetSpawnPosition(Vector3 spawnPos) {
-            _currentDropPos = spawnPos;
+            _bonusMovement.SetDropPosition(spawnPos);
         }
 
         public void SetSpawnRotation(Vector3 spawnRot) {
             //intentionally unimplemented
         }
 
-        public void SetBonusVariant(BonusType bonusType) {
-            if (_parent == null) {
-                _parent = transform.parent;
-            }
-            _bonusType = bonusType;
-            _currentVariantSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
-            _currentBonusVariantRenderer = _bonusesVariants[_bonusType].bonusRenderer;
+        public void ManageScreenVisibility() {
+            // to do: zarządzanie na ekranie
         }
-        
+
         public void UseObjectFromPool() {
             //Note: This line resets the bonus before release.
-            StopObject();
+            TryEnableBonusAndSelectedVariant(false);
+            _bonusMovement.StopObject();
             
             if(_stopCoroutine != null)
                 StopCoroutine(_stopCoroutine);
             
-            MoveObject();
-        }
-
-        public void MoveObject() {
             TryEnableBonusAndSelectedVariant(true);
-            SetMotion();
-        }
-
-        public void StopObject() {
-            TryEnableBonusAndSelectedVariant(false);
-            ResetMotion();
+            _bonusMovement.MoveObject();
         }
 
         public void TryRunBonusCollectedRoutine() {
@@ -100,29 +66,9 @@ namespace SpaceInvaders {
                 yield return WaitUtils.SkipFrames(1);
 
             _isInStopRoutine = false;
-            StopObject();
+            _bonusMovement.StopObject();
         }
         
-        void SetMotion() {
-            _thisTransform.parent = null;
-            _thisTransform.position = _currentDropPos;
-            if (_rigidbody.velocity.sqrMagnitude == 0)
-                _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
-            else
-                _rigidbody.velocity = GetReleaseForce();
-        }
-
-        Vector3 GetReleaseForce() {
-            return SIHelpers.VectorDown * 
-                   (_currentVariantSettings.releaseForceMultiplier * _currentReleaseForceModifier);
-        }
-
-        void ResetMotion() {
-            _rigidbody.velocity = SIHelpers.VectorZero;
-            _thisTransform.SetParent(_parent);
-            _thisTransform.localPosition = SIScreenUtils.HiddenObjectPosition;
-        }
-
         void TryEnableBonusAndSelectedVariant(bool isEnabled) {
             
             if (_currentBonusVariantRenderer == null)
@@ -138,25 +84,6 @@ namespace SpaceInvaders {
             
             if(isEnabled)
                 _animatorController.SetShowAnimation(_currentBonusVariantRenderer);
-        }
-        
-
-        void CheckIsInVerticalViewportSpace() {
-            Vector3 bonusViewPortPosition =
-                SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
-
-            if (!bonusViewPortPosition.IsInVerticalViewportSpace())
-                StopObject();
-        }
-
-        public void SetTimeSpeedModifier(float timeSpeedModifier, float progress) {
-            _currentReleaseForceModifier = timeSpeedModifier;
-            _rigidbody.velocity = GetReleaseForce();
-            _animatorController.SetSpeedModifier(timeSpeedModifier);    
-        }
-        
-        public void RequestTimeSpeedModification() {
-            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
         }
     }
 }    
