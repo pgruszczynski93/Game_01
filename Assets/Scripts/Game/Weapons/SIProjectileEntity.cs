@@ -21,8 +21,6 @@ namespace SpaceInvaders
 
         bool _isMoving;
 
-        float _topWorldLimit;
-        float _bottomWorldLimit;
         float _currentVelocityModifier;
         Vector3 _moveDirection;
         Vector3 _parentRelativeLocalPos;
@@ -88,9 +86,6 @@ namespace SpaceInvaders
             _damageInfo = new DamageInfo(_projectileSettings.projectileDamage);
             _currentVelocityModifier = 1f;
             
-            ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
-            _topWorldLimit = screenWorldEdges.topScreenEdge + _projectileSettings.movementLimitOffset;
-            _bottomWorldLimit = screenWorldEdges.bottomScreenEdge - _projectileSettings.movementLimitOffset;
             RequestTimeSpeedModification();
         }
 
@@ -159,9 +154,7 @@ namespace SpaceInvaders
             if (_thisTransform == null)
                 return;
             
-            bool isInVerticalSpace =
-                SIScreenUtils.IsInVerticalWorldScreenLimit(_thisTransform.position, _bottomWorldLimit, _topWorldLimit);
-            if (isInVerticalSpace)
+            if (SIScreenUtils.IsInVerticalWorldScreenLimit(_thisTransform.position.y))
                 return;
             
             StopAndResetProjectile();

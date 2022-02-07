@@ -7,8 +7,7 @@ namespace SpaceInvaders {
         [SerializeField] float _currentSpeedMultiplier;
         [Range(0f, 3f), SerializeField] protected float _screenEdgeOffset;
         [SerializeField] SIGridMovementLimiter gridMovementLimiter;
-
-        bool _isNextStepPossible;
+        
         bool _isTweeningVerticalMovement;
         bool _isInitialSequenceFinished;
         bool _gridBecameVisible;
@@ -168,19 +167,19 @@ namespace SpaceInvaders {
             Vector3 nextPosition =
                 new Vector3(currentPosition.x + posDelta, currentPosition.y, currentPosition.z);
 
-            _isNextStepPossible = SIScreenUtils.IsInHorizontalWorldScreenLimit(nextPosition,
-                _leftScreenEdgeOffset,
-                _rightScreenEdgeOffset);
-
             if (_isTweeningVerticalMovement)
                 return;
 
-            if (_isNextStepPossible)
+            if (IsInHorizontalMovementRange(nextPosition.x, _leftScreenEdgeOffset, _rightScreenEdgeOffset))
                 MoveObjectHorizontally(currentPosition, nextPosition);
             else
                 MoveObjectVertically(nextPosition);
         }
 
+        bool IsInHorizontalMovementRange(float nextPosX, float leftLimit, float rightLimit) {
+            return nextPosX >= leftLimit && nextPosX <= rightLimit;
+        }
+        
         void MoveObjectHorizontally(Vector3 currentPosition, Vector3 targetPosition)
         {
             Vector3 smoothedPosition =

@@ -16,13 +16,6 @@ namespace SpaceInvaders {
             _currentVariantRenderer = _bonusesVariants[bonusType].bonusRenderer;
         }
         
-        public void ManageLastVariant(bool isEnabled) {
-            if (_lastVariantRenderer == null)
-                return;
-            
-            _lastVariantRenderer.enabled = isEnabled;
-        }
-
         public void TryUpdateBonusVariant(bool isEnabled) {
             if (_currentVariantRenderer == null)
                 return;

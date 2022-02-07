@@ -69,10 +69,8 @@ namespace SpaceInvaders {
         }
         
         void CheckIsInVerticalViewportSpace() {
-            Vector3 bonusViewPortPosition =
-                SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
-
-            if (!bonusViewPortPosition.IsInVerticalViewportSpace())
+            
+            if (!SIScreenUtils.IsInVerticalWorldScreenLimit(_thisTransform.position.y))
                 StopObject();
         }
         
