@@ -5276,7 +5276,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2637616641139936864}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5718,27 +5718,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bonusRoot: {fileID: 6375572910197037329}
   _animatorController: {fileID: 346440941738690385}
-  _bonusesVariants:
-    _keys: 000000000100000002000000030000000400000005000000
-    _values:
-    - scriptableBonus: {fileID: 11400000, guid: fa0ff032deaf6c2478339782a7a874c4,
-        type: 2}
-      bonusRenderer: {fileID: 8654999617763603144}
-    - scriptableBonus: {fileID: 11400000, guid: 52a1d9f64191d88428ec5fa048f59904,
-        type: 2}
-      bonusRenderer: {fileID: 979481691423972112}
-    - scriptableBonus: {fileID: 11400000, guid: 80b619222c673b744b70bead767a8218,
-        type: 2}
-      bonusRenderer: {fileID: 774676110857534785}
-    - scriptableBonus: {fileID: 11400000, guid: cc67eb48a8fa3174c8325d178d7f0cb1,
-        type: 2}
-      bonusRenderer: {fileID: 2651823240091987030}
-    - scriptableBonus: {fileID: 11400000, guid: 24f13bb8b0d0f0b44bf415abc792b1ef,
-        type: 2}
-      bonusRenderer: {fileID: 1276422678062164274}
-    - scriptableBonus: {fileID: 11400000, guid: 0c4b6274d422c8d4984c2d87b63e21b1,
-        type: 2}
-      bonusRenderer: {fileID: 2030539968351113166}
   _bonusMovement: {fileID: 3222261026585731146}
   _variantSelector: {fileID: 3058366340137400967}
 --- !u!114 &6375572910197037335
@@ -5801,8 +5780,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusesVariants:
-    _keys: 
-    _values: []
+    _keys: 000000000100000002000000030000000400000005000000
+    _values:
+    - scriptableBonus: {fileID: 11400000, guid: fa0ff032deaf6c2478339782a7a874c4,
+        type: 2}
+      bonusRenderer: {fileID: 8654999617763603144}
+    - scriptableBonus: {fileID: 11400000, guid: 52a1d9f64191d88428ec5fa048f59904,
+        type: 2}
+      bonusRenderer: {fileID: 979481691423972112}
+    - scriptableBonus: {fileID: 11400000, guid: 80b619222c673b744b70bead767a8218,
+        type: 2}
+      bonusRenderer: {fileID: 774676110857534785}
+    - scriptableBonus: {fileID: 11400000, guid: cc67eb48a8fa3174c8325d178d7f0cb1,
+        type: 2}
+      bonusRenderer: {fileID: 2651823240091987030}
+    - scriptableBonus: {fileID: 11400000, guid: 24f13bb8b0d0f0b44bf415abc792b1ef,
+        type: 2}
+      bonusRenderer: {fileID: 1276422678062164274}
+    - scriptableBonus: {fileID: 11400000, guid: 0c4b6274d422c8d4984c2d87b63e21b1,
+        type: 2}
+      bonusRenderer: {fileID: 2030539968351113166}
 --- !u!1 &7607926838262202215
 GameObject:
   m_ObjectHideFlags: 0

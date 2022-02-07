@@ -7,25 +7,21 @@ namespace SpaceInvaders {
     public class SIBonus : MonoBehaviour, IPoolable {
         [SerializeField] GameObject _bonusRoot;
         [SerializeField] SIBonusAnimatorController _animatorController;
-        [SerializeField] SIBonusDictionary _bonusesVariants;
         [SerializeField] SIBonusMovement _bonusMovement;
         [SerializeField] SIBonusVariantSelector _variantSelector;
         
         bool _isInStopRoutine;
+        
         BonusType _bonusType;
-
-        BonusSettings _currentVariantSettings;
-        Renderer _currentBonusVariantRenderer;
-        Renderer _lastRenderer;
         Coroutine _stopCoroutine;
         
-        public BonusSettings BonusVariantSettings => _currentVariantSettings;
-        public Renderer BonusVariantRenderer => _currentBonusVariantRenderer;
-
+        public BonusSettings GetBonusVariantSettings() {
+            return _variantSelector.BonusVariantSettings;
+        }
+        
         public void SetBonusVariant(BonusType bonusType) {
             _bonusType = bonusType;
-            _currentVariantSettings = _bonusesVariants[_bonusType].scriptableBonus.bonusSettings;
-            _currentBonusVariantRenderer = _bonusesVariants[_bonusType].bonusRenderer;
+            _variantSelector.UseVariant(bonusType);
         }
         
         public void SetSpawnPosition(Vector3 spawnPos) {
@@ -71,19 +67,10 @@ namespace SpaceInvaders {
         
         void TryEnableBonusAndSelectedVariant(bool isEnabled) {
             
-            if (_currentBonusVariantRenderer == null)
-                return;
-            
-            if (_lastRenderer != null) {
-                _lastRenderer.enabled = false;
-            }
-            
+            _variantSelector.TryUpdateBonusVariant(isEnabled);
             _bonusRoot.SetActive(isEnabled);
-            _currentBonusVariantRenderer.enabled = isEnabled;
-            _lastRenderer = _currentBonusVariantRenderer;
-            
             if(isEnabled)
-                _animatorController.SetShowAnimation(_currentBonusVariantRenderer);
+                _animatorController.SetShowAnimation(_variantSelector.CurrentVariantRenderer);
         }
     }
 }    

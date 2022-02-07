@@ -31,7 +31,7 @@ namespace SpaceInvaders
             // todo: consider adding bonuses to enemies: 
             // todo======================================
 
-            SIBonusesEvents.BroadcastOnBonusCollected(_bonusBehaviour.BonusVariantSettings);
+            SIBonusesEvents.BroadcastOnBonusCollected(_bonusBehaviour.GetBonusVariantSettings());
             _bonusBehaviour.TryRunBonusCollectedRoutine();
         }
     }
