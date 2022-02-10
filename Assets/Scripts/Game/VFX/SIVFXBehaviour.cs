@@ -33,12 +33,11 @@ namespace SpaceInvaders
         }
 
         public void SetSpawnRotation(Vector3 spawnRot) {
-            //intentionally unimplemented
+            //Intentionally unimplemented.
         }
 
         public void ManageScreenVisibility() {
-            //TO DO: 
-
+            //Intentionally unimplemented - is always on screen.
         }
 
         public void UseObjectFromPool() {

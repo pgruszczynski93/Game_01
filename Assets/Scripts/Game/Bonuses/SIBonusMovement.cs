@@ -10,7 +10,7 @@ namespace SpaceInvaders {
         float _currentReleaseForceModifier;
         Vector3 _currentDropPos;
         Transform _parent;
-        
+
         void Start() => Initialise();
 
         void Initialise() {
@@ -20,22 +20,6 @@ namespace SpaceInvaders {
             RequestTimeSpeedModification();
         }
 
-        void OnEnable() => SubscribeEvents();
-
-        void OnDisable() => UnsubscribeEvents();
-        
-        void SubscribeEvents() {
-            SIEventsHandler.OnUpdate += HandleOnUpdate;
-        }
-
-        void UnsubscribeEvents() {
-            SIEventsHandler.OnUpdate -= HandleOnUpdate;
-        }
-        
-        void HandleOnUpdate() {
-            CheckIsInVerticalViewportSpace();
-        }
-        
         public void SetDropPosition(Vector3 spawnPos) {
             _currentDropPos = spawnPos;
         }
@@ -68,15 +52,8 @@ namespace SpaceInvaders {
             _thisTransform.localPosition = SIScreenUtils.HiddenObjectPosition;
         }
         
-        void CheckIsInVerticalViewportSpace() {
-            
-            if (!SIScreenUtils.IsInVerticalWorldScreenLimit(_thisTransform.position.y))
-                StopObject();
-        }
-        
         Vector3 GetReleaseForce() {
-            return SIHelpers.VectorDown * 
-            (_releaseForceMultiplier * _currentReleaseForceModifier);
+            return SIHelpers.VectorDown * (_releaseForceMultiplier * _currentReleaseForceModifier);
         }
     }
 }

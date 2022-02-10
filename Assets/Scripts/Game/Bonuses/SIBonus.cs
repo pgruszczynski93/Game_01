@@ -11,8 +11,7 @@ namespace SpaceInvaders {
         [SerializeField] SIBonusVariantSelector _variantSelector;
         
         bool _isInStopRoutine;
-        
-        BonusType _bonusType;
+        Transform _thisTransform;
         Coroutine _stopCoroutine;
         
         public BonusSettings GetBonusVariantSettings() {
@@ -20,7 +19,6 @@ namespace SpaceInvaders {
         }
         
         public void SetBonusVariant(BonusType bonusType) {
-            _bonusType = bonusType;
             _variantSelector.UseVariant(bonusType);
         }
         
@@ -29,11 +27,17 @@ namespace SpaceInvaders {
         }
 
         public void SetSpawnRotation(Vector3 spawnRot) {
-            //intentionally unimplemented
+            //Intentionally unimplemented.
         }
 
         public void ManageScreenVisibility() {
-            // to do: zarządzanie na ekranie
+            if (_thisTransform == null)
+                _thisTransform = transform;
+            
+            if (_thisTransform && SIScreenUtils.IsInVerticalWorldScreenLimit(_thisTransform.position.y))
+                return;
+            
+            _bonusMovement.StopObject();
         }
 
         public void UseObjectFromPool() {
