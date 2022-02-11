@@ -2,19 +2,18 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public class SIPlayerProjectilesPool: SIProjectilesPool {
+    public class SIPlayerProjectilesPool : SIProjectilesPool {
 
         [SerializeField] SIPlayerShootController _playerShootController;
-        
-        void OnEnable() => SubscribeEvents();
-        void OnDisable() => UnsubscribeEvents();
 
-        void SubscribeEvents() {
+        protected override void SubscribeEvents() {
+            base.SubscribeEvents();
             SIGameplayEvents.OnPlayerShoot += HandleOnPlayerShoot;
             SIGameplayEvents.OnPlayerProjectilesCountChanged += HandleOnProjectilesCountChanged;
         }
 
-        void UnsubscribeEvents() {
+        protected override void UnsubscribeEvents() {
+            base.UnsubscribeEvents();
             SIGameplayEvents.OnPlayerShoot -= HandleOnPlayerShoot;
             SIGameplayEvents.OnPlayerProjectilesCountChanged -= HandleOnProjectilesCountChanged;
         }

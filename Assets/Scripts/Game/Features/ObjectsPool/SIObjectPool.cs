@@ -8,18 +8,20 @@ namespace SpaceInvaders.ObjectsPool {
         [SerializeField] protected int _poolCapacity;
         [SerializeField] protected T _prefabToSpawn;
         [SerializeField] protected List<T> _objectsPool;
-        
-        protected int _poolIndex;
+
         protected T _currentObjectFromPool;
 
+        int _poolIndex;
+
+        void Start() => Initialise();
         void OnEnable() => SubscribeEvents();
         void OnDisable() => UnsubscribeEvents();
-        
-        void SubscribeEvents() {
+        protected virtual void Initialise() {}
+        protected virtual void SubscribeEvents() {
             SIEventsHandler.OnUpdate += HandleOnUpdate;
         }
         
-        void UnsubscribeEvents() {
+        protected virtual void UnsubscribeEvents() {
             SIEventsHandler.OnUpdate -= HandleOnUpdate;
         }
         

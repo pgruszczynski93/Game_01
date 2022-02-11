@@ -12,21 +12,20 @@ namespace SpaceInvaders {
         
         SIBonusDropRatesLookup _loadedLookup;
 
-        void Start() => Initialise();
-
-        void Initialise() {
+        protected override void Initialise() {
+            base.Initialise();
+            
             _loadedLookup = _scriptableLookup.dropRatesLookup;
             _bonusVariantsCount = _loadedLookup.Count;
         }
 
-        void OnEnable() => SubscribeEvents();
-        void OnDisable() => UnsubscribeEvents();
-
-        void SubscribeEvents() {
+        protected override void SubscribeEvents() {
+            base.SubscribeEvents();
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
-        void UnsubscribeEvents() {
+        protected override void UnsubscribeEvents() {
+            base.UnsubscribeEvents();
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
