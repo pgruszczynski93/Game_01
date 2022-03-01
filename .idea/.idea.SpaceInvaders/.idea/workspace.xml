@@ -58,11 +58,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0aa3c97d-d3ee-469e-9591-9d70d230594c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/CelestialRandomizer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/CelestialRandomizer.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetRandomizer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetRandomizer.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/RingsRandomizer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/RingsRandomizer.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SpaceInvaders/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Features/ObjectsPool/SIObjectPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Features/ObjectsPool/SIObjectPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIEnemyProjectilesPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIEnemyProjectilesPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIPlayerProjectilesPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIPlayerProjectilesPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/Planet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/Planet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetsPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetsPool.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -210,9 +216,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Collisions/DamageInfo.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamVfxController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Configs/ShieldSettings.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldAnimatorController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/Shield/SIShieldBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/LaserBeam/SILaserBeamBehaviour.cs" />
@@ -237,14 +240,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/SIPlanet.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetsCollection.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetGenerator.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetsPool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/SIMathUtils.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetSettings.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/BonusMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusAnimatorController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Configs/BonusSettings.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/Planet.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusVariantActivator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusColliderBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusVariantSelector.cs" />
@@ -252,15 +252,21 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Entities/Enemies/SIGridMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIProjectileEntity.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/ObjectsPool/IPoolable.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/VFX/SIVFXBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonus.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/Projectile/SIProjectileMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/Projectile/SIProjectileEntity.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIPlayerProjectilesPool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Features/ObjectsPool/SIObjectPool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/SIEnemyProjectilesPool.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Bonuses/SIBonusMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Weapons/Projectile/SIProjectileMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetsPool.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/Planet.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/CelestialRandomizer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetRandomizer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/RingsRandomizer.cs" />
       </list>
     </option>
   </component>
@@ -304,10 +310,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1372">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1372" />
+      <option name="pid" />
       <option name="selectedOptions">
         <set />
       </option>
@@ -678,6 +684,7 @@
       <workItem from="1644432451365" duration="1672000" />
       <workItem from="1644529107084" duration="4109000" />
       <workItem from="1644605022450" duration="2291000" />
+      <workItem from="1646169902093" duration="4295000" />
     </task>
     <servers />
   </component>
@@ -797,10 +804,10 @@
     </state>
     <state width="1860" height="193" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1644610102227" />
     <state width="1877" height="206" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1640699276985" />
-    <state x="783" y="221" key="RiderGenerateDialog" timestamp="1644530596167">
+    <state x="783" y="221" key="RiderGenerateDialog" timestamp="1646173872968">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="783" y="221" key="RiderGenerateDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1644530596167" />
+    <state x="783" y="221" key="RiderGenerateDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1646173872968" />
     <state x="783" y="221" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1640346286122" />
     <state x="462" y="193" key="SettingsEditor" timestamp="1643839528834">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -815,10 +822,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1640434412702" />
-    <state x="1920" y="0" width="1613" height="1027" key="dock-window-1" timestamp="1644609690205">
+    <state x="1920" y="73" width="1712" height="993" key="dock-window-1" timestamp="1646174556174">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="1920" y="0" width="1613" height="1027" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1644609690205" />
+    <state x="1920" y="73" width="1712" height="993" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1646174556174" />
     <state x="586" y="144" width="1003" height="1027" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1643475833166" />
     <state x="2073" y="0" width="1593" height="1027" maximized="true" key="dock-window-2" timestamp="1639694959299">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -829,10 +836,10 @@
     </state>
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1644609308115" />
     <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1640271943617" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1644608821176">
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1646173014143">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1644608821176" />
+    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1646173014143" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1640699024538" />
   </component>
   <component name="XDebuggerManager">

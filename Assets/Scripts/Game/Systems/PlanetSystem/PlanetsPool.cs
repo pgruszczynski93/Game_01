@@ -11,7 +11,7 @@ namespace SpaceInvaders.PlanetSystem {
         [Button]
         void RandomizePlanets() {
             for (int i = 0; i < _poolCapacity; i++) {
-                _objectsPool[i].RandomizePlanet();
+                _objectsPool[i].RandomizePlanetAndRings();
             }
         }
     }
