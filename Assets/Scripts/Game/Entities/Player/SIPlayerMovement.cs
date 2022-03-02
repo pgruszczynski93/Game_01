@@ -33,7 +33,7 @@ namespace SpaceInvaders
 
         protected override void SubscribeEvents()
         {
-            SIEventsHandler.OnUpdate += TryToMoveObject;
+            base.SubscribeEvents();
             SIEventsHandler.OnAxesInputReceived += HandleAxesInputReceived;
             SIBonusesEvents.OnBonusEnabled += HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled += HandleOnBonusDisabled;
@@ -41,8 +41,8 @@ namespace SpaceInvaders
 
         protected override void UnsubscribeEvents()
         {
-            SIEventsHandler.OnUpdate -= TryToMoveObject;
-            SIEventsHandler.OnAxesInputReceived += HandleAxesInputReceived;
+            base.UnsubscribeEvents();
+            SIEventsHandler.OnAxesInputReceived -= HandleAxesInputReceived;
             SIBonusesEvents.OnBonusEnabled -= HandleOnBonusEnabled;
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
         }
@@ -66,7 +66,7 @@ namespace SpaceInvaders
 
         protected override void TryToMoveObject()
         {
-            if (_canMove == false)
+            if (!_canMove)
                 return;
 
             UpdatePosition();
@@ -75,7 +75,7 @@ namespace SpaceInvaders
 
         protected override void TryToStopObject()
         {
-            //todo: stop conditiions
+            //todo: stop conditions
 
             if (_canMove)
                 return;

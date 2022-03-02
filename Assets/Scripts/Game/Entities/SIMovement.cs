@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -22,6 +21,7 @@ namespace SpaceInvaders {
         protected abstract void UpdateRotation();
         protected virtual void TryToMoveObject() { }
         protected virtual void TryToStopObject() { }
+        protected virtual void ResetMovement() { }
 
         protected virtual void Initialise() {
             if (_initialised)
@@ -34,9 +34,18 @@ namespace SpaceInvaders {
         protected void Start() => Initialise();
         protected void OnEnable() => SubscribeEvents();
         protected void OnDisable() => UnsubscribeEvents();
-        protected virtual void SubscribeEvents() { }
-        protected virtual void UnsubscribeEvents() { }
-        protected virtual void ResetMovement() { }
+
+        protected virtual void SubscribeEvents() {
+            SIEventsHandler.OnUpdate += HandleOnUpdate;
+        }
+
+        protected virtual void UnsubscribeEvents() {
+            SIEventsHandler.OnUpdate -= HandleOnUpdate;
+        }
+
+        protected virtual void HandleOnUpdate() {
+            TryToMoveObject();
+        }
 
         public void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1f) {
             _speedModificator = timeSpeedModifier;

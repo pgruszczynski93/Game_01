@@ -1,24 +1,27 @@
 using UnityEngine;
 
 namespace SpaceInvaders.PlanetSystem {
-    public class PlanetMovement : MonoBehaviour, ICanMove, IModifyTimeSpeedMultiplier {
+    public class PlanetMovement : SIMovement, ICanMove, IModifyTimeSpeedMultiplier {
         
-        Transform _thisTransform;
-        
-        void SubscribeEvents()
-        {
-            SIEventsHandler.OnUpdate += HandleOnUpdate;
+        //todo: remove itlater - proto
+        protected override void Initialise() {
+            base.Initialise();
+            _canMove = true;
         }
 
-        void UnsubscribeEvents()
-        {
-            SIEventsHandler.OnUpdate -= HandleOnUpdate;
+
+        protected override void TryToMoveObject() {
+            base.TryToMoveObject();
+            Debug.Log("planeta");
+
         }
 
-        void HandleOnUpdate() {
-            
+        protected override void UpdatePosition() {
         }
-        
+
+        protected override void UpdateRotation() {
+        }
+
         public void MoveObject() {
             
         }
