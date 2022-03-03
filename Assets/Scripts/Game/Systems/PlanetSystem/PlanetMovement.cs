@@ -1,8 +1,9 @@
 using UnityEngine;
 
 namespace SpaceInvaders.PlanetSystem {
-    public class PlanetMovement : SIMovement, ICanMove, IModifyTimeSpeedMultiplier {
-        
+    public class PlanetMovement : SIMovement {
+
+        public float _speed;
         //todo: remove itlater - proto
         protected override void Initialise() {
             base.Initialise();
@@ -12,28 +13,20 @@ namespace SpaceInvaders.PlanetSystem {
 
         protected override void TryToMoveObject() {
             base.TryToMoveObject();
-            Debug.Log("planeta");
-
+            UpdatePosition();
         }
 
         protected override void UpdatePosition() {
+            //proto !!
+            _dt = Time.deltaTime;
+            var curPos = _thisTransform.position;
+            var deltaY = -1 * _dt * _speed;
+            var newPos = new Vector3(curPos.x, curPos.y + deltaY, curPos.z);
+            _thisTransform.position =  newPos;
         }
 
         protected override void UpdateRotation() {
-        }
-
-        public void MoveObject() {
             
-        }
-
-        public void StopObject() {
-        }
-
-
-        public void RequestTimeSpeedModification() {
-        }
-
-        public void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1) {
         }
     }
 }

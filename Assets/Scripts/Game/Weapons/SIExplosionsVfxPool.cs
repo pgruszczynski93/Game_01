@@ -6,14 +6,13 @@ namespace SpaceInvaders {
         
         Vector3 _showPosition;
 
-        void OnEnable() => SubscribeEvents();
-        void OnDisable() => UnsubscribeEvents();
-
-        void SubscribeEvents() {
+        protected override void SubscribeEvents() {
+            base.SubscribeEvents();
             SIGameplayEvents.OnExplosiveObjectHit += HandleOnExplosiveObjectHit;
         }
 
-        void UnsubscribeEvents() {
+        protected override void UnsubscribeEvents() {
+            base.UnsubscribeEvents();
             SIGameplayEvents.OnExplosiveObjectHit -= HandleOnExplosiveObjectHit;
         }
         
