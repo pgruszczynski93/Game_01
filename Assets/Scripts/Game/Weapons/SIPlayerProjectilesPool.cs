@@ -25,7 +25,7 @@ namespace SpaceInvaders {
             _currentSlotSet = _playerShootController.GetProjectileSlotsParent();
             _currentSlotIndex = 0;
             for (int i = 0; i < _currentSlotSet.Length; i++) {
-                UpdatePool();
+                SetNextObjectFromPool();
                 _currentSlotIndex++;
             }
         }

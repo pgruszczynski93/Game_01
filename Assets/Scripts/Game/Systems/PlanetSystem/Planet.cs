@@ -11,9 +11,6 @@ namespace SpaceInvaders.PlanetSystem {
 
         Transform _thisTransform;
 
-        public Vector3 protoStartPos;
-        public Vector3 protoFinishPos;
-        
         void Start() => Initialise();
         void Initialise() {
             _planetRandomizer.Initialise();
@@ -21,20 +18,26 @@ namespace SpaceInvaders.PlanetSystem {
             _thisTransform = transform;
         }
        
-        //PROTO
         public void UseObjectFromPool() {
             SetSpawnPosition(Vector3.back);
         }
 
         public void SetSpawnPosition(Vector3 spawnPos) {
-            _thisTransform.position = protoStartPos;
+            //ustawić planete tak by była odpowiednio daleko od gracza - najlepiej wzgledem jakiegoś prostopadloscianu
+            _thisTransform.position = spawnPos;
         }
 
         public void SetSpawnRotation(Vector3 spawnRot) {
+            //todo - zrobić clampowanie kąta obrotu tak by wygladało dobrze
+            _thisTransform.eulerAngles = spawnRot;
         }
 
         public void ManageScreenVisibility() {
-            
+            if (_thisTransform && SIScreenUtils.IsInVerticalWorldScreenLimit(_thisTransform.position.y))
+                return;
+
+            // Update();
+            // zatrzymaj i zresetuj rzeczy
         }
 
         [Button]

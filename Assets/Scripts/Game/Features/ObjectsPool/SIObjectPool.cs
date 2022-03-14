@@ -44,7 +44,7 @@ namespace SpaceInvaders.ObjectsPool {
 
         protected abstract void ManagePooledObject();
         
-        protected void UpdatePool() {
+        protected void SetNextObjectFromPool() {
             _currentObjectFromPool = _objectsPool[_poolIndex];
             ManagePooledObject();
             ++_poolIndex;

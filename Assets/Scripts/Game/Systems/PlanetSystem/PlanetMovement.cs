@@ -3,30 +3,32 @@ using UnityEngine;
 namespace SpaceInvaders.PlanetSystem {
     public class PlanetMovement : SIMovement {
 
-        public float _speed;
-        //todo: remove itlater - proto
+        //todo - scriptable object do zaladowania ustawienia ruchu
+        Vector3 _movementDirection;
+        
         protected override void Initialise() {
             base.Initialise();
             _canMove = true;
+            _initialMovementSpeed = 1;
+            _currentMovementSpeed = _initialMovementSpeed;
+            _movementDirection = Vector3.down;
         }
-
-
+        
         protected override void TryToMoveObject() {
             base.TryToMoveObject();
             UpdatePosition();
         }
 
         protected override void UpdatePosition() {
-            //proto !!
             _dt = Time.deltaTime;
-            var curPos = _thisTransform.position;
-            var deltaY = -1 * _dt * _speed;
-            var newPos = new Vector3(curPos.x, curPos.y + deltaY, curPos.z);
+            float vertMovementDelta = _dt * _currentMovementSpeed * _speedModificator * _movementDirection.y; 
+            Vector3 currentPos = _thisTransform.position;
+            Vector3 newPos = new Vector3(currentPos.x, currentPos.y + vertMovementDelta, currentPos.z);
             _thisTransform.position =  newPos;
         }
 
         protected override void UpdateRotation() {
-            
+            //Intentionally unimplemented. Rotation around it's own Y axis will be done by animation.s
         }
     }
 }

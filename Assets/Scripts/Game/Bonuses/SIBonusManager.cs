@@ -45,7 +45,7 @@ namespace SpaceInvaders {
             if (!CanBeDropped(probability, dropInfo)) 
                 return;
             
-            UpdatePool();
+            SetNextObjectFromPool();
         }
         
         protected override void ManagePooledObject() {

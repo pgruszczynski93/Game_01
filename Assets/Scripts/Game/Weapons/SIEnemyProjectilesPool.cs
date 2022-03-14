@@ -1,3 +1,4 @@
+
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -33,7 +34,7 @@ namespace SpaceInvaders {
             _currentSlotSet = shootController.GetProjectileSlotsParent();
             _currentSlotIndex = 0;
             for (int i = 0; i < _currentSlotSet.Length; i++) {
-                UpdatePool();
+                SetNextObjectFromPool();
                 _currentSlotIndex++;
             }
 

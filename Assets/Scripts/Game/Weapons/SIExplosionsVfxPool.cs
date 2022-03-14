@@ -18,7 +18,7 @@ namespace SpaceInvaders {
         
         void HandleOnExplosiveObjectHit(Vector3 collisionPos) {
             _showPosition = collisionPos;
-            UpdatePool();
+            SetNextObjectFromPool();
         }
         
         protected override void ManagePooledObject() {

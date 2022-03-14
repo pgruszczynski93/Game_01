@@ -35,5 +35,11 @@ namespace SpaceInvaders
             Color rgbCol = GetRandomColorRGB();
             return new Color(rgbCol.r, rgbCol.g, rgbCol.b, !useAlpha ? 0 : alpha);
         }
+
+        public static Vector3 GetRandomEulerAngle() {
+            return new Vector3(Random.Range(0f, 360f), 
+                Random.Range(0f, 360f), 
+                Random.Range(0f, 360f));
+        }
     }
 }
