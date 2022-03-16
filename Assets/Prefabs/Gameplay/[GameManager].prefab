@@ -286,6 +286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1921457986462624398}
   - component: {fileID: 2608496213949193981}
+  - component: {fileID: 9064568871855630020}
   m_Layer: 0
   m_Name: PlanetsPool
   m_TagString: Untagged
@@ -323,6 +324,22 @@ MonoBehaviour:
   _prefabToSpawn: {fileID: 287452984305217692, guid: bac1b8d5d46f15043a732af700e0b67e,
     type: 3}
   _objectsPool: []
+  _planetAreaCollider: {fileID: 9064568871855630020}
+  protoStartPos: {x: 0, y: 0, z: 0}
+  protoFinishPos: {x: 0, y: 0, z: 0}
+--- !u!65 &9064568871855630020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2506081219831437877}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 200, y: 200, z: 200}
+  m_Center: {x: 0, y: 0, z: 100}
 --- !u!1 &2767264272409469551
 GameObject:
   m_ObjectHideFlags: 0

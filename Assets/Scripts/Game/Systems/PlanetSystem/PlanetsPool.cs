@@ -4,12 +4,29 @@ using UnityEngine;
 
 namespace SpaceInvaders.PlanetSystem {
     public class PlanetsPool : SIObjectPool<Planet> {
+
+        [SerializeField] BoxCollider _planetAreaCollider;
+
+        float _areaDepth;
+        Vector3 _planetStartPos;
+        Vector3 _planetEndPos;
+        Vector3 _areaCenter;
+        Vector3 _areaExtents;
         
-        public Vector3 protoStartPos;
-        public Vector3 protoFinishPos;
+        Bounds _planetAreaBounds;
+
+        protected override void Initialise() {
+            base.Initialise();
+            _planetAreaBounds = _planetAreaCollider.bounds;
+            _areaCenter = _planetAreaBounds.center;
+            _areaExtents = _planetAreaBounds.extents;
+            _areaDepth = _planetAreaBounds.size.z;
+            _planetStartPos = new Vector3(0 , _areaCenter.y + _areaExtents.y, _areaExtents.z);
+            _planetEndPos = new Vector3(0, _areaCenter.y - _areaExtents.y,  _areaExtents.z);
+        }
 
         protected override void ManagePooledObject() {
-            _currentObjectFromPool.SetSpawnPosition(protoStartPos);
+            _currentObjectFromPool.SetSpawnPosition(_planetStartPos);
             _currentObjectFromPool.RandomizePlanetAndRings();
             _currentObjectFromPool.UseObjectFromPool();
         }
