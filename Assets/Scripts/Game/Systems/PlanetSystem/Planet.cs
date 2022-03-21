@@ -5,21 +5,38 @@ using UnityEngine;
 namespace SpaceInvaders.PlanetSystem {
     public class Planet : MonoBehaviour, IPoolable {
 
+        [SerializeField] Transform _planetSlot;
         [SerializeField] PlanetRandomizer _planetRandomizer;
         [SerializeField] RingsRandomizer _ringsRandomizer;
         [SerializeField] PlanetMovement _planetMovement;
 
         Transform _thisTransform;
+        Bounds _planetBounds;
 
         void Start() => Initialise();
         void Initialise() {
             _planetRandomizer.Initialise();
             _ringsRandomizer.Initialise();
             _thisTransform = transform;
+            _planetBounds.Encapsulate(_planetRandomizer.GetBounds());
+            _planetBounds.Encapsulate(_ringsRandomizer.GetBounds());
         }
-       
+        
+        //todo:
+        //1 spawnowanie planety wzgledem glebokosci boxa 
+        // dorobienie boundsow
+        // przeladowywanie pooli na jakims ewencie.?
+        // void OnDrawGizmosSelected() {
+        //     Gizmos.color = Color.blue;
+        //     _planetBounds.Encapsulate(_planetRandomizer.GetBounds());
+        //     _planetBounds.Encapsulate(_ringsRandomizer.GetBounds());
+        //     var size = new Vector3(_planetBounds.size.x * _planetSlot.localScale.x,
+        //         _planetBounds.size.y * _planetSlot.localScale.y,
+        //         _planetBounds.size.z * _planetSlot.localScale.z);
+        //     Gizmos.DrawWireCube(_planetBounds.center, size);
+        // }
+
         public void UseObjectFromPool() {
-            SetSpawnPosition(Vector3.back);
         }
 
         public void SetSpawnPosition(Vector3 spawnPos) {

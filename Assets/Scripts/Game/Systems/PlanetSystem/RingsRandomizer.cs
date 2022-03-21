@@ -25,7 +25,8 @@ namespace SpaceInvaders.PlanetSystem {
             _celestial.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
             _celestial.SetActive(areRingsEnabled);
             _matPropBlock = new MaterialPropertyBlock();
-            _renderer = _celestial.GetComponent<Renderer>();
+            if(_renderer == null)
+                _renderer = _celestial.GetComponent<Renderer>();
             _renderer.GetPropertyBlock(_matPropBlock);
             _matPropBlock.SetColor(RingsTintColor, SIMathUtils.GetRandomColorRGBA(true, 0.1f));
             _renderer.SetPropertyBlock(_matPropBlock);

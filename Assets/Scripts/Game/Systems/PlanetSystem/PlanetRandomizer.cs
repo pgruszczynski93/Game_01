@@ -12,6 +12,7 @@ namespace SpaceInvaders.PlanetSystem {
         
         [SerializeField] PlanetSettings _planetSettings;
 
+
         [Button]
         public override void Randomize() {
             GameObject[] planetVariants = _planetSettings.planetsGameObjects;
@@ -22,7 +23,8 @@ namespace SpaceInvaders.PlanetSystem {
                 _celestial.name = PLANET_NAME;                
             }
             int selectedPlanetTextureIndex = Random.Range(0, maxTextures - 1);
-            _renderer = _celestial.GetComponent<Renderer>();
+            if(_renderer == null)
+                _renderer = _celestial.GetComponent<Renderer>();
             _matPropBlock = new MaterialPropertyBlock();
             _renderer.GetPropertyBlock(_matPropBlock);
             _matPropBlock.SetTexture(MainTex, _planetSettings.availableTextures[selectedPlanetTextureIndex]);

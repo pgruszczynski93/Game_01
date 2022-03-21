@@ -11,10 +11,15 @@ namespace SpaceInvaders.PlanetSystem {
         protected Renderer _renderer;
 
         public void Initialise() {
-            _matPropBlock = new MaterialPropertyBlock();
+            //Note: This line makes sure that we will get new planet on game start and proper refs assigned.
+            Randomize();
         }
 
         [Button]
         public abstract void Randomize();
+        
+        public Bounds GetBounds() {
+            return _renderer != null ? _renderer.bounds : new Bounds();
+        }
     }
 }
