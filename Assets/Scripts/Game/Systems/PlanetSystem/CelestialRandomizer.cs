@@ -21,5 +21,13 @@ namespace SpaceInvaders.PlanetSystem {
         public Bounds GetBounds() {
             return _renderer != null ? _renderer.bounds : new Bounds();
         }
+
+        public GameObject GetGameObject() {
+            return _celestial;
+        }
+
+        public bool IsObjectActiveInHierarchy() {
+            return _celestial != null && _celestial.activeInHierarchy;
+        }
     }
 }

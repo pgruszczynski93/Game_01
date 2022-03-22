@@ -11,30 +11,28 @@ namespace SpaceInvaders.PlanetSystem {
         [SerializeField] PlanetMovement _planetMovement;
 
         Transform _thisTransform;
-        Bounds _planetBounds;
 
         void Start() => Initialise();
         void Initialise() {
             _planetRandomizer.Initialise();
             _ringsRandomizer.Initialise();
             _thisTransform = transform;
-            _planetBounds.Encapsulate(_planetRandomizer.GetBounds());
-            _planetBounds.Encapsulate(_ringsRandomizer.GetBounds());
         }
         
         //todo:
         //1 spawnowanie planety wzgledem glebokosci boxa 
-        // dorobienie boundsow
         // przeladowywanie pooli na jakims ewencie.?
-        // void OnDrawGizmosSelected() {
-        //     Gizmos.color = Color.blue;
-        //     _planetBounds.Encapsulate(_planetRandomizer.GetBounds());
-        //     _planetBounds.Encapsulate(_ringsRandomizer.GetBounds());
-        //     var size = new Vector3(_planetBounds.size.x * _planetSlot.localScale.x,
-        //         _planetBounds.size.y * _planetSlot.localScale.y,
-        //         _planetBounds.size.z * _planetSlot.localScale.z);
-        //     Gizmos.DrawWireCube(_planetBounds.center, size);
-        // }
+        // proto - 
+        // spawnowanie planety wewnatrz boxa do obszaru planet - pod jakims buttnem
+        void OnDrawGizmos() {
+            Gizmos.color = Color.blue;
+            Bounds planetBounds = _planetRandomizer.GetBounds();
+            if (_planetRandomizer.IsObjectActiveInHierarchy()) 
+                Gizmos.DrawWireCube( planetBounds.center, planetBounds.size );
+            Bounds ringBounds = _ringsRandomizer.GetBounds();
+            if (_ringsRandomizer.IsObjectActiveInHierarchy()) 
+                Gizmos.DrawWireCube( ringBounds.center, ringBounds.size );
+        }
 
         public void UseObjectFromPool() {
         }
