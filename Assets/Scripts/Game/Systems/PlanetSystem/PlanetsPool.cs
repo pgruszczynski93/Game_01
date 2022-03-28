@@ -15,7 +15,8 @@ namespace SpaceInvaders.PlanetSystem {
         Vector3 _planetEndPos;
         Vector3 _areaCenter;
         Vector3 _areaExtents;
-        
+
+        Bounds _currentObjectBounds;
         Bounds _planetAreaBounds;
 
 #if UNITY_EDITOR
@@ -49,11 +50,22 @@ namespace SpaceInvaders.PlanetSystem {
         }
 
         void SetTopAreaSurfacePosition() {
-            float minX = _planetAreaBounds.min.x;
-            float minZ = _planetAreaBounds.min.z;
-            float randX = Random.Range(minX, _areaWidthSize);
-            float randZ = Random.Range(minZ, _areaDepthSize);
+            float areaMinX = _planetAreaBounds.min.x;
+            float areaMinZ = _planetAreaBounds.min.z;
             float y = _planetStartPos.y;
+
+            Bounds currPlanetBounds = _currentObjectFromPool.GetPlanetBounds();
+            float planetExtentsX = currPlanetBounds.extents.x;
+            float planetExtentsZ = currPlanetBounds.extents.z;
+
+            float spawnMinX = areaMinX + planetExtentsX;
+            float spawnMinZ = areaMinZ + planetExtentsZ;
+            float spawnMaxX = _areaWidthSize - planetExtentsX;
+            float spawnMaxZ = _areaDepthSize - planetExtentsZ;
+            
+            float randX = Random.Range(spawnMinX, spawnMaxX);
+            float randZ = Random.Range(spawnMinZ, spawnMaxZ);
+            
             _planetStartPos = new Vector3(randX, y, randZ);
         }
         

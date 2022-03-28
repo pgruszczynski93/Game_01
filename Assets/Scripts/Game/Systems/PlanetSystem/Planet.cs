@@ -23,10 +23,10 @@ namespace SpaceInvaders.PlanetSystem {
         }
         
         //todo:
-        //1 spawnowanie planety wzgledem glebokosci boxa 
         // przeladowywanie pooli na jakims ewencie.?
-        // proto - 
-        // spawnowanie planety wewnatrz boxa do obszaru planet - pod jakims buttnem
+        //2. ruch planety:
+        // planeta w ruchu - sprawdzaj widocznosc
+        // co 5-10 sekund sprawdzaj czy odpalic planete, dotrze na dól reset i powtrorz
         
         #if UNITY_EDITOR
         void OnDrawGizmosSelected() {
@@ -46,7 +46,7 @@ namespace SpaceInvaders.PlanetSystem {
         public void SetSpawnPosition(Vector3 spawnPos) {
             //ustawić planete tak by była odpowiednio daleko od gracza - najlepiej wzgledem jakiegoś prostopadloscianu
             // _thisTransform.position = spawnPos;
-            var newX = spawnPos
+            var newX = spawnPos;
             transform.position = spawnPos + new Vector3(0, _bounds.extents.y, 0);
         }
 
