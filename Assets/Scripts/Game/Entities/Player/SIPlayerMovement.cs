@@ -46,6 +46,10 @@ namespace SpaceInvaders
             SIBonusesEvents.OnBonusDisabled -= HandleOnBonusDisabled;
         }
 
+        protected override bool IsMovementPossible() {
+            return _canMove;
+        }
+
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
             if (bonusSettings.bonusType == BonusType.TimeModification) {
                 SetTimeSpeedModifier(_playerMovementSettings.slowDownBonusSpeedModificator);
@@ -63,19 +67,11 @@ namespace SpaceInvaders
             _inputValue = inputVector;
         }
 
-        protected override void TryToMoveObject()
-        {
-            if (!_canMove)
-                return;
-
-            UpdatePosition();
-            UpdateRotation();
-        }
-
         protected override void TryToStopObject()
         {
             //todo: stop conditions
-
+            _isMoving = false;
+            
             if (_canMove)
                 return;
 

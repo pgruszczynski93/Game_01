@@ -325,8 +325,6 @@ MonoBehaviour:
     type: 3}
   _objectsPool: []
   _planetAreaCollider: {fileID: 9064568871855630020}
-  protoStartPos: {x: 0, y: 0, z: 0}
-  protoFinishPos: {x: 0, y: 0, z: 0}
 --- !u!65 &9064568871855630020
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -338,7 +336,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 200, z: 200}
+  m_Size: {x: 350, y: 200, z: 200}
   m_Center: {x: 0, y: 0, z: 100}
 --- !u!1 &2767264272409469551
 GameObject:

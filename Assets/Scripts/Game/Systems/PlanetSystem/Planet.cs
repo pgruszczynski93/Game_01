@@ -25,18 +25,20 @@ namespace SpaceInvaders.PlanetSystem {
         //todo:
         // przeladowywanie pooli na jakims ewencie.?
         //2. ruch planety:
-        // planeta w ruchu - sprawdzaj widocznosc
-        // co 5-10 sekund sprawdzaj czy odpalic planete, dotrze na dól reset i powtrorz
-        
-        #if UNITY_EDITOR
+        /*
+        //Pula odpala asynchroniczne sprawdzanie czy planeta ruszyła
+        np co 3-5 sekund to sprawdza; Jesli tak - odpalamy logike moveobject
+        */
+
+#if UNITY_EDITOR
         void OnDrawGizmosSelected() {
             Gizmos.color = Color.blue;
             UpdatePlanetBounds();
             Gizmos.DrawWireCube( _bounds.center, _bounds.size );
         }
-        #endif
+#endif
 
-        void UpdatePlanetBounds() {
+        void UpdatePlanetBounds() {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
             _bounds = _planetRandomizer.GetBounds();
             _bounds.Encapsulate(_ringsRandomizer.GetBounds());
         }

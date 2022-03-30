@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     public abstract class SIMovement : MonoBehaviour, IModifyTimeSpeedMultiplier {
-        protected bool _canMove;
+        protected bool _canMove;    //State of movement possibility
+        protected bool _isMoving;   //Is moving now?
         protected bool _initialised;
 
         [SerializeField] protected float _initialMovementSpeed;
@@ -17,9 +18,9 @@ namespace SpaceInvaders {
         public Transform MovementTransform => _thisTransform;
         public Vector3 MovementWorldPosition => _thisTransform.position;
 
+        protected abstract bool IsMovementPossible();
         protected abstract void UpdatePosition();
         protected abstract void UpdateRotation();
-        protected virtual void TryToMoveObject() { }
         protected virtual void TryToStopObject() { }
         protected virtual void ResetMovement() { }
 
@@ -45,7 +46,11 @@ namespace SpaceInvaders {
         }
 
         protected virtual void HandleOnUpdate() {
-            TryToMoveObject();
+            if (!IsMovementPossible())
+                return;
+            _isMoving = true;
+            UpdatePosition();
+            UpdateRotation();
         }
 
         public void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1f) {

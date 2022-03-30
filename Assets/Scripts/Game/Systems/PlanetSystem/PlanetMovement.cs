@@ -14,9 +14,8 @@ namespace SpaceInvaders.PlanetSystem {
             _movementDirection = Vector3.down;
         }
         
-        protected override void TryToMoveObject() {
-            base.TryToMoveObject();
-            UpdatePosition();
+        protected override bool IsMovementPossible() {
+            return _canMove;
         }
 
         protected override void UpdatePosition() {

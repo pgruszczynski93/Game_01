@@ -7,7 +7,7 @@ namespace SpaceInvaders {
         [SerializeField] float _currentSpeedMultiplier;
         [Range(0f, 3f), SerializeField] protected float _screenEdgeOffset;
         [SerializeField] SIGridMovementLimiter gridMovementLimiter;
-        
+
         bool _isTweeningVerticalMovement;
         bool _isInitialSequenceFinished;
         bool _gridBecameVisible;
@@ -22,8 +22,7 @@ namespace SpaceInvaders {
         Tweener _initialMovementTweener;
         Tweener _verticalMovementTweener;
 
-        protected override void Initialise()
-        {
+        protected override void Initialise() {
             base.Initialise();
 
             _gridMovementSettings = _gridMovementSetup.gridMovementSettings;
@@ -36,16 +35,15 @@ namespace SpaceInvaders {
             InitialiseTweeners();
         }
 
-        void InitialiseTweeners()
-        {
+        void InitialiseTweeners() {
             _initialMovementTweener = _thisTransform
                 .DOLocalMove(_gridMovementSettings.worldTargetPosition,
                     _gridMovementSettings.initialMovementEaseDuration)
                 .OnPlay(() => _isInitialSequenceFinished = false)
-                .OnComplete(() =>
-                {
+                .OnComplete(() => {
                     _isInitialSequenceFinished = true;
                     _canMove = true;
+                    _isMoving = true;
                 })
                 .SetEase(_gridMovementSettings.initialMovementEaseType)
                 .SetAutoKill(false)
@@ -54,8 +52,7 @@ namespace SpaceInvaders {
             _verticalMovementTweener = _thisTransform
                 .DOMove(_gridMovementSettings.worldTargetPosition, _gridMovementSettings.horizontalDownstepDuration)
                 .OnPlay(() => _isTweeningVerticalMovement = true)
-                .OnComplete(() =>
-                {
+                .OnComplete(() => {
                     _isTweeningVerticalMovement = false;
                     _currentMovementSpeed = -_currentMovementSpeed;
                 })
@@ -63,23 +60,21 @@ namespace SpaceInvaders {
                 .SetAutoKill(false)
                 .Pause();
         }
-        
-        protected override void SubscribeEvents()
-        {
+
+        protected override void SubscribeEvents() {
             base.SubscribeEvents();
             SIGameplayEvents.OnWaveStart += HandleOnWaveStart;
             SIGameplayEvents.OnWaveEnd += HandleOnWaveEnd;
             SIGameplayEvents.OnEnemyDeath += HandleOnEnemyDeath;
         }
 
-        protected override void UnsubscribeEvents()
-        {
+        protected override void UnsubscribeEvents() {
             base.UnsubscribeEvents();
             SIGameplayEvents.OnWaveStart -= HandleOnWaveStart;
             SIGameplayEvents.OnWaveEnd -= HandleOnWaveEnd;
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
         }
-        
+
         void HandleOnWaveStart() {
             ExecuteInitialMovementSequence();
         }
@@ -90,23 +85,21 @@ namespace SpaceInvaders {
             ResetGridMovement();
             UpdateMovementOffsets();
         }
-        
+
         protected override void HandleOnUpdate() {
             CheckInitialVisibility();
 
             base.HandleOnUpdate();
         }
 
-        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviours)
-        {
+        void HandleOnEnemyDeath(SIEnemyBehaviour enemyBehaviours) {
             UpdateMovementOffsets();
         }
 
-        void ExecuteInitialMovementSequence()
-        {
+        void ExecuteInitialMovementSequence() {
             _initialMovementTweener.Restart();
         }
-        
+
         void CheckInitialVisibility() {
             Vector3 bonusViewPortPosition =
                 SIGameMasterBehaviour.Instance.MainCamera.WorldToViewportPoint(_thisTransform.position);
@@ -116,8 +109,7 @@ namespace SpaceInvaders {
             SIEnemyGridEvents.BroadcastOnGridOnGridVisibilityChanged(true);
         }
 
-        void ResetGridMovement()
-        {
+        void ResetGridMovement() {
             Debug.Log($"[SIGridMovement] ResetGrid movement()");
             TryToStopObject();
             _currentMovementSpeed = Mathf.Abs(_currentMovementSpeed);
@@ -138,8 +130,7 @@ namespace SpaceInvaders {
             _currentSpeedMultiplier = _nextSpeedMultiplier;
         }
 
-        void UpdateMovementOffsets()
-        {
+        void UpdateMovementOffsets() {
             _gridMinMax = gridMovementLimiter.CalculateGridMinMax();
             _rightScreenEdgeOffset = _worldScreenEdges.rightScreenEdge - _gridMinMax.localGridHorizontalMax -
                                      _gridMovementSettings.enemyWidthOffset;
@@ -147,21 +138,17 @@ namespace SpaceInvaders {
                                     _gridMovementSettings.enemyWidthOffset;
         }
 
-        protected override void TryToMoveObject()
-        {
-            if (!_isInitialSequenceFinished || !_canMove)
-                return;
-            UpdatePosition();
+        protected override bool IsMovementPossible() {
+            return _isInitialSequenceFinished && _canMove;
         }
 
-        protected override void TryToStopObject()
-        {
+        protected override void TryToStopObject() {
             _canMove = false;
+            _isMoving = true;
             _isTweeningVerticalMovement = false;
         }
 
-        protected override void UpdatePosition()
-        {
+        protected override void UpdatePosition() {
             _dt = Time.deltaTime;
 
             Vector3 currentPosition = _thisTransform.position;
@@ -178,19 +165,21 @@ namespace SpaceInvaders {
                 MoveObjectVertically(nextPosition);
         }
 
+        protected override void UpdateRotation() {
+            //Intentionally not implemented.
+        }
+
         bool IsInHorizontalMovementRange(float nextPosX, float leftLimit, float rightLimit) {
             return nextPosX >= leftLimit && nextPosX <= rightLimit;
         }
-        
-        void MoveObjectHorizontally(Vector3 currentPosition, Vector3 targetPosition)
-        {
+
+        void MoveObjectHorizontally(Vector3 currentPosition, Vector3 targetPosition) {
             Vector3 smoothedPosition =
                 Vector3.Lerp(currentPosition, targetPosition, _gridMovementSettings.movementSmoothStep);
             _thisTransform.position = smoothedPosition;
         }
 
-        void MoveObjectVertically(Vector3 newPosition)
-        {
+        void MoveObjectVertically(Vector3 newPosition) {
             Vector3 startPos = new Vector3(
                 Mathf.Clamp(newPosition.x, _leftScreenEdgeOffset, _rightScreenEdgeOffset),
                 newPosition.y, newPosition.z);
@@ -203,11 +192,6 @@ namespace SpaceInvaders {
                 .ChangeStartValue(startPos)
                 .ChangeEndValue(targetPos, true)
                 .Restart();
-        }
-
-        protected override void UpdateRotation()
-        {
-            //Intentionally not implemented.
         }
     }
 }
