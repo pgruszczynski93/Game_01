@@ -8,12 +8,12 @@ using Random = UnityEngine.Random;
 namespace SpaceInvaders.PlanetSystem {
     public class PlanetsPool : SIObjectPool<Planet> {
 
+        [SerializeField] bool _canManagePool;
         [SerializeField] float _maxAxisInclination;
         [SerializeField] float _minRespawnInterval;
         [SerializeField] float _maxRespawnInterval;
         [SerializeField] BoxCollider _planetAreaCollider;
 
-        bool _canManagePool;
         Bounds _currentObjectBounds;
         Bounds _planetAreaBounds;
 
