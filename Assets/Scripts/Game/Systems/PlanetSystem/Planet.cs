@@ -15,6 +15,7 @@ namespace SpaceInvaders.PlanetSystem {
         Bounds _bounds;
 
         void Start() => Initialise();
+        
         void Initialise() {
             _planetRandomizer.Initialise();
             _ringsRandomizer.Initialise();
