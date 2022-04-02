@@ -30,7 +30,6 @@ namespace SpaceInvaders.PlanetSystem {
         
         protected override void Initialise() {
             base.Initialise();
-            ManagePoolableObject();
             PlanetPoolingTask().Forget();
         }
 

@@ -17,8 +17,7 @@ namespace SpaceInvaders.PlanetSystem {
 
         protected override void UpdatePosition() {
             _dt = Time.deltaTime;
-            _currentMovementSpeed *= _speedModificator;
-            float vertMovementDelta = _dt * _currentMovementSpeed * _movementDirection.y; 
+            float vertMovementDelta = _dt * _currentMovementSpeed *_speedModificator * _movementDirection.y; 
             Vector3 currentPos = _thisTransform.position;
             Vector3 newPos = new Vector3(currentPos.x, currentPos.y + vertMovementDelta, currentPos.z);
             _thisTransform.position =  newPos;

@@ -6,6 +6,7 @@ namespace SpaceInvaders.PlanetSystem {
     public class Planet : MonoBehaviour, IPoolable {
         [SerializeField] float _planetSizeMultiplier;
         [SerializeField] Transform _planetSlot;
+        [SerializeField] GameObject _planetGraphicsParent;
         [SerializeField] PlanetRandomizer _planetRandomizer;
         [SerializeField] RingsRandomizer _ringsRandomizer;
         [SerializeField] PlanetMovement _planetMovement;
@@ -21,6 +22,7 @@ namespace SpaceInvaders.PlanetSystem {
             _planetRandomizer.Initialise();
             _ringsRandomizer.Initialise();
             _thisTransform = transform;
+            _planetGraphicsParent.SetActive(false);
             UpdatePlanetBoundsAndScale();
         }
         
@@ -50,6 +52,9 @@ namespace SpaceInvaders.PlanetSystem {
         }
         
         public void PerformOnPoolActions() {
+            if (!_planetGraphicsParent.activeInHierarchy)
+                _planetGraphicsParent.SetActive(true);
+            
             UpdatePlanetBoundsAndScale();
             _planetMovement.EnableMovement();
         }

@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _planetSizeMultiplier: 2
   _planetSlot: {fileID: 3914605462749366093}
+  _planetGraphicsParent: {fileID: 4793174022470861204}
   _planetRandomizer: {fileID: 9065168646717991693}
   _ringsRandomizer: {fileID: 7232007820553080389}
   _planetMovement: {fileID: 5737158909427191443}
@@ -111,7 +112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3914605462749366093
 Transform:
   m_ObjectHideFlags: 0
