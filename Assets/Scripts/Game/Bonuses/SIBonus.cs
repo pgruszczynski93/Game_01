@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     [RequireComponent(typeof(SIBonusColliderBehaviour))]
-    public class SIBonus : MonoBehaviour, IPoolable {
+    public class SIBonus : MonoBehaviour,  IPoolable {
         [SerializeField] GameObject _bonusRoot;
         [SerializeField] SIBonusAnimatorController _animatorController;
         [SerializeField] SIBonusMovement _bonusMovement;
@@ -40,7 +40,7 @@ namespace SpaceInvaders {
             _bonusMovement.StopObject();
         }
 
-        public void UseObjectFromPool() {
+        public void PerformOnPoolActions() {
             //Note: This line resets the bonus before release.
             TryEnableBonusAndSelectedVariant(false);
             _bonusMovement.StopObject();

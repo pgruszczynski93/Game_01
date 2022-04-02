@@ -9,14 +9,19 @@ namespace SpaceInvaders.ObjectsPool {
         [SerializeField] protected T _prefabToSpawn;
         [SerializeField] protected List<T> _objectsPool;
 
-        protected T _currentObjectFromPool;
+        protected T _currentlyPooledObject;
 
         int _poolIndex;
 
         void Start() => Initialise();
         void OnEnable() => SubscribeEvents();
         void OnDisable() => UnsubscribeEvents();
-        protected virtual void Initialise() {}
+
+        protected virtual void Initialise() {
+            if (_objectsPool != null) {
+                _currentlyPooledObject = _objectsPool[0];
+            }
+        }
         protected virtual void SubscribeEvents() {
             SIEventsHandler.OnUpdate += HandleOnUpdate;
         }
@@ -42,11 +47,11 @@ namespace SpaceInvaders.ObjectsPool {
             }
         }
 
-        protected abstract void ManagePooledObject();
+        protected abstract void ManagePoolableObject();
         
         protected void SetNextObjectFromPool() {
-            _currentObjectFromPool = _objectsPool[_poolIndex];
-            ManagePooledObject();
+            _currentlyPooledObject = _objectsPool[_poolIndex];
+            ManagePoolableObject();
             ++_poolIndex;
             if (_poolIndex > _poolCapacity - 1)
                 _poolIndex = 0;

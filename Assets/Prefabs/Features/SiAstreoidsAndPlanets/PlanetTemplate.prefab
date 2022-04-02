@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ca14a90522446e975a194c6906e02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _planetSizeMultiplier: 2
   _planetSlot: {fileID: 3914605462749366093}
   _planetRandomizer: {fileID: 9065168646717991693}
   _ringsRandomizer: {fileID: 7232007820553080389}
@@ -63,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e968993aaa984c02a246e9d88de6092d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialMovementSpeed: 0
+  _initialMovementSpeed: 12
   _currentMovementSpeed: 0
 --- !u!114 &9065168646717991693
 MonoBehaviour:
@@ -77,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09b777fb1fd45228c0a8dc22bc6f331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scaleMultiplier: 2.5
   _parent: {fileID: 3914605462749366093}
   _planetSettings: {fileID: 11400000, guid: 04b5ad0500a810e46b8cea5ff4dc8a82, type: 2}
 --- !u!114 &7232007820553080389
@@ -91,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb8e10a79d44edd9938bfe62d4e530f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scaleMultiplier: 2.5
   _parent: {fileID: 3914605462749366093}
   _planetSettings: {fileID: 11400000, guid: 04b5ad0500a810e46b8cea5ff4dc8a82, type: 2}
 --- !u!1 &4793174022470861204

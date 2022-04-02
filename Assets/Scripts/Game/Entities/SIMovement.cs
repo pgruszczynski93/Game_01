@@ -15,20 +15,20 @@ namespace SpaceInvaders {
         protected Transform _thisTransform;
         protected Tweener _tweener;
 
+        public bool IsMoving => _isMoving;
         public Transform MovementTransform => _thisTransform;
         public Vector3 MovementWorldPosition => _thisTransform.position;
-
+        
         protected abstract bool IsMovementPossible();
         protected abstract void UpdatePosition();
         protected abstract void UpdateRotation();
-        protected virtual void TryToStopObject() { }
-        protected virtual void ResetMovement() { }
 
         protected virtual void Initialise() {
             if (_initialised)
                 return;
 
             _initialised = true;
+            _canMove = false;
             _thisTransform = transform;
             RequestTimeSpeedModification();
         }
@@ -46,13 +46,36 @@ namespace SpaceInvaders {
         }
 
         protected virtual void HandleOnUpdate() {
-            if (!IsMovementPossible())
-                return;
-            _isMoving = true;
-            UpdatePosition();
-            UpdateRotation();
+            if (!IsMovementPossible()) {
+                DisableMovingState();
+            }
+            else {
+                EnableMovingState();
+                UpdatePosition();
+                UpdateRotation();
+            }
+        }
+        
+        void EnableMovingState() {
+            if (!_isMoving)
+                _isMoving = true;
         }
 
+        void DisableMovingState() {
+            if (_isMoving)
+                _isMoving = false;
+        }
+
+        public void EnableMovement() {
+            if(!_canMove)
+                _canMove = true;
+        }
+
+        public void DisableMovement() {
+            if(_canMove)
+                _canMove = false;
+        }
+        
         public void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1f) {
             _speedModificator = timeSpeedModifier;
         }

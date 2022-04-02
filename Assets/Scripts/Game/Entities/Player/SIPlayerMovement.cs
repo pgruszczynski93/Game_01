@@ -19,7 +19,6 @@ namespace SpaceInvaders
         protected override void Initialise()
         {
             base.Initialise();
-
             _canMove = true;
             _playerMovementSettings = _playerMovementSetup.playerMovementSettings;
             _worldScreenEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
@@ -67,16 +66,9 @@ namespace SpaceInvaders
             _inputValue = inputVector;
         }
 
-        protected override void TryToStopObject()
-        {
-            //todo: stop conditions
-            _isMoving = false;
-            
-            if (_canMove)
-                return;
-
-            _canMove = false;
-        }
+        /*
+         * Implement SetMovementPossibility when player dies.
+         */
         
         protected override void UpdatePosition()
         {

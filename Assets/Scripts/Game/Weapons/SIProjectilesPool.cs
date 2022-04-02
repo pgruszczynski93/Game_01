@@ -14,14 +14,14 @@ namespace SpaceInvaders {
             _availableProjectilesCount = _availableProjectiles;
         }
 
-        protected override void ManagePooledObject() {
+        protected override void ManagePoolableObject() {
             Transform slotIndexTransform = _currentSlotSet[_currentSlotIndex];
             //Note 1: Always enable element from pool.
-            _currentObjectFromPool.gameObject.SetActive(true); 
-            _currentObjectFromPool.SetSpawnPosition(slotIndexTransform.position);
+            _currentlyPooledObject.gameObject.SetActive(true); 
+            _currentlyPooledObject.SetSpawnPosition(slotIndexTransform.position);
             //Note 2: Check projectiles parent upwards normalized rotation (direction of release force).
-            _currentObjectFromPool.SetSpawnRotation(slotIndexTransform.up.normalized);
-            _currentObjectFromPool.UseObjectFromPool();
+            _currentlyPooledObject.SetSpawnRotation(slotIndexTransform.up.normalized);
+            _currentlyPooledObject.PerformOnPoolActions();
         }
         
 #if UNITY_EDITOR

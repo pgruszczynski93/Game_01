@@ -40,7 +40,7 @@ namespace SpaceInvaders
             //Intentionally unimplemented - is always on screen.
         }
 
-        public void UseObjectFromPool() {
+        public void PerformOnPoolActions() {
             TryPlayParticles();
         }
         

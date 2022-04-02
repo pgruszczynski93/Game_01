@@ -21,9 +21,9 @@ namespace SpaceInvaders {
             SetNextObjectFromPool();
         }
         
-        protected override void ManagePooledObject() {
-            _currentObjectFromPool.SetSpawnPosition(_showPosition);
-            _currentObjectFromPool.UseObjectFromPool();
+        protected override void ManagePoolableObject() {
+            _currentlyPooledObject.SetSpawnPosition(_showPosition);
+            _currentlyPooledObject.PerformOnPoolActions();
         }
 
     }

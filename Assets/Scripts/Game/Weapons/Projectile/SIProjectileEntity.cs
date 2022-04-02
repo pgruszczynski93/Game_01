@@ -75,7 +75,7 @@ namespace SpaceInvaders {
             StopAndResetProjectile();
         }
 
-        public void UseObjectFromPool() {
+        public void PerformOnPoolActions() {
             UseProjectile();
         }
 

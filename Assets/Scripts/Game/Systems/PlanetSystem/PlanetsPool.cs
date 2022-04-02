@@ -1,21 +1,19 @@
+using System;
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using SpaceInvaders.ObjectsPool;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SpaceInvaders.PlanetSystem {
     public class PlanetsPool : SIObjectPool<Planet> {
 
+        [SerializeField] float _maxAxisInclination;
+        [SerializeField] float _minRespawnInterval;
+        [SerializeField] float _maxRespawnInterval;
         [SerializeField] BoxCollider _planetAreaCollider;
 
-        float _areaWidthSize;
-        float _areaHeightSize;
-        float _areaDepthSize;
-
-        Vector3 _planetStartPos;
-        Vector3 _planetEndPos;
-        Vector3 _areaCenter;
-        Vector3 _areaExtents;
-
+        bool _canManagePool;
         Bounds _currentObjectBounds;
         Bounds _planetAreaBounds;
 
@@ -32,61 +30,97 @@ namespace SpaceInvaders.PlanetSystem {
         
         protected override void Initialise() {
             base.Initialise();
-            SetRefs();
+            ManagePoolableObject();
+            PlanetPoolingTask().Forget();
         }
 
-        void SetRefs() {
+        protected override void SubscribeEvents() {
+            base.SubscribeEvents();
+            SIEventsHandler.OnGameStateChanged += HandleOnGameStateChanged;
+        }
+
+        protected override void UnsubscribeEvents() {
+            base.UnsubscribeEvents();
+            SIEventsHandler.OnGameStateChanged -= HandleOnGameStateChanged;
+        }
+
+        void HandleOnGameStateChanged(GameStates gameState) {
+            if (gameState == GameStates.GameStarted) {
+                EnablePoolManagement();
+            }
+        }
+
+        void EnablePoolManagement() {
+            _canManagePool = true;
+        }
+
+        async UniTaskVoid PlanetPoolingTask() {
+            while (true) {
+                if (_currentlyPooledObject != null) {
+                    await UniTask.WaitUntil(() => !_currentlyPooledObject.IsMoving());
+                    if (!_canManagePool)
+                        await UniTask.Yield();
+                    else {
+                        float interval = Random.Range(_minRespawnInterval, _maxRespawnInterval);
+                        await UniTask.Delay(TimeSpan.FromSeconds(interval));
+                        ManagePoolableObject();
+                    }
+                }
+
+                await UniTask.Yield();
+            }
+        }
+        
+        Vector3 CalculateSpawnPosition() {
             _planetAreaBounds = _planetAreaCollider.bounds;
-            _areaCenter = _planetAreaBounds.center;
-            _areaExtents = _planetAreaBounds.extents;
-            _areaWidthSize = _planetAreaBounds.min.x + _planetAreaBounds.size.x;
-            _areaHeightSize = _planetAreaBounds.min.y + _planetAreaBounds.size.y;
-            _areaDepthSize = _planetAreaBounds.min.z + _planetAreaBounds.size.z;
-            _planetStartPos = new Vector3(0, _areaCenter.y + _areaExtents.y, _areaExtents.z);
-            _planetEndPos = new Vector3(0, _areaCenter.y - _areaExtents.y, _areaExtents.z);
-        }
-
-        protected override void ManagePooledObject() {
-            SetTopAreaSurfacePosition();
-            _currentObjectFromPool.SetSpawnPosition(_planetStartPos);
-            _currentObjectFromPool.RandomizePlanetAndRings();
-            _currentObjectFromPool.UseObjectFromPool();
-        }
-
-        void SetTopAreaSurfacePosition() {
+            Vector3 areaCenter = _planetAreaBounds.center;
+            Vector3 areaExtents = _planetAreaBounds.extents;
+            
+            float areaWidthSize = _planetAreaBounds.min.x + _planetAreaBounds.size.x;
+            float areaDepthSize = _planetAreaBounds.min.z + _planetAreaBounds.size.z;
             float areaMinX = _planetAreaBounds.min.x;
             float areaMinZ = _planetAreaBounds.min.z;
-            float y = _planetStartPos.y;
+            float y = areaCenter.y + areaExtents.y;
 
-            Bounds currPlanetBounds = _currentObjectFromPool.GetPlanetBounds();
+            Bounds currPlanetBounds = _currentlyPooledObject.GetPlanetBounds();
             float planetExtentsX = currPlanetBounds.extents.x;
             float planetExtentsZ = currPlanetBounds.extents.z;
 
             float spawnMinX = areaMinX + planetExtentsX;
             float spawnMinZ = areaMinZ + planetExtentsZ;
-            float spawnMaxX = _areaWidthSize - planetExtentsX;
-            float spawnMaxZ = _areaDepthSize - planetExtentsZ;
+            float spawnMaxX = areaWidthSize - planetExtentsX;
+            float spawnMaxZ = areaDepthSize - planetExtentsZ;
             
             float randX = Random.Range(spawnMinX, spawnMaxX);
             float randZ = Random.Range(spawnMinZ, spawnMaxZ);
             
-            _planetStartPos = new Vector3(randX, y, randZ);
+            return new Vector3(randX, y, randZ);
+        }
+
+        Vector3 GetPlanetInclinationXZ() {
+            float xAxisInclination = Random.Range(-_maxAxisInclination, _maxAxisInclination);
+            float zAxisInclination = Random.Range(-_maxAxisInclination, _maxAxisInclination);
+            return new Vector3(xAxisInclination, 0, zAxisInclination);
+        }
+
+        protected override void ManagePoolableObject() {
+            _currentlyPooledObject.RandomizePlanetAndRings();
+            CalculateSpawnPosition();
+            _currentlyPooledObject.SetSpawnPosition(CalculateSpawnPosition());
+            _currentlyPooledObject.SetSpawnRotation(GetPlanetInclinationXZ());
+            _currentlyPooledObject.PerformOnPoolActions();
         }
         
-        //wywyloac SetNextObjectFromPool na jakims ewencie, albo sprawic tak, zeby to sie działo przy zniknieciu planety
         [Button]
         void RandomizePlanets() {
             for (int i = 0; i < _poolCapacity; i++) {
                 _objectsPool[i].RandomizePlanetAndRings();
             }
         }
-        
-        //TEST PUPROSE
+
         [Button]
-        void TestPlanetAlignment() {
-            SetRefs();
-            SetNextObjectFromPool();
-            ManagePooledObject();
+        void AlignPlanetTest() {
+            ManagePoolableObject();
         }
     }
 }

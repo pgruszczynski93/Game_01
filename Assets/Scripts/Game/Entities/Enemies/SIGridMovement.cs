@@ -43,7 +43,6 @@ namespace SpaceInvaders {
                 .OnComplete(() => {
                     _isInitialSequenceFinished = true;
                     _canMove = true;
-                    _isMoving = true;
                 })
                 .SetEase(_gridMovementSettings.initialMovementEaseType)
                 .SetAutoKill(false)
@@ -111,7 +110,8 @@ namespace SpaceInvaders {
 
         void ResetGridMovement() {
             Debug.Log($"[SIGridMovement] ResetGrid movement()");
-            TryToStopObject();
+            _canMove = false;
+            _isTweeningVerticalMovement = false;
             _currentMovementSpeed = Mathf.Abs(_currentMovementSpeed);
 //            _currentMovementSpeed += _gridMovementSettings.newWaveInitialSpeedChange;
 //            _currentMovementSpeed = Mathf.Clamp(_currentMovementSpeed, _initialMovementSpeed,
@@ -140,12 +140,6 @@ namespace SpaceInvaders {
 
         protected override bool IsMovementPossible() {
             return _isInitialSequenceFinished && _canMove;
-        }
-
-        protected override void TryToStopObject() {
-            _canMove = false;
-            _isMoving = true;
-            _isTweeningVerticalMovement = false;
         }
 
         protected override void UpdatePosition() {

@@ -31,7 +31,7 @@ namespace SpaceInvaders.PlanetSystem {
             _matPropBlock.SetColor(RimColor, SIMathUtils.GetRandomColorRGB());
             _matPropBlock.SetColor(BaseColor,  SIMathUtils.GetRandomColorRGB());
             _matPropBlock.SetFloat(BaseColorOpacity, Random.Range(0f, 1f));
-            _renderer.SetPropertyBlock(_matPropBlock);
+            _renderer.SetPropertyBlock(_matPropBlock); 
         }
     }
 }

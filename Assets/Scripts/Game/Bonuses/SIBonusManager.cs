@@ -48,10 +48,10 @@ namespace SpaceInvaders {
             SetNextObjectFromPool();
         }
         
-        protected override void ManagePooledObject() {
-            _currentObjectFromPool.SetSpawnPosition(_currentDropPosition);
-            _currentObjectFromPool.SetBonusVariant(_currentBonusType);
-            _currentObjectFromPool.UseObjectFromPool();
+        protected override void ManagePoolableObject() {
+            _currentlyPooledObject.SetSpawnPosition(_currentDropPosition);
+            _currentlyPooledObject.SetBonusVariant(_currentBonusType);
+            _currentlyPooledObject.PerformOnPoolActions();
         }
 
         bool CanSelectBonusToDrop(float probability) {

@@ -31,12 +31,24 @@ namespace SpaceInvaders
             float rightLimit = screenWorldEdges.rightScreenEdge + rightOffset;
             return horizontalPos >= leftLimit && horizontalPos <= rightLimit;
         }
-        public static bool IsInVerticalWorldScreenLimit(float verticalPos, float bottomOffset = 0f, float topOffset = 0f)
+        public static bool IsInVerticalWorldScreenLimit(float verticalPos, float topOffset = 0f, float bottomOffset = 0f)
         {
             ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
-            float bottomLimit = screenWorldEdges.bottomScreenEdge + bottomOffset;
             float topLimit = screenWorldEdges.topScreenEdge + topOffset;
+            float bottomLimit = screenWorldEdges.bottomScreenEdge + bottomOffset;
             return verticalPos >= bottomLimit && verticalPos <= topLimit;
+        }
+
+        public static bool IsHigherThanVerticalScreenLimit(float verticalPos, float offset = 0f) {
+            ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
+            float topLimit = screenWorldEdges.topScreenEdge + offset;
+            return verticalPos > topLimit;
+        }
+
+        public static bool IsLowerThanVerticalScreenLimit(float verticalPos, float offset = 0f) {
+            ScreenEdges screenWorldEdges = SIGameMasterBehaviour.Instance.ScreenAreaCalculator.CalculatedScreenEdges;
+            float bottomLimit = screenWorldEdges.bottomScreenEdge + offset;
+            return verticalPos < bottomLimit;
         }
     }
 }

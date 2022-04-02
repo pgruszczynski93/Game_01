@@ -4,15 +4,16 @@ using UnityEngine;
 
 namespace SpaceInvaders.PlanetSystem {
     public class Planet : MonoBehaviour, IPoolable {
-
+        [SerializeField] float _planetSizeMultiplier;
         [SerializeField] Transform _planetSlot;
         [SerializeField] PlanetRandomizer _planetRandomizer;
         [SerializeField] RingsRandomizer _ringsRandomizer;
         [SerializeField] PlanetMovement _planetMovement;
 
-        Transform _thisTransform;
-
+        bool _canRandomize;
+        float _planetSizeY;
         Bounds _bounds;
+        Transform _thisTransform;
 
         void Start() => Initialise();
         
@@ -20,62 +21,57 @@ namespace SpaceInvaders.PlanetSystem {
             _planetRandomizer.Initialise();
             _ringsRandomizer.Initialise();
             _thisTransform = transform;
-            UpdatePlanetBounds();
+            UpdatePlanetBoundsAndScale();
         }
         
-        //todo:
-        // przeladowywanie pooli na jakims ewencie.?
-        //2. ruch planety:
-        /*
-        //Pula odpala asynchroniczne sprawdzanie czy planeta ruszyła
-        np co 3-5 sekund to sprawdza; Jesli tak - odpalamy logike moveobject
-        */
-
 #if UNITY_EDITOR
         void OnDrawGizmosSelected() {
             Gizmos.color = Color.blue;
-            UpdatePlanetBounds();
+            _bounds = _planetRandomizer.GetBounds();
+            _bounds.Encapsulate(_ringsRandomizer.GetBounds());
+            _planetSizeY = _bounds.size.y * _planetSizeMultiplier;
             Gizmos.DrawWireCube( _bounds.center, _bounds.size );
         }
 #endif
-
-        void UpdatePlanetBounds() {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        void UpdatePlanetBoundsAndScale() {
+            float randomScaleMultiplier = Random.Range(1, _planetSizeMultiplier);
+            transform.localScale = new Vector3(randomScaleMultiplier, randomScaleMultiplier, randomScaleMultiplier); 
             _bounds = _planetRandomizer.GetBounds();
             _bounds.Encapsulate(_ringsRandomizer.GetBounds());
-        }
-        public void UseObjectFromPool() {
+            _planetSizeY = _bounds.size.y * _planetSizeMultiplier; //To make sure planet will hide completely during visibility check
         }
 
         public void SetSpawnPosition(Vector3 spawnPos) {
-            //ustawić planete tak by była odpowiednio daleko od gracza - najlepiej wzgledem jakiegoś prostopadloscianu
-            // _thisTransform.position = spawnPos;
-            var newX = spawnPos;
-            transform.position = spawnPos + new Vector3(0, _bounds.extents.y, 0);
+            _thisTransform.position = spawnPos + new Vector3(0, _bounds.extents.y, 0);
         }
-
+        
         public void SetSpawnRotation(Vector3 spawnRot) {
-            //todo - zrobić clampowanie kąta obrotu tak by wygladało dobrze
-            // _thisTransform.position = spawnPos;
-            transform.eulerAngles = spawnRot;
+            _thisTransform.eulerAngles = spawnRot;
+        }
+        
+        public void PerformOnPoolActions() {
+            UpdatePlanetBoundsAndScale();
+            _planetMovement.EnableMovement();
         }
 
         public void ManageScreenVisibility() {
-            if (_thisTransform && SIScreenUtils.IsInVerticalWorldScreenLimit(_thisTransform.position.y))
-                return;
-
-            // Update();
-            // zatrzymaj i zresetuj rzeczy
+            if (_thisTransform != null && SIScreenUtils.IsLowerThanVerticalScreenLimit(_thisTransform.position.y, -_planetSizeY))
+                _planetMovement.DisableMovement();
         }
 
         public Bounds GetPlanetBounds() {
-            //If doesn't work: UpdateBounds();
             return _bounds;
-        } 
+        }
+
+        public bool IsMoving() {
+            return _planetMovement.IsMoving;
+        }
 
         [Button]
         public void RandomizePlanetAndRings() {
             RandomizePlanet();
             RandomizeRings();
+            UpdatePlanetBoundsAndScale();
         }
 
         [Button]

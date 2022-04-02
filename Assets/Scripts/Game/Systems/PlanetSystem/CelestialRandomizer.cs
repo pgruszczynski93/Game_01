@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace SpaceInvaders.PlanetSystem {
     public abstract class CelestialRandomizer : MonoBehaviour {
-        
+
+        [SerializeField] protected float _scaleMultiplier;
         [SerializeField] protected Transform _parent;
 
         protected GameObject _celestial;
