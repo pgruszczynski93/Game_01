@@ -31,7 +31,7 @@ namespace SpaceInvaders {
             _leftScreenEdgeOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _gridMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
-            SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
+            RequestTimeSpeedModification();
             InitialiseTweeners();
         }
 

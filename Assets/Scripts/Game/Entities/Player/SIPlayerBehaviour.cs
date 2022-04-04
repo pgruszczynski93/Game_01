@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -49,6 +50,12 @@ namespace SpaceInvaders
             for (int i = 0; i < _playerContent.Length; i++) {
                 _playerContent[i].SetActive(isEnabled);
             }
+        }
+
+        [Button]
+        void TestHealthEffect(int damage) {
+            _playerHealth.TryApplyDamage(damage);
+            CheckAliveStatus();
         }
     }
 }

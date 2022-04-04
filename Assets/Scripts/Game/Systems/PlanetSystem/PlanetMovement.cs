@@ -9,6 +9,7 @@ namespace SpaceInvaders.PlanetSystem {
             base.Initialise();
             _currentMovementSpeed = _initialMovementSpeed;
             _movementDirection = Vector3.down;
+            RequestTimeSpeedModification();
         }
         
         protected override bool IsMovementPossible() {

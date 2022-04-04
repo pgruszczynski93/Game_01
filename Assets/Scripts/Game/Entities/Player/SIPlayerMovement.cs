@@ -6,7 +6,7 @@ namespace SpaceInvaders
     {
         [SerializeField] PlayerMovementSetup _playerMovementSetup;
         [SerializeField] PlayerMovementSettings _playerMovementSettings;
-
+        [SerializeField] Transform _moveableContent;
         [Range(0f, 3f), SerializeField] protected float _screenEdgeOffset;
 
         float _rightScreenOffset;
@@ -26,6 +26,10 @@ namespace SpaceInvaders
             _leftScreenOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _playerMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
+            if(_moveableContent == null)
+                Debug.LogError($"{nameof(SIPlayerMovement)} No moveable content attached!");
+            else
+                _thisTransform = _moveableContent;
             SetTimeSpeedModifier(_playerMovementSettings.defaultSpeedModificator);
         }
 

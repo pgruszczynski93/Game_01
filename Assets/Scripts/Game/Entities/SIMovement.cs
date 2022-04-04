@@ -30,7 +30,6 @@ namespace SpaceInvaders {
             _initialised = true;
             _canMove = false;
             _thisTransform = transform;
-            RequestTimeSpeedModification();
         }
 
         protected void Start() => Initialise();
