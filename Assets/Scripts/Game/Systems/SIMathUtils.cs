@@ -7,19 +7,14 @@ namespace SpaceInvaders
         public const float COMPARSION_TOLERANCE = 1e-5f;
         public const float FULL_EULER_ANGLE = 360f;
 
-        public static bool IsEqualTo(float source, float target)
+        public static bool IsApproximatelyEqualTo(float source, float target)
         {
             return Mathf.Abs(source - target) < COMPARSION_TOLERANCE;
         }
         
-//        public static bool IsEqualToTarget(this float source, float target)
-//        {
-//            return Mathf.Abs(source - target) < COMPARSION_TOLERANCE;
-//        }
-
         public static float Remap(float oldValue, float oldMin, float oldMax, float newMin, float newMax)
         {
-            return (oldValue - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+            return Remap01(oldValue, oldMin, oldMax) * (newMax - newMin) + newMin;
         }
 
         public static float Remap01(float oldValue, float oldMin, float oldMax)

@@ -22,6 +22,10 @@ namespace SpaceInvaders {
         Tweener _initialMovementTweener;
         Tweener _verticalMovementTweener;
 
+        public override void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1) {
+            _speedModificator = timeSpeedModifier;
+        }
+
         protected override void Initialise() {
             base.Initialise();
 
@@ -31,7 +35,6 @@ namespace SpaceInvaders {
             _leftScreenEdgeOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _gridMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
-            RequestTimeSpeedModification();
             InitialiseTweeners();
         }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -7,14 +8,24 @@ namespace SpaceInvaders
         [SerializeField] PlayerMovementSetup _playerMovementSetup;
         [SerializeField] PlayerMovementSettings _playerMovementSettings;
         [SerializeField] Transform _moveableContent;
-        [Range(0f, 3f), SerializeField] protected float _screenEdgeOffset;
+        [Range(0f, 3f), SerializeField] float _screenEdgeOffset;
 
+        bool isSpeedModificatorBonusPositive;
         float _rightScreenOffset;
         float _leftScreenOffset;
+        float _minSpeedModificator;
+        float _maxSpeedModificator;
+        
         Vector3 _inputValue;
         ScreenEdges _worldScreenEdges;
         Quaternion _fromRotation;
         Quaternion _toRotation;
+        
+        public override void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1) {
+            _speedModificator = isSpeedModificatorBonusPositive
+                ? Mathf.Lerp(_minSpeedModificator, _maxSpeedModificator, progress)
+                : timeSpeedModifier;
+        }
 
         protected override void Initialise()
         {
@@ -26,6 +37,8 @@ namespace SpaceInvaders
             _leftScreenOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _playerMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
+            SetSpeedModificatorFromBonus(_playerMovementSettings.defaultSpeedModificator, BonusType.TimeModification);
+            
             if(_moveableContent == null)
                 Debug.LogError($"{nameof(SIPlayerMovement)} No moveable content attached!");
             else
@@ -55,19 +68,47 @@ namespace SpaceInvaders
 
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
             if (bonusSettings.bonusType == BonusType.TimeModification) {
-                SetTimeSpeedModifier(_playerMovementSettings.slowDownBonusSpeedModificator);
+                SetSpeedModificatorFromBonus(_playerMovementSettings.slowDownBonusSpeedModificator, BonusType.TimeModification);
             }
         }
-        
+
         void HandleOnBonusDisabled(BonusSettings bonusSettings) {
             if (bonusSettings.bonusType == BonusType.TimeModification) {
-                SetTimeSpeedModifier(_playerMovementSettings.defaultSpeedModificator);
+                SetSpeedModificatorFromBonus(_playerMovementSettings.defaultSpeedModificator, BonusType.TimeModification);
             }
         }
 
         void HandleAxesInputReceived(Vector3 inputVector)
         {
             _inputValue = inputVector;
+        }
+
+        void SetSpeedModificatorFromBonus(float modificator, BonusType bonusType) {
+            
+            isSpeedModificatorBonusPositive = IsTimeModificationBonusPositive(bonusType);
+
+            _minSpeedModificator = isSpeedModificatorBonusPositive
+                ? _playerMovementSettings.defaultSpeedModificator
+                : _playerMovementSettings.minSpeedModificator;
+
+            _maxSpeedModificator = isSpeedModificatorBonusPositive
+                ? modificator
+                : _playerMovementSettings.defaultSpeedModificator;
+        }
+
+        bool IsTimeModificationBonusPositive(BonusType type) {
+            switch (type) {
+                case BonusType.TimeModification:
+                    return true;
+                case BonusType.NegativeTimeModification:
+                    return false;
+            }
+
+            return false;
+            
+            /*
+             * Zmienić nazewnictwo time modification i dodać testowo negatywny bonus czasowy dostepny z bonus managera
+             * */
         }
 
         /*

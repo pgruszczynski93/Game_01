@@ -5,11 +5,14 @@ namespace SpaceInvaders.PlanetSystem {
 
         Vector3 _movementDirection;
         
+        public override void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1) {
+            _speedModificator = timeSpeedModifier;
+        }
+        
         protected override void Initialise() {
             base.Initialise();
             _currentMovementSpeed = _initialMovementSpeed;
             _movementDirection = Vector3.down;
-            RequestTimeSpeedModification();
         }
         
         protected override bool IsMovementPossible() {

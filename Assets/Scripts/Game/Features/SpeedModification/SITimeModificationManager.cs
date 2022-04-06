@@ -96,14 +96,14 @@ namespace SpaceInvaders {
                 _timeSpeedModificationProgress = time / modParam.duration;
                 modifierValue = Mathf.Lerp(modParam.fromTimeMul, modParam.toTimeMul, curve.Evaluate(_timeSpeedModificationProgress));
                 modifierValue = Mathf.Clamp(modifierValue, modParam.minTimeMulVal, modParam.maxTimeMulVal);
-                ManageObjectToModifySpeed(modifierValue);
+                ManageObjectModifyingSpeed(modifierValue);
                 time += Time.fixedDeltaTime;
                 yield return WaitUtils.SkipFixedFrames(1);
             }
             IsModifyingSpeed = false;
             _timeSpeedModificationProgress = 1f;
             _currentSpeedModifier = modParam.toTimeMul;
-            ManageObjectToModifySpeed(modParam.toTimeMul);
+            ManageObjectModifyingSpeed(modParam.toTimeMul);
         }
 
         void ApplySpeedUpMultiplier() {
@@ -161,7 +161,7 @@ namespace SpaceInvaders {
             if (CanRestartTimeSpeedModificationRoutine(modParam.toTimeMul)) 
                 _timeSpeedModificationRoutine = StartCoroutine(TimeSpeedModificationRoutine(modParam, curve));
             else if(!_settings.useIncrementalSpeedModification)
-                ManageObjectToModifySpeed(modParam.toTimeMul);
+                ManageObjectModifyingSpeed(modParam.toTimeMul);
         }
 
         bool CanRestartTimeSpeedModificationRoutine(float multiplier) {
@@ -169,7 +169,7 @@ namespace SpaceInvaders {
                    Math.Abs(multiplier - _currentSpeedModifier) > 1e-05f;
         }
 
-        void ManageObjectToModifySpeed(float speedMultiplier) {
+        void ManageObjectModifyingSpeed(float speedMultiplier) {
             float progressToUse = _settings.useIncrementalSpeedModification && IsModifyingSpeed
                 ? _timeSpeedModificationProgress : 1f;
             foreach (IModifyTimeSpeedMultiplier objToModify in _objectsToModifySpeed) {

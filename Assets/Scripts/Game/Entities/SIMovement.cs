@@ -22,7 +22,8 @@ namespace SpaceInvaders {
         protected abstract bool IsMovementPossible();
         protected abstract void UpdatePosition();
         protected abstract void UpdateRotation();
-
+        public abstract void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1f);
+        
         protected virtual void Initialise() {
             if (_initialised)
                 return;
@@ -30,6 +31,7 @@ namespace SpaceInvaders {
             _initialised = true;
             _canMove = false;
             _thisTransform = transform;
+            RequestTimeSpeedModification();
         }
 
         protected void Start() => Initialise();
@@ -74,11 +76,7 @@ namespace SpaceInvaders {
             if(_canMove)
                 _canMove = false;
         }
-        
-        public void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1f) {
-            _speedModificator = timeSpeedModifier;
-        }
-        
+
         public void RequestTimeSpeedModification() {
             SIGameplayEvents.BroadcastOnSpeedModificationRequested(this);
         }

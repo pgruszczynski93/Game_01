@@ -36,6 +36,7 @@
         LaserBeam,
         EnergyBoost,
         TimeModification, 
+        NegativeTimeModification
         // Teleportation,
         // Hacking,
         // MassiveKill, 
