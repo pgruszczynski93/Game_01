@@ -35,8 +35,9 @@
         ShieldSystem,
         LaserBeam,
         EnergyBoost,
-        TimeModification, 
-        NegativeTimeModification
+        //Time Slow/Fast All - Slow All (slows every object except player) / Fast All (oposite)
+        TimeModSlowAll, 
+        TimeModeFastAll
         // Teleportation,
         // Hacking,
         // MassiveKill, 

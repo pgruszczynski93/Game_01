@@ -15,8 +15,9 @@ namespace SpaceInvaders {
         
         [SerializeField] TimeModificationManagerSettings _settings;
 
-        TimeSpeedModificationParam _basicSlowDownParam;
-        TimeSpeedModificationParam _energyBoostSlowDownParam;
+        TimeModParameter _timeSlowAllParam;
+        TimeModParameter _timeFastAllParam;
+        TimeModParameter _timeWithEnergyBoostParam;
         
         Coroutine _timeSpeedModificationRoutine;
         WaitUntil _waitForTimeModificationFinished;
@@ -34,30 +35,44 @@ namespace SpaceInvaders {
         void Initialise() {
             _currentSpeedModifier = _settings.defaultTimeSpeedMultiplier;
             _waitForTimeModificationFinished = new WaitUntil(() => !IsModifyingSpeed && _energyBoostEnabled);
-            
-            _basicSlowDownParam = new TimeSpeedModificationParam {
-                duration = _settings.basicTimeMultiplierParam.duration,
-                minTimeMulVal = _settings.basicTimeMultiplierParam.minMultiplier,
-                maxTimeMulVal = _settings.basicTimeMultiplierParam.maxMultiplier
+            _timeSlowAllParam = new TimeModParameter {
+                duration = _settings.timeModSlowAllParam.duration,
+                minTimeMulVal = _settings.timeModSlowAllParam.minTimeMultiplier,
+                maxTimeMulVal = _settings.timeModSlowAllParam.maxTimeMultiplier
             };
             
-            _energyBoostSlowDownParam = new TimeSpeedModificationParam {
-                duration = _settings.energyBoostTimeMultiplierParam.duration,
-                minTimeMulVal = _settings.energyBoostTimeMultiplierParam.minMultiplier,
-                maxTimeMulVal = _settings.energyBoostTimeMultiplierParam.maxMultiplier
+            _timeFastAllParam = new TimeModParameter {
+                duration = _settings.timeModFastAllParam.duration,
+                minTimeMulVal = _settings.timeModFastAllParam.minTimeMultiplier,
+                maxTimeMulVal = _settings.timeModFastAllParam.maxTimeMultiplier
             };
+            
+            _timeWithEnergyBoostParam = new TimeModParameter {
+                duration = _settings.timeWithEnergyBoostModParam.duration,
+                minTimeMulVal = _settings.timeWithEnergyBoostModParam.minTimeMultiplier,
+                maxTimeMulVal = _settings.timeWithEnergyBoostModParam.maxTimeMultiplier
+            };
+        }
+
+        protected override void HandleOnBonusEnabled(BonusSettings bonusSettings) {
+            base.HandleOnBonusEnabled(bonusSettings);
+            if (bonusSettings.bonusType == BonusType.TimeModeFastAll) {
+                ApplyTimeModFastMultiplier();
+            }
         }
 
         protected override void ManageEnabledBonus() {
             //This check ensures that: WaitEnergyBoostTimeModification will complete correctly.
+            //Also disables TimeFastAll mode.
             if (SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost))
                 return;
             
-            ApplySlowDownMultiplier();
+            ApplyTimeModSlowMultiplier();
+            ApplyTimeModFastMultiplier();
         }
 
         protected override void ManageDisabledBonus() {
-            SetDefaultSpeedMultiplier();
+            SetDefaultTimeModMultiplier();
         }
 
         protected override void SubscribeEvents() {
@@ -84,10 +99,10 @@ namespace SpaceInvaders {
         }
         
         void HandleOnWaveCoolDown() {
-            SetDefaultSpeedMultiplier();
+            SetDefaultTimeModMultiplier();
         }
 
-        IEnumerator TimeSpeedModificationRoutine(TimeSpeedModificationParam modParam, AnimationCurve curve) {
+        IEnumerator TimeSpeedModificationRoutine(TimeModParameter modParam, AnimationCurve curve) {
             _timeSpeedModificationProgress = 0.0f;
             float time = 0.0f;
             float modifierValue = _settings.defaultTimeSpeedMultiplier;
@@ -106,40 +121,41 @@ namespace SpaceInvaders {
             ManageObjectModifyingSpeed(modParam.toTimeMul);
         }
 
-        void ApplySpeedUpMultiplier() {
-            //For now intentionally uniplemented.
-            // ManageObjectToModifySpeed(_speedUpMultiplier);
+        void ApplyTimeModFastMultiplier() {
+            _timeFastAllParam.fromTimeMul = _currentSpeedModifier;
+            _timeFastAllParam.toTimeMul = _settings.timeModFastAllParam.targetTimeMultiplier;
+            ApplySpeedModification(_timeFastAllParam, _settings.speedUpCurve);
         }
         
-        void ApplySlowDownMultiplier() {
-            _basicSlowDownParam.fromTimeMul = _currentSpeedModifier;
-            _basicSlowDownParam.toTimeMul = _settings.basicTimeMultiplierParam.slowDownMultiplier;
-            ApplySpeedModification(_basicSlowDownParam, _settings.slowDownCurve);
+        void ApplyTimeModSlowMultiplier() {
+            _timeSlowAllParam.fromTimeMul = _currentSpeedModifier;
+            _timeSlowAllParam.toTimeMul = _settings.timeModSlowAllParam.targetTimeMultiplier;
+            ApplySpeedModification(_timeSlowAllParam, _settings.slowDownCurve);
         }
         
-        void SetDefaultSpeedMultiplier() {
-            _basicSlowDownParam.fromTimeMul = _currentSpeedModifier;
-            _basicSlowDownParam.toTimeMul = _settings.defaultTimeSpeedMultiplier;
-            ApplySpeedModification(_basicSlowDownParam, _settings.speedUpCurve);
+        void SetDefaultTimeModMultiplier() {
+            _timeSlowAllParam.fromTimeMul = _currentSpeedModifier;
+            _timeSlowAllParam.toTimeMul = _settings.defaultTimeSpeedMultiplier;
+            ApplySpeedModification(_timeSlowAllParam, _settings.speedUpCurve);
         }
         
         [Button]
         void SetEnergyBoostSpeedModifierStartVal() {
-            float slowDownMultiplier = _settings.basicTimeMultiplierParam.slowDownMultiplier;
-            _energyBoostSlowDownParam.fromTimeMul = slowDownMultiplier;
-            _energyBoostSlowDownParam.toTimeMul = slowDownMultiplier * _settings.energyBoostTimeMultiplierParam.slowDownMultiplier;
-            ApplySpeedModification(_energyBoostSlowDownParam, _settings.slowDownCurve);
+            float slowDownMultiplier = _settings.timeModSlowAllParam.targetTimeMultiplier;
+            _timeWithEnergyBoostParam.fromTimeMul = slowDownMultiplier;
+            _timeWithEnergyBoostParam.toTimeMul = slowDownMultiplier * _settings.timeWithEnergyBoostModParam.targetTimeMultiplier;
+            ApplySpeedModification(_timeWithEnergyBoostParam, _settings.slowDownCurve);
         }
         
         [Button]
         void SetEnergyBoostMultiplierEndVal() {
-            float toModifier = SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification)
-                ? _settings.basicTimeMultiplierParam.slowDownMultiplier
+            float toModifier = SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModSlowAll)
+                ? _settings.timeModSlowAllParam.targetTimeMultiplier
                 : _settings.defaultTimeSpeedMultiplier;
 
-            _energyBoostSlowDownParam.fromTimeMul = _currentSpeedModifier;
-            _energyBoostSlowDownParam.toTimeMul = toModifier;
-            ApplySpeedModification(_energyBoostSlowDownParam, _settings.speedUpCurve);
+            _timeWithEnergyBoostParam.fromTimeMul = _currentSpeedModifier;
+            _timeWithEnergyBoostParam.toTimeMul = toModifier;
+            ApplySpeedModification(_timeWithEnergyBoostParam, _settings.speedUpCurve);
         }
 
         protected override void EnableEnergyBoostForBonus(bool isEnabled) {
@@ -157,7 +173,7 @@ namespace SpaceInvaders {
             }
         }
 
-        void ApplySpeedModification(TimeSpeedModificationParam modParam, AnimationCurve curve) {
+        void ApplySpeedModification(TimeModParameter modParam, AnimationCurve curve) {
             if (CanRestartTimeSpeedModificationRoutine(modParam.toTimeMul)) 
                 _timeSpeedModificationRoutine = StartCoroutine(TimeSpeedModificationRoutine(modParam, curve));
             else if(!_settings.useIncrementalSpeedModification)
@@ -179,13 +195,18 @@ namespace SpaceInvaders {
         
         //Buttons to test coroutines
         [Button]
-        void SpeedUp() {
-            SetDefaultSpeedMultiplier();
+        void DefaultTimeMod() {
+            SetDefaultTimeModMultiplier();
         }
 
         [Button]
-        void SlowDown() {
-            ApplySlowDownMultiplier();
+        void TimeModSlowAll() {
+            ApplyTimeModSlowMultiplier();
+        }
+        
+        [Button]
+        void TimeModFastAll() {
+            ApplyTimeModFastMultiplier();
         }
     }
 }

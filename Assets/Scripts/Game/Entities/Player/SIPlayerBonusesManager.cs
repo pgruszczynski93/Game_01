@@ -105,7 +105,6 @@ namespace SpaceInvaders {
             BonusSettings settings = _scriptableBonuses[2].bonusSettings;
             TryRunBonusRoutine(settings);
         }
-        
                 
         [Button]
         void TestLaserBeamBonus() {
@@ -113,17 +112,21 @@ namespace SpaceInvaders {
             TryRunBonusRoutine(settings);
         }
         
-                
         [Button]
         void TestEnergyBoostBonus() {
             BonusSettings settings = _scriptableBonuses[4].bonusSettings;
             TryRunBonusRoutine(settings);
         }
-        
                 
         [Button]
-        void TestTimeModificationBonus() {
+        void TestTimeModSlowAllBonus() {
             BonusSettings settings = _scriptableBonuses[5].bonusSettings;
+            TryRunBonusRoutine(settings);
+        }
+        
+        [Button]
+        void TestTimeModFastAllBonus() {
+            BonusSettings settings = _scriptableBonuses[6].bonusSettings;
             TryRunBonusRoutine(settings);
         }
     }

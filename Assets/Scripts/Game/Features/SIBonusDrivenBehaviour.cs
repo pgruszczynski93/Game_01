@@ -61,7 +61,7 @@ namespace SpaceInvaders {
 
         bool CanRunEnergyBoostBonus() {
             if (IsTimeModificationWithBoostToggled())
-                return SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModification);;
+                return SIPlayerBonusesManager.IsBonusActive(BonusType.TimeModSlowAll);;
             
             return _rootObject != null && 
                    _rootObject.activeInHierarchy && 
@@ -73,7 +73,7 @@ namespace SpaceInvaders {
             //Note: For TimeModification rootObject is null because it doesn't enable/disable any GO
             return _rootObject == null &&
                    !_energyBoostEnabled &&
-                   _assignedBonusType == BonusType.TimeModification &&
+                   _assignedBonusType == BonusType.TimeModSlowAll &&
                    SIPlayerBonusesManager.IsBonusActive(BonusType.EnergyBoost);
         }
 

@@ -7,18 +7,18 @@ namespace Configs {
     public class TimeModificationManagerSettings : ScriptableObject {
         public bool useIncrementalSpeedModification;
         public float defaultTimeSpeedMultiplier;
-        public TimeSpeedMultiplierParameter basicTimeMultiplierParam;
-        public TimeSpeedMultiplierParameter energyBoostTimeMultiplierParam;
+        public TimeModMultiplierSettings timeModSlowAllParam;
+        public TimeModMultiplierSettings timeModFastAllParam;
+        public TimeModMultiplierSettings timeWithEnergyBoostModParam;
         public AnimationCurve speedUpCurve;
         public AnimationCurve slowDownCurve;
     }
 
     [Serializable]
-    public class TimeSpeedMultiplierParameter {
+    public class TimeModMultiplierSettings {
         [Range(0, 3)] public float duration;
-        public float slowDownMultiplier;
-        public float speedUpMultiplier;
-        public float minMultiplier;
-        public float maxMultiplier;
+        public float targetTimeMultiplier;
+        public float minTimeMultiplier;
+        public float maxTimeMultiplier;
     }
 }

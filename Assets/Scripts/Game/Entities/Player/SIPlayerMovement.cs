@@ -37,7 +37,7 @@ namespace SpaceInvaders
             _leftScreenOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _playerMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
-            SetSpeedModificatorFromBonus(_playerMovementSettings.defaultSpeedModificator, BonusType.TimeModification);
+            SetSpeedModificatorFromBonus(_playerMovementSettings.defaultSpeedModificator, BonusType.TimeModSlowAll);
             
             if(_moveableContent == null)
                 Debug.LogError($"{nameof(SIPlayerMovement)} No moveable content attached!");
@@ -67,14 +67,14 @@ namespace SpaceInvaders
         }
 
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType == BonusType.TimeModification) {
-                SetSpeedModificatorFromBonus(_playerMovementSettings.slowDownBonusSpeedModificator, BonusType.TimeModification);
+            if (bonusSettings.bonusType == BonusType.TimeModSlowAll) {
+                SetSpeedModificatorFromBonus(_playerMovementSettings.slowDownBonusSpeedModificator, BonusType.TimeModSlowAll);
             }
         }
 
         void HandleOnBonusDisabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType == BonusType.TimeModification) {
-                SetSpeedModificatorFromBonus(_playerMovementSettings.defaultSpeedModificator, BonusType.TimeModification);
+            if (bonusSettings.bonusType == BonusType.TimeModSlowAll) {
+                SetSpeedModificatorFromBonus(_playerMovementSettings.defaultSpeedModificator, BonusType.TimeModSlowAll);
             }
         }
 
@@ -84,8 +84,8 @@ namespace SpaceInvaders
         }
 
         void SetSpeedModificatorFromBonus(float modificator, BonusType bonusType) {
-            
-            isSpeedModificatorBonusPositive = IsTimeModificationBonusPositive(bonusType);
+
+            isSpeedModificatorBonusPositive = true;
 
             _minSpeedModificator = isSpeedModificatorBonusPositive
                 ? _playerMovementSettings.defaultSpeedModificator
@@ -94,21 +94,6 @@ namespace SpaceInvaders
             _maxSpeedModificator = isSpeedModificatorBonusPositive
                 ? modificator
                 : _playerMovementSettings.defaultSpeedModificator;
-        }
-
-        bool IsTimeModificationBonusPositive(BonusType type) {
-            switch (type) {
-                case BonusType.TimeModification:
-                    return true;
-                case BonusType.NegativeTimeModification:
-                    return false;
-            }
-
-            return false;
-            
-            /*
-             * Zmienić nazewnictwo time modification i dodać testowo negatywny bonus czasowy dostepny z bonus managera
-             * */
         }
 
         /*

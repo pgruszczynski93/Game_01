@@ -50,13 +50,13 @@ namespace Project.Systems {
         }
 
         void HandleOnBonusEnabled(BonusSettings settings) {
-            if (settings.bonusType == BonusType.TimeModification) {
-                TrySetTimeModificationPostprocessEffect();
+            if (settings.bonusType == BonusType.TimeModSlowAll || settings.bonusType == BonusType.TimeModeFastAll) {
+                TrySetTimeModSlowAllPostprocessEffect();
             }
         }
 
         void HandleOnBonusDisabled(BonusSettings settings) {
-            if (settings.bonusType == BonusType.TimeModification) {
+            if (settings.bonusType == BonusType.TimeModSlowAll || settings.bonusType == BonusType.TimeModeFastAll) {
                 TrySetBasePostprocessEffect();
             }
         }
@@ -91,7 +91,7 @@ namespace Project.Systems {
             _isModifyingPosprocesses = false;
         }
 
-        void BaseToTimeModificationPostProcess(float progress) {
+        void BaseToTimeModSlowAllPostprocess(float progress) {
             _bloom.threshold.value =
                 Mathf.Lerp(_baseConfig.bloomThreshold, _timeSpeedModificationConfig.bloomThreshold, progress);
             _bloom.intensity.value =
@@ -105,7 +105,11 @@ namespace Project.Systems {
                 _timeSpeedModificationConfig.vignetteSmoothness, progress);
         }
 
-        void TimeModificationToBasePostprocess(float progress) {
+        void BaseToFastAllPostprocess(float progress) {
+            BaseToTimeModSlowAllPostprocess(progress);
+        }
+
+        void TimeModSlowAllToBasePostprocess(float progress) {
             _bloom.threshold.value =
                 Mathf.Lerp(_timeSpeedModificationConfig.bloomThreshold, _baseConfig.bloomThreshold, progress);
             _bloom.intensity.value =
@@ -124,18 +128,28 @@ namespace Project.Systems {
             _applyPostprocessCoroutine = StartCoroutine(
                 ApplyPostprocessCoroutine(_baseConfig.effectApplyDuration,
                     timeModificationOutCurve,
-                    TimeModificationToBasePostprocess,
+                    TimeModSlowAllToBasePostprocess,
                     PostProcessControllerState.BasicPostprocess
                 ));
         }
         
         [Button]
-        void TrySetTimeModificationPostprocessEffect() {
+        void TrySetTimeModSlowAllPostprocessEffect() {
             _applyPostprocessCoroutine = StartCoroutine(
                 ApplyPostprocessCoroutine(_timeSpeedModificationConfig.effectApplyDuration,
                     timeModificationInCurve,
-                    BaseToTimeModificationPostProcess,
-                    PostProcessControllerState.TimeModificationPostprocess
+                    BaseToTimeModSlowAllPostprocess,
+                    PostProcessControllerState.TimeModSlowAllPostprocess
+                ));
+        }
+        
+        [Button]
+        void TrySetTimeModFastAllPostprocessEffect() {
+            _applyPostprocessCoroutine = StartCoroutine(
+                ApplyPostprocessCoroutine(_timeSpeedModificationConfig.effectApplyDuration,
+                    timeModificationOutCurve,
+                    BaseToFastAllPostprocess,
+                    PostProcessControllerState.TimeModFastAllPostprocess
                 ));
         }
     }

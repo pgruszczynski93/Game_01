@@ -14,18 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useIncrementalSpeedModification: 1
   defaultTimeSpeedMultiplier: 1
-  basicTimeMultiplierParam:
+  timeModSlowAllParam:
     duration: 0.3
-    slowDownMultiplier: 0.3
-    speedUpMultiplier: 1
-    minMultiplier: 0.3
-    maxMultiplier: 1
-  energyBoostTimeMultiplierParam:
+    targetTimeMultiplier: 0.3
+    minTimeMultiplier: 0.3
+    maxTimeMultiplier: 1
+  timeModFastAllParam:
+    duration: 0.3
+    targetTimeMultiplier: 1.5
+    minTimeMultiplier: 1
+    maxTimeMultiplier: 1.5
+  timeWithEnergyBoostModParam:
     duration: 0.15
-    slowDownMultiplier: 0.3
-    speedUpMultiplier: 1
-    minMultiplier: 0
-    maxMultiplier: 1
+    targetTimeMultiplier: 0.15
+    minTimeMultiplier: 0.15
+    maxTimeMultiplier: 1
   speedUpCurve:
     serializedVersion: 2
     m_Curve:
