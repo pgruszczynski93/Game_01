@@ -21,7 +21,9 @@ MonoBehaviour:
     easeType: 27
     easeTime: 1
     maxRotationAngle: 40
-    slowDownBonusSpeedModificator: 1.5
-    speedModificatorForEnergyBoostBonus: 2
-    minSpeedModificator: 0.3
-    defaultSpeedModificator: 1
+    timeModSlowAllMultiplier: 1.5
+    timeModFastAllMultiplier: 0.3
+    energyBoostTimeModMultiplier: 2
+    minTimeModMultiplier: 0.3
+    maxTimeModMultiplier: 0
+    defaultTimeModMultiplier: 1

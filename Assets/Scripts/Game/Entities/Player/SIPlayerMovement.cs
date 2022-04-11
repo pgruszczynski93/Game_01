@@ -1,5 +1,4 @@
-﻿using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -10,11 +9,10 @@ namespace SpaceInvaders
         [SerializeField] Transform _moveableContent;
         [Range(0f, 3f), SerializeField] float _screenEdgeOffset;
 
-        bool isSpeedModificatorBonusPositive;
         float _rightScreenOffset;
         float _leftScreenOffset;
-        float _minSpeedModificator;
-        float _maxSpeedModificator;
+        float _fromTimeMod;
+        float _toTimeMod;
         
         Vector3 _inputValue;
         ScreenEdges _worldScreenEdges;
@@ -22,9 +20,8 @@ namespace SpaceInvaders
         Quaternion _toRotation;
         
         public override void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1) {
-            _speedModificator = isSpeedModificatorBonusPositive
-                ? Mathf.Lerp(_minSpeedModificator, _maxSpeedModificator, progress)
-                : timeSpeedModifier;
+            //Player slows down when all are fast and opposite. Maybe I'll change this mechanic in some time.
+            _speedModificator = Mathf.Lerp(_fromTimeMod, _toTimeMod, progress);
         }
 
         protected override void Initialise()
@@ -37,13 +34,13 @@ namespace SpaceInvaders
             _leftScreenOffset = _worldScreenEdges.leftScreenEdge + _screenEdgeOffset;
             _initialMovementSpeed = _playerMovementSettings.initialMovementSpeed;
             _currentMovementSpeed = _initialMovementSpeed;
-            SetSpeedModificatorFromBonus(_playerMovementSettings.defaultSpeedModificator, BonusType.TimeModSlowAll);
+            SetSpeedModificatorFromBonus(_playerMovementSettings.defaultTimeModMultiplier);
             
             if(_moveableContent == null)
                 Debug.LogError($"{nameof(SIPlayerMovement)} No moveable content attached!");
             else
                 _thisTransform = _moveableContent;
-            SetTimeSpeedModifier(_playerMovementSettings.defaultSpeedModificator);
+            SetTimeSpeedModifier(_playerMovementSettings.defaultTimeModMultiplier);
         }
 
         protected override void SubscribeEvents()
@@ -67,14 +64,19 @@ namespace SpaceInvaders
         }
 
         void HandleOnBonusEnabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType == BonusType.TimeModSlowAll) {
-                SetSpeedModificatorFromBonus(_playerMovementSettings.slowDownBonusSpeedModificator, BonusType.TimeModSlowAll);
+            switch (bonusSettings.bonusType) {
+                case BonusType.TimeModSlowAll:
+                    SetSpeedModificatorFromBonus(_playerMovementSettings.timeModSlowAllMultiplier);
+                    break;
+                case BonusType.TimeModeFastAll:
+                    SetSpeedModificatorFromBonus(_playerMovementSettings.timeModFastAllMultiplier);
+                    break;
             }
         }
 
         void HandleOnBonusDisabled(BonusSettings bonusSettings) {
-            if (bonusSettings.bonusType == BonusType.TimeModSlowAll) {
-                SetSpeedModificatorFromBonus(_playerMovementSettings.defaultSpeedModificator, BonusType.TimeModSlowAll);
+            if (bonusSettings.bonusType == BonusType.TimeModSlowAll || bonusSettings.bonusType == BonusType.TimeModeFastAll) {
+                SetSpeedModificatorFromBonus(_playerMovementSettings.defaultTimeModMultiplier);
             }
         }
 
@@ -83,17 +85,9 @@ namespace SpaceInvaders
             _inputValue = inputVector;
         }
 
-        void SetSpeedModificatorFromBonus(float modificator, BonusType bonusType) {
-
-            isSpeedModificatorBonusPositive = true;
-
-            _minSpeedModificator = isSpeedModificatorBonusPositive
-                ? _playerMovementSettings.defaultSpeedModificator
-                : _playerMovementSettings.minSpeedModificator;
-
-            _maxSpeedModificator = isSpeedModificatorBonusPositive
-                ? modificator
-                : _playerMovementSettings.defaultSpeedModificator;
+        void SetSpeedModificatorFromBonus(float modificator) {
+            _fromTimeMod = _playerMovementSettings.defaultTimeModMultiplier;
+            _toTimeMod = modificator;
         }
 
         /*

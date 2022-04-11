@@ -61,6 +61,13 @@ namespace SpaceInvaders {
             }
         }
 
+        protected override void HandleOnBonusDisabled(BonusSettings bonusSettings) {
+            base.HandleOnBonusDisabled(bonusSettings);
+            if (bonusSettings.bonusType == BonusType.TimeModeFastAll) {
+                SetDefaultTimeModMultiplier();
+            }
+        }
+
         protected override void ManageEnabledBonus() {
             //This check ensures that: WaitEnergyBoostTimeModification will complete correctly.
             //Also disables TimeFastAll mode.

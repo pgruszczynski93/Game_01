@@ -10,9 +10,9 @@ namespace SpaceInvaders
         public Ease easeType;
         public float easeTime;
         [Range(0, 90)] public float maxRotationAngle;
-        public float slowDownBonusSpeedModificator;
-        public float speedModificatorForEnergyBoostBonus;
-        public float minSpeedModificator;
-        public float defaultSpeedModificator;
+        public float timeModSlowAllMultiplier;
+        public float timeModFastAllMultiplier;
+        public float energyBoostTimeModMultiplier;
+        public float defaultTimeModMultiplier;
     }
 }
