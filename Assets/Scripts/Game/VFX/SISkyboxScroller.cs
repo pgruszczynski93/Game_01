@@ -1,3 +1,4 @@
+using System;
 using SpaceInvaders;
 using UnityEngine;
 
@@ -11,13 +12,20 @@ namespace Game.VFX {
 
         float _currentScrollSpeedMultiplier;
         float _currentAngle;
+        Material _skyboxBackup;
 
         void Start() => Initialise();
-
         void Initialise() {
+            _skyboxBackup = new Material(RenderSettings.skybox);
             RequestTimeSpeedModification();
         }
-        
+
+        void OnDestroy() {
+            RenderSettings.skybox = _skyboxBackup;
+            DynamicGI.UpdateEnvironment();
+            Destroy(_skyboxBackup);
+        } 
+
         void OnEnable() => SubscribeEvents();
 
         void OnDisable() => UnsubscribeEvents();
@@ -32,6 +40,7 @@ namespace Game.VFX {
 
         void HandleOnIndependentUpdate() {
             RenderSettings.skybox.SetFloat(rotationId, GetClampedAngle());
+            DynamicGI.UpdateEnvironment();
         }
 
         float GetClampedAngle() {
