@@ -5,13 +5,14 @@ using UnityEngine;
 namespace Game.VFX {
     public class SISkyboxScroller : MonoBehaviour, IModifyTimeSpeedMultiplier {
         
-        static readonly int rotationId = Shader.PropertyToID("_Rotation");
+        static readonly int xRotationId = Shader.PropertyToID("_Rotation");
         static readonly int rotationAxisId = Shader.PropertyToID("_RotationAxis");
 
         [SerializeField] float _scrollSpeed;
 
         float _currentScrollSpeedMultiplier;
         float _currentAngle;
+        float _startSkyboxAngleX;
         Material _skyboxBackup;
 
         void Start() => Initialise();
@@ -21,14 +22,18 @@ namespace Game.VFX {
         }
 
         void OnDestroy() {
-            RenderSettings.skybox = _skyboxBackup;
-            DynamicGI.UpdateEnvironment();
             Destroy(_skyboxBackup);
+        }
+
+        void OnEnable() {
+            BackupMaterialProperties();
+            SubscribeEvents();
+        }
+
+        void OnDisable() {
+            RestoreOriginalMaterialProperties();
+            UnsubscribeEvents();  
         } 
-
-        void OnEnable() => SubscribeEvents();
-
-        void OnDisable() => UnsubscribeEvents();
 
         void SubscribeEvents() {
             SIEventsHandler.OnIndependentUpdate += HandleOnIndependentUpdate;
@@ -38,8 +43,17 @@ namespace Game.VFX {
             SIEventsHandler.OnIndependentUpdate -= HandleOnIndependentUpdate;  
         }
 
+        void BackupMaterialProperties() {
+            _startSkyboxAngleX = RenderSettings.skybox.GetFloat(xRotationId);
+        }
+
+        void RestoreOriginalMaterialProperties() {
+            RenderSettings.skybox = _skyboxBackup;
+            RenderSettings.skybox.SetFloat(xRotationId, _startSkyboxAngleX);
+        }
+        
         void HandleOnIndependentUpdate() {
-            RenderSettings.skybox.SetFloat(rotationId, GetClampedAngle());
+            RenderSettings.skybox.SetFloat(xRotationId, GetClampedAngle());
             DynamicGI.UpdateEnvironment();
         }
 
