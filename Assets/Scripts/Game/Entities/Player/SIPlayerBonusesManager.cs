@@ -80,7 +80,7 @@ namespace SpaceInvaders {
         IEnumerator RunBonusRoutine(BonusSettings bonusSettings) {
             _activeBonuses[bonusSettings.bonusType].isCoroutineActive = true;
 
-            yield return WaitUtils.WaitSecondsAndRunSequence(
+            yield return WaitForUtils.StartWaitSecFinishTask(
                 () => SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings), 
                 () => SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings),
                 bonusSettings.durationTime);

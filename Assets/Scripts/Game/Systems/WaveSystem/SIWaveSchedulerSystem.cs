@@ -1,5 +1,6 @@
 using System.Collections;
 using Configs;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace SpaceInvaders {
@@ -12,14 +13,8 @@ namespace SpaceInvaders {
         int _livingEnemies;
         
         WaveSettings _currentWaveSettings;
-        Coroutine _waveRestartRoutine;
         
         void Start() => Initialise();
-
-        void OnDestroy() {
-            if(_waveRestartRoutine != null)
-                StopCoroutine(StartNewWaveRoutine());
-        }
 
         void Initialise() {
             if (_waveSettings == null || _waveSettings.Length == 0) {
@@ -52,7 +47,7 @@ namespace SpaceInvaders {
             if (gameState != GameStates.GameStarted)
                 return;
 
-            _waveRestartRoutine = StartCoroutine(StartNewWaveRoutine());
+            StartNewWaveTask().Forget();
         }
         
         void HandleOnEnemyDeath(SIEnemyBehaviour enemy) {
@@ -65,15 +60,15 @@ namespace SpaceInvaders {
             if (_livingEnemies > 0)
                 return;
 
-            _waveRestartRoutine = StartCoroutine(StartNewWaveRoutine());
+            StartNewWaveTask().Forget();
             ResetWaveProperties();
         }
         
-        IEnumerator StartNewWaveRoutine() {
+        async UniTaskVoid StartNewWaveTask() {
             //Note: End wave is always before start wave, to ensure that every gameobject which uses this event handled necessary operations.
-            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_currentWaveSettings.waveEndCoolDown, SIGameplayEvents.BroadcastOnWaveEnd));
-            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_currentWaveSettings.waveCoolDown, SIGameplayEvents.BroadcastOnWaveCoolDown));
-            yield return StartCoroutine(WaitUtils.WaitAndInvoke(_currentWaveSettings.waveStartCooldown, SIGameplayEvents.BroadcastOnWaveStart));
+            await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveEndCoolDown, SIGameplayEvents.BroadcastOnWaveEnd);
+            await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveCoolDown, SIGameplayEvents.BroadcastOnWaveCoolDown);
+            await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveStartCooldown, SIGameplayEvents.BroadcastOnWaveStart);
         }
     }
 }

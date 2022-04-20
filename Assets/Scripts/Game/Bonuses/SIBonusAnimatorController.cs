@@ -131,7 +131,7 @@ namespace SpaceInvaders {
                 
                 UpdateSelectedFloatMaterialProperty(DissolveAmountID, progress);
                 currentTime += Time.deltaTime;
-                yield return WaitUtils.SkipFrames(1);
+                yield return WaitForUtils.SkipFramesTask(1);
             }
 
             _isVariantAnimationTriggered = false;

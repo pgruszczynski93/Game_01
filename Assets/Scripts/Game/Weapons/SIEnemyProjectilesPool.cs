@@ -1,5 +1,4 @@
-
-using System.Collections;
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ namespace SpaceInvaders {
         protected override void Initialise() {
             base.Initialise();
             //Note: Only to testing
-            StartCoroutine(TierTester());
+            ChangeWeaponTierTestTask().Forget();
         }
 
         protected override void SubscribeEvents() {
@@ -47,14 +46,14 @@ namespace SpaceInvaders {
             SIGameplayEvents.BroadcastOnEnemyProjectilesCountChanged(availableProjectiles);
         }
 
-        IEnumerator TierTester() {
+        async UniTaskVoid ChangeWeaponTierTestTask() {
             while (true) {
-                yield return WaitUtils.WaitForCachedSeconds(3f);
-                //Note: 1-4 because of array indexing => 0-3
-                TestWeaponTierUpdate(Random.Range(1, 4));
+                await WaitForUtils.WaitSecondsAndInvokeTask(3f, () => {
+                    //Note: 1-4 because of array indexing => 0-3
+                    TestWeaponTierUpdate(Random.Range(1, 4));
+                });
             }
+            // ReSharper disable once FunctionNeverReturns
         }
-
-        //
     }
 }

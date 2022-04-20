@@ -40,7 +40,7 @@ namespace Game.Features.Shield {
         }
 
         IEnumerator DisableRoutine() {
-            yield return WaitUtils.WaitSecondsAndRunSequence(
+            yield return WaitForUtils.StartWaitSecFinishTask(
                 _animatorController.SetHideAnimation,     
                 DisableRootObject, _shieldSettings.waitForDisableTime);
         }

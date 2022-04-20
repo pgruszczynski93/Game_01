@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace SpaceInvaders {
@@ -11,7 +12,6 @@ namespace SpaceInvaders {
 
         bool _isGridShootingEnabled;
         int _totalEnemiesAbleToShoot;
-        Coroutine _shootingRoutine;
         GridShootingSettings _gridBehaviourSettings;
 
         void Start() {
@@ -21,11 +21,6 @@ namespace SpaceInvaders {
         void Initialise() {
             _gridBehaviourSettings = _gridBehaviourSetup.shootingSettings;
             _enemiesAbleToShoot = new List<SIEnemyShootController>();
-        }
-
-        void OnDestroy() {
-            if (_shootingRoutine != null)
-                StopCoroutine(_shootingRoutine);
         }
 
         void OnEnable() {
@@ -63,7 +58,7 @@ namespace SpaceInvaders {
 
         void HandleOnWaveStart() {
             EnableGridShootingPossibility(true);
-            TryToRunGridShootingRoutine();
+            TryToRunGridShootingTask();
         }
 
         void HandleOnWaveEnd() {
@@ -115,20 +110,25 @@ namespace SpaceInvaders {
             return _enemiesAbleToShoot == null || _enemiesAbleToShoot.Count == 0 || !_isGridShootingEnabled;
         }
 
-        void TryToRunGridShootingRoutine() {
+        void TryToRunGridShootingTask() {
             if (ShouldStopGridShooting() || _isGridShootingLockedByDev)
                 return;
-            _shootingRoutine = StartCoroutine(GridShootingRoutine());
+            
+            GridShootingTask().Forget();
         }
 
 
-        IEnumerator GridShootingRoutine() {
+        async UniTaskVoid GridShootingTask() {
             int indexOfSelectedEnemy;
 
             while (_totalEnemiesAbleToShoot > 0) {
-                indexOfSelectedEnemy = Random.Range(0, _totalEnemiesAbleToShoot);
-                SIEnemyGridEvents.BroadcastOnShotInvoked(_enemiesAbleToShoot[indexOfSelectedEnemy]);
-                yield return WaitUtils.WaitForCachedSeconds(Random.Range(
+                await WaitForUtils.StartWaitSecFinishTask(
+                    () => {
+                        indexOfSelectedEnemy = Random.Range(0, _totalEnemiesAbleToShoot);
+                        SIEnemyGridEvents.BroadcastOnShotInvoked(_enemiesAbleToShoot[indexOfSelectedEnemy]);
+                    }, 
+                    null,
+                    Random.Range(
                     _gridBehaviourSettings.minShootingInterval, _gridBehaviourSettings.maxShootingInterval));
             }
         }

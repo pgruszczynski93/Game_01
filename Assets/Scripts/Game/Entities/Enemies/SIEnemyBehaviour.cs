@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace SpaceInvaders
 {
@@ -64,7 +65,7 @@ namespace SpaceInvaders
                 _shootController.TryToSelectNextShootingBehaviour();
             
             SetEnemyVisibility(false);
-            StartCoroutine(WaitUtils.SkipFramesAndInvoke(1, BroadcastEnemyDeath));
+            WaitForUtils.SkipFramesAndInvokeTask(1, BroadcastEnemyDeath).Forget();
         }
 
         void BroadcastEnemyDeath()

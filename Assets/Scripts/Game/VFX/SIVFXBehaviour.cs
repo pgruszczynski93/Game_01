@@ -73,7 +73,7 @@ namespace SpaceInvaders
 
         IEnumerator TryResetParticlesRoutine() {
             while (_particles.isPlaying)
-                yield return WaitUtils.SkipFrames(1);
+                yield return WaitForUtils.SkipFramesTask(1);
             
             ResetVfx();
         }

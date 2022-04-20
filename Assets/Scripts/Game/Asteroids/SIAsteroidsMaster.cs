@@ -1,4 +1,5 @@
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace SpaceInvaders
@@ -41,10 +42,10 @@ namespace SpaceInvaders
             if (_asteroidsSpawner == null)
                 return;
 
-            StartCoroutine(AsteroidsMovementRoutine());
+            AsteroidsMovementTask().Forget();
         }
 
-        IEnumerator AsteroidsMovementRoutine()
+        async UniTaskVoid AsteroidsMovementTask()
         {
             SIAsteroidBehaviour[] asteroids = _asteroidsSpawner.SpawnedAsteroids;
             int asteroidsCount = asteroids.Length;
@@ -55,11 +56,10 @@ namespace SpaceInvaders
                 {
                     SIAsteroidBehaviour asteroid = asteroids[i];
                     asteroid.MoveObject();
-                    yield return WaitUtils.WaitForCachedSeconds(Random.Range(minAsteroidMoveDelay,
-                        maxAsteroidMoveDelay));
+                    await WaitForUtils.WaitSecondsTask(Random.Range(minAsteroidMoveDelay, maxAsteroidMoveDelay));
                 }
 
-                yield return WaitUtils.WaitForCachedSeconds(SIConstants.ASTEROIDS_RESPAWN_DELAY);
+                await WaitForUtils.WaitSecondsTask(SIConstants.ASTEROIDS_RESPAWN_DELAY);
             }
         }
     }

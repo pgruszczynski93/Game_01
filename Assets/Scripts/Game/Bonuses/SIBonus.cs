@@ -63,7 +63,7 @@ namespace SpaceInvaders {
             _isInStopRoutine = true;
             _animatorController.SetHideAnimation();
             while (_animatorController.IsVariantAnimationTriggered)
-                yield return WaitUtils.SkipFrames(1);
+                yield return WaitForUtils.SkipFramesTask(1);
 
             _isInStopRoutine = false;
             _bonusMovement.StopObject();
