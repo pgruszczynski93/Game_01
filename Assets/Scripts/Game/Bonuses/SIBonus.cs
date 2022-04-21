@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Cysharp.Threading.Tasks;
 using SpaceInvaders.ObjectsPool;
 using UnityEngine;
 
@@ -12,7 +13,6 @@ namespace SpaceInvaders {
         
         bool _isInStopRoutine;
         Transform _thisTransform;
-        Coroutine _stopCoroutine;
         
         public BonusSettings GetBonusVariantSettings() {
             return _variantSelector.BonusVariantSettings;
@@ -44,9 +44,10 @@ namespace SpaceInvaders {
             //Note: This line resets the bonus before release.
             TryEnableBonusAndSelectedVariant(false);
             _bonusMovement.StopObject();
-            
-            if(_stopCoroutine != null)
-                StopCoroutine(_stopCoroutine);
+                        
+            //TODO ADD cancelationtoken heres
+            // if(_stopCoroutine != null)
+            //     StopCoroutine(_stopCoroutine);
             
             TryEnableBonusAndSelectedVariant(true);
             _bonusMovement.MoveObject();
@@ -56,14 +57,14 @@ namespace SpaceInvaders {
             if (_isInStopRoutine)
                 return;
             
-            _stopCoroutine = StartCoroutine(RunStopRoutine());
+            StopBonusAnimationTask().Forget();
         }
 
-        IEnumerator RunStopRoutine() {
+        async UniTaskVoid StopBonusAnimationTask() {
             _isInStopRoutine = true;
             _animatorController.SetHideAnimation();
             while (_animatorController.IsVariantAnimationTriggered)
-                yield return WaitForUtils.SkipFramesTask(1);
+                await WaitForUtils.SkipFramesTask(1);
 
             _isInStopRoutine = false;
             _bonusMovement.StopObject();

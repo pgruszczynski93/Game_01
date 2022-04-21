@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace SpaceInvaders {
@@ -45,12 +46,12 @@ namespace SpaceInvaders {
         
         //Note: This code should runs once at Animation Event
         public void ShowBonusVariantAnimation() {
-            _animationRoutine = StartCoroutine(AnimationRoutine(BonusAnimationType.Show));
+            AnimationTask(BonusAnimationType.Show).Forget();
         }
         
         //Note: This code should runs once at Animation Event
         public void HideBonusVariantAnimation() {
-            _animationRoutine = StartCoroutine(AnimationRoutine(BonusAnimationType.Hide));
+            AnimationTask(BonusAnimationType.Hide).Forget();
         }
         
         public void RequestTimeSpeedModification() {
@@ -103,38 +104,35 @@ namespace SpaceInvaders {
         // Tried to fix that bug, but any of the solutions didn't work.
         // ---====--- Instead I used coroutine.
 
-        IEnumerator AnimationRoutine(BonusAnimationType type) {
-            if (_bonusVariantRenderer == null) {
-                _isVariantAnimationTriggered = false;
-                yield break;
-            }
-
-            int sign;
-            float currentTime = 0;
-            float progress;
-            float duration;
-            float dissolveStartValue;
+        async UniTaskVoid AnimationTask(BonusAnimationType type) {
+            if (_bonusVariantRenderer != null) {
+                int sign;
+                float currentTime = 0;
+                float progress;
+                float duration;
+                float dissolveStartValue;
             
-            if (type == BonusAnimationType.Show) {
-                duration = _showAnimationTime;
-                dissolveStartValue = FULLY_DISSOLVED;
-                sign = -1;
-            }
-            else {
-                duration = _hideAnimationTime;
-                dissolveStartValue = NOT_DISSOLVED;
-                sign = 1;
-            }
+                if (type == BonusAnimationType.Show) {
+                    duration = _showAnimationTime;
+                    dissolveStartValue = FULLY_DISSOLVED;
+                    sign = -1;
+                }
+                else {
+                    duration = _hideAnimationTime;
+                    dissolveStartValue = NOT_DISSOLVED;
+                    sign = 1;
+                }
             
-            while (currentTime <= duration) {
-                progress = dissolveStartValue + sign * (currentTime/duration);
+                while (currentTime <= duration) {
+                    progress = dissolveStartValue + sign * (currentTime/duration);
                 
-                UpdateSelectedFloatMaterialProperty(DissolveAmountID, progress);
-                currentTime += Time.deltaTime;
-                yield return WaitForUtils.SkipFramesTask(1);
-            }
+                    UpdateSelectedFloatMaterialProperty(DissolveAmountID, progress);
+                    currentTime += Time.deltaTime;
+                    await WaitForUtils.SkipFramesTask(1);
+                }
 
-            _isVariantAnimationTriggered = false;
+                _isVariantAnimationTriggered = false;
+            }
         }
 
         public void SetSpeedModifier(float modifier) {
