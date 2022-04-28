@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace SpaceInvaders {
 
         Renderer _bonusVariantRenderer;
         MaterialPropertyBlock _propertyBlock;
-        Coroutine _animationRoutine;
+        CancellationTokenSource _cancellationTokenSource;
         
         Action onAnimationStarted;
         Action onAnimationFinished;
@@ -46,11 +47,13 @@ namespace SpaceInvaders {
         
         //Note: This code should runs once at Animation Event
         public void ShowBonusVariantAnimation() {
+            RefreshCancellationSource();
             AnimationTask(BonusAnimationType.Show).Forget();
         }
         
         //Note: This code should runs once at Animation Event
         public void HideBonusVariantAnimation() {
+            RefreshCancellationSource();
             AnimationTask(BonusAnimationType.Hide).Forget();
         }
         
@@ -64,8 +67,7 @@ namespace SpaceInvaders {
         
         public void SetShowAnimation(Renderer variantRenderer) {
             TryInitialise();
-            TryStopCurrentVariantAnimation();
-            
+            RefreshCancellationSource();
             _isVariantAnimationTriggered = true;
             _bonusVariantRenderer = variantRenderer;
             _animator.ResetTrigger(BonusCollectedID);
@@ -74,7 +76,7 @@ namespace SpaceInvaders {
 
         public void SetHideAnimation() {
             TryStopCurrentVariantAnimation();
-            
+            RefreshCancellationSource();
             _isVariantAnimationTriggered = true;
             _animator.SetTrigger(BonusCollectedID);
         }
@@ -84,11 +86,7 @@ namespace SpaceInvaders {
         }
 
         void TryStopCurrentVariantAnimation() {
-            if (_animationRoutine == null)
-                return;
-
             _isVariantAnimationTriggered = false;
-            StopCoroutine(_animationRoutine);
         }
         
         void UpdateSelectedFloatMaterialProperty(int propId, float newValue) {
@@ -105,39 +103,48 @@ namespace SpaceInvaders {
         // ---====--- Instead I used coroutine.
 
         async UniTaskVoid AnimationTask(BonusAnimationType type) {
-            if (_bonusVariantRenderer != null) {
-                int sign;
-                float currentTime = 0;
-                float progress;
-                float duration;
-                float dissolveStartValue;
-            
-                if (type == BonusAnimationType.Show) {
-                    duration = _showAnimationTime;
-                    dissolveStartValue = FULLY_DISSOLVED;
-                    sign = -1;
-                }
-                else {
-                    duration = _hideAnimationTime;
-                    dissolveStartValue = NOT_DISSOLVED;
-                    sign = 1;
-                }
-            
-                while (currentTime <= duration) {
-                    progress = dissolveStartValue + sign * (currentTime/duration);
-                
-                    UpdateSelectedFloatMaterialProperty(DissolveAmountID, progress);
-                    currentTime += Time.deltaTime;
-                    await WaitForUtils.SkipFramesTask(1);
-                }
+            try {
+                if (_bonusVariantRenderer != null) {
+                    int sign;
+                    float currentTime = 0;
+                    float progress;
+                    float duration;
+                    float dissolveStartValue;
 
-                _isVariantAnimationTriggered = false;
+                    if (type == BonusAnimationType.Show) {
+                        duration = _showAnimationTime;
+                        dissolveStartValue = FULLY_DISSOLVED;
+                        sign = -1;
+                    }
+                    else {
+                        duration = _hideAnimationTime;
+                        dissolveStartValue = NOT_DISSOLVED;
+                        sign = 1;
+                    }
+
+                    while (currentTime <= duration) {
+                        progress = dissolveStartValue + sign * (currentTime / duration);
+
+                        UpdateSelectedFloatMaterialProperty(DissolveAmountID, progress);
+                        currentTime += Time.deltaTime;
+                        await WaitForUtils.SkipFramesTask(1, _cancellationTokenSource.Token);
+                    }
+
+                    _isVariantAnimationTriggered = false;
+                }
             }
+            catch (OperationCanceledException) { }
         }
 
         public void SetSpeedModifier(float modifier) {
             //Note: I use as base animation speed value of 1.
             _animator.speed = modifier;
+        }
+        
+        void RefreshCancellationSource() {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = new CancellationTokenSource();
         }
     }
 }

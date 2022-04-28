@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace SpaceInvaders
@@ -10,6 +11,8 @@ namespace SpaceInvaders
         [SerializeField] SIEnemyShootController _shootController;
         [SerializeField] SIEnemyHealth _enemyHealth;
 
+        CancellationTokenSource _cancellationTokenSource;
+        
         public SIEnemyShootController EnemyShootController
         {
             get => _shootController;
@@ -65,7 +68,8 @@ namespace SpaceInvaders
                 _shootController.TryToSelectNextShootingBehaviour();
             
             SetEnemyVisibility(false);
-            WaitForUtils.SkipFramesAndInvokeTask(1, BroadcastEnemyDeath).Forget();
+            RefreshCancellationSource();
+            WaitForUtils.SkipFramesAndInvokeTask(1, _cancellationTokenSource.Token, BroadcastEnemyDeath).Forget();
         }
 
         void BroadcastEnemyDeath()
@@ -79,6 +83,12 @@ namespace SpaceInvaders
         {
             _colliderParent.SetActive(isEnabled);
             _meshRenderer.enabled = isEnabled;
+        }
+        
+        void RefreshCancellationSource() {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = new CancellationTokenSource();
         }
     }
 }

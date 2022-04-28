@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,6 +13,8 @@ namespace SpaceInvaders {
         [Header("List of bonus settings to use in tests - don't change order!")]
         [SerializeField] List<ScriptableBonus> _scriptableBonuses;
 
+        CancellationTokenSource _cancellationTokenSource;
+        
         void Start() {
             Initialise();
         }
@@ -56,18 +61,17 @@ namespace SpaceInvaders {
             if (!IsBonusTypeAdded(bonusType))
                 _activeBonuses.Add(bonusType, new RuntimeBonus(collectedBonusSettings));
             else
-                StopCoroutine(_activeBonuses[collectedBonusSettings.bonusType].bonusRoutine);
+                StopCoroutine(_activeBonuses[collectedBonusSettings.bonusType].bonusTask);
 
-            _activeBonuses[collectedBonusSettings.bonusType].bonusRoutine =
-                StartCoroutine(RunBonusRoutine(collectedBonusSettings));
+            _activeBonuses[collectedBonusSettings.bonusType].bonusTask = RunBonusTask(collectedBonusSettings).Forget();
         }
 
         void TryClearCoroutines() {
             if (_activeBonuses == null)
                 return;
-            Coroutine currentRoutine;
+            UniTask currentRoutine;
             foreach (KeyValuePair<BonusType, RuntimeBonus> kvp in _activeBonuses) {
-                currentRoutine = kvp.Value.bonusRoutine;
+                currentRoutine = kvp.Value.bonusTask;
                 if(currentRoutine != null)
                     StopCoroutine(currentRoutine);
             }
@@ -77,15 +81,18 @@ namespace SpaceInvaders {
             return _activeBonuses != null && _activeBonuses.ContainsKey(bonusType);
         }
 
-        IEnumerator RunBonusRoutine(BonusSettings bonusSettings) {
-            _activeBonuses[bonusSettings.bonusType].isCoroutineActive = true;
+        async UniTask RunBonusTask(BonusSettings bonusSettings) {
+            try {
+                _activeBonuses[bonusSettings.bonusType].isCoroutineActive = true;
 
-            yield return WaitForUtils.StartWaitSecFinishTask(
-                () => SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings), 
-                () => SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings),
-                bonusSettings.durationTime);
-            
-            _activeBonuses[bonusSettings.bonusType].isCoroutineActive = false;
+                await WaitForUtils.StartWaitSecFinishTask(
+                    () => SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings),
+                    () => SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings),
+                    bonusSettings.durationTime, _cancellationTokenSource.Token);
+
+                _activeBonuses[bonusSettings.bonusType].isCoroutineActive = false;
+            }
+            catch (OperationCanceledException) { }
         }
 
         [Button]

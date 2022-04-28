@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
+using System.Threading;
 using Configs;
+using Cysharp.Threading.Tasks;
 using SpaceInvaders;
 using UnityEngine;
 
@@ -9,14 +12,8 @@ namespace Game.Features.Shield {
         [SerializeField] ShieldSettings _shieldSettings;
         [SerializeField] SIShieldAnimatorController _animatorController;
 
-        Coroutine _shieldAnimationRoutine;
+        CancellationTokenSource _cancellationTokenSource;
 
-        protected override void OnDisable() {
-            base.OnDisable();
-            if(_shieldAnimationRoutine != null)
-                StopCoroutine(DisableRoutine());
-        }
-        
         protected override void EnableEnergyBoostForBonus(bool isEnabled) {
             base.EnableEnergyBoostForBonus(isEnabled);
             _animatorController.EnableExtraEnergyAnimation(isEnabled);
@@ -36,13 +33,23 @@ namespace Game.Features.Shield {
         }
 
         void DisableShield() {
-            _shieldAnimationRoutine = StartCoroutine(DisableRoutine());
+            RefreshCancellationSource();
+            DisableShieldTask().Forget();
         }
 
-        IEnumerator DisableRoutine() {
-            yield return WaitForUtils.StartWaitSecFinishTask(
-                _animatorController.SetHideAnimation,     
-                DisableRootObject, _shieldSettings.waitForDisableTime);
+        async UniTaskVoid DisableShieldTask() {
+            try {
+                await WaitForUtils.StartWaitSecFinishTask(_animatorController.SetHideAnimation,
+                    DisableRootObject, _shieldSettings.waitForDisableTime, _cancellationTokenSource.Token);
+            }
+            catch (OperationCanceledException) { }
         }
+        
+        void RefreshCancellationSource() {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = new CancellationTokenSource();
+        }
+        //TODO cancelllation tokeny ogarnać
     }
 }

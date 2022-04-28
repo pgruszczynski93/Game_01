@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using SpaceInvaders.ObjectsPool;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace SpaceInvaders {
         
         bool _isInStopRoutine;
         Transform _thisTransform;
+        CancellationTokenSource _cancellationTokenSource;
         
         public BonusSettings GetBonusVariantSettings() {
             return _variantSelector.BonusVariantSettings;
@@ -56,18 +58,28 @@ namespace SpaceInvaders {
         public void TryRunBonusCollectedRoutine() {
             if (_isInStopRoutine)
                 return;
-            
+
+            RefreshCancellationSource();
             StopBonusAnimationTask().Forget();
         }
 
         async UniTaskVoid StopBonusAnimationTask() {
-            _isInStopRoutine = true;
-            _animatorController.SetHideAnimation();
-            while (_animatorController.IsVariantAnimationTriggered)
-                await WaitForUtils.SkipFramesTask(1);
+            try {
+                _isInStopRoutine = true;
+                _animatorController.SetHideAnimation();
+                while (_animatorController.IsVariantAnimationTriggered)
+                    await WaitForUtils.SkipFramesTask(1, _cancellationTokenSource.Token);
 
-            _isInStopRoutine = false;
-            _bonusMovement.StopObject();
+                _isInStopRoutine = false;
+                _bonusMovement.StopObject();
+            }
+            catch (OperationCanceledException) { } 
+        }
+        
+        void RefreshCancellationSource() {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = new CancellationTokenSource();
         }
         
         void TryEnableBonusAndSelectedVariant(bool isEnabled) {
