@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace SpaceInvaders {
         bool _isGridShootingEnabled;
         int _totalEnemiesAbleToShoot;
         GridShootingSettings _gridBehaviourSettings;
+        CancellationTokenSource _shootingCancellation;
 
         void Start() {
             Initialise();
@@ -114,6 +116,7 @@ namespace SpaceInvaders {
             if (ShouldStopGridShooting() || _isGridShootingLockedByDev)
                 return;
             
+            RefreshCancellation();
             GridShootingTask().Forget();
         }
 
@@ -128,9 +131,15 @@ namespace SpaceInvaders {
                         SIEnemyGridEvents.BroadcastOnShotInvoked(_enemiesAbleToShoot[indexOfSelectedEnemy]);
                     }, 
                     null,
-                    Random.Range(
-                    _gridBehaviourSettings.minShootingInterval, _gridBehaviourSettings.maxShootingInterval));
+                    Random.Range(_gridBehaviourSettings.minShootingInterval, _gridBehaviourSettings.maxShootingInterval),
+                    _shootingCancellation.Token);
             }
+        }
+        
+        void RefreshCancellation() {
+            _shootingCancellation?.Cancel();
+            _shootingCancellation?.Dispose();
+            _shootingCancellation = new CancellationTokenSource();
         }
     }
 }

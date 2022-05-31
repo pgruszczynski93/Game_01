@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Threading;
 using Configs;
+using Cysharp.Threading.Tasks;
 using Game.Systems;
 using Sirenix.OdinInspector;
 using SpaceInvaders;
@@ -17,17 +19,13 @@ namespace Project.Systems {
         [SerializeField] Volume _postProcessVolume;
 
         bool _isModifyingPosprocesses;
+        
         PostProcessControllerState _postProcessState;
         Bloom _bloom;
         Vignette _vignette;
-        Coroutine _applyPostprocessCoroutine;
+        CancellationTokenSource _postprocessCancellation;
 
         void Start() => Initialise();
-
-        void OnDestroy() {
-            if (_applyPostprocessCoroutine != null)
-                StopCoroutine(_applyPostprocessCoroutine);
-        }
 
         void Initialise() {
             _postProcessVolume.profile.TryGet(out _bloom);
@@ -62,33 +60,36 @@ namespace Project.Systems {
         }
 
         void HandleOnWaveCooldown() {
-            if(_applyPostprocessCoroutine != null)
-                StopCoroutine(_applyPostprocessCoroutine);
+            RefreshPostProcessCancellation();
             TrySetBasePostprocessEffect();
         }
+        
+        void RefreshPostProcessCancellation() {
+            _postprocessCancellation?.Cancel();
+            _postprocessCancellation?.Dispose();
+            _postprocessCancellation = new CancellationTokenSource();
+        }
 
-        IEnumerator ApplyPostprocessCoroutine(float duration, 
+        async UniTaskVoid ApplyPostprocessTask(float duration, 
             AnimationCurve curve, 
             Action<float> onPostprocessChange, PostProcessControllerState newState) {
 
-            if (_postProcessState == newState) {
-                yield break;
-            }
-            
-            float progress;
-            float time = 0.0f;
-            _isModifyingPosprocesses = true;
-            while (time < duration) {
-                time += Time.deltaTime;
-                progress = curve.Evaluate(time / duration);
-                onPostprocessChange?.Invoke(progress);
-                yield return WaitForUtils.SkipFramesTask(1);
-            }
+            if (_postProcessState != newState) {
+                float progress;
+                float time = 0.0f;
+                _isModifyingPosprocesses = true;
+                while (time < duration) {
+                    time += Time.deltaTime;
+                    progress = curve.Evaluate(time / duration);
+                    onPostprocessChange?.Invoke(progress);
+                    await WaitForUtils.SkipFramesTask(1, _postprocessCancellation.Token);
+                }
 
-            onPostprocessChange?.Invoke(1f);
-            yield return WaitForUtils.SkipFramesTask(1);
-            _postProcessState = newState;
-            _isModifyingPosprocesses = false;
+                onPostprocessChange?.Invoke(1f);
+                await WaitForUtils.SkipFramesTask(1, _postprocessCancellation.Token);
+                _postProcessState = newState;
+                _isModifyingPosprocesses = false;
+            }
         }
 
         void BaseToTimeModSlowAllPostprocess(float progress) {
@@ -125,32 +126,30 @@ namespace Project.Systems {
 
         [Button]
         void TrySetBasePostprocessEffect() {
-            _applyPostprocessCoroutine = StartCoroutine(
-                ApplyPostprocessCoroutine(_baseConfig.effectApplyDuration,
-                    timeModificationOutCurve,
-                    TimeModSlowAllToBasePostprocess,
-                    PostProcessControllerState.BasicPostprocess
-                ));
+            RefreshPostProcessCancellation();
+            ApplyPostprocessTask(_baseConfig.effectApplyDuration,
+                timeModificationOutCurve,
+                TimeModSlowAllToBasePostprocess,
+                PostProcessControllerState.BasicPostprocess).Forget();
         }
         
         [Button]
         void TrySetTimeModSlowAllPostprocessEffect() {
-            _applyPostprocessCoroutine = StartCoroutine(
-                ApplyPostprocessCoroutine(_timeSpeedModificationConfig.effectApplyDuration,
-                    timeModificationInCurve,
-                    BaseToTimeModSlowAllPostprocess,
-                    PostProcessControllerState.TimeModSlowAllPostprocess
-                ));
+            RefreshPostProcessCancellation();
+            ApplyPostprocessTask(_timeSpeedModificationConfig.effectApplyDuration,
+                timeModificationInCurve,
+                BaseToTimeModSlowAllPostprocess,
+                PostProcessControllerState.TimeModSlowAllPostprocess).Forget();
         }
         
         [Button]
         void TrySetTimeModFastAllPostprocessEffect() {
-            _applyPostprocessCoroutine = StartCoroutine(
-                ApplyPostprocessCoroutine(_timeSpeedModificationConfig.effectApplyDuration,
-                    timeModificationOutCurve,
-                    BaseToFastAllPostprocess,
-                    PostProcessControllerState.TimeModFastAllPostprocess
-                ));
+            RefreshPostProcessCancellation();
+            ApplyPostprocessTask(_timeSpeedModificationConfig.effectApplyDuration,
+                timeModificationOutCurve,
+                BaseToFastAllPostprocess,
+                PostProcessControllerState.TimeModFastAllPostprocess
+            ).Forget();
         }
     }
 }

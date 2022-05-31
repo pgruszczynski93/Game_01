@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -30,9 +29,6 @@ namespace SpaceInvaders {
         MaterialPropertyBlock _propertyBlock;
         CancellationTokenSource _cancellationTokenSource;
         
-        Action onAnimationStarted;
-        Action onAnimationFinished;
-
         public bool IsVariantAnimationTriggered => _isVariantAnimationTriggered;
 
         void TryInitialise() {
@@ -47,13 +43,13 @@ namespace SpaceInvaders {
         
         //Note: This code should runs once at Animation Event
         public void ShowBonusVariantAnimation() {
-            RefreshCancellationSource();
+            RefreshCancellation();
             AnimationTask(BonusAnimationType.Show).Forget();
         }
         
         //Note: This code should runs once at Animation Event
         public void HideBonusVariantAnimation() {
-            RefreshCancellationSource();
+            RefreshCancellation();
             AnimationTask(BonusAnimationType.Hide).Forget();
         }
         
@@ -67,7 +63,7 @@ namespace SpaceInvaders {
         
         public void SetShowAnimation(Renderer variantRenderer) {
             TryInitialise();
-            RefreshCancellationSource();
+            RefreshCancellation();
             _isVariantAnimationTriggered = true;
             _bonusVariantRenderer = variantRenderer;
             _animator.ResetTrigger(BonusCollectedID);
@@ -76,7 +72,7 @@ namespace SpaceInvaders {
 
         public void SetHideAnimation() {
             TryStopCurrentVariantAnimation();
-            RefreshCancellationSource();
+            RefreshCancellation();
             _isVariantAnimationTriggered = true;
             _animator.SetTrigger(BonusCollectedID);
         }
@@ -141,7 +137,7 @@ namespace SpaceInvaders {
             _animator.speed = modifier;
         }
         
-        void RefreshCancellationSource() {
+        void RefreshCancellation() {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();

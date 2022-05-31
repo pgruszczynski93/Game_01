@@ -40,7 +40,7 @@ namespace SpaceInvaders
             if (_asteroidsSpawner == null)
                 return;
 
-            RefreshCancellationSource();
+            RefreshCancellation();
             AsteroidsMovementTask().Forget();
         }
 
@@ -62,7 +62,7 @@ namespace SpaceInvaders
             }
         }
 
-        void RefreshCancellationSource() {
+        void RefreshCancellation() {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();

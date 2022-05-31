@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -26,9 +27,13 @@ namespace SpaceInvaders
 
     [Serializable]
     public class RuntimeBonus : BonusSettings {
-        public bool isCoroutineActive;
+        public bool isBonusTaskActive;
         public UniTask bonusTask;
-        public RuntimeBonus(BonusSettings settings) : base(settings) {}
+        public CancellationTokenSource bonusCancellation;
+
+        public RuntimeBonus(BonusSettings settings) : base(settings) {
+            bonusCancellation = new CancellationTokenSource();
+        }
     }
 
     [Serializable]

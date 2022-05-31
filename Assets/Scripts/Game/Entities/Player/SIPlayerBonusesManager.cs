@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -13,8 +12,6 @@ namespace SpaceInvaders {
         [Header("List of bonus settings to use in tests - don't change order!")]
         [SerializeField] List<ScriptableBonus> _scriptableBonuses;
 
-        CancellationTokenSource _cancellationTokenSource;
-        
         void Start() {
             Initialise();
         }
@@ -48,7 +45,7 @@ namespace SpaceInvaders {
         }
 
         public static bool IsBonusActive(BonusType type) {
-            return IsBonusTypeAdded(type) && _activeBonuses[type].isCoroutineActive;
+            return IsBonusTypeAdded(type) && _activeBonuses[type].isBonusTaskActive;
         }
         
         void ManageCollectedBonus(BonusSettings collectedBonusSettings) {
@@ -60,37 +57,43 @@ namespace SpaceInvaders {
 
             if (!IsBonusTypeAdded(bonusType))
                 _activeBonuses.Add(bonusType, new RuntimeBonus(collectedBonusSettings));
-            else
-                StopCoroutine(_activeBonuses[collectedBonusSettings.bonusType].bonusTask);
+            else {
+                CancellationTokenSource cancellation = _activeBonuses[collectedBonusSettings.bonusType].bonusCancellation;
+                cancellation?.Cancel();
+                cancellation?.Dispose();
+                _activeBonuses[collectedBonusSettings.bonusType].bonusCancellation = new CancellationTokenSource();
+            }
 
-            _activeBonuses[collectedBonusSettings.bonusType].bonusTask = RunBonusTask(collectedBonusSettings).Forget();
+            _activeBonuses[collectedBonusSettings.bonusType].bonusTask = RunBonusTask(collectedBonusSettings);
         }
 
         void TryClearCoroutines() {
             if (_activeBonuses == null)
                 return;
-            UniTask currentRoutine;
+            
             foreach (KeyValuePair<BonusType, RuntimeBonus> kvp in _activeBonuses) {
-                currentRoutine = kvp.Value.bonusTask;
-                if(currentRoutine != null)
-                    StopCoroutine(currentRoutine);
+                CancellationTokenSource cancellation = kvp.Value.bonusCancellation;
+                cancellation?.Cancel();
+                cancellation?.Dispose();
+                kvp.Value.bonusCancellation = new CancellationTokenSource();
             }
         }
-
+        
         static bool IsBonusTypeAdded(BonusType bonusType) {
             return _activeBonuses != null && _activeBonuses.ContainsKey(bonusType);
         }
 
         async UniTask RunBonusTask(BonusSettings bonusSettings) {
             try {
-                _activeBonuses[bonusSettings.bonusType].isCoroutineActive = true;
+                RuntimeBonus runtimeBonus = _activeBonuses[bonusSettings.bonusType];
+                runtimeBonus.isBonusTaskActive = true;
 
                 await WaitForUtils.StartWaitSecFinishTask(
                     () => SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings),
                     () => SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings),
-                    bonusSettings.durationTime, _cancellationTokenSource.Token);
+                    bonusSettings.durationTime, runtimeBonus.bonusCancellation.Token);
 
-                _activeBonuses[bonusSettings.bonusType].isCoroutineActive = false;
+                _activeBonuses[bonusSettings.bonusType].isBonusTaskActive = false;
             }
             catch (OperationCanceledException) { }
         }

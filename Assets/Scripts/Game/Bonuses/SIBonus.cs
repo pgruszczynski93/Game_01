@@ -12,7 +12,7 @@ namespace SpaceInvaders {
         [SerializeField] SIBonusMovement _bonusMovement;
         [SerializeField] SIBonusVariantSelector _variantSelector;
         
-        bool _isInStopRoutine;
+        bool _isAnimationTaskActive;
         Transform _thisTransform;
         CancellationTokenSource _cancellationTokenSource;
         
@@ -47,36 +47,32 @@ namespace SpaceInvaders {
             TryEnableBonusAndSelectedVariant(false);
             _bonusMovement.StopObject();
                         
-            //TODO ADD cancelationtoken heres
-            // if(_stopCoroutine != null)
-            //     StopCoroutine(_stopCoroutine);
-            
             TryEnableBonusAndSelectedVariant(true);
             _bonusMovement.MoveObject();
         }
 
         public void TryRunBonusCollectedRoutine() {
-            if (_isInStopRoutine)
+            if (_isAnimationTaskActive)
                 return;
 
-            RefreshCancellationSource();
+            RefreshCancellation();
             StopBonusAnimationTask().Forget();
         }
 
         async UniTaskVoid StopBonusAnimationTask() {
             try {
-                _isInStopRoutine = true;
+                _isAnimationTaskActive = true;
                 _animatorController.SetHideAnimation();
                 while (_animatorController.IsVariantAnimationTriggered)
                     await WaitForUtils.SkipFramesTask(1, _cancellationTokenSource.Token);
 
-                _isInStopRoutine = false;
+                _isAnimationTaskActive = false;
                 _bonusMovement.StopObject();
             }
             catch (OperationCanceledException) { } 
         }
         
-        void RefreshCancellationSource() {
+        void RefreshCancellation() {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();

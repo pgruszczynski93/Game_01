@@ -1,4 +1,5 @@
-using System.Collections;
+using System;
+using System.Threading;
 using Configs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace SpaceInvaders {
         int _livingEnemies;
         
         WaveSettings _currentWaveSettings;
+        CancellationTokenSource _waveCancellation;
         
         void Start() => Initialise();
 
@@ -60,15 +62,25 @@ namespace SpaceInvaders {
             if (_livingEnemies > 0)
                 return;
 
-            StartNewWaveTask().Forget();
+            RefreshWaveCancellation();
             ResetWaveProperties();
+            StartNewWaveTask().Forget();
         }
         
         async UniTaskVoid StartNewWaveTask() {
             //Note: End wave is always before start wave, to ensure that every gameobject which uses this event handled necessary operations.
-            await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveEndCoolDown, SIGameplayEvents.BroadcastOnWaveEnd);
-            await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveCoolDown, SIGameplayEvents.BroadcastOnWaveCoolDown);
-            await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveStartCooldown, SIGameplayEvents.BroadcastOnWaveStart);
+            try {
+                await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveEndCoolDown, SIGameplayEvents.BroadcastOnWaveEnd, _waveCancellation.Token);
+                await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveCoolDown, SIGameplayEvents.BroadcastOnWaveCoolDown, _waveCancellation.Token);
+                await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveStartCooldown, SIGameplayEvents.BroadcastOnWaveStart, _waveCancellation.Token);
+            }
+            catch (OperationCanceledException) { } 
+        }
+
+        void RefreshWaveCancellation() {
+            _waveCancellation?.Cancel();
+            _waveCancellation?.Dispose();
+            _waveCancellation = new CancellationTokenSource();
         }
     }
 }

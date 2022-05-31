@@ -68,7 +68,7 @@ namespace SpaceInvaders
                 _shootController.TryToSelectNextShootingBehaviour();
             
             SetEnemyVisibility(false);
-            RefreshCancellationSource();
+            RefreshCancellation();
             WaitForUtils.SkipFramesAndInvokeTask(1, _cancellationTokenSource.Token, BroadcastEnemyDeath).Forget();
         }
 
@@ -85,7 +85,7 @@ namespace SpaceInvaders
             _meshRenderer.enabled = isEnabled;
         }
         
-        void RefreshCancellationSource() {
+        void RefreshCancellation() {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();

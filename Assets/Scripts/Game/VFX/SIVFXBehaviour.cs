@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using SpaceInvaders.ObjectsPool;
 using UnityEngine;
@@ -13,7 +15,7 @@ namespace SpaceInvaders
         [ShowIf("_hasParticles"), SerializeField] ParticleSystem _particles;
         
         Vector3 _currentDropPos;
-        Coroutine _particlesRoutine;
+        CancellationTokenSource _vfxCancellation;
 
         void Initialise() {
             if (_parent == null) {
@@ -22,9 +24,10 @@ namespace SpaceInvaders
         }
         void Start() => Initialise();
 
-        void OnDestroy() {
-            if(_particlesRoutine != null)
-                StopCoroutine(_particlesRoutine);
+        void RefreshCancellation() {
+            _vfxCancellation?.Cancel();
+            _vfxCancellation?.Dispose();
+            _vfxCancellation = new CancellationTokenSource();
         }
 
         public void SetSpawnPosition(Vector3 spawnPos) {
@@ -48,7 +51,8 @@ namespace SpaceInvaders
             if (!CanPlayParticles())
                 return;
             _particles.Play();
-            _particlesRoutine = StartCoroutine(TryResetParticlesRoutine());
+            RefreshCancellation();
+            TryResetParticlesTask().Forget();
         }
 
         void TryStopParticles() {
@@ -71,9 +75,9 @@ namespace SpaceInvaders
             TryStopParticles();
         }
 
-        IEnumerator TryResetParticlesRoutine() {
+        async UniTaskVoid TryResetParticlesTask() {
             while (_particles.isPlaying)
-                yield return WaitForUtils.SkipFramesTask(1);
+                await WaitForUtils.SkipFramesTask(1, _vfxCancellation.Token);
             
             ResetVfx();
         }

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Threading;
 using Configs;
 using Cysharp.Threading.Tasks;
@@ -33,7 +32,7 @@ namespace Game.Features.Shield {
         }
 
         void DisableShield() {
-            RefreshCancellationSource();
+            RefreshCancellation();
             DisableShieldTask().Forget();
         }
 
@@ -45,11 +44,10 @@ namespace Game.Features.Shield {
             catch (OperationCanceledException) { }
         }
         
-        void RefreshCancellationSource() {
+        void RefreshCancellation() {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();
         }
-        //TODO cancelllation tokeny ogarnać
     }
 }

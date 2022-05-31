@@ -1,3 +1,4 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -6,10 +7,12 @@ namespace SpaceInvaders {
     public class SIEnemyProjectilesPool : SIProjectilesPool {
 
         bool _isPoolReleasingProjectiles;
-
+        CancellationTokenSource _weaponTierChangeCancellation;
+            
         protected override void Initialise() {
             base.Initialise();
             //Note: Only to testing
+            RefreshCancellation();
             ChangeWeaponTierTestTask().Forget();
         }
 
@@ -39,6 +42,12 @@ namespace SpaceInvaders {
 
             _isPoolReleasingProjectiles = false;
         }
+        
+        void RefreshCancellation() {
+            _weaponTierChangeCancellation?.Cancel();
+            _weaponTierChangeCancellation?.Dispose();
+            _weaponTierChangeCancellation = new CancellationTokenSource();
+        }
 
         //TESTING METHODS - remove them later
         [Button]
@@ -48,10 +57,12 @@ namespace SpaceInvaders {
 
         async UniTaskVoid ChangeWeaponTierTestTask() {
             while (true) {
-                await WaitForUtils.WaitSecondsAndInvokeTask(3f, () => {
+                await WaitForUtils.WaitSecondsAndInvokeTask(3f, 
+                    () => {
                     //Note: 1-4 because of array indexing => 0-3
-                    TestWeaponTierUpdate(Random.Range(1, 4));
-                });
+                    TestWeaponTierUpdate(Random.Range(1, 4)); 
+                },
+                    _weaponTierChangeCancellation.Token);
             }
             // ReSharper disable once FunctionNeverReturns
         }
