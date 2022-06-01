@@ -111,7 +111,7 @@ TextureImporter:
       213: 21300070
     second: Explosion_Green_35
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -131,6 +131,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -139,12 +141,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -162,9 +164,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -959,6 +965,43 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Explosion_Green_20: 21300040
+      Explosion_Green_22: 21300044
+      Explosion_Green_32: 21300064
+      Explosion_Green_5: 21300010
+      Explosion_Green_31: 21300062
+      Explosion_Green_18: 21300036
+      Explosion_Green_24: 21300048
+      Explosion_Green_21: 21300042
+      Explosion_Green_1: 21300002
+      Explosion_Green_34: 21300068
+      Explosion_Green_30: 21300060
+      Explosion_Green_7: 21300014
+      Explosion_Green_15: 21300030
+      Explosion_Green_14: 21300028
+      Explosion_Green_6: 21300012
+      Explosion_Green_17: 21300034
+      Explosion_Green_23: 21300046
+      Explosion_Green_19: 21300038
+      Explosion_Green_29: 21300058
+      Explosion_Green_8: 21300016
+      Explosion_Green_26: 21300052
+      Explosion_Green_3: 21300006
+      Explosion_Green_16: 21300032
+      Explosion_Green_2: 21300004
+      Explosion_Green_9: 21300018
+      Explosion_Green_25: 21300050
+      Explosion_Green_10: 21300020
+      Explosion_Green_35: 21300070
+      Explosion_Green_4: 21300008
+      Explosion_Green_12: 21300024
+      Explosion_Green_11: 21300022
+      Explosion_Green_28: 21300056
+      Explosion_Green_0: 21300000
+      Explosion_Green_13: 21300026
+      Explosion_Green_27: 21300054
+      Explosion_Green_33: 21300066
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

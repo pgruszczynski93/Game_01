@@ -105,7 +105,7 @@ TextureImporter:
       213: 21300066
     second: Explosion_Grey_33
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -125,6 +125,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -133,12 +135,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -156,9 +158,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -911,6 +917,41 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Explosion_Grey_24: 21300048
+      Explosion_Grey_26: 21300052
+      Explosion_Grey_27: 21300054
+      Explosion_Grey_8: 21300016
+      Explosion_Grey_6: 21300012
+      Explosion_Grey_3: 21300006
+      Explosion_Grey_21: 21300042
+      Explosion_Grey_15: 21300030
+      Explosion_Grey_25: 21300050
+      Explosion_Grey_13: 21300026
+      Explosion_Grey_19: 21300038
+      Explosion_Grey_28: 21300056
+      Explosion_Grey_9: 21300018
+      Explosion_Grey_18: 21300036
+      Explosion_Grey_1: 21300002
+      Explosion_Grey_11: 21300022
+      Explosion_Grey_10: 21300020
+      Explosion_Grey_30: 21300060
+      Explosion_Grey_29: 21300058
+      Explosion_Grey_2: 21300004
+      Explosion_Grey_4: 21300008
+      Explosion_Grey_33: 21300066
+      Explosion_Grey_12: 21300024
+      Explosion_Grey_31: 21300062
+      Explosion_Grey_32: 21300064
+      Explosion_Grey_7: 21300014
+      Explosion_Grey_17: 21300034
+      Explosion_Grey_20: 21300040
+      Explosion_Grey_14: 21300028
+      Explosion_Grey_0: 21300000
+      Explosion_Grey_5: 21300010
+      Explosion_Grey_22: 21300044
+      Explosion_Grey_23: 21300046
+      Explosion_Grey_16: 21300032
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

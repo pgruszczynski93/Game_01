@@ -48,7 +48,7 @@ namespace SpaceInvaders {
         void HandleOnGameStateChanged(GameStates gameState) {
             if (gameState != GameStates.GameStarted)
                 return;
-
+            
             StartNewWaveTask().Forget();
         }
         
@@ -62,14 +62,14 @@ namespace SpaceInvaders {
             if (_livingEnemies > 0)
                 return;
 
-            RefreshWaveCancellation();
-            ResetWaveProperties();
             StartNewWaveTask().Forget();
         }
         
         async UniTaskVoid StartNewWaveTask() {
             //Note: End wave is always before start wave, to ensure that every gameobject which uses this event handled necessary operations.
             try {
+                ResetWaveProperties();
+                RefreshWaveCancellation();
                 await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveEndCoolDown, SIGameplayEvents.BroadcastOnWaveEnd, _waveCancellation.Token);
                 await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveCoolDown, SIGameplayEvents.BroadcastOnWaveCoolDown, _waveCancellation.Token);
                 await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveStartCooldown, SIGameplayEvents.BroadcastOnWaveStart, _waveCancellation.Token);
