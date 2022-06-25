@@ -81,11 +81,11 @@ namespace Project.Systems {
                     time += Time.deltaTime;
                     progress = curve.Evaluate(time / duration);
                     onPostprocessChange?.Invoke(progress);
-                    await WaitForUtils.SkipFramesTask(1, _postprocessCancellation.Token);
+                    await WaitUtils.SkipFramesTask(1, _postprocessCancellation.Token);
                 }
 
                 onPostprocessChange?.Invoke(1f);
-                await WaitForUtils.SkipFramesTask(1, _postprocessCancellation.Token);
+                await WaitUtils.SkipFramesTask(1, _postprocessCancellation.Token);
                 _postProcessState = newState;
                 _isModifyingPosprocesses = false;
             }

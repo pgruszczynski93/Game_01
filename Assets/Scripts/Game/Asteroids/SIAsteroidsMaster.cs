@@ -12,7 +12,7 @@ namespace SpaceInvaders
 
         [SerializeField] SIAsteroidSpawner _asteroidsSpawner;
 
-        CancellationTokenSource _cancellationTokenSource;
+        CancellationTokenSource _asteroidsCancellation;
         
         void OnEnable() => SubscribeEvents();
         void OnDisable() => UnsubscribeEvents();
@@ -55,17 +55,17 @@ namespace SpaceInvaders
                 {
                     SIAsteroidBehaviour asteroid = asteroids[i];
                     asteroid.MoveObject();
-                    await WaitForUtils.WaitSecondsTask(Random.Range(minAsteroidMoveDelay, maxAsteroidMoveDelay), _cancellationTokenSource.Token);
+                    await WaitUtils.WaitSecondsTask(Random.Range(minAsteroidMoveDelay, maxAsteroidMoveDelay), _asteroidsCancellation.Token);
                 }
 
-                await WaitForUtils.WaitSecondsTask(SIConstants.ASTEROIDS_RESPAWN_DELAY, _cancellationTokenSource.Token);
+                await WaitUtils.WaitSecondsTask(SIConstants.ASTEROIDS_RESPAWN_DELAY, _asteroidsCancellation.Token);
             }
         }
 
         void RefreshCancellation() {
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = new CancellationTokenSource();
+            _asteroidsCancellation?.Cancel();
+            _asteroidsCancellation?.Dispose();
+            _asteroidsCancellation = new CancellationTokenSource();
         }
     }
 }

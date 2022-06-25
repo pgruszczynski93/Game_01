@@ -11,7 +11,7 @@ namespace SpaceInvaders
         [SerializeField] SIEnemyShootController _shootController;
         [SerializeField] SIEnemyHealth _enemyHealth;
 
-        CancellationTokenSource _cancellationTokenSource;
+        CancellationTokenSource _waitTaskCancellation;
         
         public SIEnemyShootController EnemyShootController
         {
@@ -69,7 +69,7 @@ namespace SpaceInvaders
             
             SetEnemyVisibility(false);
             RefreshCancellation();
-            WaitForUtils.SkipFramesAndInvokeTask(1, _cancellationTokenSource.Token, BroadcastEnemyDeath).Forget();
+            WaitUtils.SkipFramesAndInvokeTask(1, _waitTaskCancellation.Token, BroadcastEnemyDeath).Forget();
         }
 
         void BroadcastEnemyDeath()
@@ -86,9 +86,9 @@ namespace SpaceInvaders
         }
         
         void RefreshCancellation() {
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = new CancellationTokenSource();
+            _waitTaskCancellation?.Cancel();
+            _waitTaskCancellation?.Dispose();
+            _waitTaskCancellation = new CancellationTokenSource();
         }
     }
 }

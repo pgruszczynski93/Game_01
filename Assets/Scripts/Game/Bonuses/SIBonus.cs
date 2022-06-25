@@ -14,7 +14,7 @@ namespace SpaceInvaders {
         
         bool _isAnimationTaskActive;
         Transform _thisTransform;
-        CancellationTokenSource _cancellationTokenSource;
+        CancellationTokenSource _bonusCancellation;
         
         public BonusSettings GetBonusVariantSettings() {
             return _variantSelector.BonusVariantSettings;
@@ -64,7 +64,7 @@ namespace SpaceInvaders {
                 _isAnimationTaskActive = true;
                 _animatorController.SetHideAnimation();
                 while (_animatorController.IsVariantAnimationTriggered)
-                    await WaitForUtils.SkipFramesTask(1, _cancellationTokenSource.Token);
+                    await WaitUtils.SkipFramesTask(1, _bonusCancellation.Token);
 
                 _isAnimationTaskActive = false;
                 _bonusMovement.StopObject();
@@ -73,9 +73,9 @@ namespace SpaceInvaders {
         }
         
         void RefreshCancellation() {
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = new CancellationTokenSource();
+            _bonusCancellation?.Cancel();
+            _bonusCancellation?.Dispose();
+            _bonusCancellation = new CancellationTokenSource();
         }
         
         void TryEnableBonusAndSelectedVariant(bool isEnabled) {

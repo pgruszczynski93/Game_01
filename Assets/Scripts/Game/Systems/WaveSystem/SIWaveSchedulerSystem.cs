@@ -70,9 +70,9 @@ namespace SpaceInvaders {
             try {
                 ResetWaveProperties();
                 RefreshWaveCancellation();
-                await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveEndCoolDown, SIGameplayEvents.BroadcastOnWaveEnd, _waveCancellation.Token);
-                await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveCoolDown, SIGameplayEvents.BroadcastOnWaveCoolDown, _waveCancellation.Token);
-                await WaitForUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveStartCooldown, SIGameplayEvents.BroadcastOnWaveStart, _waveCancellation.Token);
+                await WaitUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveEndCoolDown, SIGameplayEvents.BroadcastOnWaveEnd, _waveCancellation.Token);
+                await WaitUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveCoolDown, SIGameplayEvents.BroadcastOnWaveCoolDown, _waveCancellation.Token);
+                await WaitUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveStartCooldown, SIGameplayEvents.BroadcastOnWaveStart, _waveCancellation.Token);
             }
             catch (OperationCanceledException) { } 
         }

@@ -120,7 +120,7 @@ namespace SpaceInvaders {
                 modifierValue = Mathf.Clamp(modifierValue, modParam.minTimeMulVal, modParam.maxTimeMulVal);
                 ManageObjectModifyingSpeed(modifierValue);
                 time += Time.fixedDeltaTime;
-                yield return WaitForUtils.SkipFixedFrames(1);
+                yield return WaitUtils.SkipFixedFrames(1);
             }
             IsModifyingSpeed = false;
             _timeSpeedModificationProgress = 1f;

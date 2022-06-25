@@ -49,10 +49,10 @@ namespace SpaceInvaders {
         }
         
         void ManageCollectedBonus(BonusSettings collectedBonusSettings) {
-            TryRunBonusRoutine(collectedBonusSettings);
+            TryRunBonusTask(collectedBonusSettings);
         }
 
-        void TryRunBonusRoutine(BonusSettings collectedBonusSettings) {
+        void TryRunBonusTask(BonusSettings collectedBonusSettings) {
             BonusType bonusType = collectedBonusSettings.bonusType;
 
             if (!IsBonusTypeAdded(bonusType))
@@ -88,7 +88,7 @@ namespace SpaceInvaders {
                 RuntimeBonus runtimeBonus = _activeBonuses[bonusSettings.bonusType];
                 runtimeBonus.isBonusTaskActive = true;
 
-                await WaitForUtils.StartWaitSecFinishTask(
+                await WaitUtils.StartWaitSecFinishTask(
                     () => SIBonusesEvents.BroadcastOnBonusEnabled(bonusSettings),
                     () => SIBonusesEvents.BroadcastOnBonusDisabled(bonusSettings),
                     bonusSettings.durationTime, runtimeBonus.bonusCancellation.Token);
@@ -101,43 +101,43 @@ namespace SpaceInvaders {
         [Button]
         void TestHealthBonus() {
             BonusSettings settings = _scriptableBonuses[0].bonusSettings;
-            TryRunBonusRoutine(settings);
+            TryRunBonusTask(settings);
         }
         
         [Button]
         void TestProjectileBonus() {
             BonusSettings settings = _scriptableBonuses[1].bonusSettings;
-            TryRunBonusRoutine(settings);
+            TryRunBonusTask(settings);
         }
         
         [Button]
         void TestShieldSystemBonus() {
             BonusSettings settings = _scriptableBonuses[2].bonusSettings;
-            TryRunBonusRoutine(settings);
+            TryRunBonusTask(settings);
         }
                 
         [Button]
         void TestLaserBeamBonus() {
             BonusSettings settings = _scriptableBonuses[3].bonusSettings;
-            TryRunBonusRoutine(settings);
+            TryRunBonusTask(settings);
         }
         
         [Button]
         void TestEnergyBoostBonus() {
             BonusSettings settings = _scriptableBonuses[4].bonusSettings;
-            TryRunBonusRoutine(settings);
+            TryRunBonusTask(settings);
         }
                 
         [Button]
         void TestTimeModSlowAllBonus() {
             BonusSettings settings = _scriptableBonuses[5].bonusSettings;
-            TryRunBonusRoutine(settings);
+            TryRunBonusTask(settings);
         }
         
         [Button]
         void TestTimeModFastAllBonus() {
             BonusSettings settings = _scriptableBonuses[6].bonusSettings;
-            TryRunBonusRoutine(settings);
+            TryRunBonusTask(settings);
         }
     }
 }

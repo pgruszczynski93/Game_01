@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SpaceInvaders
 {
-    public static class WaitForUtils
+    public static class WaitUtils
     {
         //Unitask - WaitForEndOfFrame/WaitForFixedUpdate/Coroutine is not supported.
         static readonly WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();

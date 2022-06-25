@@ -125,7 +125,7 @@ namespace SpaceInvaders {
             int indexOfSelectedEnemy;
 
             while (_totalEnemiesAbleToShoot > 0) {
-                await WaitForUtils.StartWaitSecFinishTask(
+                await WaitUtils.StartWaitSecFinishTask(
                     () => {
                         indexOfSelectedEnemy = Random.Range(0, _totalEnemiesAbleToShoot);
                         SIEnemyGridEvents.BroadcastOnShotInvoked(_enemiesAbleToShoot[indexOfSelectedEnemy]);

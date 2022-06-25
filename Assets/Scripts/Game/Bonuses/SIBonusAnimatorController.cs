@@ -27,7 +27,7 @@ namespace SpaceInvaders {
 
         Renderer _bonusVariantRenderer;
         MaterialPropertyBlock _propertyBlock;
-        CancellationTokenSource _cancellationTokenSource;
+        CancellationTokenSource _animationCancellation;
         
         public bool IsVariantAnimationTriggered => _isVariantAnimationTriggered;
 
@@ -123,7 +123,7 @@ namespace SpaceInvaders {
 
                         UpdateSelectedFloatMaterialProperty(DissolveAmountID, progress);
                         currentTime += Time.deltaTime;
-                        await WaitForUtils.SkipFramesTask(1, _cancellationTokenSource.Token);
+                        await WaitUtils.SkipFramesTask(1, _animationCancellation.Token);
                     }
 
                     _isVariantAnimationTriggered = false;
@@ -138,9 +138,9 @@ namespace SpaceInvaders {
         }
         
         void RefreshCancellation() {
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = new CancellationTokenSource();
+            _animationCancellation?.Cancel();
+            _animationCancellation?.Dispose();
+            _animationCancellation = new CancellationTokenSource();
         }
     }
 }

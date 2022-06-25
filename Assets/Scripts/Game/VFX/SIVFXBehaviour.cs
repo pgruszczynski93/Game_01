@@ -77,7 +77,7 @@ namespace SpaceInvaders
 
         async UniTaskVoid TryResetParticlesTask() {
             while (_particles.isPlaying)
-                await WaitForUtils.SkipFramesTask(1, _vfxCancellation.Token);
+                await WaitUtils.SkipFramesTask(1, _vfxCancellation.Token);
             
             ResetVfx();
         }

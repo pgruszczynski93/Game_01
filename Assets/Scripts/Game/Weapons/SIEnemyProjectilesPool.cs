@@ -57,7 +57,7 @@ namespace SpaceInvaders {
 
         async UniTaskVoid ChangeWeaponTierTestTask() {
             while (true) {
-                await WaitForUtils.WaitSecondsAndInvokeTask(3f, 
+                await WaitUtils.WaitSecondsAndInvokeTask(3f, 
                     () => {
                     //Note: 1-4 because of array indexing => 0-3
                     TestWeaponTierUpdate(Random.Range(1, 4)); 

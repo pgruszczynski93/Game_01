@@ -11,7 +11,7 @@ namespace Game.Features.Shield {
         [SerializeField] ShieldSettings _shieldSettings;
         [SerializeField] SIShieldAnimatorController _animatorController;
 
-        CancellationTokenSource _cancellationTokenSource;
+        CancellationTokenSource _shieldCancellation;
 
         protected override void EnableEnergyBoostForBonus(bool isEnabled) {
             base.EnableEnergyBoostForBonus(isEnabled);
@@ -38,16 +38,16 @@ namespace Game.Features.Shield {
 
         async UniTaskVoid DisableShieldTask() {
             try {
-                await WaitForUtils.StartWaitSecFinishTask(_animatorController.SetHideAnimation,
-                    DisableRootObject, _shieldSettings.waitForDisableTime, _cancellationTokenSource.Token);
+                await WaitUtils.StartWaitSecFinishTask(_animatorController.SetHideAnimation,
+                    DisableRootObject, _shieldSettings.waitForDisableTime, _shieldCancellation.Token);
             }
             catch (OperationCanceledException) { }
         }
         
         void RefreshCancellation() {
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource?.Dispose();
-            _cancellationTokenSource = new CancellationTokenSource();
+            _shieldCancellation?.Cancel();
+            _shieldCancellation?.Dispose();
+            _shieldCancellation = new CancellationTokenSource();
         }
     }
 }
