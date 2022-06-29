@@ -32,8 +32,11 @@ namespace SpaceInvaders
             SIGameplayEvents.OnEnemyProjectilesCountChanged -= HandleOnEnemyProjectilesCountChanged;
         }
 
-        void HandleOnWaveEnd()
+        void HandleOnWaveEnd(WaveType waveType)
         {
+            if(waveType != WaveType.Grid)
+                return;
+
             SIEnemyGridEvents.BroadcastOnReadyToShoot(this);
         }
 

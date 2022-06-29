@@ -5,8 +5,8 @@ namespace SpaceInvaders
 {
     public static class SIGameplayEvents {
         public static event Action OnEnemyWeaponHit;
-        public static event Action OnWaveStart;
-        public static event Action OnWaveEnd;
+        public static event Action<WaveType> OnWaveStart;
+        public static event Action<WaveType> OnWaveEnd;
         public static event Action OnWaveCoolDown;
         public static event Action OnPlayerShoot;
         
@@ -51,13 +51,13 @@ namespace SpaceInvaders
             OnPlayerShoot?.Invoke();
         }
         
-        public static void BroadcastOnWaveStart() {
-            OnWaveStart?.Invoke();
+        public static void BroadcastOnWaveStart(WaveType waveType) {
+            OnWaveStart?.Invoke(waveType);
         }
         
-        public static void BroadcastOnWaveEnd()
+        public static void BroadcastOnWaveEnd(WaveType waveType)
         {
-            OnWaveEnd?.Invoke();
+            OnWaveEnd?.Invoke(waveType);
         }
 
         public static void BroadcastOnWaveCoolDown() {

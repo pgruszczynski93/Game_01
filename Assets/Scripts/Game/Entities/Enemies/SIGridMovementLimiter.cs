@@ -29,12 +29,12 @@ namespace SpaceInvaders
 
         void AssignEvents()
         {
-            SIGameplayEvents.OnWaveEnd += SetStartLimits;
+            SIGameplayEvents.OnWaveEnd += HandleWaveEnd;
         }
 
         void RemoveEvents()
         {
-            SIGameplayEvents.OnWaveEnd -= SetStartLimits;
+            SIGameplayEvents.OnWaveEnd -= HandleWaveEnd;
         }
 
         void TryToUpdateGridDimensions()
@@ -54,6 +54,11 @@ namespace SpaceInvaders
                 xLocalPos = enemyTransform.localPosition.x;
                 FindNewGridLocalMinMax(xLocalPos);
             }
+        }
+
+        void HandleWaveEnd(WaveType waveType) {
+            //todo: maybe apply to other wave types - no if check
+            SetStartLimits();
         }
 
         void SetStartLimits()

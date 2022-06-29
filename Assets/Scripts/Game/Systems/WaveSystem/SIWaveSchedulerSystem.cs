@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Configs;
 using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SpaceInvaders {
@@ -48,8 +49,8 @@ namespace SpaceInvaders {
         void HandleOnGameStateChanged(GameStates gameState) {
             if (gameState != GameStates.GameStarted)
                 return;
-            
-            StartNewWaveTask().Forget();
+            //todo: new wave selector
+            StartNewWaveTask(WaveType.Grid).Forget();
         }
         
         void HandleOnEnemyDeath(SIEnemyBehaviour enemy) {
@@ -62,17 +63,18 @@ namespace SpaceInvaders {
             if (_livingEnemies > 0)
                 return;
 
-            StartNewWaveTask().Forget();
+            //todo: new wave selector
+            StartNewWaveTask(WaveType.Grid).Forget();
         }
         
-        async UniTaskVoid StartNewWaveTask() {
+        async UniTaskVoid StartNewWaveTask(WaveType waveType) {
             //Note: End wave is always before start wave, to ensure that every gameobject which uses this event handled necessary operations.
             try {
                 ResetWaveProperties();
                 RefreshWaveCancellation();
-                await WaitUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveEndCoolDown, SIGameplayEvents.BroadcastOnWaveEnd, _waveCancellation.Token);
+                await WaitUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveEndCoolDown, () => SIGameplayEvents.BroadcastOnWaveEnd(waveType), _waveCancellation.Token);
                 await WaitUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveCoolDown, SIGameplayEvents.BroadcastOnWaveCoolDown, _waveCancellation.Token);
-                await WaitUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveStartCooldown, SIGameplayEvents.BroadcastOnWaveStart, _waveCancellation.Token);
+                await WaitUtils.WaitSecondsAndInvokeTask(_currentWaveSettings.waveStartCooldown, () => SIGameplayEvents.BroadcastOnWaveStart(waveType), _waveCancellation.Token);
             }
             catch (OperationCanceledException) { } 
         }
@@ -81,6 +83,21 @@ namespace SpaceInvaders {
             _waveCancellation?.Cancel();
             _waveCancellation?.Dispose();
             _waveCancellation = new CancellationTokenSource();
+        }
+
+        [Button]
+        void BroadcastNoWave() {
+            StartNewWaveTask(WaveType.NoWave).Forget();
+        }
+        
+        [Button]
+        void BroadcastGridWave() {
+            StartNewWaveTask(WaveType.Grid).Forget();
+        }
+        
+        [Button]
+        void BroadcastAsteroidsWave() {
+            StartNewWaveTask(WaveType.Asteroids).Forget();
         }
     }
 }

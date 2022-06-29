@@ -46,8 +46,9 @@ namespace SpaceInvaders
         {
             _gameStatistics.UpdatePlayerKillsCounter();
         }
-        void HandleOnWaveEnd()
+        void HandleOnWaveEnd(WaveType waveType)
         {
+            //Todo: Consider usage of waveType
             _gameStatistics.UpdateCurrentWaveCounter();
         }
         

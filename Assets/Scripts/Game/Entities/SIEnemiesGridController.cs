@@ -54,8 +54,9 @@ namespace SpaceInvaders {
         }
         
         
-        void HandleOnWaveEnd() {
-            TryResetGridController();
+        void HandleOnWaveEnd(WaveType waveType) {
+            if(waveType == WaveType.Grid)
+                TryResetGridController();
         }
 
         void SetupEnemies() {

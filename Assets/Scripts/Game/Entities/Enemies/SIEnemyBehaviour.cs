@@ -44,8 +44,11 @@ namespace SpaceInvaders
             SIGameplayEvents.OnDamage -= HandleOnDamage;
         }
 
-        void HandleOnWaveEnd()
+        void HandleOnWaveEnd(WaveType waveType)
         {
+            if(waveType != WaveType.Grid)
+                return;
+            
             SetEnemyVisibility(true);
             _enemyHealth.SetMaxHealth();
         }

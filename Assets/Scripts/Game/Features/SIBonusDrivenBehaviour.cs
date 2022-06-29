@@ -47,7 +47,8 @@ namespace SpaceInvaders {
             CheckForEnergyBoostBonus();
         }
         
-        protected virtual void HandleOnWaveEnd() {
+        protected virtual void HandleOnWaveEnd(WaveType waveType) {
+            //Todo: Consider usage of waveType
             ManageDisabledBonus();
         }
 

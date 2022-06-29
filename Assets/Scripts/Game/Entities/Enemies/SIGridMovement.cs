@@ -77,13 +77,18 @@ namespace SpaceInvaders {
             SIGameplayEvents.OnEnemyDeath -= HandleOnEnemyDeath;
         }
 
-        void HandleOnWaveStart() {
+        void HandleOnWaveStart(WaveType waveType) {
+            if (waveType != WaveType.Grid)
+                return;
             ExecuteInitialMovementSequence();
         }
 
-        void HandleOnWaveEnd() {
+        void HandleOnWaveEnd(WaveType waveType) {
             //=== Don't remove ===
             //This method ensures that movement limits will be recalculated with each wave.
+            // if (waveType != WaveType.Grid)
+                // return;
+            
             ResetGridMovement();
             UpdateMovementOffsets();
         }

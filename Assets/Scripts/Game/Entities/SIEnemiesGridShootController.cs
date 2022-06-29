@@ -58,12 +58,18 @@ namespace SpaceInvaders {
             _isGridShootingEnabled = isGridShootingEnabled;
         }
 
-        void HandleOnWaveStart() {
+        void HandleOnWaveStart(WaveType waveType) {
+            if (waveType != WaveType.Grid)
+                return;
+            
             EnableGridShootingPossibility(true);
             TryToRunGridShootingTask();
         }
 
-        void HandleOnWaveEnd() {
+        void HandleOnWaveEnd(WaveType waveType) {
+            // if (waveType != WaveType.Grid)
+                // return;
+
             EnableGridShootingPossibility(false);
         }
 
