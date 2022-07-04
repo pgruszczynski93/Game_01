@@ -51,7 +51,7 @@ namespace SpaceInvaders
             OnPlayerShoot?.Invoke();
         }
         
-        public static void BroadcastOnWaveStart(WaveType waveType) {
+        public static void BroadcastOnWaveStart(WaveType waveType) {    
             OnWaveStart?.Invoke(waveType);
         }
         

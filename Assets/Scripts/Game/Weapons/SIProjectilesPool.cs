@@ -2,7 +2,7 @@ using SpaceInvaders.ObjectsPool;
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public class SIProjectilesPool : SIObjectPool<SIProjectileEntity> {
+    public class SIProjectilesPool : ObjectsPool<SIProjectileEntity> {
         
         [SerializeField] protected SIProjectileSetup[] _availableProjectiles;
 

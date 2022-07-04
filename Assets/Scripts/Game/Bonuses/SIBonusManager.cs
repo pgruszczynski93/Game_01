@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public class SIBonusManager : SIObjectPool<SIBonus> {
+    public class SIBonusManager : ObjectsPool<SIBonus> {
         [Range(0, 100), SerializeField] int _bonusDropPropability;
         [SerializeField] ScriptableBonusDropLookup _scriptableLookup;
 

@@ -6,7 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace SpaceInvaders.PlanetSystem {
-    public class PlanetsPool : SIObjectPool<Planet> {
+    public class PlanetsPool : ObjectsPool<Planet> {
 
         [SerializeField] bool _canManagePool;
         [SerializeField] float _maxAxisInclination;
