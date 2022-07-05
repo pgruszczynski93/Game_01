@@ -2,7 +2,7 @@ using SpaceInvaders.ObjectsPool;
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public class SIExplosionsVfxPool : ObjectsPool<SIVFXBehaviour> {
+    public class SIExplosionsVfxPool : ObjectsPool<VFXBehaviour> {
         
         Vector3 _showPosition;
 
