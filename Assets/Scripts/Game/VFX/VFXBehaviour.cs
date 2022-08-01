@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Threading;
+﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using SpaceInvaders.ObjectsPool;
@@ -9,13 +8,13 @@ namespace SpaceInvaders
 {
     public class VFXBehaviour : MonoBehaviour, IPoolable {
         
-        [SerializeField] bool _hasParticles;
-        [SerializeField] Transform _thisTransform;
-        [SerializeField] Transform _parent;
-        [ShowIf("_hasParticles"), SerializeField] ParticleSystem _particles;
+        [SerializeField] protected bool _hasParticles;
+        [SerializeField] protected Transform _thisTransform;
+        [SerializeField] protected Transform _parent;
+        [ShowIf("_hasParticles"), SerializeField] protected ParticleSystem _particles;
         
-        Vector3 _currentDropPos;
-        CancellationTokenSource _vfxCancellation;
+        protected Vector3 _currentSpawnPos;
+        protected CancellationTokenSource _vfxCancellation;
 
         void Initialise() {
             if (_parent == null) {
@@ -30,20 +29,20 @@ namespace SpaceInvaders
             _vfxCancellation = new CancellationTokenSource();
         }
 
-        public void SetSpawnPosition(Vector3 spawnPos) {
-            _currentDropPos = spawnPos;
+        public virtual void SetSpawnPosition(Vector3 spawnPos) {
+            _currentSpawnPos = spawnPos;
             SetVfx();
         }
 
-        public void SetSpawnRotation(Vector3 spawnRot) {
+        public virtual void SetSpawnRotation(Vector3 spawnRot) {
             //Intentionally unimplemented.
         }
 
-        public void ManageScreenVisibility() {
-            //Intentionally unimplemented - is always on screen.
+        public virtual void ManageScreenVisibility() {
+            //Intentionally unimplemented.
         }
 
-        public void PerformOnPoolActions() {
+        public virtual void PerformOnPoolActions() {
             TryPlayParticles();
         }
         
@@ -66,7 +65,7 @@ namespace SpaceInvaders
         }
 
         void SetVfx() {
-            _thisTransform.position = _currentDropPos;
+            _thisTransform.position = _currentSpawnPos;
         }
 
         void ResetVfx() {
@@ -75,7 +74,7 @@ namespace SpaceInvaders
             TryStopParticles();
         }
 
-        async UniTaskVoid TryResetParticlesTask() {
+        protected async UniTaskVoid TryResetParticlesTask() {
             while (_particles.isPlaying)
                 await WaitUtils.SkipFramesTask(1, _vfxCancellation.Token);
             

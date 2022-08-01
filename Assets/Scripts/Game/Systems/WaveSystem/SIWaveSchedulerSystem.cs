@@ -87,7 +87,7 @@ namespace SpaceInvaders {
 
         [Button]
         void BroadcastNoWave() {
-            StartNewWaveTask(WaveType.NoWave).Forget();
+            StartNewWaveTask(WaveType.Idle).Forget();
         }
         
         [Button]

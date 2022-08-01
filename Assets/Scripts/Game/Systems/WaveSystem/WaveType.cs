@@ -1,6 +1,6 @@
 namespace SpaceInvaders {
     public enum WaveType {
-        NoWave,
+        Idle,
         Grid, 
         Asteroids,
         //todo: more types - fe. boss

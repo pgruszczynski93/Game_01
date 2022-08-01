@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SpaceInvaders {
     public class SIDamageVFX : MonoBehaviour {
-        static readonly int noiseTresholdPropId = Shader.PropertyToID("_NoiseTreshold");
+        static readonly int noiseThresholdPropId = Shader.PropertyToID("_NoiseThreshold");
         static readonly int edgeWidthPropId = Shader.PropertyToID("_EdgeWidth");
         static readonly int isColorTintActivePropId = Shader.PropertyToID("_IsColorTintActive");
         static readonly int canClipAlpha = Shader.PropertyToID("_CanClipAlpha");
@@ -76,7 +76,7 @@ namespace SpaceInvaders {
 
             DOTween.To(() => _currNoiseTresholdVal, newVal => _currNoiseTresholdVal = newVal, _nextNoiseTresholdVal,
                     shaderSetup.noiseChangeDuration)
-                .OnUpdate(() => UpdateSelectedFloatMaterialProperty(noiseTresholdPropId, _currNoiseTresholdVal));
+                .OnUpdate(() => UpdateSelectedFloatMaterialProperty(noiseThresholdPropId, _currNoiseTresholdVal));
 
             DOTween.To(() => _currEdgeWidthVal, newVal => _currEdgeWidthVal = newVal, _nextEdgeWidthVal,
                     shaderSetup.edgeChangeDuration)
@@ -128,7 +128,7 @@ namespace SpaceInvaders {
             StopParticlesSystems();
             UpdateSelectedFloatMaterialProperty(isColorTintActivePropId, 0);
             UpdateSelectedFloatMaterialProperty(canClipAlpha, 0);
-            UpdateSelectedFloatMaterialProperty(noiseTresholdPropId, 0);
+            UpdateSelectedFloatMaterialProperty(noiseThresholdPropId, 0);
             UpdateSelectedFloatMaterialProperty(edgeWidthPropId, 0);
         }
     }
