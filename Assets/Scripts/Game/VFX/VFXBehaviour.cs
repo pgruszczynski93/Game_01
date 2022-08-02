@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using SpaceInvaders.ObjectsPool;
@@ -34,33 +35,31 @@ namespace SpaceInvaders
             SetVfx();
         }
 
-        public virtual void SetSpawnRotation(Vector3 spawnRot) {
-            //Intentionally unimplemented.
-        }
+        public virtual void SetSpawnRotation(Vector3 spawnRot) { }
 
-        public virtual void ManageScreenVisibility() {
-            //Intentionally unimplemented.
-        }
+        public virtual void ManageScreenVisibility() { }
 
         public virtual void PerformOnPoolActions() {
             TryPlayParticles();
         }
         
         void TryPlayParticles() {
-            if (!CanPlayParticles())
+            if (!PlayPossible())
                 return;
+            
             _particles.Play();
             RefreshCancellation();
-            TryResetParticlesTask().Forget();
+            TryResetParticlesTask(() => !_particles.isPlaying).Forget();
         }
 
         void TryStopParticles() {
-            if (!CanPlayParticles())
+            if (!PlayPossible())
                 return;
+            
             _particles.Stop();
         }
 
-        bool CanPlayParticles() {
+        bool PlayPossible() {
             return _hasParticles && _particles != null && !_particles.isPlaying;
         }
 
@@ -74,10 +73,8 @@ namespace SpaceInvaders
             TryStopParticles();
         }
 
-        protected async UniTaskVoid TryResetParticlesTask() {
-            while (_particles.isPlaying)
-                await WaitUtils.SkipFramesTask(1, _vfxCancellation.Token);
-            
+        protected async UniTaskVoid TryResetParticlesTask(Func<bool> onWait) {
+            await UniTask.WaitUntil(onWait, cancellationToken: _vfxCancellation.Token);
             ResetVfx();
         }
     }

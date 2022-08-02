@@ -1,8 +1,9 @@
+using Game.VFX;
 using SpaceInvaders.ObjectsPool;
 using UnityEngine;
 
 namespace SpaceInvaders {
-    public class SIExplosionsVfxPool : ObjectsPool<VFXBehaviour> {
+    public class SIExplosionsVfxPool : ObjectsPool<ExplosionVFX> {
         Vector3 _showPosition;
 
         protected override void SubscribeEvents() {
