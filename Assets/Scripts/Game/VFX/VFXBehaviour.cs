@@ -17,7 +17,7 @@ namespace SpaceInvaders
         protected Vector3 _currentSpawnPos;
         protected CancellationTokenSource _vfxCancellation;
 
-        void Initialise() {
+        protected virtual void Initialise() {
             if (_parent == null) {
                 _parent = transform.parent;
             }
@@ -50,7 +50,7 @@ namespace SpaceInvaders
             _particles.Play();
             RefreshCancellation();
             TryResetParticlesTask(() => !_particles.isPlaying).Forget();
-        }
+        } 
 
         void TryStopParticles() {
             if (!PlayPossible())
