@@ -14,6 +14,8 @@ namespace SpaceInvaders.PlanetSystem {
         [SerializeField] float _maxRespawnInterval;
         [SerializeField] BoxCollider _planetAreaCollider;
 
+        bool _isStopped;
+        //todo: dorobić zatrzymywanie polowania w momencie, kiedy dostepna jest fala asteroid
         Bounds _currentObjectBounds;
         Bounds _planetAreaBounds;
 
@@ -57,9 +59,7 @@ namespace SpaceInvaders.PlanetSystem {
             while (true) {
                 if (_currentlyPooledObject != null) {
                     await UniTask.WaitUntil(() => !_currentlyPooledObject.IsMoving());
-                    if (!_canManagePool)
-                        await UniTask.Yield();
-                    else {
+                    if (_canManagePool){
                         float interval = Random.Range(_minRespawnInterval, _maxRespawnInterval);
                         await UniTask.Delay(TimeSpan.FromSeconds(interval));
                         ManagePoolableObject();

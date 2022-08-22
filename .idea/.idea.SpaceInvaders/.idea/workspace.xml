@@ -63,7 +63,7 @@
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Features/SiAstreoidsAndPlanets/AsteroidFieldVFX.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Features/SiAstreoidsAndPlanets/AsteroidFieldVFX.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/AsteroidsField/AsteroidsFieldPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/AsteroidsField/AsteroidsFieldPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/AsteroidsField/AsteroidsFieldVFX.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/AsteroidsField/AsteroidsFieldVFX.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetsPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Systems/PlanetSystem/PlanetsPool.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/VFX/VFXBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/VFX/VFXBehaviour.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +83,6 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10564ED1-54D6-47E1-94BE-F4AEF8878649/24/a6da843d/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10564ED1-54D6-47E1-94BE-F4AEF8878649/59/397821a6/Time.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10564ED1-54D6-47E1-94BE-F4AEF8878649/77/8ab5b075/LayerMask.cs" root0="SKIP_HIGHLIGHTING" />
@@ -330,10 +329,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="15696">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="18892">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="15696" />
+      <option name="pid" value="18892" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -743,7 +742,8 @@
       <workItem from="1657056110487" duration="1162000" />
       <workItem from="1659385491583" duration="4206000" />
       <workItem from="1659462436317" duration="1924000" />
-      <workItem from="1659881076369" duration="5863000" />
+      <workItem from="1659881076369" duration="6121000" />
+      <workItem from="1661202674653" duration="1477000" />
     </task>
     <servers />
   </component>
@@ -808,6 +808,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/AsteroidsField/AsteroidsFieldPool.cs</url>
+          <line>30</line>
+          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\AsteroidsField\AsteroidsFieldPool.cs" initialLine="30" containingFunctionPresentation="method 'UpdateVFXSpawnPosition'">
+            <startOffsets>
+              <option value="903" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1078" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Game/AsteroidsField/AsteroidsFieldVFX.cs</url>
+          <line>14</line>
+          <properties documentPath="D:\Unity Projects\SpaceInvaders\Assets\Scripts\Game\AsteroidsField\AsteroidsFieldVFX.cs" initialLine="14" containingFunctionPresentation="method 'Initialise'">
+            <startOffsets>
+              <option value="453" />
+            </startOffsets>
+            <endOffsets>
+              <option value="537" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

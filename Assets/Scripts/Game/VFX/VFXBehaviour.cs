@@ -43,6 +43,10 @@ namespace SpaceInvaders
             TryPlayParticles();
         }
         
+        public void EnableParticlesGameObject(bool enable) {
+            _particles.gameObject.SetActive(enable);
+        }
+        
         void TryPlayParticles() {
             if (!PlayPossible())
                 return;
