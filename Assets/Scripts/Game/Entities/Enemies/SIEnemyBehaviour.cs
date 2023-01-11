@@ -46,9 +46,6 @@ namespace SpaceInvaders
 
         void HandleOnWaveEnd(WaveType waveType)
         {
-            if(waveType != WaveType.Grid)
-                return;
-            
             SetEnemyVisibility(true);
             _enemyHealth.SetMaxHealth();
         }

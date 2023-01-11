@@ -16,6 +16,7 @@ namespace SpaceInvaders.PlanetSystem {
 
         bool _isStopped;
         //todo: dorobić zatrzymywanie polowania w momencie, kiedy dostepna jest fala asteroid
+        //todo: najlepiej zrobi to tak, że fala asteroid bedzie mogla zostac wylosowan w momencie, kiedy zadnej planety nie ma widocznej na ekranie
         Bounds _currentObjectBounds;
         Bounds _planetAreaBounds;
 
