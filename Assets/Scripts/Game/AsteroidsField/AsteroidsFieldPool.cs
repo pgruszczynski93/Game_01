@@ -28,6 +28,7 @@ namespace Game.AsteroidsField {
 
         void UpdateVFXSpawnPosition() {
             //VFX size is constant for each of pool elements.
+            //niech asteroidy spadaja w dol i sie pooluja
             _vfxSpawnPosition = new Vector3(0,
                 _currentlyPooledObject.VfxSize.y + _vfxSpawnOffset.y,
                 _currentlyPooledObject.VfxSize.z + _vfxSpawnOffset.z);
