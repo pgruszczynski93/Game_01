@@ -1,5 +1,6 @@
 ﻿using PG.Game.Configs;
 using PG.Game.VFX;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace PG.Game.Entities {
@@ -21,6 +22,7 @@ namespace PG.Game.Entities {
             SetMaxHealth();
         }
 
+        [Button]
         public void SetMaxHealth() {
             _currentHealth = _entitySetup.entityMaxHealth;
             _damageVFX.ResetDamageVFX();
@@ -34,7 +36,7 @@ namespace PG.Game.Entities {
             _damageVFX.ResetDamageVFX();
         }
 
-        public void TryRestoreHealth(float newHealth) {
+        protected void TryRestoreHealth(float newHealth) {
             ModifyHealth(newHealth);
 
             if (HasFullHealth())
@@ -56,7 +58,7 @@ namespace PG.Game.Entities {
             return _currentHealth > 0;
         }
 
-        public bool HasFullHealth() {
+        bool HasFullHealth() {
             return _currentHealth >= _entitySetup.entityMaxHealth;
         }
     }
