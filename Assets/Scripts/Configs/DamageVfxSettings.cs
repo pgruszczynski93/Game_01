@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace ScriptableSettings {
-    [CreateAssetMenu(fileName = "Damage VFX config", menuName = "Mindwalker Studio/Damage VFX config")]
+namespace PG.Game.Configs {
+    [CreateAssetMenu(fileName = "Damage VFX config", menuName = "Configs/Damage VFX")]
     public class DamageVfxSettings : ScriptableObject {
         public DamageShaderSetup shaderSetup;
         public DamageVfxParticleSetup particleSetup;
@@ -9,8 +9,8 @@ namespace ScriptableSettings {
 
     [System.Serializable]
     public class DamageShaderSetup {
-        public float minNoiseTreshold;
-        public float maxNoiseTreshold;
+        public float minNoiseThreshold;
+        public float maxNoiseThreshold;
         public float minEdgeWidth;
         public float maxEdgeWidth;
         public float noiseChangeDuration;

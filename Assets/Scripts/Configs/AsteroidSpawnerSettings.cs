@@ -1,12 +1,11 @@
+using PG.Game.Asteroids;
 using UnityEngine;
 
-namespace SpaceInvaders
-{
+namespace PG.Game.Configs {
     [System.Serializable]
-    public class AsteroidSpawnerSettings
-    {
+    public class AsteroidSpawnerSettings {
         [Range(0, 20)] public int asteroidVariantsCount;
         [Range(0, 100)] public int maxAsteroidsToSpawn;
-        public SIAsteroidBehaviour[] asteroidVariants;
+        public AsteroidBehaviour[] asteroidVariants;
     }
 }

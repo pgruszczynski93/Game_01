@@ -1,11 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace SpaceInvaders
-{
+namespace PG.Game.Configs {
     [Serializable]
-    public class MovementSettings
-    {
+    public class MovementSettings {
         [Range(1, 30)] public float initialMovementSpeed;
         [Range(1, 10)] public float initialSpeedMultiplier;
         [Range(0, 1)] public float movementSmoothStep;

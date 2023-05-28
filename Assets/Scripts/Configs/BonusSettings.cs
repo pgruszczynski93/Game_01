@@ -1,13 +1,12 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using PG.Game.Helpers;
 using UnityEngine;
 
-namespace SpaceInvaders
-{
+namespace PG.Game.Configs {
     [Serializable]
-    public class BonusSettings
-    {
+    public class BonusSettings {
         public BonusType bonusType;
         public int gainedHealth;
         public int gainedScore;
@@ -37,8 +36,7 @@ namespace SpaceInvaders
     }
 
     [Serializable]
-    public struct BonusDropInfo
-    {
+    public struct BonusDropInfo {
         [Range(0, 100)] public int minDropRate;
         [Range(0, 100)] public int maxDropRate;
     }

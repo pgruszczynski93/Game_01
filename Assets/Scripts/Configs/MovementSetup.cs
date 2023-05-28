@@ -1,6 +1,5 @@
 using UnityEngine;
 
-namespace SpaceInvaders
-{
+namespace PG.Game.Configs {
     public class MovementSetup : ScriptableObject { }
 }

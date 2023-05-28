@@ -1,10 +1,8 @@
 using UnityEngine;
 
-namespace SpaceInvaders
-{
-    [CreateAssetMenu(fileName = "Grid Movement Config", menuName = "Mindwalker Studio/Grid Movement Config")]
-    public class GridMovementSetup : MovementSetup
-    {
+namespace PG.Game.Configs {
+    [CreateAssetMenu(fileName = "Grid Movement Config", menuName = "Configs/Grid Movement")]
+    public class GridMovementSetup : MovementSetup {
         public GridMovementSettings gridMovementSettings;
     }
 }

@@ -1,10 +1,8 @@
 using UnityEngine;
 
-namespace SpaceInvaders
-{
-    [CreateAssetMenu(fileName = "Entity config", menuName = "Mindwalker Studio/Entity config")]
-    public class EntitySetup : ScriptableObject
-    {
+namespace PG.Game.Configs {
+    [CreateAssetMenu(fileName = "Entity config", menuName = "Configs/Entity")]
+    public class EntitySetup : ScriptableObject {
         public float entityMaxHealth;
     }
 }

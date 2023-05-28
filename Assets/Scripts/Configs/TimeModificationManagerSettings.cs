@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Configs {
+namespace PG.Game.Configs {
     [CreateAssetMenu(fileName = "Time Modification Manager Config",
-        menuName = "Project/Time Modification Manager Config")]
+        menuName = "Configs/Time Modification Manager")]
     public class TimeModificationManagerSettings : ScriptableObject {
         public bool useIncrementalSpeedModification;
         public float defaultTimeSpeedMultiplier;

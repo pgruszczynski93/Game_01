@@ -1,5 +1,4 @@
-namespace SpaceInvaders
-{
+namespace PG.Game.Configs {
     [System.Serializable]
     public class SIPlayerStatistics {
         public int playerLevel;

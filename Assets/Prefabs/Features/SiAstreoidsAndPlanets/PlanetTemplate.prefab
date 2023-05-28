@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3914605462749366093}
   m_Father: {fileID: 0}
@@ -52,7 +53,7 @@ MonoBehaviour:
   _planetGraphicsParent: {fileID: 4793174022470861204}
   _planetRandomizer: {fileID: 9065168646717991693}
   _ringsRandomizer: {fileID: 7232007820553080389}
-  _planetMovement: {fileID: 5737158909427191443}
+  _planetMovementBehaviour: {fileID: 5737158909427191443}
 --- !u!114 &5737158909427191443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +124,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4442119400199286869}
   m_RootOrder: 0

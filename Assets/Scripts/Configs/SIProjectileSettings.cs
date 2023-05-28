@@ -1,10 +1,9 @@
+using PG.Game.Helpers;
 using UnityEngine;
 
-namespace SpaceInvaders
-{
+namespace PG.Game.Configs {
     [System.Serializable]
-    public class SIProjectileSettings
-    {
+    public class SIProjectileSettings {
         public float movementLimitOffset; //Value, when weapon hides from the screen.
         public float projectileDamage;
         public float launchForceMultiplier;

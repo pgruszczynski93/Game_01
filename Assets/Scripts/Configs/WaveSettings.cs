@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace Configs {
-    [CreateAssetMenu(fileName = "Wave config", menuName = "Mindwalker Studio/Wave config")]
+namespace PG.Game.Configs {
+    [CreateAssetMenu(fileName = "Wave config", menuName = "Configs/Wave config")]
     public class WaveSettings : ScriptableObject {
         public WaveType waveType;
         public int enemiesInWave;
