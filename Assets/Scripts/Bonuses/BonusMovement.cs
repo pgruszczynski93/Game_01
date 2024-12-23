@@ -34,7 +34,7 @@ namespace PG.Game.Bonuses {
 
         public void SetTimeSpeedModifier(float timeSpeedModifier, float progress) {
             _currentReleaseForceModifier = timeSpeedModifier;
-            _rigidbody.velocity = GetReleaseForce();
+            _rigidbody.linearVelocity = GetReleaseForce();
         }
 
         public void RequestTimeSpeedModification() {
@@ -44,14 +44,14 @@ namespace PG.Game.Bonuses {
         public void MoveObject() {
             _thisTransform.parent = null;
             _thisTransform.position = _currentDropPos;
-            if (_rigidbody.velocity.sqrMagnitude == 0)
+            if (_rigidbody.linearVelocity.sqrMagnitude == 0)
                 _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
             else
-                _rigidbody.velocity = GetReleaseForce();
+                _rigidbody.linearVelocity = GetReleaseForce();
         }
 
         public void StopObject() {
-            _rigidbody.velocity = MathConsts.VectorZero;
+            _rigidbody.linearVelocity = MathConsts.VectorZero;
             _thisTransform.SetParent(_parent);
             _thisTransform.localPosition = ScreenUtils.HiddenObjectPosition;
         }

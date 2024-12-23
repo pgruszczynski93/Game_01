@@ -33,7 +33,7 @@ namespace PG.Game.Weapons.Projectile {
         public void SetTimeSpeedModifier(float timeSpeedModifier, float progress = 1) {
             _currentVelocityModifier = _ownerTag == ProjectileOwnerTag.Enemy ? timeSpeedModifier : _currentVelocityModifier;
             Vector3 releaseForce = GetReleaseForce();
-            _rigidbody.velocity = releaseForce;
+            _rigidbody.linearVelocity = releaseForce;
         }
 
         public void SetMovePosition(Vector3 pos) {
@@ -62,16 +62,16 @@ namespace PG.Game.Weapons.Projectile {
             //Objects are affected by timeSpeedModification so even if they're in pool their velocity is being modified.
             //This line would add extra force to their velocity. Same solution in Bonus class
 
-            if (_rigidbody.velocity.sqrMagnitude == 0)
+            if (_rigidbody.linearVelocity.sqrMagnitude == 0)
                 _rigidbody.AddForce(GetReleaseForce(), ForceMode.Impulse);
             else
-                _rigidbody.velocity = GetReleaseForce();
+                _rigidbody.linearVelocity = GetReleaseForce();
         }
 
         public void StopObject() {
             _isMoving = false;
             _thisTransform.localPosition = _parentRelativeLocalPos;
-            _rigidbody.velocity = MathConsts.VectorZero;
+            _rigidbody.linearVelocity = MathConsts.VectorZero;
             _rigidbody.angularVelocity = MathConsts.VectorZero;
         }
 

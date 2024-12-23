@@ -60,7 +60,7 @@ namespace PG.Game.Asteroids {
 
         void ResetMovement() {
             _isMoving = false;
-            _rigidbody.velocity = MathConsts.VectorZero;
+            _rigidbody.linearVelocity = MathConsts.VectorZero;
             _rigidbody.angularVelocity = MathConsts.VectorZero;
             _asteroidState = AsteroidState.ReadyToMove;
             _thisTransform.localPosition = _startPosition;
